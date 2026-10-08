@@ -1,0 +1,24 @@
+Hush session-catalog handoff. This zip identifies dev recordings. It does not rerun Experiment 002.
+
+Holdouts hush_20260917_205513 and hush_20260920_200635 are listed in SESSION_CATALOG.csv and were not sampled. No holdout audio is in this zip.
+
+Each dev session has one 25-second mono clip from the middle of the session span, in catalog_clips/. The file is named by session id. If that midpoint fell in a gap, the clip is the nearest recorded audio. See manifest.csv.
+
+Content fields were filled from those clips, plus extra 15–25 s windows inside long dev sessions when one midpoint could not represent the file. Those extra windows are not in the zip. A field is blank when the audio did not name it.
+
+Only hush_20260914_212529 has delivery and network filled: sports, linear, ESPN, MNF.
+
+No dev clip says Prime, Hulu, Peacock, Tubi, NBC, or ABC. National ads are not treated as proof of linear versus ad-supported streaming.
+
+The three replication slots are still open:
+- streaming sports, preferably Prime football
+- linear scripted TV with normal commercials
+- ad-supported streaming scripted TV
+
+Closest unassigned captures:
+- hush_20260910_205330 opens as a live 49ers NFL game and is still football around 90 minutes. Prime is not spoken. Hours later the middle is true-crime narration.
+- hush_20260924_220624 is a Falcons NFL game with national ads. A promo line transcribes as "exclusively right here on private," not a clear Prime.
+- hush_20260912_215850 is Rick and Morty across the sampled windows. No service is named.
+- hush_20260901_221145 mixes Family Guy and Desperate Housewives in one hour, with national ads. No service is named.
+
+Do not start the frozen Exp002 replication until those three session ids are named.

@@ -1,0 +1,23 @@
+Hush replication handoff. Feature discovery on the ESPN dev tape is finished. This zip is the state to discuss next. It is not a labeled replication result.
+
+ESPN session hush_20260914_212529, span 0–6899 s, is development data. Exp001 is closed, partial/negative. Exp002 is closed: strong speaker departure, negative return. Exp003 is closed: strong audio-world departure, negative adaptive return. Exp003b, Exp004, and Exp005 are measured, not closed. Exp004 is negative for a precise commercial clock. Exp005: exact "welcome back" / "welcome back to" is a rare return corroborator; generic "back to," "timeout," "coming up," and "after this" are not standalone evidence; the frozen semantic snapshot uses the known commercial start and is an audit, not a detector. Verdicts are in the EXP*_RESULT.md files. Do not retune those constants. Do not design Exp006 from this game.
+
+Replication rules are in experiments/REPLICATION_PROTOCOL.md. Success is the same qualitative structure, not ESPN's counts: the program establishes an identity, ads replace it, a frozen copy stays distinguishable during the pod, and the identity comes back. No per-genre threshold changes. PLAY stays favored when uncertain.
+
+Locked spans, hashed before any commercial inspection. Experiment clocks are seconds since t0. Hashes are in experiments/replication/spans.json.
+
+- Prime sports: hush_20260924_220624, 0–7600 s. Prime Video, Falcons at Packers, confirmed by the recorder. Quiet tail after 7600 s was dropped from level, not from ads.
+- Streaming scripted: hush_20260827_135935, session 300–7200 s. Ad-supported Hulu. Identity probes only: the first 45 s are not Gilmore Girls; probes at 5, 10, 15, 20, 30, 60, 90, and 120 min are, including the Chilton valedictorian speech. The 90 min probe later contains a national ad. The span was not cut on that ad.
+- Linear scripted: not recorded. One cable or antenna program, 60–120 min, ordinary commercials. Rick and Morty (hush_20260912_215850) is a 24/7 stream with no commercials and does not fill this slot.
+
+Secondary football check, not a replication slot, same frozen code: hush_20260909_213047 full file 0–9373.184 s; hush_20260913_150934 first continuous block 0–7200 s (chunks 9–14 were removed as silence, so the file has a hole); hush_20260913_210542 0–12480 s (quiet tail trimmed).
+
+The computer does not wait for all five sessions. Order is Prime, then Hulu, then the three football files. Each session runs Exp002, Exp003, Exp003b, and Exp005, then its outputs are hashed. Prime can be labeled as soon as that hash exists, while Hulu is already computing. Hulu is labeled the same way. Football is labeled after those two. Result order is Prime replication, then Hulu replication, then linear scripted replication.
+
+As this zip was built, Prime Exp002 had finished with truth_ledger_read false (81.7% speech-active, 179 clusters, 55 recurring). That summary is included as unlabeled health only. Do not read its drops as commercial locations. Prime Exp003 was still embedding, past 5,600 of 7,591 windows. No session had been hashed yet. Later sessions are not in this zip. Labels come from listening, under LABEL_POLICY_V1. Do not use detector marks, and do not move a boundary onto a 15/30/60 grid.
+
+The only new capture is one linear scripted program: 60–120 minutes, one show, cable or antenna, ordinary commercials, no channel switching. News, reality, kids, a movie with ad breaks, another streamer, and another sports event stay on the backlog. Do not record those yet.
+
+Holdouts hush_20260917_205513 and hush_20260920_200635 stay sealed. Their rows in SESSION_CATALOG.csv have blank identity on purpose. Do not open them. Do not fill those rows from the NFL schedule.
+
+Not in this zip: raw audio, derived wavs, model weights, virtualenvs, embedding matrices, full ASR word and segment tables, and unfinished Exp003/005 outputs. Holdouts were not opened.

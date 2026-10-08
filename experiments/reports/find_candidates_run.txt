@@ -1,0 +1,28 @@
+audio_0001.wav: 15.0 min → 6 candidates
+audio_0002.wav: 15.0 min → 6 candidates
+audio_0003.wav: 15.0 min → 6 candidates
+audio_0004.wav: 15.0 min → 6 candidates
+audio_0005.wav: 15.0 min → 6 candidates
+audio_0006.wav: 15.0 min → 6 candidates
+audio_0007.wav: 15.0 min → 6 candidates
+audio_0008.wav: 15.0 min → 6 candidates
+audio_0009.wav: 15.0 min → 6 candidates
+audio_0010.wav: 15.0 min → 6 candidates
+audio_0011.wav: 15.0 min → 6 candidates
+audio_0012.wav: 15.0 min → 6 candidates
+audio_0013.wav: 15.0 min → 6 candidates
+audio_0014.wav: 15.0 min → 6 candidates
+audio_0015.wav: 7.8 min → 6 candidates
+
+Wrote 90 candidates → experiments/candidates/hush_20260827_135935_candidates.jsonl
+Top scores:
+     109.2s  score=13.40  audio_0001.wav  silence=True
+    1116.4s  score=11.73  audio_0002.wav  silence=False
+    2076.8s  score=10.61  audio_0003.wav  silence=False
+   11590.9s  score=10.40  audio_0013.wav  silence=False
+    5009.2s  score=10.30  audio_0006.wav  silence=False
+    2168.0s  score=10.18  audio_0003.wav  silence=True
+   11681.8s  score= 9.59  audio_0013.wav  silence=True
+    7278.2s  score= 9.54  audio_0009.wav  silence=False
+    1450.2s  score= 9.52  audio_0002.wav  silence=False
+   12336.0s  score= 9.50  audio_0014.wav  silence=False

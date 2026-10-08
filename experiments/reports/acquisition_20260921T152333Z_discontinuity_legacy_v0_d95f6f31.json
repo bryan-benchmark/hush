@@ -1,0 +1,4257 @@
+{
+  "detector_id": "acquisition_v1",
+  "run_id": "20260921T152333Z_discontinuity_legacy_v0_d95f6f31",
+  "near_silence_db": -80.0,
+  "chunks": 206,
+  "eligible_chunks": 155,
+  "ineligible_hours": 11.337934814814815,
+  "by_reason": {
+    "short_test_capture": 3,
+    "digital_silence": 46,
+    "valid_tv_audio": 155,
+    "mostly_silence_plus_transient": 1,
+    "flatline": 1
+  },
+  "by_session": {
+    "hush_20260823_210126": {
+      "chunks": 1,
+      "eligible": 0,
+      "reasons": {
+        "short_test_capture": 1
+      }
+    },
+    "hush_20260823_210233": {
+      "chunks": 2,
+      "eligible": 0,
+      "reasons": {
+        "digital_silence": 2
+      }
+    },
+    "hush_20260823_211937": {
+      "chunks": 1,
+      "eligible": 0,
+      "reasons": {
+        "short_test_capture": 1
+      }
+    },
+    "hush_20260827_135908": {
+      "chunks": 1,
+      "eligible": 0,
+      "reasons": {
+        "short_test_capture": 1
+      }
+    },
+    "hush_20260827_135935": {
+      "chunks": 15,
+      "eligible": 15,
+      "reasons": {
+        "valid_tv_audio": 15
+      }
+    },
+    "hush_20260827_214906": {
+      "chunks": 1,
+      "eligible": 1,
+      "reasons": {
+        "valid_tv_audio": 1
+      }
+    },
+    "hush_20260827_220023": {
+      "chunks": 5,
+      "eligible": 4,
+      "reasons": {
+        "valid_tv_audio": 4,
+        "digital_silence": 1
+      }
+    },
+    "hush_20260901_221145": {
+      "chunks": 5,
+      "eligible": 5,
+      "reasons": {
+        "valid_tv_audio": 5
+      }
+    },
+    "hush_20260909_213047": {
+      "chunks": 11,
+      "eligible": 11,
+      "reasons": {
+        "valid_tv_audio": 11
+      }
+    },
+    "hush_20260910_205330": {
+      "chunks": 38,
+      "eligible": 38,
+      "reasons": {
+        "valid_tv_audio": 38
+      }
+    },
+    "hush_20260912_215850": {
+      "chunks": 48,
+      "eligible": 10,
+      "reasons": {
+        "valid_tv_audio": 10,
+        "digital_silence": 37,
+        "mostly_silence_plus_transient": 1
+      }
+    },
+    "hush_20260913_150934": {
+      "chunks": 19,
+      "eligible": 13,
+      "reasons": {
+        "valid_tv_audio": 13,
+        "flatline": 1,
+        "digital_silence": 5
+      }
+    },
+    "hush_20260913_210542": {
+      "chunks": 15,
+      "eligible": 14,
+      "reasons": {
+        "valid_tv_audio": 14,
+        "digital_silence": 1
+      }
+    },
+    "hush_20260914_212529": {
+      "chunks": 11,
+      "eligible": 11,
+      "reasons": {
+        "valid_tv_audio": 11
+      }
+    },
+    "hush_20260917_205513": {
+      "chunks": 14,
+      "eligible": 14,
+      "reasons": {
+        "valid_tv_audio": 14
+      }
+    },
+    "hush_20260920_200635": {
+      "chunks": 19,
+      "eligible": 19,
+      "reasons": {
+        "valid_tv_audio": 19
+      }
+    }
+  },
+  "rows": [
+    {
+      "session": "hush_20260823_210126",
+      "file": "audio_0001.wav",
+      "dataset_role": "ignore",
+      "duration_seconds": 6.282666666666667,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 6.2826458333333335,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "short_test_capture"
+    },
+    {
+      "session": "hush_20260823_210233",
+      "file": "audio_0001.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260823_210233",
+      "file": "audio_0002.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 102.21866666666666,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 102.21864583333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260823_211937",
+      "file": "audio_0001.wav",
+      "dataset_role": "ignore",
+      "duration_seconds": 14.858666666666666,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 14.858645833333334,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "short_test_capture"
+    },
+    {
+      "session": "hush_20260827_135908",
+      "file": "audio_0001.wav",
+      "dataset_role": "ignore",
+      "duration_seconds": 14.901333333333334,
+      "nonzero_sample_fraction": 0.9994386687992126,
+      "digital_zero_fraction": 0.0005613312007874016,
+      "rms_p50_db": -29.318909645080566,
+      "rms_p95_db": -23.180810737609864,
+      "rms_max_db": -21.572505950927734,
+      "near_silence_fraction": 0.0,
+      "longest_flatline_seconds": 2.0833333333333333e-05,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0028343523449109926,
+        0.0022049351899278754
+      ],
+      "eligible_for_detection": false,
+      "reason": "short_test_capture"
+    },
+    {
+      "session": "hush_20260827_135935",
+      "file": "audio_0001.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.965960625,
+      "digital_zero_fraction": 0.034039375,
+      "rms_p50_db": -30.722900390625,
+      "rms_p95_db": -22.947525596618657,
+      "rms_max_db": -14.607059478759766,
+      "near_silence_fraction": 0.058480344492290594,
+      "longest_flatline_seconds": 0.004458333333333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0015253944122282296,
+        0.001525841175365904
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260827_135935",
+      "file": "audio_0002.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9888889814814815,
+      "digital_zero_fraction": 0.011111018518518518,
+      "rms_p50_db": -29.189348220825195,
+      "rms_p95_db": -22.3365535736084,
+      "rms_max_db": -17.517621994018555,
+      "near_silence_fraction": 0.01014029726350882,
+      "longest_flatline_seconds": 0.005416666666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0018582437057851563,
+        0.0018665195022778008
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260827_135935",
+      "file": "audio_0003.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9946849652777778,
+      "digital_zero_fraction": 0.005315034722222222,
+      "rms_p50_db": -28.649099349975586,
+      "rms_p95_db": -22.551646995544434,
+      "rms_max_db": -18.021785736083984,
+      "near_silence_fraction": 0.0019447145436866232,
+      "longest_flatline_seconds": 0.007541666666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.001888400002976069,
+        0.0018739531454246888
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260827_135935",
+      "file": "audio_0004.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9911448032407407,
+      "digital_zero_fraction": 0.008855196759259259,
+      "rms_p50_db": -30.073041915893555,
+      "rms_p95_db": -23.654201889038088,
+      "rms_max_db": -18.772531509399414,
+      "near_silence_fraction": 0.004445061814140853,
+      "longest_flatline_seconds": 0.0050625,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0014181240342706182,
+        0.0014083391081016184
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260827_135935",
+      "file": "audio_0005.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9881897685185185,
+      "digital_zero_fraction": 0.011810231481481482,
+      "rms_p50_db": -31.15443229675293,
+      "rms_p95_db": -23.356829833984378,
+      "rms_max_db": -17.39505958557129,
+      "near_silence_fraction": 0.009029031809973607,
+      "longest_flatline_seconds": 0.007166666666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0014112548803264723,
+        0.0013645648427212534
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260827_135935",
+      "file": "audio_0006.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9934800810185185,
+      "digital_zero_fraction": 0.006519918981481482,
+      "rms_p50_db": -32.87822723388672,
+      "rms_p95_db": -23.772840118408205,
+      "rms_max_db": -16.845212936401367,
+      "near_silence_fraction": 0.003194888178913738,
+      "longest_flatline_seconds": 0.005895833333333334,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0011782396460293051,
+        0.0011626025055179424
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260827_135935",
+      "file": "audio_0007.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9949629166666667,
+      "digital_zero_fraction": 0.0050370833333333335,
+      "rms_p50_db": -30.15184211730957,
+      "rms_p95_db": -21.720238494873048,
+      "rms_max_db": -15.485411643981934,
+      "near_silence_fraction": 0.0022225309070704265,
+      "longest_flatline_seconds": 0.003875,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0017992952158776138,
+        0.0018096715969660674
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260827_135935",
+      "file": "audio_0008.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9876706597222222,
+      "digital_zero_fraction": 0.012329340277777778,
+      "rms_p50_db": -29.688610076904297,
+      "rms_p95_db": -22.3036527633667,
+      "rms_max_db": -15.25291633605957,
+      "near_silence_fraction": 0.011668287262119739,
+      "longest_flatline_seconds": 0.0067083333333333335,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0017866137666680798,
+        0.001775029817789543
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260827_135935",
+      "file": "audio_0009.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9906409490740741,
+      "digital_zero_fraction": 0.009359050925925925,
+      "rms_p50_db": -31.119121551513672,
+      "rms_p95_db": -23.058434295654298,
+      "rms_max_db": -17.723926544189453,
+      "near_silence_fraction": 0.0050006945409084595,
+      "longest_flatline_seconds": 0.0045,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0014222849146046253,
+        0.0014384174412423185
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260827_135935",
+      "file": "audio_0010.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9937161111111111,
+      "digital_zero_fraction": 0.006283888888888889,
+      "rms_p50_db": -29.90003204345703,
+      "rms_p95_db": -22.86479377746582,
+      "rms_max_db": -16.027132034301758,
+      "near_silence_fraction": 0.002083622725378525,
+      "longest_flatline_seconds": 0.005229166666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.001596642307132241,
+        0.001588972963112497
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260827_135935",
+      "file": "audio_0011.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9942164930555556,
+      "digital_zero_fraction": 0.005783506944444444,
+      "rms_p50_db": -30.13991928100586,
+      "rms_p95_db": -22.124349594116214,
+      "rms_max_db": -15.846332550048828,
+      "near_silence_fraction": 0.002083622725378525,
+      "longest_flatline_seconds": 0.0047708333333333335,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.001748344459806362,
+        0.0017491782692941422
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260827_135935",
+      "file": "audio_0012.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9895746643518518,
+      "digital_zero_fraction": 0.010425335648148149,
+      "rms_p50_db": -28.962305068969727,
+      "rms_p95_db": -22.473847007751466,
+      "rms_max_db": -15.792749404907227,
+      "near_silence_fraction": 0.009723572718433115,
+      "longest_flatline_seconds": 0.004916666666666666,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.001939710033830596,
+        0.0019455645955346644
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260827_135935",
+      "file": "audio_0013.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9912572337962963,
+      "digital_zero_fraction": 0.008742766203703704,
+      "rms_p50_db": -29.45461654663086,
+      "rms_p95_db": -22.735090446472167,
+      "rms_max_db": -16.872013092041016,
+      "near_silence_fraction": 0.005834143631059869,
+      "longest_flatline_seconds": 0.004958333333333334,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0017631023139829739,
+        0.0017369297208413008
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260827_135935",
+      "file": "audio_0014.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9937056018518519,
+      "digital_zero_fraction": 0.006294398148148148,
+      "rms_p50_db": -30.25800895690918,
+      "rms_p95_db": -22.430892753601075,
+      "rms_max_db": -16.827938079833984,
+      "near_silence_fraction": 0.002778163633838033,
+      "longest_flatline_seconds": 0.0051875,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0016916390731256386,
+        0.0017019135468134966
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260827_135935",
+      "file": "audio_0015.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 616.0213333333334,
+      "nonzero_sample_fraction": 0.9891934038810344,
+      "digital_zero_fraction": 0.010806596118965577,
+      "rms_p50_db": -30.943830490112305,
+      "rms_p95_db": -22.829057121276854,
+      "rms_max_db": -17.15280532836914,
+      "near_silence_fraction": 0.01177186929165821,
+      "longest_flatline_seconds": 0.004145833333333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.001492077444685422,
+        0.00148533762330047
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260827_214906",
+      "file": "audio_0001.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 586.9973333333334,
+      "nonzero_sample_fraction": 0.9900557292423816,
+      "digital_zero_fraction": 0.009944270757618433,
+      "rms_p50_db": -35.43458938598633,
+      "rms_p95_db": -24.23168172836304,
+      "rms_max_db": -19.98595428466797,
+      "near_silence_fraction": 0.010225820195994887,
+      "longest_flatline_seconds": 0.0003541666666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0009384387774127496,
+        0.0009796335909852349
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260827_220023",
+      "file": "audio_0001.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9511777430555556,
+      "digital_zero_fraction": 0.04882225694444445,
+      "rms_p50_db": -24.108680725097656,
+      "rms_p95_db": -21.469569015502938,
+      "rms_max_db": -17.639909744262695,
+      "near_silence_fraction": 0.08959577719127657,
+      "longest_flatline_seconds": 0.0020208333333333332,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0038382256667133362,
+        0.004013428878686606
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260827_220023",
+      "file": "audio_0002.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9974943518518519,
+      "digital_zero_fraction": 0.0025056481481481483,
+      "rms_p50_db": -23.736797332763672,
+      "rms_p95_db": -21.47827377319336,
+      "rms_max_db": -17.19598960876465,
+      "near_silence_fraction": 0.0030559799972218363,
+      "longest_flatline_seconds": 0.0009375,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.004337900667804147,
+        0.004427028555499705
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260827_220023",
+      "file": "audio_0003.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9975501620370371,
+      "digital_zero_fraction": 0.002449837962962963,
+      "rms_p50_db": -23.73836898803711,
+      "rms_p95_db": -21.37113265991211,
+      "rms_max_db": -16.55124282836914,
+      "near_silence_fraction": 0.00416724545075705,
+      "longest_flatline_seconds": 0.0006458333333333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.00443905822375246,
+        0.004476325329489558
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260827_220023",
+      "file": "audio_0004.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9156214120370371,
+      "digital_zero_fraction": 0.08437858796296296,
+      "rms_p50_db": -24.230430603027344,
+      "rms_p95_db": -21.042232513427734,
+      "rms_max_db": -16.280601501464844,
+      "near_silence_fraction": 0.1679399916655091,
+      "longest_flatline_seconds": 0.0005625,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.003743857576229989,
+        0.003802083709732763
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260827_220023",
+      "file": "audio_0005.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 99.43466666666667,
+      "nonzero_sample_fraction": 0.499882041474469,
+      "digital_zero_fraction": 0.500117958525531,
+      "rms_p50_db": -94.55795288085938,
+      "rms_p95_db": -94.51619567871094,
+      "rms_max_db": -94.48136901855469,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 0.00010416666666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        4.6550772104936226e-10,
+        4.6559513869072554e-10
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260901_221145",
+      "file": "audio_0001.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9696488541666667,
+      "digital_zero_fraction": 0.030351145833333332,
+      "rms_p50_db": -29.21642303466797,
+      "rms_p95_db": -25.619891166687015,
+      "rms_max_db": -19.409828186035156,
+      "near_silence_fraction": 0.027920544520072234,
+      "longest_flatline_seconds": 0.014791666666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.001338900128027782,
+        0.0013036543489963945
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260901_221145",
+      "file": "audio_0002.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9582940509259259,
+      "digital_zero_fraction": 0.04170594907407407,
+      "rms_p50_db": -33.40483856201172,
+      "rms_p95_db": -25.36587448120117,
+      "rms_max_db": -20.29329490661621,
+      "near_silence_fraction": 0.060147242672593415,
+      "longest_flatline_seconds": 0.053375,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0009229709954815701,
+        0.0009145215236719836
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260901_221145",
+      "file": "audio_0003.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9900788078703704,
+      "digital_zero_fraction": 0.009921192129629629,
+      "rms_p50_db": -33.74287414550781,
+      "rms_p95_db": -24.86379852294922,
+      "rms_max_db": -21.17580223083496,
+      "near_silence_fraction": 0.011390470898735936,
+      "longest_flatline_seconds": 0.043208333333333335,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0009320021882724379,
+        0.0009554792492773548
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260901_221145",
+      "file": "audio_0004.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9886765509259259,
+      "digital_zero_fraction": 0.011323449074074074,
+      "rms_p50_db": -36.540557861328125,
+      "rms_p95_db": -24.56879806518556,
+      "rms_max_db": -20.204681396484375,
+      "near_silence_fraction": 0.01736352271148771,
+      "longest_flatline_seconds": 0.06575,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0008375772838936299,
+        0.000830431316865897
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260901_221145",
+      "file": "audio_0005.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 487.31733333333335,
+      "nonzero_sample_fraction": 0.9888526606892702,
+      "digital_zero_fraction": 0.011147339310729764,
+      "rms_p50_db": -32.26871871948242,
+      "rms_p95_db": -24.1506217956543,
+      "rms_max_db": -20.164710998535156,
+      "near_silence_fraction": 0.020785219399538105,
+      "longest_flatline_seconds": 0.057625,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0011910807813597833,
+        0.0011946334347544495
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260909_213047",
+      "file": "audio_0001.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9950592939814815,
+      "digital_zero_fraction": 0.004940706018518519,
+      "rms_p50_db": -28.059078216552734,
+      "rms_p95_db": -24.973173141479492,
+      "rms_max_db": -17.242076873779297,
+      "near_silence_fraction": 0.010001389081816919,
+      "longest_flatline_seconds": 0.0003333333333333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0017077908777284728,
+        0.0016948320190345273
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260909_213047",
+      "file": "audio_0002.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9965328819444444,
+      "digital_zero_fraction": 0.0034671180555555558,
+      "rms_p50_db": -28.15871810913086,
+      "rms_p95_db": -24.34000396728516,
+      "rms_max_db": -18.081796646118164,
+      "near_silence_fraction": 0.006667592721211279,
+      "longest_flatline_seconds": 0.010604166666666666,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.001823152013922313,
+        0.0018138348453412808
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260909_213047",
+      "file": "audio_0003.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9808744675925926,
+      "digital_zero_fraction": 0.019125532407407407,
+      "rms_p50_db": -28.747344970703125,
+      "rms_p95_db": -25.292458152770998,
+      "rms_max_db": -20.65906524658203,
+      "near_silence_fraction": 0.04014446450895958,
+      "longest_flatline_seconds": 0.0003333333333333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0014919276492221549,
+        0.0014881262355222564
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260909_213047",
+      "file": "audio_0004.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9719691782407407,
+      "digital_zero_fraction": 0.02803082175925926,
+      "rms_p50_db": -29.047584533691406,
+      "rms_p95_db": -25.261271476745605,
+      "rms_max_db": -18.459903717041016,
+      "near_silence_fraction": 0.06348103903319906,
+      "longest_flatline_seconds": 0.00025,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0014233415561815707,
+        0.0014139710757779431
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260909_213047",
+      "file": "audio_0005.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9794242824074074,
+      "digital_zero_fraction": 0.020575717592592593,
+      "rms_p50_db": -28.920202255249023,
+      "rms_p95_db": -25.520475387573242,
+      "rms_max_db": -18.646575927734375,
+      "near_silence_fraction": 0.04333935268787332,
+      "longest_flatline_seconds": 0.00025,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0014817165209001569,
+        0.0014590616095491418
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260909_213047",
+      "file": "audio_0006.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9796851388888889,
+      "digital_zero_fraction": 0.02031486111111111,
+      "rms_p50_db": -29.17257308959961,
+      "rms_p95_db": -25.4236852645874,
+      "rms_max_db": -19.077733993530273,
+      "near_silence_fraction": 0.04403389359633282,
+      "longest_flatline_seconds": 0.00020833333333333335,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0014086082545457478,
+        0.00138217511117329
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260909_213047",
+      "file": "audio_0007.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9495984722222223,
+      "digital_zero_fraction": 0.05040152777777778,
+      "rms_p50_db": -29.099925994873047,
+      "rms_p95_db": -25.634124183654787,
+      "rms_max_db": -20.970361709594727,
+      "near_silence_fraction": 0.11848867898319211,
+      "longest_flatline_seconds": 0.0022916666666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0013610940651618876,
+        0.001347667093805309
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260909_213047",
+      "file": "audio_0008.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9613358333333333,
+      "digital_zero_fraction": 0.038664166666666666,
+      "rms_p50_db": -29.28117561340332,
+      "rms_p95_db": -25.04360466003418,
+      "rms_max_db": -18.2198543548584,
+      "near_silence_fraction": 0.08973468537296847,
+      "longest_flatline_seconds": 0.0002708333333333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0014122963735969797,
+        0.0014160269717562995
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260909_213047",
+      "file": "audio_0009.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9695831828703704,
+      "digital_zero_fraction": 0.03041681712962963,
+      "rms_p50_db": -28.526046752929688,
+      "rms_p95_db": -24.766188812255862,
+      "rms_max_db": -19.737693786621094,
+      "near_silence_fraction": 0.0668148353938047,
+      "longest_flatline_seconds": 0.0002916666666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0014955868814020047,
+        0.0014934343931762744
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260909_213047",
+      "file": "audio_0010.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9757475810185186,
+      "digital_zero_fraction": 0.02425241898148148,
+      "rms_p50_db": -28.038118362426758,
+      "rms_p95_db": -24.52032318115235,
+      "rms_max_db": -21.028032302856445,
+      "near_silence_fraction": 0.05222947631615502,
+      "longest_flatline_seconds": 0.0002708333333333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0016577736697248528,
+        0.001658352763757252
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260909_213047",
+      "file": "audio_0011.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 373.184,
+      "nonzero_sample_fraction": 0.9284105941483737,
+      "digital_zero_fraction": 0.07158940585162636,
+      "rms_p50_db": -28.725677490234375,
+      "rms_p95_db": -24.691625308990478,
+      "rms_max_db": -21.009328842163086,
+      "near_silence_fraction": 0.07607238605898123,
+      "longest_flatline_seconds": 23.9741875,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.001506545788644234,
+        0.001488500297238993
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0001.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9961893287037037,
+      "digital_zero_fraction": 0.0038106712962962964,
+      "rms_p50_db": -33.843467712402344,
+      "rms_p95_db": -30.130698204040527,
+      "rms_max_db": -26.019668579101562,
+      "near_silence_fraction": 0.0029170718155299346,
+      "longest_flatline_seconds": 0.07510416666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0004564971010042441,
+        0.00046172520628919033
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0002.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9965162731481482,
+      "digital_zero_fraction": 0.003483726851851852,
+      "rms_p50_db": -33.38819885253906,
+      "rms_p95_db": -29.5639762878418,
+      "rms_max_db": -23.340909957885742,
+      "near_silence_fraction": 0.0026392554521461314,
+      "longest_flatline_seconds": 0.09975,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.000526089675038583,
+        0.000533284668796976
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0003.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9960946990740741,
+      "digital_zero_fraction": 0.0039053009259259258,
+      "rms_p50_db": -33.568115234375,
+      "rms_p95_db": -29.714166259765626,
+      "rms_max_db": -25.909099578857422,
+      "near_silence_fraction": 0.003750520905681345,
+      "longest_flatline_seconds": 0.04727083333333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0005086151577500601,
+        0.0005025397390637038
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0004.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9962155555555555,
+      "digital_zero_fraction": 0.0037844444444444444,
+      "rms_p50_db": -33.82358932495117,
+      "rms_p95_db": -30.033028221130373,
+      "rms_max_db": -26.25775146484375,
+      "near_silence_fraction": 0.0016668981803028198,
+      "longest_flatline_seconds": 0.28872916666666665,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.00046418846603243664,
+        0.0004653790051508824
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0005.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9806480092592592,
+      "digital_zero_fraction": 0.01935199074074074,
+      "rms_p50_db": -34.05779266357422,
+      "rms_p95_db": -30.76360492706299,
+      "rms_max_db": -25.635665893554688,
+      "near_silence_fraction": 0.022086400889012363,
+      "longest_flatline_seconds": 12.821833333333334,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.00046286049881113557,
+        0.00044808205709061846
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0006.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9962715393518519,
+      "digital_zero_fraction": 0.0037284606481481483,
+      "rms_p50_db": -34.31841278076172,
+      "rms_p95_db": -30.888563919067384,
+      "rms_max_db": -26.659164428710938,
+      "near_silence_fraction": 0.0026392554521461314,
+      "longest_flatline_seconds": 0.028854166666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0004079567280557024,
+        0.0004096741563550636
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0007.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9964561342592593,
+      "digital_zero_fraction": 0.0035438657407407407,
+      "rms_p50_db": -34.338653564453125,
+      "rms_p95_db": -30.978557777404784,
+      "rms_max_db": -26.136653900146484,
+      "near_silence_fraction": 0.0016668981803028198,
+      "longest_flatline_seconds": 0.64375,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0004112654637721048,
+        0.0004055564048850081
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0008.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.995621886574074,
+      "digital_zero_fraction": 0.004378113425925926,
+      "rms_p50_db": -34.51119613647461,
+      "rms_p95_db": -31.036333656311037,
+      "rms_max_db": -26.037384033203125,
+      "near_silence_fraction": 0.0030559799972218363,
+      "longest_flatline_seconds": 0.16235416666666666,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.00040207160037256676,
+        0.0003957034260761079
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0009.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9954880208333333,
+      "digital_zero_fraction": 0.004511979166666667,
+      "rms_p50_db": -34.56915283203125,
+      "rms_p95_db": -31.123741149902347,
+      "rms_max_db": -27.02558135986328,
+      "near_silence_fraction": 0.004445061814140853,
+      "longest_flatline_seconds": 0.11083333333333334,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.00038837763171334735,
+        0.0003884051305606004
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0010.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9961483912037037,
+      "digital_zero_fraction": 0.003851608796296296,
+      "rms_p50_db": -34.635196685791016,
+      "rms_p95_db": -31.154744720458986,
+      "rms_max_db": -26.654081344604492,
+      "near_silence_fraction": 0.0011112654535352132,
+      "longest_flatline_seconds": 0.191875,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0003898158879949349,
+        0.0003825568235957029
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0011.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9963054398148148,
+      "digital_zero_fraction": 0.0036945601851851853,
+      "rms_p50_db": -34.10614776611328,
+      "rms_p95_db": -31.27004337310791,
+      "rms_max_db": -26.99286460876465,
+      "near_silence_fraction": 0.0022225309070704265,
+      "longest_flatline_seconds": 0.38554166666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.00041136384821770694,
+        0.000406727357060407
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0012.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.8119181712962963,
+      "digital_zero_fraction": 0.1880818287037037,
+      "rms_p50_db": -36.214786529541016,
+      "rms_p95_db": -31.76325511932373,
+      "rms_max_db": -27.505033493041992,
+      "near_silence_fraction": 0.1844700652868454,
+      "longest_flatline_seconds": 163.8978125,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.00026375795546158094,
+        0.0002654702462240648
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0013.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.7748224305555556,
+      "digital_zero_fraction": 0.22517756944444445,
+      "rms_p50_db": -30.326343536376953,
+      "rms_p95_db": -24.806538391113282,
+      "rms_max_db": -21.15567398071289,
+      "near_silence_fraction": 0.2357271843311571,
+      "longest_flatline_seconds": 184.5489375,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0012872044175149683,
+        0.0012902571486938892
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0014.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9972653587962963,
+      "digital_zero_fraction": 0.0027346412037037035,
+      "rms_p50_db": -28.63788604736328,
+      "rms_p95_db": -24.774187660217287,
+      "rms_max_db": -21.20556640625,
+      "near_silence_fraction": 0.00041672454507570494,
+      "longest_flatline_seconds": 0.0096875,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0016248941984131752,
+        0.0015971924300854422
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0015.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9780449884259259,
+      "digital_zero_fraction": 0.021955011574074073,
+      "rms_p50_db": -28.61271095275879,
+      "rms_p95_db": -24.353624153137208,
+      "rms_max_db": -13.785093307495117,
+      "near_silence_fraction": 0.03639394360327823,
+      "longest_flatline_seconds": 0.012604166666666666,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0017938675331970876,
+        0.0016811621195003089
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0016.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9831469097222222,
+      "digital_zero_fraction": 0.016853090277777778,
+      "rms_p50_db": -28.821992874145508,
+      "rms_p95_db": -24.387126350402834,
+      "rms_max_db": -18.86060905456543,
+      "near_silence_fraction": 0.02778163633838033,
+      "longest_flatline_seconds": 0.0021458333333333334,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0016460870744929546,
+        0.001619628042730382
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0017.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9395530902777778,
+      "digital_zero_fraction": 0.06044690972222222,
+      "rms_p50_db": -28.698766708374023,
+      "rms_p95_db": -24.853523826599123,
+      "rms_max_db": -20.800682067871094,
+      "near_silence_fraction": 0.11446034171412696,
+      "longest_flatline_seconds": 0.013416666666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0015318241933776557,
+        0.0015390847031425262
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0018.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9616337037037037,
+      "digital_zero_fraction": 0.038366296296296294,
+      "rms_p50_db": -28.161964416503906,
+      "rms_p95_db": -24.8640380859375,
+      "rms_max_db": -20.846059799194336,
+      "near_silence_fraction": 0.07000972357271844,
+      "longest_flatline_seconds": 0.004020833333333334,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0016909021738372933,
+        0.0017621045596429138
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0019.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9821266087962963,
+      "digital_zero_fraction": 0.017873391203703702,
+      "rms_p50_db": -28.151681900024414,
+      "rms_p95_db": -24.783855438232425,
+      "rms_max_db": -20.62139320373535,
+      "near_silence_fraction": 0.030559799972218363,
+      "longest_flatline_seconds": 0.004291666666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.001714178486757985,
+        0.0017862706447389037
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0020.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9739977314814815,
+      "digital_zero_fraction": 0.02600226851851852,
+      "rms_p50_db": -28.317995071411133,
+      "rms_p95_db": -24.607173919677734,
+      "rms_max_db": -20.403404235839844,
+      "near_silence_fraction": 0.04806223086539797,
+      "longest_flatline_seconds": 0.0018333333333333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0017007943859669008,
+        0.0017327216256204864
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0021.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9800565625,
+      "digital_zero_fraction": 0.0199434375,
+      "rms_p50_db": -28.01498031616211,
+      "rms_p95_db": -24.519238471984867,
+      "rms_max_db": -20.649309158325195,
+      "near_silence_fraction": 0.03528267814974302,
+      "longest_flatline_seconds": 0.0012291666666666666,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0018142562197109994,
+        0.0018428674774669128
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0022.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9183301967592593,
+      "digital_zero_fraction": 0.08166980324074075,
+      "rms_p50_db": -29.24503517150879,
+      "rms_p95_db": -25.137054634094238,
+      "rms_max_db": -20.566631317138672,
+      "near_silence_fraction": 0.15460480622308653,
+      "longest_flatline_seconds": 0.0012083333333333334,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0013856298196287093,
+        0.0013874050602430685
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0023.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.958310011574074,
+      "digital_zero_fraction": 0.041689988425925924,
+      "rms_p50_db": -28.46804428100586,
+      "rms_p95_db": -24.6175106048584,
+      "rms_max_db": -17.483503341674805,
+      "near_silence_fraction": 0.07695513265731352,
+      "longest_flatline_seconds": 0.00225,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.001675748387751217,
+        0.00166006403795105
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0024.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9565675462962963,
+      "digital_zero_fraction": 0.0434324537037037,
+      "rms_p50_db": -28.673294067382812,
+      "rms_p95_db": -25.28442440032959,
+      "rms_max_db": -21.057493209838867,
+      "near_silence_fraction": 0.07792748992915682,
+      "longest_flatline_seconds": 0.005354166666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.001443551506051509,
+        0.0014870157628683416
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0025.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9670179166666667,
+      "digital_zero_fraction": 0.032982083333333335,
+      "rms_p50_db": -28.25876235961914,
+      "rms_p95_db": -24.743938636779784,
+      "rms_max_db": -21.034046173095703,
+      "near_silence_fraction": 0.061536324489512434,
+      "longest_flatline_seconds": 0.0012708333333333332,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0016858763559501298,
+        0.0017063908901822071
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0026.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9981599189814815,
+      "digital_zero_fraction": 0.0018400810185185185,
+      "rms_p50_db": -28.39520263671875,
+      "rms_p95_db": -25.02516613006592,
+      "rms_max_db": -21.01092529296875,
+      "near_silence_fraction": 0.0002778163633838033,
+      "longest_flatline_seconds": 0.0028333333333333335,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0017086012217801935,
+        0.0016118080304757501
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0027.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9981251157407407,
+      "digital_zero_fraction": 0.0018748842592592593,
+      "rms_p50_db": -28.405441284179688,
+      "rms_p95_db": -24.801319694519044,
+      "rms_max_db": -19.270950317382812,
+      "near_silence_fraction": 0.0006945409084595083,
+      "longest_flatline_seconds": 0.0011875,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0016856768574873072,
+        0.0016948970117665507
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0028.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9981593518518519,
+      "digital_zero_fraction": 0.0018406481481481481,
+      "rms_p50_db": -28.47907257080078,
+      "rms_p95_db": -24.605569648742676,
+      "rms_max_db": -19.29977035522461,
+      "near_silence_fraction": 0.00041672454507570494,
+      "longest_flatline_seconds": 0.0020833333333333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.001682257870306666,
+        0.001651315293512113
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0029.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9970092361111111,
+      "digital_zero_fraction": 0.0029907638888888887,
+      "rms_p50_db": -28.692066192626953,
+      "rms_p95_db": -25.221778678894044,
+      "rms_max_db": -21.091838836669922,
+      "near_silence_fraction": 0.0008334490901514099,
+      "longest_flatline_seconds": 0.0073125,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.001507028228855472,
+        0.0014943863068928908
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0030.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9953174421296296,
+      "digital_zero_fraction": 0.004682557870370371,
+      "rms_p50_db": -28.793123245239258,
+      "rms_p95_db": -25.796468162536623,
+      "rms_max_db": -20.481929779052734,
+      "near_silence_fraction": 0.00013890818169190166,
+      "longest_flatline_seconds": 0.00075,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.001355693297570041,
+        0.001356191797099072
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0031.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9980858912037037,
+      "digital_zero_fraction": 0.0019141087962962963,
+      "rms_p50_db": -28.397449493408203,
+      "rms_p95_db": -25.559114265441895,
+      "rms_max_db": -22.669828414916992,
+      "near_silence_fraction": 0.0,
+      "longest_flatline_seconds": 0.0014375,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0014688272029217935,
+        0.0014683436004599962
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0032.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.998773912037037,
+      "digital_zero_fraction": 0.001226087962962963,
+      "rms_p50_db": -28.382083892822266,
+      "rms_p95_db": -26.003536796569826,
+      "rms_max_db": -24.238969802856445,
+      "near_silence_fraction": 0.0,
+      "longest_flatline_seconds": 0.00010416666666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0014179155916493403,
+        0.0014179062267201219
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0033.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9770375578703704,
+      "digital_zero_fraction": 0.02296244212962963,
+      "rms_p50_db": -28.182666778564453,
+      "rms_p95_db": -25.57811794281006,
+      "rms_max_db": -23.838184356689453,
+      "near_silence_fraction": 0.04153354632587859,
+      "longest_flatline_seconds": 0.0015,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0014563776100651334,
+        0.001481620207418045
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0034.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9933652662037037,
+      "digital_zero_fraction": 0.0066347337962962966,
+      "rms_p50_db": -27.778589248657227,
+      "rms_p95_db": -25.215706634521485,
+      "rms_max_db": -23.198863983154297,
+      "near_silence_fraction": 0.005556327267676066,
+      "longest_flatline_seconds": 0.0012291666666666666,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0015883719983602511,
+        0.0016111525088758208
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0035.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9982367476851852,
+      "digital_zero_fraction": 0.0017632523148148147,
+      "rms_p50_db": -28.10085105895996,
+      "rms_p95_db": -25.29967346191406,
+      "rms_max_db": -23.189441680908203,
+      "near_silence_fraction": 0.0005556327267676066,
+      "longest_flatline_seconds": 0.0017291666666666666,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0015007124216056481,
+        0.0015167325600444262
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0036.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9986423032407408,
+      "digital_zero_fraction": 0.0013576967592592592,
+      "rms_p50_db": -28.61835289001465,
+      "rms_p95_db": -25.407714080810546,
+      "rms_max_db": -23.6601619720459,
+      "near_silence_fraction": 0.0,
+      "longest_flatline_seconds": 0.0002708333333333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0014172976485385637,
+        0.001411194020688525
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0037.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9876941666666667,
+      "digital_zero_fraction": 0.012305833333333334,
+      "rms_p50_db": -29.116546630859375,
+      "rms_p95_db": -25.474757766723634,
+      "rms_max_db": -23.46348762512207,
+      "near_silence_fraction": 0.012362828170579248,
+      "longest_flatline_seconds": 0.0077083333333333335,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0012741892713149664,
+        0.0012716592702951015
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260910_205330",
+      "file": "audio_0038.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 146.16533333333334,
+      "nonzero_sample_fraction": 0.8499287194181931,
+      "digital_zero_fraction": 0.1500712805818069,
+      "rms_p50_db": -32.888084411621094,
+      "rms_p95_db": -25.993660259246827,
+      "rms_max_db": -24.122970581054688,
+      "near_silence_fraction": 0.0,
+      "longest_flatline_seconds": 0.001375,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0007908307006171027,
+        0.0007906540193950865
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0001.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9600182754629629,
+      "digital_zero_fraction": 0.039981724537037036,
+      "rms_p50_db": -35.567405700683594,
+      "rms_p95_db": -29.68309326171875,
+      "rms_max_db": -19.788888931274414,
+      "near_silence_fraction": 0.06570356994026948,
+      "longest_flatline_seconds": 0.042604166666666665,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0003776936962123943,
+        0.0003946923234264789
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0002.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9626885532407408,
+      "digital_zero_fraction": 0.03731144675925926,
+      "rms_p50_db": -35.77963638305664,
+      "rms_p95_db": -30.28472366333008,
+      "rms_max_db": -21.69565200805664,
+      "near_silence_fraction": 0.06125850812612863,
+      "longest_flatline_seconds": 0.005583333333333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0003464214546236218,
+        0.0003616735067913369
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0003.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9641447685185185,
+      "digital_zero_fraction": 0.03585523148148148,
+      "rms_p50_db": -35.67634201049805,
+      "rms_p95_db": -30.470107650756837,
+      "rms_max_db": -18.112464904785156,
+      "near_silence_fraction": 0.06209195721628004,
+      "longest_flatline_seconds": 0.0043125,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.000364316582906241,
+        0.0003704866835632991
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0004.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9774170601851851,
+      "digital_zero_fraction": 0.022582939814814816,
+      "rms_p50_db": -33.82616424560547,
+      "rms_p95_db": -24.33960666656495,
+      "rms_max_db": -12.258938789367676,
+      "near_silence_fraction": 0.03625503542158633,
+      "longest_flatline_seconds": 0.008020833333333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0011158237435780164,
+        0.0011457902523165104
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0005.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9896965162037037,
+      "digital_zero_fraction": 0.010303483796296297,
+      "rms_p50_db": -30.9511775970459,
+      "rms_p95_db": -21.81535320281983,
+      "rms_max_db": -16.182628631591797,
+      "near_silence_fraction": 0.010001389081816919,
+      "longest_flatline_seconds": 0.008666666666666666,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0016960897534991253,
+        0.0016666304520911676
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0006.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9935266435185185,
+      "digital_zero_fraction": 0.006473356481481482,
+      "rms_p50_db": -30.86866569519043,
+      "rms_p95_db": -22.359296226501467,
+      "rms_max_db": -15.070720672607422,
+      "near_silence_fraction": 0.0033337963606056395,
+      "longest_flatline_seconds": 0.0057708333333333335,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0015438269284782991,
+        0.0016393125535520785
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0007.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9941829513888889,
+      "digital_zero_fraction": 0.005817048611111111,
+      "rms_p50_db": -30.86684226989746,
+      "rms_p95_db": -25.512605285644536,
+      "rms_max_db": -17.69971466064453,
+      "near_silence_fraction": 0.00041672454507570494,
+      "longest_flatline_seconds": 0.005479166666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0011123879011547737,
+        0.0011381196025882726
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0008.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9914100578703704,
+      "digital_zero_fraction": 0.00858994212962963,
+      "rms_p50_db": -31.608768463134766,
+      "rms_p95_db": -22.38251075744629,
+      "rms_max_db": -13.460044860839844,
+      "near_silence_fraction": 0.0022225309070704265,
+      "longest_flatline_seconds": 0.0058125,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.001522822597733358,
+        0.0016433896893104194
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0009.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9881817476851852,
+      "digital_zero_fraction": 0.011818252314814814,
+      "rms_p50_db": -31.188209533691406,
+      "rms_p95_db": -22.059549713134775,
+      "rms_max_db": -15.237579345703125,
+      "near_silence_fraction": 0.007362133629670788,
+      "longest_flatline_seconds": 0.00675,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0016418208909540273,
+        0.0017538182467701025
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0010.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.8367237962962963,
+      "digital_zero_fraction": 0.16327620370370372,
+      "rms_p50_db": -34.10293197631836,
+      "rms_p95_db": -25.105868530273444,
+      "rms_max_db": -17.115856170654297,
+      "near_silence_fraction": 0.321989165161828,
+      "longest_flatline_seconds": 0.005,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0008784506655423643,
+        0.0009399878825537463
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0011.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.49993596064814816,
+      "digital_zero_fraction": 0.5000640393518518,
+      "rms_p50_db": -94.55699157714844,
+      "rms_p95_db": -94.51508331298828,
+      "rms_max_db": -94.4552001953125,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 0.00010416666666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        4.656160793577631e-10,
+        4.655872126696286e-10
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0012.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0072636921296296295,
+      "digital_zero_fraction": 0.9927363078703704,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -94.48113250732422,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 886.9261041666666,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        6.762156435460956e-12,
+        6.767524475300753e-12
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0013.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.007771203703703704,
+      "digital_zero_fraction": 0.9922287962962963,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -35.6965446472168,
+      "near_silence_fraction": 0.9981941936380053,
+      "longest_flatline_seconds": 474.33820833333334,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        3.0725871113611867e-07,
+        8.772028234994246e-08
+      ],
+      "eligible_for_detection": false,
+      "reason": "mostly_silence_plus_transient"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0014.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0015.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0016.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0017.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0018.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0019.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0020.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0021.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0022.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0023.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0024.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0025.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0026.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0027.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0028.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0029.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0030.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0031.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0032.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0033.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0034.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0035.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0036.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0037.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0038.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0039.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0040.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0041.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0042.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0043.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0044.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0045.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0046.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0047.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260912_215850",
+      "file": "audio_0048.wav",
+      "dataset_role": "acquisition_fixture",
+      "duration_seconds": 580.7466666666667,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 580.7466458333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260913_150934",
+      "file": "audio_0001.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9481799537037037,
+      "digital_zero_fraction": 0.051820046296296295,
+      "rms_p50_db": -34.71043014526367,
+      "rms_p95_db": -27.384447097778324,
+      "rms_max_db": -23.5488224029541,
+      "near_silence_fraction": 0.09570773718572025,
+      "longest_flatline_seconds": 0.016,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0005682036725343722,
+        0.0005637619385320728
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_150934",
+      "file": "audio_0002.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.8485002430555556,
+      "digital_zero_fraction": 0.15149975694444445,
+      "rms_p50_db": -36.889217376708984,
+      "rms_p95_db": -33.095027160644534,
+      "rms_max_db": -30.578662872314453,
+      "near_silence_fraction": 0.2903180997360745,
+      "longest_flatline_seconds": 0.0011041666666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0002483636102651643,
+        0.00022917330861641354
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_150934",
+      "file": "audio_0003.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9440759490740741,
+      "digital_zero_fraction": 0.05592405092592593,
+      "rms_p50_db": -35.8895149230957,
+      "rms_p95_db": -32.698601150512694,
+      "rms_max_db": -29.154417037963867,
+      "near_silence_fraction": 0.0926517571884984,
+      "longest_flatline_seconds": 0.0030416666666666665,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0003080093173260145,
+        0.000285006672196668
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_150934",
+      "file": "audio_0004.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9574217592592592,
+      "digital_zero_fraction": 0.04257824074074074,
+      "rms_p50_db": -35.50716781616211,
+      "rms_p95_db": -32.56695365905762,
+      "rms_max_db": -29.637474060058594,
+      "near_silence_fraction": 0.0672315599388804,
+      "longest_flatline_seconds": 0.0016666666666666668,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0003478295756088294,
+        0.00027364082561577325
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_150934",
+      "file": "audio_0005.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9596948148148148,
+      "digital_zero_fraction": 0.04030518518518519,
+      "rms_p50_db": -35.46220397949219,
+      "rms_p95_db": -32.381475830078124,
+      "rms_max_db": -29.214290618896484,
+      "near_silence_fraction": 0.06306431448812334,
+      "longest_flatline_seconds": 0.0010416666666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0003282430688630255,
+        0.0002758765345517572
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_150934",
+      "file": "audio_0006.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9645885648148148,
+      "digital_zero_fraction": 0.035411435185185185,
+      "rms_p50_db": -35.560447692871094,
+      "rms_p95_db": -32.913276290893556,
+      "rms_max_db": -30.12372589111328,
+      "near_silence_fraction": 0.054174190859841646,
+      "longest_flatline_seconds": 0.0026875,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.00034119412793504094,
+        0.00025781762094323143
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_150934",
+      "file": "audio_0007.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9646783217592593,
+      "digital_zero_fraction": 0.03532167824074074,
+      "rms_p50_db": -35.48335647583008,
+      "rms_p95_db": -32.536969375610354,
+      "rms_max_db": -29.470937728881836,
+      "near_silence_fraction": 0.05514654813168496,
+      "longest_flatline_seconds": 0.004520833333333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0003345979910631259,
+        0.00029204415069218224
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_150934",
+      "file": "audio_0008.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9677545601851851,
+      "digital_zero_fraction": 0.032245439814814814,
+      "rms_p50_db": -35.069122314453125,
+      "rms_p95_db": -32.118934631347656,
+      "rms_max_db": -27.506752014160156,
+      "near_silence_fraction": 0.04847895541047368,
+      "longest_flatline_seconds": 0.0015416666666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.00033629374756850736,
+        0.000341488844601791
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_150934",
+      "file": "audio_0009.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.36553810185185187,
+      "digital_zero_fraction": 0.6344618981481481,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -33.17077407836914,
+      "rms_max_db": -30.27078628540039,
+      "near_silence_fraction": 0.6399499930545909,
+      "longest_flatline_seconds": 560.3079583333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0001224425141088216,
+        0.00012316198980136066
+      ],
+      "eligible_for_detection": false,
+      "reason": "flatline"
+    },
+    {
+      "session": "hush_20260913_150934",
+      "file": "audio_0010.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260913_150934",
+      "file": "audio_0011.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260913_150934",
+      "file": "audio_0012.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260913_150934",
+      "file": "audio_0013.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260913_150934",
+      "file": "audio_0014.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 899.9999791666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260913_150934",
+      "file": "audio_0015.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.7187920138888889,
+      "digital_zero_fraction": 0.2812079861111111,
+      "rms_p50_db": -39.105533599853516,
+      "rms_p95_db": -22.963582038879395,
+      "rms_max_db": -11.784097671508789,
+      "near_silence_fraction": 0.29531879427698293,
+      "longest_flatline_seconds": 232.39016666666666,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.001099725871070965,
+        0.0011332895086822532
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_150934",
+      "file": "audio_0016.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.995063900462963,
+      "digital_zero_fraction": 0.0049360995370370375,
+      "rms_p50_db": -33.18795394897461,
+      "rms_p95_db": -18.843959426879884,
+      "rms_max_db": -10.175460815429688,
+      "near_silence_fraction": 0.0,
+      "longest_flatline_seconds": 0.00010416666666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0031888909913702973,
+        0.003199122827236726
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_150934",
+      "file": "audio_0017.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9954701620370371,
+      "digital_zero_fraction": 0.004529837962962963,
+      "rms_p50_db": -32.83561706542969,
+      "rms_p95_db": -20.858533668518067,
+      "rms_max_db": -8.77975082397461,
+      "near_silence_fraction": 0.0,
+      "longest_flatline_seconds": 8.333333333333333e-05,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0024877490002936167,
+        0.0025881424439882566
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_150934",
+      "file": "audio_0018.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9936710648148148,
+      "digital_zero_fraction": 0.006328935185185185,
+      "rms_p50_db": -35.269981384277344,
+      "rms_p95_db": -18.15782699584961,
+      "rms_max_db": -12.377662658691406,
+      "near_silence_fraction": 0.0,
+      "longest_flatline_seconds": 0.00010416666666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0026161791032290787,
+        0.0026831222604407445
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_150934",
+      "file": "audio_0019.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 712.2133333333334,
+      "nonzero_sample_fraction": 0.9978160218848285,
+      "digital_zero_fraction": 0.0021839781151714844,
+      "rms_p50_db": -27.82860565185547,
+      "rms_p95_db": -17.581565856933594,
+      "rms_max_db": -10.1271333694458,
+      "near_silence_fraction": 0.0,
+      "longest_flatline_seconds": 6.25e-05,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.005365797177769164,
+        0.005436704531161539
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_210542",
+      "file": "audio_0001.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9470987152777778,
+      "digital_zero_fraction": 0.05290128472222222,
+      "rms_p50_db": -25.095508575439453,
+      "rms_p95_db": -20.963154029846194,
+      "rms_max_db": -15.281023979187012,
+      "near_silence_fraction": 0.09487428809556883,
+      "longest_flatline_seconds": 0.001979166666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0042923777412660034,
+        0.004216606963459096
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_210542",
+      "file": "audio_0002.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9952430208333334,
+      "digital_zero_fraction": 0.004756979166666666,
+      "rms_p50_db": -24.493579864501953,
+      "rms_p95_db": -20.323677253723147,
+      "rms_max_db": -15.202157974243164,
+      "near_silence_fraction": 0.0072232254479788855,
+      "longest_flatline_seconds": 0.0007083333333333334,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.004722290072343636,
+        0.0048166012497296495
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_210542",
+      "file": "audio_0003.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9987031944444444,
+      "digital_zero_fraction": 0.0012968055555555556,
+      "rms_p50_db": -24.632484436035156,
+      "rms_p95_db": -20.80238456726074,
+      "rms_max_db": -10.951494216918945,
+      "near_silence_fraction": 0.0006945409084595083,
+      "longest_flatline_seconds": 0.004791666666666666,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.004572252831334654,
+        0.004537851250704434
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_210542",
+      "file": "audio_0004.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9932697916666666,
+      "digital_zero_fraction": 0.006730208333333334,
+      "rms_p50_db": -24.245393753051758,
+      "rms_p95_db": -20.239145851135255,
+      "rms_max_db": -12.6289701461792,
+      "near_silence_fraction": 0.009584664536741214,
+      "longest_flatline_seconds": 0.0027083333333333334,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.004752573336498527,
+        0.004780869305397996
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_210542",
+      "file": "audio_0005.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9850430902777778,
+      "digital_zero_fraction": 0.014956909722222222,
+      "rms_p50_db": -24.384559631347656,
+      "rms_p95_db": -21.078935623168945,
+      "rms_max_db": -16.091581344604492,
+      "near_silence_fraction": 0.023058758160855675,
+      "longest_flatline_seconds": 0.017041666666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0043197143404701014,
+        0.0044501937045945345
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_210542",
+      "file": "audio_0006.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9963500115740741,
+      "digital_zero_fraction": 0.003649988425925926,
+      "rms_p50_db": -24.433963775634766,
+      "rms_p95_db": -21.117650032043457,
+      "rms_max_db": -14.772496223449707,
+      "near_silence_fraction": 0.005834143631059869,
+      "longest_flatline_seconds": 0.0018541666666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.004587029434822357,
+        0.004665610507079659
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_210542",
+      "file": "audio_0007.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9962042708333333,
+      "digital_zero_fraction": 0.003795729166666667,
+      "rms_p50_db": -24.420377731323242,
+      "rms_p95_db": -20.378857231140138,
+      "rms_max_db": -14.605411529541016,
+      "near_silence_fraction": 0.0051396027226003616,
+      "longest_flatline_seconds": 0.105875,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.004729522128569704,
+        0.004722441423498439
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_210542",
+      "file": "audio_0008.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9097893518518518,
+      "digital_zero_fraction": 0.09021064814814815,
+      "rms_p50_db": -24.897972106933594,
+      "rms_p95_db": -19.793355369567873,
+      "rms_max_db": -15.171558380126953,
+      "near_silence_fraction": 0.17835810529240173,
+      "longest_flatline_seconds": 0.0018958333333333334,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.004173703138698,
+        0.004224553782970006
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_210542",
+      "file": "audio_0009.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9986008217592592,
+      "digital_zero_fraction": 0.0013991782407407408,
+      "rms_p50_db": -24.314167022705078,
+      "rms_p95_db": -20.93269462585449,
+      "rms_max_db": -15.196267127990723,
+      "near_silence_fraction": 0.0016668981803028198,
+      "longest_flatline_seconds": 0.0033125,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.00443475695036522,
+        0.00443549614798864
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_210542",
+      "file": "audio_0010.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9834940740740741,
+      "digital_zero_fraction": 0.016505925925925927,
+      "rms_p50_db": -24.363786697387695,
+      "rms_p95_db": -20.534056663513187,
+      "rms_max_db": -13.445195198059082,
+      "near_silence_fraction": 0.03194888178913738,
+      "longest_flatline_seconds": 0.0007291666666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.004524614975462771,
+        0.004503148141461424
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_210542",
+      "file": "audio_0011.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.8957804513888888,
+      "digital_zero_fraction": 0.10421954861111112,
+      "rms_p50_db": -24.683961868286133,
+      "rms_p95_db": -20.204416465759277,
+      "rms_max_db": -10.355243682861328,
+      "near_silence_fraction": 0.20655646617585777,
+      "longest_flatline_seconds": 0.15045833333333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0038029665562412615,
+        0.00386907389830412
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_210542",
+      "file": "audio_0012.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9685564930555556,
+      "digital_zero_fraction": 0.03144350694444444,
+      "rms_p50_db": -24.608861923217773,
+      "rms_p95_db": -19.952901268005373,
+      "rms_max_db": -15.75363540649414,
+      "near_silence_fraction": 0.0588970690373663,
+      "longest_flatline_seconds": 0.06752083333333334,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0042004609355095045,
+        0.004271717829446813
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_210542",
+      "file": "audio_0013.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9951996527777778,
+      "digital_zero_fraction": 0.004800347222222222,
+      "rms_p50_db": -24.451162338256836,
+      "rms_p95_db": -20.741385459899902,
+      "rms_max_db": -17.080991744995117,
+      "near_silence_fraction": 0.002778163633838033,
+      "longest_flatline_seconds": 0.008583333333333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.003993416205889338,
+        0.004026090215352856
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_210542",
+      "file": "audio_0014.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.8465470949074074,
+      "digital_zero_fraction": 0.1534529050925926,
+      "rms_p50_db": -25.228473663330078,
+      "rms_p95_db": -19.724048614501957,
+      "rms_max_db": -15.026893615722656,
+      "near_silence_fraction": 0.16585636894013056,
+      "longest_flatline_seconds": 121.01033333333334,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0037810945482371393,
+        0.003849819682368845
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260913_210542",
+      "file": "audio_0015.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 398.12266666666665,
+      "nonzero_sample_fraction": 0.0,
+      "digital_zero_fraction": 1.0,
+      "rms_p50_db": -119.99999237060547,
+      "rms_p95_db": -119.99999237060547,
+      "rms_max_db": -119.99999237060547,
+      "near_silence_fraction": 1.0,
+      "longest_flatline_seconds": 398.1226458333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0,
+        0.0
+      ],
+      "eligible_for_detection": false,
+      "reason": "digital_silence"
+    },
+    {
+      "session": "hush_20260914_212529",
+      "file": "audio_0001.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9788474537037037,
+      "digital_zero_fraction": 0.021152546296296298,
+      "rms_p50_db": -25.25109100341797,
+      "rms_p95_db": -20.91486358642578,
+      "rms_max_db": -14.600152015686035,
+      "near_silence_fraction": 0.03472704542297542,
+      "longest_flatline_seconds": 0.0006458333333333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.00404283901310431,
+        0.004037560888403527
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260914_212529",
+      "file": "audio_0002.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9725685416666666,
+      "digital_zero_fraction": 0.027431458333333332,
+      "rms_p50_db": -24.237239837646484,
+      "rms_p95_db": -19.843395805358888,
+      "rms_max_db": -15.080181121826172,
+      "near_silence_fraction": 0.04570079177663564,
+      "longest_flatline_seconds": 0.07402083333333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.004672440837716028,
+        0.004691985819607981
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260914_212529",
+      "file": "audio_0003.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9714860416666666,
+      "digital_zero_fraction": 0.028513958333333332,
+      "rms_p50_db": -25.66616439819336,
+      "rms_p95_db": -21.297797012329106,
+      "rms_max_db": -14.11497688293457,
+      "near_silence_fraction": 0.04986803722739269,
+      "longest_flatline_seconds": 0.0001875,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.003899113437190212,
+        0.003982992708014445
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260914_212529",
+      "file": "audio_0004.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9706650347222222,
+      "digital_zero_fraction": 0.029334965277777778,
+      "rms_p50_db": -25.457481384277344,
+      "rms_p95_db": -20.729946517944338,
+      "rms_max_db": -14.74819278717041,
+      "near_silence_fraction": 0.05292401722461453,
+      "longest_flatline_seconds": 0.004270833333333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.004277787775164557,
+        0.004347063206439747
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260914_212529",
+      "file": "audio_0005.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9962701273148148,
+      "digital_zero_fraction": 0.003729872685185185,
+      "rms_p50_db": -24.842634201049805,
+      "rms_p95_db": -20.798005485534667,
+      "rms_max_db": -11.582178115844727,
+      "near_silence_fraction": 0.006389776357827476,
+      "longest_flatline_seconds": 0.001,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.004596282846445295,
+        0.00469700858737064
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260914_212529",
+      "file": "audio_0006.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9974522569444444,
+      "digital_zero_fraction": 0.0025477430555555557,
+      "rms_p50_db": -24.670833587646484,
+      "rms_p95_db": -20.593265342712407,
+      "rms_max_db": -14.912734031677246,
+      "near_silence_fraction": 0.004445061814140853,
+      "longest_flatline_seconds": 0.003625,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.004415214913325768,
+        0.00450496839793662
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260914_212529",
+      "file": "audio_0007.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9990458912037037,
+      "digital_zero_fraction": 0.0009541087962962963,
+      "rms_p50_db": -24.871397018432617,
+      "rms_p95_db": -20.83912773132324,
+      "rms_max_db": -14.630942344665527,
+      "near_silence_fraction": 0.0,
+      "longest_flatline_seconds": 0.000375,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.004262756558005543,
+        0.004302485507538464
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260914_212529",
+      "file": "audio_0008.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9910413888888889,
+      "digital_zero_fraction": 0.008958611111111112,
+      "rms_p50_db": -26.58386993408203,
+      "rms_p95_db": -21.117879486083986,
+      "rms_max_db": -14.442900657653809,
+      "near_silence_fraction": 0.012223919988887345,
+      "longest_flatline_seconds": 0.045375,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0033806561735029014,
+        0.0034346941322747067
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260914_212529",
+      "file": "audio_0009.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9854330902777778,
+      "digital_zero_fraction": 0.014566909722222222,
+      "rms_p50_db": -33.58714294433594,
+      "rms_p95_db": -24.50446071624756,
+      "rms_max_db": -15.249311447143555,
+      "near_silence_fraction": 0.017224614529795804,
+      "longest_flatline_seconds": 0.005854166666666666,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0011308550422779863,
+        0.0011560873627652311
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260914_212529",
+      "file": "audio_0010.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9810015393518519,
+      "digital_zero_fraction": 0.018998460648148148,
+      "rms_p50_db": -36.34819793701172,
+      "rms_p95_db": -29.88501091003418,
+      "rms_max_db": -22.341821670532227,
+      "near_silence_fraction": 0.01750243089317961,
+      "longest_flatline_seconds": 0.0085625,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.00035778632384906006,
+        0.00036036334281776494
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260914_212529",
+      "file": "audio_0011.wav",
+      "dataset_role": "dev",
+      "duration_seconds": 651.9253333333334,
+      "nonzero_sample_fraction": 0.9302902339020419,
+      "digital_zero_fraction": 0.06970976609795805,
+      "rms_p50_db": -36.27193641662598,
+      "rms_p95_db": -29.157608127593996,
+      "rms_max_db": -22.595367431640625,
+      "near_silence_fraction": 0.04794783275795934,
+      "longest_flatline_seconds": 20.884125,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0004168345495035822,
+        0.0004246247878797751
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260917_205513",
+      "file": "audio_0001.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9963991782407408,
+      "digital_zero_fraction": 0.0036008217592592593,
+      "rms_p50_db": -33.79270935058594,
+      "rms_p95_db": -29.77301063537598,
+      "rms_max_db": -19.953615188598633,
+      "near_silence_fraction": 0.0019447145436866232,
+      "longest_flatline_seconds": 0.404625,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0005362548348142903,
+        0.0005213409472817417
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260917_205513",
+      "file": "audio_0002.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9942035648148149,
+      "digital_zero_fraction": 0.005796435185185185,
+      "rms_p50_db": -33.822601318359375,
+      "rms_p95_db": -28.480752563476564,
+      "rms_max_db": -21.244508743286133,
+      "near_silence_fraction": 0.003472704542297541,
+      "longest_flatline_seconds": 0.5995416666666666,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0005582200278545282,
+        0.000559279370380531
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260917_205513",
+      "file": "audio_0003.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.99487625,
+      "digital_zero_fraction": 0.00512375,
+      "rms_p50_db": -34.25448989868164,
+      "rms_p95_db": -28.416582870483403,
+      "rms_max_db": -21.93639373779297,
+      "near_silence_fraction": 0.003194888178913738,
+      "longest_flatline_seconds": 0.4004375,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.000533977439847529,
+        0.0005236185554527738
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260917_205513",
+      "file": "audio_0004.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9977932291666667,
+      "digital_zero_fraction": 0.002206770833333333,
+      "rms_p50_db": -34.18068313598633,
+      "rms_p95_db": -29.464359092712414,
+      "rms_max_db": -22.448562622070312,
+      "near_silence_fraction": 0.0015279899986109181,
+      "longest_flatline_seconds": 0.0156875,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0004926222002678939,
+        0.00048444878071100296
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260917_205513",
+      "file": "audio_0005.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9478408333333334,
+      "digital_zero_fraction": 0.052159166666666666,
+      "rms_p50_db": -32.943302154541016,
+      "rms_p95_db": -29.628130340576174,
+      "rms_max_db": -25.127979278564453,
+      "near_silence_fraction": 0.057369079038755384,
+      "longest_flatline_seconds": 39.6524375,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0005629298100720971,
+        0.0005554683593218215
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260917_205513",
+      "file": "audio_0006.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9966887268518518,
+      "digital_zero_fraction": 0.0033112731481481483,
+      "rms_p50_db": -34.65996170043945,
+      "rms_p95_db": -30.671466636657716,
+      "rms_max_db": -27.21620750427246,
+      "near_silence_fraction": 0.002361439088762328,
+      "longest_flatline_seconds": 0.5100416666666666,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0004133570609780684,
+        0.00040891745372759436
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260917_205513",
+      "file": "audio_0007.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9945612615740741,
+      "digital_zero_fraction": 0.005438738425925926,
+      "rms_p50_db": -34.565757751464844,
+      "rms_p95_db": -30.540345764160158,
+      "rms_max_db": -26.73649787902832,
+      "near_silence_fraction": 0.0051396027226003616,
+      "longest_flatline_seconds": 0.6820208333333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0004066349728188167,
+        0.00040702788673485716
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260917_205513",
+      "file": "audio_0008.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9962409953703704,
+      "digital_zero_fraction": 0.0037590046296296295,
+      "rms_p50_db": -34.55837631225586,
+      "rms_p95_db": -30.654355239868163,
+      "rms_max_db": -26.24393081665039,
+      "near_silence_fraction": 0.0022225309070704265,
+      "longest_flatline_seconds": 0.584875,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.00042528560196254314,
+        0.0004243671874231573
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260917_205513",
+      "file": "audio_0009.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9942857754629629,
+      "digital_zero_fraction": 0.005714224537037037,
+      "rms_p50_db": -35.029937744140625,
+      "rms_p95_db": -30.582193756103518,
+      "rms_max_db": -26.800146102905273,
+      "near_silence_fraction": 0.004028337269065148,
+      "longest_flatline_seconds": 0.5642708333333334,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.00039935742420922637,
+        0.000398421517544495
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260917_205513",
+      "file": "audio_0010.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9975666782407407,
+      "digital_zero_fraction": 0.002433321759259259,
+      "rms_p50_db": -34.29163360595703,
+      "rms_p95_db": -30.211098289489748,
+      "rms_max_db": -23.01258087158203,
+      "near_silence_fraction": 0.0019447145436866232,
+      "longest_flatline_seconds": 0.08339583333333334,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0004592741323764548,
+        0.00044250861086664913
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260917_205513",
+      "file": "audio_0011.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9967554513888889,
+      "digital_zero_fraction": 0.0032445486111111112,
+      "rms_p50_db": -34.124755859375,
+      "rms_p95_db": -29.880407524108886,
+      "rms_max_db": -24.21609115600586,
+      "near_silence_fraction": 0.0030559799972218363,
+      "longest_flatline_seconds": 0.31866666666666665,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.00048782386964223677,
+        0.0004993040848371392
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260917_205513",
+      "file": "audio_0012.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9955059143518519,
+      "digital_zero_fraction": 0.004494085648148148,
+      "rms_p50_db": -33.550315856933594,
+      "rms_p95_db": -29.964994430541992,
+      "rms_max_db": -23.135948181152344,
+      "near_silence_fraction": 0.003194888178913738,
+      "longest_flatline_seconds": 0.6405416666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0005235526861645781,
+        0.0005348596158075897
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260917_205513",
+      "file": "audio_0013.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9944733680555555,
+      "digital_zero_fraction": 0.005526631944444444,
+      "rms_p50_db": -34.09932327270508,
+      "rms_p95_db": -30.355960273742678,
+      "rms_max_db": -25.41242790222168,
+      "near_silence_fraction": 0.0051396027226003616,
+      "longest_flatline_seconds": 0.19160416666666666,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0004458497635642912,
+        0.00044679148209453734
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260917_205513",
+      "file": "audio_0014.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 659.872,
+      "nonzero_sample_fraction": 0.6581515840698398,
+      "digital_zero_fraction": 0.3418484159301602,
+      "rms_p50_db": -36.75408172607422,
+      "rms_p95_db": -30.21840934753418,
+      "rms_max_db": -24.584918975830078,
+      "near_silence_fraction": 0.34148190259617206,
+      "longest_flatline_seconds": 222.79427083333334,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0003402622633843686,
+        0.00034069387517154454
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260920_200635",
+      "file": "audio_0001.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.7908238194444445,
+      "digital_zero_fraction": 0.20917618055555556,
+      "rms_p50_db": -26.713220596313477,
+      "rms_p95_db": -21.18166198730469,
+      "rms_max_db": -14.625948905944824,
+      "near_silence_fraction": 0.4081122378108071,
+      "longest_flatline_seconds": 0.0005,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0026389985580109188,
+        0.002855320370183111
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260920_200635",
+      "file": "audio_0002.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9433352893518518,
+      "digital_zero_fraction": 0.056664710648148146,
+      "rms_p50_db": -25.217111587524414,
+      "rms_p95_db": -21.712764739990238,
+      "rms_max_db": -16.76158332824707,
+      "near_silence_fraction": 0.1089040144464509,
+      "longest_flatline_seconds": 0.00022916666666666666,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.003908481270871815,
+        0.004030494796804635
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260920_200635",
+      "file": "audio_0003.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9659800231481481,
+      "digital_zero_fraction": 0.03401997685185185,
+      "rms_p50_db": -29.30558204650879,
+      "rms_p95_db": -22.009333992004397,
+      "rms_max_db": -15.395523071289062,
+      "near_silence_fraction": 0.06320322266981525,
+      "longest_flatline_seconds": 0.0041875,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.002140859174505286,
+        0.002149961675364455
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260920_200635",
+      "file": "audio_0004.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9972630902777778,
+      "digital_zero_fraction": 0.002736909722222222,
+      "rms_p50_db": -30.332487106323242,
+      "rms_p95_db": -27.659841918945315,
+      "rms_max_db": -23.137554168701172,
+      "near_silence_fraction": 0.0015279899986109181,
+      "longest_flatline_seconds": 0.008895833333333334,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0009430089050535699,
+        0.0009553277688744668
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260920_200635",
+      "file": "audio_0005.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9949491319444445,
+      "digital_zero_fraction": 0.005050868055555556,
+      "rms_p50_db": -30.2677059173584,
+      "rms_p95_db": -26.916920471191407,
+      "rms_max_db": -23.25075340270996,
+      "near_silence_fraction": 0.006250868176135575,
+      "longest_flatline_seconds": 0.007083333333333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.000999269535377475,
+        0.0010074559885839699
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260920_200635",
+      "file": "audio_0006.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9499578356481482,
+      "digital_zero_fraction": 0.05004216435185185,
+      "rms_p50_db": -30.507553100585938,
+      "rms_p95_db": -27.415528678894045,
+      "rms_max_db": -23.908477783203125,
+      "near_silence_fraction": 0.09362411446034172,
+      "longest_flatline_seconds": 0.011854166666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0008872261184754272,
+        0.0009027238558607469
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260920_200635",
+      "file": "audio_0007.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9979998842592592,
+      "digital_zero_fraction": 0.0020001157407407407,
+      "rms_p50_db": -30.39956283569336,
+      "rms_p95_db": -27.451311302185058,
+      "rms_max_db": -22.43362045288086,
+      "near_silence_fraction": 0.0006945409084595083,
+      "longest_flatline_seconds": 0.043833333333333335,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0009444821721091608,
+        0.0009546714928662361
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260920_200635",
+      "file": "audio_0008.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9888881597222222,
+      "digital_zero_fraction": 0.011111840277777778,
+      "rms_p50_db": -29.36608123779297,
+      "rms_p95_db": -26.731254386901856,
+      "rms_max_db": -23.224279403686523,
+      "near_silence_fraction": 0.013890818169190165,
+      "longest_flatline_seconds": 0.0161875,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.001187478231021949,
+        0.0011785815171575975
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260920_200635",
+      "file": "audio_0009.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.989970787037037,
+      "digital_zero_fraction": 0.010029212962962964,
+      "rms_p50_db": -30.288604736328125,
+      "rms_p95_db": -27.65043125152588,
+      "rms_max_db": -23.925983428955078,
+      "near_silence_fraction": 0.01500208362272538,
+      "longest_flatline_seconds": 0.020625,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0009184219231410167,
+        0.0009288877235513387
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260920_200635",
+      "file": "audio_0010.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.942275,
+      "digital_zero_fraction": 0.057725,
+      "rms_p50_db": -29.501182556152344,
+      "rms_p95_db": -21.749164199829107,
+      "rms_max_db": -16.74908447265625,
+      "near_silence_fraction": 0.11029309626336992,
+      "longest_flatline_seconds": 0.0053125,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.0020223333375221464,
+        0.002095706572041338
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260920_200635",
+      "file": "audio_0011.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.7063055092592593,
+      "digital_zero_fraction": 0.2936944907407407,
+      "rms_p50_db": -94.5291748046875,
+      "rms_p95_db": -21.64254837036133,
+      "rms_max_db": -17.234634399414062,
+      "near_silence_fraction": 0.5850812612862898,
+      "longest_flatline_seconds": 0.00025,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.001858536242456585,
+        0.0019375977843809503
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260920_200635",
+      "file": "audio_0012.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9828907638888889,
+      "digital_zero_fraction": 0.01710923611111111,
+      "rms_p50_db": -24.257797241210938,
+      "rms_p95_db": -20.451851081848147,
+      "rms_max_db": -12.25885009765625,
+      "near_silence_fraction": 0.028198360883456036,
+      "longest_flatline_seconds": 0.07233333333333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.004358358864162195,
+        0.00443088026054805
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260920_200635",
+      "file": "audio_0013.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9863323958333333,
+      "digital_zero_fraction": 0.013667604166666666,
+      "rms_p50_db": -24.656221389770508,
+      "rms_p95_db": -21.101211547851566,
+      "rms_max_db": -17.438024520874023,
+      "near_silence_fraction": 0.02458674815946659,
+      "longest_flatline_seconds": 0.0004375,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.004059178002573403,
+        0.004180555759749237
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260920_200635",
+      "file": "audio_0014.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9865582754629629,
+      "digital_zero_fraction": 0.013441724537037037,
+      "rms_p50_db": -24.729705810546875,
+      "rms_p95_db": -20.674819946289062,
+      "rms_max_db": -15.583320617675781,
+      "near_silence_fraction": 0.022919849979163773,
+      "longest_flatline_seconds": 0.1049375,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.003975340645485708,
+        0.004097539557011375
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260920_200635",
+      "file": "audio_0015.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9983745486111111,
+      "digital_zero_fraction": 0.001625451388888889,
+      "rms_p50_db": -24.72934913635254,
+      "rms_p95_db": -20.869264602661133,
+      "rms_max_db": -14.491683959960938,
+      "near_silence_fraction": 0.0009723572718433116,
+      "longest_flatline_seconds": 0.04064583333333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.004090191845290721,
+        0.0042826085394705405
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260920_200635",
+      "file": "audio_0016.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9982420138888889,
+      "digital_zero_fraction": 0.0017579861111111112,
+      "rms_p50_db": -24.034128189086914,
+      "rms_p95_db": -20.080883598327638,
+      "rms_max_db": -11.117959976196289,
+      "near_silence_fraction": 0.0029170718155299346,
+      "longest_flatline_seconds": 0.0002916666666666667,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.004816208563454242,
+        0.00482955928730621
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260920_200635",
+      "file": "audio_0017.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9833520833333333,
+      "digital_zero_fraction": 0.016647916666666665,
+      "rms_p50_db": -23.67782974243164,
+      "rms_p95_db": -20.332951545715332,
+      "rms_max_db": -16.266077041625977,
+      "near_silence_fraction": 0.03180997360744548,
+      "longest_flatline_seconds": 0.0007916666666666666,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.004600117943166643,
+        0.004733940520540001
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260920_200635",
+      "file": "audio_0018.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 900.0,
+      "nonzero_sample_fraction": 0.9947544328703704,
+      "digital_zero_fraction": 0.0052455671296296295,
+      "rms_p50_db": -23.40410614013672,
+      "rms_p95_db": -19.687871551513673,
+      "rms_max_db": -15.421539306640625,
+      "near_silence_fraction": 0.006528684539519378,
+      "longest_flatline_seconds": 0.10889583333333333,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.004983288481876306,
+        0.004967934306231457
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    },
+    {
+      "session": "hush_20260920_200635",
+      "file": "audio_0019.wav",
+      "dataset_role": "holdout",
+      "duration_seconds": 142.67733333333334,
+      "nonzero_sample_fraction": 0.9258338891718376,
+      "digital_zero_fraction": 0.07416611082816238,
+      "rms_p50_db": -23.890503883361816,
+      "rms_p95_db": -19.617874813079833,
+      "rms_max_db": -16.497451782226562,
+      "near_silence_fraction": 0.07017543859649122,
+      "longest_flatline_seconds": 10.294958333333334,
+      "clipping_fraction": 0.0,
+      "channel_mean_square": [
+        0.00469976136160921,
+        0.004682521113317373
+      ],
+      "eligible_for_detection": true,
+      "reason": "valid_tv_audio"
+    }
+  ]
+}

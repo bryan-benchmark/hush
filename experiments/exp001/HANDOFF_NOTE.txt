@@ -1,0 +1,29 @@
+Hush Experiment 001 audit handoff. Spec exp001-v1 is frozen. No score was refit after labels were opened.
+
+Session: hush_20260914_212529 (dev, not a holdout)
+Coverage: 0–6899 s. The tail after 6899 s is dead TV and was excluded.
+Raw 48 kHz stereo chunks were not modified. They were concatenated, then resampled once to 16 kHz mono.
+This folder is not a git repo, so metadata git_commit is null.
+
+Two stages are in this zip.
+
+1. Unlabeled run, in plots/
+   Question: when the television leaves football for a commercial pod, does the low-level acoustic distribution stay shifted?
+   Timestamps are window-end times (when the 1 s of audio is available). Hop is 0.5 s.
+   Causal scores use only audio already heard: Euclidean, cosine, Mahalanobis, symmetric KL at 30/60/120 s, energy distance at 60 s, and a frozen baseline.
+   Foote novelty looks 5 s ahead and is labeled non-causal.
+   Y axes are median/IQR display scaling. features.parquet holds the raw scores.
+   Numerical guards, chosen before labels: z-score clip ±8, and symmetric-KL variance floor of 1 in that standardized space.
+   Sanity: 6899.0 s, 13,797 windows. No top sustained event is within 2 s of a 15-minute chunk seam. Foote at 15 s and 37 s is warmup. Frozen baseline latched only at 2335–2360 s and 2917.5–2960 s.
+
+2. Truth overlay, in plots_labeled/, overlay_boundaries.csv, overlay_summary.json
+   Same scores. Commercial pods shaded. Solid lines are break starts, dashed lines are returns.
+   The audit score is local maxima of euclid_60. Nothing was recomputed.
+   A peak within ±10 s is not evidence: maxima occur about every 4 s, and 99% of the timeline is already within 10 s of one.
+   1,488 local maxima. 1,363 are more than 10 s from any commercial start or end.
+   172 of those outside peaks are at least as large as the median peak nearest a true boundary (threshold 6.30).
+   The frozen baseline never overlapped a labeled pod. Both latches are during play.
+   Verdict, also in EXP001_RESULT.md: partial / negative for standalone low-level separation. Boundary spikes exist and are not specific. No persistent commercial state.
+
+Not included: the 16 kHz wav (~224 MB). The feature table is included as features.parquet.
+Code that produced the run: src/hush/audio.py, features.py, change.py, experiment001.py, overlay001.py.

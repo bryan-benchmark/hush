@@ -1,0 +1,42 @@
+Hush Experiment 003 handoff. Spec exp003-v1 is frozen.
+The unlabeled scores were written first. The truth overlay was a separate later step and did not rescore anything.
+No window, hop, memory, or reference span was changed after the labels were opened.
+Exp001 scores and Exp002 scores were not read and are not in this zip.
+
+Session: hush_20260914_212529 (dev, ESPN Monday Night Football). Not a holdout.
+Coverage: 0–6899 s, the same range as Exp001 and Exp002.
+Audio is a 32 kHz mono resample of the raw 48 kHz capture, checked against the Exp001 16 kHz derived wav hash.
+The 32 kHz wav and the CNN14 checkpoint are not in this zip.
+Holdouts were not opened. This folder is not a git repo, so metadata git_commit is null.
+
+Question: does a 10 s PANNs CNN14 embedding move away from the sound of the previous 3 minutes?
+
+Model: qiuqiangkong/panns-cnn14
+Checkpoint: Cnn14_mAP=0.431.pth from Zenodo record 3987831
+Not fine-tuned. The penultimate embedding is L2-normalized. The AudioSet class head is discarded.
+Device: CPU. NNPACK disabled. torch 2.14.1, panns-inference 0.1.1.
+
+Frozen rule: a window is 10 s, hop 1 s. Its reference is embeddings whose windows ended before this window started, and no older than 180 s. The score is 1 minus the cosine to the mean of that reference. The score stays null until the reference spans 60 s. The current window cannot enter its own reference. Overlapping hops are excluded because their audio has not finished before the window starts.
+The top-20 listing in summary.json uses a 45 s gap. It is not a mute rule.
+
+Unlabeled counts: 6,890 windows, 6,820 defined. First defined window end is 80 s.
+Distance p10 / p50 / p90 = 0.039 / 0.120 / 0.263.
+A median of 0.12 is a cosine of about 0.88 to the recent cloud. Most windows stay close to the previous 3 minutes.
+
+Plots, unlabeled, no pod shading:
+- program_distance.png
+- program_distance_hist.png
+Table: program_cloud.parquet
+
+The truth overlay was run after these artifacts were frozen. Embeddings were not recomputed. The 10 s window, 1 s hop, and 180 s memory were not changed.
+
+Overlay, same commercial filter as Exp001 and Exp002, 15 breaks:
+All 15 starts have a higher median distance in the 30 s after the start than in the 30 s before. Fourteen of the 15 post-start peaks sit at or above the 94th percentile of all defined scores. The misshapen one is the break at 1539 s: its 0–30 s median barely rises, and its peak is at the 81st percentile.
+Of the 20 largest peaks, 45 s apart, 17 fall inside a pod or within 30 s of a start. Relative to time spent in each region, that is about 12 times as dense. Of the 50 largest, 30 do, about 3 times as dense. Pod scores sit higher than program scores (median 0.213 versus 0.092) and the two distributions overlap.
+At most returns the score does not rise again. A high score after an end would mean the audio differs from the previous 3 minutes, including a return to football after the cloud has adapted to the pod. That was not turned into a PLAY rule.
+Several pods are highest in the first 20 s and lower by 40–60 s. Some stay elevated. That pattern was not used to change exp003-v1.
+
+Tables: overlay_starts.csv, overlay_returns.csv, overlay_events.csv, overlay_summary.json.
+Shaded plot: plots_labeled/program_distance.png.
+
+Separate from this experiment: new recordings must name content_type, delivery, network, and show before audio starts. One program per session is the default. The old dev sessions were not assigned to Prime football, linear scripted, or ad-supported streaming scripted. Those three captures still have to be recorded on purpose. recorder.py writes that identity into session.json and experiments/SESSION_CATALOG.csv.

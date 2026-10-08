@@ -1,0 +1,1254 @@
+{
+  "experiment_spec_version": "exp001-v1",
+  "score": "euclid_60",
+  "score_note": "Local maxima of euclid_60. No score was recomputed and no threshold was fit to labels.",
+  "session": "hush_20260914_212529",
+  "n_breaks": 15,
+  "n_local_maxima": 1488,
+  "false_radius_seconds": 10.0,
+  "n_peaks_outside_10s_of_any_boundary": 1363,
+  "similarly_large_definition": "outside peak score >= median nearest-boundary peak score",
+  "thresholds": {
+    "median_nearest_start_peak": 6.727232883183125,
+    "median_nearest_end_peak": 4.479406932063091,
+    "median_nearest_boundary_peak": 6.299314247787881
+  },
+  "false_peaks_at_least_as_large": {
+    "median_nearest_start_peak": 135,
+    "median_nearest_end_peak": 572,
+    "median_nearest_boundary_peak": 172
+  },
+  "false_peak_times_vs_median_boundary": [
+    {
+      "timestamp_seconds": 2330.5,
+      "score": 24.289487867223787
+    },
+    {
+      "timestamp_seconds": 4125.0,
+      "score": 23.152449586481612
+    },
+    {
+      "timestamp_seconds": 3501.0,
+      "score": 18.30517590564002
+    },
+    {
+      "timestamp_seconds": 3087.0,
+      "score": 18.06991568806534
+    },
+    {
+      "timestamp_seconds": 3231.0,
+      "score": 16.047428050838224
+    },
+    {
+      "timestamp_seconds": 3876.0,
+      "score": 15.559783139307417
+    },
+    {
+      "timestamp_seconds": 1444.5,
+      "score": 15.05196111242864
+    },
+    {
+      "timestamp_seconds": 407.5,
+      "score": 14.104195194364005
+    },
+    {
+      "timestamp_seconds": 3020.5,
+      "score": 13.90615906648391
+    },
+    {
+      "timestamp_seconds": 1817.5,
+      "score": 13.868010910043878
+    },
+    {
+      "timestamp_seconds": 941.0,
+      "score": 13.669054806131141
+    },
+    {
+      "timestamp_seconds": 406.0,
+      "score": 13.626283197442858
+    },
+    {
+      "timestamp_seconds": 5034.0,
+      "score": 13.376040974817865
+    },
+    {
+      "timestamp_seconds": 551.5,
+      "score": 13.2004488156976
+    },
+    {
+      "timestamp_seconds": 935.0,
+      "score": 12.065592002101486
+    },
+    {
+      "timestamp_seconds": 5967.5,
+      "score": 12.016475897980655
+    },
+    {
+      "timestamp_seconds": 6063.0,
+      "score": 11.705343564681852
+    },
+    {
+      "timestamp_seconds": 2911.5,
+      "score": 11.684032125036433
+    },
+    {
+      "timestamp_seconds": 4969.5,
+      "score": 11.470189622480902
+    },
+    {
+      "timestamp_seconds": 1976.0,
+      "score": 11.420659535872067
+    },
+    {
+      "timestamp_seconds": 2560.0,
+      "score": 11.31405171283556
+    },
+    {
+      "timestamp_seconds": 704.0,
+      "score": 10.854981247790214
+    },
+    {
+      "timestamp_seconds": 1811.5,
+      "score": 10.8336651925788
+    },
+    {
+      "timestamp_seconds": 4263.5,
+      "score": 10.695551174234689
+    },
+    {
+      "timestamp_seconds": 2916.5,
+      "score": 10.561883955992853
+    },
+    {
+      "timestamp_seconds": 4526.5,
+      "score": 10.53336461763022
+    },
+    {
+      "timestamp_seconds": 233.0,
+      "score": 10.493976738880447
+    },
+    {
+      "timestamp_seconds": 6443.5,
+      "score": 10.196969623130903
+    },
+    {
+      "timestamp_seconds": 3561.0,
+      "score": 10.031996835978072
+    },
+    {
+      "timestamp_seconds": 3451.5,
+      "score": 9.91854381137142
+    },
+    {
+      "timestamp_seconds": 3636.5,
+      "score": 9.8574099304857
+    },
+    {
+      "timestamp_seconds": 706.5,
+      "score": 9.744884023156466
+    },
+    {
+      "timestamp_seconds": 3559.5,
+      "score": 9.552338366465262
+    },
+    {
+      "timestamp_seconds": 150.5,
+      "score": 9.392022796227222
+    },
+    {
+      "timestamp_seconds": 870.0,
+      "score": 9.159891198667577
+    },
+    {
+      "timestamp_seconds": 4007.5,
+      "score": 9.128732595632375
+    },
+    {
+      "timestamp_seconds": 2083.0,
+      "score": 9.095332725266168
+    },
+    {
+      "timestamp_seconds": 2004.5,
+      "score": 8.983519376873966
+    },
+    {
+      "timestamp_seconds": 5404.5,
+      "score": 8.976255625242962
+    },
+    {
+      "timestamp_seconds": 2003.0,
+      "score": 8.975664521348751
+    },
+    {
+      "timestamp_seconds": 2726.5,
+      "score": 8.905422220708443
+    },
+    {
+      "timestamp_seconds": 5401.0,
+      "score": 8.861542161856171
+    },
+    {
+      "timestamp_seconds": 494.5,
+      "score": 8.855448212667504
+    },
+    {
+      "timestamp_seconds": 4410.5,
+      "score": 8.810604243393486
+    },
+    {
+      "timestamp_seconds": 1014.0,
+      "score": 8.709820897565994
+    },
+    {
+      "timestamp_seconds": 6071.5,
+      "score": 8.677415218946397
+    },
+    {
+      "timestamp_seconds": 5403.0,
+      "score": 8.676188535933477
+    },
+    {
+      "timestamp_seconds": 4397.0,
+      "score": 8.586939767681288
+    },
+    {
+      "timestamp_seconds": 5408.5,
+      "score": 8.567506922715065
+    },
+    {
+      "timestamp_seconds": 5815.5,
+      "score": 8.52198380292561
+    },
+    {
+      "timestamp_seconds": 2060.0,
+      "score": 8.495761393200466
+    },
+    {
+      "timestamp_seconds": 1662.5,
+      "score": 8.403985219665996
+    },
+    {
+      "timestamp_seconds": 4578.0,
+      "score": 8.343523004529034
+    },
+    {
+      "timestamp_seconds": 4703.5,
+      "score": 8.328241382672276
+    },
+    {
+      "timestamp_seconds": 3318.0,
+      "score": 8.321145975892605
+    },
+    {
+      "timestamp_seconds": 2527.5,
+      "score": 8.316009005273049
+    },
+    {
+      "timestamp_seconds": 4897.0,
+      "score": 8.314532099819203
+    },
+    {
+      "timestamp_seconds": 5361.0,
+      "score": 8.24904283840853
+    },
+    {
+      "timestamp_seconds": 1895.0,
+      "score": 8.24155945987699
+    },
+    {
+      "timestamp_seconds": 4412.5,
+      "score": 8.215951350947842
+    },
+    {
+      "timestamp_seconds": 4701.0,
+      "score": 8.126956661305249
+    },
+    {
+      "timestamp_seconds": 4702.0,
+      "score": 8.121555069604094
+    },
+    {
+      "timestamp_seconds": 4697.5,
+      "score": 8.120989057072723
+    },
+    {
+      "timestamp_seconds": 4025.0,
+      "score": 8.06003293128808
+    },
+    {
+      "timestamp_seconds": 1336.0,
+      "score": 8.046589437956781
+    },
+    {
+      "timestamp_seconds": 2590.0,
+      "score": 8.007582662735558
+    },
+    {
+      "timestamp_seconds": 3328.5,
+      "score": 7.994425720129152
+    },
+    {
+      "timestamp_seconds": 5700.5,
+      "score": 7.974201490941669
+    },
+    {
+      "timestamp_seconds": 5359.5,
+      "score": 7.943761216689161
+    },
+    {
+      "timestamp_seconds": 2924.5,
+      "score": 7.9024742385702105
+    },
+    {
+      "timestamp_seconds": 3688.5,
+      "score": 7.85009579531371
+    },
+    {
+      "timestamp_seconds": 3819.5,
+      "score": 7.817097577387234
+    },
+    {
+      "timestamp_seconds": 3158.5,
+      "score": 7.773300867340076
+    },
+    {
+      "timestamp_seconds": 3579.5,
+      "score": 7.760161162814161
+    },
+    {
+      "timestamp_seconds": 1261.5,
+      "score": 7.745144302316057
+    },
+    {
+      "timestamp_seconds": 1827.0,
+      "score": 7.725953248098239
+    },
+    {
+      "timestamp_seconds": 4294.0,
+      "score": 7.69462793212757
+    },
+    {
+      "timestamp_seconds": 5008.0,
+      "score": 7.670535338704655
+    },
+    {
+      "timestamp_seconds": 258.0,
+      "score": 7.655720732362067
+    },
+    {
+      "timestamp_seconds": 5619.5,
+      "score": 7.61505295784703
+    },
+    {
+      "timestamp_seconds": 2930.5,
+      "score": 7.597888837620137
+    },
+    {
+      "timestamp_seconds": 5305.5,
+      "score": 7.588156694198378
+    },
+    {
+      "timestamp_seconds": 5054.0,
+      "score": 7.550648534530297
+    },
+    {
+      "timestamp_seconds": 2592.0,
+      "score": 7.531514398444412
+    },
+    {
+      "timestamp_seconds": 6069.5,
+      "score": 7.514202427417384
+    },
+    {
+      "timestamp_seconds": 5056.0,
+      "score": 7.513512839274037
+    },
+    {
+      "timestamp_seconds": 4026.5,
+      "score": 7.509937591877209
+    },
+    {
+      "timestamp_seconds": 5711.0,
+      "score": 7.413936416780602
+    },
+    {
+      "timestamp_seconds": 3884.0,
+      "score": 7.404686265142738
+    },
+    {
+      "timestamp_seconds": 792.5,
+      "score": 7.3928314452284
+    },
+    {
+      "timestamp_seconds": 3457.5,
+      "score": 7.365453236827986
+    },
+    {
+      "timestamp_seconds": 1219.0,
+      "score": 7.3496189023845355
+    },
+    {
+      "timestamp_seconds": 1157.0,
+      "score": 7.335791408281417
+    },
+    {
+      "timestamp_seconds": 2230.0,
+      "score": 7.303791717728587
+    },
+    {
+      "timestamp_seconds": 791.0,
+      "score": 7.29826165353896
+    },
+    {
+      "timestamp_seconds": 5873.5,
+      "score": 7.278615614775104
+    },
+    {
+      "timestamp_seconds": 6300.0,
+      "score": 7.274784503114234
+    },
+    {
+      "timestamp_seconds": 330.5,
+      "score": 7.271295550512058
+    },
+    {
+      "timestamp_seconds": 6697.0,
+      "score": 7.252469974759088
+    },
+    {
+      "timestamp_seconds": 2932.0,
+      "score": 7.21003712741721
+    },
+    {
+      "timestamp_seconds": 329.0,
+      "score": 7.205699047776889
+    },
+    {
+      "timestamp_seconds": 5219.0,
+      "score": 7.162217480184642
+    },
+    {
+      "timestamp_seconds": 5508.0,
+      "score": 7.1545475521724695
+    },
+    {
+      "timestamp_seconds": 4845.0,
+      "score": 7.110567707573435
+    },
+    {
+      "timestamp_seconds": 1217.0,
+      "score": 7.110053516244007
+    },
+    {
+      "timestamp_seconds": 6602.0,
+      "score": 7.103382645514969
+    },
+    {
+      "timestamp_seconds": 5069.5,
+      "score": 7.087172083209914
+    },
+    {
+      "timestamp_seconds": 5428.5,
+      "score": 7.076771214480936
+    },
+    {
+      "timestamp_seconds": 1159.5,
+      "score": 7.074884136241835
+    },
+    {
+      "timestamp_seconds": 2894.0,
+      "score": 7.05422310449246
+    },
+    {
+      "timestamp_seconds": 2232.5,
+      "score": 7.045278655031758
+    },
+    {
+      "timestamp_seconds": 4016.5,
+      "score": 7.029634623475765
+    },
+    {
+      "timestamp_seconds": 4015.5,
+      "score": 7.026535398525439
+    },
+    {
+      "timestamp_seconds": 2967.5,
+      "score": 7.024679565803218
+    },
+    {
+      "timestamp_seconds": 451.0,
+      "score": 7.016325573099535
+    },
+    {
+      "timestamp_seconds": 6787.5,
+      "score": 7.008028974499699
+    },
+    {
+      "timestamp_seconds": 6303.0,
+      "score": 7.000933062249756
+    },
+    {
+      "timestamp_seconds": 4923.5,
+      "score": 6.959013170828343
+    },
+    {
+      "timestamp_seconds": 2804.0,
+      "score": 6.92650696839297
+    },
+    {
+      "timestamp_seconds": 1606.0,
+      "score": 6.925382293166182
+    },
+    {
+      "timestamp_seconds": 566.5,
+      "score": 6.90234933613475
+    },
+    {
+      "timestamp_seconds": 4925.5,
+      "score": 6.894478244420813
+    },
+    {
+      "timestamp_seconds": 6596.5,
+      "score": 6.8916629034617145
+    },
+    {
+      "timestamp_seconds": 667.0,
+      "score": 6.857248351252995
+    },
+    {
+      "timestamp_seconds": 1831.0,
+      "score": 6.842047562627021
+    },
+    {
+      "timestamp_seconds": 6266.0,
+      "score": 6.841715765392653
+    },
+    {
+      "timestamp_seconds": 6267.5,
+      "score": 6.8225630455647375
+    },
+    {
+      "timestamp_seconds": 5645.0,
+      "score": 6.814082153856743
+    },
+    {
+      "timestamp_seconds": 2244.0,
+      "score": 6.813646602186404
+    },
+    {
+      "timestamp_seconds": 5480.5,
+      "score": 6.799155215919876
+    },
+    {
+      "timestamp_seconds": 4200.0,
+      "score": 6.7930423139314895
+    },
+    {
+      "timestamp_seconds": 2681.0,
+      "score": 6.789387276961775
+    },
+    {
+      "timestamp_seconds": 5312.0,
+      "score": 6.756753249151758
+    },
+    {
+      "timestamp_seconds": 5713.0,
+      "score": 6.737229130637492
+    },
+    {
+      "timestamp_seconds": 3683.0,
+      "score": 6.7327579972669405
+    },
+    {
+      "timestamp_seconds": 4390.0,
+      "score": 6.695211740146356
+    },
+    {
+      "timestamp_seconds": 3568.0,
+      "score": 6.6900697687910835
+    },
+    {
+      "timestamp_seconds": 5169.0,
+      "score": 6.6820254811086945
+    },
+    {
+      "timestamp_seconds": 2381.0,
+      "score": 6.678675885426552
+    },
+    {
+      "timestamp_seconds": 1688.5,
+      "score": 6.675644114658523
+    },
+    {
+      "timestamp_seconds": 4402.0,
+      "score": 6.6679478654108815
+    },
+    {
+      "timestamp_seconds": 1213.0,
+      "score": 6.656202368630698
+    },
+    {
+      "timestamp_seconds": 154.5,
+      "score": 6.627067646740636
+    },
+    {
+      "timestamp_seconds": 6700.0,
+      "score": 6.597099116912831
+    },
+    {
+      "timestamp_seconds": 6656.5,
+      "score": 6.591839706503971
+    },
+    {
+      "timestamp_seconds": 4890.5,
+      "score": 6.589144948378422
+    },
+    {
+      "timestamp_seconds": 235.0,
+      "score": 6.583783548128408
+    },
+    {
+      "timestamp_seconds": 6699.0,
+      "score": 6.577253438984446
+    },
+    {
+      "timestamp_seconds": 2095.0,
+      "score": 6.566873399013557
+    },
+    {
+      "timestamp_seconds": 2097.0,
+      "score": 6.54667742109426
+    },
+    {
+      "timestamp_seconds": 236.0,
+      "score": 6.53763417236405
+    },
+    {
+      "timestamp_seconds": 4299.0,
+      "score": 6.51985954531028
+    },
+    {
+      "timestamp_seconds": 2546.0,
+      "score": 6.507372908859713
+    },
+    {
+      "timestamp_seconds": 807.0,
+      "score": 6.489360432474012
+    },
+    {
+      "timestamp_seconds": 5176.0,
+      "score": 6.47827416091441
+    },
+    {
+      "timestamp_seconds": 4296.5,
+      "score": 6.462082005628077
+    },
+    {
+      "timestamp_seconds": 389.0,
+      "score": 6.461258363037021
+    },
+    {
+      "timestamp_seconds": 4850.5,
+      "score": 6.449133428727109
+    },
+    {
+      "timestamp_seconds": 897.5,
+      "score": 6.43313738589523
+    },
+    {
+      "timestamp_seconds": 4465.5,
+      "score": 6.4231089535487635
+    },
+    {
+      "timestamp_seconds": 5177.5,
+      "score": 6.413136506916484
+    },
+    {
+      "timestamp_seconds": 5339.0,
+      "score": 6.41151755600377
+    },
+    {
+      "timestamp_seconds": 3216.5,
+      "score": 6.402067953939949
+    },
+    {
+      "timestamp_seconds": 5857.5,
+      "score": 6.3937770145148205
+    },
+    {
+      "timestamp_seconds": 6503.5,
+      "score": 6.3812132381151825
+    },
+    {
+      "timestamp_seconds": 6516.5,
+      "score": 6.379749441705573
+    },
+    {
+      "timestamp_seconds": 1518.5,
+      "score": 6.379239453141486
+    },
+    {
+      "timestamp_seconds": 3852.5,
+      "score": 6.37041395887849
+    },
+    {
+      "timestamp_seconds": 4990.5,
+      "score": 6.333450827623307
+    },
+    {
+      "timestamp_seconds": 3851.0,
+      "score": 6.309343250663669
+    },
+    {
+      "timestamp_seconds": 1266.0,
+      "score": 6.304803091132564
+    },
+    {
+      "timestamp_seconds": 6037.5,
+      "score": 6.303520555893874
+    }
+  ],
+  "boundaries": [
+    {
+      "break_index": 1,
+      "boundary": "start",
+      "boundary_seconds": 166.63993768328444,
+      "nearest_peak_seconds": 171.0,
+      "delay_seconds": 4.360062316715556,
+      "peak_score": 9.071535139361986,
+      "peak_percentile": 96.57258064516128,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 7.630805876847907,
+      "max_score_pm_5s": 9.071535139361986,
+      "max_score_pm_10s": 9.071535139361986,
+      "pod_start_seconds": 166.63993768328444,
+      "pod_end_seconds": 305.7665872434018,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubgw53b_w1adw4"
+    },
+    {
+      "break_index": 1,
+      "boundary": "end",
+      "boundary_seconds": 305.7665872434018,
+      "nearest_peak_seconds": 307.5,
+      "delay_seconds": 1.7334127565982271,
+      "peak_score": 3.276056181807434,
+      "peak_percentile": 23.857526881720432,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 3.276056181807434,
+      "max_score_pm_5s": 4.090890451012935,
+      "max_score_pm_10s": 5.674870070544921,
+      "pod_start_seconds": 166.63993768328444,
+      "pod_end_seconds": 305.7665872434018,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubgw53b_w1adw4"
+    },
+    {
+      "break_index": 2,
+      "boundary": "start",
+      "boundary_seconds": 512.855334,
+      "nearest_peak_seconds": 515.0,
+      "delay_seconds": 2.1446660000000293,
+      "peak_score": 7.953185874949705,
+      "peak_percentile": 94.15322580645162,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 7.790981890674291,
+      "max_score_pm_5s": 7.953185874949705,
+      "max_score_pm_10s": 7.953185874949705,
+      "pod_start_seconds": 512.855334,
+      "pod_end_seconds": 634.731753,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubh12un_hwpvpe"
+    },
+    {
+      "break_index": 2,
+      "boundary": "end",
+      "boundary_seconds": 634.731753,
+      "nearest_peak_seconds": 635.0,
+      "delay_seconds": 0.2682469999999739,
+      "peak_score": 3.670405857848971,
+      "peak_percentile": 34.543010752688176,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 4.010054022966714,
+      "max_score_pm_5s": 5.23054694336651,
+      "max_score_pm_10s": 7.728268606218046,
+      "pod_start_seconds": 512.855334,
+      "pod_end_seconds": 634.731753,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubh12un_hwpvpe"
+    },
+    {
+      "break_index": 3,
+      "boundary": "start",
+      "boundary_seconds": 1029.663793,
+      "nearest_peak_seconds": 1034.5,
+      "delay_seconds": 4.8362070000000585,
+      "peak_score": 8.23424345312859,
+      "peak_percentile": 94.89247311827957,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 3.4656310499977128,
+      "max_score_pm_5s": 8.23424345312859,
+      "max_score_pm_10s": 8.23424345312859,
+      "pod_start_seconds": 1029.663793,
+      "pod_end_seconds": 1079.127815,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubh2khm_rqjhjd"
+    },
+    {
+      "break_index": 3,
+      "boundary": "end",
+      "boundary_seconds": 1079.127815,
+      "nearest_peak_seconds": 1080.0,
+      "delay_seconds": 0.8721849999999449,
+      "peak_score": 4.136718762764759,
+      "peak_percentile": 46.975806451612904,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 4.136718762764759,
+      "max_score_pm_5s": 5.342314100583655,
+      "max_score_pm_10s": 5.342314100583655,
+      "pod_start_seconds": 1029.663793,
+      "pod_end_seconds": 1079.127815,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubh2khm_rqjhjd"
+    },
+    {
+      "break_index": 4,
+      "boundary": "start",
+      "boundary_seconds": 1243.16933,
+      "nearest_peak_seconds": 1245.5,
+      "delay_seconds": 2.3306700000000546,
+      "peak_score": 6.146207095652234,
+      "peak_percentile": 84.13978494623656,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 8.236218670682376,
+      "max_score_pm_5s": 11.737434240570982,
+      "max_score_pm_10s": 11.737434240570982,
+      "pod_start_seconds": 1243.16933,
+      "pod_end_seconds": 1308.19743,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubh4bjr_o00z50"
+    },
+    {
+      "break_index": 4,
+      "boundary": "end",
+      "boundary_seconds": 1308.19743,
+      "nearest_peak_seconds": 1307.5,
+      "delay_seconds": -0.6974299999999403,
+      "peak_score": 2.9900486927577834,
+      "peak_percentile": 16.196236559139784,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 5.038239938725987,
+      "max_score_pm_5s": 5.077938123092917,
+      "max_score_pm_10s": 5.077938123092917,
+      "pod_start_seconds": 1243.16933,
+      "pod_end_seconds": 1308.19743,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubh4bjr_o00z50"
+    },
+    {
+      "break_index": 5,
+      "boundary": "start",
+      "boundary_seconds": 1538.857022,
+      "nearest_peak_seconds": 1537.0,
+      "delay_seconds": -1.8570219999999154,
+      "peak_score": 6.727232883183125,
+      "peak_percentile": 88.70967741935483,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 6.727232883183125,
+      "max_score_pm_5s": 9.740736152564862,
+      "max_score_pm_10s": 19.178436925882416,
+      "pod_start_seconds": 1538.857022,
+      "pod_end_seconds": 1767.489919,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubh5xsd_po68fx"
+    },
+    {
+      "break_index": 5,
+      "boundary": "end",
+      "boundary_seconds": 1767.489919,
+      "nearest_peak_seconds": 1766.0,
+      "delay_seconds": -1.4899190000001,
+      "peak_score": 4.479406932063091,
+      "peak_percentile": 55.77956989247311,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 4.479406932063091,
+      "max_score_pm_5s": 4.479406932063091,
+      "max_score_pm_10s": 4.479406932063091,
+      "pod_start_seconds": 1538.857022,
+      "pod_end_seconds": 1767.489919,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubh5xsd_po68fx"
+    },
+    {
+      "break_index": 6,
+      "boundary": "start",
+      "boundary_seconds": 2072.112009,
+      "nearest_peak_seconds": 2071.0,
+      "delay_seconds": -1.1120089999999436,
+      "peak_score": 6.951152456027084,
+      "peak_percentile": 90.05376344086021,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 7.603692277484252,
+      "max_score_pm_5s": 8.031173277117848,
+      "max_score_pm_10s": 10.131107196716147,
+      "pod_start_seconds": 2072.112009,
+      "pod_end_seconds": 2207.396609,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubh6zvr_3sowkm"
+    },
+    {
+      "break_index": 6,
+      "boundary": "end",
+      "boundary_seconds": 2207.396609,
+      "nearest_peak_seconds": 2207.0,
+      "delay_seconds": -0.3966089999998985,
+      "peak_score": 2.0540176392180833,
+      "peak_percentile": 1.411290322580645,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 2.5097525604178,
+      "max_score_pm_5s": 8.339162329477329,
+      "max_score_pm_10s": 8.339162329477329,
+      "pod_start_seconds": 2072.112009,
+      "pod_end_seconds": 2207.396609,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubh6zvr_3sowkm"
+    },
+    {
+      "break_index": 7,
+      "boundary": "start",
+      "boundary_seconds": 2658.533644,
+      "nearest_peak_seconds": 2658.5,
+      "delay_seconds": -0.03364400000009482,
+      "peak_score": 6.589440328448842,
+      "peak_percentile": 87.97043010752688,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 6.861143433192494,
+      "max_score_pm_5s": 6.960117122188796,
+      "max_score_pm_10s": 6.960117122188796,
+      "pod_start_seconds": 2658.533644,
+      "pod_end_seconds": 2780.387517,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubh7wrc_69g6t0"
+    },
+    {
+      "break_index": 7,
+      "boundary": "end",
+      "boundary_seconds": 2780.387517,
+      "nearest_peak_seconds": 2780.5,
+      "delay_seconds": 0.11248299999988376,
+      "peak_score": 6.51458766100904,
+      "peak_percentile": 87.36559139784946,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 6.51458766100904,
+      "max_score_pm_5s": 6.51458766100904,
+      "max_score_pm_10s": 8.63591222377325,
+      "pod_start_seconds": 2658.533644,
+      "pod_end_seconds": 2780.387517,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubh7wrc_69g6t0"
+    },
+    {
+      "break_index": 8,
+      "boundary": "start",
+      "boundary_seconds": 3180.107485,
+      "nearest_peak_seconds": 3186.0,
+      "delay_seconds": 5.892515000000003,
+      "peak_score": 5.856606501405342,
+      "peak_percentile": 80.04032258064517,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 4.78257861651962,
+      "max_score_pm_5s": 5.841674043945834,
+      "max_score_pm_10s": 16.73779155765656,
+      "pod_start_seconds": 3180.107485,
+      "pod_end_seconds": 3290.206026,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubhbjfm_dc3br1"
+    },
+    {
+      "break_index": 8,
+      "boundary": "end",
+      "boundary_seconds": 3290.206026,
+      "nearest_peak_seconds": 3293.5,
+      "delay_seconds": 3.293974000000162,
+      "peak_score": 9.333992994148943,
+      "peak_percentile": 96.84139784946237,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 6.050910870034073,
+      "max_score_pm_5s": 9.333992994148943,
+      "max_score_pm_10s": 9.333992994148943,
+      "pod_start_seconds": 3180.107485,
+      "pod_end_seconds": 3290.206026,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubhbjfm_dc3br1"
+    },
+    {
+      "break_index": 9,
+      "boundary": "start",
+      "boundary_seconds": 3649.090433,
+      "nearest_peak_seconds": 3644.5,
+      "delay_seconds": -4.590432999999848,
+      "peak_score": 6.533670417928953,
+      "peak_percentile": 87.5,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 8.272479395969258,
+      "max_score_pm_5s": 11.476749352016009,
+      "max_score_pm_10s": 11.476749352016009,
+      "pod_start_seconds": 3649.090433,
+      "pod_end_seconds": 3785.163738,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubhdmxv_jozk4c"
+    },
+    {
+      "break_index": 9,
+      "boundary": "end",
+      "boundary_seconds": 3785.163738,
+      "nearest_peak_seconds": 3783.0,
+      "delay_seconds": -2.163738000000194,
+      "peak_score": 4.729242327448818,
+      "peak_percentile": 61.424731182795696,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 12.626554453284923,
+      "max_score_pm_5s": 13.448002220017097,
+      "max_score_pm_10s": 13.448002220017097,
+      "pod_start_seconds": 3649.090433,
+      "pod_end_seconds": 3785.163738,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubhdmxv_jozk4c"
+    },
+    {
+      "break_index": 10,
+      "boundary": "start",
+      "boundary_seconds": 4244.241231,
+      "nearest_peak_seconds": 4243.5,
+      "delay_seconds": -0.7412309999999707,
+      "peak_score": 4.766382001196409,
+      "peak_percentile": 62.02956989247311,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 5.2097457077015665,
+      "max_score_pm_5s": 5.960349788649171,
+      "max_score_pm_10s": 5.960349788649171,
+      "pod_start_seconds": 4244.241231,
+      "pod_end_seconds": 4378.959192,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubhfhfe_wne5hk"
+    },
+    {
+      "break_index": 10,
+      "boundary": "end",
+      "boundary_seconds": 4378.959192,
+      "nearest_peak_seconds": 4376.0,
+      "delay_seconds": -2.9591920000002574,
+      "peak_score": 6.1463617020555485,
+      "peak_percentile": 84.20698924731182,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 8.78734464375389,
+      "max_score_pm_5s": 10.494337361212557,
+      "max_score_pm_10s": 10.494337361212557,
+      "pod_start_seconds": 4244.241231,
+      "pod_end_seconds": 4378.959192,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubhfhfe_wne5hk"
+    },
+    {
+      "break_index": 11,
+      "boundary": "start",
+      "boundary_seconds": 4543.794045,
+      "nearest_peak_seconds": 4547.5,
+      "delay_seconds": 3.7059550000003583,
+      "peak_score": 7.726743433131714,
+      "peak_percentile": 93.34677419354838,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 6.429783087942156,
+      "max_score_pm_5s": 7.726743433131714,
+      "max_score_pm_10s": 7.726743433131714,
+      "pod_start_seconds": 4543.794045,
+      "pod_end_seconds": 4675.305021,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubhjt5m_0qbc9q"
+    },
+    {
+      "break_index": 11,
+      "boundary": "end",
+      "boundary_seconds": 4675.305021,
+      "nearest_peak_seconds": 4677.5,
+      "delay_seconds": 2.1949789999998757,
+      "peak_score": 7.6456102432550965,
+      "peak_percentile": 93.01075268817203,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 7.5285841750430444,
+      "max_score_pm_5s": 7.6456102432550965,
+      "max_score_pm_10s": 10.135719508385879,
+      "pod_start_seconds": 4543.794045,
+      "pod_end_seconds": 4675.305021,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubhjt5m_0qbc9q"
+    },
+    {
+      "break_index": 12,
+      "boundary": "start",
+      "boundary_seconds": 5019.614887,
+      "nearest_peak_seconds": 5024.0,
+      "delay_seconds": 4.385113000000274,
+      "peak_score": 10.111134565502134,
+      "peak_percentile": 97.37903225806451,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 7.214027588010633,
+      "max_score_pm_5s": 10.111134565502134,
+      "max_score_pm_10s": 10.111134565502134,
+      "pod_start_seconds": 5019.614887,
+      "pod_end_seconds": 5157.319671,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubhkrv3_1guafr"
+    },
+    {
+      "break_index": 12,
+      "boundary": "end",
+      "boundary_seconds": 5157.319671,
+      "nearest_peak_seconds": 5160.0,
+      "delay_seconds": 2.6803289999998015,
+      "peak_score": 13.564604053768006,
+      "peak_percentile": 98.99193548387096,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 12.6046540802583,
+      "max_score_pm_5s": 13.564604053768006,
+      "max_score_pm_10s": 13.564604053768006,
+      "pod_start_seconds": 5019.614887,
+      "pod_end_seconds": 5157.319671,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubhkrv3_1guafr"
+    },
+    {
+      "break_index": 13,
+      "boundary": "start",
+      "boundary_seconds": 5665.36827,
+      "nearest_peak_seconds": 5665.0,
+      "delay_seconds": -0.3682699999999386,
+      "peak_score": 6.452266793520213,
+      "peak_percentile": 86.89516129032258,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 6.452266793520213,
+      "max_score_pm_5s": 6.452266793520213,
+      "max_score_pm_10s": 7.62451342125351,
+      "pod_start_seconds": 5665.36827,
+      "pod_end_seconds": 5785.714505,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubhm3p7_znw8z9"
+    },
+    {
+      "break_index": 13,
+      "boundary": "end",
+      "boundary_seconds": 5785.714505,
+      "nearest_peak_seconds": 5785.5,
+      "delay_seconds": -0.21450499999991735,
+      "peak_score": 4.526527385266037,
+      "peak_percentile": 56.78763440860215,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 6.193402089817221,
+      "max_score_pm_5s": 10.045671463538179,
+      "max_score_pm_10s": 10.045671463538179,
+      "pod_start_seconds": 5665.36827,
+      "pod_end_seconds": 5785.714505,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubhm3p7_znw8z9"
+    },
+    {
+      "break_index": 14,
+      "boundary": "start",
+      "boundary_seconds": 6344.634084,
+      "nearest_peak_seconds": 6349.5,
+      "delay_seconds": 4.865915999999743,
+      "peak_score": 11.63469143051185,
+      "peak_percentile": 98.38709677419355,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 8.698849883856797,
+      "max_score_pm_5s": 11.63469143051185,
+      "max_score_pm_10s": 11.63469143051185,
+      "pod_start_seconds": 6344.634084,
+      "pod_end_seconds": 6470.607413,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubhn3uw_nl6f54"
+    },
+    {
+      "break_index": 14,
+      "boundary": "end",
+      "boundary_seconds": 6470.607413,
+      "nearest_peak_seconds": 6468.0,
+      "delay_seconds": -2.607412999999724,
+      "peak_score": 2.2480540337542836,
+      "peak_percentile": 2.4193548387096775,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 4.987550907401241,
+      "max_score_pm_5s": 5.863815567910253,
+      "max_score_pm_10s": 5.863815567910253,
+      "pod_start_seconds": 6344.634084,
+      "pod_end_seconds": 6470.607413,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubhn3uw_nl6f54"
+    },
+    {
+      "break_index": 15,
+      "boundary": "start",
+      "boundary_seconds": 6852.563786,
+      "nearest_peak_seconds": 6849.5,
+      "delay_seconds": -3.063785999999709,
+      "peak_score": 5.028489035700435,
+      "peak_percentile": 67.6747311827957,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 8.629587675408732,
+      "max_score_pm_5s": 13.865822204657952,
+      "max_score_pm_10s": 13.865822204657952,
+      "pod_start_seconds": 6852.563786,
+      "pod_end_seconds": 6898.919587,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubhooye_d58gun"
+    },
+    {
+      "break_index": 15,
+      "boundary": "end",
+      "boundary_seconds": 6898.919587,
+      "nearest_peak_seconds": 6898.5,
+      "delay_seconds": -0.4195870000003197,
+      "peak_score": 4.272161418423299,
+      "peak_percentile": 50.94086021505376,
+      "frozen": false,
+      "peak_within_10s": true,
+      "max_score_pm_2s": 4.272161418423299,
+      "max_score_pm_5s": 4.272161418423299,
+      "max_score_pm_10s": 7.900573539933185,
+      "pod_start_seconds": 6852.563786,
+      "pod_end_seconds": 6898.919587,
+      "frozen_in_pod": false,
+      "gold_id": "gold_mubhooye_d58gun"
+    }
+  ],
+  "plot_dir": "experiments/exp001/hush_20260914_212529/plots_labeled"
+}

@@ -1,0 +1,53 @@
+{
+  "manifest_version": 3,
+  "name": "OHush Live",
+  "version": "0.1.0",
+  "description": "Sends play and mute to OHush. Does not mute the Prime Video tab.",
+  "permissions": ["tabs", "commands"],
+  "host_permissions": [
+    "http://127.0.0.1:8770/*",
+    "https://www.primevideo.com/*",
+    "https://primevideo.com/*",
+    "https://www.amazon.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["icon.svg"],
+      "matches": [
+        "https://www.primevideo.com/*",
+        "https://primevideo.com/*",
+        "https://www.amazon.com/*"
+      ]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.primevideo.com/*",
+        "https://primevideo.com/*",
+        "https://www.amazon.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "commands": {
+    "mute-now": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+M",
+        "mac": "Command+Shift+M"
+      },
+      "description": "Mute now"
+    },
+    "play-now": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+P",
+        "mac": "Command+Shift+P"
+      },
+      "description": "Play now"
+    }
+  }
+}

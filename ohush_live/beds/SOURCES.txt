@@ -1,0 +1,20 @@
+Local family-test beds. These Mixkit files stay in this folder for tonight.
+They are not a stock library and should not be shipped as standalone downloads.
+
+stadium.wav
+  Mixkit "Big crowd talking loop" (id 364), about 59 seconds, looped.
+  A diffuse crowd, with no chant and no music. The clips titled stadium
+  were short cheers, so this talking-crowd loop is the steady bed.
+
+rain.wav
+  Mixkit "Long rain ambience" (id 1247), about 5 minutes 35 seconds.
+
+fireplace.wav
+  Mixkit "Campfire night wind" (id 1736), about 31 seconds, looped.
+  The crackle-only fireplace clips were under 25 seconds.
+
+pink, brown, and silence are generated in ohush_live/sounds.py.
+
+All three recordings are scaled well below normal game level.
+Mixkit's free sound-effect license allows use in a project.
+https://mixkit.co/license/#sfxFree

@@ -1,0 +1,101 @@
+[
+  {
+    "trigger_s": 911.0,
+    "reference_after_s": 701.0,
+    "reference_through_s": 881.0,
+    "n_reference": 180,
+    "reference_span_s": 179.0,
+    "self_median_distance": 0.02850246349487895,
+    "skipped": false
+  },
+  {
+    "trigger_s": 1395.0,
+    "reference_after_s": 1185.0,
+    "reference_through_s": 1365.0,
+    "n_reference": 180,
+    "reference_span_s": 179.0,
+    "self_median_distance": 0.019238929240555258,
+    "skipped": false
+  },
+  {
+    "trigger_s": 2225.0,
+    "reference_after_s": 2015.0,
+    "reference_through_s": 2195.0,
+    "n_reference": 180,
+    "reference_span_s": 179.0,
+    "self_median_distance": 0.023153959374035693,
+    "skipped": false
+  },
+  {
+    "trigger_s": 3489.0,
+    "reference_after_s": 3279.0,
+    "reference_through_s": 3459.0,
+    "n_reference": 180,
+    "reference_span_s": 179.0,
+    "self_median_distance": 0.034992581738706174,
+    "skipped": false
+  },
+  {
+    "trigger_s": 4200.0,
+    "reference_after_s": 3990.0,
+    "reference_through_s": 4170.0,
+    "n_reference": 180,
+    "reference_span_s": 179.0,
+    "self_median_distance": 0.021427154706983143,
+    "skipped": false
+  },
+  {
+    "trigger_s": 5010.0,
+    "reference_after_s": 4800.0,
+    "reference_through_s": 4980.0,
+    "n_reference": 180,
+    "reference_span_s": 179.0,
+    "self_median_distance": 0.02688903343077048,
+    "skipped": false
+  },
+  {
+    "trigger_s": 5357.0,
+    "reference_after_s": 5147.0,
+    "reference_through_s": 5327.0,
+    "n_reference": 180,
+    "reference_span_s": 179.0,
+    "self_median_distance": 0.015283764824100543,
+    "skipped": false
+  },
+  {
+    "trigger_s": 6016.0,
+    "reference_after_s": 5806.0,
+    "reference_through_s": 5986.0,
+    "n_reference": 180,
+    "reference_span_s": 179.0,
+    "self_median_distance": 0.02465806667710968,
+    "skipped": false
+  },
+  {
+    "trigger_s": 6783.0,
+    "reference_after_s": 6573.0,
+    "reference_through_s": 6753.0,
+    "n_reference": 180,
+    "reference_span_s": 179.0,
+    "self_median_distance": 0.06138610767986019,
+    "skipped": false
+  },
+  {
+    "trigger_s": 6909.0,
+    "reference_after_s": 6699.0,
+    "reference_through_s": 6879.0,
+    "n_reference": 180,
+    "reference_span_s": 179.0,
+    "self_median_distance": 0.1205056629729156,
+    "skipped": false
+  },
+  {
+    "trigger_s": 7539.0,
+    "reference_after_s": 7329.0,
+    "reference_through_s": 7509.0,
+    "n_reference": 180,
+    "reference_span_s": 179.0,
+    "self_median_distance": 0.06057702766068668,
+    "skipped": false
+  }
+]

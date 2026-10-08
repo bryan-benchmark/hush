@@ -1,0 +1,1291 @@
+{
+  "probe_id": "repeat_audio_probe_v0",
+  "window_s": 8.0,
+  "hop_s": 2.0,
+  "sim_threshold": 0.93,
+  "sessions": [
+    "hush_20260914_212529",
+    "hush_20260921_204539"
+  ],
+  "n_fingerprints": 5364,
+  "n_pairs": 176,
+  "n_clusters": 48,
+  "n_cross_session_clusters": 10,
+  "clusters": [
+    {
+      "size": 13,
+      "mean_sim": 0.9406852381569999,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 490.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 788.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 940.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 970.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1818.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2168.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2466.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2524.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2788.0,
+          "file": "audio_0004.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 3018.0,
+          "file": "audio_0004.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 3032.0,
+          "file": "audio_0004.wav"
+        },
+        {
+          "session": "hush_20260921_204539",
+          "elapsed_seconds": 214.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260921_204539",
+          "elapsed_seconds": 574.0,
+          "file": "audio_0001.wav"
+        }
+      ]
+    },
+    {
+      "size": 10,
+      "mean_sim": 0.9372783516134534,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 88.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 692.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 738.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 872.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1280.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1594.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2214.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2848.0,
+          "file": "audio_0004.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2994.0,
+          "file": "audio_0004.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 3160.0,
+          "file": "audio_0004.wav"
+        }
+      ]
+    },
+    {
+      "size": 7,
+      "mean_sim": 0.9538571308640873,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 938.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1816.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2330.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2776.0,
+          "file": "audio_0004.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2786.0,
+          "file": "audio_0004.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 3016.0,
+          "file": "audio_0004.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 3230.0,
+          "file": "audio_0004.wav"
+        }
+      ]
+    },
+    {
+      "size": 6,
+      "mean_sim": 0.9456769100257328,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 32.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1434.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1966.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2320.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2550.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2770.0,
+          "file": "audio_0004.wav"
+        }
+      ]
+    },
+    {
+      "size": 6,
+      "mean_sim": 0.9355753660202026,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 92.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 742.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1924.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2276.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2852.0,
+          "file": "audio_0004.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2998.0,
+          "file": "audio_0004.wav"
+        }
+      ]
+    },
+    {
+      "size": 5,
+      "mean_sim": 0.9459399104118347,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 320.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2164.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 3342.0,
+          "file": "audio_0004.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 4670.0,
+          "file": "audio_0006.wav"
+        },
+        {
+          "session": "hush_20260921_204539",
+          "elapsed_seconds": 210.0,
+          "file": "audio_0001.wav"
+        }
+      ]
+    },
+    {
+      "size": 5,
+      "mean_sim": 0.9400833770632744,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 396.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1800.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1884.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 3490.0,
+          "file": "audio_0004.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 4114.0,
+          "file": "audio_0005.wav"
+        }
+      ]
+    },
+    {
+      "size": 5,
+      "mean_sim": 0.9475672006607055,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 570.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 924.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 3010.0,
+          "file": "audio_0004.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 3076.0,
+          "file": "audio_0004.wav"
+        },
+        {
+          "session": "hush_20260921_204539",
+          "elapsed_seconds": 3760.0,
+          "file": "audio_0005.wav"
+        }
+      ]
+    },
+    {
+      "size": 5,
+      "mean_sim": 0.9702587902545929,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 936.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1814.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2328.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2784.0,
+          "file": "audio_0004.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 3228.0,
+          "file": "audio_0004.wav"
+        }
+      ]
+    },
+    {
+      "size": 5,
+      "mean_sim": 0.9497701440538678,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1440.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2378.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 3084.0,
+          "file": "audio_0004.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 4122.0,
+          "file": "audio_0005.wav"
+        },
+        {
+          "session": "hush_20260921_204539",
+          "elapsed_seconds": 3766.0,
+          "file": "audio_0005.wav"
+        }
+      ]
+    },
+    {
+      "size": 4,
+      "mean_sim": 0.9359519481658936,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 90.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 740.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2850.0,
+          "file": "audio_0004.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2996.0,
+          "file": "audio_0004.wav"
+        }
+      ]
+    },
+    {
+      "size": 4,
+      "mean_sim": 0.9412326693534852,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 146.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 404.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1544.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 3170.0,
+          "file": "audio_0004.wav"
+        }
+      ]
+    },
+    {
+      "size": 4,
+      "mean_sim": 0.9456336945295334,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 318.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 3340.0,
+          "file": "audio_0004.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 4668.0,
+          "file": "audio_0006.wav"
+        },
+        {
+          "session": "hush_20260921_204539",
+          "elapsed_seconds": 208.0,
+          "file": "audio_0001.wav"
+        }
+      ]
+    },
+    {
+      "size": 4,
+      "mean_sim": 0.9345609545707703,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 402.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 546.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1234.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 3496.0,
+          "file": "audio_0004.wav"
+        }
+      ]
+    },
+    {
+      "size": 4,
+      "mean_sim": 0.9341477553049723,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 784.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 966.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2462.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2520.0,
+          "file": "audio_0003.wav"
+        }
+      ]
+    },
+    {
+      "size": 4,
+      "mean_sim": 0.9385763853788376,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 786.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 968.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2464.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2522.0,
+          "file": "audio_0003.wav"
+        }
+      ]
+    },
+    {
+      "size": 4,
+      "mean_sim": 0.937278668085734,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1118.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1490.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1758.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260921_204539",
+          "elapsed_seconds": 18.0,
+          "file": "audio_0001.wav"
+        }
+      ]
+    },
+    {
+      "size": 3,
+      "mean_sim": 0.9634459813435873,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 38.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1542.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 3168.0,
+          "file": "audio_0004.wav"
+        }
+      ]
+    },
+    {
+      "size": 3,
+      "mean_sim": 0.9507375657558441,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 322.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2166.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260921_204539",
+          "elapsed_seconds": 212.0,
+          "file": "audio_0001.wav"
+        }
+      ]
+    },
+    {
+      "size": 3,
+      "mean_sim": 0.9408837556838989,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 454.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2410.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 3350.0,
+          "file": "audio_0004.wav"
+        }
+      ]
+    },
+    {
+      "size": 3,
+      "mean_sim": 0.9450808465480804,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 878.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1154.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1312.0,
+          "file": "audio_0002.wav"
+        }
+      ]
+    },
+    {
+      "size": 3,
+      "mean_sim": 0.9328368703524271,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 964.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2460.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2518.0,
+          "file": "audio_0003.wav"
+        }
+      ]
+    },
+    {
+      "size": 3,
+      "mean_sim": 0.9397670030593872,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1006.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2604.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260921_204539",
+          "elapsed_seconds": 570.0,
+          "file": "audio_0001.wav"
+        }
+      ]
+    },
+    {
+      "size": 3,
+      "mean_sim": 0.9443050622940063,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1008.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2606.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260921_204539",
+          "elapsed_seconds": 572.0,
+          "file": "audio_0001.wav"
+        }
+      ]
+    },
+    {
+      "size": 3,
+      "mean_sim": 0.9325897693634033,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1488.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2368.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2956.0,
+          "file": "audio_0004.wav"
+        }
+      ]
+    },
+    {
+      "size": 3,
+      "mean_sim": 0.9657713174819946,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1812.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2326.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 3226.0,
+          "file": "audio_0004.wav"
+        }
+      ]
+    },
+    {
+      "size": 3,
+      "mean_sim": 0.9364688694477081,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2016.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2366.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2954.0,
+          "file": "audio_0004.wav"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "mean_sim": 0.9654518365859985,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 0.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1886.0,
+          "file": "audio_0003.wav"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "mean_sim": 0.9767231345176697,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1888.0,
+          "file": "audio_0003.wav"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "mean_sim": 0.9804327487945557,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 4.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1890.0,
+          "file": "audio_0003.wav"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "mean_sim": 0.9421722292900085,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 94.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2278.0,
+          "file": "audio_0003.wav"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "mean_sim": 0.9625946879386902,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 398.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 3492.0,
+          "file": "audio_0004.wav"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "mean_sim": 0.9452787041664124,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 400.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 3494.0,
+          "file": "audio_0004.wav"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "mean_sim": 0.9485589861869812,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 450.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2406.0,
+          "file": "audio_0003.wav"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "mean_sim": 0.9559263586997986,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 452.0,
+          "file": "audio_0001.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2408.0,
+          "file": "audio_0003.wav"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "mean_sim": 0.9338728785514832,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1036.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2118.0,
+          "file": "audio_0003.wav"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "mean_sim": 0.9400830864906311,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1116.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1756.0,
+          "file": "audio_0002.wav"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "mean_sim": 0.9378957748413086,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1152.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1310.0,
+          "file": "audio_0002.wav"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "mean_sim": 0.9614888429641724,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1536.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 3162.0,
+          "file": "audio_0004.wav"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "mean_sim": 0.963362991809845,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1538.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 3164.0,
+          "file": "audio_0004.wav"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "mean_sim": 0.9761548638343811,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1540.0,
+          "file": "audio_0002.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 3166.0,
+          "file": "audio_0004.wav"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "mean_sim": 0.9489481449127197,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1968.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2552.0,
+          "file": "audio_0003.wav"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "mean_sim": 0.9512050747871399,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 1970.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2554.0,
+          "file": "audio_0003.wav"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "mean_sim": 0.9529793858528137,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2014.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260921_204539",
+          "elapsed_seconds": 206.0,
+          "file": "audio_0001.wav"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "mean_sim": 0.9466938972473145,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2020.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2958.0,
+          "file": "audio_0004.wav"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "mean_sim": 0.9620290994644165,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2374.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 4118.0,
+          "file": "audio_0005.wav"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "mean_sim": 0.9605523943901062,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2376.0,
+          "file": "audio_0003.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 4120.0,
+          "file": "audio_0005.wav"
+        }
+      ]
+    },
+    {
+      "size": 2,
+      "mean_sim": 0.9552652835845947,
+      "occurrences": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 2780.0,
+          "file": "audio_0004.wav"
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 3078.0,
+          "file": "audio_0004.wav"
+        }
+      ]
+    }
+  ],
+  "gold_seeds": [
+    {
+      "gold_id": "gold_mubgw53b_w1adw4",
+      "gold_in": 166.63993768328444,
+      "gold_out": 305.7665872434018,
+      "query_elapsed": 232.0,
+      "n_hits": 0,
+      "hits": []
+    },
+    {
+      "gold_id": "gold_mubh12un_hwpvpe",
+      "gold_in": 512.855334,
+      "gold_out": 634.731753,
+      "query_elapsed": 570.0,
+      "n_hits": 2,
+      "hits": [
+        {
+          "session": "hush_20260921_204539",
+          "elapsed_seconds": 3760.0,
+          "similarity": 0.9367
+        },
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 3076.0,
+          "similarity": 0.9311
+        }
+      ]
+    },
+    {
+      "gold_id": "gold_mubh2khm_rqjhjd",
+      "gold_in": 1029.663793,
+      "gold_out": 1079.127815,
+      "query_elapsed": 1050.0,
+      "n_hits": 0,
+      "hits": []
+    },
+    {
+      "gold_id": "gold_mubh4bjr_o00z50",
+      "gold_in": 1243.16933,
+      "gold_out": 1308.19743,
+      "query_elapsed": 1272.0,
+      "n_hits": 0,
+      "hits": []
+    },
+    {
+      "gold_id": "gold_mubh5xsd_po68fx",
+      "gold_in": 1538.857022,
+      "gold_out": 1767.489919,
+      "query_elapsed": 1650.0,
+      "n_hits": 0,
+      "hits": []
+    },
+    {
+      "gold_id": "gold_mubh6zvr_3sowkm",
+      "gold_in": 2072.112009,
+      "gold_out": 2207.396609,
+      "query_elapsed": 2136.0,
+      "n_hits": 0,
+      "hits": []
+    },
+    {
+      "gold_id": "gold_mubh7wrc_69g6t0",
+      "gold_in": 2658.533644,
+      "gold_out": 2780.387517,
+      "query_elapsed": 2716.0,
+      "n_hits": 0,
+      "hits": []
+    },
+    {
+      "gold_id": "gold_mubhbjfm_dc3br1",
+      "gold_in": 3180.107485,
+      "gold_out": 3290.206026,
+      "query_elapsed": 3232.0,
+      "n_hits": 0,
+      "hits": []
+    },
+    {
+      "gold_id": "gold_mubhdmxv_jozk4c",
+      "gold_in": 3649.090433,
+      "gold_out": 3785.163738,
+      "query_elapsed": 3714.0,
+      "n_hits": 0,
+      "hits": []
+    },
+    {
+      "gold_id": "gold_mubhfhfe_wne5hk",
+      "gold_in": 4244.241231,
+      "gold_out": 4378.959192,
+      "query_elapsed": 4308.0,
+      "n_hits": 0,
+      "hits": []
+    },
+    {
+      "gold_id": "gold_mubhjt5m_0qbc9q",
+      "gold_in": 4543.794045,
+      "gold_out": 4675.305021,
+      "query_elapsed": 4606.0,
+      "n_hits": 0,
+      "hits": []
+    },
+    {
+      "gold_id": "gold_mubhkrv3_1guafr",
+      "gold_in": 5019.614887,
+      "gold_out": 5157.319671,
+      "query_elapsed": 5084.0,
+      "n_hits": 0,
+      "hits": []
+    },
+    {
+      "gold_id": "gold_mubhm3p7_znw8z9",
+      "gold_in": 5665.36827,
+      "gold_out": 5785.714505,
+      "query_elapsed": 5392.0,
+      "n_hits": 1,
+      "hits": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 5392.0,
+          "similarity": 1.0
+        }
+      ]
+    },
+    {
+      "gold_id": "gold_mubhn3uw_nl6f54",
+      "gold_in": 6344.634084,
+      "gold_out": 6470.607413,
+      "query_elapsed": 5392.0,
+      "n_hits": 1,
+      "hits": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 5392.0,
+          "similarity": 1.0
+        }
+      ]
+    },
+    {
+      "gold_id": "gold_mubhooye_d58gun",
+      "gold_in": 6852.563786,
+      "gold_out": 6898.919587,
+      "query_elapsed": 5392.0,
+      "n_hits": 1,
+      "hits": [
+        {
+          "session": "hush_20260914_212529",
+          "elapsed_seconds": 5392.0,
+          "similarity": 1.0
+        }
+      ]
+    }
+  ],
+  "verdict": "PROMISING_FINGERPRINT \u2014 48 repeat clusters (10 cross-session); 4/15 gold commercials have near-identical audio elsewhere. Worth building a commercial fingerprint library next."
+}

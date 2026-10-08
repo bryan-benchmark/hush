@@ -1,0 +1,92 @@
+{
+  "experiment_spec_version": "exp004-v1",
+  "session": "hush_20260914_212529",
+  "clock_changed": false,
+  "peak_rule_changed": false,
+  "embeddings_recomputed": false,
+  "tolerance_s": 3.0,
+  "spot_s": [
+    15.0,
+    30.0,
+    60.0
+  ],
+  "pod_s": [
+    60.0,
+    90.0,
+    120.0,
+    150.0,
+    180.0
+  ],
+  "return_clock_s": [
+    60.0,
+    90.0,
+    120.0,
+    150.0
+  ],
+  "tolerance_note": "Within 3 s of 15/30/60 for cuts, or of 60/90/120/150/180 for a whole pod. The tolerance was not widened after the durations were seen.",
+  "n_complete_pods": 14,
+  "pods_within_3s_of_60_90_120_150_180": 3,
+  "pod_durations_s": [
+    139.1,
+    121.9,
+    49.5,
+    65.0,
+    228.6,
+    135.3,
+    121.9,
+    110.1,
+    136.1,
+    134.7,
+    131.5,
+    137.7,
+    120.3,
+    126.0
+  ],
+  "cuts_inside_one_pod": {
+    "n_gaps": 50,
+    "n_on_clock": 37,
+    "fraction": 0.74,
+    "n_near_15": 29,
+    "n_near_30": 6,
+    "n_near_60": 2,
+    "median_s": 16.0
+  },
+  "cuts_outside_pods": {
+    "n_gaps": 53,
+    "n_on_clock": 20,
+    "fraction": 0.37735849056603776,
+    "n_near_15": 15,
+    "n_near_30": 3,
+    "n_near_60": 2,
+    "median_s": 34.0
+  },
+  "gap_note": "A 12 s refractory means many gaps land in the 12\u201318 s bin. Near-15 is reported separately from near-30 and near-60 so that bin is not read as a 15 s spot clock.",
+  "median_abs_15s_residual_inside_pods": 4.614886999999726,
+  "uniform_15s_residual_median": 3.75,
+  "jump_autocorr_inside_pods": {
+    "15": 0.001822794216458622,
+    "30": 0.001403309898758076,
+    "60": 0.0007597203594950411,
+    "10": 0.0019175281218867654,
+    "20": 0.0011797662760025054,
+    "45": 0.0001531750364024075
+  },
+  "jump_autocorr_outside_pods": {
+    "15": 0.0006943327868917784,
+    "30": 0.00024978510627600935,
+    "60": 0.000283444014234078,
+    "10": 0.0008474435337120314,
+    "20": 0.0006647164837152854,
+    "45": 0.00010869406402836074
+  },
+  "largest_frozen_drop_on_return_clock": {
+    "note": "Largest 10 s drop in frozen-program distance during the 180 s after a break start, and the same measurement after a program stretch begins. On-clock means that drop's offset is within 3 s of 60, 90, 120, or 150. This is not an unmute threshold.",
+    "breaks_on_clock": 2,
+    "n_breaks": 14,
+    "program_stretches_on_clock": 1,
+    "n_program_stretches": 11,
+    "median_clock_error_after_break_start_s": 6.351805999999897,
+    "median_clock_error_in_program_s": 44.387517000000116
+  },
+  "validation_note": "This ESPN session is development data. A clock result here is not independent confirmation."
+}

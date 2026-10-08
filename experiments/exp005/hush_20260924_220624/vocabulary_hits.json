@@ -1,0 +1,147 @@
+[
+  {
+    "phrase": "download",
+    "start": 333.33,
+    "end": 333.55
+  },
+  {
+    "phrase": "sign up",
+    "start": 335.81,
+    "end": 336.33
+  },
+  {
+    "phrase": "call",
+    "start": 359.23,
+    "end": 359.55
+  },
+  {
+    "phrase": "call",
+    "start": 514.51,
+    "end": 514.93
+  },
+  {
+    "phrase": "free",
+    "start": 708.01,
+    "end": 708.29
+  },
+  {
+    "phrase": "free",
+    "start": 948.13,
+    "end": 948.39
+  },
+  {
+    "phrase": "side effects",
+    "start": 959.75,
+    "end": 960.31
+  },
+  {
+    "phrase": "talk to your doctor",
+    "start": 983.61,
+    "end": 984.29
+  },
+  {
+    "phrase": "side effects",
+    "start": 988.19,
+    "end": 988.83
+  },
+  {
+    "phrase": "talk to your doctor",
+    "start": 996.87,
+    "end": 997.59
+  },
+  {
+    "phrase": "call",
+    "start": 1140.39,
+    "end": 1140.59
+  },
+  {
+    "phrase": "limited time",
+    "start": 1499.97,
+    "end": 1500.51
+  },
+  {
+    "phrase": "call",
+    "start": 2106.01,
+    "end": 2106.27
+  },
+  {
+    "phrase": "call",
+    "start": 3241.47,
+    "end": 3241.87
+  },
+  {
+    "phrase": "free",
+    "start": 3664.55,
+    "end": 3665.27
+  },
+  {
+    "phrase": "order",
+    "start": 3809.39,
+    "end": 3809.87
+  },
+  {
+    "phrase": "call",
+    "start": 4441.61,
+    "end": 4441.75
+  },
+  {
+    "phrase": "save",
+    "start": 4868.95,
+    "end": 4869.09
+  },
+  {
+    "phrase": "learn more",
+    "start": 5181.67,
+    "end": 5182.13
+  },
+  {
+    "phrase": "limited time",
+    "start": 5436.53,
+    "end": 5437.13
+  },
+  {
+    "phrase": "buy",
+    "start": 5466.39,
+    "end": 5466.69
+  },
+  {
+    "phrase": "buy",
+    "start": 5479.43,
+    "end": 5479.63
+  },
+  {
+    "phrase": "free",
+    "start": 5716.99,
+    "end": 5717.17
+  },
+  {
+    "phrase": "call",
+    "start": 6047.87,
+    "end": 6048.67
+  },
+  {
+    "phrase": "save",
+    "start": 6054.77,
+    "end": 6054.91
+  },
+  {
+    "phrase": "free",
+    "start": 6083.77,
+    "end": 6083.95
+  },
+  {
+    "phrase": "buy",
+    "start": 6543.81,
+    "end": 6543.95
+  },
+  {
+    "phrase": "visit",
+    "start": 6621.45,
+    "end": 6621.59
+  },
+  {
+    "phrase": "save",
+    "start": 7589.73,
+    "end": 7589.99
+  }
+]

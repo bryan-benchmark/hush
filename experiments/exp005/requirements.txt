@@ -1,0 +1,7 @@
+# Isolated from Exp001, Exp002, and Exp003. ASR and text embeddings only.
+faster-whisper==1.2.1
+sentence-transformers==5.1.1
+numpy
+pandas
+pyarrow
+matplotlib

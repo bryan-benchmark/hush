@@ -1,0 +1,12 @@
+[project]
+name = "hush"
+version = "0.0.1"
+description = "Hush acoustic experiments"
+requires-python = ">=3.12"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"

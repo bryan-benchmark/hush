@@ -1,0 +1,9 @@
+audio_0001.wav: top change at [97.0, 45.0, 44.0, 98.0, 96.0]
+audio_0002.wav: top change at [1111.0, 1116.0, 1117.0, 1110.0, 1115.0]
+audio_0003.wav: top change at [2168.0, 2574.0, 2169.0, 2399.0, 2398.0]
+audio_0004.wav: top change at [3333.0, 3345.0, 3374.0, 3346.0, 3334.0]
+audio_0005.wav: top change at [4115.0, 4228.0, 4116.0, 4121.0, 4120.0]
+audio_0006.wav: top change at [5221.0, 5184.0, 4999.0, 5222.0, 5000.0]
+audio_0007.wav: top change at [6216.0, 6215.0, 5762.0, 6268.0, 5933.0]
+audio_0008.wav: top change at [6399.0, 6400.0, 7029.0, 7028.0, 7034.0]
+Wrote experiments/features/hush_20260827_135935/change_summary.json

@@ -1,0 +1,183 @@
+{
+  "experiment_spec_version": "exp001-v1",
+  "feature_schema_version": "exp001-features-v1",
+  "git_commit": null,
+  "python": "3.13.5 (main, Jun 11 2025, 15:36:57) [Clang 17.0.0 (clang-1700.0.13.3)]",
+  "platform": "macOS-15.6.1-arm64-arm-64bit-Mach-O",
+  "packages": {
+    "numpy": "2.5.2",
+    "scipy": "1.18.1",
+    "pandas": "3.0.6",
+    "scikit-learn": "1.9.0",
+    "librosa": "1.0.0",
+    "soundfile": "0.14.0",
+    "matplotlib": "3.11.1",
+    "pyloudnorm": "0.2.0",
+    "pyarrow": "25.0.1"
+  },
+  "session_id": "hush_20260914_212529",
+  "analysis_start_seconds": 0.0,
+  "analysis_end_seconds": 6899.0,
+  "analysis_sample_range_48k": {
+    "start_inclusive": 0,
+    "stop_exclusive": 331152000
+  },
+  "resampling": "scipy.signal.resample_poly up=1 down=3 window=(kaiser, 5.0) padtype=constant on one concatenated 48 kHz mono stream. Chunks are not resampled independently.",
+  "raw_chunks": [
+    {
+      "file": "audio_0001.wav",
+      "file_frames": 43200000,
+      "read_start_frame": 0,
+      "read_stop_frame": 43200000,
+      "n_samples": 43200000,
+      "session_start_seconds": 0.0,
+      "session_end_seconds": 900.0
+    },
+    {
+      "file": "audio_0002.wav",
+      "file_frames": 43200000,
+      "read_start_frame": 0,
+      "read_stop_frame": 43200000,
+      "n_samples": 43200000,
+      "session_start_seconds": 900.0,
+      "session_end_seconds": 1800.0
+    },
+    {
+      "file": "audio_0003.wav",
+      "file_frames": 43200000,
+      "read_start_frame": 0,
+      "read_stop_frame": 43200000,
+      "n_samples": 43200000,
+      "session_start_seconds": 1800.0,
+      "session_end_seconds": 2700.0
+    },
+    {
+      "file": "audio_0004.wav",
+      "file_frames": 43200000,
+      "read_start_frame": 0,
+      "read_stop_frame": 43200000,
+      "n_samples": 43200000,
+      "session_start_seconds": 2700.0,
+      "session_end_seconds": 3600.0
+    },
+    {
+      "file": "audio_0005.wav",
+      "file_frames": 43200000,
+      "read_start_frame": 0,
+      "read_stop_frame": 43200000,
+      "n_samples": 43200000,
+      "session_start_seconds": 3600.0,
+      "session_end_seconds": 4500.0
+    },
+    {
+      "file": "audio_0006.wav",
+      "file_frames": 43200000,
+      "read_start_frame": 0,
+      "read_stop_frame": 43200000,
+      "n_samples": 43200000,
+      "session_start_seconds": 4500.0,
+      "session_end_seconds": 5400.0
+    },
+    {
+      "file": "audio_0007.wav",
+      "file_frames": 43200000,
+      "read_start_frame": 0,
+      "read_stop_frame": 43200000,
+      "n_samples": 43200000,
+      "session_start_seconds": 5400.0,
+      "session_end_seconds": 6300.0
+    },
+    {
+      "file": "audio_0008.wav",
+      "file_frames": 43200000,
+      "read_start_frame": 0,
+      "read_stop_frame": 28752000,
+      "n_samples": 28752000,
+      "session_start_seconds": 6300.0,
+      "session_end_seconds": 6899.0
+    }
+  ],
+  "feature_params": {
+    "feature_schema_version": "exp001-features-v1",
+    "win_s": 1.0,
+    "hop_s": 0.5,
+    "n_fft": 512,
+    "stft_hop": 160,
+    "stft_center": false,
+    "onset_center": false,
+    "n_mfcc": 13,
+    "rolloff": 0.85,
+    "silence_dbfs": -45.0,
+    "momentary_s": 0.4,
+    "short_term_s": 3.0,
+    "lufs_definition": "ungated K-weighted power, pyloudnorm K-weighting filters",
+    "rhythm_s": 8.0,
+    "modulation_hz": [
+      0.5,
+      4.0
+    ],
+    "onset_peak": "causal: strength[i] > strength[i-1] and strength[i] > strength[i-2]",
+    "timestamp": "window_end_seconds"
+  },
+  "change_params": {
+    "experiment_spec_version": "exp001-v1",
+    "std_floor": 1e-06,
+    "z_abs_clip": 8.0,
+    "symkl_variance_floor_in_z_space": 1.0,
+    "lufs_floor_for_distance_only": -70.0,
+    "min_baseline_s": 20.0,
+    "recent_s": 5.0,
+    "contexts_s": [
+      30.0,
+      60.0,
+      120.0
+    ],
+    "energy_context_s": 60.0,
+    "energy_distance": "Szekely, pairwise L2, diagonal excluded",
+    "mahal_contexts_s": [
+      60.0,
+      120.0
+    ],
+    "mahal_every_s": 1.0,
+    "mahal_shrink_toward_diag": 0.2,
+    "cosine": "both means divided by baseline std; means are not removed",
+    "foote": "non-causal, 5 s after the timestamp; scale from the past 5 s only",
+    "arm_s": 180.0,
+    "threshold": "median + 5.0 * raw MAD of euclid_60 over the trailing 600.0s, excluding the last 30.0s. Until 600.0s exists, use the shorter available history.",
+    "freeze_hold_s": 8.0,
+    "frozen_cloud": "(65.0 s, 5.0 s] before freeze",
+    "release_fraction": 0.5,
+    "release_hold_s": 10.0,
+    "min_freeze_s": 15.0,
+    "refractory_s": 20.0,
+    "distance_columns": [
+      "rms_dbfs",
+      "crest",
+      "zcr",
+      "spec_centroid",
+      "spec_bandwidth",
+      "spec_rolloff",
+      "spec_flatness",
+      "spec_flux",
+      "onset_mean",
+      "silence_fraction",
+      "short_term_lufs",
+      "lufs_var_15s",
+      "mfcc_00",
+      "mfcc_01",
+      "mfcc_02",
+      "mfcc_03",
+      "mfcc_04",
+      "mfcc_05",
+      "mfcc_06",
+      "mfcc_07",
+      "mfcc_08",
+      "mfcc_09",
+      "mfcc_10",
+      "mfcc_11",
+      "mfcc_12"
+    ]
+  },
+  "display_scaling": "plots divide each series by its own full-recording IQR after subtracting the median. Scores in the parquet are not scaled that way.",
+  "hop_s": 0.5
+}

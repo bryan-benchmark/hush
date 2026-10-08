@@ -1,0 +1,114 @@
+[
+  {
+    "kind": "departure",
+    "phrase": "coming up",
+    "matched_text": "coming up",
+    "similarity": 1.0,
+    "start": 231.36,
+    "end": 231.68
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 716.54,
+    "end": 716.9
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back two",
+    "similarity": 0.875,
+    "start": 1485.39,
+    "end": 1485.73
+  },
+  {
+    "kind": "return",
+    "phrase": "back here",
+    "matched_text": "back here",
+    "similarity": 1.0,
+    "start": 2564.45,
+    "end": 2564.77
+  },
+  {
+    "kind": "return",
+    "phrase": "back here",
+    "matched_text": "back here",
+    "similarity": 1.0,
+    "start": 2844.47,
+    "end": 2844.81
+  },
+  {
+    "kind": "departure",
+    "phrase": "we'll be back",
+    "matched_text": "i will be back",
+    "similarity": 0.8666666666666667,
+    "start": 2878.83,
+    "end": 2879.55
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 3469.87,
+    "end": 3470.21
+  },
+  {
+    "kind": "departure",
+    "phrase": "coming up",
+    "matched_text": "coming uh",
+    "similarity": 0.8888888888888888,
+    "start": 4565.01,
+    "end": 4565.71
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 4578.27,
+    "end": 4578.63
+  },
+  {
+    "kind": "departure",
+    "phrase": "we'll be back",
+    "matched_text": "we will get back",
+    "similarity": 0.875,
+    "start": 5414.25,
+    "end": 5414.89
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 5472.17,
+    "end": 5472.53
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 5480.11,
+    "end": 5480.49
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 5937.93,
+    "end": 5938.21
+  },
+  {
+    "kind": "return",
+    "phrase": "back here",
+    "matched_text": "back here",
+    "similarity": 1.0,
+    "start": 6612.81,
+    "end": 6613.31
+  }
+]

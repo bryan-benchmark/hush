@@ -1,0 +1,355 @@
+{
+  "question": "Does separating episode detection from onset localization, with rolling intensity instead of linked clusters, explain more of the frozen errors?",
+  "gold": "GOLD_DEV_V1",
+  "session": "hush_20260914_212529",
+  "coverage": [
+    0.0,
+    6899.0
+  ],
+  "collar_s": 2.0,
+  "truth_frozen": true,
+  "runs": {
+    "legacy_v0": {
+      "run_id": "20260921T152333Z_discontinuity_legacy_v0_d95f6f31",
+      "proposal_count": 46,
+      "tp": 1,
+      "fp": 45,
+      "fn": 14,
+      "precision": 0.021739130434782608,
+      "recall": 0.06666666666666667,
+      "in_error": {
+        "n": 1,
+        "signed_mean": 1.8413559999999052,
+        "mae": 1.8413559999999052,
+        "p50": 1.8413559999999052,
+        "p95": 1.8413559999999052
+      },
+      "fp_taxonomy": {
+        "isolated_program": 13,
+        "inside_break": 20,
+        "near_onset": 2,
+        "near_return": 5,
+        "other": 5
+      }
+    },
+    "v1": {
+      "run_id": "20260921T171917Z_discontinuity_v1",
+      "proposal_count": 49,
+      "tp": 3,
+      "fp": 46,
+      "fn": 12,
+      "precision": 0.061224489795918366,
+      "recall": 0.2,
+      "in_error": {
+        "n": 3,
+        "signed_mean": 0.0407750000000154,
+        "mae": 0.46788566666668885,
+        "p50": 0.4086440000000948,
+        "p95": 0.7275563000000602
+      },
+      "fp_taxonomy": {
+        "session_edge": 1,
+        "other": 5,
+        "inside_break": 12,
+        "isolated_program": 23,
+        "near_return": 3,
+        "near_onset": 2
+      }
+    },
+    "v1_1": {
+      "run_id": "20260921T173219Z_discontinuity_v1_1",
+      "proposal_count": 33,
+      "tp": 2,
+      "fp": 31,
+      "fn": 13,
+      "precision": 0.06060606060606061,
+      "recall": 0.13333333333333333,
+      "in_error": {
+        "n": 2,
+        "signed_mean": 0.13342150000016773,
+        "mae": 0.3766915000001063,
+        "p50": 0.3766915000001063,
+        "p95": 0.4967708500002573
+      },
+      "fp_taxonomy": {
+        "other": 6,
+        "inside_break": 12,
+        "isolated_program": 9,
+        "near_onset": 3,
+        "near_return": 1
+      }
+    }
+  },
+  "delta_v11_vs_legacy": {
+    "tp": 1,
+    "fp": -14,
+    "fn": -1
+  },
+  "delta_v11_vs_v1": {
+    "tp": -1,
+    "fp": -15,
+    "fn": 1
+  },
+  "by_baseline_cause_vs_legacy": {
+    "evidence/weak_boundary": {
+      "still_fn": 4,
+      "improved_fn_to_tp": 2
+    },
+    "onset_timing": {
+      "still_fn": 6
+    },
+    "selection/top_k": {
+      "still_fn": 2
+    },
+    "matched_\u00b12s": {
+      "regressed_tp_to_fn": 1
+    }
+  },
+  "per_gold": [
+    {
+      "gold_id": "gold_mubgw53b_w1adw4",
+      "gold_in": 166.63993768328444,
+      "baseline_cause": "evidence/weak_boundary",
+      "legacy_v0_tp": false,
+      "legacy_v0_nearest": 96.125,
+      "legacy_v0_delta": -70.515,
+      "v1_tp": false,
+      "v1_nearest": 122.375,
+      "v1_delta": -44.265,
+      "v1_1_tp": false,
+      "v1_1_nearest": 202.875,
+      "v1_1_delta": 36.235,
+      "change_vs_legacy": "still_fn",
+      "change_vs_v1": "still_fn"
+    },
+    {
+      "gold_id": "gold_mubh12un_hwpvpe",
+      "gold_in": 512.855334,
+      "baseline_cause": "onset_timing",
+      "legacy_v0_tp": false,
+      "legacy_v0_nearest": 490.875,
+      "legacy_v0_delta": -21.98,
+      "v1_tp": false,
+      "v1_nearest": 542.25,
+      "v1_delta": 29.395,
+      "v1_1_tp": false,
+      "v1_1_nearest": 523.25,
+      "v1_1_delta": 10.395,
+      "change_vs_legacy": "still_fn",
+      "change_vs_v1": "still_fn"
+    },
+    {
+      "gold_id": "gold_mubh2khm_rqjhjd",
+      "gold_in": 1029.663793,
+      "baseline_cause": "onset_timing",
+      "legacy_v0_tp": false,
+      "legacy_v0_nearest": 1038.0,
+      "legacy_v0_delta": 8.336,
+      "v1_tp": false,
+      "v1_nearest": 1088.0,
+      "v1_delta": 58.336,
+      "v1_1_tp": false,
+      "v1_1_nearest": 983.125,
+      "v1_1_delta": -46.539,
+      "change_vs_legacy": "still_fn",
+      "change_vs_v1": "still_fn"
+    },
+    {
+      "gold_id": "gold_mubh4bjr_o00z50",
+      "gold_in": 1243.16933,
+      "baseline_cause": "evidence/weak_boundary",
+      "legacy_v0_tp": false,
+      "legacy_v0_nearest": 1282.25,
+      "legacy_v0_delta": 39.081,
+      "v1_tp": false,
+      "v1_nearest": 1195.5,
+      "v1_delta": -47.669,
+      "v1_1_tp": false,
+      "v1_1_nearest": 1199.875,
+      "v1_1_delta": -43.294,
+      "change_vs_legacy": "still_fn",
+      "change_vs_v1": "still_fn"
+    },
+    {
+      "gold_id": "gold_mubh5xsd_po68fx",
+      "gold_in": 1538.857022,
+      "baseline_cause": "selection/top_k",
+      "legacy_v0_tp": false,
+      "legacy_v0_nearest": 1442.125,
+      "legacy_v0_delta": -96.732,
+      "v1_tp": true,
+      "v1_nearest": 1538.625,
+      "v1_delta": -0.232,
+      "v1_1_tp": false,
+      "v1_1_nearest": 1516.25,
+      "v1_1_delta": -22.607,
+      "change_vs_legacy": "still_fn",
+      "change_vs_v1": "regressed_tp_to_fn"
+    },
+    {
+      "gold_id": "gold_mubh6zvr_3sowkm",
+      "gold_in": 2072.112009,
+      "baseline_cause": "selection/top_k",
+      "legacy_v0_tp": false,
+      "legacy_v0_nearest": 2119.75,
+      "legacy_v0_delta": 47.638,
+      "v1_tp": true,
+      "v1_nearest": 2072.875,
+      "v1_delta": 0.763,
+      "v1_1_tp": false,
+      "v1_1_nearest": 2091.0,
+      "v1_1_delta": 18.888,
+      "change_vs_legacy": "still_fn",
+      "change_vs_v1": "regressed_tp_to_fn"
+    },
+    {
+      "gold_id": "gold_mubh7wrc_69g6t0",
+      "gold_in": 2658.533644,
+      "baseline_cause": "matched_\u00b12s",
+      "legacy_v0_tp": true,
+      "legacy_v0_nearest": 2660.375,
+      "legacy_v0_delta": 1.841,
+      "v1_tp": true,
+      "v1_nearest": 2658.125,
+      "v1_delta": -0.409,
+      "v1_1_tp": false,
+      "v1_1_nearest": 2698.0,
+      "v1_1_delta": 39.466,
+      "change_vs_legacy": "regressed_tp_to_fn",
+      "change_vs_v1": "regressed_tp_to_fn"
+    },
+    {
+      "gold_id": "gold_mubhbjfm_dc3br1",
+      "gold_in": 3180.107485,
+      "baseline_cause": "onset_timing",
+      "legacy_v0_tp": false,
+      "legacy_v0_nearest": 3171.125,
+      "legacy_v0_delta": -8.982,
+      "v1_tp": false,
+      "v1_nearest": 3232.625,
+      "v1_delta": 52.518,
+      "v1_1_tp": false,
+      "v1_1_nearest": 3183.75,
+      "v1_1_delta": 3.643,
+      "change_vs_legacy": "still_fn",
+      "change_vs_v1": "still_fn"
+    },
+    {
+      "gold_id": "gold_mubhdmxv_jozk4c",
+      "gold_in": 3649.090433,
+      "baseline_cause": "evidence/weak_boundary",
+      "legacy_v0_tp": false,
+      "legacy_v0_nearest": 3784.0,
+      "legacy_v0_delta": 134.91,
+      "v1_tp": false,
+      "v1_nearest": 3616.5,
+      "v1_delta": -32.59,
+      "v1_1_tp": false,
+      "v1_1_nearest": 3754.5,
+      "v1_1_delta": 105.41,
+      "change_vs_legacy": "still_fn",
+      "change_vs_v1": "still_fn"
+    },
+    {
+      "gold_id": "gold_mubhfhfe_wne5hk",
+      "gold_in": 4244.241231,
+      "baseline_cause": "onset_timing",
+      "legacy_v0_tp": false,
+      "legacy_v0_nearest": 4266.875,
+      "legacy_v0_delta": 22.634,
+      "v1_tp": false,
+      "v1_nearest": 4166.5,
+      "v1_delta": -77.741,
+      "v1_1_tp": false,
+      "v1_1_nearest": 4234.875,
+      "v1_1_delta": -9.366,
+      "change_vs_legacy": "still_fn",
+      "change_vs_v1": "still_fn"
+    },
+    {
+      "gold_id": "gold_mubhjt5m_0qbc9q",
+      "gold_in": 4543.794045,
+      "baseline_cause": "onset_timing",
+      "legacy_v0_tp": false,
+      "legacy_v0_nearest": 4559.625,
+      "legacy_v0_delta": 15.831,
+      "v1_tp": false,
+      "v1_nearest": 4532.875,
+      "v1_delta": -10.919,
+      "v1_1_tp": false,
+      "v1_1_nearest": 4532.875,
+      "v1_1_delta": -10.919,
+      "change_vs_legacy": "still_fn",
+      "change_vs_v1": "still_fn"
+    },
+    {
+      "gold_id": "gold_mubhkrv3_1guafr",
+      "gold_in": 5019.614887,
+      "baseline_cause": "evidence/weak_boundary",
+      "legacy_v0_tp": false,
+      "legacy_v0_nearest": 5065.5,
+      "legacy_v0_delta": 45.885,
+      "v1_tp": false,
+      "v1_nearest": 4995.375,
+      "v1_delta": -24.24,
+      "v1_1_tp": true,
+      "v1_1_nearest": 5020.125,
+      "v1_1_delta": 0.51,
+      "change_vs_legacy": "improved_fn_to_tp",
+      "change_vs_v1": "improved_fn_to_tp"
+    },
+    {
+      "gold_id": "gold_mubhm3p7_znw8z9",
+      "gold_in": 5665.36827,
+      "baseline_cause": "evidence/weak_boundary",
+      "legacy_v0_tp": false,
+      "legacy_v0_nearest": 5707.75,
+      "legacy_v0_delta": 42.382,
+      "v1_tp": false,
+      "v1_nearest": 5687.25,
+      "v1_delta": 21.882,
+      "v1_1_tp": true,
+      "v1_1_nearest": 5665.125,
+      "v1_1_delta": -0.243,
+      "change_vs_legacy": "improved_fn_to_tp",
+      "change_vs_v1": "improved_fn_to_tp"
+    },
+    {
+      "gold_id": "gold_mubhn3uw_nl6f54",
+      "gold_in": 6344.634084,
+      "baseline_cause": "evidence/weak_boundary",
+      "legacy_v0_tp": false,
+      "legacy_v0_nearest": 6379.875,
+      "legacy_v0_delta": 35.241,
+      "v1_tp": false,
+      "v1_nearest": 6384.625,
+      "v1_delta": 39.991,
+      "v1_1_tp": false,
+      "v1_1_nearest": 6384.625,
+      "v1_1_delta": 39.991,
+      "change_vs_legacy": "still_fn",
+      "change_vs_v1": "still_fn"
+    },
+    {
+      "gold_id": "gold_mubhooye_d58gun",
+      "gold_in": 6852.563786,
+      "baseline_cause": "onset_timing",
+      "legacy_v0_tp": false,
+      "legacy_v0_nearest": 6855.25,
+      "legacy_v0_delta": 2.686,
+      "v1_tp": false,
+      "v1_nearest": 6799.25,
+      "v1_delta": -53.314,
+      "v1_1_tp": false,
+      "v1_1_nearest": 6871.875,
+      "v1_1_delta": 19.311,
+      "change_vs_legacy": "still_fn",
+      "change_vs_v1": "still_fn"
+    }
+  ],
+  "architecture_verdict": "PROMISING \u2014 semantics improved; keep iterating without abandoning",
+  "notes": {
+    "isolated_program_fps": 9,
+    "session_edge_fps": 0
+  }
+}

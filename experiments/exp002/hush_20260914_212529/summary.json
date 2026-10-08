@@ -1,0 +1,433 @@
+{
+  "experiment_spec_version": "exp002-v1",
+  "truth_ledger_read": false,
+  "n_speech_regions": 1248,
+  "speech_region_seconds": 5013.20000000002,
+  "speech_active_seconds": 5222,
+  "speech_active_fraction": 0.756921292941006,
+  "n_embedding_windows": 4496,
+  "n_clusters": 122,
+  "n_recurring_clusters": 48,
+  "novel_window_fraction": 0.027135231316725978,
+  "causal_fraction_of_attributed_speech_on_already_recurring": 0.721561875138859,
+  "end_state_fraction_of_speech_in_recurring_clusters": 0.9221099015033696,
+  "end_state_note": "end_state_fraction labels a cluster by whether it eventually recurred. It is descriptive. Causal scores never use that future status.",
+  "novel_window_duration_seconds": 213.00000000000048,
+  "attributed_speech_seconds": 5401.200000000021,
+  "top_recurring_clusters": [
+    {
+      "cluster_id": "c0001",
+      "cumulative_speech_seconds": 2161.4000000000124,
+      "occurrence_count": 73,
+      "first_seen": 0.1,
+      "last_seen": 6802.6,
+      "n_windows": 1835
+    },
+    {
+      "cluster_id": "c0049",
+      "cumulative_speech_seconds": 834.8000000000006,
+      "occurrence_count": 55,
+      "first_seen": 2067.7,
+      "last_seen": 6810.5,
+      "n_windows": 673
+    },
+    {
+      "cluster_id": "c0002",
+      "cumulative_speech_seconds": 195.3000000000053,
+      "occurrence_count": 51,
+      "first_seen": 8.4,
+      "last_seen": 6684.9,
+      "n_windows": 145
+    },
+    {
+      "cluster_id": "c0022",
+      "cumulative_speech_seconds": 169.6999999999997,
+      "occurrence_count": 6,
+      "first_seen": 616.8,
+      "last_seen": 5257.1,
+      "n_windows": 153
+    },
+    {
+      "cluster_id": "c0027",
+      "cumulative_speech_seconds": 145.5999999999999,
+      "occurrence_count": 11,
+      "first_seen": 1040.3,
+      "last_seen": 6838.8,
+      "n_windows": 133
+    },
+    {
+      "cluster_id": "c0023",
+      "cumulative_speech_seconds": 117.7000000000005,
+      "occurrence_count": 20,
+      "first_seen": 767.0,
+      "last_seen": 5962.4,
+      "n_windows": 92
+    },
+    {
+      "cluster_id": "c0025",
+      "cumulative_speech_seconds": 88.69999999999982,
+      "occurrence_count": 5,
+      "first_seen": 1004.4,
+      "last_seen": 3790.5,
+      "n_windows": 76
+    },
+    {
+      "cluster_id": "c0012",
+      "cumulative_speech_seconds": 81.59999999999991,
+      "occurrence_count": 7,
+      "first_seen": 281.0,
+      "last_seen": 5104.3,
+      "n_windows": 68
+    },
+    {
+      "cluster_id": "c0015",
+      "cumulative_speech_seconds": 75.400000000001,
+      "occurrence_count": 13,
+      "first_seen": 512.5,
+      "last_seen": 5897.7,
+      "n_windows": 65
+    },
+    {
+      "cluster_id": "c0116",
+      "cumulative_speech_seconds": 72.59999999999945,
+      "occurrence_count": 5,
+      "first_seen": 6163.2,
+      "last_seen": 6635.2,
+      "n_windows": 57
+    },
+    {
+      "cluster_id": "c0009",
+      "cumulative_speech_seconds": 67.00000000000028,
+      "occurrence_count": 6,
+      "first_seen": 220.8,
+      "last_seen": 6861.3,
+      "n_windows": 62
+    },
+    {
+      "cluster_id": "c0011",
+      "cumulative_speech_seconds": 66.10000000000002,
+      "occurrence_count": 5,
+      "first_seen": 249.6,
+      "last_seen": 4597.7,
+      "n_windows": 57
+    }
+  ],
+  "longest_speech_without_recurring": [
+    {
+      "start_seconds": 199.0,
+      "end_seconds": 449.0,
+      "span_seconds": 250.0,
+      "speech_without_recurring_seconds": 166
+    },
+    {
+      "start_seconds": 1336.0,
+      "end_seconds": 1512.0,
+      "span_seconds": 176.0,
+      "speech_without_recurring_seconds": 136
+    },
+    {
+      "start_seconds": 27.0,
+      "end_seconds": 98.0,
+      "span_seconds": 71.0,
+      "speech_without_recurring_seconds": 51
+    },
+    {
+      "start_seconds": 553.0,
+      "end_seconds": 599.0,
+      "span_seconds": 46.0,
+      "speech_without_recurring_seconds": 27
+    },
+    {
+      "start_seconds": 122.0,
+      "end_seconds": 165.0,
+      "span_seconds": 43.0,
+      "speech_without_recurring_seconds": 26
+    },
+    {
+      "start_seconds": 2682.0,
+      "end_seconds": 2722.0,
+      "span_seconds": 40.0,
+      "speech_without_recurring_seconds": 17
+    },
+    {
+      "start_seconds": 2091.0,
+      "end_seconds": 2130.0,
+      "span_seconds": 39.0,
+      "speech_without_recurring_seconds": 17
+    },
+    {
+      "start_seconds": 1098.0,
+      "end_seconds": 1136.0,
+      "span_seconds": 38.0,
+      "speech_without_recurring_seconds": 31
+    },
+    {
+      "start_seconds": 5690.0,
+      "end_seconds": 5724.0,
+      "span_seconds": 34.0,
+      "speech_without_recurring_seconds": 24
+    },
+    {
+      "start_seconds": 2135.0,
+      "end_seconds": 2163.0,
+      "span_seconds": 28.0,
+      "speech_without_recurring_seconds": 19
+    },
+    {
+      "start_seconds": 1547.0,
+      "end_seconds": 1574.0,
+      "span_seconds": 27.0,
+      "speech_without_recurring_seconds": 24
+    },
+    {
+      "start_seconds": 4545.0,
+      "end_seconds": 4569.0,
+      "span_seconds": 24.0,
+      "speech_without_recurring_seconds": 16
+    },
+    {
+      "start_seconds": 1588.0,
+      "end_seconds": 1611.0,
+      "span_seconds": 23.0,
+      "speech_without_recurring_seconds": 17
+    },
+    {
+      "start_seconds": 1664.0,
+      "end_seconds": 1686.0,
+      "span_seconds": 22.0,
+      "speech_without_recurring_seconds": 10
+    },
+    {
+      "start_seconds": 172.0,
+      "end_seconds": 193.0,
+      "span_seconds": 21.0,
+      "speech_without_recurring_seconds": 18
+    }
+  ],
+  "largest_continuity_drops": [
+    {
+      "timestamp_seconds": 523.0,
+      "continuity": 0.0,
+      "drop": 0.6077407838977624
+    },
+    {
+      "timestamp_seconds": 894.0,
+      "continuity": 0.0,
+      "drop": 0.5291424681319865
+    },
+    {
+      "timestamp_seconds": 1044.0,
+      "continuity": 0.0,
+      "drop": 0.5931758954172466
+    },
+    {
+      "timestamp_seconds": 1254.0,
+      "continuity": 0.0,
+      "drop": 0.5396267699232724
+    },
+    {
+      "timestamp_seconds": 1345.0,
+      "continuity": 0.12260604734363567,
+      "drop": 0.3928295656962608
+    },
+    {
+      "timestamp_seconds": 1545.0,
+      "continuity": 0.0,
+      "drop": 0.6082408948890022
+    },
+    {
+      "timestamp_seconds": 1599.0,
+      "continuity": 0.11263082421410772,
+      "drop": 0.4495122010844246
+    },
+    {
+      "timestamp_seconds": 2086.0,
+      "continuity": 0.0,
+      "drop": 0.4583861766626502
+    },
+    {
+      "timestamp_seconds": 2636.0,
+      "continuity": 0.0,
+      "drop": 0.6320626862789727
+    },
+    {
+      "timestamp_seconds": 3190.0,
+      "continuity": 0.0,
+      "drop": 0.5607919937258197
+    },
+    {
+      "timestamp_seconds": 3284.0,
+      "continuity": 0.18677866974046786,
+      "drop": 0.46991882151287256
+    },
+    {
+      "timestamp_seconds": 3473.0,
+      "continuity": 0.0,
+      "drop": 0.6962987586605942
+    },
+    {
+      "timestamp_seconds": 3661.0,
+      "continuity": 0.08796278222886349,
+      "drop": 0.4746512508641439
+    },
+    {
+      "timestamp_seconds": 4252.0,
+      "continuity": 0.2403880786582036,
+      "drop": 0.4050205698383967
+    },
+    {
+      "timestamp_seconds": 4555.0,
+      "continuity": 0.0,
+      "drop": 0.45675869817747317
+    },
+    {
+      "timestamp_seconds": 5073.0,
+      "continuity": 0.26159196050255407,
+      "drop": 0.3841892650411328
+    },
+    {
+      "timestamp_seconds": 5150.0,
+      "continuity": 0.0,
+      "drop": 0.4908214026342525
+    },
+    {
+      "timestamp_seconds": 5675.0,
+      "continuity": 0.0,
+      "drop": 0.6621879186325776
+    },
+    {
+      "timestamp_seconds": 6356.0,
+      "continuity": 0.0,
+      "drop": 0.6676099729827595
+    },
+    {
+      "timestamp_seconds": 6702.0,
+      "continuity": 0.18958019200093426,
+      "drop": 0.3882808825327435
+    }
+  ],
+  "strongest_return_events": [
+    {
+      "timestamp_seconds": 2213.0,
+      "return_score": 0.7338329208560752,
+      "cluster_id": "c0001"
+    },
+    {
+      "timestamp_seconds": 2519.0,
+      "return_score": 0.6313596545653473,
+      "cluster_id": "c0023"
+    },
+    {
+      "timestamp_seconds": 2920.0,
+      "return_score": 0.7129312411933385,
+      "cluster_id": "c0023"
+    },
+    {
+      "timestamp_seconds": 3295.0,
+      "return_score": 0.6965090699323966,
+      "cluster_id": "c0001"
+    },
+    {
+      "timestamp_seconds": 4001.0,
+      "return_score": 0.6137308824598804,
+      "cluster_id": "c0049"
+    },
+    {
+      "timestamp_seconds": 4171.0,
+      "return_score": 0.6268651782483298,
+      "cluster_id": "c0002"
+    },
+    {
+      "timestamp_seconds": 4410.0,
+      "return_score": 0.7428525049731088,
+      "cluster_id": "c0002"
+    },
+    {
+      "timestamp_seconds": 4473.0,
+      "return_score": 0.6438235745560266,
+      "cluster_id": "c0002"
+    },
+    {
+      "timestamp_seconds": 4680.0,
+      "return_score": 0.708919879092495,
+      "cluster_id": "c0049"
+    },
+    {
+      "timestamp_seconds": 4915.0,
+      "return_score": 0.6135880645354894,
+      "cluster_id": "c0049"
+    },
+    {
+      "timestamp_seconds": 5008.0,
+      "return_score": 0.6321651685511791,
+      "cluster_id": "c0001"
+    },
+    {
+      "timestamp_seconds": 5161.0,
+      "return_score": 0.7665084937421947,
+      "cluster_id": "c0049"
+    },
+    {
+      "timestamp_seconds": 5279.0,
+      "return_score": 0.6200723556267238,
+      "cluster_id": "c0001"
+    },
+    {
+      "timestamp_seconds": 5480.0,
+      "return_score": 0.6405072554934521,
+      "cluster_id": "c0002"
+    },
+    {
+      "timestamp_seconds": 5791.0,
+      "return_score": 0.7046986765088805,
+      "cluster_id": "c0049"
+    },
+    {
+      "timestamp_seconds": 5947.0,
+      "return_score": 0.615670277553283,
+      "cluster_id": "c0049"
+    },
+    {
+      "timestamp_seconds": 6122.0,
+      "return_score": 0.7204950637045905,
+      "cluster_id": "c0002"
+    },
+    {
+      "timestamp_seconds": 6492.0,
+      "return_score": 0.7381636126276606,
+      "cluster_id": "c0049"
+    },
+    {
+      "timestamp_seconds": 6593.0,
+      "return_score": 0.6287225252612225,
+      "cluster_id": "c0002"
+    },
+    {
+      "timestamp_seconds": 6817.0,
+      "return_score": 0.6015503301736926,
+      "cluster_id": "c0027"
+    }
+  ],
+  "similarity_when_matched": {
+    "p10": 0.3756807976126387,
+    "p50": 0.585357769657882,
+    "p90": 0.7142100576785372
+  },
+  "similarity_when_novel": {
+    "p50": 0.21399956537276915,
+    "p90": 0.24057812602343182,
+    "max": 0.24957269928710912
+  },
+  "continuity_when_defined": {
+    "n": 6829,
+    "p50": 0.5257122423135429,
+    "p90": 0.6442078952641953
+  },
+  "first_recurring_window_end": 483.8,
+  "embedding_l2_norm": {
+    "min": 0.9999998807907104,
+    "max": 1.0000001192092896,
+    "mean": 1.0
+  },
+  "embedding_dim": 192
+}

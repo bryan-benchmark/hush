@@ -1,0 +1,21 @@
+{
+  "experiment_spec_version": "exp005-v1",
+  "feature_schema_version": "exp005-language-v1",
+  "session_id": "hush_20260913_150934",
+  "asr_model": "medium.en",
+  "asr_compute_type": "int8",
+  "asr_device": "cpu",
+  "language": "en",
+  "beam_size": 5,
+  "temperature": 0.0,
+  "condition_on_previous_text": false,
+  "vad_filter": false,
+  "initial_prompt": null,
+  "word_timestamps": true,
+  "duration_after_vad": 7200.0,
+  "source_wav_sha256": "71ca98c73965d4ae5cec83ca987bd951269d926ca6e5f5628546661a4b59dc9c",
+  "n_words": 14423,
+  "n_segments": 1419,
+  "truth_ledger_read": false,
+  "note": "This is ASR dictation, not broadcast closed captions."
+}

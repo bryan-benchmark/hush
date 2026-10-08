@@ -1,0 +1,35 @@
+{
+  "experiment_spec_version": "exp003b-v1",
+  "feature_schema_version": "exp003b-frozen-program-v1",
+  "reads_exp003_spec": "exp003-v1",
+  "session_id": "hush_20260914_212529",
+  "embeddings_recomputed": false,
+  "exp003_scores_recomputed": false,
+  "truth_ledger_read": false,
+  "n_freezes": 10,
+  "freeze_times_s": [
+    522.0,
+    1639.0,
+    1831.0,
+    2078.0,
+    2664.0,
+    3823.0,
+    4552.0,
+    5667.0,
+    5727.0,
+    6345.0
+  ],
+  "n_frozen_distance": 6378,
+  "frozen_distance_p50": 0.1357551856427046,
+  "params": {
+    "percentile": 99.0,
+    "history_s": 600.0,
+    "min_history_s": 300.0,
+    "hits_required": 3,
+    "hits_window": 5,
+    "refractory_s": 60.0,
+    "freeze_exclude_s": 30.0,
+    "freeze_span_s": 180.0
+  },
+  "validation_note": "This ESPN session is development data. A result here is not independent confirmation."
+}

@@ -1,0 +1,1318 @@
+{
+  "truth_frozen": true,
+  "note": "Gold labels were not modified. Causes are detector-side diagnoses.",
+  "baseline": {
+    "tp": 1,
+    "fp": 45,
+    "fn": 14,
+    "precision": 0.021739130434782608,
+    "recall": 0.06666666666666667,
+    "gold_count": 15,
+    "coverage_hours": 1.916388888888889
+  },
+  "fn_cause_counts": {
+    "evidence/weak_boundary": 6,
+    "onset_timing": 6,
+    "selection/top_k": 2
+  },
+  "fp_cause_counts": {
+    "isolated_over_trigger": 18,
+    "fired_inside_break": 20,
+    "near_break_wrong_onset": 2,
+    "near_program_return": 5
+  },
+  "events": [
+    {
+      "kind": "FN",
+      "gold_in": 166.63993768328444,
+      "gold_out": 305.7665872434018,
+      "gold_id": "gold_mubgw53b_w1adw4",
+      "cause": "evidence/weak_boundary",
+      "detail": "best \u00b15s composite=2.48 at 169.0 (flux_z=1.9, jump_z=1.0)",
+      "nearest_keep": 96.125,
+      "keep_delta": -70.51,
+      "keep_score": 7.547,
+      "nearest_prop": 96.125,
+      "prop_delta": -70.51,
+      "peak_pm2": {
+        "file": "audio_0001.wav",
+        "t": 168.625,
+        "score": 0.08408688008785248,
+        "rms_db": -28.160140991210938,
+        "flux_z": -0.49817711114883423,
+        "jump_z": 0.45771971344947815,
+        "silence_bonus": 0.0
+      },
+      "peak_pm5": {
+        "file": "audio_0001.wav",
+        "t": 169.0,
+        "score": 2.48211407661438,
+        "rms_db": -22.005001068115234,
+        "flux_z": 1.949507236480713,
+        "jump_z": 1.0199836492538452,
+        "silence_bonus": 0.0
+      },
+      "chunk": "audio_0001.wav",
+      "chunk_sixth_score": 6.346
+    },
+    {
+      "kind": "FN",
+      "gold_in": 512.855334,
+      "gold_out": 634.731753,
+      "gold_id": "gold_mubh12un_hwpvpe",
+      "cause": "onset_timing",
+      "detail": "detector keep nearby at 490.9 (\u0394 -22.0s). Fired on a different moment of the same transition cluster.",
+      "nearest_keep": 490.875,
+      "keep_delta": -21.98,
+      "keep_score": 6.413,
+      "nearest_prop": 490.875,
+      "prop_delta": -21.98,
+      "peak_pm2": {
+        "file": "audio_0001.wav",
+        "t": 514.75,
+        "score": 1.4296551942825317,
+        "rms_db": -24.783708572387695,
+        "flux_z": 1.894586205482483,
+        "jump_z": 0.008715536445379257,
+        "silence_bonus": 0.0
+      },
+      "peak_pm5": {
+        "file": "audio_0001.wav",
+        "t": 514.75,
+        "score": 1.4296551942825317,
+        "rms_db": -24.783708572387695,
+        "flux_z": 1.894586205482483,
+        "jump_z": 0.008715536445379257,
+        "silence_bonus": 0.0
+      },
+      "chunk": "audio_0001.wav",
+      "chunk_sixth_score": 6.346
+    },
+    {
+      "kind": "FN",
+      "gold_in": 1029.663793,
+      "gold_out": 1079.127815,
+      "gold_id": "gold_mubh2khm_rqjhjd",
+      "cause": "onset_timing",
+      "detail": "detector keep nearby at 1038.0 (\u0394 +8.3s). Fired on a different moment of the same transition cluster.",
+      "nearest_keep": 1038.0,
+      "keep_delta": 8.34,
+      "keep_score": 6.858,
+      "nearest_prop": 1038.0,
+      "prop_delta": 8.34,
+      "peak_pm2": {
+        "file": "audio_0002.wav",
+        "t": 1028.0,
+        "score": 0.3202810287475586,
+        "rms_db": -23.064443588256836,
+        "flux_z": 0.8281729221343994,
+        "jump_z": -0.30084866285324097,
+        "silence_bonus": 0.0
+      },
+      "peak_pm5": {
+        "file": "audio_0002.wav",
+        "t": 1026.5,
+        "score": 1.7900580167770386,
+        "rms_db": -25.60064697265625,
+        "flux_z": 2.1673691272735596,
+        "jump_z": 0.16453120112419128,
+        "silence_bonus": 0.0
+      },
+      "chunk": "audio_0002.wav",
+      "chunk_sixth_score": 6.189
+    },
+    {
+      "kind": "FN",
+      "gold_in": 1243.16933,
+      "gold_out": 1308.19743,
+      "gold_id": "gold_mubh4bjr_o00z50",
+      "cause": "evidence/weak_boundary",
+      "detail": "best \u00b15s composite=3.37 at 1238.2 (flux_z=-0.3, jump_z=3.6)",
+      "nearest_keep": 1282.25,
+      "keep_delta": 39.08,
+      "keep_score": 7.31,
+      "nearest_prop": 1282.25,
+      "prop_delta": 39.08,
+      "peak_pm2": {
+        "file": "audio_0002.wav",
+        "t": 1244.625,
+        "score": 2.6199254989624023,
+        "rms_db": -20.821407318115234,
+        "flux_z": 3.179719924926758,
+        "jump_z": 0.2351355105638504,
+        "silence_bonus": 0.0
+      },
+      "peak_pm5": {
+        "file": "audio_0002.wav",
+        "t": 1238.25,
+        "score": 3.3727633953094482,
+        "rms_db": -31.914175033569336,
+        "flux_z": -0.2999933660030365,
+        "jump_z": 3.5977585315704346,
+        "silence_bonus": 0.0
+      },
+      "chunk": "audio_0002.wav",
+      "chunk_sixth_score": 6.189
+    },
+    {
+      "kind": "FN",
+      "gold_in": 1538.857022,
+      "gold_out": 1767.489919,
+      "gold_id": "gold_mubh5xsd_po68fx",
+      "cause": "selection/top_k",
+      "detail": "boundary score 2.90 loses to chunk top_k floor 6.19",
+      "nearest_keep": 1442.125,
+      "keep_delta": -96.73,
+      "keep_score": 7.35,
+      "nearest_prop": 1442.125,
+      "prop_delta": -96.73,
+      "peak_pm2": {
+        "file": "audio_0002.wav",
+        "t": 1538.625,
+        "score": 2.896751642227173,
+        "rms_db": -18.140626907348633,
+        "flux_z": 3.392996072769165,
+        "jump_z": 0.35200461745262146,
+        "silence_bonus": 0.0
+      },
+      "peak_pm5": {
+        "file": "audio_0002.wav",
+        "t": 1541.0,
+        "score": 4.151014804840088,
+        "rms_db": -94.5772476196289,
+        "flux_z": -1.334365963935852,
+        "jump_z": 4.65178918838501,
+        "silence_bonus": 0.5
+      },
+      "chunk": "audio_0002.wav",
+      "chunk_sixth_score": 6.189
+    },
+    {
+      "kind": "FN",
+      "gold_in": 2072.112009,
+      "gold_out": 2207.396609,
+      "gold_id": "gold_mubh6zvr_3sowkm",
+      "cause": "selection/top_k",
+      "detail": "boundary score 4.60 loses to chunk top_k floor 6.43",
+      "nearest_keep": 2119.75,
+      "keep_delta": 47.64,
+      "keep_score": 7.452,
+      "nearest_prop": 2119.75,
+      "prop_delta": 47.64,
+      "peak_pm2": {
+        "file": "audio_0003.wav",
+        "t": 2072.875,
+        "score": 4.600955486297607,
+        "rms_db": -30.017704010009766,
+        "flux_z": -0.034938111901283264,
+        "jump_z": 4.127159118652344,
+        "silence_bonus": 0.5
+      },
+      "peak_pm5": {
+        "file": "audio_0003.wav",
+        "t": 2072.875,
+        "score": 4.600955486297607,
+        "rms_db": -30.017704010009766,
+        "flux_z": -0.034938111901283264,
+        "jump_z": 4.127159118652344,
+        "silence_bonus": 0.5
+      },
+      "chunk": "audio_0003.wav",
+      "chunk_sixth_score": 6.431
+    },
+    {
+      "kind": "TP",
+      "gold_in": 2658.533644,
+      "gold_out": 2780.387517,
+      "cause": "matched_\u00b12s",
+      "detail": "keep \u0394=+1.84s",
+      "keep_delta": 1.84,
+      "peak_pm2": {
+        "file": "audio_0003.wav",
+        "t": 2660.375,
+        "score": 6.431103229522705,
+        "rms_db": -22.245365142822266,
+        "flux_z": 2.3308725357055664,
+        "jump_z": 4.682949066162109,
+        "silence_bonus": 0.0
+      },
+      "chunk": "audio_0003.wav"
+    },
+    {
+      "kind": "FN",
+      "gold_in": 3180.107485,
+      "gold_out": 3290.206026,
+      "gold_id": "gold_mubhbjfm_dc3br1",
+      "cause": "onset_timing",
+      "detail": "detector keep nearby at 3171.1 (\u0394 -9.0s). Fired on a different moment of the same transition cluster.",
+      "nearest_keep": 3171.125,
+      "keep_delta": -8.98,
+      "keep_score": 7.343,
+      "nearest_prop": 3171.5,
+      "prop_delta": -8.61,
+      "peak_pm2": {
+        "file": "audio_0004.wav",
+        "t": 3180.25,
+        "score": 1.6351808309555054,
+        "rms_db": -23.923904418945312,
+        "flux_z": 2.533856153488159,
+        "jump_z": -0.26521116495132446,
+        "silence_bonus": 0.0
+      },
+      "peak_pm5": {
+        "file": "audio_0004.wav",
+        "t": 3183.75,
+        "score": 2.1417205333709717,
+        "rms_db": -23.83986473083496,
+        "flux_z": 2.4520249366760254,
+        "jump_z": 0.3027019202709198,
+        "silence_bonus": 0.0
+      },
+      "chunk": "audio_0004.wav",
+      "chunk_sixth_score": 5.94
+    },
+    {
+      "kind": "FN",
+      "gold_in": 3649.090433,
+      "gold_out": 3785.163738,
+      "gold_id": "gold_mubhdmxv_jozk4c",
+      "cause": "evidence/weak_boundary",
+      "detail": "best \u00b15s composite=2.17 at 3649.6 (flux_z=1.5, jump_z=1.0)",
+      "nearest_keep": 3784.0,
+      "keep_delta": 134.91,
+      "keep_score": 10.217,
+      "nearest_prop": 3783.875,
+      "prop_delta": 134.78,
+      "peak_pm2": {
+        "file": "audio_0005.wav",
+        "t": 3649.625,
+        "score": 2.1673526763916016,
+        "rms_db": -22.64950942993164,
+        "flux_z": 1.4931360483169556,
+        "jump_z": 1.0475006103515625,
+        "silence_bonus": 0.0
+      },
+      "peak_pm5": {
+        "file": "audio_0005.wav",
+        "t": 3649.625,
+        "score": 2.1673526763916016,
+        "rms_db": -22.64950942993164,
+        "flux_z": 1.4931360483169556,
+        "jump_z": 1.0475006103515625,
+        "silence_bonus": 0.0
+      },
+      "chunk": "audio_0005.wav",
+      "chunk_sixth_score": 6.26
+    },
+    {
+      "kind": "FN",
+      "gold_in": 4244.241231,
+      "gold_out": 4378.959192,
+      "gold_id": "gold_mubhfhfe_wne5hk",
+      "cause": "onset_timing",
+      "detail": "detector keep nearby at 4266.9 (\u0394 +22.6s). Fired on a different moment of the same transition cluster.",
+      "nearest_keep": 4266.875,
+      "keep_delta": 22.63,
+      "keep_score": 7.025,
+      "nearest_prop": 4266.875,
+      "prop_delta": 22.63,
+      "peak_pm2": {
+        "file": "audio_0005.wav",
+        "t": 4244.0,
+        "score": 1.6961392164230347,
+        "rms_db": -24.385602951049805,
+        "flux_z": 2.3496525287628174,
+        "jump_z": -0.0661001056432724,
+        "silence_bonus": 0.0
+      },
+      "peak_pm5": {
+        "file": "audio_0005.wav",
+        "t": 4247.875,
+        "score": 2.319885492324829,
+        "rms_db": -24.529281616210938,
+        "flux_z": 0.5779337882995605,
+        "jump_z": 1.8864351511001587,
+        "silence_bonus": 0.0
+      },
+      "chunk": "audio_0005.wav",
+      "chunk_sixth_score": 6.26
+    },
+    {
+      "kind": "FN",
+      "gold_in": 4543.794045,
+      "gold_out": 4675.305021,
+      "gold_id": "gold_mubhjt5m_0qbc9q",
+      "cause": "onset_timing",
+      "detail": "detector keep nearby at 4559.6 (\u0394 +15.8s). Fired on a different moment of the same transition cluster.",
+      "nearest_keep": 4559.625,
+      "keep_delta": 15.83,
+      "keep_score": 6.6,
+      "nearest_prop": 4552.5,
+      "prop_delta": 8.71,
+      "peak_pm2": {
+        "file": "audio_0006.wav",
+        "t": 4545.25,
+        "score": 3.8620569705963135,
+        "rms_db": -18.267623901367188,
+        "flux_z": 2.8606367111206055,
+        "jump_z": 1.216579556465149,
+        "silence_bonus": 0.5
+      },
+      "peak_pm5": {
+        "file": "audio_0006.wav",
+        "t": 4545.25,
+        "score": 3.8620569705963135,
+        "rms_db": -18.267623901367188,
+        "flux_z": 2.8606367111206055,
+        "jump_z": 1.216579556465149,
+        "silence_bonus": 0.5
+      },
+      "chunk": "audio_0006.wav",
+      "chunk_sixth_score": 4.885
+    },
+    {
+      "kind": "FN",
+      "gold_in": 5019.614887,
+      "gold_out": 5157.319671,
+      "gold_id": "gold_mubhkrv3_1guafr",
+      "cause": "evidence/weak_boundary",
+      "detail": "best \u00b15s composite=3.94 at 5020.1 (flux_z=3.9, jump_z=1.0)",
+      "nearest_keep": 5065.5,
+      "keep_delta": 45.89,
+      "keep_score": 13.383,
+      "nearest_prop": 5045.125,
+      "prop_delta": 25.51,
+      "peak_pm2": {
+        "file": "audio_0006.wav",
+        "t": 5020.125,
+        "score": 3.9373483657836914,
+        "rms_db": -24.59475326538086,
+        "flux_z": 3.8772218227386475,
+        "jump_z": 1.0294321775436401,
+        "silence_bonus": 0.0
+      },
+      "peak_pm5": {
+        "file": "audio_0006.wav",
+        "t": 5020.125,
+        "score": 3.9373483657836914,
+        "rms_db": -24.59475326538086,
+        "flux_z": 3.8772218227386475,
+        "jump_z": 1.0294321775436401,
+        "silence_bonus": 0.0
+      },
+      "chunk": "audio_0006.wav",
+      "chunk_sixth_score": 4.885
+    },
+    {
+      "kind": "FN",
+      "gold_in": 5665.36827,
+      "gold_out": 5785.714505,
+      "gold_id": "gold_mubhm3p7_znw8z9",
+      "cause": "evidence/weak_boundary",
+      "detail": "best \u00b15s composite=2.82 at 5668.6 (flux_z=1.2, jump_z=1.9)",
+      "nearest_keep": 5707.75,
+      "keep_delta": 42.38,
+      "keep_score": 9.424,
+      "nearest_prop": 5689.5,
+      "prop_delta": 24.13,
+      "peak_pm2": {
+        "file": "audio_0007.wav",
+        "t": 5665.125,
+        "score": 1.570504903793335,
+        "rms_db": -21.89009666442871,
+        "flux_z": 1.540976643562317,
+        "jump_z": 0.4147723913192749,
+        "silence_bonus": 0.0
+      },
+      "peak_pm5": {
+        "file": "audio_0007.wav",
+        "t": 5668.625,
+        "score": 2.81618070602417,
+        "rms_db": -21.397611618041992,
+        "flux_z": 1.2349517345428467,
+        "jump_z": 1.8899669647216797,
+        "silence_bonus": 0.0
+      },
+      "chunk": "audio_0007.wav",
+      "chunk_sixth_score": 4.586
+    },
+    {
+      "kind": "FN",
+      "gold_in": 6344.634084,
+      "gold_out": 6470.607413,
+      "gold_id": "gold_mubhn3uw_nl6f54",
+      "cause": "evidence/weak_boundary",
+      "detail": "best \u00b15s composite=0.63 at 6339.8 (flux_z=1.2, jump_z=-0.3)",
+      "nearest_keep": 6379.875,
+      "keep_delta": 35.24,
+      "keep_score": 5.49,
+      "nearest_prop": 6379.875,
+      "prop_delta": 35.24,
+      "peak_pm2": {
+        "file": "audio_0008.wav",
+        "t": 6345.375,
+        "score": 0.17020606994628906,
+        "rms_db": -27.16773796081543,
+        "flux_z": -0.23696844279766083,
+        "jump_z": 0.3479323983192444,
+        "silence_bonus": 0.0
+      },
+      "peak_pm5": {
+        "file": "audio_0008.wav",
+        "t": 6339.75,
+        "score": 0.6349368095397949,
+        "rms_db": -21.36030387878418,
+        "flux_z": 1.1946502923965454,
+        "jump_z": -0.26105087995529175,
+        "silence_bonus": 0.0
+      },
+      "chunk": "audio_0008.wav",
+      "chunk_sixth_score": null
+    },
+    {
+      "kind": "FN",
+      "gold_in": 6852.563786,
+      "gold_out": 6898.919587,
+      "gold_id": "gold_mubhooye_d58gun",
+      "cause": "onset_timing",
+      "detail": "detector keep nearby at 6855.2 (\u0394 +2.7s). Fired on a different moment of the same transition cluster.",
+      "nearest_keep": 6855.25,
+      "keep_delta": 2.69,
+      "keep_score": 7.996,
+      "nearest_prop": 6854.875,
+      "prop_delta": 2.31,
+      "peak_pm2": {
+        "file": "audio_0008.wav",
+        "t": 6854.125,
+        "score": 3.1418466567993164,
+        "rms_db": -90.78082275390625,
+        "flux_z": -1.298405408859253,
+        "jump_z": 3.6156506538391113,
+        "silence_bonus": 0.5
+      },
+      "peak_pm5": {
+        "file": "audio_0008.wav",
+        "t": 6855.25,
+        "score": 7.996118068695068,
+        "rms_db": -25.26026725769043,
+        "flux_z": -0.42291489243507385,
+        "jump_z": 7.813304424285889,
+        "silence_bonus": 0.5
+      },
+      "chunk": "audio_0008.wav",
+      "chunk_sixth_score": null
+    }
+  ],
+  "false_positives": [
+    {
+      "t": 96.12,
+      "score": 7.547,
+      "file": "audio_0001.wav",
+      "nearest_gold_in": 166.64,
+      "delta": 70.51,
+      "near_out": 209.64,
+      "cause": "isolated_over_trigger",
+      "peak": {
+        "file": "audio_0001.wav",
+        "t": 96.125,
+        "score": 7.546840190887451,
+        "rms_db": -24.75933837890625,
+        "flux_z": 3.3583457469940186,
+        "jump_z": 4.528080940246582,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 274.5,
+      "score": 7.713,
+      "file": "audio_0001.wav",
+      "nearest_gold_in": 166.64,
+      "delta": -107.86,
+      "near_out": 31.27,
+      "cause": "fired_inside_break",
+      "peak": {
+        "file": "audio_0001.wav",
+        "t": 274.5,
+        "score": 7.7132439613342285,
+        "rms_db": -20.020320892333984,
+        "flux_z": 3.1245813369750977,
+        "jump_z": 4.869807720184326,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 490.88,
+      "score": 6.413,
+      "file": "audio_0001.wav",
+      "nearest_gold_in": 512.86,
+      "delta": 21.98,
+      "near_out": 143.86,
+      "cause": "near_break_wrong_onset",
+      "peak": {
+        "file": "audio_0001.wav",
+        "t": 490.875,
+        "score": 6.4127516746521,
+        "rms_db": -26.28257942199707,
+        "flux_z": 1.9872678518295288,
+        "jump_z": 4.422300815582275,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 549.38,
+      "score": 7.248,
+      "file": "audio_0001.wav",
+      "nearest_gold_in": 512.86,
+      "delta": -36.52,
+      "near_out": 85.36,
+      "cause": "fired_inside_break",
+      "peak": {
+        "file": "audio_0001.wav",
+        "t": 549.375,
+        "score": 7.248321533203125,
+        "rms_db": -19.4864501953125,
+        "flux_z": 2.4542136192321777,
+        "jump_z": 4.907661437988281,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 577.88,
+      "score": 6.346,
+      "file": "audio_0001.wav",
+      "nearest_gold_in": 512.86,
+      "delta": -65.02,
+      "near_out": 56.86,
+      "cause": "fired_inside_break",
+      "peak": {
+        "file": "audio_0001.wav",
+        "t": 577.875,
+        "score": 6.345898151397705,
+        "rms_db": -26.928783416748047,
+        "flux_z": 1.9603861570358276,
+        "jump_z": 4.375608444213867,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 644.88,
+      "score": 6.469,
+      "file": "audio_0001.wav",
+      "nearest_gold_in": 512.86,
+      "delta": -132.02,
+      "near_out": 10.14,
+      "cause": "near_program_return",
+      "peak": {
+        "file": "audio_0001.wav",
+        "t": 644.875,
+        "score": 6.468859672546387,
+        "rms_db": -20.12378692626953,
+        "flux_z": 2.142864942550659,
+        "jump_z": 4.861711025238037,
+        "silence_bonus": 0.0
+      }
+    },
+    {
+      "t": 1038.0,
+      "score": 6.858,
+      "file": "audio_0002.wav",
+      "nearest_gold_in": 1029.66,
+      "delta": -8.34,
+      "near_out": 41.13,
+      "cause": "fired_inside_break",
+      "peak": {
+        "file": "audio_0002.wav",
+        "t": 1038.0,
+        "score": 6.857640266418457,
+        "rms_db": -27.757530212402344,
+        "flux_z": 3.3222410678863525,
+        "jump_z": 3.865959644317627,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 1120.5,
+      "score": 6.189,
+      "file": "audio_0002.wav",
+      "nearest_gold_in": 1029.66,
+      "delta": -90.84,
+      "near_out": 41.37,
+      "cause": "isolated_over_trigger",
+      "peak": {
+        "file": "audio_0002.wav",
+        "t": 1120.5,
+        "score": 6.189399719238281,
+        "rms_db": -20.38916778564453,
+        "flux_z": 1.781703233718872,
+        "jump_z": 4.353122234344482,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 1282.25,
+      "score": 7.31,
+      "file": "audio_0002.wav",
+      "nearest_gold_in": 1243.17,
+      "delta": -39.08,
+      "near_out": 25.95,
+      "cause": "fired_inside_break",
+      "peak": {
+        "file": "audio_0002.wav",
+        "t": 1282.25,
+        "score": 7.309995651245117,
+        "rms_db": -19.108407974243164,
+        "flux_z": 9.667816162109375,
+        "jump_z": 0.05913351848721504,
+        "silence_bonus": 0.0
+      }
+    },
+    {
+      "t": 1314.88,
+      "score": 6.612,
+      "file": "audio_0002.wav",
+      "nearest_gold_in": 1243.17,
+      "delta": -71.71,
+      "near_out": 6.68,
+      "cause": "near_program_return",
+      "peak": {
+        "file": "audio_0002.wav",
+        "t": 1314.875,
+        "score": 6.612081527709961,
+        "rms_db": -21.268442153930664,
+        "flux_z": 3.0956814289093018,
+        "jump_z": 4.29032039642334,
+        "silence_bonus": 0.0
+      }
+    },
+    {
+      "t": 1359.88,
+      "score": 6.524,
+      "file": "audio_0002.wav",
+      "nearest_gold_in": 1243.17,
+      "delta": -116.71,
+      "near_out": 51.68,
+      "cause": "isolated_over_trigger",
+      "peak": {
+        "file": "audio_0002.wav",
+        "t": 1359.875,
+        "score": 6.523554801940918,
+        "rms_db": -22.595842361450195,
+        "flux_z": 2.4236977100372314,
+        "jump_z": 4.20578145980835,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 1442.12,
+      "score": 7.35,
+      "file": "audio_0002.wav",
+      "nearest_gold_in": 1538.86,
+      "delta": 96.73,
+      "near_out": 133.93,
+      "cause": "isolated_over_trigger",
+      "peak": {
+        "file": "audio_0002.wav",
+        "t": 1442.125,
+        "score": 7.349964141845703,
+        "rms_db": -21.656818389892578,
+        "flux_z": 3.4417269229888916,
+        "jump_z": 4.268669128417969,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 1892.12,
+      "score": 9.068,
+      "file": "audio_0003.wav",
+      "nearest_gold_in": 2072.11,
+      "delta": 179.99,
+      "near_out": 124.64,
+      "cause": "isolated_over_trigger",
+      "peak": {
+        "file": "audio_0003.wav",
+        "t": 1892.125,
+        "score": 9.068352699279785,
+        "rms_db": -19.98282241821289,
+        "flux_z": 4.9679107666015625,
+        "jump_z": 4.8424201011657715,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 2119.75,
+      "score": 7.452,
+      "file": "audio_0003.wav",
+      "nearest_gold_in": 2072.11,
+      "delta": -47.64,
+      "near_out": 87.65,
+      "cause": "fired_inside_break",
+      "peak": {
+        "file": "audio_0003.wav",
+        "t": 2119.75,
+        "score": 7.451991081237793,
+        "rms_db": -25.176942825317383,
+        "flux_z": 3.307119607925415,
+        "jump_z": 4.471651554107666,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 2222.0,
+      "score": 7.382,
+      "file": "audio_0003.wav",
+      "nearest_gold_in": 2072.11,
+      "delta": -149.89,
+      "near_out": 14.6,
+      "cause": "near_program_return",
+      "peak": {
+        "file": "audio_0003.wav",
+        "t": 2222.0,
+        "score": 7.381716728210449,
+        "rms_db": -22.90021514892578,
+        "flux_z": 3.0003998279571533,
+        "jump_z": 4.6314167976379395,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 2279.88,
+      "score": 6.805,
+      "file": "audio_0003.wav",
+      "nearest_gold_in": 2072.11,
+      "delta": -207.76,
+      "near_out": 72.48,
+      "cause": "isolated_over_trigger",
+      "peak": {
+        "file": "audio_0003.wav",
+        "t": 2279.875,
+        "score": 6.804502964019775,
+        "rms_db": -21.600662231445312,
+        "flux_z": 2.101435422897339,
+        "jump_z": 4.728426456451416,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 2525.25,
+      "score": 6.779,
+      "file": "audio_0003.wav",
+      "nearest_gold_in": 2658.53,
+      "delta": 133.28,
+      "near_out": 255.14,
+      "cause": "isolated_over_trigger",
+      "peak": {
+        "file": "audio_0003.wav",
+        "t": 2525.25,
+        "score": 6.77873420715332,
+        "rms_db": -24.770357131958008,
+        "flux_z": 3.0395047664642334,
+        "jump_z": 4.499105930328369,
+        "silence_bonus": 0.0
+      }
+    },
+    {
+      "t": 2788.88,
+      "score": 7.461,
+      "file": "audio_0004.wav",
+      "nearest_gold_in": 2658.53,
+      "delta": -130.34,
+      "near_out": 8.49,
+      "cause": "near_program_return",
+      "peak": {
+        "file": "audio_0004.wav",
+        "t": 2788.875,
+        "score": 7.46066951751709,
+        "rms_db": -24.144420623779297,
+        "flux_z": 3.031639575958252,
+        "jump_z": 4.686939716339111,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 3018.75,
+      "score": 6.638,
+      "file": "audio_0004.wav",
+      "nearest_gold_in": 3180.11,
+      "delta": 161.36,
+      "near_out": 238.36,
+      "cause": "isolated_over_trigger",
+      "peak": {
+        "file": "audio_0004.wav",
+        "t": 3018.75,
+        "score": 6.637691974639893,
+        "rms_db": -24.561662673950195,
+        "flux_z": 1.972214937210083,
+        "jump_z": 4.6585307121276855,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 3138.5,
+      "score": 5.94,
+      "file": "audio_0004.wav",
+      "nearest_gold_in": 3180.11,
+      "delta": 41.61,
+      "near_out": 151.71,
+      "cause": "isolated_over_trigger",
+      "peak": {
+        "file": "audio_0004.wav",
+        "t": 3138.5,
+        "score": 5.940171241760254,
+        "rms_db": -22.028722763061523,
+        "flux_z": 1.4610307216644287,
+        "jump_z": 4.844398021697998,
+        "silence_bonus": 0.0
+      }
+    },
+    {
+      "t": 3171.12,
+      "score": 7.343,
+      "file": "audio_0004.wav",
+      "nearest_gold_in": 3180.11,
+      "delta": 8.98,
+      "near_out": 119.08,
+      "cause": "near_break_wrong_onset",
+      "peak": {
+        "file": "audio_0004.wav",
+        "t": 3171.125,
+        "score": 7.3430352210998535,
+        "rms_db": -24.793254852294922,
+        "flux_z": 2.933577060699463,
+        "jump_z": 4.642852306365967,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 3232.62,
+      "score": 7.962,
+      "file": "audio_0004.wav",
+      "nearest_gold_in": 3180.11,
+      "delta": -52.52,
+      "near_out": 57.58,
+      "cause": "fired_inside_break",
+      "peak": {
+        "file": "audio_0004.wav",
+        "t": 3232.625,
+        "score": 7.9620466232299805,
+        "rms_db": -23.49091339111328,
+        "flux_z": 3.6317570209503174,
+        "jump_z": 4.738228797912598,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 3346.75,
+      "score": 7.527,
+      "file": "audio_0004.wav",
+      "nearest_gold_in": 3180.11,
+      "delta": -166.64,
+      "near_out": 56.54,
+      "cause": "isolated_over_trigger",
+      "peak": {
+        "file": "audio_0004.wav",
+        "t": 3346.75,
+        "score": 7.527349948883057,
+        "rms_db": -23.80624008178711,
+        "flux_z": 3.082756757736206,
+        "jump_z": 4.715282440185547,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 3784.0,
+      "score": 10.217,
+      "file": "audio_0005.wav",
+      "nearest_gold_in": 3649.09,
+      "delta": -134.91,
+      "near_out": 1.16,
+      "cause": "fired_inside_break",
+      "peak": {
+        "file": "audio_0005.wav",
+        "t": 3784.0,
+        "score": 10.21689510345459,
+        "rms_db": -83.82862091064453,
+        "flux_z": -1.5038129091262817,
+        "jump_z": 10.844755172729492,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 4124.38,
+      "score": 12.107,
+      "file": "audio_0005.wav",
+      "nearest_gold_in": 4244.24,
+      "delta": 119.87,
+      "near_out": 254.58,
+      "cause": "isolated_over_trigger",
+      "peak": {
+        "file": "audio_0005.wav",
+        "t": 4124.375,
+        "score": 12.106769561767578,
+        "rms_db": -29.22760772705078,
+        "flux_z": 0.2004549354314804,
+        "jump_z": 11.456428527832031,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 4266.88,
+      "score": 7.025,
+      "file": "audio_0005.wav",
+      "nearest_gold_in": 4244.24,
+      "delta": -22.63,
+      "near_out": 112.08,
+      "cause": "fired_inside_break",
+      "peak": {
+        "file": "audio_0005.wav",
+        "t": 4266.875,
+        "score": 7.02471923828125,
+        "rms_db": -23.784502029418945,
+        "flux_z": 4.045709609985352,
+        "jump_z": 3.9904370307922363,
+        "silence_bonus": 0.0
+      }
+    },
+    {
+      "t": 4318.88,
+      "score": 6.984,
+      "file": "audio_0005.wav",
+      "nearest_gold_in": 4244.24,
+      "delta": -74.63,
+      "near_out": 60.08,
+      "cause": "fired_inside_break",
+      "peak": {
+        "file": "audio_0005.wav",
+        "t": 4318.875,
+        "score": 6.98358678817749,
+        "rms_db": -66.98808288574219,
+        "flux_z": -1.5018537044525146,
+        "jump_z": 7.6099772453308105,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 4349.88,
+      "score": 6.26,
+      "file": "audio_0005.wav",
+      "nearest_gold_in": 4244.24,
+      "delta": -105.63,
+      "near_out": 29.08,
+      "cause": "fired_inside_break",
+      "peak": {
+        "file": "audio_0005.wav",
+        "t": 4349.875,
+        "score": 6.260314464569092,
+        "rms_db": -19.956077575683594,
+        "flux_z": 1.9580774307250977,
+        "jump_z": 4.7917561531066895,
+        "silence_bonus": 0.0
+      }
+    },
+    {
+      "t": 4431.25,
+      "score": 6.442,
+      "file": "audio_0005.wav",
+      "nearest_gold_in": 4543.79,
+      "delta": 112.54,
+      "near_out": 52.29,
+      "cause": "isolated_over_trigger",
+      "peak": {
+        "file": "audio_0005.wav",
+        "t": 4431.25,
+        "score": 6.441659927368164,
+        "rms_db": -18.027814865112305,
+        "flux_z": 8.140323638916016,
+        "jump_z": 0.33641698956489563,
+        "silence_bonus": 0.0
+      }
+    },
+    {
+      "t": 4559.62,
+      "score": 6.6,
+      "file": "audio_0006.wav",
+      "nearest_gold_in": 4543.79,
+      "delta": -15.83,
+      "near_out": 115.68,
+      "cause": "fired_inside_break",
+      "peak": {
+        "file": "audio_0006.wav",
+        "t": 4559.625,
+        "score": 6.599522590637207,
+        "rms_db": -21.472042083740234,
+        "flux_z": 7.989675045013428,
+        "jump_z": 0.607266366481781,
+        "silence_bonus": 0.0
+      }
+    },
+    {
+      "t": 4663.75,
+      "score": 9.067,
+      "file": "audio_0006.wav",
+      "nearest_gold_in": 4543.79,
+      "delta": -119.96,
+      "near_out": 11.56,
+      "cause": "fired_inside_break",
+      "peak": {
+        "file": "audio_0006.wav",
+        "t": 4663.75,
+        "score": 9.067270278930664,
+        "rms_db": -25.605363845825195,
+        "flux_z": -0.30641427636146545,
+        "jump_z": 8.797080993652344,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 5065.5,
+      "score": 13.383,
+      "file": "audio_0006.wav",
+      "nearest_gold_in": 5019.61,
+      "delta": -45.89,
+      "near_out": 91.82,
+      "cause": "fired_inside_break",
+      "peak": {
+        "file": "audio_0006.wav",
+        "t": 5065.5,
+        "score": 13.38310718536377,
+        "rms_db": -22.910175323486328,
+        "flux_z": 3.8814334869384766,
+        "jump_z": 9.97203254699707,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 5155.25,
+      "score": 8.566,
+      "file": "audio_0006.wav",
+      "nearest_gold_in": 5019.61,
+      "delta": -135.64,
+      "near_out": 2.07,
+      "cause": "fired_inside_break",
+      "peak": {
+        "file": "audio_0006.wav",
+        "t": 5155.25,
+        "score": 8.566429138183594,
+        "rms_db": -86.7790298461914,
+        "flux_z": -1.3999381065368652,
+        "jump_z": 9.116382598876953,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 5244.5,
+      "score": 4.885,
+      "file": "audio_0006.wav",
+      "nearest_gold_in": 5019.61,
+      "delta": -224.89,
+      "near_out": 87.18,
+      "cause": "isolated_over_trigger",
+      "peak": {
+        "file": "audio_0006.wav",
+        "t": 5244.5,
+        "score": 4.885374546051025,
+        "rms_db": -21.580463409423828,
+        "flux_z": 3.9760944843292236,
+        "jump_z": 1.903303861618042,
+        "silence_bonus": 0.0
+      }
+    },
+    {
+      "t": 5372.62,
+      "score": 5.945,
+      "file": "audio_0006.wav",
+      "nearest_gold_in": 5665.37,
+      "delta": 292.74,
+      "near_out": 215.31,
+      "cause": "isolated_over_trigger",
+      "peak": {
+        "file": "audio_0006.wav",
+        "t": 5372.625,
+        "score": 5.945440292358398,
+        "rms_db": -22.300811767578125,
+        "flux_z": 5.064460754394531,
+        "jump_z": 2.1470947265625,
+        "silence_bonus": 0.0
+      }
+    },
+    {
+      "t": 5423.5,
+      "score": 4.989,
+      "file": "audio_0007.wav",
+      "nearest_gold_in": 5665.37,
+      "delta": 241.87,
+      "near_out": 266.18,
+      "cause": "isolated_over_trigger",
+      "peak": {
+        "file": "audio_0007.wav",
+        "t": 5423.5,
+        "score": 4.989429950714111,
+        "rms_db": -15.339794158935547,
+        "flux_z": 3.981395721435547,
+        "jump_z": 2.003383159637451,
+        "silence_bonus": 0.0
+      }
+    },
+    {
+      "t": 5450.0,
+      "score": 4.586,
+      "file": "audio_0007.wav",
+      "nearest_gold_in": 5665.37,
+      "delta": 215.37,
+      "near_out": 292.68,
+      "cause": "isolated_over_trigger",
+      "peak": {
+        "file": "audio_0007.wav",
+        "t": 5450.0,
+        "score": 4.586013317108154,
+        "rms_db": -21.237632751464844,
+        "flux_z": 1.6960241794586182,
+        "jump_z": 3.313995361328125,
+        "silence_bonus": 0.0
+      }
+    },
+    {
+      "t": 5707.75,
+      "score": 9.424,
+      "file": "audio_0007.wav",
+      "nearest_gold_in": 5665.37,
+      "delta": -42.38,
+      "near_out": 77.96,
+      "cause": "fired_inside_break",
+      "peak": {
+        "file": "audio_0007.wav",
+        "t": 5707.75,
+        "score": 9.423918724060059,
+        "rms_db": -16.65116310119629,
+        "flux_z": 4.013623237609863,
+        "jump_z": 6.41370153427124,
+        "silence_bonus": 0.0
+      }
+    },
+    {
+      "t": 5785.75,
+      "score": 9.437,
+      "file": "audio_0007.wav",
+      "nearest_gold_in": 5665.37,
+      "delta": -120.38,
+      "near_out": 0.04,
+      "cause": "near_program_return",
+      "peak": {
+        "file": "audio_0007.wav",
+        "t": 5785.75,
+        "score": 9.436619758605957,
+        "rms_db": -76.81295776367188,
+        "flux_z": -1.4922654628753662,
+        "jump_z": 10.055818557739258,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 6065.25,
+      "score": 4.819,
+      "file": "audio_0007.wav",
+      "nearest_gold_in": 6344.63,
+      "delta": 279.38,
+      "near_out": 279.54,
+      "cause": "isolated_over_trigger",
+      "peak": {
+        "file": "audio_0007.wav",
+        "t": 6065.25,
+        "score": 4.818789958953857,
+        "rms_db": -27.95038414001465,
+        "flux_z": 2.013035297393799,
+        "jump_z": 2.809013605117798,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 6244.25,
+      "score": 5.102,
+      "file": "audio_0007.wav",
+      "nearest_gold_in": 6344.63,
+      "delta": 100.38,
+      "near_out": 226.36,
+      "cause": "isolated_over_trigger",
+      "peak": {
+        "file": "audio_0007.wav",
+        "t": 6244.25,
+        "score": 5.102490425109863,
+        "rms_db": -23.178293228149414,
+        "flux_z": 4.019138813018799,
+        "jump_z": 2.088136672973633,
+        "silence_bonus": 0.0
+      }
+    },
+    {
+      "t": 6379.88,
+      "score": 5.49,
+      "file": "audio_0008.wav",
+      "nearest_gold_in": 6344.63,
+      "delta": -35.24,
+      "near_out": 90.73,
+      "cause": "fired_inside_break",
+      "peak": {
+        "file": "audio_0008.wav",
+        "t": 6379.875,
+        "score": 5.489952564239502,
+        "rms_db": -19.14484977722168,
+        "flux_z": 3.5571839809417725,
+        "jump_z": 2.3220643997192383,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 6439.88,
+      "score": 10.55,
+      "file": "audio_0008.wav",
+      "nearest_gold_in": 6344.63,
+      "delta": -95.24,
+      "near_out": 30.73,
+      "cause": "fired_inside_break",
+      "peak": {
+        "file": "audio_0008.wav",
+        "t": 6439.875,
+        "score": 10.550361633300781,
+        "rms_db": -26.791149139404297,
+        "flux_z": 1.3071116209030151,
+        "jump_z": 9.070028305053711,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 6470.0,
+      "score": 8.349,
+      "file": "audio_0008.wav",
+      "nearest_gold_in": 6344.63,
+      "delta": -125.37,
+      "near_out": 0.61,
+      "cause": "fired_inside_break",
+      "peak": {
+        "file": "audio_0008.wav",
+        "t": 6470.0,
+        "score": 8.34927749633789,
+        "rms_db": -96.5380859375,
+        "flux_z": -1.2983866930007935,
+        "jump_z": 8.823067665100098,
+        "silence_bonus": 0.5
+      }
+    },
+    {
+      "t": 6855.25,
+      "score": 7.996,
+      "file": "audio_0008.wav",
+      "nearest_gold_in": 6852.56,
+      "delta": -2.69,
+      "near_out": 43.67,
+      "cause": "fired_inside_break",
+      "peak": {
+        "file": "audio_0008.wav",
+        "t": 6855.25,
+        "score": 7.996118068695068,
+        "rms_db": -25.26026725769043,
+        "flux_z": -0.42291489243507385,
+        "jump_z": 7.813304424285889,
+        "silence_bonus": 0.5
+      }
+    }
+  ]
+}

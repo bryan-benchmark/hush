@@ -1,0 +1,24 @@
+{
+  "id": "HOLDOUT_V1",
+  "reserved_sessions": [
+    {
+      "session": "hush_20260920_200635",
+      "role": "holdout",
+      "note": "Healthy later night. Leave sealed during iteration."
+    },
+    {
+      "session": "hush_20260917_205513",
+      "role": "holdout",
+      "note": "Second holdout. Do not listen before a change is a serious candidate."
+    }
+  ],
+  "removed_from_holdout": [
+    {
+      "session": "hush_20260912_215850",
+      "now": "dev",
+      "reason": "Dead chunks were deleted and named in ACQUISITION_FIXTURES_V1. The audio that remains is dev, same as DATASETS_V1."
+    }
+  ],
+  "coverage": [],
+  "note": "Truth for these sessions stays unwritten. Unseal only with unseal=HOLDOUT_V1."
+}

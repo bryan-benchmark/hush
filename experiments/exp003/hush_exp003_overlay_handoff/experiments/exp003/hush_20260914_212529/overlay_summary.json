@@ -1,0 +1,47 @@
+{
+  "experiment_spec_version": "exp003-v1",
+  "session": "hush_20260914_212529",
+  "embeddings_recomputed": false,
+  "params_changed": false,
+  "score_timestamp": "window_end; the scored audio is the preceding 10 s",
+  "n_breaks": 15,
+  "starts_with_higher_median_in_0_30_than_pre_30": 15,
+  "pod_seconds": 1804.0,
+  "associated_seconds": 2254.0,
+  "outside_associated_seconds": 4645.0,
+  "pod_distribution": {
+    "n": 1804,
+    "p10": 0.1197,
+    "p50": 0.213,
+    "p90": 0.3243,
+    "mean": 0.2189
+  },
+  "program_distribution": {
+    "n": 5016,
+    "p10": 0.0352,
+    "p50": 0.0915,
+    "p90": 0.2078,
+    "mean": 0.1063
+  },
+  "top20": {
+    "k": 20,
+    "inside_pod": 17,
+    "within_30s_of_start": 12,
+    "associated_pod_or_near_start": 17,
+    "outside": 3,
+    "associated_per_hour": 27.1517,
+    "outside_per_hour": 2.3251,
+    "enrichment": 11.6778
+  },
+  "top50": {
+    "k": 50,
+    "inside_pod": 30,
+    "within_30s_of_start": 14,
+    "associated_pod_or_near_start": 30,
+    "outside": 20,
+    "associated_per_hour": 47.9148,
+    "outside_per_hour": 15.5005,
+    "enrichment": 3.0912
+  },
+  "return_note": "A high score after a pod end means the audio differs from the previous 3 minutes. It is not a PLAY decision."
+}

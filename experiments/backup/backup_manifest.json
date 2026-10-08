@@ -1,0 +1,31 @@
+{
+  "project": "hushdev",
+  "bucket": "hushdev-748439071367-research",
+  "created_at": "2026-10-08T16:28:09Z",
+  "deletes_cloud_files": false,
+  "files": [
+    {
+      "path": "experiments/annotations/truth_events.jsonl",
+      "sha256": "6e489a863d765c1333d2759210acccc2d18d239494ce95a1107ab20ec5184249",
+      "bytes": 16432
+    },
+    {
+      "path": "experiments/gold/GOLD_REPLICATION_V1.json",
+      "sha256": "b36b6c1b7550696c7ddf3c5308901f00f289c1659eed1f3d4554db6c131ed3f0",
+      "bytes": 1092
+    },
+    {
+      "path": "experiments/replication/freeze/gold_ledgers.json",
+      "sha256": "ff68392117af1819a2995b90f28648b069f3326cde649c06bb6a63cab01542f9",
+      "bytes": 723
+    },
+    {
+      "path": "experiments/replication/PRIMARY_OVERLAY_COMPARISON.md",
+      "sha256": "0bffb783c7f0037aae124d0070cc4622f03aac679b71efca21b9e37895494a11",
+      "bytes": 4950
+    }
+  ],
+  "recordings_sha256": "experiments/backup/recordings.sha256",
+  "experiments_sha256": "experiments/backup/experiments.sha256",
+  "rsync_deletes_unmatched": false
+}

@@ -1,0 +1,562 @@
+[
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 211.44,
+    "end": 212.1
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 676.4,
+    "end": 676.9
+  },
+  {
+    "kind": "departure",
+    "phrase": "after this",
+    "matched_text": "after his",
+    "similarity": 0.9,
+    "start": 1199.74,
+    "end": 1200.3
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 1231.1,
+    "end": 1231.44
+  },
+  {
+    "kind": "departure",
+    "phrase": "coming up",
+    "matched_text": "coming up",
+    "similarity": 1.0,
+    "start": 1685.08,
+    "end": 1685.76
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 1712.44,
+    "end": 1712.76
+  },
+  {
+    "kind": "departure",
+    "phrase": "we'll be right back",
+    "matched_text": "we will be right back",
+    "similarity": 1.0,
+    "start": 1907.1399999999999,
+    "end": 1909.54
+  },
+  {
+    "kind": "departure",
+    "phrase": "we'll be right back",
+    "matched_text": "we will be right back",
+    "similarity": 1.0,
+    "start": 1909.54,
+    "end": 1909.7
+  },
+  {
+    "kind": "departure",
+    "phrase": "we'll be right back",
+    "matched_text": "we will be right back",
+    "similarity": 1.0,
+    "start": 1909.7,
+    "end": 1909.92
+  },
+  {
+    "kind": "departure",
+    "phrase": "we'll be right back",
+    "matched_text": "we will be right back",
+    "similarity": 1.0,
+    "start": 1909.92,
+    "end": 1910.02
+  },
+  {
+    "kind": "departure",
+    "phrase": "we'll be right back",
+    "matched_text": "we will be right back",
+    "similarity": 1.0,
+    "start": 1910.02,
+    "end": 1910.34
+  },
+  {
+    "kind": "departure",
+    "phrase": "we'll be right back",
+    "matched_text": "we will be right back",
+    "similarity": 1.0,
+    "start": 1910.34,
+    "end": 1910.78
+  },
+  {
+    "kind": "departure",
+    "phrase": "we'll be right back",
+    "matched_text": "we will be right back",
+    "similarity": 1.0,
+    "start": 1910.78,
+    "end": 1911.1
+  },
+  {
+    "kind": "departure",
+    "phrase": "we'll be right back",
+    "matched_text": "we will be right back",
+    "similarity": 1.0,
+    "start": 1911.38,
+    "end": 1913.04
+  },
+  {
+    "kind": "departure",
+    "phrase": "we'll be right back",
+    "matched_text": "we will be right back",
+    "similarity": 1.0,
+    "start": 1913.04,
+    "end": 1913.66
+  },
+  {
+    "kind": "departure",
+    "phrase": "we'll be right back",
+    "matched_text": "we will be right back",
+    "similarity": 1.0,
+    "start": 1915.28,
+    "end": 1916.6
+  },
+  {
+    "kind": "departure",
+    "phrase": "we'll be right back",
+    "matched_text": "we will be right back",
+    "similarity": 1.0,
+    "start": 1918.92,
+    "end": 1919.8
+  },
+  {
+    "kind": "departure",
+    "phrase": "timeout",
+    "matched_text": "timeouts",
+    "similarity": 0.875,
+    "start": 1937.46,
+    "end": 1938.04
+  },
+  {
+    "kind": "departure",
+    "phrase": "coming up",
+    "matched_text": "coming up",
+    "similarity": 1.0,
+    "start": 1947.74,
+    "end": 1948.18
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 2033.98,
+    "end": 2034.52
+  },
+  {
+    "kind": "departure",
+    "phrase": "timeout",
+    "matched_text": "time out",
+    "similarity": 0.875,
+    "start": 2074.86,
+    "end": 2075.42
+  },
+  {
+    "kind": "departure",
+    "phrase": "coming up",
+    "matched_text": "coming up",
+    "similarity": 1.0,
+    "start": 2081.84,
+    "end": 2082.36
+  },
+  {
+    "kind": "return",
+    "phrase": "we're back",
+    "matched_text": "we are back",
+    "similarity": 1.0,
+    "start": 2082.58,
+    "end": 2082.96
+  },
+  {
+    "kind": "departure",
+    "phrase": "after this",
+    "matched_text": "after this",
+    "similarity": 1.0,
+    "start": 2083.74,
+    "end": 2084.42
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 2343.2,
+    "end": 2343.82
+  },
+  {
+    "kind": "departure",
+    "phrase": "timeout",
+    "matched_text": "timeouts",
+    "similarity": 0.875,
+    "start": 2345.46,
+    "end": 2345.9
+  },
+  {
+    "kind": "departure",
+    "phrase": "timeout",
+    "matched_text": "timeout",
+    "similarity": 1.0,
+    "start": 2401.18,
+    "end": 2401.44
+  },
+  {
+    "kind": "departure",
+    "phrase": "timeout",
+    "matched_text": "time out",
+    "similarity": 0.875,
+    "start": 2581.22,
+    "end": 2581.7000000000003
+  },
+  {
+    "kind": "departure",
+    "phrase": "timeout",
+    "matched_text": "time out",
+    "similarity": 0.875,
+    "start": 2615.7,
+    "end": 2616.14
+  },
+  {
+    "kind": "departure",
+    "phrase": "timeout",
+    "matched_text": "time out",
+    "similarity": 0.875,
+    "start": 2799.82,
+    "end": 2800.52
+  },
+  {
+    "kind": "departure",
+    "phrase": "timeout",
+    "matched_text": "time out",
+    "similarity": 0.875,
+    "start": 2806.12,
+    "end": 2806.42
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 2995.48,
+    "end": 2995.74
+  },
+  {
+    "kind": "departure",
+    "phrase": "coming up",
+    "matched_text": "coming up",
+    "similarity": 1.0,
+    "start": 3056.38,
+    "end": 3056.96
+  },
+  {
+    "kind": "departure",
+    "phrase": "coming up",
+    "matched_text": "coming up",
+    "similarity": 1.0,
+    "start": 3542.22,
+    "end": 3542.6
+  },
+  {
+    "kind": "departure",
+    "phrase": "coming up",
+    "matched_text": "coming up",
+    "similarity": 1.0,
+    "start": 3902.54,
+    "end": 3903.32
+  },
+  {
+    "kind": "departure",
+    "phrase": "after this",
+    "matched_text": "after his",
+    "similarity": 0.9,
+    "start": 3926.82,
+    "end": 3927.6
+  },
+  {
+    "kind": "departure",
+    "phrase": "after this",
+    "matched_text": "after his",
+    "similarity": 0.9,
+    "start": 3944.5,
+    "end": 3945.3
+  },
+  {
+    "kind": "departure",
+    "phrase": "timeout",
+    "matched_text": "time out",
+    "similarity": 0.875,
+    "start": 4083.12,
+    "end": 4083.64
+  },
+  {
+    "kind": "departure",
+    "phrase": "timeout",
+    "matched_text": "time out",
+    "similarity": 0.875,
+    "start": 4088.5,
+    "end": 4089.06
+  },
+  {
+    "kind": "departure",
+    "phrase": "timeout",
+    "matched_text": "timeout",
+    "similarity": 1.0,
+    "start": 4222.7,
+    "end": 4223.08
+  },
+  {
+    "kind": "departure",
+    "phrase": "timeout",
+    "matched_text": "timeout",
+    "similarity": 1.0,
+    "start": 4227.06,
+    "end": 4227.58
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 5050.56,
+    "end": 5050.98
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back so",
+    "similarity": 0.8571428571428572,
+    "start": 5473.72,
+    "end": 5474.82
+  },
+  {
+    "kind": "return",
+    "phrase": "welcome back",
+    "matched_text": "we come back",
+    "similarity": 0.9166666666666666,
+    "start": 5479.0,
+    "end": 5479.5
+  },
+  {
+    "kind": "departure",
+    "phrase": "coming up",
+    "matched_text": "coming up",
+    "similarity": 1.0,
+    "start": 5849.42,
+    "end": 5850.08
+  },
+  {
+    "kind": "departure",
+    "phrase": "coming up",
+    "matched_text": "coming up",
+    "similarity": 1.0,
+    "start": 5862.24,
+    "end": 5862.98
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 6297.82,
+    "end": 6298.32
+  },
+  {
+    "kind": "departure",
+    "phrase": "after this",
+    "matched_text": "after this",
+    "similarity": 1.0,
+    "start": 6301.74,
+    "end": 6303.04
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 6784.82,
+    "end": 6785.38
+  },
+  {
+    "kind": "departure",
+    "phrase": "timeout",
+    "matched_text": "timeouts",
+    "similarity": 0.875,
+    "start": 7844.14,
+    "end": 7844.6
+  },
+  {
+    "kind": "departure",
+    "phrase": "timeout",
+    "matched_text": "timeout",
+    "similarity": 1.0,
+    "start": 8101.0,
+    "end": 8101.26
+  },
+  {
+    "kind": "departure",
+    "phrase": "timeout",
+    "matched_text": "timeout",
+    "similarity": 1.0,
+    "start": 8106.62,
+    "end": 8107.08
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 8136.16,
+    "end": 8136.74
+  },
+  {
+    "kind": "departure",
+    "phrase": "timeout",
+    "matched_text": "timeout",
+    "similarity": 1.0,
+    "start": 8232.7,
+    "end": 8233.2
+  },
+  {
+    "kind": "departure",
+    "phrase": "coming up",
+    "matched_text": "coming up",
+    "similarity": 1.0,
+    "start": 8409.36,
+    "end": 8409.92
+  },
+  {
+    "kind": "departure",
+    "phrase": "timeout",
+    "matched_text": "timeout",
+    "similarity": 1.0,
+    "start": 8419.08,
+    "end": 8419.3
+  },
+  {
+    "kind": "departure",
+    "phrase": "timeout",
+    "matched_text": "timeout",
+    "similarity": 1.0,
+    "start": 8437.76,
+    "end": 8438.22
+  },
+  {
+    "kind": "departure",
+    "phrase": "timeout",
+    "matched_text": "timeouts",
+    "similarity": 0.875,
+    "start": 8480.46,
+    "end": 8480.84
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 8498.6,
+    "end": 8499.02
+  },
+  {
+    "kind": "departure",
+    "phrase": "coming up",
+    "matched_text": "coming up",
+    "similarity": 1.0,
+    "start": 8665.42,
+    "end": 8666.22
+  },
+  {
+    "kind": "return",
+    "phrase": "we're back",
+    "matched_text": "we are back",
+    "similarity": 1.0,
+    "start": 9048.06,
+    "end": 9048.68
+  },
+  {
+    "kind": "departure",
+    "phrase": "after this",
+    "matched_text": "after this",
+    "similarity": 1.0,
+    "start": 9120.56,
+    "end": 9121.14
+  },
+  {
+    "kind": "return",
+    "phrase": "welcome back to",
+    "matched_text": "welcome back to",
+    "similarity": 1.0,
+    "start": 9384.64,
+    "end": 9385.64
+  },
+  {
+    "kind": "departure",
+    "phrase": "coming up",
+    "matched_text": "coming up",
+    "similarity": 1.0,
+    "start": 9404.26,
+    "end": 9404.72
+  },
+  {
+    "kind": "departure",
+    "phrase": "coming up",
+    "matched_text": "coming up",
+    "similarity": 1.0,
+    "start": 9410.46,
+    "end": 9411.42
+  },
+  {
+    "kind": "departure",
+    "phrase": "after this",
+    "matched_text": "after his",
+    "similarity": 0.9,
+    "start": 9658.14,
+    "end": 9658.74
+  },
+  {
+    "kind": "departure",
+    "phrase": "after this",
+    "matched_text": "after his",
+    "similarity": 0.9,
+    "start": 9938.06,
+    "end": 9938.68
+  },
+  {
+    "kind": "return",
+    "phrase": "welcome back to",
+    "matched_text": "we came back to",
+    "similarity": 0.8666666666666667,
+    "start": 10319.46,
+    "end": 10320.14
+  },
+  {
+    "kind": "departure",
+    "phrase": "we'll be right back",
+    "matched_text": "we will be right back",
+    "similarity": 1.0,
+    "start": 11300.9,
+    "end": 11301.66
+  },
+  {
+    "kind": "return",
+    "phrase": "welcome back to",
+    "matched_text": "welcome back to",
+    "similarity": 1.0,
+    "start": 11459.56,
+    "end": 11460.76
+  }
+]

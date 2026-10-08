@@ -1,0 +1,68 @@
+[
+  {
+    "session_id": "hush_20260924_220624",
+    "t0": 0.0,
+    "t1": 7600.0,
+    "timestamps": "experiment outputs are seconds since t0",
+    "reason": "Prime sports. Terminal digital silence begins at 7600 s and continues to 7919.9 s. Cut from level, before any commercial inspection.",
+    "derived_16k": "experiments/replication/derived/hush_20260924_220624_0_7600_16k_mono.wav",
+    "sha256": "79dd0f3f910a0572648321eeba411e3865a300ed25299f2fb6840d3b7f4d8993",
+    "truth_ledger_read": false,
+    "commercial_locations_consulted": false
+  },
+  {
+    "session_id": "hush_20260827_135935",
+    "t0": 300.0,
+    "t1": 7200.0,
+    "timestamps": "experiment outputs are seconds since t0",
+    "reason": "Hulu Gilmore Girls. Identity probes only: 0-45 s is not the show; 5, 10, 15, 20, 30, 60, 90, and 120 min are. Span starts at the first Gilmore probe and ends at the 120 min probe. Not cut on an advertisement.",
+    "derived_16k": "experiments/replication/derived/hush_20260827_135935_300_7200_16k_mono.wav",
+    "sha256": "f018c81ef0c07f55448aa548e9546d7613489adb99ea2c0252403b0795c4cbc3",
+    "truth_ledger_read": false,
+    "commercial_locations_consulted": false
+  },
+  {
+    "session_id": "hush_20261007_220650",
+    "t0": 20.0,
+    "t1": 11751.0,
+    "timestamps": "experiment outputs are seconds since t0",
+    "reason": "Hulu Gilmore Girls (scripted/streaming), identity in session.json at capture. Lead digital silence 0-17 s cut at 20 s. Terminal digital silence from 11751 s to 12039.36 s cut before any commercial inspection.",
+    "derived_16k": "experiments/replication/derived/hush_20261007_220650_20_11751_16k_mono.wav",
+    "sha256": "c3b865508ab75b2ffb12796ea7a99209e8e5bf7792a2e7068365b1a15be4ed7d",
+    "truth_ledger_read": false,
+    "commercial_locations_consulted": false
+  },
+  {
+    "session_id": "hush_20260909_213047",
+    "t0": 0.0,
+    "t1": 9373.184,
+    "timestamps": "experiment outputs are seconds since t0",
+    "reason": "NBC opener robustness. Full kept recording.",
+    "derived_16k": "experiments/replication/derived/hush_20260909_213047_0_9373.18_16k_mono.wav",
+    "sha256": "71e940f83bbb52c59c877b1ae9a4d6bc72a68b68d985f446a75fa265e92e4d76",
+    "truth_ledger_read": false,
+    "commercial_locations_consulted": false
+  },
+  {
+    "session_id": "hush_20260913_150934",
+    "t0": 0.0,
+    "t1": 7200.0,
+    "timestamps": "experiment outputs are seconds since t0",
+    "reason": "FOX afternoon robustness. First continuous block. Chunks 9-14 were removed as flatline or digital silence.",
+    "derived_16k": "experiments/replication/derived/hush_20260913_150934_0_7200_16k_mono.wav",
+    "sha256": "71ca98c73965d4ae5cec83ca987bd951269d926ca6e5f5628546661a4b59dc9c",
+    "truth_ledger_read": false,
+    "commercial_locations_consulted": false
+  },
+  {
+    "session_id": "hush_20260913_210542",
+    "t0": 0.0,
+    "t1": 12480.0,
+    "timestamps": "experiment outputs are seconds since t0",
+    "reason": "NBC Sunday night robustness. Quiet from 12480 s through the kept file at 12600 s. A further silence chunk was already removed.",
+    "derived_16k": "experiments/replication/derived/hush_20260913_210542_0_12480_16k_mono.wav",
+    "sha256": "5d0da2eace7a5ff65f58c913c1ad203b0780a86812a2b8a54f59a08ed01844de",
+    "truth_ledger_read": false,
+    "commercial_locations_consulted": false
+  }
+]

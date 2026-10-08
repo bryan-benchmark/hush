@@ -1,0 +1,202 @@
+[
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back no",
+    "similarity": 0.8571428571428572,
+    "start": 2827.79,
+    "end": 2828.53
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 2854.67,
+    "end": 2855.01
+  },
+  {
+    "kind": "departure",
+    "phrase": "coming up",
+    "matched_text": "coming up",
+    "similarity": 1.0,
+    "start": 3327.39,
+    "end": 3327.77
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 3368.67,
+    "end": 3369.01
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 3515.95,
+    "end": 3516.29
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 4253.47,
+    "end": 4253.77
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 5152.73,
+    "end": 5153.21
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 6006.93,
+    "end": 6007.27
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 6302.85,
+    "end": 6303.41
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 6343.61,
+    "end": 6344.07
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 6607.77,
+    "end": 6608.09
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back so",
+    "similarity": 0.8571428571428572,
+    "start": 6908.53,
+    "end": 6909.39
+  },
+  {
+    "kind": "departure",
+    "phrase": "we'll be right back",
+    "matched_text": "we will be right back",
+    "similarity": 1.0,
+    "start": 7370.94,
+    "end": 7370.96
+  },
+  {
+    "kind": "return",
+    "phrase": "back here",
+    "matched_text": "back here",
+    "similarity": 1.0,
+    "start": 7570.38,
+    "end": 7570.86
+  },
+  {
+    "kind": "return",
+    "phrase": "back here",
+    "matched_text": "back here",
+    "similarity": 1.0,
+    "start": 7672.28,
+    "end": 7672.84
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back so",
+    "similarity": 0.8571428571428572,
+    "start": 8047.74,
+    "end": 8048.8
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 8134.56,
+    "end": 8134.92
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 8197.68,
+    "end": 8198.14
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 8253.2,
+    "end": 8253.5
+  },
+  {
+    "kind": "return",
+    "phrase": "back here",
+    "matched_text": "back here",
+    "similarity": 1.0,
+    "start": 9218.74,
+    "end": 9219.14
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 9557.62,
+    "end": 9558.06
+  },
+  {
+    "kind": "departure",
+    "phrase": "after this",
+    "matched_text": "after his",
+    "similarity": 0.9,
+    "start": 10232.34,
+    "end": 10232.72
+  },
+  {
+    "kind": "return",
+    "phrase": "back here",
+    "matched_text": "rack here",
+    "similarity": 0.8888888888888888,
+    "start": 10657.08,
+    "end": 10657.44
+  },
+  {
+    "kind": "departure",
+    "phrase": "coming up",
+    "matched_text": "coming up",
+    "similarity": 1.0,
+    "start": 11225.5,
+    "end": 11225.9
+  },
+  {
+    "kind": "return",
+    "phrase": "back to",
+    "matched_text": "back to",
+    "similarity": 1.0,
+    "start": 11576.98,
+    "end": 11577.32
+  }
+]

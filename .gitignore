@@ -1,0 +1,44 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+recordings/
+*.wav
+.python-version
+.vscode/
+.idea/
+node_modules/
+.next/
+apps/monitor/.next/
+apps/monitor/node_modules/
+apps/monitor/.git/
+.env
+.env.local
+.env.*
+*.log
+.mplconfig/
+.numba_cache/
+*.parquet
+*.npy
+*.zip
+
+# Local live runtime
+ohush_live/cache/
+ohush_live/beds/src/
+ohush_live/sessions/
+ohush_live/sessions/**
+
+# Experiment machine state (kept in GCS)
+experiments/**/.venv/
+experiments/**/.cache/
+experiments/**/models/
+experiments/**/derived/
+experiments/clips/
+experiments/catalog_clips/
+experiments/runs/
+experiments/replication/overlays/
+experiments/backup/*.sha256
+experiments/reports/labeler_audio_debug.jsonl
+
+# Nested junk
+/package-lock.json

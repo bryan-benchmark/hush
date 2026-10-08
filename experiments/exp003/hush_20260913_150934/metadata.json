@@ -1,0 +1,49 @@
+{
+  "experiment_spec_version": "exp003-v1",
+  "feature_schema_version": "exp003-program-cloud-v1",
+  "session_id": "hush_20260913_150934",
+  "t0": 0.0,
+  "t1": 7200.0,
+  "git_commit": null,
+  "python": "3.13.5",
+  "platform": "macOS-15.6.1-arm64-arm-64bit-Mach-O",
+  "device": "cpu",
+  "torch_num_threads": 8,
+  "nnpack_enabled": false,
+  "packages": {
+    "torch": "2.14.1",
+    "panns-inference": "0.1.1",
+    "numpy": "2.5.3",
+    "soundfile": "0.14.0"
+  },
+  "embedding_model": {
+    "id": "qiuqiangkong/panns-cnn14",
+    "checkpoint": "Cnn14_mAP=0.431.pth",
+    "checkpoint_url": "https://zenodo.org/record/3987831/files/Cnn14_mAP%3D0.431.pth?download=1",
+    "checkpoint_sha256": "0dc499e40e9761ef5ea061ffc77697697f277f6a960894903df3ada000e34b31",
+    "embedding": "penultimate CNN14 embedding, L2-normalized",
+    "classifier_head_used": false,
+    "fine_tuned": false
+  },
+  "source_16k_sha256": null,
+  "analysis_wav": {
+    "path": "experiments/exp003/derived/hush_20260913_150934_0_7200_32k_mono.wav",
+    "sha256": "1232563f72d4293d50010151b5ae3baa724a127c7cd8623d31c9980fda779afa",
+    "sample_rate_hz": 32000,
+    "channels": 1,
+    "hop_s": 1.0,
+    "window_s": 10.0
+  },
+  "params": {
+    "window_s": 10.0,
+    "hop_s": 1.0,
+    "memory_s": 180.0,
+    "min_reference_s": 60.0,
+    "listing_gap_s": 45.0,
+    "listing_k": 20
+  },
+  "truth_ledger_read": false,
+  "holdouts_read": false,
+  "exp001_scores_read": false,
+  "exp002_scores_read": false
+}

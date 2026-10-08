@@ -1,0 +1,442 @@
+[
+  {
+    "phrase": "save",
+    "start": 36.1,
+    "end": 36.2
+  },
+  {
+    "phrase": "save",
+    "start": 37.82,
+    "end": 38.0
+  },
+  {
+    "phrase": "call",
+    "start": 101.24,
+    "end": 101.46
+  },
+  {
+    "phrase": "call",
+    "start": 102.66,
+    "end": 102.82
+  },
+  {
+    "phrase": "call",
+    "start": 177.44,
+    "end": 178.18
+  },
+  {
+    "phrase": "download",
+    "start": 249.02,
+    "end": 249.26
+  },
+  {
+    "phrase": "save",
+    "start": 289.4,
+    "end": 289.5
+  },
+  {
+    "phrase": "save",
+    "start": 291.14,
+    "end": 291.3
+  },
+  {
+    "phrase": "free",
+    "start": 376.72,
+    "end": 376.98
+  },
+  {
+    "phrase": "call",
+    "start": 406.1,
+    "end": 406.18
+  },
+  {
+    "phrase": "free",
+    "start": 406.98,
+    "end": 407.2
+  },
+  {
+    "phrase": "call",
+    "start": 411.96,
+    "end": 412.18
+  },
+  {
+    "phrase": "call",
+    "start": 664.74,
+    "end": 664.9
+  },
+  {
+    "phrase": "call",
+    "start": 717.02,
+    "end": 717.26
+  },
+  {
+    "phrase": "buy",
+    "start": 901.28,
+    "end": 901.46
+  },
+  {
+    "phrase": "free",
+    "start": 921.94,
+    "end": 922.2
+  },
+  {
+    "phrase": "shop",
+    "start": 923.18,
+    "end": 923.28
+  },
+  {
+    "phrase": "free",
+    "start": 1617.38,
+    "end": 1617.62
+  },
+  {
+    "phrase": "free",
+    "start": 1688.82,
+    "end": 1688.94
+  },
+  {
+    "phrase": "call",
+    "start": 1790.21,
+    "end": 1790.47
+  },
+  {
+    "phrase": "visit",
+    "start": 1804.89,
+    "end": 1805.13
+  },
+  {
+    "phrase": "call",
+    "start": 1806.41,
+    "end": 1806.71
+  },
+  {
+    "phrase": "offer",
+    "start": 1810.69,
+    "end": 1810.87
+  },
+  {
+    "phrase": "offer",
+    "start": 1813.61,
+    "end": 1813.91
+  },
+  {
+    "phrase": "call",
+    "start": 1894.53,
+    "end": 1894.75
+  },
+  {
+    "phrase": "free",
+    "start": 2080.53,
+    "end": 2080.87
+  },
+  {
+    "phrase": "save",
+    "start": 2197.57,
+    "end": 2197.65
+  },
+  {
+    "phrase": "call",
+    "start": 2722.07,
+    "end": 2722.25
+  },
+  {
+    "phrase": "call",
+    "start": 2724.33,
+    "end": 2724.59
+  },
+  {
+    "phrase": "free",
+    "start": 2824.83,
+    "end": 2825.07
+  },
+  {
+    "phrase": "free",
+    "start": 2834.55,
+    "end": 2834.75
+  },
+  {
+    "phrase": "call",
+    "start": 2935.45,
+    "end": 2935.67
+  },
+  {
+    "phrase": "free",
+    "start": 2950.33,
+    "end": 2950.67
+  },
+  {
+    "phrase": "save",
+    "start": 2964.87,
+    "end": 2965.23
+  },
+  {
+    "phrase": "call",
+    "start": 3016.97,
+    "end": 3017.23
+  },
+  {
+    "phrase": "order",
+    "start": 3267.41,
+    "end": 3267.61
+  },
+  {
+    "phrase": "free",
+    "start": 3339.99,
+    "end": 3340.13
+  },
+  {
+    "phrase": "buy",
+    "start": 3980.49,
+    "end": 3980.65
+  },
+  {
+    "phrase": "free",
+    "start": 4789.29,
+    "end": 4789.61
+  },
+  {
+    "phrase": "buy",
+    "start": 5012.41,
+    "end": 5012.69
+  },
+  {
+    "phrase": "free",
+    "start": 5174.05,
+    "end": 5174.29
+  },
+  {
+    "phrase": "buy",
+    "start": 5388.43,
+    "end": 5388.57
+  },
+  {
+    "phrase": "call",
+    "start": 5848.01,
+    "end": 5848.23
+  },
+  {
+    "phrase": "side effects",
+    "start": 6326.07,
+    "end": 6326.61
+  },
+  {
+    "phrase": "limited time",
+    "start": 6919.97,
+    "end": 6920.61
+  },
+  {
+    "phrase": "save",
+    "start": 6932.97,
+    "end": 6933.33
+  },
+  {
+    "phrase": "call",
+    "start": 7254.92,
+    "end": 7255.66
+  },
+  {
+    "phrase": "save",
+    "start": 7368.6,
+    "end": 7368.76
+  },
+  {
+    "phrase": "buy",
+    "start": 7462.66,
+    "end": 7462.88
+  },
+  {
+    "phrase": "call",
+    "start": 7609.76,
+    "end": 7609.92
+  },
+  {
+    "phrase": "call",
+    "start": 7827.64,
+    "end": 7827.96
+  },
+  {
+    "phrase": "limited time",
+    "start": 8073.66,
+    "end": 8074.38
+  },
+  {
+    "phrase": "visit",
+    "start": 8110.6,
+    "end": 8110.9
+  },
+  {
+    "phrase": "call",
+    "start": 8308.34,
+    "end": 8308.5
+  },
+  {
+    "phrase": "offer",
+    "start": 8493.88,
+    "end": 8494.2
+  },
+  {
+    "phrase": "call",
+    "start": 8650.84,
+    "end": 8650.98
+  },
+  {
+    "phrase": "side effects",
+    "start": 8741.26,
+    "end": 8741.72
+  },
+  {
+    "phrase": "call",
+    "start": 9203.68,
+    "end": 9203.84
+  },
+  {
+    "phrase": "side effects",
+    "start": 9320.94,
+    "end": 9321.4
+  },
+  {
+    "phrase": "offer",
+    "start": 9475.28,
+    "end": 9475.5
+  },
+  {
+    "phrase": "offer",
+    "start": 9476.88,
+    "end": 9477.16
+  },
+  {
+    "phrase": "offer",
+    "start": 9477.58,
+    "end": 9477.86
+  },
+  {
+    "phrase": "call",
+    "start": 9512.64,
+    "end": 9512.94
+  },
+  {
+    "phrase": "call",
+    "start": 9731.86,
+    "end": 9732.18
+  },
+  {
+    "phrase": "call",
+    "start": 9756.82,
+    "end": 9756.94
+  },
+  {
+    "phrase": "call",
+    "start": 9788.16,
+    "end": 9788.32
+  },
+  {
+    "phrase": "call",
+    "start": 9790.76,
+    "end": 9790.96
+  },
+  {
+    "phrase": "call",
+    "start": 9801.56,
+    "end": 9801.9
+  },
+  {
+    "phrase": "offer",
+    "start": 9993.7,
+    "end": 9993.94
+  },
+  {
+    "phrase": "offer",
+    "start": 9995.32,
+    "end": 9995.6
+  },
+  {
+    "phrase": "offer",
+    "start": 9996.02,
+    "end": 9996.28
+  },
+  {
+    "phrase": "call",
+    "start": 10008.44,
+    "end": 10008.58
+  },
+  {
+    "phrase": "call",
+    "start": 10022.1,
+    "end": 10022.44
+  },
+  {
+    "phrase": "free",
+    "start": 10033.72,
+    "end": 10033.84
+  },
+  {
+    "phrase": "free",
+    "start": 10038.52,
+    "end": 10038.74
+  },
+  {
+    "phrase": "free",
+    "start": 10083.18,
+    "end": 10083.32
+  },
+  {
+    "phrase": "call",
+    "start": 10095.4,
+    "end": 10096.14
+  },
+  {
+    "phrase": "order",
+    "start": 10225.14,
+    "end": 10225.62
+  },
+  {
+    "phrase": "order",
+    "start": 10250.6,
+    "end": 10250.86
+  },
+  {
+    "phrase": "call",
+    "start": 10253.52,
+    "end": 10253.78
+  },
+  {
+    "phrase": "free",
+    "start": 10257.44,
+    "end": 10257.66
+  },
+  {
+    "phrase": "call",
+    "start": 10263.4,
+    "end": 10263.6
+  },
+  {
+    "phrase": "call",
+    "start": 10644.08,
+    "end": 10644.24
+  },
+  {
+    "phrase": "call",
+    "start": 10795.76,
+    "end": 10795.88
+  },
+  {
+    "phrase": "save",
+    "start": 10909.64,
+    "end": 10909.92
+  },
+  {
+    "phrase": "buy",
+    "start": 10984.86,
+    "end": 10985.04
+  },
+  {
+    "phrase": "order",
+    "start": 11367.06,
+    "end": 11367.26
+  },
+  {
+    "phrase": "call",
+    "start": 11590.2,
+    "end": 11590.6
+  }
+]

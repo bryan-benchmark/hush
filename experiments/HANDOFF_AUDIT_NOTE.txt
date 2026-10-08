@@ -1,0 +1,64 @@
+Hush audit handoff. Unlabeled runs are finished and hashed. Nothing here is a labeled replication result. Do not design Exp006 from it.
+
+The commercial ledger was not opened. Every new summary has truth_ledger_read false. Freeze times, speaker drops, audio-distance peaks, and phrase hits are not commercial locations. Do not hunt breaks in the plots. Listing peaks in the Exp003 summaries are explicitly not a mute rule.
+
+## What finished
+
+Frozen Exp002, Exp003, Exp003b, and Exp005, no threshold changes. Output clocks are seconds since each span's t0. Hashes are in experiments/replication/freeze/. Spans and reasons are in experiments/replication/spans.json.
+
+| Role | Session | Span | Hours |
+|---|---|---|---|
+| Prime replication | hush_20260924_220624 | 0–7600 s | 2.11 |
+| Hulu replication, locked August span | hush_20260827_135935 | session 300–7200 s | 1.92 |
+| Hulu, new October capture | hush_20261007_220650 | 20–11751 s | 3.26 |
+| Football robustness | hush_20260909_213047 | 0–9373.184 s | 2.60 |
+| Football robustness | hush_20260913_150934 | 0–7200 s | 2.00 |
+| Football robustness | hush_20260913_210542 | 0–12480 s | 3.47 |
+
+ESPN hush_20260914_212529, 0–6899 s, stays development data. It is not a replication slot.
+
+The October file is a new recording, 7 Oct 2026, 10:06pm ET, identity written at capture: scripted, streaming, Hulu, Gilmore Girls. The span drops digital silence only: about 17 s at the start and the tail after 11751 s. Commercial locations were not used. It is longer than the 60–120 minute target. It does not replace the locked August span. No one has listened through it for a show change.
+
+Linear scripted is still missing. One cable or antenna program, 60–120 minutes, one show, ordinary commercials. Holdouts hush_20260917_205513 and hush_20260920_200635 stay sealed.
+
+## Unlabeled health
+
+Same machinery on every file. Exp003's first defined window ends at 80 s, and each file has 70 null windows. That is the frozen warmup (10 s window, 60 s of reference), not a dead recording. Speech stays mostly active. Recurring speaker clusters exist on every file, and most attributed speech lands on a voice already heard. Semantic scores exist across each span. No run failed.
+
+| Session | Speech active | Clusters / recurring | Causal speech on an already-recurring voice | Exp003 p50 | Freezes / hour | ASR words | Semantic scores | Semantic p50 |
+|---|---|---|---|---|---|---|---|---|
+| ESPN dev | 0.76 | 122 / 48 | 0.72 | 0.120 | 5.2 | 16009 | 6519 | 0.58 |
+| Prime | 0.82 | 179 / 55 | 0.73 | 0.087 | 5.2 | 20068 | 7185 | 0.57 |
+| Hulu August | 0.75 | 143 / 56 | 0.77 | 0.122 | 6.8 | 19253 | 6451 | 0.67 |
+| Hulu October | 0.63 | 190 / 88 | 0.79 | 0.129 | 6.4 | 28321 | 10097 | 0.66 |
+| NBC opener | 0.71 | 190 / 74 | 0.72 | 0.114 | 4.2 | 20557 | 8692 | 0.61 |
+| FOX afternoon | 0.68 | 57 / 25 | 0.90 | 0.049 | 6.0 | 14423 | 6554 | 0.47 |
+| NBC Sunday | 0.71 | 204 / 100 | 0.76 | 0.128 | 4.9 | 26594 | 11059 | 0.61 |
+
+Phrase counts and vocabulary hits are in the Exp005 summaries. They are not pod-versus-program rates until labels exist. Generic "back to," "timeout," "coming up," and "after this" are still not standalone evidence.
+
+The October Hulu file is the quietest of the set (63% speech-active) and still has a recurring speaker cast. The FOX file has fewer clusters and a tighter audio-distance distribution. Neither is a failed run.
+
+## What the audit should do next
+
+Do not fill the replication matrix from this table. These runs are healthy and frozen. They are not replication results. An unlabeled rate, such as freezes per hour, is not a performance number. Nothing in the health table is a reason to change a threshold, drop a session, or start fusion. Do not wait for the linear recording before the two gold ledgers below.
+
+Gold for both primary cells is frozen before either overlay is opened:
+
+```text
+label Prime by ear → freeze that gold
+label August Hulu by ear → freeze that gold
+THEN inspect Prime overlays
+THEN inspect Hulu overlays
+THEN interpret the primary results
+```
+
+Listen under experiments/gold/LABEL_POLICY_V1.md. Do not use detector marks. Do not move a boundary onto 15/30/60. Prime asks whether the ESPN structure appears on another game and another delivery path. The August Hulu overlay is the higher-information result: whether program identity disappears during ads outside sports.
+
+The October Hulu file stays secondary. It is extra evidence because identity was written at capture, and it is already hashed. It does not replace hush_20260827_135935. If a later listen finds Gilmore Girls throughout, it is a within-domain check of the scripted-streaming result, after the primary Hulu overlay. Do not let its freeze times choose the August boundaries.
+
+After the two primary overlays: October Hulu, then the three football files, then one new linear scripted capture through this same pipeline. The final matrix, and any Exp006 decision, wait until Prime, the locked August Hulu span, and that linear show all have overlays.
+
+The decision is the qualitative structure, not ESPN's counts: the program establishes an identity, ads replace it, a frozen copy of that identity stays distinguishable during the pod, and that identity comes back afterward.
+
+The zip includes experiments/replication/freeze/*.json so an auditor can check that the post-run files match the hashes taken before any labels. Not in this zip: raw audio, derived wavs, weights, virtualenvs, embedding matrices, full ASR tables, and the time-series plots. Holdouts were not opened.

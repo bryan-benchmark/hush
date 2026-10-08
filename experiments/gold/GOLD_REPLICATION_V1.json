@@ -1,0 +1,27 @@
+{
+  "id": "GOLD_REPLICATION_V1",
+  "truth_ledger": "experiments/annotations/truth_events.jsonl",
+  "coverage": [
+    {
+      "session": "hush_20260924_220624",
+      "from_seconds": 0,
+      "to_seconds": 7600,
+      "from_sample": 0,
+      "to_sample": 364800000,
+      "fully_annotated": true,
+      "note": "Marked from timeline mode. No ad inside this range means no ad.",
+      "created_at": "2026-10-08T14:44:10.506Z"
+    },
+    {
+      "session": "hush_20260827_135935",
+      "from_seconds": 300,
+      "to_seconds": 7200,
+      "from_sample": 14400000,
+      "to_sample": 345600000,
+      "fully_annotated": true,
+      "note": "Marked from timeline mode. No ad inside this range means no ad.",
+      "created_at": "2026-10-08T15:50:21.284Z"
+    }
+  ],
+  "note": "Prime and August Hulu only. Times in truth_events.jsonl are seconds on the recording, not experiment time. August Hulu experiment time is session time minus 300 s. Marked by ear. Detector marks were not shown. A fully_annotated range means the span was listened through; no commercial inside it means no commercial."
+}

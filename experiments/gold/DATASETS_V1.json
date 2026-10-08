@@ -1,0 +1,21 @@
+{
+  "id": "DATASETS_V1",
+  "default_role": "dev",
+  "roles": ["dev", "holdout", "acquisition_fixture", "ignore"],
+  "seal": "HOLDOUT_V1",
+  "sessions": {
+    "hush_20260912_215850": {
+      "role": "dev",
+      "reason": "TV-off tail was deleted. Remaining audio is dev. Dead chunks are named in ACQUISITION_FIXTURES_V1, not as a session role."
+    },
+    "hush_20260917_205513": {
+      "role": "holdout",
+      "reason": "Second holdout. Detector output may exist. Do not listen while tuning."
+    },
+    "hush_20260920_200635": {
+      "role": "holdout",
+      "reason": "Pre-ship holdout. Audio is expected to be healthy. Do not listen while tuning."
+    }
+  },
+  "note": "Unlisted sessions are dev. A holdout may be scored by software. The labeler and review queue must not show it unless the request passes unseal=HOLDOUT_V1."
+}

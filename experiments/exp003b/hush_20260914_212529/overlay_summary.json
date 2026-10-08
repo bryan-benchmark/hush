@@ -1,0 +1,29 @@
+{
+  "experiment_spec_version": "exp003b-v1",
+  "session": "hush_20260914_212529",
+  "trigger_changed": false,
+  "embeddings_recomputed": false,
+  "cover_window_s": 60.0,
+  "cover_window_note": "A break counts as covered when a freeze falls in (start, start+60 s]. That window is for counting only.",
+  "n_breaks": 15,
+  "breaks_with_freeze": 6,
+  "n_freezes": 10,
+  "freezes_outside_pods_and_not_near_a_start": 2,
+  "false_freezes_per_program_hour": 1.4132,
+  "program_frozen_distribution": {
+    "n": 4722,
+    "p10": 0.0465,
+    "p50": 0.0913,
+    "p90": 0.2752,
+    "mean": 0.1293
+  },
+  "pod_frozen_distribution": {
+    "n": 1656,
+    "p10": 0.1494,
+    "p50": 0.2885,
+    "p90": 0.3813,
+    "mean": 0.2775
+  },
+  "returns_reaching_self_baseline_within_120s": 11,
+  "validation_note": "This ESPN session is development data. The trigger was not fit to these breaks."
+}

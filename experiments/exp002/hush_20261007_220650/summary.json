@@ -1,0 +1,433 @@
+{
+  "experiment_spec_version": "exp002-v1",
+  "truth_ledger_read": false,
+  "n_speech_regions": 1646,
+  "speech_region_seconds": 7108.8000000000175,
+  "speech_active_seconds": 7393,
+  "speech_active_fraction": 0.6302105532350183,
+  "n_embedding_windows": 6433,
+  "n_clusters": 190,
+  "n_recurring_clusters": 88,
+  "novel_window_fraction": 0.02953520907819058,
+  "causal_fraction_of_attributed_speech_on_already_recurring": 0.7917693912383837,
+  "end_state_fraction_of_speech_in_recurring_clusters": 0.9436516214678544,
+  "end_state_note": "end_state_fraction labels a cluster by whether it eventually recurred. It is descriptive. Causal scores never use that future status.",
+  "novel_window_duration_seconds": 316.3000000000049,
+  "attributed_speech_seconds": 8436.800000000017,
+  "top_recurring_clusters": [
+    {
+      "cluster_id": "c0012",
+      "cumulative_speech_seconds": 1578.5000000000011,
+      "occurrence_count": 117,
+      "first_seen": 107.4,
+      "last_seen": 11682.5,
+      "n_windows": 1238
+    },
+    {
+      "cluster_id": "c0024",
+      "cumulative_speech_seconds": 939.8999999999962,
+      "occurrence_count": 91,
+      "first_seen": 353.4,
+      "last_seen": 11430.7,
+      "n_windows": 715
+    },
+    {
+      "cluster_id": "c0047",
+      "cumulative_speech_seconds": 561.1000000000017,
+      "occurrence_count": 32,
+      "first_seen": 1617.9,
+      "last_seen": 11021.0,
+      "n_windows": 455
+    },
+    {
+      "cluster_id": "c0036",
+      "cumulative_speech_seconds": 433.70000000000084,
+      "occurrence_count": 63,
+      "first_seen": 754.4,
+      "last_seen": 11729.9,
+      "n_windows": 313
+    },
+    {
+      "cluster_id": "c0023",
+      "cumulative_speech_seconds": 311.7999999999982,
+      "occurrence_count": 38,
+      "first_seen": 318.8,
+      "last_seen": 11719.7,
+      "n_windows": 234
+    },
+    {
+      "cluster_id": "c0011",
+      "cumulative_speech_seconds": 227.59999999999968,
+      "occurrence_count": 14,
+      "first_seen": 100.3,
+      "last_seen": 8179.4,
+      "n_windows": 191
+    },
+    {
+      "cluster_id": "c0026",
+      "cumulative_speech_seconds": 218.19999999999726,
+      "occurrence_count": 26,
+      "first_seen": 449.2,
+      "last_seen": 11142.3,
+      "n_windows": 175
+    },
+    {
+      "cluster_id": "c0035",
+      "cumulative_speech_seconds": 217.89999999999907,
+      "occurrence_count": 32,
+      "first_seen": 744.4,
+      "last_seen": 11730.8,
+      "n_windows": 164
+    },
+    {
+      "cluster_id": "c0050",
+      "cumulative_speech_seconds": 173.59999999999945,
+      "occurrence_count": 29,
+      "first_seen": 1786.1,
+      "last_seen": 11376.4,
+      "n_windows": 131
+    },
+    {
+      "cluster_id": "c0057",
+      "cumulative_speech_seconds": 151.29999999999836,
+      "occurrence_count": 22,
+      "first_seen": 2000.5,
+      "last_seen": 11676.8,
+      "n_windows": 116
+    },
+    {
+      "cluster_id": "c0049",
+      "cumulative_speech_seconds": 125.19999999999891,
+      "occurrence_count": 15,
+      "first_seen": 1781.2,
+      "last_seen": 11103.8,
+      "n_windows": 98
+    },
+    {
+      "cluster_id": "c0120",
+      "cumulative_speech_seconds": 123.70000000000073,
+      "occurrence_count": 35,
+      "first_seen": 5705.6,
+      "last_seen": 11679.3,
+      "n_windows": 78
+    }
+  ],
+  "longest_speech_without_recurring": [
+    {
+      "start_seconds": 2.0,
+      "end_seconds": 58.0,
+      "span_seconds": 56.0,
+      "speech_without_recurring_seconds": 41
+    },
+    {
+      "start_seconds": 94.0,
+      "end_seconds": 145.0,
+      "span_seconds": 51.0,
+      "speech_without_recurring_seconds": 36
+    },
+    {
+      "start_seconds": 736.0,
+      "end_seconds": 782.0,
+      "span_seconds": 46.0,
+      "speech_without_recurring_seconds": 43
+    },
+    {
+      "start_seconds": 1779.0,
+      "end_seconds": 1824.0,
+      "span_seconds": 45.0,
+      "speech_without_recurring_seconds": 25
+    },
+    {
+      "start_seconds": 224.0,
+      "end_seconds": 268.0,
+      "span_seconds": 44.0,
+      "speech_without_recurring_seconds": 23
+    },
+    {
+      "start_seconds": 294.0,
+      "end_seconds": 333.0,
+      "span_seconds": 39.0,
+      "speech_without_recurring_seconds": 31
+    },
+    {
+      "start_seconds": 783.0,
+      "end_seconds": 819.0,
+      "span_seconds": 36.0,
+      "speech_without_recurring_seconds": 26
+    },
+    {
+      "start_seconds": 5412.0,
+      "end_seconds": 5443.0,
+      "span_seconds": 31.0,
+      "speech_without_recurring_seconds": 16
+    },
+    {
+      "start_seconds": 5450.0,
+      "end_seconds": 5477.0,
+      "span_seconds": 27.0,
+      "speech_without_recurring_seconds": 14
+    },
+    {
+      "start_seconds": 2446.0,
+      "end_seconds": 2472.0,
+      "span_seconds": 26.0,
+      "speech_without_recurring_seconds": 22
+    },
+    {
+      "start_seconds": 561.0,
+      "end_seconds": 583.0,
+      "span_seconds": 22.0,
+      "speech_without_recurring_seconds": 13
+    },
+    {
+      "start_seconds": 405.0,
+      "end_seconds": 426.0,
+      "span_seconds": 21.0,
+      "speech_without_recurring_seconds": 18
+    },
+    {
+      "start_seconds": 4729.0,
+      "end_seconds": 4750.0,
+      "span_seconds": 21.0,
+      "speech_without_recurring_seconds": 13
+    },
+    {
+      "start_seconds": 2388.0,
+      "end_seconds": 2408.0,
+      "span_seconds": 20.0,
+      "speech_without_recurring_seconds": 8
+    },
+    {
+      "start_seconds": 883.0,
+      "end_seconds": 900.0,
+      "span_seconds": 17.0,
+      "speech_without_recurring_seconds": 7
+    }
+  ],
+  "largest_continuity_drops": [
+    {
+      "timestamp_seconds": 415.0,
+      "continuity": 0.10596159703299032,
+      "drop": 0.5238109223578953
+    },
+    {
+      "timestamp_seconds": 738.0,
+      "continuity": 0.0,
+      "drop": 0.48674789655870354
+    },
+    {
+      "timestamp_seconds": 876.0,
+      "continuity": 0.0,
+      "drop": 0.5912893709384286
+    },
+    {
+      "timestamp_seconds": 1791.0,
+      "continuity": 0.0,
+      "drop": 0.4293359794814388
+    },
+    {
+      "timestamp_seconds": 1933.0,
+      "continuity": 0.0,
+      "drop": 0.48263056472878835
+    },
+    {
+      "timestamp_seconds": 2827.0,
+      "continuity": 0.036987523183807984,
+      "drop": 0.4313445443301603
+    },
+    {
+      "timestamp_seconds": 2952.0,
+      "continuity": 0.0,
+      "drop": 0.4731115336505673
+    },
+    {
+      "timestamp_seconds": 3082.0,
+      "continuity": 0.0,
+      "drop": 0.5342553108188615
+    },
+    {
+      "timestamp_seconds": 3278.0,
+      "continuity": 0.10756726703854017,
+      "drop": 0.42828302672005425
+    },
+    {
+      "timestamp_seconds": 3821.0,
+      "continuity": 0.0,
+      "drop": 0.5762896081355817
+    },
+    {
+      "timestamp_seconds": 4340.0,
+      "continuity": 0.089363974014644,
+      "drop": 0.3968006671256795
+    },
+    {
+      "timestamp_seconds": 4556.0,
+      "continuity": 0.0,
+      "drop": 0.5609257469102993
+    },
+    {
+      "timestamp_seconds": 4698.0,
+      "continuity": 0.0,
+      "drop": 0.47333473637175677
+    },
+    {
+      "timestamp_seconds": 5286.0,
+      "continuity": 0.0,
+      "drop": 0.5539797891554689
+    },
+    {
+      "timestamp_seconds": 7769.0,
+      "continuity": 0.050260009353994266,
+      "drop": 0.40060484404557467
+    },
+    {
+      "timestamp_seconds": 8088.0,
+      "continuity": 0.057789061854999255,
+      "drop": 0.5012021239511182
+    },
+    {
+      "timestamp_seconds": 9834.0,
+      "continuity": 0.0,
+      "drop": 0.40929542837150923
+    },
+    {
+      "timestamp_seconds": 10230.0,
+      "continuity": 0.15196866144056578,
+      "drop": 0.4317139125783698
+    },
+    {
+      "timestamp_seconds": 10508.0,
+      "continuity": 0.1090059191958842,
+      "drop": 0.4412816320563838
+    },
+    {
+      "timestamp_seconds": 11699.0,
+      "continuity": 0.0,
+      "drop": 0.4886468916356211
+    }
+  ],
+  "strongest_return_events": [
+    {
+      "timestamp_seconds": 2849.0,
+      "return_score": 0.6282463850771687,
+      "cluster_id": "c0024"
+    },
+    {
+      "timestamp_seconds": 3762.0,
+      "return_score": 0.5962216524641597,
+      "cluster_id": "c0024"
+    },
+    {
+      "timestamp_seconds": 3993.0,
+      "return_score": 0.5974747190404681,
+      "cluster_id": "c0012"
+    },
+    {
+      "timestamp_seconds": 4212.0,
+      "return_score": 0.6438464017307509,
+      "cluster_id": "c0024"
+    },
+    {
+      "timestamp_seconds": 4804.0,
+      "return_score": 0.6040461692866288,
+      "cluster_id": "c0012"
+    },
+    {
+      "timestamp_seconds": 4937.0,
+      "return_score": 0.677502887557196,
+      "cluster_id": "c0024"
+    },
+    {
+      "timestamp_seconds": 5798.0,
+      "return_score": 0.621495278681345,
+      "cluster_id": "c0026"
+    },
+    {
+      "timestamp_seconds": 5918.0,
+      "return_score": 0.6065897518132869,
+      "cluster_id": "c0012"
+    },
+    {
+      "timestamp_seconds": 6956.0,
+      "return_score": 0.5967719073803155,
+      "cluster_id": "c0012"
+    },
+    {
+      "timestamp_seconds": 7914.0,
+      "return_score": 0.5974334495669027,
+      "cluster_id": "c0055"
+    },
+    {
+      "timestamp_seconds": 8182.0,
+      "return_score": 0.6572514315946456,
+      "cluster_id": "c0012"
+    },
+    {
+      "timestamp_seconds": 8243.0,
+      "return_score": 0.6311075175778538,
+      "cluster_id": "c0072"
+    },
+    {
+      "timestamp_seconds": 8390.0,
+      "return_score": 0.6321677194936131,
+      "cluster_id": "c0024"
+    },
+    {
+      "timestamp_seconds": 9108.0,
+      "return_score": 0.6630223379248885,
+      "cluster_id": "c0049"
+    },
+    {
+      "timestamp_seconds": 9411.0,
+      "return_score": 0.6071676674481928,
+      "cluster_id": "c0012"
+    },
+    {
+      "timestamp_seconds": 9987.0,
+      "return_score": 0.659473516560132,
+      "cluster_id": "c0132"
+    },
+    {
+      "timestamp_seconds": 10523.0,
+      "return_score": 0.6137141905582112,
+      "cluster_id": "c0024"
+    },
+    {
+      "timestamp_seconds": 10781.0,
+      "return_score": 0.6139480208862456,
+      "cluster_id": "c0026"
+    },
+    {
+      "timestamp_seconds": 11037.0,
+      "return_score": 0.7131363868511678,
+      "cluster_id": "c0049"
+    },
+    {
+      "timestamp_seconds": 11575.0,
+      "return_score": 0.6267120575418389,
+      "cluster_id": "c0057"
+    }
+  ],
+  "similarity_when_matched": {
+    "p10": 0.33040492219020046,
+    "p50": 0.5037908405679009,
+    "p90": 0.659555791841662
+  },
+  "similarity_when_novel": {
+    "p50": 0.2254543468131851,
+    "p90": 0.24652315728131813,
+    "max": 0.2496349265729243
+  },
+  "continuity_when_defined": {
+    "n": 10135,
+    "p50": 0.4387444014096637,
+    "p90": 0.5612861633754718
+  },
+  "first_recurring_window_end": 269.0,
+  "embedding_l2_norm": {
+    "min": 0.9999998807907104,
+    "max": 1.0000001192092896,
+    "mean": 1.0
+  },
+  "embedding_dim": 192
+}

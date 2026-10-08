@@ -1,0 +1,47 @@
+[
+  {
+    "phrase": "call",
+    "start": 3246.35,
+    "end": 3246.75
+  },
+  {
+    "phrase": "free",
+    "start": 3609.59,
+    "end": 3609.75
+  },
+  {
+    "phrase": "free",
+    "start": 3990.11,
+    "end": 3990.33
+  },
+  {
+    "phrase": "call",
+    "start": 4359.81,
+    "end": 4359.95
+  },
+  {
+    "phrase": "call",
+    "start": 4730.31,
+    "end": 4730.49
+  },
+  {
+    "phrase": "call",
+    "start": 4790.29,
+    "end": 4790.49
+  },
+  {
+    "phrase": "call",
+    "start": 5680.75,
+    "end": 5680.99
+  },
+  {
+    "phrase": "call",
+    "start": 5711.07,
+    "end": 5711.25
+  },
+  {
+    "phrase": "free",
+    "start": 6677.27,
+    "end": 6677.57
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "run_id": "20260921T152114Z_discontinuity_legacy_v0_d95f6f31",
+  "gold": "GOLD_DEV_V1",
+  "coverage_ranges": 0,
+  "unsure_reviews_excluded_from_primary": 0,
+  "holdout_warning": [],
+  "recall": null,
+  "reason": "no fully_annotated coverage; refusing precision and recall",
+  "run_keep_count": 90
+}

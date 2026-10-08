@@ -1,0 +1,18 @@
+{
+  "id": "GOLD_DEV_V1",
+  "truth_ledger": "experiments/annotations/truth_events.jsonl",
+  "reviews_ledger": "experiments/annotations/candidate_reviews.jsonl",
+  "coverage": [
+    {
+      "session": "hush_20260914_212529",
+      "from_seconds": 0,
+      "to_seconds": 6899,
+      "from_sample": 0,
+      "to_sample": 331152000,
+      "fully_annotated": true,
+      "note": "Continuous live TV through last labeled break. Dead TV after this is out of coverage.",
+      "created_at": "2026-09-21T17:04:51.616Z"
+    }
+  ],
+  "note": "Precision and recall are valid only inside fully_annotated ranges. Target is 2-4 continuous hours marked from the timeline, not from the debug queue. Candidate reviews are not exhaustive negatives."
+}

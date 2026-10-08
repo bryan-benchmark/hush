@@ -1,0 +1,38 @@
+{
+  "experiment_spec_version": "exp003b-v1",
+  "feature_schema_version": "exp003b-frozen-program-v1",
+  "reads_exp003_spec": "exp003-v1",
+  "session_id": "hush_20260827_135935",
+  "embeddings_recomputed": false,
+  "exp003_scores_recomputed": false,
+  "truth_ledger_read": false,
+  "n_freezes": 13,
+  "freeze_times_s": [
+    526.0,
+    613.0,
+    795.0,
+    1107.0,
+    1800.0,
+    2269.0,
+    3330.0,
+    3458.0,
+    4077.0,
+    5459.0,
+    5646.0,
+    5887.0,
+    6689.0
+  ],
+  "n_frozen_distance": 6375,
+  "frozen_distance_p50": 0.13132976390529438,
+  "params": {
+    "percentile": 99.0,
+    "history_s": 600.0,
+    "min_history_s": 300.0,
+    "hits_required": 3,
+    "hits_window": 5,
+    "refractory_s": 60.0,
+    "freeze_exclude_s": 30.0,
+    "freeze_span_s": 180.0
+  },
+  "validation_note": "Unlabeled. The commercial ledger was not read."
+}

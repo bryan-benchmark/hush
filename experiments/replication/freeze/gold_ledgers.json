@@ -1,0 +1,16 @@
+{
+  "id": "GOLD_REPLICATION_V1_HASH",
+  "frozen_at": "2026-10-08T16:13:00Z",
+  "overlays_opened": false,
+  "note": "SHA-256 of the replication gold, written before either primary overlay was opened. Ledger times are seconds on the recording. August Hulu experiment time is session time minus 300 s. The Prime pod that ends at 7600 s is the span cap and is right-censored for return analysis.",
+  "files": [
+    {
+      "path": "experiments/annotations/truth_events.jsonl",
+      "sha256": "6e489a863d765c1333d2759210acccc2d18d239494ce95a1107ab20ec5184249"
+    },
+    {
+      "path": "experiments/gold/GOLD_REPLICATION_V1.json",
+      "sha256": "b36b6c1b7550696c7ddf3c5308901f00f289c1659eed1f3d4554db6c131ed3f0"
+    }
+  ]
+}

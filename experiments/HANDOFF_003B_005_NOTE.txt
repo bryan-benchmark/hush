@@ -1,0 +1,14 @@
+Hush handoff after Exp003. One ESPN dev session, hush_20260914_212529, 0–6899 s. Not a holdout. Not independent confirmation.
+Prime football, linear scripted, and ad-supported streaming scripted have not been recorded. No fusion. No mute rule. Constants were not moved after labels were opened.
+
+Exp003 is closed. Strong for departure from the recent program sound-world. Negative for return with the adaptive reference. See experiments/exp003/EXP003_RESULT.md. The earlier overlay zip did not contain that result file. The 32 kHz wav, the CNN14 checkpoint, and program_cloud.parquet are not in this zip.
+
+Exp003b is measured, not closed. The 99th-percentile freeze found 6 of 14 eligible starts and will not be rescued. The useful part is the frozen pre-departure cloud: pod median distance 0.289 versus 0.091 outside pods, and several late pods where the adaptive score has fallen while the frozen score stays high. Return to that cloud is real on some breaks and late or absent on others. It is not an unmute event.
+
+Exp004 is measured, not closed. Negative for a precise 15/30/60 commercial clock. Weak support only for a broad duration prior: 11 of 14 complete pods last 110–140 s, and only 3 of 14 fall within 3 s of 60/90/120/150/180. The apparent ~15 s gap is the 12 s refractory.
+
+Exp005 is measured, not closed. The transcript is faster-whisper medium.en ASR, not closed captions. Departure phrases hit 0 of 15 starts. Exact "welcome back" / "welcome back to" is a rare return corroborator. Generic "back to," "timeout," "coming up," and "after this" are not standalone evidence. Commercial vocabulary is about six times denser in pods (1.06 versus 0.18 hits per minute) and too sparse to mark a pod. Semantic distance rises at 14 of 15 starts. The frozen semantic cloud is an audit that uses the known start. It is not a blind detector. It keeps pods near 0.78–1.00 while the program's own level is about 0.31–0.42. Return toward that cloud is partial and often takes tens of seconds.
+
+Feature discovery on this game stops. The replication rules are frozen in experiments/REPLICATION_PROTOCOL.md. Exp002, Exp003, and Exp003b run blind. Exp005 ASR, cues, vocabulary, and adaptive semantic distance run blind. The known-start semantic snapshot is an overlay audit only, after labels. No per-genre threshold changes. Success is the same qualitative structure, not ESPN's counts. Exp006 waits until Prime sports, linear scripted, and streaming scripted have all been through that protocol.
+
+Not in this zip: raw audio, derived wavs, model weights, virtualenvs, the 2048-d and 384-d embedding matrices, and the full ASR word and segment tables. Cue lists and vocabulary hits are included. Holdouts were not opened.

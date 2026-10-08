@@ -1,0 +1,442 @@
+[
+  {
+    "file": "audio_0001.wav",
+    "peaks": [
+      {
+        "chunk_second": 97,
+        "elapsed_seconds": 97.0,
+        "change_score": 0.7058
+      },
+      {
+        "chunk_second": 45,
+        "elapsed_seconds": 45.0,
+        "change_score": 0.6416
+      },
+      {
+        "chunk_second": 44,
+        "elapsed_seconds": 44.0,
+        "change_score": 0.528
+      },
+      {
+        "chunk_second": 98,
+        "elapsed_seconds": 98.0,
+        "change_score": 0.5253
+      },
+      {
+        "chunk_second": 96,
+        "elapsed_seconds": 96.0,
+        "change_score": 0.5223
+      },
+      {
+        "chunk_second": 46,
+        "elapsed_seconds": 46.0,
+        "change_score": 0.4042
+      },
+      {
+        "chunk_second": 11,
+        "elapsed_seconds": 11.0,
+        "change_score": 0.4008
+      },
+      {
+        "chunk_second": 12,
+        "elapsed_seconds": 12.0,
+        "change_score": 0.3431
+      },
+      {
+        "chunk_second": 10,
+        "elapsed_seconds": 10.0,
+        "change_score": 0.3307
+      },
+      {
+        "chunk_second": 43,
+        "elapsed_seconds": 43.0,
+        "change_score": 0.3106
+      }
+    ]
+  },
+  {
+    "file": "audio_0002.wav",
+    "peaks": [
+      {
+        "chunk_second": 211,
+        "elapsed_seconds": 1111.0,
+        "change_score": 0.4487
+      },
+      {
+        "chunk_second": 216,
+        "elapsed_seconds": 1116.0,
+        "change_score": 0.438
+      },
+      {
+        "chunk_second": 217,
+        "elapsed_seconds": 1117.0,
+        "change_score": 0.422
+      },
+      {
+        "chunk_second": 210,
+        "elapsed_seconds": 1110.0,
+        "change_score": 0.4196
+      },
+      {
+        "chunk_second": 215,
+        "elapsed_seconds": 1115.0,
+        "change_score": 0.3811
+      },
+      {
+        "chunk_second": 171,
+        "elapsed_seconds": 1071.0,
+        "change_score": 0.363
+      },
+      {
+        "chunk_second": 212,
+        "elapsed_seconds": 1112.0,
+        "change_score": 0.3562
+      },
+      {
+        "chunk_second": 643,
+        "elapsed_seconds": 1543.0,
+        "change_score": 0.3204
+      },
+      {
+        "chunk_second": 169,
+        "elapsed_seconds": 1069.0,
+        "change_score": 0.3146
+      },
+      {
+        "chunk_second": 271,
+        "elapsed_seconds": 1171.0,
+        "change_score": 0.3092
+      }
+    ]
+  },
+  {
+    "file": "audio_0003.wav",
+    "peaks": [
+      {
+        "chunk_second": 368,
+        "elapsed_seconds": 2168.0,
+        "change_score": 0.5378
+      },
+      {
+        "chunk_second": 774,
+        "elapsed_seconds": 2574.0,
+        "change_score": 0.3974
+      },
+      {
+        "chunk_second": 369,
+        "elapsed_seconds": 2169.0,
+        "change_score": 0.3927
+      },
+      {
+        "chunk_second": 599,
+        "elapsed_seconds": 2399.0,
+        "change_score": 0.3754
+      },
+      {
+        "chunk_second": 598,
+        "elapsed_seconds": 2398.0,
+        "change_score": 0.3709
+      },
+      {
+        "chunk_second": 304,
+        "elapsed_seconds": 2104.0,
+        "change_score": 0.3676
+      },
+      {
+        "chunk_second": 773,
+        "elapsed_seconds": 2573.0,
+        "change_score": 0.3652
+      },
+      {
+        "chunk_second": 367,
+        "elapsed_seconds": 2167.0,
+        "change_score": 0.3374
+      },
+      {
+        "chunk_second": 772,
+        "elapsed_seconds": 2572.0,
+        "change_score": 0.3029
+      },
+      {
+        "chunk_second": 363,
+        "elapsed_seconds": 2163.0,
+        "change_score": 0.2653
+      }
+    ]
+  },
+  {
+    "file": "audio_0004.wav",
+    "peaks": [
+      {
+        "chunk_second": 633,
+        "elapsed_seconds": 3333.0,
+        "change_score": 0.4048
+      },
+      {
+        "chunk_second": 645,
+        "elapsed_seconds": 3345.0,
+        "change_score": 0.3899
+      },
+      {
+        "chunk_second": 674,
+        "elapsed_seconds": 3374.0,
+        "change_score": 0.3844
+      },
+      {
+        "chunk_second": 646,
+        "elapsed_seconds": 3346.0,
+        "change_score": 0.3507
+      },
+      {
+        "chunk_second": 634,
+        "elapsed_seconds": 3334.0,
+        "change_score": 0.3356
+      },
+      {
+        "chunk_second": 639,
+        "elapsed_seconds": 3339.0,
+        "change_score": 0.2778
+      },
+      {
+        "chunk_second": 717,
+        "elapsed_seconds": 3417.0,
+        "change_score": 0.2707
+      },
+      {
+        "chunk_second": 638,
+        "elapsed_seconds": 3338.0,
+        "change_score": 0.2656
+      },
+      {
+        "chunk_second": 722,
+        "elapsed_seconds": 3422.0,
+        "change_score": 0.258
+      },
+      {
+        "chunk_second": 644,
+        "elapsed_seconds": 3344.0,
+        "change_score": 0.2575
+      }
+    ]
+  },
+  {
+    "file": "audio_0005.wav",
+    "peaks": [
+      {
+        "chunk_second": 515,
+        "elapsed_seconds": 4115.0,
+        "change_score": 0.5746
+      },
+      {
+        "chunk_second": 628,
+        "elapsed_seconds": 4228.0,
+        "change_score": 0.5733
+      },
+      {
+        "chunk_second": 516,
+        "elapsed_seconds": 4116.0,
+        "change_score": 0.567
+      },
+      {
+        "chunk_second": 521,
+        "elapsed_seconds": 4121.0,
+        "change_score": 0.5131
+      },
+      {
+        "chunk_second": 520,
+        "elapsed_seconds": 4120.0,
+        "change_score": 0.4982
+      },
+      {
+        "chunk_second": 627,
+        "elapsed_seconds": 4227.0,
+        "change_score": 0.4905
+      },
+      {
+        "chunk_second": 629,
+        "elapsed_seconds": 4229.0,
+        "change_score": 0.4602
+      },
+      {
+        "chunk_second": 614,
+        "elapsed_seconds": 4214.0,
+        "change_score": 0.3691
+      },
+      {
+        "chunk_second": 514,
+        "elapsed_seconds": 4114.0,
+        "change_score": 0.3683
+      },
+      {
+        "chunk_second": 522,
+        "elapsed_seconds": 4122.0,
+        "change_score": 0.3378
+      }
+    ]
+  },
+  {
+    "file": "audio_0006.wav",
+    "peaks": [
+      {
+        "chunk_second": 721,
+        "elapsed_seconds": 5221.0,
+        "change_score": 0.5737
+      },
+      {
+        "chunk_second": 684,
+        "elapsed_seconds": 5184.0,
+        "change_score": 0.5088
+      },
+      {
+        "chunk_second": 499,
+        "elapsed_seconds": 4999.0,
+        "change_score": 0.5025
+      },
+      {
+        "chunk_second": 722,
+        "elapsed_seconds": 5222.0,
+        "change_score": 0.498
+      },
+      {
+        "chunk_second": 500,
+        "elapsed_seconds": 5000.0,
+        "change_score": 0.4517
+      },
+      {
+        "chunk_second": 683,
+        "elapsed_seconds": 5183.0,
+        "change_score": 0.4398
+      },
+      {
+        "chunk_second": 45,
+        "elapsed_seconds": 4545.0,
+        "change_score": 0.4343
+      },
+      {
+        "chunk_second": 720,
+        "elapsed_seconds": 5220.0,
+        "change_score": 0.4328
+      },
+      {
+        "chunk_second": 531,
+        "elapsed_seconds": 5031.0,
+        "change_score": 0.4211
+      },
+      {
+        "chunk_second": 501,
+        "elapsed_seconds": 5001.0,
+        "change_score": 0.3918
+      }
+    ]
+  },
+  {
+    "file": "audio_0007.wav",
+    "peaks": [
+      {
+        "chunk_second": 816,
+        "elapsed_seconds": 6216.0,
+        "change_score": 0.6189
+      },
+      {
+        "chunk_second": 815,
+        "elapsed_seconds": 6215.0,
+        "change_score": 0.5147
+      },
+      {
+        "chunk_second": 362,
+        "elapsed_seconds": 5762.0,
+        "change_score": 0.4871
+      },
+      {
+        "chunk_second": 868,
+        "elapsed_seconds": 6268.0,
+        "change_score": 0.4836
+      },
+      {
+        "chunk_second": 533,
+        "elapsed_seconds": 5933.0,
+        "change_score": 0.4538
+      },
+      {
+        "chunk_second": 817,
+        "elapsed_seconds": 6217.0,
+        "change_score": 0.4198
+      },
+      {
+        "chunk_second": 356,
+        "elapsed_seconds": 5756.0,
+        "change_score": 0.4135
+      },
+      {
+        "chunk_second": 823,
+        "elapsed_seconds": 6223.0,
+        "change_score": 0.4104
+      },
+      {
+        "chunk_second": 361,
+        "elapsed_seconds": 5761.0,
+        "change_score": 0.4003
+      },
+      {
+        "chunk_second": 869,
+        "elapsed_seconds": 6269.0,
+        "change_score": 0.3917
+      }
+    ]
+  },
+  {
+    "file": "audio_0008.wav",
+    "peaks": [
+      {
+        "chunk_second": 99,
+        "elapsed_seconds": 6399.0,
+        "change_score": 0.6587
+      },
+      {
+        "chunk_second": 100,
+        "elapsed_seconds": 6400.0,
+        "change_score": 0.5764
+      },
+      {
+        "chunk_second": 729,
+        "elapsed_seconds": 7029.0,
+        "change_score": 0.5704
+      },
+      {
+        "chunk_second": 728,
+        "elapsed_seconds": 7028.0,
+        "change_score": 0.5666
+      },
+      {
+        "chunk_second": 734,
+        "elapsed_seconds": 7034.0,
+        "change_score": 0.566
+      },
+      {
+        "chunk_second": 733,
+        "elapsed_seconds": 7033.0,
+        "change_score": 0.5418
+      },
+      {
+        "chunk_second": 98,
+        "elapsed_seconds": 6398.0,
+        "change_score": 0.4839
+      },
+      {
+        "chunk_second": 281,
+        "elapsed_seconds": 6581.0,
+        "change_score": 0.4244
+      },
+      {
+        "chunk_second": 672,
+        "elapsed_seconds": 6972.0,
+        "change_score": 0.4072
+      },
+      {
+        "chunk_second": 727,
+        "elapsed_seconds": 7027.0,
+        "change_score": 0.3896
+      }
+    ]
+  }
+]

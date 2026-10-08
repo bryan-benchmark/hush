@@ -1,0 +1,72 @@
+{
+  "experiment_spec_version": "exp005-v1",
+  "feature_schema_version": "exp005-language-v1",
+  "session_id": "hush_20260827_135935",
+  "analysis_start_seconds": 300.0,
+  "analysis_end_seconds": 7200.0,
+  "timestamps": "seconds since analysis_start_seconds",
+  "truth_ledger_read": false,
+  "asr_is_closed_captions": false,
+  "n_departure_cues": 4,
+  "n_return_cues": 10,
+  "n_vocabulary_hits": 67,
+  "n_semantic_scores": 6451,
+  "semantic_p50": 0.6662626646667973,
+  "language_params": {
+    "match_similarity": 0.85,
+    "max_span_s": 8.0,
+    "max_gap_s": 1.5,
+    "departure_phrases": [
+      "we'll be right back",
+      "we'll be back",
+      "stay with us",
+      "coming up",
+      "after the break",
+      "after this",
+      "timeout",
+      "commercial break"
+    ],
+    "return_phrases": [
+      "welcome back",
+      "we're back",
+      "back here",
+      "back to",
+      "welcome back to",
+      "let's get back to"
+    ],
+    "commercial_vocabulary": [
+      "visit",
+      "call",
+      "order",
+      "shop",
+      "buy",
+      "save",
+      "free",
+      "offer",
+      "limited time",
+      "available now",
+      "learn more",
+      "sign up",
+      "download",
+      "ask your doctor",
+      "talk to your doctor",
+      "side effects",
+      "terms apply",
+      "restrictions apply",
+      "participating locations"
+    ],
+    "fuzzy_applies_to": "transition phrases only",
+    "vocabulary_match": "exact contiguous tokens after the same normalization"
+  },
+  "semantic_params": {
+    "embedding_model_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "window_s": 15.0,
+    "hop_s": 1.0,
+    "memory_s": 180.0,
+    "min_reference_s": 60.0,
+    "min_words": 8,
+    "text": "ASR word texts joined by spaces. Phrase normalization is not applied.",
+    "empty_windows": "fewer than 8 words are null and stay out of the reference"
+  },
+  "validation_note": "Unlabeled. The commercial ledger was not read."
+}

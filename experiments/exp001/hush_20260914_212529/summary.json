@@ -1,0 +1,201 @@
+{
+  "experiment_spec_version": "exp001-v1",
+  "audio_duration_seconds": 6899.0,
+  "n_windows": 13797,
+  "timestamp_min": 1.0,
+  "timestamp_max": 6899.0,
+  "largest_sustained_change_points": [
+    {
+      "timestamp_seconds": 2336.0,
+      "score": 9.695113940012824
+    },
+    {
+      "timestamp_seconds": 946.0,
+      "score": 9.426877550720292
+    },
+    {
+      "timestamp_seconds": 1820.5,
+      "score": 9.325831331878831
+    },
+    {
+      "timestamp_seconds": 5037.5,
+      "score": 9.147722667536923
+    },
+    {
+      "timestamp_seconds": 2918.0,
+      "score": 8.740314291085735
+    },
+    {
+      "timestamp_seconds": 3887.0,
+      "score": 8.404944626949748
+    },
+    {
+      "timestamp_seconds": 6358.5,
+      "score": 8.376475809019198
+    },
+    {
+      "timestamp_seconds": 713.0,
+      "score": 8.26092408163311
+    },
+    {
+      "timestamp_seconds": 5412.0,
+      "score": 8.231395678847836
+    },
+    {
+      "timestamp_seconds": 6073.5,
+      "score": 7.875194905140909
+    },
+    {
+      "timestamp_seconds": 4710.0,
+      "score": 7.667239416824652
+    },
+    {
+      "timestamp_seconds": 3641.5,
+      "score": 7.624030247578519
+    },
+    {
+      "timestamp_seconds": 2084.5,
+      "score": 7.615445000219088
+    },
+    {
+      "timestamp_seconds": 3459.0,
+      "score": 7.241427546274035
+    },
+    {
+      "timestamp_seconds": 4679.0,
+      "score": 7.18696108194681
+    },
+    {
+      "timestamp_seconds": 3661.5,
+      "score": 7.050564463064683
+    },
+    {
+      "timestamp_seconds": 3572.0,
+      "score": 6.939932214944892
+    },
+    {
+      "timestamp_seconds": 4906.0,
+      "score": 6.9396141985371225
+    },
+    {
+      "timestamp_seconds": 4535.5,
+      "score": 6.872413700613643
+    },
+    {
+      "timestamp_seconds": 4415.5,
+      "score": 6.754287474661849
+    }
+  ],
+  "top_20_foote_novelty": [
+    {
+      "timestamp_seconds": 15.0,
+      "score": 1.9999999999997415
+    },
+    {
+      "timestamp_seconds": 3224.5,
+      "score": 0.9988033086268707
+    },
+    {
+      "timestamp_seconds": 4120.0,
+      "score": 0.9986966803602723
+    },
+    {
+      "timestamp_seconds": 37.0,
+      "score": 0.9982266067996587
+    },
+    {
+      "timestamp_seconds": 4258.5,
+      "score": 0.9967066374647872
+    },
+    {
+      "timestamp_seconds": 3081.5,
+      "score": 0.9966147804439908
+    },
+    {
+      "timestamp_seconds": 2775.0,
+      "score": 0.9960219811348774
+    },
+    {
+      "timestamp_seconds": 5154.5,
+      "score": 0.9958953968471559
+    },
+    {
+      "timestamp_seconds": 2325.0,
+      "score": 0.9946269649979108
+    },
+    {
+      "timestamp_seconds": 3166.5,
+      "score": 0.9938884548967054
+    },
+    {
+      "timestamp_seconds": 941.0,
+      "score": 0.9465179488953095
+    },
+    {
+      "timestamp_seconds": 1819.0,
+      "score": 0.848828970399933
+    },
+    {
+      "timestamp_seconds": 1439.5,
+      "score": 0.8398263356596539
+    },
+    {
+      "timestamp_seconds": 1541.0,
+      "score": 0.8144200022395557
+    },
+    {
+      "timestamp_seconds": 5399.5,
+      "score": 0.7928916694598508
+    },
+    {
+      "timestamp_seconds": 3496.5,
+      "score": 0.7805382193630934
+    },
+    {
+      "timestamp_seconds": 788.0,
+      "score": 0.7764599103878345
+    },
+    {
+      "timestamp_seconds": 1506.5,
+      "score": 0.7556320341867262
+    },
+    {
+      "timestamp_seconds": 1226.5,
+      "score": 0.7543944909577234
+    },
+    {
+      "timestamp_seconds": 745.0,
+      "score": 0.6869833104733328
+    }
+  ],
+  "frozen_intervals": [
+    {
+      "start_seconds": 2335.0,
+      "end_seconds": 2360.0
+    },
+    {
+      "start_seconds": 2917.5,
+      "end_seconds": 2960.0
+    }
+  ],
+  "seam_seconds": [
+    900.0,
+    1800.0,
+    2700.0,
+    3600.0,
+    4500.0,
+    5400.0,
+    6300.0
+  ],
+  "sustained_events_within_2s_of_a_seam": [],
+  "plot_paths": [
+    "experiments/exp001/hush_20260914_212529/plots/loudness_dynamics.png",
+    "experiments/exp001/hush_20260914_212529/plots/mfcc_change.png",
+    "experiments/exp001/hush_20260914_212529/plots/overall_change_scores.png",
+    "experiments/exp001/hush_20260914_212529/plots/rhythm_onset_change.png",
+    "experiments/exp001/hush_20260914_212529/plots/spectral_change.png",
+    "experiments/exp001/hush_20260914_212529/plots/stereo_production.png"
+  ],
+  "parquet": "experiments/exp001/hush_20260914_212529/features.parquet",
+  "derived_wav": "experiments/exp001/derived/hush_20260914_212529_0_6899_16k_mono.wav"
+}

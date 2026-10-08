@@ -1,0 +1,337 @@
+[
+  {
+    "phrase": "call",
+    "start": 495.14,
+    "end": 495.3
+  },
+  {
+    "phrase": "call",
+    "start": 1106.56,
+    "end": 1107.32
+  },
+  {
+    "phrase": "download",
+    "start": 1175.68,
+    "end": 1176.1
+  },
+  {
+    "phrase": "order",
+    "start": 1231.35,
+    "end": 1231.63
+  },
+  {
+    "phrase": "order",
+    "start": 1375.11,
+    "end": 1375.35
+  },
+  {
+    "phrase": "buy",
+    "start": 1436.89,
+    "end": 1436.99
+  },
+  {
+    "phrase": "shop",
+    "start": 1446.27,
+    "end": 1446.59
+  },
+  {
+    "phrase": "buy",
+    "start": 1542.09,
+    "end": 1542.25
+  },
+  {
+    "phrase": "buy",
+    "start": 1623.79,
+    "end": 1623.79
+  },
+  {
+    "phrase": "download",
+    "start": 1804.65,
+    "end": 1804.83
+  },
+  {
+    "phrase": "order",
+    "start": 2084.13,
+    "end": 2084.35
+  },
+  {
+    "phrase": "free",
+    "start": 2187.71,
+    "end": 2187.91
+  },
+  {
+    "phrase": "free",
+    "start": 2188.95,
+    "end": 2189.17
+  },
+  {
+    "phrase": "free",
+    "start": 2190.63,
+    "end": 2190.87
+  },
+  {
+    "phrase": "buy",
+    "start": 2281.09,
+    "end": 2281.29
+  },
+  {
+    "phrase": "call",
+    "start": 2297.25,
+    "end": 2297.39
+  },
+  {
+    "phrase": "free",
+    "start": 2358.33,
+    "end": 2358.51
+  },
+  {
+    "phrase": "order",
+    "start": 2407.23,
+    "end": 2407.59
+  },
+  {
+    "phrase": "free",
+    "start": 2432.07,
+    "end": 2432.33
+  },
+  {
+    "phrase": "call",
+    "start": 2433.79,
+    "end": 2434.03
+  },
+  {
+    "phrase": "buy",
+    "start": 2476.43,
+    "end": 2476.61
+  },
+  {
+    "phrase": "offer",
+    "start": 2490.53,
+    "end": 2491.03
+  },
+  {
+    "phrase": "offer",
+    "start": 2494.55,
+    "end": 2494.97
+  },
+  {
+    "phrase": "shop",
+    "start": 2592.23,
+    "end": 2592.61
+  },
+  {
+    "phrase": "shop",
+    "start": 2634.13,
+    "end": 2634.55
+  },
+  {
+    "phrase": "call",
+    "start": 2952.27,
+    "end": 2952.49
+  },
+  {
+    "phrase": "call",
+    "start": 3013.85,
+    "end": 3014.03
+  },
+  {
+    "phrase": "call",
+    "start": 3014.61,
+    "end": 3014.75
+  },
+  {
+    "phrase": "save",
+    "start": 3031.15,
+    "end": 3031.31
+  },
+  {
+    "phrase": "order",
+    "start": 3065.73,
+    "end": 3065.99
+  },
+  {
+    "phrase": "free",
+    "start": 3111.25,
+    "end": 3111.47
+  },
+  {
+    "phrase": "call",
+    "start": 3174.01,
+    "end": 3174.17
+  },
+  {
+    "phrase": "call",
+    "start": 3185.81,
+    "end": 3185.97
+  },
+  {
+    "phrase": "save",
+    "start": 3823.77,
+    "end": 3824.21
+  },
+  {
+    "phrase": "buy",
+    "start": 3828.31,
+    "end": 3828.65
+  },
+  {
+    "phrase": "free",
+    "start": 3830.61,
+    "end": 3830.89
+  },
+  {
+    "phrase": "limited time",
+    "start": 3832.53,
+    "end": 3833.03
+  },
+  {
+    "phrase": "free",
+    "start": 3844.55,
+    "end": 3844.81
+  },
+  {
+    "phrase": "save",
+    "start": 3846.85,
+    "end": 3847.15
+  },
+  {
+    "phrase": "free",
+    "start": 4124.09,
+    "end": 4124.33
+  },
+  {
+    "phrase": "free",
+    "start": 4133.87,
+    "end": 4134.21
+  },
+  {
+    "phrase": "shop",
+    "start": 4146.67,
+    "end": 4146.73
+  },
+  {
+    "phrase": "save",
+    "start": 4153.81,
+    "end": 4154.01
+  },
+  {
+    "phrase": "free",
+    "start": 4159.25,
+    "end": 4159.53
+  },
+  {
+    "phrase": "shop",
+    "start": 4182.51,
+    "end": 4182.59
+  },
+  {
+    "phrase": "shop",
+    "start": 4193.35,
+    "end": 4193.47
+  },
+  {
+    "phrase": "visit",
+    "start": 4194.09,
+    "end": 4194.31
+  },
+  {
+    "phrase": "visit",
+    "start": 4381.33,
+    "end": 4381.67
+  },
+  {
+    "phrase": "call",
+    "start": 4573.01,
+    "end": 4573.19
+  },
+  {
+    "phrase": "save",
+    "start": 4602.03,
+    "end": 4602.13
+  },
+  {
+    "phrase": "free",
+    "start": 4715.97,
+    "end": 4716.29
+  },
+  {
+    "phrase": "free",
+    "start": 4721.73,
+    "end": 4721.91
+  },
+  {
+    "phrase": "shop",
+    "start": 5126.669999999999,
+    "end": 5127.19
+  },
+  {
+    "phrase": "shop",
+    "start": 5138.25,
+    "end": 5138.35
+  },
+  {
+    "phrase": "visit",
+    "start": 5138.97,
+    "end": 5139.19
+  },
+  {
+    "phrase": "free",
+    "start": 5145.55,
+    "end": 5145.75
+  },
+  {
+    "phrase": "call",
+    "start": 5157.97,
+    "end": 5158.21
+  },
+  {
+    "phrase": "shop",
+    "start": 5435.61,
+    "end": 5435.91
+  },
+  {
+    "phrase": "call",
+    "start": 5539.67,
+    "end": 5539.95
+  },
+  {
+    "phrase": "call",
+    "start": 5632.89,
+    "end": 5633.07
+  },
+  {
+    "phrase": "call",
+    "start": 5648.55,
+    "end": 5648.75
+  },
+  {
+    "phrase": "download",
+    "start": 6140.11,
+    "end": 6140.39
+  },
+  {
+    "phrase": "download",
+    "start": 6160.95,
+    "end": 6161.15
+  },
+  {
+    "phrase": "order",
+    "start": 6201.99,
+    "end": 6202.49
+  },
+  {
+    "phrase": "offer",
+    "start": 6417.27,
+    "end": 6417.45
+  },
+  {
+    "phrase": "call",
+    "start": 6607.25,
+    "end": 6607.47
+  },
+  {
+    "phrase": "buy",
+    "start": 6621.65,
+    "end": 6621.73
+  }
+]

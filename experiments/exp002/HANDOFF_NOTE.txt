@@ -1,0 +1,63 @@
+Hush Experiment 002 handoff. Spec exp002-v1 is frozen and closed.
+Verdict, also in EXP002_RESULT.md: strong for detecting departure from the current program; negative for detecting return with the current rule.
+12 of 13 evaluable commercial starts have the frozen continuity collapse within 15 seconds. The break at 167 s is before any cluster qualifies, and the last break is still open at 6899 s. Collapses are about 28 per hour inside pods and 4.2 per hour during programming.
+Recurring speaker is not program speaker. c0001, c0049, and c0002 are almost entirely outside ads. Several other recurring clusters are almost entirely inside ads.
+No match threshold, recurrence rule, window, or return absence was changed after the labels were opened.
+Embeddings and cluster assignments were not recomputed. The overlay only reads them.
+
+Session: hush_20260914_212529 (dev, not a holdout)
+Coverage: 0–6899 s, the same range as Exp001.
+Input audio is the read-only 16 kHz mono wav Exp001 already derived.
+Exp001 scores were not read and are not in this zip.
+Holdouts were not opened. This folder is not a git repo, so metadata git_commit is null.
+
+Question: can a causal system learn recurring speakers from this broadcast, notice when they disappear, and recognize when they come back?
+
+Model: speechbrain/spkrec-ecapa-voxceleb
+Revision: 0f99f2d0ebe89ac095bcc5903c4dd8f72b367286
+Not fine-tuned. 192-d embeddings, L2-normalized. Device: CPU. NNPACK disabled (recorded in metadata).
+VAD: silero 6.2.3, published defaults.
+Match cosine 0.25 is the published SpeechBrain verification threshold. It was not moved.
+A cluster is RECURRING from history before the current window: at least 3 appearances separated by gaps over 10 s, span at least 60 s, and at least 6 s of attributed speech.
+Continuity uses embedding windows that ended in the trailing 15 s. Silence is not in the denominator.
+The return score needs an already-recurring cluster to match again after an absence of at least 30 s.
+
+Two stages are in this zip.
+
+1. Unlabeled run
+   Plots in the session folder root (no commercial shading).
+   summary.json, metadata.json, speaker_timeline.parquet, speaker_segments.parquet.
+   1,248 speech regions, 4,496 embedding windows, 122 clusters, 48 recurring.
+   First recurring decision at 483.8 s.
+   Novel windows 2.7%. Matched cosine median 0.59. Rejected cosines pile up just under 0.25.
+   Dominant cluster c0001: 2,161 s, present from the start through 6,803 s.
+   Next, c0049: 835 s, first seen at 2,068 s. Then c0002: 195 s.
+
+2. Truth overlay, after the unlabeled artifacts were frozen
+   plots_labeled/ shades commercial pods. Solid lines are break starts, dashed lines are returns.
+   Tables: overlay_breaks.csv, overlay_returns.csv, overlay_summary.json, cluster_pod_balance.csv, cluster_integrity.csv.
+   A continuity collapse is the frozen unlabeled listing rule: continuity at least 0.35 below the max of the previous 10 s. Not a mute threshold.
+   12 of 15 starts have such a collapse within 15 s. Median latency 9.6 s.
+   11 of 15 starts are within 15 s of a top-20 drop.
+   The break at 167 s is before any cluster qualifies, so continuity is already 0. The last break is still open at 6899 s. The break at 5020 s collapses only at 52 s.
+   Time-ordered collapses: 14 inside pods, 6 outside. About 28 per hour of pod time, 4 per hour of program. Two of the six outside drops sit about 22 s before a start.
+
+   RECURRING is not "program speaker." These shares of attributed speech fall inside commercial pods:
+   c0001 0.2% (4 s of 2,161). c0049 0%. c0002 0%.
+   c0012 and c0015 about 95%. c0009, c0011, and c0042 are 100% inside pods.
+   When c0001 is the voice in the 30 s before a break, its share during the pod falls to about zero. Other recurring clusters often remain inside the pod.
+
+   Generic return score: within 10 s of a true return on 5 of 15 breaks in the top-20 list, and 7 of 15 if every return event is counted. 48 of those events are during program.
+   c0001 is heard again within 10 s on 8 of 15 returns. A 30 s absence of c0001 also ends during play 16 times. That absence is the frozen return rule, applied descriptively to one cluster. It was not shortened.
+
+   Cluster geometry, membership not refit:
+   Replaying the frozen assignments reproduces stored similarities exactly.
+   c0001 causal prototype stays at cosine 0.99 to its early self. Early-versus-late centroid 0.86. Margin to the next cluster has p10 about 0.05. One window at 1900 s is cosine 0.21 to the centroid.
+   c0049 early-versus-late centroid 0.96. Margin p10 about 0.02.
+
+   excerpts/ has five clips from c0001 and five from c0049. They were spread across each cluster's own timeline. Commercial labels were not used to choose them. The first c0049 file is that cluster's opening second. window_similarity on an opening window is the cosine to some other cluster, because that window was NOVEL.
+
+No Exp002 number was retuned. No exp002b was started. No other broadcast was run.
+
+Not included: the 16 kHz analysis wav, model weights, the Exp002 virtualenv, Exp001 scores, and the raw truth ledger.
+Code: src/hush/speaker_memory.py, experiment002.py, overlay002.py, experiments/tests/test_exp002_causal.py, experiments/exp002/requirements.txt.

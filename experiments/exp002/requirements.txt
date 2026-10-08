@@ -1,0 +1,8 @@
+# Isolated from the Experiment 001 environment. Do not install these into .venv.
+speechbrain==1.1.0
+silero-vad>=5.1
+soundfile>=0.12
+numpy>=2.0
+pandas>=2.2
+pyarrow>=15
+matplotlib>=3.8

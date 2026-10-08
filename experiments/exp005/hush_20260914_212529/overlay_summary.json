@@ -1,0 +1,35 @@
+{
+  "experiment_spec_version": "exp005-v1",
+  "session": "hush_20260914_212529",
+  "phrases_changed": false,
+  "matcher_changed": false,
+  "semantic_window_changed": false,
+  "asr_rerun": false,
+  "asr_is_closed_captions": false,
+  "collar_note": "A departure cue counts for a start in (start-10 s, start+15 s]. A return cue counts for an end in (end-5 s, end+15 s]. Those collars are for counting only.",
+  "prebreak_note": "The pre-break cloud is the mean of semantic windows whose ends fall in (S-210 s, S-30 s]. It is built from the labeled start during this audit. It is not a detector and it does not read Exp003b.",
+  "n_breaks": 15,
+  "starts_with_departure_language": 0,
+  "ends_with_return_language": 4,
+  "cue_buckets": {
+    "departure": {
+      "program": 24
+    },
+    "return": {
+      "program": 21,
+      "near_end": 4
+    }
+  },
+  "false_departure_per_program_hour": 17.00787401574803,
+  "false_return_per_program_hour": 14.881889763779526,
+  "vocabulary_hits_in_pods": 32,
+  "vocabulary_hits_outside_pods": 15,
+  "vocabulary_per_pod_minute": 1.0555250137438152,
+  "vocabulary_per_program_minute": 0.17716535433070865,
+  "semantic_pod_median": 0.8513881782837501,
+  "semantic_program_median": 0.5219333981202199,
+  "returns_reaching_prebreak_level_within_120s": 10,
+  "semantic_memory_s": 180.0,
+  "semantic_min_reference_s": 60.0,
+  "validation_note": "This ESPN session is development data. The phrases and the matcher were not changed after these counts."
+}

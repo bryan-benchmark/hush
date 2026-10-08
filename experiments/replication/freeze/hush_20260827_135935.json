@@ -1,0 +1,144 @@
+{
+  "session_id": "hush_20260827_135935",
+  "frozen_at": "2026-10-07T23:46:03Z",
+  "truth_ledger_read": false,
+  "commercial_ledger_opened": false,
+  "n_files": 27,
+  "files": [
+    {
+      "path": "experiments/exp002/hush_20260827_135935/metadata.json",
+      "sha256": "e5beee92f2ccce9193557f815f3067071f9b20fc3a7d05abec4b20c601c526ec",
+      "bytes": 4614
+    },
+    {
+      "path": "experiments/exp002/hush_20260827_135935/speaker_clusters.png",
+      "sha256": "fa5c7cf0e6b98c1a6f9c0c33bc9abb3fa65d146ea5ae8f9860afed89916ed67e",
+      "bytes": 69224
+    },
+    {
+      "path": "experiments/exp002/hush_20260827_135935/speaker_continuity.png",
+      "sha256": "0a1a6781c7fa3e83f31d17620e08c86f6f04b0a3a4b0d0801706b9320705e5e9",
+      "bytes": 263114
+    },
+    {
+      "path": "experiments/exp002/hush_20260827_135935/speaker_returns.png",
+      "sha256": "956f16524b5425d8c82bb041eae046fd3c9eac5df87ef2f9420652473d7814c9",
+      "bytes": 57916
+    },
+    {
+      "path": "experiments/exp002/hush_20260827_135935/speaker_segments.parquet",
+      "sha256": "6cf7dbc0a922300d31db39f8226ca780093b49574782537190c2b40f908be539",
+      "bytes": 4473823
+    },
+    {
+      "path": "experiments/exp002/hush_20260827_135935/speaker_timeline.parquet",
+      "sha256": "f165828c03b393b7c9d5340ce6d92d730381af4b856fa1a9b5652d443636d77f",
+      "bytes": 356425
+    },
+    {
+      "path": "experiments/exp002/hush_20260827_135935/speaker_turnover.png",
+      "sha256": "bae5dca97b259eeb1cbfc3c1621d3437673a8925d5ff81376e37eddaa8d9346c",
+      "bytes": 296050
+    },
+    {
+      "path": "experiments/exp002/hush_20260827_135935/summary.json",
+      "sha256": "7936172e7d9a7f4dbe9670b9065d679b80cf9dbe96d0bface567b6ac0e12442a",
+      "bytes": 9778
+    },
+    {
+      "path": "experiments/exp003/hush_20260827_135935/metadata.json",
+      "sha256": "c82b7f50bc7a1d4374e7e16f69ce93a5cf89318ce67e2f0aece0e1f8bd50da51",
+      "bytes": 1468
+    },
+    {
+      "path": "experiments/exp003/hush_20260827_135935/program_cloud.parquet",
+      "sha256": "03abc0f8a71286ef783ade98d2af0ec3a0519be08ed9a10402e9fad38d2ce061",
+      "bytes": 15324399
+    },
+    {
+      "path": "experiments/exp003/hush_20260827_135935/program_distance.png",
+      "sha256": "2b9ab188ae93ddcdf5adc1119f0e8fed04c382c40f098f543aac0c984e765ca7",
+      "bytes": 129022
+    },
+    {
+      "path": "experiments/exp003/hush_20260827_135935/program_distance_hist.png",
+      "sha256": "33341aaf95c698b81b27f8ee539793503d6a64e6fe542bf4fc8050de9bf4fdc6",
+      "bytes": 19128
+    },
+    {
+      "path": "experiments/exp003/hush_20260827_135935/summary.json",
+      "sha256": "201ef504b299b34a983d8c01776b0c2e6b9fabe0b49948e079c1a992dcf031b5",
+      "bytes": 2405
+    },
+    {
+      "path": "experiments/exp003b/hush_20260827_135935/freezes.json",
+      "sha256": "f074054159351e7fe7220e68dbcb236e3d9b7cfc8f5f93a6f94a4f3bc15efad5",
+      "bytes": 2942
+    },
+    {
+      "path": "experiments/exp003b/hush_20260827_135935/frozen_program.png",
+      "sha256": "2c397898cec7d8462591741b37ddd55b1252a9a3b1f4120208b405afcbd89368",
+      "bytes": 276967
+    },
+    {
+      "path": "experiments/exp003b/hush_20260827_135935/frozen_timeline.parquet",
+      "sha256": "5164c623aca42e852f8e1284e1e869ee1a578d85bee77c53a24240f1913e0453",
+      "bytes": 168920
+    },
+    {
+      "path": "experiments/exp003b/hush_20260827_135935/summary.json",
+      "sha256": "b289958ab3841daf6e9f6e3b9c00bdcaa1e2b6eff0b2d8e51e968eb3ee41ae18",
+      "bytes": 848
+    },
+    {
+      "path": "experiments/exp005/hush_20260827_135935/asr_metadata.json",
+      "sha256": "99ea1c0a8480ba673437432d8428f04917929f0abe6ca073f3913a0d8ae3e4fc",
+      "bytes": 653
+    },
+    {
+      "path": "experiments/exp005/hush_20260827_135935/cues.json",
+      "sha256": "206d37b0eaef947817853f48bbc3640a95b1c9151b07e439f242cdef1c2a2f2b",
+      "bytes": 2207
+    },
+    {
+      "path": "experiments/exp005/hush_20260827_135935/language.png",
+      "sha256": "1ed176e9c362e9bfdb7e8d83c045035cdb5f60b5835d8f89f30db6226ac259f3",
+      "bytes": 170632
+    },
+    {
+      "path": "experiments/exp005/hush_20260827_135935/segments.parquet",
+      "sha256": "c845b527220faff2d0a04dce54db07fed7ac5a8d74acaefc317a7d4d09c5aabd",
+      "bytes": 110683
+    },
+    {
+      "path": "experiments/exp005/hush_20260827_135935/semantic.parquet",
+      "sha256": "5a68d4a6eb41049a7234dd621b2daf21ee2b057a03bff86a5447ed828b3e98d1",
+      "bytes": 153019
+    },
+    {
+      "path": "experiments/exp005/hush_20260827_135935/semantic_embeddings.npy",
+      "sha256": "4ab8a134f7ac5c7525aef309d563144badcd344d9fa398bfb786448972894c5b",
+      "bytes": 10577024
+    },
+    {
+      "path": "experiments/exp005/hush_20260827_135935/summary.json",
+      "sha256": "22a075eff59556c4db6f440d276e20736a0daa4fab288f884f5eef6fba11490e",
+      "bytes": 1928
+    },
+    {
+      "path": "experiments/exp005/hush_20260827_135935/vocabulary_density.parquet",
+      "sha256": "263d927f3ba3585e318f223aba63110876a4b7ab051f6e857df5e71951cbad8b",
+      "bytes": 40903
+    },
+    {
+      "path": "experiments/exp005/hush_20260827_135935/vocabulary_hits.json",
+      "sha256": "16a4d71afeeb5b6d770b1384bdcfdbf2d2cfa592c98f781cd025974b30aa67c9",
+      "bytes": 4862
+    },
+    {
+      "path": "experiments/exp005/hush_20260827_135935/words.parquet",
+      "sha256": "82f8cc87850281d41e947d431e3423f4fb14637dcd06a96941a2a0420576eefb",
+      "bytes": 437346
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "experiment_spec_version": "exp003-v1",
+  "feature_schema_version": "exp003-program-cloud-v1",
+  "session_id": "hush_20260913_210542",
+  "t0": 0.0,
+  "t1": 12480.0,
+  "timestamps": "seconds since t0",
+  "n_windows": 12471,
+  "n_defined": 12401,
+  "first_defined_window_end": 80.0,
+  "anomaly_p10": 0.0355906753688332,
+  "anomaly_p50": 0.12817330835481267,
+  "anomaly_p90": 0.2773907470364487,
+  "listing_peaks_not_a_mute_rule": [
+    {
+      "timestamp_seconds": 4489.0,
+      "anomaly": 0.48625167252815615
+    },
+    {
+      "timestamp_seconds": 8279.0,
+      "anomaly": 0.47748810613241277
+    },
+    {
+      "timestamp_seconds": 5313.0,
+      "anomaly": 0.4623075035068479
+    },
+    {
+      "timestamp_seconds": 9902.0,
+      "anomaly": 0.4600171408805809
+    },
+    {
+      "timestamp_seconds": 6330.0,
+      "anomaly": 0.4423306592171594
+    },
+    {
+      "timestamp_seconds": 804.0,
+      "anomaly": 0.4377149509175363
+    },
+    {
+      "timestamp_seconds": 2703.0,
+      "anomaly": 0.4248626562888761
+    },
+    {
+      "timestamp_seconds": 6844.0,
+      "anomaly": 0.4094825813317826
+    },
+    {
+      "timestamp_seconds": 11489.0,
+      "anomaly": 0.403446255878684
+    },
+    {
+      "timestamp_seconds": 7669.0,
+      "anomaly": 0.39675694903712433
+    },
+    {
+      "timestamp_seconds": 8704.0,
+      "anomaly": 0.39205845185000965
+    },
+    {
+      "timestamp_seconds": 7133.0,
+      "anomaly": 0.3910999141060516
+    },
+    {
+      "timestamp_seconds": 11314.0,
+      "anomaly": 0.38947536586260645
+    },
+    {
+      "timestamp_seconds": 11680.0,
+      "anomaly": 0.3880512630804105
+    },
+    {
+      "timestamp_seconds": 1556.0,
+      "anomaly": 0.3861752251007342
+    },
+    {
+      "timestamp_seconds": 8352.0,
+      "anomaly": 0.3839545362040574
+    },
+    {
+      "timestamp_seconds": 11917.0,
+      "anomaly": 0.3804940859021948
+    },
+    {
+      "timestamp_seconds": 10419.0,
+      "anomaly": 0.37382089324888534
+    },
+    {
+      "timestamp_seconds": 2217.0,
+      "anomaly": 0.36800777791990225
+    },
+    {
+      "timestamp_seconds": 7237.0,
+      "anomaly": 0.36303544897392404
+    }
+  ],
+  "truth_ledger_read": false,
+  "exp001_scores_read": false,
+  "exp002_scores_read": false,
+  "classifier_head_used": false,
+  "params": {
+    "window_s": 10.0,
+    "hop_s": 1.0,
+    "memory_s": 180.0,
+    "min_reference_s": 60.0,
+    "listing_gap_s": 45.0,
+    "listing_k": 20
+  }
+}
