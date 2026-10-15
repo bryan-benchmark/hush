@@ -1,0 +1,552 @@
+{
+  "system": "universal_v1",
+  "architecture": "optical audio only",
+  "champion_candidate": false,
+  "policy": {
+    "count": 200,
+    "query_s": 5.0,
+    "hop_s": 5.0,
+    "library": "gold commercials from earlier recordings; current recording excluded",
+    "enrollment": "label-informed",
+    "decision": "causal; action applies after the query ends",
+    "missing_evidence": "play",
+    "dsp": "receipt only",
+    "handoff": "not_on_clock",
+    "micro_dip": "not_admitted"
+  },
+  "pipeline_check": {
+    "program_at_count_10": 91,
+    "pod_at_count_10": 813,
+    "frozen_program": 91,
+    "frozen_pod": 813
+  },
+  "self_match_score": 634,
+  "football_ad_seconds": 17648.4,
+  "football_program_seconds_published": 67428.0,
+  "budget_99_99_seconds": 8.51,
+  "groups": {
+    "v1": {
+      "football": {
+        "population": "football",
+        "count": 200,
+        "commercial_seconds_heard": 17530.7,
+        "program_seconds_covered": 0.0,
+        "total_error_seconds": 17530.7,
+        "false_cover_incidents": 0,
+        "false_cover_incidents_per_program_hour": 0.0,
+        "premature_return_incidents": 2,
+        "ad_seconds_heard_after_a_cover_let_go": 328.5,
+        "pods_with_any_cover": 2,
+        "pods_already_covered_at_the_gold_start": 0,
+        "pods_missed": 134,
+        "missed_pod_seconds": 17222.1,
+        "start_delay_s": {
+          "n": 2,
+          "median": 9.937,
+          "p95": 10.126
+        },
+        "return_delay_s": {
+          "n": 0,
+          "median": null,
+          "p95": null,
+          "still_covering_at_annotation_end": 0
+        },
+        "worst_continuous_program_interruption_s": 0.0,
+        "unscorable_s": 275.0,
+        "worst_session": {
+          "session": "hush_20260913_210542",
+          "network": "NBC",
+          "ad_seconds_heard": 3052.5,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_program_interruption_s": 0.0,
+          "ad_seconds": 3052.5,
+          "program_seconds": 9547.5,
+          "unscorable_s": 0
+        },
+        "sessions": [
+          {
+            "session": "hush_20260909_213047",
+            "network": "NBC",
+            "ad_seconds_heard": 2849.9,
+            "program_seconds_covered": 0.0,
+            "false_cover_incidents": 0,
+            "worst_program_interruption_s": 0.0,
+            "ad_seconds": 2849.9,
+            "program_seconds": 6523.1,
+            "unscorable_s": 0
+          },
+          {
+            "session": "hush_20260913_210542",
+            "network": "NBC",
+            "ad_seconds_heard": 3052.5,
+            "program_seconds_covered": 0.0,
+            "false_cover_incidents": 0,
+            "worst_program_interruption_s": 0.0,
+            "ad_seconds": 3052.5,
+            "program_seconds": 9547.5,
+            "unscorable_s": 0
+          },
+          {
+            "session": "hush_20261008_205100",
+            "network": "Prime Video",
+            "ad_seconds_heard": 2563.4,
+            "program_seconds_covered": 0.0,
+            "false_cover_incidents": 0,
+            "worst_program_interruption_s": 0.0,
+            "ad_seconds": 2583.4,
+            "program_seconds": 7617.0,
+            "unscorable_s": 240.0
+          },
+          {
+            "session": "hush_20261011_204300",
+            "network": "Cable / antenna",
+            "ad_seconds_heard": 592.4,
+            "program_seconds_covered": 0.0,
+            "false_cover_incidents": 0,
+            "worst_program_interruption_s": 0.0,
+            "ad_seconds": 592.4,
+            "program_seconds": 13777.9,
+            "unscorable_s": 35.0
+          },
+          {
+            "session": "hush_20261012_204200",
+            "network": "Cable / antenna",
+            "ad_seconds_heard": 2939.3,
+            "program_seconds_covered": 0.0,
+            "false_cover_incidents": 0,
+            "worst_program_interruption_s": 0.0,
+            "ad_seconds": 2944.3,
+            "program_seconds": 10167.5,
+            "unscorable_s": 0
+          },
+          {
+            "session": "hush_20261010_222400",
+            "network": "Cable / antenna",
+            "ad_seconds_heard": 1081.8,
+            "program_seconds_covered": 0.0,
+            "false_cover_incidents": 0,
+            "worst_program_interruption_s": 0.0,
+            "ad_seconds": 1081.8,
+            "program_seconds": 4983.0,
+            "unscorable_s": 0
+          },
+          {
+            "session": "hush_20261011_135700",
+            "network": "Cable / antenna",
+            "ad_seconds_heard": 983.0,
+            "program_seconds_covered": 0.0,
+            "false_cover_incidents": 0,
+            "worst_program_interruption_s": 0.0,
+            "ad_seconds": 983.0,
+            "program_seconds": 3913.8,
+            "unscorable_s": 0
+          },
+          {
+            "session": "hush_20260914_212529",
+            "network": "ESPN",
+            "ad_seconds_heard": 1804.0,
+            "program_seconds_covered": 0.0,
+            "false_cover_incidents": 0,
+            "worst_program_interruption_s": 0.0,
+            "ad_seconds": 1804.0,
+            "program_seconds": 5095.0,
+            "unscorable_s": 0
+          },
+          {
+            "session": "hush_20260924_220624",
+            "network": "Prime",
+            "ad_seconds_heard": 1664.4,
+            "program_seconds_covered": 0.0,
+            "false_cover_incidents": 0,
+            "worst_program_interruption_s": 0.0,
+            "ad_seconds": 1664.4,
+            "program_seconds": 5935.6,
+            "unscorable_s": 0
+          }
+        ]
+      },
+      "redzone": {
+        "population": "redzone",
+        "count": 200,
+        "commercial_seconds_heard": 0.0,
+        "program_seconds_covered": 0.0,
+        "total_error_seconds": 0.0,
+        "false_cover_incidents": 0,
+        "false_cover_incidents_per_program_hour": 0.0,
+        "premature_return_incidents": 0,
+        "ad_seconds_heard_after_a_cover_let_go": 0.0,
+        "pods_with_any_cover": 0,
+        "pods_already_covered_at_the_gold_start": 0,
+        "pods_missed": 0,
+        "missed_pod_seconds": 0.0,
+        "start_delay_s": {
+          "n": 0,
+          "median": null,
+          "p95": null
+        },
+        "return_delay_s": {
+          "n": 0,
+          "median": null,
+          "p95": null,
+          "still_covering_at_annotation_end": 0
+        },
+        "worst_continuous_program_interruption_s": 0.0,
+        "unscorable_s": 0,
+        "worst_session": {
+          "session": "hush_20260913_150934",
+          "network": "FOX",
+          "ad_seconds_heard": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_program_interruption_s": 0.0,
+          "ad_seconds": 0.0,
+          "program_seconds": 7200.0,
+          "unscorable_s": 0
+        },
+        "sessions": [
+          {
+            "session": "hush_20260913_150934",
+            "network": "FOX",
+            "ad_seconds_heard": 0.0,
+            "program_seconds_covered": 0.0,
+            "false_cover_incidents": 0,
+            "worst_program_interruption_s": 0.0,
+            "ad_seconds": 0.0,
+            "program_seconds": 7200.0,
+            "unscorable_s": 0
+          }
+        ]
+      },
+      "scripted": {
+        "population": "scripted",
+        "count": 200,
+        "commercial_seconds_heard": 2382.2,
+        "program_seconds_covered": 0.0,
+        "total_error_seconds": 2382.2,
+        "false_cover_incidents": 0,
+        "false_cover_incidents_per_program_hour": 0.0,
+        "premature_return_incidents": 0,
+        "ad_seconds_heard_after_a_cover_let_go": 0.0,
+        "pods_with_any_cover": 0,
+        "pods_already_covered_at_the_gold_start": 0,
+        "pods_missed": 30,
+        "missed_pod_seconds": 2382.1,
+        "start_delay_s": {
+          "n": 0,
+          "median": null,
+          "p95": null
+        },
+        "return_delay_s": {
+          "n": 0,
+          "median": null,
+          "p95": null,
+          "still_covering_at_annotation_end": 0
+        },
+        "worst_continuous_program_interruption_s": 0.0,
+        "unscorable_s": 0,
+        "worst_session": {
+          "session": "hush_20261007_220650",
+          "network": "Hulu",
+          "ad_seconds_heard": 1521.3,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_program_interruption_s": 0.0,
+          "ad_seconds": 1521.3,
+          "program_seconds": 10209.7,
+          "unscorable_s": 0
+        },
+        "sessions": [
+          {
+            "session": "hush_20261007_220650",
+            "network": "Hulu",
+            "ad_seconds_heard": 1521.3,
+            "program_seconds_covered": 0.0,
+            "false_cover_incidents": 0,
+            "worst_program_interruption_s": 0.0,
+            "ad_seconds": 1521.3,
+            "program_seconds": 10209.7,
+            "unscorable_s": 0
+          },
+          {
+            "session": "hush_20260827_135935",
+            "network": "Hulu",
+            "ad_seconds_heard": 860.9,
+            "program_seconds_covered": 0.0,
+            "false_cover_incidents": 0,
+            "worst_program_interruption_s": 0.0,
+            "ad_seconds": 860.9,
+            "program_seconds": 6039.1,
+            "unscorable_s": 0
+          }
+        ]
+      }
+    },
+    "ablation_count_10": {
+      "football": {
+        "population": "football",
+        "count": 10,
+        "commercial_seconds_heard": 13652.5,
+        "program_seconds_covered": 432.1,
+        "total_error_seconds": 14084.6,
+        "false_cover_incidents": 72,
+        "false_cover_incidents_per_program_hour": 3.837,
+        "premature_return_incidents": 186,
+        "ad_seconds_heard_after_a_cover_let_go": 6321.5,
+        "pods_with_any_cover": 105,
+        "pods_already_covered_at_the_gold_start": 4,
+        "pods_missed": 31,
+        "missed_pod_seconds": 3639.2,
+        "start_delay_s": {
+          "n": 105,
+          "median": 17.436,
+          "p95": 122.385
+        },
+        "return_delay_s": {
+          "n": 26,
+          "median": 5.256,
+          "p95": 9.552,
+          "still_covering_at_annotation_end": 2
+        },
+        "worst_continuous_program_interruption_s": 25.1,
+        "unscorable_s": 275.0,
+        "worst_session": {
+          "session": "hush_20260909_213047",
+          "network": "NBC",
+          "ad_seconds_heard": 2844.9,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_program_interruption_s": 0.0,
+          "ad_seconds": 2849.9,
+          "program_seconds": 6523.1,
+          "unscorable_s": 0
+        },
+        "sessions": [
+          {
+            "session": "hush_20260909_213047",
+            "network": "NBC",
+            "ad_seconds_heard": 2844.9,
+            "program_seconds_covered": 0.0,
+            "false_cover_incidents": 0,
+            "worst_program_interruption_s": 0.0,
+            "ad_seconds": 2849.9,
+            "program_seconds": 6523.1,
+            "unscorable_s": 0
+          },
+          {
+            "session": "hush_20260913_210542",
+            "network": "NBC",
+            "ad_seconds_heard": 2215.2,
+            "program_seconds_covered": 122.8,
+            "false_cover_incidents": 14,
+            "worst_program_interruption_s": 25.1,
+            "ad_seconds": 3052.5,
+            "program_seconds": 9547.5,
+            "unscorable_s": 0
+          },
+          {
+            "session": "hush_20261008_205100",
+            "network": "Prime Video",
+            "ad_seconds_heard": 2025.3,
+            "program_seconds_covered": 57.2,
+            "false_cover_incidents": 12,
+            "worst_program_interruption_s": 7.2,
+            "ad_seconds": 2583.4,
+            "program_seconds": 7617.0,
+            "unscorable_s": 240.0
+          },
+          {
+            "session": "hush_20261011_204300",
+            "network": "Cable / antenna",
+            "ad_seconds_heard": 327.4,
+            "program_seconds_covered": 20.0,
+            "false_cover_incidents": 4,
+            "worst_program_interruption_s": 5.0,
+            "ad_seconds": 592.4,
+            "program_seconds": 13777.9,
+            "unscorable_s": 35.0
+          },
+          {
+            "session": "hush_20261012_204200",
+            "network": "Cable / antenna",
+            "ad_seconds_heard": 1943.0,
+            "program_seconds_covered": 58.6,
+            "false_cover_incidents": 11,
+            "worst_program_interruption_s": 10.0,
+            "ad_seconds": 2944.3,
+            "program_seconds": 10167.5,
+            "unscorable_s": 0
+          },
+          {
+            "session": "hush_20261010_222400",
+            "network": "Cable / antenna",
+            "ad_seconds_heard": 859.5,
+            "program_seconds_covered": 57.6,
+            "false_cover_incidents": 9,
+            "worst_program_interruption_s": 20.0,
+            "ad_seconds": 1081.8,
+            "program_seconds": 4983.0,
+            "unscorable_s": 0
+          },
+          {
+            "session": "hush_20261011_135700",
+            "network": "Cable / antenna",
+            "ad_seconds_heard": 707.5,
+            "program_seconds_covered": 79.6,
+            "false_cover_incidents": 15,
+            "worst_program_interruption_s": 9.6,
+            "ad_seconds": 983.0,
+            "program_seconds": 3913.8,
+            "unscorable_s": 0
+          },
+          {
+            "session": "hush_20260914_212529",
+            "network": "ESPN",
+            "ad_seconds_heard": 1300.6,
+            "program_seconds_covered": 16.6,
+            "false_cover_incidents": 3,
+            "worst_program_interruption_s": 7.5,
+            "ad_seconds": 1804.0,
+            "program_seconds": 5095.0,
+            "unscorable_s": 0
+          },
+          {
+            "session": "hush_20260924_220624",
+            "network": "Prime",
+            "ad_seconds_heard": 1429.1,
+            "program_seconds_covered": 19.7,
+            "false_cover_incidents": 4,
+            "worst_program_interruption_s": 6.7,
+            "ad_seconds": 1664.4,
+            "program_seconds": 5935.6,
+            "unscorable_s": 0
+          }
+        ]
+      },
+      "redzone": {
+        "population": "redzone",
+        "count": 10,
+        "commercial_seconds_heard": 0.0,
+        "program_seconds_covered": 10.0,
+        "total_error_seconds": 10.0,
+        "false_cover_incidents": 2,
+        "false_cover_incidents_per_program_hour": 1.0,
+        "premature_return_incidents": 0,
+        "ad_seconds_heard_after_a_cover_let_go": 0.0,
+        "pods_with_any_cover": 0,
+        "pods_already_covered_at_the_gold_start": 0,
+        "pods_missed": 0,
+        "missed_pod_seconds": 0.0,
+        "start_delay_s": {
+          "n": 0,
+          "median": null,
+          "p95": null
+        },
+        "return_delay_s": {
+          "n": 0,
+          "median": null,
+          "p95": null,
+          "still_covering_at_annotation_end": 0
+        },
+        "worst_continuous_program_interruption_s": 5.0,
+        "unscorable_s": 0,
+        "worst_session": {
+          "session": "hush_20260913_150934",
+          "network": "FOX",
+          "ad_seconds_heard": 0.0,
+          "program_seconds_covered": 10.0,
+          "false_cover_incidents": 2,
+          "worst_program_interruption_s": 5.0,
+          "ad_seconds": 0.0,
+          "program_seconds": 7200.0,
+          "unscorable_s": 0
+        },
+        "sessions": [
+          {
+            "session": "hush_20260913_150934",
+            "network": "FOX",
+            "ad_seconds_heard": 0.0,
+            "program_seconds_covered": 10.0,
+            "false_cover_incidents": 2,
+            "worst_program_interruption_s": 5.0,
+            "ad_seconds": 0.0,
+            "program_seconds": 7200.0,
+            "unscorable_s": 0
+          }
+        ]
+      },
+      "scripted": {
+        "population": "scripted",
+        "count": 10,
+        "commercial_seconds_heard": 2273.7,
+        "program_seconds_covered": 61.5,
+        "total_error_seconds": 2335.2,
+        "false_cover_incidents": 11,
+        "false_cover_incidents_per_program_hour": 2.437,
+        "premature_return_incidents": 8,
+        "ad_seconds_heard_after_a_cover_let_go": 243.2,
+        "pods_with_any_cover": 8,
+        "pods_already_covered_at_the_gold_start": 0,
+        "pods_missed": 22,
+        "missed_pod_seconds": 1813.9,
+        "start_delay_s": {
+          "n": 8,
+          "median": 15.404,
+          "p95": 72.532
+        },
+        "return_delay_s": {
+          "n": 3,
+          "median": 6.976,
+          "p95": 8.373,
+          "still_covering_at_annotation_end": 0
+        },
+        "worst_continuous_program_interruption_s": 8.4,
+        "unscorable_s": 0,
+        "worst_session": {
+          "session": "hush_20261007_220650",
+          "network": "Hulu",
+          "ad_seconds_heard": 1412.8,
+          "program_seconds_covered": 61.5,
+          "false_cover_incidents": 11,
+          "worst_program_interruption_s": 8.4,
+          "ad_seconds": 1521.3,
+          "program_seconds": 10209.7,
+          "unscorable_s": 0
+        },
+        "sessions": [
+          {
+            "session": "hush_20261007_220650",
+            "network": "Hulu",
+            "ad_seconds_heard": 1412.8,
+            "program_seconds_covered": 61.5,
+            "false_cover_incidents": 11,
+            "worst_program_interruption_s": 8.4,
+            "ad_seconds": 1521.3,
+            "program_seconds": 10209.7,
+            "unscorable_s": 0
+          },
+          {
+            "session": "hush_20260827_135935",
+            "network": "Hulu",
+            "ad_seconds_heard": 860.9,
+            "program_seconds_covered": 0.0,
+            "false_cover_incidents": 0,
+            "worst_program_interruption_s": 0.0,
+            "ad_seconds": 860.9,
+            "program_seconds": 6039.1,
+            "unscorable_s": 0
+          }
+        ]
+      }
+    }
+  },
+  "holes_s": 275.0,
+  "decisions": 22229,
+  "wall_s": 379.3,
+  "max_rss_bytes": 620593152,
+  "enhanced": {
+    "status": "not_measured",
+    "accuracy": null,
+    "reason": "No game-event feed, schedule, or device metadata was authorized or aligned."
+  }
+}

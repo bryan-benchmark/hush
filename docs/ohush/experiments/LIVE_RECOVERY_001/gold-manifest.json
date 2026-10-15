@@ -1,0 +1,25 @@
+{
+  "experiment": "LIVE_RECOVERY_001",
+  "scientific_authority": false,
+  "dataset_role": "live_dev",
+  "status": "PROVISIONAL",
+  "warning": "Point labels and F8/F9 overrides identify review candidates only. They do NOT establish exact commercial start/end boundaries. Do not use this file as held-out accuracy ground truth until interval review is completed.",
+  "session": "ohush_live/sessions/2026-10-08-tnf",
+  "split": {
+    "development_runs": "run00-run24 (engine restarts earlier in evening)",
+    "held_out_runs": "run25-run31 reserved; do not tune on these once interval gold exists",
+    "rule": "split by engine run / recording segment, not by random seconds"
+  },
+  "label_sources": [
+    {"path": "labels.jsonl", "role": "point_markers", "authority": "human_live_dev"},
+    {"path": "overrides.jsonl", "role": "manual_cover_show", "authority": "human_control_not_content_boundary"},
+    {"path": "decisions.jsonl", "role": "system_actions", "authority": "not_ground_truth"}
+  ],
+  "intervals": [],
+  "uncertainty": "Interval gold empty pending human pass over WAV with program_end/commercial_start/commercial_end/program_return and outro/bumper tags.",
+  "synthetic_fixtures": {
+    "path": "ohush_live/recovery/fixtures.py",
+    "role": "invariant_regression_only",
+    "not": "real_world_accuracy"
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "system": "universal_v4_low_latency_speech",
+  "mute_policy": false,
+  "chunk_s": 5.0,
+  "model": "faster-whisper base.en int8 cpu beam 1",
+  "football_pods": 136,
+  "strong_events": 27,
+  "weak_events": 52,
+  "pods_with_strong_phrase_spoken_in_the_30s_before_the_start": 12,
+  "of_those_known_before_the_start": 10,
+  "strong_events_at_least_15s_from_every_pod": 12,
+  "redzone_strong_events": 3,
+  "examples_before": [
+    {
+      "session": "hush_20260909_213047",
+      "network": "NBC",
+      "start": 623.347274,
+      "spoken_end": 621.9,
+      "available_at": 625.0,
+      "phrase": "when we come back"
+    },
+    {
+      "session": "hush_20260909_213047",
+      "network": "NBC",
+      "start": 7000.980657,
+      "spoken_end": 6997.2,
+      "available_at": 7000.0,
+      "phrase": "after these messages"
+    },
+    {
+      "session": "hush_20260913_210542",
+      "network": "NBC",
+      "start": 8671.036946999999,
+      "spoken_end": 8667.26,
+      "available_at": 8670.0,
+      "phrase": "after these messages"
+    },
+    {
+      "session": "hush_20261008_205100",
+      "network": "Prime Video",
+      "start": 8802.614656,
+      "spoken_end": 8783.88,
+      "available_at": 8785.0,
+      "phrase": "these messages"
+    },
+    {
+      "session": "hush_20261010_222400",
+      "network": "Cable / antenna",
+      "start": 1257.309861,
+      "spoken_end": 1247.66,
+      "available_at": 1250.0,
+      "phrase": "when we come back"
+    },
+    {
+      "session": "hush_20261011_135700",
+      "network": "Cable / antenna",
+      "start": 1298.306029,
+      "spoken_end": 1294.58,
+      "available_at": 1295.0,
+      "phrase": "back after this"
+    },
+    {
+      "session": "hush_20261011_204300",
+      "network": "Cable / antenna",
+      "start": 2598.830584,
+      "spoken_end": 2597.68,
+      "available_at": 2600.0,
+      "phrase": "when we come back"
+    },
+    {
+      "session": "hush_20261012_204200",
+      "network": "Cable / antenna",
+      "start": 655.340942,
+      "spoken_end": 646.26,
+      "available_at": 650.0,
+      "phrase": "when we come back"
+    },
+    {
+      "session": "hush_20261012_204200",
+      "network": "Cable / antenna",
+      "start": 2284.252524,
+      "spoken_end": 2277.0,
+      "available_at": 2280.0,
+      "phrase": "when we come back"
+    },
+    {
+      "session": "hush_20261012_204200",
+      "network": "Cable / antenna",
+      "start": 2558.7306120000003,
+      "spoken_end": 2542.26,
+      "available_at": 2545.0,
+      "phrase": "when we come back"
+    },
+    {
+      "session": "hush_20261012_204200",
+      "network": "Cable / antenna",
+      "start": 6636.525785,
+      "spoken_end": 6632.48,
+      "available_at": 6635.0,
+      "phrase": "back after this"
+    },
+    {
+      "session": "hush_20261012_204200",
+      "network": "Cable / antenna",
+      "start": 11072.408627,
+      "spoken_end": 11067.94,
+      "available_at": 11070.0,
+      "phrase": "when we come back"
+    }
+  ],
+  "wall_s": 0.0,
+  "benchmark_chunk_s": 20.0,
+  "benchmark_spoken_before": 12,
+  "benchmark_known_before": 3,
+  "benchmark_spoken_that_this_chunk_makes_causal": 6,
+  "still_not_an_action_policy": true
+}

@@ -1,0 +1,130 @@
+{
+  "system": "microgap_stereo_check_001",
+  "mute_rescored": false,
+  "thresholds_changed": false,
+  "october_used": false,
+  "holdouts_opened": false,
+  "cancellation_shaped_means": "At the quietest mono window, stereo energy is above -50 dB, at least 20 dB louder than the mono average, and correlation is below -0.5.",
+  "sessions": [
+    {
+      "session": "hush_20260827_135935",
+      "threshold_db": -85.0,
+      "window_s": 0.005,
+      "definition": "Same mono average as scan.py. Measures are taken at the quietest mono window inside each run.",
+      "runs": 103,
+      "all": {
+        "n": 103,
+        "both_channels_at_or_below_minus_85": 86,
+        "either_channel_above_minus_40": 0,
+        "cancellation_shaped": 0,
+        "median_correlation": 0.15,
+        "median_energy_minus_mono_db": 2.1,
+        "one_sided_n": 17,
+        "one_sided_louder_channel_median_db": -83.4,
+        "one_sided_louder_channel_p90_db": -79.4
+      },
+      "program": {
+        "n": 9,
+        "both_channels_at_or_below_minus_85": 5,
+        "either_channel_above_minus_40": 0,
+        "cancellation_shaped": 0,
+        "median_correlation": 0.183,
+        "median_energy_minus_mono_db": 2.1,
+        "one_sided_n": 4,
+        "one_sided_louder_channel_median_db": -84.4,
+        "one_sided_louder_channel_p90_db": -84.1
+      },
+      "within_1s_of_a_start": {
+        "n": 11,
+        "both_channels_at_or_below_minus_85": 9,
+        "either_channel_above_minus_40": 0,
+        "cancellation_shaped": 0,
+        "median_correlation": 0.029,
+        "median_energy_minus_mono_db": 1.4,
+        "one_sided_n": 2,
+        "one_sided_louder_channel_median_db": -82.0,
+        "one_sided_louder_channel_p90_db": -79.8
+      }
+    },
+    {
+      "session": "hush_20260914_212529",
+      "threshold_db": -85.0,
+      "window_s": 0.005,
+      "definition": "Same mono average as scan.py. Measures are taken at the quietest mono window inside each run.",
+      "runs": 409,
+      "all": {
+        "n": 409,
+        "both_channels_at_or_below_minus_85": 182,
+        "either_channel_above_minus_40": 0,
+        "cancellation_shaped": 0,
+        "median_correlation": -0.086,
+        "median_energy_minus_mono_db": 2.4,
+        "one_sided_n": 227,
+        "one_sided_louder_channel_median_db": -82.4,
+        "one_sided_louder_channel_p90_db": -80.5
+      },
+      "program": {
+        "n": 103,
+        "both_channels_at_or_below_minus_85": 96,
+        "either_channel_above_minus_40": 0,
+        "cancellation_shaped": 0,
+        "median_correlation": -0.057,
+        "median_energy_minus_mono_db": 1.5,
+        "one_sided_n": 7,
+        "one_sided_louder_channel_median_db": -81.3,
+        "one_sided_louder_channel_p90_db": -80.0
+      },
+      "within_1s_of_a_start": {
+        "n": 2,
+        "both_channels_at_or_below_minus_85": 2,
+        "either_channel_above_minus_40": 0,
+        "cancellation_shaped": 0,
+        "median_correlation": -0.109,
+        "median_energy_minus_mono_db": 1.5,
+        "one_sided_n": 0,
+        "one_sided_louder_channel_median_db": null,
+        "one_sided_louder_channel_p90_db": null
+      }
+    },
+    {
+      "session": "hush_20260924_220624",
+      "threshold_db": -85.0,
+      "window_s": 0.005,
+      "definition": "Same mono average as scan.py. Measures are taken at the quietest mono window inside each run.",
+      "runs": 210,
+      "all": {
+        "n": 210,
+        "both_channels_at_or_below_minus_85": 176,
+        "either_channel_above_minus_40": 0,
+        "cancellation_shaped": 0,
+        "median_correlation": 0.414,
+        "median_energy_minus_mono_db": 0.5,
+        "one_sided_n": 34,
+        "one_sided_louder_channel_median_db": -82.5,
+        "one_sided_louder_channel_p90_db": -80.7
+      },
+      "program": {
+        "n": 7,
+        "both_channels_at_or_below_minus_85": 6,
+        "either_channel_above_minus_40": 0,
+        "cancellation_shaped": 0,
+        "median_correlation": 0.183,
+        "median_energy_minus_mono_db": 0.6,
+        "one_sided_n": 1,
+        "one_sided_louder_channel_median_db": -81.8,
+        "one_sided_louder_channel_p90_db": -81.8
+      },
+      "within_1s_of_a_start": {
+        "n": 26,
+        "both_channels_at_or_below_minus_85": 19,
+        "either_channel_above_minus_40": 0,
+        "cancellation_shaped": 0,
+        "median_correlation": 0.364,
+        "median_energy_minus_mono_db": 0.8,
+        "one_sided_n": 7,
+        "one_sided_louder_channel_median_db": -84.4,
+        "one_sided_louder_channel_p90_db": -83.0
+      }
+    }
+  ]
+}

@@ -62,6 +62,11 @@ type SessionInfo = {
   audio_seconds: number | null;
   started_at: string | null;
   sample_rate_hz: number;
+  show?: string;
+  service?: string;
+  content?: string;
+  label_queue?: boolean;
+  gaps?: number;
 };
 type TruthEvent = {
   gold_id: string;
@@ -71,6 +76,7 @@ type TruthEvent = {
   event_class?: string;
   desired_action?: string;
   confidence?: string;
+  note?: string;
   created_at?: string;
 };
 type CoverageRange = {
@@ -79,6 +85,31 @@ type CoverageRange = {
   to_seconds: number;
   fully_annotated?: boolean;
 };
+
+type OpenShow = { name: string; start: number };
+
+function openShowKey(session: string) {
+  return `ohush-open-show:${session}`;
+}
+
+function readOpenShow(session: string): OpenShow | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = localStorage.getItem(openShowKey(session));
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as OpenShow;
+    if (!parsed?.name || typeof parsed.start !== "number") return null;
+    return { name: parsed.name, start: parsed.start };
+  } catch {
+    return null;
+  }
+}
+
+function writeOpenShow(session: string, show: OpenShow | null) {
+  if (typeof window === "undefined") return;
+  if (!show) localStorage.removeItem(openShowKey(session));
+  else localStorage.setItem(openShowKey(session), JSON.stringify(show));
+}
 
 const EVENT_CLASSES = ["commercial", "network_promo", "sponsorship", "other"] as const;
 const ACTIONS = ["mute", "play", "unsure"] as const;
@@ -154,6 +185,15 @@ function fmtClip(sec: number) {
   return `${m}:${r.toFixed(1).padStart(4, "0")}`;
 }
 
+function dur(sec: number) {
+  const s = Math.max(0, Math.floor(sec));
+  const h = Math.floor(s / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  const r = s % 60;
+  if (h > 0) return `${h}:${String(m).padStart(2, "0")}:${String(r).padStart(2, "0")}`;
+  return `${m}:${String(r).padStart(2, "0")}`;
+}
+
 function sessionIsFinished(session: string, ranges: CoverageRange[]) {
   return ranges.some((r) => r.session === session && r.fully_annotated !== false);
 }
@@ -191,7 +231,15 @@ const WAVE_ROWS: Array<{
   { id: "bright", label: "Edge", hint: "Sample-to-sample edge / brightness", kind: "bars", tone: "bright" },
 ];
 
-const REPLICATION_TASKS = [
+type ListenJob = {
+  session: string;
+  title: string;
+  hint: string;
+  t0: number;
+  t1: number;
+};
+
+const REPLICATION_TASKS: readonly ListenJob[] = [
   {
     session: "hush_20260924_220624",
     title: "1 · Prime football",
@@ -206,13 +254,127 @@ const REPLICATION_TASKS = [
     t0: 300,
     t1: 7200,
   },
-] as const;
+];
 
-export function LabelApp({ task }: { task?: "replication" }) {
+const DATASET_TASKS: readonly ListenJob[] = [
+  {
+    session: "hush_20261007_220650",
+    title: "1 · Hulu · Gilmore Girls",
+    hint: "Opens at 0:20. Listen through 3:15:51. Confirm it stays Gilmore Girls. Saved times are on the recording clock.",
+    t0: 20,
+    t1: 11751,
+  },
+  {
+    session: "hush_20260909_213047",
+    title: "2 · NBC · Patriots at Seahawks",
+    hint: "NBC channel, not Peacock. Listen the whole recording, about 2:36:13.",
+    t0: 0,
+    t1: 9373,
+  },
+  {
+    session: "hush_20260913_150934",
+    title: "3 · FOX · Falcons at Steelers",
+    hint: "Listen the first 2:00:00 only. Audio after that is a separate piece with a hole in front of it.",
+    t0: 0,
+    t1: 7200,
+  },
+  {
+    session: "hush_20260913_210542",
+    title: "4 · NBC · Cowboys at Giants",
+    hint: "NBC channel, not Peacock. Listen the whole recording, about 3:30:00.",
+    t0: 0,
+    t1: 12600,
+  },
+  {
+    session: "hush_20261008_205100",
+    title: "5 · Thu Oct 8 · Prime · Bucs at Cowboys",
+    hint: "Prime Video. The first five minutes are a restart, then the recording is off until 9:48pm. After that it is one sitting, about 2:54:00 of audio. Times are the captured audio, not the TV clock.",
+    t0: 0,
+    t1: 10440.364,
+  },
+  {
+    session: "hush_20261011_204300",
+    title: "6 · Sun Oct 11 night",
+    hint: "Cable. The first two minutes are 8:44pm, then the recording is off until 9:09pm. Football at the start. A later spot check heard a scripted show, so mark where the program changes. About 4:00:05 of audio. Times skip that hole.",
+    t0: 0,
+    t1: 14405.376,
+  },
+  {
+    session: "hush_20261012_204200",
+    title: "7 · Mon Oct 12 · Monday Night Football",
+    hint: "Cable. One continuous recording from 8:42pm, about 3:38:32. Mark commercials and the return to the game.",
+    t0: 0,
+    t1: 13111.808,
+  },
+  {
+    session: "hush_20261010_222400",
+    title: "8 · Sat Oct 10 · cable · Browns at Jets",
+    hint: "Cable. Saturday night from 10:24pm, one continuous recording, about 1:41:05. This is not Sunday night.",
+    t0: 0,
+    t1: 6064.768,
+  },
+  {
+    session: "hush_20261011_135700",
+    title: "9 · Sun Oct 11 afternoon · cable",
+    hint: "Cable. Sunday afternoon from 1:57pm, one continuous recording, about 1:21:37. Separate from Sunday night.",
+    t0: 0,
+    t1: 4896.768,
+  },
+];
+
+function sameJobList(left: readonly ListenJob[], right: readonly ListenJob[]) {
+  if (left.length !== right.length) return false;
+  return left.every(
+    (job, index) =>
+      job.session === right[index]?.session &&
+      job.t1 === right[index]?.t1 &&
+      job.title === right[index]?.title,
+  );
+}
+
+function liveJobsFrom(rows: readonly SessionInfo[]): ListenJob[] {
+  const known = new Set(DATASET_TASKS.map((job) => job.session));
+  return rows
+    .filter((row) => row.label_queue && (row.audio_seconds ?? 0) > 0 && !known.has(row.session))
+    .sort((a, b) => (a.started_at ?? "").localeCompare(b.started_at ?? ""))
+    .map((row) => {
+      const when = row.started_at
+        ? new Date(row.started_at).toLocaleString("en-US", {
+            weekday: "short",
+            month: "short",
+            day: "numeric",
+            hour: "numeric",
+            minute: "2-digit",
+          })
+        : row.session;
+      const holes = row.gaps ?? 0;
+      return {
+        session: row.session,
+        title: [when, row.service, row.show].filter(Boolean).join(" · "),
+        hint: holes
+          ? "Recording paused and came back. Times follow the captured audio, and the missing stretch is a hole."
+          : "One sitting. Times follow the captured audio.",
+        t0: 0,
+        t1: row.audio_seconds ?? 0,
+      };
+    });
+}
+
+export function LabelApp({ task }: { task?: "replication" | "dataset" }) {
   const [mode, setMode] = useState<"debug" | "timeline">("timeline");
-  const replication = task === "replication";
-  const coverageManifest = replication ? "GOLD_REPLICATION_V1" : "GOLD_DEV_V1";
-  const spanRef = useRef<(typeof REPLICATION_TASKS)[number] | null>(null);
+  const [extraJobs, setExtraJobs] = useState<ListenJob[]>([]);
+  const jobs = useMemo(
+    () => (task === "dataset" ? [...DATASET_TASKS, ...extraJobs] : [...REPLICATION_TASKS]),
+    [task, extraJobs],
+  );
+  const replication = task === "replication" || task === "dataset";
+  const coverageManifest =
+    task === "dataset"
+      ? "GOLD_DATASET_20261013"
+      : task === "replication"
+        ? "GOLD_REPLICATION_V1"
+        : "GOLD_DEV_V1";
+  const spanRef = useRef<ListenJob | null>(null);
   const [runs, setRuns] = useState<RunInfo[]>([]);
   const [runId, setRunId] = useState("");
   const [candidates, setCandidates] = useState<Candidate[]>([]);
@@ -241,7 +403,7 @@ export function LabelApp({ task }: { task?: "replication" }) {
   const [sessions, setSessions] = useState<SessionInfo[]>([]);
   const [timelineSession, setTimelineSession] = useState("");
   spanRef.current = replication
-    ? (REPLICATION_TASKS.find((row) => row.session === timelineSession) ?? null)
+    ? (jobs.find((row) => row.session === timelineSession) ?? null)
     : null;
   const [timelineStart, setTimelineStart] = useState(0);
   const [coverageFrom, setCoverageFrom] = useState(0);
@@ -259,12 +421,24 @@ export function LabelApp({ task }: { task?: "replication" }) {
   const [desiredAction, setDesiredAction] = useState<(typeof ACTIONS)[number]>("mute");
   const [confidence, setConfidence] = useState<"certain" | "unsure">("certain");
   const [pendingIn, setPendingIn] = useState<number | null>(null);
+  const [pendingKind, setPendingKind] = useState<"break" | "show" | null>(null);
+  const [programName, setProgramName] = useState("");
+  const [openShow, setOpenShow] = useState<OpenShow | null>(null);
   const [lastSaved, setLastSaved] = useState<string | null>(null);
   const [audioBusy, setAudioBusy] = useState(false);
   const [audioPlaying, setAudioPlaying] = useState(false);
   const [audioClipStart, setAudioClipStart] = useState(0);
   const [audioDebug, setAudioDebug] = useState<AudioDebugLine[]>([]);
   const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    if (!timelineSession) {
+      setOpenShow(null);
+      return;
+    }
+    setOpenShow(readOpenShow(timelineSession));
+    setProgramName("");
+  }, [timelineSession]);
 
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -355,15 +529,18 @@ export function LabelApp({ task }: { task?: "replication" }) {
       const sessData = await sessRes.json();
       const covData = covRes.ok ? await covRes.json() : { coverage: [] };
       const all = (sessData.sessions ?? []) as SessionInfo[];
+      const extras = task === "dataset" ? liveJobsFrom(all) : [];
+      const merged = task === "dataset" ? [...DATASET_TASKS, ...extras] : REPLICATION_TASKS;
+      setExtraJobs((prev) => (sameJobList(prev, extras) ? prev : extras));
       const list = replication
-        ? REPLICATION_TASKS.flatMap((job) => all.filter((row) => row.session === job.session))
+        ? merged.flatMap((job) => all.filter((row) => row.session === job.session))
         : all;
       const ranges = (covData.coverage ?? []) as CoverageRange[];
       setSessions(list);
       setCoverageRanges(ranges);
       setTimelineSession((prev) => {
         const next = pickOpenSession(list, ranges, prev);
-        const job = REPLICATION_TASKS.find((row) => row.session === next);
+        const job = merged.find((row) => row.session === next);
         if (replication && job) setTimelineStart(job.t0);
         return next;
       });
@@ -381,7 +558,7 @@ export function LabelApp({ task }: { task?: "replication" }) {
         setError(e instanceof Error ? e.message : "Failed to load sessions");
       }
     }
-  }, [coverageManifest, replication]);
+  }, [coverageManifest, jobs, replication]);
 
   const loadCandidates = useCallback(async (id: string) => {
     if (!id) {
@@ -493,7 +670,7 @@ export function LabelApp({ task }: { task?: "replication" }) {
             openedSessionRef.current = null;
             alignedSessionRef.current = null;
             setTimelineSession(next);
-            setTimelineStart(REPLICATION_TASKS.find((row) => row.session === next)?.t0 ?? 0);
+            setTimelineStart(jobs.find((row) => row.session === next)?.t0 ?? 0);
           }
         }
       })
@@ -503,7 +680,7 @@ export function LabelApp({ task }: { task?: "replication" }) {
     return () => {
       cancelled = true;
     };
-  }, [coverageManifest, mode, timelineSession, refreshTruth]);
+  }, [coverageManifest, jobs, mode, timelineSession, refreshTruth]);
 
   useEffect(() => {
     if (mode !== "debug" || !current) {
@@ -628,7 +805,19 @@ export function LabelApp({ task }: { task?: "replication" }) {
   useEffect(() => {
     if (mode !== "timeline" || !timelineSession) return;
     // Quantize for server cache hits across Range requests / tiny float drift.
-    const start = Math.round(Math.max(0, audioClipStart) * 10) / 10;
+    let start = Math.round(Math.max(0, audioClipStart) * 10) / 10;
+    const end = spanRef.current?.t1;
+    // A clip that starts at the end finishes instantly and onEnded was
+    // stepping forward forever, far past the recording.
+    if (end != null && start >= end - 1) {
+      const clamped = Math.round(Math.max(0, Math.min(playheadRef.current, end) - AUDIO_PREROLL_S) * 10) / 10;
+      if (clamped < end - 1 && Math.abs(clamped - start) > 0.2) {
+        seekTargetRef.current = Math.min(playheadRef.current, end);
+        setAudioClipStart(clamped);
+        return;
+      }
+      start = Math.min(start, Math.max(0, end - AUDIO_WINDOW_S));
+    }
     audioClipStartRef.current = start;
     audioClipDurRef.current = AUDIO_WINDOW_S;
     audioReloadRef.current = true;
@@ -676,6 +865,9 @@ export function LabelApp({ task }: { task?: "replication" }) {
       if (span && abs >= span.t1) {
         a.pause();
         abs = span.t1;
+        setPlayhead(abs);
+        playheadRef.current = abs;
+        return;
       }
       setPlayhead(abs);
       playheadRef.current = abs;
@@ -777,9 +969,7 @@ export function LabelApp({ task }: { task?: "replication" }) {
 
   function switchSession(
     next: string,
-    startAt = replication
-      ? (REPLICATION_TASKS.find((row) => row.session === next)?.t0 ?? 0)
-      : 0,
+    startAt = replication ? (jobs.find((row) => row.session === next)?.t0 ?? 0) : 0,
   ) {
     if (!next) return;
     if (next !== timelineSession) {
@@ -789,6 +979,7 @@ export function LabelApp({ task }: { task?: "replication" }) {
     }
     setTimelineStart(startAt);
     setPendingIn(null);
+    setPendingKind(null);
   }
 
   function absToPct(abs: number) {
@@ -973,17 +1164,30 @@ export function LabelApp({ task }: { task?: "replication" }) {
     }
   }
 
-  async function saveTruth(start = inPoint, end = outPoint) {
+  async function saveTruth(
+    start = inPoint,
+    end = outPoint,
+    kind?: "break" | "show",
+    name?: string,
+  ): Promise<boolean> {
     const session = timelineSession;
-    if (!session || end - start < 5 || saving) return;
+    const showName = (name ?? programName).trim();
+    if (kind === "show" && !showName) {
+      setError("Type what's on.");
+      return false;
+    }
+    if (!session || end - start < 5 || saving) return false;
     const span = spanRef.current;
     if (span && (start < span.t0 || end > span.t1)) {
       setError("That mark is outside this recording's span.");
-      return;
+      return false;
     }
     setSaving(true);
     setError(null);
     const t0 = performance.now();
+    const savedNote = kind === "show" ? showName : kind === "break" ? null : note.trim() || null;
+    const savedClass = kind === "show" ? "program" : kind === "break" ? "commercial" : eventClass;
+    const savedAction = kind === "show" ? "play" : kind === "break" ? "mute" : desiredAction;
     try {
       const rate = sessions.find((s) => s.session === session)?.sample_rate_hz ?? 48000;
       const res = await fetch("/api/truth", {
@@ -995,22 +1199,19 @@ export function LabelApp({ task }: { task?: "replication" }) {
           end_seconds: end,
           sample_rate_hz: rate,
           reviewer: reviewer.trim() || null,
-          note: note.trim() || null,
-          event_class: eventClass,
-          desired_action: desiredAction,
-          confidence,
+          note: savedNote,
+          event_class: savedClass,
+          desired_action: savedAction,
+          confidence: kind ? "certain" : confidence,
         }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "save failed");
-      setNote("");
+      if (!kind) setNote("");
       setPendingIn(null);
-      const stamp = sessions.find((s) => s.session === session)?.started_at;
-      setLastSaved(
-        stamp
-          ? `${wallClock(stamp, start)} – ${wallClock(stamp, end)}`
-          : `${fmtClip(start)}–${fmtClip(end)}`,
-      );
+      setPendingKind(null);
+      const savedLabel = kind === "show" ? showName || "Show" : "Commercial";
+      setLastSaved(`${savedLabel} · ${dur(end - start)}`);
       await refreshTruth(session);
       logUi("journey_save_ok", {
         session,
@@ -1018,19 +1219,81 @@ export function LabelApp({ task }: { task?: "replication" }) {
         end,
         ms: Math.round(performance.now() - t0),
       });
+      return true;
     } catch (e) {
       logUi("journey_save_error", { error: String(e) });
       setError(e instanceof Error ? e.message : "save failed");
+      return false;
     } finally {
       setSaving(false);
     }
   }
 
   function markBreakStart() {
-    logUi("journey_mark_start", { at: playhead, session: timelineSession });
+    logUi("journey_mark_start", { at: playhead, session: timelineSession, kind: "break" });
+    setPendingKind("break");
     setPendingIn(playhead);
     setLastSaved(null);
     setError(null);
+  }
+
+  async function startNewShow() {
+    const session = timelineSession;
+    const name = programName.trim();
+    if (!session) return;
+    if (!name) {
+      setError(openShow ? "Type the new show." : "Type what's on.");
+      return;
+    }
+    if (pendingIn !== null) {
+      setError("End the commercial first.");
+      return;
+    }
+    if (openShow && openShow.name.toLowerCase() === name.toLowerCase()) {
+      setError("That show is already on.");
+      return;
+    }
+    if (openShow && playhead < openShow.start) {
+      setError("Move forward to where the new show starts.");
+      return;
+    }
+    if (openShow && playhead - openShow.start < 5) {
+      setError("Wait a few seconds. That show just started.");
+      return;
+    }
+    if (openShow) {
+      const ok = await saveTruth(openShow.start, playhead, "show", openShow.name);
+      if (!ok) return;
+    }
+    const next = { name, start: playhead };
+    setOpenShow(next);
+    writeOpenShow(session, next);
+    setProgramName("");
+    setError(null);
+  }
+
+  async function finishListening() {
+    if (
+      replication &&
+      !window.confirm("Finished listening through this whole span? This locks the recording as done.")
+    ) {
+      return;
+    }
+    const session = timelineSession;
+    const span = spanRef.current;
+    if (openShow && session) {
+      const end = span?.t1 ?? playhead;
+      if (end - openShow.start >= 5) {
+        const ok = await saveTruth(openShow.start, end, "show", openShow.name);
+        if (!ok) return;
+      }
+      setOpenShow(null);
+      writeOpenShow(session, null);
+    }
+    const last = Math.ceil(
+      sessionSlots.reduce((m, e) => Math.max(m, e.end_seconds), 0) || playhead || 3600,
+    );
+    await closeCoverage(span?.t0 ?? 0, span?.t1 ?? last);
   }
 
   function markBreakEnd() {
@@ -1041,7 +1304,7 @@ export function LabelApp({ task }: { task?: "replication" }) {
         playhead,
         reason: "too_short",
       });
-      setError("Break is too short — keep listening, then tap End.");
+      setError("Commercial is too short — keep listening, then tap End.");
       return;
     }
     logUi("journey_mark_end", {
@@ -1049,13 +1312,15 @@ export function LabelApp({ task }: { task?: "replication" }) {
       end: playhead,
       duration: playhead - pendingIn,
       session: timelineSession,
+      kind: "break",
     });
-    void saveTruth(pendingIn, playhead);
+    void saveTruth(pendingIn, playhead, "break");
   }
 
   function cancelPending() {
     logUi("journey_mark_cancel", { pending_in: pendingIn });
     setPendingIn(null);
+    setPendingKind(null);
     setError(null);
   }
 
@@ -1184,6 +1449,7 @@ export function LabelApp({ task }: { task?: "replication" }) {
     timelineSession,
     coverageRanges,
     pendingIn,
+    pendingKind,
   ]);
 
   const inPct = absToPct(inPoint);
@@ -1215,10 +1481,28 @@ export function LabelApp({ task }: { task?: "replication" }) {
     .filter((event) => event.session === timelineSession)
     .slice()
     .sort((a, b) => a.start_seconds - b.start_seconds);
-  const lastCommercial =
-    sessionSlots.length > 0 ? sessionSlots[sessionSlots.length - 1] : null;
-  const sinceLastSec =
-    lastCommercial != null ? playhead - lastCommercial.end_seconds : null;
+  const breakSlots = sessionSlots.filter((event) => event.event_class !== "program");
+  const showSlots = sessionSlots.filter((event) => event.event_class === "program");
+  const lastCommercial = breakSlots.length > 0 ? breakSlots[breakSlots.length - 1] : null;
+  const breakAround =
+    breakSlots.find((event) => playhead >= event.start_seconds && playhead < event.end_seconds) ?? null;
+  const breakBefore =
+    [...breakSlots].reverse().find((event) => event.end_seconds <= playhead) ?? null;
+  const sinceLastSec = breakBefore != null ? playhead - breakBefore.end_seconds : null;
+  const markingBreak = pendingIn != null;
+  const clockMain = markingBreak
+    ? dur(playhead - pendingIn)
+    : breakAround
+      ? dur(breakAround.end_seconds - breakAround.start_seconds)
+      : sinceLastSec != null
+        ? dur(sinceLastSec)
+        : "—";
+  const clockSub = markingBreak || breakAround ? "break" : sinceLastSec != null ? "since break" : "no break yet";
+  const recordingEnd =
+    spanRef.current?.t1 ??
+    sessions.find((row) => row.session === timelineSession)?.audio_seconds ??
+    null;
+  const leftSec = recordingEnd != null ? Math.max(0, recordingEnd - playhead) : null;
   const slotsInHour = sessionSlots.filter(
     (event) => event.end_seconds > coverageFrom && event.start_seconds < coverageTo,
   );
@@ -1344,9 +1628,12 @@ export function LabelApp({ task }: { task?: "replication" }) {
 
       {mode === "timeline" && allDoneAck && openSessions.length === 0 ? (
         <section className="blind-panel">
-          <p className="blind-done">Both recordings are saved.</p>
-          <p className="device">1 · Prime football</p>
-          <p className="device">2 · Hulu · Gilmore Girls</p>
+          <p className="blind-done">These recordings are saved.</p>
+          {jobs.map((job) => (
+            <p key={job.session} className="device">
+              {job.title}
+            </p>
+          ))}
           <p className="device">You can close this page.</p>
         </section>
       ) : null}
@@ -1369,7 +1656,7 @@ export function LabelApp({ task }: { task?: "replication" }) {
                 </option>
                 {visibleSessions.map((s) => {
                   const done = sessionIsFinished(s.session, coverageRanges);
-                  const job = REPLICATION_TASKS.find((row) => row.session === s.session);
+                  const job = jobs.find((row) => row.session === s.session);
                   const hours = s.audio_seconds != null ? (s.audio_seconds / 3600).toFixed(1) : "?";
                   return (
                     <option key={s.session} value={s.session}>
@@ -1386,29 +1673,13 @@ export function LabelApp({ task }: { task?: "replication" }) {
                 <button
                   type="button"
                   className="complete-btn"
-                  disabled={saving || sessionSlots.length === 0}
+                  disabled={saving || (task !== "dataset" && sessionSlots.length === 0)}
                   title={
-                    sessionSlots.length === 0
-                      ? "Save at least one commercial first"
-                      : "Finished listening — close this recording"
+                    task === "dataset" || sessionSlots.length > 0
+                      ? "Finished listening — close this recording"
+                      : "Save at least one commercial first"
                   }
-                  onClick={() => {
-                    if (
-                      replication &&
-                      !window.confirm(
-                        "Finished listening through this whole span? This locks the recording as done.",
-                      )
-                    ) {
-                      return;
-                    }
-                    const span = spanRef.current;
-                    const last = Math.ceil(
-                      sessionSlots.reduce((m, e) => Math.max(m, e.end_seconds), 0) ||
-                        playhead ||
-                        3600,
-                    );
-                    void closeCoverage(span?.t0 ?? 0, span?.t1 ?? last);
-                  }}
+                  onClick={() => void finishListening()}
                 >
                   <svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true">
                     <path
@@ -1437,47 +1708,73 @@ export function LabelApp({ task }: { task?: "replication" }) {
             </div>
           </div>
           <p className="device">
-            {sessionSlots.length} commercials
+            {breakSlots.length} commercials
+            {showSlots.length ? ` · ${showSlots.length} shows` : ""}
             {openSessions.length ? ` · ${openSessions.length} recordings left` : ""}
           </p>
 
           {sessionDone ? (
             <p className="blind-done">
               {allDoneAck && openSessions.length === 0
-                ? "Both recordings are saved. You can leave this page."
-                : `Finished. You marked ${sessionSlots.length} commercials.`}
+                ? "These recordings are saved. You can leave this page."
+                : `Finished. You marked ${breakSlots.length} commercials${showSlots.length ? ` and ${showSlots.length} shows` : ""}.`}
             </p>
           ) : (
             <p className="device">
-              Listen. Press <kbd>Space</kbd> (or Start/End) when a commercial begins, again when
-              the show returns. <kbd>K</kbd> play/pause.
+              Press <kbd>Space</kbd> when a commercial starts. Press it again when the show comes
+              back. <kbd>K</kbd> play/pause.
             </p>
           )}
 
-          <p className="blind-clock mono" suppressHydrationWarning>
-            {mounted && startedAt ? wallClock(startedAt, playhead) : fmtClip(playhead)}
-          </p>
-          {lastCommercial != null && sinceLastSec != null ? (
+          <div className="now-row">
+            <div className="now-clock">
+              <p className="blind-clock mono" suppressHydrationWarning>
+                {clockMain}
+                <span className="clock-when">{clockSub}</span>
+              </p>
+              {leftSec != null ? <p className="left-readout mono">{dur(leftSec)} left</p> : null}
+            </div>
+            <div className="now-show">
+              <span className={openShow ? "now-label live" : "now-label"}>
+                {openShow ? openShow.name : "What's on?"}
+              </span>
+              {openShow ? (
+                <span className="now-since mono">on for {dur(Math.max(0, playhead - openShow.start))}</span>
+              ) : null}
+              <input
+                className="program-name"
+                value={programName}
+                placeholder={openShow ? "Next show" : "Football, news, RedZone…"}
+                aria-label={openShow ? "Next show" : "What's on?"}
+                onChange={(e) => setProgramName(e.target.value)}
+              />
+              <button
+                type="button"
+                className="new-show-btn"
+                disabled={saving || sessionDone}
+                onClick={() => void startNewShow()}
+              >
+                New show
+              </button>
+            </div>
+          </div>
+          {sessionDone ? null : (
+            <p className="now-hint">
+              {openShow
+                ? "Press New show when a different program starts."
+                : "Type what's on, then press New show."}
+            </p>
+          )}
+          {breakBefore && !markingBreak && !breakAround ? (
             <p className="since-last-readout mono">
-              {sinceLastSec >= 0
-                ? `${fmtClip(sinceLastSec)} after last commercial`
-                : `${fmtClip(-sinceLastSec)} before last commercial ends`}
-              {" · "}
-              last ended{" "}
-              {mounted && startedAt
-                ? wallClock(startedAt, lastCommercial.end_seconds)
-                : fmtClip(lastCommercial.end_seconds)}
+              Last break {dur(breakBefore.end_seconds - breakBefore.start_seconds)}
             </p>
           ) : null}
 
           {error ? <p className="mark-error">{error}</p> : null}
           {lastSaved ? <p className="device">Saved {lastSaved}. Keep going.</p> : null}
           {pendingIn !== null ? (
-            <p className="blind-pending">
-              Started at{" "}
-              {mounted && startedAt ? wallClock(startedAt, pendingIn) : fmtClip(pendingIn)}. Press
-              End when it finishes.
-            </p>
+            <p className="blind-pending">Press End when the show comes back.</p>
           ) : null}
 
           {replication ? null : (
@@ -1539,26 +1836,33 @@ export function LabelApp({ task }: { task?: "replication" }) {
                         Math.min(event.end_seconds, windowStart + windowDur),
                       );
                       const width = Math.max(1.2, right - left);
-                      const isLast = lastCommercial?.gold_id === event.gold_id;
+                      const isProgram = event.event_class === "program";
+                      const isLast = !isProgram && lastCommercial?.gold_id === event.gold_id;
                       return (
                         <div
                           key={event.gold_id}
-                          className={isLast ? "saved-slot last-commercial" : "saved-slot"}
+                          className={
+                            isProgram
+                              ? "saved-slot saved-program"
+                              : isLast
+                                ? "saved-slot last-commercial"
+                                : "saved-slot"
+                          }
                           style={{ left: `${left}%`, width: `${width}%` }}
-                          title={`${mounted && startedAt ? wallClock(startedAt, event.start_seconds) : fmtClip(event.start_seconds)} – ${mounted && startedAt ? wallClock(startedAt, event.end_seconds) : fmtClip(event.end_seconds)}${isLast ? " · last marked" : ""}`}
+                          title={`${isProgram ? `${event.note || "Show"} · ` : ""}${dur(event.end_seconds - event.start_seconds)}${isLast ? " · last marked" : ""}`}
                         >
                           {showTrash ? (
                             <>
                               <span className="slot-time mono">
-                                {mounted && startedAt
-                                  ? wallClock(startedAt, event.start_seconds)
-                                  : fmtClip(event.start_seconds)}
+                                {isProgram
+                                  ? event.note || "Show"
+                                  : dur(event.end_seconds - event.start_seconds)}
                               </span>
                               <button
                                 type="button"
                                 className="slot-trash"
                                 disabled={saving}
-                                aria-label="Delete this commercial"
+                                aria-label={isProgram ? "Delete this show" : "Delete this commercial"}
                                 title="Delete"
                                 onPointerDown={(e) => e.stopPropagation()}
                                 onClick={(e) => {
@@ -1580,7 +1884,9 @@ export function LabelApp({ task }: { task?: "replication" }) {
                     })}
                     {pendingIn !== null ? (
                       <div
-                        className="pending-slot"
+                        className={
+                          pendingKind === "show" ? "pending-slot pending-program" : "pending-slot"
+                        }
                         style={{
                           left: `${absToPct(Math.max(pendingIn, windowStart))}%`,
                           width: `${Math.max(
@@ -1595,13 +1901,15 @@ export function LabelApp({ task }: { task?: "replication" }) {
                         }}
                       />
                     ) : null}
-                    {lastCommercial != null &&
+                    {breakBefore != null &&
                     sinceLastSec != null &&
                     sinceLastSec >= 0 &&
-                    lastCommercial.end_seconds < windowStart + windowDur &&
+                    !breakAround &&
+                    !markingBreak &&
+                    breakBefore.end_seconds < windowStart + windowDur &&
                     playhead > windowStart
                       ? (() => {
-                          const gapStart = Math.max(lastCommercial.end_seconds, windowStart);
+                          const gapStart = Math.max(breakBefore.end_seconds, windowStart);
                           const gapEnd = Math.min(playhead, windowStart + windowDur);
                           if (gapEnd <= gapStart) return null;
                           const left = absToPct(gapStart);
@@ -1610,24 +1918,24 @@ export function LabelApp({ task }: { task?: "replication" }) {
                             <div
                               className="since-last-band"
                               style={{ left: `${left}%`, width: `${Math.max(0.35, width)}%` }}
-                              title={`${fmtClip(sinceLastSec)} after last commercial`}
+                              title={`${dur(sinceLastSec)} since break`}
                             >
                               {showTrash ? (
                                 <span className="since-last-band-label mono">
-                                  {fmtClip(sinceLastSec)}
+                                  {dur(sinceLastSec)}
                                 </span>
                               ) : null}
                             </div>
                           );
                         })()
                       : null}
-                    {lastCommercial != null &&
-                    lastCommercial.end_seconds >= windowStart &&
-                    lastCommercial.end_seconds <= windowStart + windowDur ? (
+                    {breakBefore != null &&
+                    breakBefore.end_seconds >= windowStart &&
+                    breakBefore.end_seconds <= windowStart + windowDur ? (
                       <div
                         className={showTrash ? "last-end-mark" : "last-end-mark bare"}
-                        style={{ left: `${absToPct(lastCommercial.end_seconds)}%` }}
-                        title="End of last commercial"
+                        style={{ left: `${absToPct(breakBefore.end_seconds)}%` }}
+                        title="End of break"
                       />
                     ) : null}
                     {overlay && overlayAllowed
@@ -1691,6 +1999,8 @@ export function LabelApp({ task }: { task?: "replication" }) {
                 if (!a) return;
                 const target = seekTargetRef.current ?? audioClipStartRef.current;
                 const offset = Math.max(0, target - audioClipStartRef.current);
+                const end = spanRef.current?.t1;
+                const atEnd = end != null && target >= end - 0.5;
                 logUi("audio_element_loadeddata", {
                   target,
                   offset,
@@ -1703,6 +2013,12 @@ export function LabelApp({ task }: { task?: "replication" }) {
                   } catch {
                     /* ignore */
                   }
+                  if (atEnd) {
+                    a.pause();
+                    audioReloadRef.current = false;
+                    setAudioBusy(false);
+                    return;
+                  }
                   void a.play().catch((e) => logUi("play_error", { error: String(e) }));
                   audioReloadRef.current = false;
                   setAudioBusy(false);
@@ -1711,7 +2027,11 @@ export function LabelApp({ task }: { task?: "replication" }) {
                 else a.addEventListener("canplay", go, { once: true });
               }}
               onEnded={() => {
+                const end = spanRef.current?.t1;
+                const here = playheadRef.current;
+                if (end != null && here >= end - 0.5) return;
                 const next = audioClipStartRef.current + audioClipDurRef.current - AUDIO_PREROLL_S;
+                if (end != null && next >= end - 1) return;
                 const target = Math.max(playheadRef.current, next + AUDIO_PREROLL_S);
                 logUi("audio_element_ended", {
                   next_clip_start: Math.max(0, next),
@@ -1746,9 +2066,7 @@ export function LabelApp({ task }: { task?: "replication" }) {
               <div className="transport-fill" style={{ width: `${Math.min(100, Math.max(0, playPct))}%` }} />
               <div className="playhead" style={{ left: `${playPct}%` }} />
               <span className="transport-time mono">
-                {mounted && startedAt ? wallClock(startedAt, playhead) : fmtClip(playhead)}
-                {" · "}
-                view {fmtClip(windowStart)}–{fmtClip(windowStart + windowDur)}
+                {clockMain} {clockSub}
               </span>
             </div>
           </div>
@@ -1826,14 +2144,7 @@ export function LabelApp({ task }: { task?: "replication" }) {
           {sessionSlots.length > 0 ? (
             <ol className="slot-list plain-list">
               {sessionSlots.map((event, i) => {
-                const inLabel =
-                  mounted && startedAt
-                    ? wallClock(startedAt, event.start_seconds)
-                    : fmtClip(event.start_seconds);
-                const outLabel =
-                  mounted && startedAt
-                    ? wallClock(startedAt, event.end_seconds)
-                    : fmtClip(event.end_seconds);
+                const lengthLabel = dur(event.end_seconds - event.start_seconds);
                 return (
                   <li key={event.gold_id} className="slot-row">
                     <button
@@ -1850,16 +2161,17 @@ export function LabelApp({ task }: { task?: "replication" }) {
                       }}
                     >
                       <span className="slot-num">#{i + 1}</span>
-                      <span className="slot-stamp mono">
-                        {inLabel} – {outLabel}
+                      <span className={event.event_class === "program" ? "slot-kind show" : "slot-kind"}>
+                        {event.event_class === "program" ? event.note || "Show" : "Commercial"}
                       </span>
+                      <span className="slot-stamp mono">{lengthLabel}</span>
                     </button>
                     <button
                       type="button"
                       className="icon-btn danger"
                       disabled={saving}
-                      aria-label={`Delete commercial ${i + 1}`}
-                      title="Delete this commercial"
+                      aria-label={`Delete ${event.event_class === "program" ? "show" : "break"} ${i + 1}`}
+                      title={event.event_class === "program" ? "Delete this show" : "Delete this commercial"}
                       onClick={() => void retractTruth(event.gold_id)}
                     >
                       <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">

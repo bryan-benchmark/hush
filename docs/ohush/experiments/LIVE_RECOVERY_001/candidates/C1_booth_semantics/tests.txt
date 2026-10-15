@@ -1,0 +1,23 @@
+# Commands and outcomes — C1
+
+.venv/bin/python -m ohush_live.recovery.compare_fixtures \
+  --defect-peak docs/ohush/experiments/LIVE_RECOVERY_001/baseline/defect_peak \
+  --candidate docs/ohush/experiments/LIVE_RECOVERY_001/candidates/C1_booth_semantics/code \
+  --out docs/ohush/experiments/LIVE_RECOVERY_001/candidates/C1_booth_semantics/metrics_fixtures.json
+# => defect_peak_ok true, candidate_ok true
+
+.venv/bin/python -m ohush_live.recovery.decision_replay \
+  --track docs/ohush/experiments/LIVE_RECOVERY_001/inputs/session_2026-10-08-tnf/track.jsonl \
+  --code-root docs/ohush/experiments/LIVE_RECOVERY_001/baseline/defect_peak \
+  --alias defect_peak \
+  --out docs/ohush/experiments/LIVE_RECOVERY_001/candidates/C1_booth_semantics/baseline-decisions.jsonl
+
+.venv/bin/python -m ohush_live.recovery.decision_replay \
+  --track docs/ohush/experiments/LIVE_RECOVERY_001/inputs/session_2026-10-08-tnf/track.jsonl \
+  --code-root docs/ohush/experiments/LIVE_RECOVERY_001/candidates/C1_booth_semantics/code \
+  --alias candidate \
+  --out docs/ohush/experiments/LIVE_RECOVERY_001/candidates/C1_booth_semantics/candidate-decisions.jsonl
+# => DETERMINISM_OK on repeat
+
+.venv/bin/python -m unittest tests.test_ohush_live_state tests.test_ohush_live_sports tests.test_ohush_live_recovery -q
+# => OK

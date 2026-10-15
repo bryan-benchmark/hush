@@ -1,0 +1,298 @@
+"""OHUSH_LIVE_V0 state machine. No audio, no experiment files."""
+
+import unittest
+
+from ohush_live.state import Machine
+
+
+def reading(departure=None, strong_departure=False, ret=None, strong_return=False):
+    return {
+        "departure": departure,
+        "strong_departure": strong_departure,
+        "return": ret,
+        "strong_return": strong_return,
+    }
+
+
+class StateTests(unittest.TestCase):
+    def test_one_family_yes_one_no_does_not_mute(self):
+        machine = Machine()
+        families = {
+            "audio": reading(0.3, True),
+            "speaker": reading(0.1, False),
+            "semantic": None,
+        }
+        for t in range(1, 12):
+            self.assertIsNone(machine.step(t, 1.0, families))
+        self.assertEqual(machine.state, "PLAY")
+
+    def test_two_families_mute_after_persist(self):
+        machine = Machine()
+        families = {
+            "audio": reading(0.25, True),
+            "speaker": reading(0.4, True),
+            "semantic": None,
+        }
+        self.assertIsNone(machine.step(1, 1.0, families))
+        self.assertIsNone(machine.step(2, 1.0, families))
+        event = machine.step(3, 1.0, families)
+        self.assertEqual(event["state_after"], "MUTED")
+        self.assertEqual(event["reason"], "2_of_strong")
+        self.assertFalse(event["manual_override"])
+        self.assertEqual(machine.state, "MUTED")
+
+    def test_solo_audio_mutes_when_others_unavailable(self):
+        """Ad2-class: audio strong, speaker/semantic null → product may cover."""
+        machine = Machine()
+        families = {
+            "audio": reading(0.3, True),
+            "speaker": None,
+            "semantic": None,
+        }
+        for t in range(1, 4):
+            self.assertIsNone(machine.step(t, 1.0, families))
+        event = machine.step(4, 1.0, families)
+        self.assertIsNotNone(event)
+        self.assertEqual(event["state_after"], "MUTED")
+        self.assertEqual(event["reason"], "solo_audio_depart")
+
+    def test_solo_audio_uses_score_even_if_flag_false(self):
+        """Audio score at/above AUDIO_STRONG mutes even when the worker flag lags."""
+        machine = Machine()
+        families = {
+            "audio": reading(0.23, False),
+            "speaker": None,
+            "semantic": None,
+        }
+        for t in range(1, 4):
+            self.assertIsNone(machine.step(t, 1.0, families))
+        event = machine.step(4, 1.0, families)
+        self.assertIsNotNone(event)
+        self.assertEqual(event["state_after"], "MUTED")
+
+    def test_booth_talking_blocks_solo_audio_mute(self):
+        """Announcers still wrapping — do not cover on audio world alone."""
+        machine = Machine()
+        families = {
+            "audio": reading(0.3, True),
+            "speaker": {
+                "departure": 0.02,
+                "strong_departure": False,
+                "return": 0.0,
+                "strong_return": False,
+                "speech": True,
+                "recurring": True,
+                "booth_present": True,
+                "continuity": 0.3,
+            },
+            "semantic": None,
+        }
+        for t in range(1, 12):
+            self.assertIsNone(machine.step(t, 1.0, families))
+        self.assertEqual(machine.state, "PLAY")
+
+    def test_booth_locked_blocks_solo_audio_mute(self):
+        """Once Al/color are locked, audio-alone cannot cover."""
+        machine = Machine()
+        families = {
+            "audio": reading(0.3, True),
+            "speaker": {
+                "departure": None,
+                "strong_departure": False,
+                "return": 0.0,
+                "strong_return": False,
+                "speech": False,
+                "recurring": False,
+                "booth_present": False,
+                "booth_locked": True,
+                "continuity": None,
+            },
+            "semantic": None,
+        }
+        for t in range(1, 12):
+            self.assertIsNone(machine.step(t, 1.0, families))
+        self.assertEqual(machine.state, "PLAY")
+
+    def test_empty_placeholder_families_do_not_block_solo_audio(self):
+        machine = Machine()
+        empty = reading(None, False, None, False)
+        families = {
+            "audio": reading(0.3, True),
+            "speaker": empty,
+            "semantic": empty,
+        }
+        for t in range(1, 4):
+            self.assertIsNone(machine.step(t, 1.0, families))
+        event = machine.step(4, 1.0, families)
+        self.assertEqual(event["state_after"], "MUTED")
+        self.assertEqual(event["reason"], "solo_audio_depart")
+
+    def test_solo_speaker_does_not_mute(self):
+        machine = Machine()
+        families = {
+            "audio": None,
+            "speaker": reading(0.5, True),
+            "semantic": None,
+        }
+        for t in range(1, 12):
+            self.assertIsNone(machine.step(t, 1.0, families))
+        self.assertEqual(machine.state, "PLAY")
+
+    def test_return_waits_and_needs_two_families_when_both_alive(self):
+        machine = Machine()
+        mute = {
+            "audio": reading(0.25, True),
+            "speaker": reading(0.4, True),
+            "semantic": None,
+        }
+        machine.step(1, 1.0, mute)
+        machine.step(2, 1.0, mute)
+        machine.step(3, 1.0, mute)
+        self.assertEqual(machine.state, "MUTED")
+        one = {
+            "audio": reading(0.05, False, 0.05, True),
+            "speaker": reading(0.2, False, 0.0, False),
+            "semantic": None,
+        }
+        for t in range(4, 20):
+            self.assertIsNone(machine.step(t, 1.0, one))
+        self.assertEqual(machine.state, "MUTED")
+        both = {
+            "audio": reading(0.05, False, 0.05, True),
+            "speaker": reading(0.1, False, 0.4, True),
+            "semantic": None,
+        }
+        # muted_at=3, hold 6s → open at t=9; speaker persist 1s → PLAY at t=9.
+        event = machine.step(9, 1.0, both)
+        self.assertIsNotNone(event)
+        self.assertEqual(event["state_after"], "PLAY")
+        self.assertEqual(event["reason"], "speaker_return")
+
+    def test_solo_audio_return_after_hold(self):
+        machine = Machine()
+        mute = {
+            "audio": reading(0.3, True),
+            "speaker": None,
+            "semantic": None,
+        }
+        for t in range(1, 5):
+            machine.step(t, 1.0, mute)
+        self.assertEqual(machine.state, "MUTED")
+        back = {
+            "audio": reading(0.05, False, 0.05, True),
+            "speaker": None,
+            "semantic": None,
+        }
+        # muted_at=4, hold 6s → open at t=10; solo play persist 3s → t=12.
+        for t in range(5, 12):
+            self.assertIsNone(machine.step(t, 1.0, back))
+        event = machine.step(12, 1.0, back)
+        self.assertIsNotNone(event)
+        self.assertEqual(event["state_after"], "PLAY")
+        self.assertEqual(event["reason"], "solo_audio_return")
+
+    def test_al_michaels_booth_voice_returns_immediately(self):
+        """Hearing the booth (Al) always lifts cover — even during mute hold."""
+        machine = Machine()
+        mute = {
+            "audio": reading(0.3, True),
+            "speaker": None,
+            "semantic": None,
+        }
+        for t in range(1, 5):
+            machine.step(t, 1.0, mute)
+        self.assertEqual(machine.state, "MUTED")
+        voice = {
+            "audio": reading(0.25, True, 0.25, False),
+            "speaker": {
+                "departure": 0.05,
+                "strong_departure": False,
+                "return": 0.0,
+                "strong_return": False,
+                "speech": True,
+                "recurring": True,
+                "booth_present": True,
+                "continuity": 0.55,
+                "cluster_id": "c0001",
+            },
+            "semantic": None,
+        }
+        # Still inside MIN_MUTE_HOLD — booth voice wins anyway.
+        event = machine.step(5, 1.0, voice)
+        self.assertIsNotNone(event)
+        self.assertEqual(event["state_after"], "PLAY")
+        self.assertEqual(event["reason"], "booth_voice")
+
+    def test_any_announcer_similarity_returns(self):
+        """Color / sideline match via booth prototype — not only Al's cluster id."""
+        machine = Machine()
+        mute = {
+            "audio": reading(0.3, True),
+            "speaker": None,
+            "semantic": None,
+        }
+        for t in range(1, 5):
+            machine.step(t, 1.0, mute)
+        self.assertEqual(machine.state, "MUTED")
+        voice = {
+            "audio": reading(0.25, True, 0.25, False),
+            "speaker": {
+                "departure": 0.05,
+                "strong_departure": False,
+                "return": 0.0,
+                "strong_return": False,
+                "speech": True,
+                "recurring": False,
+                "booth_present": False,
+                "booth_locked": True,
+                "similarity_to_booth": 0.72,
+                "cluster_id": "c0099",
+            },
+            "semantic": None,
+        }
+        event = machine.step(5, 1.0, voice)
+        self.assertIsNotNone(event)
+        self.assertEqual(event["state_after"], "PLAY")
+        self.assertEqual(event["reason"], "booth_voice")
+
+    def test_al_outro_hold_blocks_mute_through_bumper_gap(self):
+        """Al into outro: linger booth_present (no speech) through the silent handoff."""
+        machine = Machine()
+        families = {
+            "audio": reading(0.3, True),
+            "speaker": {
+                "departure": None,
+                "strong_departure": False,
+                "return": 0.0,
+                "strong_return": False,
+                "speech": False,
+                "recurring": True,
+                "booth_present": True,
+                "booth_locked": True,
+                "continuity": None,
+            },
+            "semantic": None,
+        }
+        for t in range(1, 14):
+            self.assertIsNone(machine.step(t, 1.0, families))
+        self.assertEqual(machine.state, "PLAY")
+
+    def test_manual_play_is_immediate(self):
+        machine = Machine()
+        families = {
+            "audio": reading(0.3, True),
+            "speaker": reading(0.4, True),
+            "semantic": None,
+        }
+        machine.step(1, 1.0, families)
+        machine.step(2, 1.0, families)
+        machine.step(3, 1.0, families)
+        event = machine.manual(4, "play", families)
+        self.assertEqual(event["state_before"], "MUTED")
+        self.assertEqual(event["state_after"], "PLAY")
+        self.assertTrue(event["manual_override"])
+        self.assertEqual(machine.state, "PLAY")
+
+
+if __name__ == "__main__":
+    unittest.main()

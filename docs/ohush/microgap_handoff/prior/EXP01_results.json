@@ -1,0 +1,1103 @@
+{
+  "implementation_sha256": "7af559990dd7495decb448fd38a103180750769718f71cf08686ece6123cc46e",
+  "literature": {
+    "source": "https://arxiv.org/abs/1811.02411",
+    "frame_samples": 1920,
+    "frame_s": 0.04,
+    "absolute_db": -60.0,
+    "regression_reproduced": false
+  },
+  "relative": {
+    "drop_db": 18.0,
+    "recovery_db": 6.0,
+    "past_s": 2.0,
+    "past_floor_db": -45.0
+  },
+  "gate": "NOT_MET",
+  "gate_inputs": {
+    "program_per_hour": 134.028632688806,
+    "redzone_per_hour": 4.0,
+    "start_recall_1s": 0.029411764705882353,
+    "complement_hits_0.5s": 3,
+    "football_starts": 136
+  },
+  "scales": {
+    "10": {
+      "short_start": {
+        "n": 136,
+        "0.25": 2,
+        "0.5": 4,
+        "1.0": 7,
+        "2.0": 7,
+        "3.0": 12,
+        "delay_1s_median": 0.422,
+        "delay_1s_p95": 0.726
+      },
+      "short_end": {
+        "n": 136,
+        "0.25": 0,
+        "0.5": 1,
+        "1.0": 1,
+        "2.0": 1,
+        "3.0": 1
+      },
+      "absolute_start": {
+        "n": 136,
+        "0.25": 2,
+        "0.5": 3,
+        "1.0": 3,
+        "2.0": 3,
+        "3.0": 4,
+        "delay_1s_median": 0.07,
+        "delay_1s_p95": 0.07
+      },
+      "coarse_start": {
+        "n": 136,
+        "0.25": 11,
+        "0.5": 17,
+        "1.0": 24,
+        "2.0": 31,
+        "3.0": 49,
+        "delay_1s_median": 0.299,
+        "delay_1s_p95": 0.768
+      },
+      "rates_short": {
+        "football_program": {
+          "episodes": 1899,
+          "seconds": 67445.3,
+          "per_hour": 101.36215590443751
+        },
+        "football_far": {
+          "episodes": 1876,
+          "seconds": 67445.3,
+          "per_hour": 100.13449419522105
+        },
+        "redzone": {
+          "episodes": 6,
+          "seconds": 7200.0,
+          "per_hour": 3.0
+        },
+        "scripted": {
+          "episodes": 1592,
+          "seconds": 16248.9,
+          "per_hour": 352.71397501116996
+        },
+        "pod": {
+          "episodes": 597,
+          "seconds": 17525.8,
+          "per_hour": 122.63091586327783
+        },
+        "pod_interior": {
+          "episodes": 516,
+          "seconds": 17525.8,
+          "per_hour": 105.9925503943909
+        }
+      },
+      "rates_absolute": {
+        "football_program": {
+          "episodes": 246,
+          "seconds": 67445.3,
+          "per_hour": 13.130642629010863
+        },
+        "football_far": {
+          "episodes": 244,
+          "seconds": 67445.3,
+          "per_hour": 13.023889436905083
+        },
+        "redzone": {
+          "episodes": 0,
+          "seconds": 7200.0,
+          "per_hour": 0.0
+        },
+        "scripted": {
+          "episodes": 85,
+          "seconds": 16248.9,
+          "per_hour": 18.832090374340105
+        },
+        "pod": {
+          "episodes": 121,
+          "seconds": 17525.8,
+          "per_hour": 24.854842243645926
+        },
+        "pod_interior": {
+          "episodes": 108,
+          "seconds": 17525.8,
+          "per_hour": 22.18448729184926
+        }
+      },
+      "rates_coarse": {
+        "football_program": {
+          "episodes": 20915,
+          "seconds": 67445.3,
+          "per_hour": 1116.3715064461878
+        },
+        "football_far": {
+          "episodes": 20463,
+          "seconds": 67445.3,
+          "per_hour": 1092.2452850302816
+        },
+        "redzone": {
+          "episodes": 534,
+          "seconds": 7200.0,
+          "per_hour": 267.0
+        },
+        "scripted": {
+          "episodes": 18756,
+          "seconds": 16248.9,
+          "per_hour": 4155.466906601448
+        },
+        "pod": {
+          "episodes": 6709,
+          "seconds": 17525.8,
+          "per_hour": 1378.1085670464506
+        },
+        "pod_interior": {
+          "episodes": 5673,
+          "seconds": 17525.8,
+          "per_hour": 1165.301818580193
+        }
+      },
+      "rejected": {
+        "too_long": 3906,
+        "no_recovery": 39948,
+        "absolute_runs": 11940
+      }
+    },
+    "20": {
+      "short_start": {
+        "n": 136,
+        "0.25": 1,
+        "0.5": 3,
+        "1.0": 4,
+        "2.0": 5,
+        "3.0": 11,
+        "delay_1s_median": 0.386,
+        "delay_1s_p95": 0.422
+      },
+      "short_end": {
+        "n": 136,
+        "0.25": 0,
+        "0.5": 1,
+        "1.0": 1,
+        "2.0": 1,
+        "3.0": 3
+      },
+      "absolute_start": {
+        "n": 136,
+        "0.25": 1,
+        "0.5": 2,
+        "1.0": 2,
+        "2.0": 3,
+        "3.0": 3,
+        "delay_1s_median": 0.218,
+        "delay_1s_p95": 0.013
+      },
+      "coarse_start": {
+        "n": 136,
+        "0.25": 11,
+        "0.5": 15,
+        "1.0": 21,
+        "2.0": 29,
+        "3.0": 44,
+        "delay_1s_median": 0.242,
+        "delay_1s_p95": 0.853
+      },
+      "rates_short": {
+        "football_program": {
+          "episodes": 2256,
+          "seconds": 67445.3,
+          "per_hour": 120.41760069531914
+        },
+        "football_far": {
+          "episodes": 2226,
+          "seconds": 67445.3,
+          "per_hour": 118.81630281373243
+        },
+        "redzone": {
+          "episodes": 6,
+          "seconds": 7200.0,
+          "per_hour": 3.0
+        },
+        "scripted": {
+          "episodes": 1933,
+          "seconds": 16248.9,
+          "per_hour": 428.2638905129344
+        },
+        "pod": {
+          "episodes": 652,
+          "seconds": 17525.8,
+          "per_hour": 133.92857142857144
+        },
+        "pod_interior": {
+          "episodes": 566,
+          "seconds": 17525.8,
+          "per_hour": 116.26314636283963
+        }
+      },
+      "rates_absolute": {
+        "football_program": {
+          "episodes": 315,
+          "seconds": 67445.3,
+          "per_hour": 16.81362775666025
+        },
+        "football_far": {
+          "episodes": 311,
+          "seconds": 67445.3,
+          "per_hour": 16.600121372448694
+        },
+        "redzone": {
+          "episodes": 0,
+          "seconds": 7200.0,
+          "per_hour": 0.0
+        },
+        "scripted": {
+          "episodes": 77,
+          "seconds": 16248.9,
+          "per_hour": 17.059658339108097
+        },
+        "pod": {
+          "episodes": 142,
+          "seconds": 17525.8,
+          "per_hour": 29.168492550394394
+        },
+        "pod_interior": {
+          "episodes": 131,
+          "seconds": 17525.8,
+          "per_hour": 26.908961437335673
+        }
+      },
+      "rates_coarse": {
+        "football_program": {
+          "episodes": 13278,
+          "seconds": 67445.3,
+          "per_hour": 708.7344423902692
+        },
+        "football_far": {
+          "episodes": 12963,
+          "seconds": 67445.3,
+          "per_hour": 691.920814633609
+        },
+        "redzone": {
+          "episodes": 452,
+          "seconds": 7200.0,
+          "per_hour": 226.0
+        },
+        "scripted": {
+          "episodes": 11258,
+          "seconds": 16248.9,
+          "per_hour": 2494.254981580246
+        },
+        "pod": {
+          "episodes": 3883,
+          "seconds": 17525.8,
+          "per_hour": 797.6144829097284
+        },
+        "pod_interior": {
+          "episodes": 3299,
+          "seconds": 17525.8,
+          "per_hour": 677.6539219982473
+        }
+      },
+      "rejected": {
+        "too_long": 4182,
+        "no_recovery": 20395,
+        "absolute_runs": 7045
+      }
+    },
+    "40": {
+      "short_start": {
+        "n": 136,
+        "0.25": 1,
+        "0.5": 3,
+        "1.0": 4,
+        "2.0": 5,
+        "3.0": 12,
+        "delay_1s_median": 0.458,
+        "delay_1s_p95": 0.494
+      },
+      "short_end": {
+        "n": 136,
+        "0.25": 0,
+        "0.5": 0,
+        "1.0": 0,
+        "2.0": 1,
+        "3.0": 3
+      },
+      "absolute_start": {
+        "n": 136,
+        "0.25": 2,
+        "0.5": 3,
+        "1.0": 3,
+        "2.0": 3,
+        "3.0": 5,
+        "delay_1s_median": 0.137,
+        "delay_1s_p95": 0.137
+      },
+      "coarse_start": {
+        "n": 136,
+        "0.25": 10,
+        "0.5": 15,
+        "1.0": 18,
+        "2.0": 26,
+        "3.0": 41,
+        "delay_1s_median": 0.216,
+        "delay_1s_p95": 0.715
+      },
+      "rates_short": {
+        "football_program": {
+          "episodes": 2511,
+          "seconds": 67445.3,
+          "per_hour": 134.028632688806
+        },
+        "football_far": {
+          "episodes": 2476,
+          "seconds": 67445.3,
+          "per_hour": 132.16045182695487
+        },
+        "redzone": {
+          "episodes": 8,
+          "seconds": 7200.0,
+          "per_hour": 4.0
+        },
+        "scripted": {
+          "episodes": 2215,
+          "seconds": 16248.9,
+          "per_hour": 490.74211975486276
+        },
+        "pod": {
+          "episodes": 659,
+          "seconds": 17525.8,
+          "per_hour": 135.36645486415426
+        },
+        "pod_interior": {
+          "episodes": 567,
+          "seconds": 17525.8,
+          "per_hour": 116.4685582822086
+        }
+      },
+      "rates_absolute": {
+        "football_program": {
+          "episodes": 340,
+          "seconds": 67445.3,
+          "per_hour": 18.148042657982494
+        },
+        "football_far": {
+          "episodes": 339,
+          "seconds": 67445.3,
+          "per_hour": 18.094666061929605
+        },
+        "redzone": {
+          "episodes": 0,
+          "seconds": 7200.0,
+          "per_hour": 0.0
+        },
+        "scripted": {
+          "episodes": 97,
+          "seconds": 16248.9,
+          "per_hour": 21.49073842718812
+        },
+        "pod": {
+          "episodes": 139,
+          "seconds": 17525.8,
+          "per_hour": 28.55225679228747
+        },
+        "pod_interior": {
+          "episodes": 124,
+          "seconds": 17525.8,
+          "per_hour": 25.47107800175285
+        }
+      },
+      "rates_coarse": {
+        "football_program": {
+          "episodes": 8957,
+          "seconds": 67445.3,
+          "per_hour": 478.09417084573295
+        },
+        "football_far": {
+          "episodes": 8716,
+          "seconds": 67445.3,
+          "per_hour": 465.2304111969865
+        },
+        "redzone": {
+          "episodes": 413,
+          "seconds": 7200.0,
+          "per_hour": 206.5
+        },
+        "scripted": {
+          "episodes": 7638,
+          "seconds": 16248.9,
+          "per_hour": 1692.2294856377614
+        },
+        "pod": {
+          "episodes": 2601,
+          "seconds": 17525.8,
+          "per_hour": 534.2764022787029
+        },
+        "pod_interior": {
+          "episodes": 2196,
+          "seconds": 17525.8,
+          "per_hour": 451.08457493426823
+        }
+      },
+      "rejected": {
+        "too_long": 4389,
+        "no_recovery": 10133,
+        "absolute_runs": 4804
+      }
+    },
+    "100": {
+      "short_start": {
+        "n": 136,
+        "0.25": 3,
+        "0.5": 4,
+        "1.0": 6,
+        "2.0": 7,
+        "3.0": 9,
+        "delay_1s_median": 0.328,
+        "delay_1s_p95": 0.776
+      },
+      "short_end": {
+        "n": 136,
+        "0.25": 0,
+        "0.5": 0,
+        "1.0": 0,
+        "2.0": 0,
+        "3.0": 2
+      },
+      "absolute_start": {
+        "n": 136,
+        "0.25": 3,
+        "0.5": 4,
+        "1.0": 5,
+        "2.0": 6,
+        "3.0": 7,
+        "delay_1s_median": 0.194,
+        "delay_1s_p95": 0.462
+      },
+      "coarse_start": {
+        "n": 136,
+        "0.25": 20,
+        "0.5": 22,
+        "1.0": 24,
+        "2.0": 30,
+        "3.0": 40,
+        "delay_1s_median": 0.09,
+        "delay_1s_p95": 0.362
+      },
+      "rates_short": {
+        "football_program": {
+          "episodes": 1322,
+          "seconds": 67445.3,
+          "per_hour": 70.56385998192016
+        },
+        "football_far": {
+          "episodes": 1305,
+          "seconds": 67445.3,
+          "per_hour": 69.65645784902104
+        },
+        "redzone": {
+          "episodes": 3,
+          "seconds": 7200.0,
+          "per_hour": 1.5
+        },
+        "scripted": {
+          "episodes": 1405,
+          "seconds": 16248.9,
+          "per_hour": 311.28337618762174
+        },
+        "pod": {
+          "episodes": 409,
+          "seconds": 17525.8,
+          "per_hour": 84.01347502191061
+        },
+        "pod_interior": {
+          "episodes": 362,
+          "seconds": 17525.8,
+          "per_hour": 74.3591148115688
+        }
+      },
+      "rates_absolute": {
+        "football_program": {
+          "episodes": 240,
+          "seconds": 67445.3,
+          "per_hour": 12.810383052693524
+        },
+        "football_far": {
+          "episodes": 234,
+          "seconds": 67445.3,
+          "per_hour": 12.490123476376187
+        },
+        "redzone": {
+          "episodes": 1,
+          "seconds": 7200.0,
+          "per_hour": 0.5
+        },
+        "scripted": {
+          "episodes": 65,
+          "seconds": 16248.9,
+          "per_hour": 14.40101028626008
+        },
+        "pod": {
+          "episodes": 120,
+          "seconds": 17525.8,
+          "per_hour": 24.649430324276953
+        },
+        "pod_interior": {
+          "episodes": 105,
+          "seconds": 17525.8,
+          "per_hour": 21.568251533742334
+        }
+      },
+      "rates_coarse": {
+        "football_program": {
+          "episodes": 4803,
+          "seconds": 67445.3,
+          "per_hour": 256.36779084202914
+        },
+        "football_far": {
+          "episodes": 4629,
+          "seconds": 67445.3,
+          "per_hour": 247.08026312882635
+        },
+        "redzone": {
+          "episodes": 394,
+          "seconds": 7200.0,
+          "per_hour": 197.0
+        },
+        "scripted": {
+          "episodes": 3854,
+          "seconds": 16248.9,
+          "per_hour": 853.8691329730208
+        },
+        "pod": {
+          "episodes": 1557,
+          "seconds": 17525.8,
+          "per_hour": 319.8263584574935
+        },
+        "pod_interior": {
+          "episodes": 1286,
+          "seconds": 17525.8,
+          "per_hour": 264.15972830850137
+        }
+      },
+      "rejected": {
+        "too_long": 4398,
+        "no_recovery": 3223,
+        "absolute_runs": 3221
+      }
+    },
+    "250": {
+      "short_start": {
+        "n": 136,
+        "0.25": 0,
+        "0.5": 0,
+        "1.0": 0,
+        "2.0": 0,
+        "3.0": 0
+      },
+      "short_end": {
+        "n": 136,
+        "0.25": 0,
+        "0.5": 0,
+        "1.0": 0,
+        "2.0": 0,
+        "3.0": 0
+      },
+      "absolute_start": {
+        "n": 136,
+        "0.25": 0,
+        "0.5": 0,
+        "1.0": 0,
+        "2.0": 0,
+        "3.0": 0
+      },
+      "coarse_start": {
+        "n": 136,
+        "0.25": 35,
+        "0.5": 45,
+        "1.0": 46,
+        "2.0": 51,
+        "3.0": 54,
+        "delay_1s_median": 0.138,
+        "delay_1s_p95": 0.436
+      },
+      "rates_short": {
+        "football_program": {
+          "episodes": 0,
+          "seconds": 67445.3,
+          "per_hour": 0.0
+        },
+        "football_far": {
+          "episodes": 0,
+          "seconds": 67445.3,
+          "per_hour": 0.0
+        },
+        "redzone": {
+          "episodes": 0,
+          "seconds": 7200.0,
+          "per_hour": 0.0
+        },
+        "scripted": {
+          "episodes": 0,
+          "seconds": 16248.9,
+          "per_hour": 0.0
+        },
+        "pod": {
+          "episodes": 0,
+          "seconds": 17525.8,
+          "per_hour": 0.0
+        },
+        "pod_interior": {
+          "episodes": 0,
+          "seconds": 17525.8,
+          "per_hour": 0.0
+        }
+      },
+      "rates_absolute": {
+        "football_program": {
+          "episodes": 0,
+          "seconds": 67445.3,
+          "per_hour": 0.0
+        },
+        "football_far": {
+          "episodes": 0,
+          "seconds": 67445.3,
+          "per_hour": 0.0
+        },
+        "redzone": {
+          "episodes": 0,
+          "seconds": 7200.0,
+          "per_hour": 0.0
+        },
+        "scripted": {
+          "episodes": 0,
+          "seconds": 16248.9,
+          "per_hour": 0.0
+        },
+        "pod": {
+          "episodes": 0,
+          "seconds": 17525.8,
+          "per_hour": 0.0
+        },
+        "pod_interior": {
+          "episodes": 0,
+          "seconds": 17525.8,
+          "per_hour": 0.0
+        }
+      },
+      "rates_coarse": {
+        "football_program": {
+          "episodes": 2802,
+          "seconds": 67445.3,
+          "per_hour": 149.5612221401969
+        },
+        "football_far": {
+          "episodes": 2676,
+          "seconds": 67445.3,
+          "per_hour": 142.8357710375328
+        },
+        "redzone": {
+          "episodes": 393,
+          "seconds": 7200.0,
+          "per_hour": 196.5
+        },
+        "scripted": {
+          "episodes": 1737,
+          "seconds": 16248.9,
+          "per_hour": 384.83930564975014
+        },
+        "pod": {
+          "episodes": 916,
+          "seconds": 17525.8,
+          "per_hour": 188.15731814198074
+        },
+        "pod_interior": {
+          "episodes": 705,
+          "seconds": 17525.8,
+          "per_hour": 144.8154031551271
+        }
+      },
+      "rejected": {
+        "too_long": 5955,
+        "no_recovery": 0,
+        "absolute_runs": 2328
+      }
+    },
+    "500": {
+      "short_start": {
+        "n": 136,
+        "0.25": 0,
+        "0.5": 0,
+        "1.0": 0,
+        "2.0": 0,
+        "3.0": 0
+      },
+      "short_end": {
+        "n": 136,
+        "0.25": 0,
+        "0.5": 0,
+        "1.0": 0,
+        "2.0": 0,
+        "3.0": 0
+      },
+      "absolute_start": {
+        "n": 136,
+        "0.25": 0,
+        "0.5": 0,
+        "1.0": 0,
+        "2.0": 0,
+        "3.0": 0
+      },
+      "coarse_start": {
+        "n": 136,
+        "0.25": 15,
+        "0.5": 41,
+        "1.0": 65,
+        "2.0": 69,
+        "3.0": 72,
+        "delay_1s_median": 0.441,
+        "delay_1s_p95": 0.718
+      },
+      "rates_short": {
+        "football_program": {
+          "episodes": 0,
+          "seconds": 67445.3,
+          "per_hour": 0.0
+        },
+        "football_far": {
+          "episodes": 0,
+          "seconds": 67445.3,
+          "per_hour": 0.0
+        },
+        "redzone": {
+          "episodes": 0,
+          "seconds": 7200.0,
+          "per_hour": 0.0
+        },
+        "scripted": {
+          "episodes": 0,
+          "seconds": 16248.9,
+          "per_hour": 0.0
+        },
+        "pod": {
+          "episodes": 0,
+          "seconds": 17525.8,
+          "per_hour": 0.0
+        },
+        "pod_interior": {
+          "episodes": 0,
+          "seconds": 17525.8,
+          "per_hour": 0.0
+        }
+      },
+      "rates_absolute": {
+        "football_program": {
+          "episodes": 0,
+          "seconds": 67445.3,
+          "per_hour": 0.0
+        },
+        "football_far": {
+          "episodes": 0,
+          "seconds": 67445.3,
+          "per_hour": 0.0
+        },
+        "redzone": {
+          "episodes": 0,
+          "seconds": 7200.0,
+          "per_hour": 0.0
+        },
+        "scripted": {
+          "episodes": 0,
+          "seconds": 16248.9,
+          "per_hour": 0.0
+        },
+        "pod": {
+          "episodes": 0,
+          "seconds": 17525.8,
+          "per_hour": 0.0
+        },
+        "pod_interior": {
+          "episodes": 0,
+          "seconds": 17525.8,
+          "per_hour": 0.0
+        }
+      },
+      "rates_coarse": {
+        "football_program": {
+          "episodes": 1623,
+          "seconds": 67445.3,
+          "per_hour": 86.63021539383996
+        },
+        "football_far": {
+          "episodes": 1510,
+          "seconds": 67445.3,
+          "per_hour": 80.59866003986343
+        },
+        "redzone": {
+          "episodes": 392,
+          "seconds": 7200.0,
+          "per_hour": 196.0
+        },
+        "scripted": {
+          "episodes": 701,
+          "seconds": 16248.9,
+          "per_hour": 155.30935708720486
+        },
+        "pod": {
+          "episodes": 578,
+          "seconds": 17525.8,
+          "per_hour": 118.72808939526732
+        },
+        "pod_interior": {
+          "episodes": 417,
+          "seconds": 17525.8,
+          "per_hour": 85.65677037686241
+        }
+      },
+      "rejected": {
+        "too_long": 3350,
+        "no_recovery": 0,
+        "absolute_runs": 1886
+      }
+    },
+    "40_both_channels": {
+      "start": {
+        "n": 136,
+        "0.25": 1,
+        "0.5": 3,
+        "1.0": 4,
+        "2.0": 5,
+        "3.0": 12,
+        "delay_1s_median": 0.458,
+        "delay_1s_p95": 0.494
+      },
+      "end": {
+        "n": 136,
+        "0.25": 0,
+        "0.5": 0,
+        "1.0": 0,
+        "2.0": 1,
+        "3.0": 3
+      },
+      "rates": {
+        "football_program": {
+          "episodes": 2510,
+          "seconds": 67445.3,
+          "per_hour": 133.9752560927531
+        },
+        "football_far": {
+          "episodes": 2475,
+          "seconds": 67445.3,
+          "per_hour": 132.10707523090198
+        },
+        "redzone": {
+          "episodes": 8,
+          "seconds": 7200.0,
+          "per_hour": 4.0
+        },
+        "scripted": {
+          "episodes": 2212,
+          "seconds": 16248.9,
+          "per_hour": 490.07745774165073
+        },
+        "pod": {
+          "episodes": 658,
+          "seconds": 17525.8,
+          "per_hour": 135.1610429447853
+        },
+        "pod_interior": {
+          "episodes": 566,
+          "seconds": 17525.8,
+          "per_hour": 116.26314636283963
+        }
+      }
+    }
+  },
+  "descriptive_drop_db": {
+    "football_starts": {
+      "n": 135,
+      "p50": 47.06,
+      "p90": 67.5
+    },
+    "football_ends": {
+      "n": 130,
+      "p50": 42.45,
+      "p90": 77.57
+    },
+    "football_program_controls": {
+      "n": 2069,
+      "p50": 6.6,
+      "p90": 18.88
+    },
+    "redzone_controls": {
+      "n": 239,
+      "p50": 6.08,
+      "p90": 15.66
+    },
+    "starts_drop_ge_18": 96,
+    "starts_min_db_le_m60": 88,
+    "starts_described": 135
+  },
+  "spectral_flux_40ms": {
+    "at_start_causal_0.25s": {
+      "n": 166,
+      "p50": 0.94,
+      "p90": 2.37
+    },
+    "program_sample": {
+      "n": 4788,
+      "p50": 0.82,
+      "p90": 1.15
+    }
+  },
+  "stereo_corr_40ms": {
+    "at_start_frame": {
+      "n": 166,
+      "p50": 0.58,
+      "p90": 0.98
+    },
+    "program_sample": {
+      "n": 4788,
+      "p50": 0.89,
+      "p90": 1.0
+    }
+  },
+  "floors": {
+    "hush_20261007_220650": {
+      "p01": -94.75,
+      "p50": -35.19
+    },
+    "hush_20260909_213047": {
+      "p01": -94.45,
+      "p50": -30.36
+    },
+    "hush_20260913_150934": {
+      "p01": -94.74,
+      "p50": -37.07
+    },
+    "hush_20260913_210542": {
+      "p01": -97.41,
+      "p50": -25.87
+    },
+    "hush_20261008_205100": {
+      "p01": -84.84,
+      "p50": -36.0
+    },
+    "hush_20261011_204300": {
+      "p01": -240.0,
+      "p50": -37.61
+    },
+    "hush_20261012_204200": {
+      "p01": -240.0,
+      "p50": -30.06
+    },
+    "hush_20261010_222400": {
+      "p01": -94.77,
+      "p50": -30.31
+    },
+    "hush_20261011_135700": {
+      "p01": -94.82,
+      "p50": -35.76
+    },
+    "hush_20260914_212529": {
+      "p01": -94.62,
+      "p50": -26.87
+    },
+    "hush_20260924_220624": {
+      "p01": -86.54,
+      "p50": -36.3
+    },
+    "hush_20260827_135935": {
+      "p01": -64.63,
+      "p50": -34.54
+    }
+  },
+  "measured_s": {
+    "hush_20261007_220650": {
+      "program": 0.0,
+      "pod": 1521.26,
+      "redzone": 0.0,
+      "scripted": 10209.74,
+      "missing": 0.0
+    },
+    "hush_20260909_213047": {
+      "program": 6523.07,
+      "pod": 2849.93,
+      "redzone": 0.0,
+      "scripted": 0.0,
+      "missing": 0.0
+    },
+    "hush_20260913_150934": {
+      "program": 0.0,
+      "pod": 0.0,
+      "redzone": 7200.0,
+      "scripted": 0.0,
+      "missing": 0.0
+    },
+    "hush_20260913_210542": {
+      "program": 9547.54,
+      "pod": 3052.46,
+      "redzone": 0.0,
+      "scripted": 0.0,
+      "missing": 0.0
+    },
+    "hush_20261008_205100": {
+      "program": 7556.96,
+      "pod": 2523.4,
+      "redzone": 0.0,
+      "scripted": 0.0,
+      "missing": 360.0
+    },
+    "hush_20261011_204300": {
+      "program": 13722.93,
+      "pod": 622.44,
+      "redzone": 0.0,
+      "scripted": 0.0,
+      "missing": 60.0
+    },
+    "hush_20261012_204200": {
+      "program": 10167.49,
+      "pod": 2944.31,
+      "redzone": 0.0,
+      "scripted": 0.0,
+      "missing": 0.0
+    },
+    "hush_20261010_222400": {
+      "program": 4982.95,
+      "pod": 1081.81,
+      "redzone": 0.0,
+      "scripted": 0.0,
+      "missing": 0.0
+    },
+    "hush_20261011_135700": {
+      "program": 3913.79,
+      "pod": 982.97,
+      "redzone": 0.0,
+      "scripted": 0.0,
+      "missing": 0.0
+    },
+    "hush_20260914_212529": {
+      "program": 5094.92,
+      "pod": 1804.08,
+      "redzone": 0.0,
+      "scripted": 0.0,
+      "missing": 0.0
+    },
+    "hush_20260924_220624": {
+      "program": 5935.64,
+      "pod": 1664.3600000000001,
+      "redzone": 0.0,
+      "scripted": 0.0,
+      "missing": 0.0
+    },
+    "hush_20260827_135935": {
+      "program": 0.0,
+      "pod": 860.88,
+      "redzone": 0.0,
+      "scripted": 6039.12,
+      "missing": 0.0
+    }
+  },
+  "wall_s": 261.8,
+  "max_rss_bytes": 552927232
+}

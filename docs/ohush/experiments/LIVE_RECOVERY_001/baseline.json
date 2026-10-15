@@ -1,0 +1,16 @@
+{
+  "experiment": "LIVE_RECOVERY_001",
+  "scientific_authority": false,
+  "dataset_role": "live_dev",
+  "head_sha": "eedcb444c2546e06f6b3cea16dc2efb92b8d6506",
+  "working_tree_dirty": true,
+  "defect_peak_source": "ohush_live_false_negative_audit_2026-10-08.zip",
+  "defect_peak_state_sha256": "af272995a971e0f233f693252d3f2a0f9f9809bbb795138681af3e6b4bce8a1e",
+  "session": "ohush_live/sessions/2026-10-08-tnf",
+  "frozen_track": "docs/ohush/experiments/LIVE_RECOVERY_001/inputs/session_2026-10-08-tnf/track.jsonl",
+  "frozen_track_sha256": "f4850eccecfb8bbf734fefce0854fb3fe0677e6f339d9f6abe1672d4a02be442",
+  "wav_inventory": "docs/ohush/experiments/LIVE_RECOVERY_001/inputs/wav_inventory.json",
+  "python_root": "3.13.5",
+  "torch_exp002": "2.14.1",
+  "policy_note": "Defect-peak BOOTH_HOLD_S=12, permanent booth_locked veto. Git HEAD had no booth_locked."
+}

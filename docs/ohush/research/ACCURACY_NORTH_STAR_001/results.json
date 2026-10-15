@@ -1,0 +1,42 @@
+{
+  "football_pods": 136,
+  "ad_seconds": 17648.4,
+  "program_seconds_published": 67428.0,
+  "corpus_seconds": 85076.4,
+  "budget_99_99_seconds": 8.51,
+  "budget_99_99_three_hour_game_seconds": 1.08,
+  "ceiling_perfect_return": {
+    "within_3s": {
+      "pods_muted": 86,
+      "delay_seconds_on_those_pods": 72.9,
+      "missed_pods": 50,
+      "missed_pod_seconds": 6406.8,
+      "ad_seconds_heard": 6479.6
+    },
+    "within_30s": {
+      "pods_muted": 131,
+      "delay_seconds_on_those_pods": 582.0,
+      "missed_pods": 5,
+      "missed_pod_seconds": 534.9,
+      "ad_seconds_heard": 1116.9
+    },
+    "if_every_pod_were_caught_at_1_12s": 152.3
+  },
+  "causal_or_episode_seconds": {
+    "fresh_end": 46.0,
+    "fresh_start": 73.0,
+    "inside_pod": 2604.0,
+    "ongoing_start": 121.0,
+    "program": 5862.0,
+    "redzone": 1369.0
+  },
+  "causal_or_episode_counts": {
+    "fresh_end": 35,
+    "fresh_start": 50,
+    "inside_pod": 1723,
+    "ongoing_start": 41,
+    "program": 3993,
+    "redzone": 947
+  },
+  "note": "Perfect return is an accounting device. The causal episode totals are the frozen scan."
+}

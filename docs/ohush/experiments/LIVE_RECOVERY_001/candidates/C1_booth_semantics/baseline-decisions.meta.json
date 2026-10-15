@@ -1,0 +1,10 @@
+{
+  "alias": "defect_peak",
+  "code_root": "/Users/Projects/hush.dev/docs/ohush/experiments/LIVE_RECOVERY_001/baseline/defect_peak",
+  "track": "/Users/Projects/hush.dev/docs/ohush/experiments/LIVE_RECOVERY_001/inputs/session_2026-10-08-tnf/track.jsonl",
+  "track_sha256": "f4850eccecfb8bbf734fefce0854fb3fe0677e6f339d9f6abe1672d4a02be442",
+  "state_sha256": "af272995a971e0f233f693252d3f2a0f9f9809bbb795138681af3e6b4bce8a1e",
+  "n_events": 40,
+  "n_mute": 23,
+  "n_play": 17
+}

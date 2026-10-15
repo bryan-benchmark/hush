@@ -1,0 +1,125 @@
+{
+  "instructions": "The moment under review is 10.000 seconds into the clip. This file contains no gold label and no model score.",
+  "items": [
+    {
+      "id": "r001",
+      "session": "hush_20261010_222400",
+      "play_start": 141.12,
+      "duration": 20.0
+    },
+    {
+      "id": "r002",
+      "session": "hush_20261011_135700",
+      "play_start": 2203.156,
+      "duration": 20.0
+    },
+    {
+      "id": "r003",
+      "session": "hush_20261012_204200",
+      "play_start": 780.464,
+      "duration": 20.0
+    },
+    {
+      "id": "r004",
+      "session": "hush_20261012_204200",
+      "play_start": 6408.34,
+      "duration": 20.0
+    },
+    {
+      "id": "r005",
+      "session": "hush_20260914_212529",
+      "play_start": 295.767,
+      "duration": 20.0
+    },
+    {
+      "id": "r006",
+      "session": "hush_20260914_212529",
+      "play_start": 1298.197,
+      "duration": 20.0
+    },
+    {
+      "id": "r007",
+      "session": "hush_20260914_212529",
+      "play_start": 3280.206,
+      "duration": 20.0
+    },
+    {
+      "id": "r008",
+      "session": "hush_20260914_212529",
+      "play_start": 5147.32,
+      "duration": 20.0
+    },
+    {
+      "id": "r009",
+      "session": "hush_20260909_213047",
+      "play_start": 131.539,
+      "duration": 20.0
+    },
+    {
+      "id": "r010",
+      "session": "hush_20260909_213047",
+      "play_start": 4065.106,
+      "duration": 20.0
+    },
+    {
+      "id": "r011",
+      "session": "hush_20260913_210542",
+      "play_start": 144.609,
+      "duration": 20.0
+    },
+    {
+      "id": "r012",
+      "session": "hush_20260913_210542",
+      "play_start": 5415.29,
+      "duration": 20.0
+    },
+    {
+      "id": "r013",
+      "session": "hush_20260924_220624",
+      "play_start": 39.585,
+      "duration": 20.0
+    },
+    {
+      "id": "r014",
+      "session": "hush_20260924_220624",
+      "play_start": 1601.211,
+      "duration": 20.0
+    },
+    {
+      "id": "r015",
+      "session": "hush_20260924_220624",
+      "play_start": 2907.945,
+      "duration": 20.0
+    },
+    {
+      "id": "r016",
+      "session": "hush_20260924_220624",
+      "play_start": 5508.664,
+      "duration": 20.0
+    },
+    {
+      "id": "r017",
+      "session": "hush_20261008_205100",
+      "play_start": 366.9,
+      "duration": 20.0
+    },
+    {
+      "id": "r018",
+      "session": "hush_20261008_205100",
+      "play_start": 2355.654,
+      "duration": 20.0
+    },
+    {
+      "id": "r019",
+      "session": "hush_20261008_205100",
+      "play_start": 4969.744,
+      "duration": 20.0
+    },
+    {
+      "id": "r020",
+      "session": "hush_20261008_205100",
+      "play_start": 7787.831,
+      "duration": 20.0
+    }
+  ]
+}

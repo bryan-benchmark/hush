@@ -1,0 +1,103 @@
+[
+  {
+    "bed": "wednesday_night",
+    "peak": 0.7127,
+    "rms": 0.0987,
+    "crest": 7.22,
+    "speechish_ratio": 0.0,
+    "loop_edge_delta": 0.0501,
+    "clipped": false,
+    "suitable_for_default": true
+  },
+  {
+    "bed": "wednesday_night_lofi_again",
+    "peak": 0.6933,
+    "rms": 0.1,
+    "crest": 6.933,
+    "speechish_ratio": 0.0,
+    "loop_edge_delta": 0.1037,
+    "clipped": false,
+    "suitable_for_default": true
+  },
+  {
+    "bed": "wednesday_night_cup_of_tea",
+    "peak": 0.6381,
+    "rms": 0.0672,
+    "crest": 9.502,
+    "speechish_ratio": 0.0106,
+    "loop_edge_delta": 0.0016,
+    "clipped": false,
+    "suitable_for_default": true
+  },
+  {
+    "bed": "friends_over",
+    "peak": 0.4775,
+    "rms": 0.0977,
+    "crest": 4.89,
+    "speechish_ratio": 0.0,
+    "loop_edge_delta": 0.0003,
+    "clipped": false,
+    "suitable_for_default": false
+  },
+  {
+    "bed": "friends_over_disco",
+    "peak": 0.5235,
+    "rms": 0.0978,
+    "crest": 5.353,
+    "speechish_ratio": 0.0,
+    "loop_edge_delta": 0.0264,
+    "clipped": false,
+    "suitable_for_default": false
+  },
+  {
+    "bed": "friends_over_empty_stretch",
+    "peak": 0.5587,
+    "rms": 0.0987,
+    "crest": 5.658,
+    "speechish_ratio": 0.0,
+    "loop_edge_delta": 0.0079,
+    "clipped": false,
+    "suitable_for_default": false
+  },
+  {
+    "bed": "cocktail_lounge",
+    "peak": 0.7027,
+    "rms": 0.0977,
+    "crest": 7.192,
+    "speechish_ratio": 0.0,
+    "loop_edge_delta": 0.0332,
+    "clipped": false,
+    "suitable_for_default": false
+  },
+  {
+    "bed": "cocktail_lounge_bossa",
+    "peak": 0.6665,
+    "rms": 0.0966,
+    "crest": 6.902,
+    "speechish_ratio": 0.0,
+    "loop_edge_delta": 0.0001,
+    "clipped": false,
+    "suitable_for_default": false
+  },
+  {
+    "bed": "rainy_night",
+    "peak": 0.6337,
+    "rms": 0.0915,
+    "crest": 6.928,
+    "speechish_ratio": 0.0311,
+    "loop_edge_delta": 0.0025,
+    "clipped": false,
+    "suitable_for_default": false
+  },
+  {
+    "bed": "stadium_vibe",
+    "peak": 0.7173,
+    "rms": 0.0647,
+    "crest": 11.082,
+    "speechish_ratio": 0.0378,
+    "loop_edge_delta": 0.0071,
+    "clipped": false,
+    "suitable_for_default": false,
+    "notes": "calm_crop_start_s=157.0 crest_score=12.127"
+  }
+]

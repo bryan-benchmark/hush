@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img">
+  <title>Peacock</title>
+  <circle fill="#FF7A00" cx="7" cy="10" r="3"/>
+  <circle fill="#FFD100" cx="12" cy="7.5" r="3"/>
+  <circle fill="#00C389" cx="17" cy="10" r="3"/>
+  <circle fill="#0B6EFD" cx="9.5" cy="15" r="3"/>
+  <circle fill="#6E3CBC" cx="14.5" cy="15" r="3"/>
+</svg>

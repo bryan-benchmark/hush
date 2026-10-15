@@ -1,0 +1,1736 @@
+{
+  "system": "universal_v2_content_state",
+  "verdict": "FAIL",
+  "gate": {
+    "additional_commercial_seconds_vs_v1_on_evaluation": 0.0,
+    "evaluation_program_seconds_covered": 0.0,
+    "program_cap_s": 10.0,
+    "commercial_gain_required_s": 1000.0,
+    "broadcasters_with_a_gain_inside_the_cap": [],
+    "met": false
+  },
+  "chosen_on_calibration": {
+    "T_high": null,
+    "T_low": null,
+    "fallback": "play",
+    "reason": "no grid point stayed within 10 program seconds"
+  },
+  "gate0": {
+    "gross_football_coverage_s": 85391.084,
+    "gross_commercial_s": 17648.4,
+    "gross_program_s": 67742.684,
+    "dsp_integer_program_s": 67446,
+    "published_18_73h_s": 67428.0,
+    "published_note": "18.73 is 67446/3600 rounded to two decimals. 18.73*3600 is 67428, eighteen seconds under the DSP integer total.",
+    "v1_read_failure_s": 275.0,
+    "missing_commercial_s": 92.684,
+    "missing_program_s": 182.316,
+    "scorable_commercial_s": 17555.716,
+    "scorable_program_s": 67560.368,
+    "like_for_like_no_cover_heard_s": 17555.716,
+    "budget_99_99_on_gross_coverage_s": 8.539,
+    "budget_99_99_published_s": 8.508
+  },
+  "not_measured": {
+    "cnn14_full_embedding": "The stored series are anomaly scores, not embedding vectors, and October football has no series. Torch is not installed.",
+    "audio_text_model": "No CLAP or audio-text checkpoint is installed.",
+    "full_stream_asr": "Not run. The sign-off study remains the gold-neighborhood transcripts only.",
+    "verified_speaker": "Enrollment count is 0. Booth files were not read.",
+    "enhanced_feed": "No accuracy number."
+  },
+  "split": {
+    "train": [
+      "hush_20260909_213047",
+      "hush_20260924_220624"
+    ],
+    "calibration": [
+      "hush_20260913_210542",
+      "hush_20260914_212529"
+    ],
+    "evaluation": [
+      "hush_20261008_205100",
+      "hush_20261010_222400",
+      "hush_20261011_135700",
+      "hush_20261011_204300",
+      "hush_20261012_204200"
+    ]
+  },
+  "train_windows": {
+    "n": 3362,
+    "commercial": 904,
+    "program": 2458
+  },
+  "scored": {
+    "train": {
+      "population": "block",
+      "commercial_seconds_heard": 4514.3,
+      "commercial_seconds_covered": 0.0,
+      "program_seconds_covered": 0.0,
+      "false_cover_incidents": 0,
+      "worst_program_interruption_s": 0.0,
+      "sessions": [
+        {
+          "session": "hush_20260909_213047",
+          "network": "NBC",
+          "commercial_seconds_heard": 2849.9,
+          "commercial_seconds_covered": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_program_interruption_s": 0.0,
+          "scorable_commercial_s": 2849.9,
+          "scorable_program_s": 6523.1,
+          "unscorable_s": 0
+        },
+        {
+          "session": "hush_20260924_220624",
+          "network": "Prime",
+          "commercial_seconds_heard": 1664.4,
+          "commercial_seconds_covered": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_program_interruption_s": 0.0,
+          "scorable_commercial_s": 1664.4,
+          "scorable_program_s": 5935.6,
+          "unscorable_s": 0
+        }
+      ],
+      "T_high": 1.1,
+      "T_low": -0.1
+    },
+    "calibration": {
+      "population": "block",
+      "commercial_seconds_heard": 4856.5,
+      "commercial_seconds_covered": 0.0,
+      "program_seconds_covered": 0.0,
+      "false_cover_incidents": 0,
+      "worst_program_interruption_s": 0.0,
+      "sessions": [
+        {
+          "session": "hush_20260913_210542",
+          "network": "NBC",
+          "commercial_seconds_heard": 3052.5,
+          "commercial_seconds_covered": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_program_interruption_s": 0.0,
+          "scorable_commercial_s": 3052.5,
+          "scorable_program_s": 9547.5,
+          "unscorable_s": 0
+        },
+        {
+          "session": "hush_20260914_212529",
+          "network": "ESPN",
+          "commercial_seconds_heard": 1804.0,
+          "commercial_seconds_covered": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_program_interruption_s": 0.0,
+          "scorable_commercial_s": 1804.0,
+          "scorable_program_s": 5095.0,
+          "unscorable_s": 0
+        }
+      ],
+      "T_high": 1.1,
+      "T_low": -0.1
+    },
+    "evaluation": {
+      "population": "block",
+      "commercial_seconds_heard": 8184.9,
+      "commercial_seconds_covered": 0.0,
+      "program_seconds_covered": 0.0,
+      "false_cover_incidents": 0,
+      "worst_program_interruption_s": 0.0,
+      "sessions": [
+        {
+          "session": "hush_20261008_205100",
+          "network": "Prime Video",
+          "commercial_seconds_heard": 2583.4,
+          "commercial_seconds_covered": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_program_interruption_s": 0.0,
+          "scorable_commercial_s": 2583.4,
+          "scorable_program_s": 7617.0,
+          "unscorable_s": 240.0
+        },
+        {
+          "session": "hush_20261010_222400",
+          "network": "Cable / antenna",
+          "commercial_seconds_heard": 1081.8,
+          "commercial_seconds_covered": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_program_interruption_s": 0.0,
+          "scorable_commercial_s": 1081.8,
+          "scorable_program_s": 4983.0,
+          "unscorable_s": 0
+        },
+        {
+          "session": "hush_20261011_135700",
+          "network": "Cable / antenna",
+          "commercial_seconds_heard": 983.0,
+          "commercial_seconds_covered": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_program_interruption_s": 0.0,
+          "scorable_commercial_s": 983.0,
+          "scorable_program_s": 3913.8,
+          "unscorable_s": 0
+        },
+        {
+          "session": "hush_20261011_204300",
+          "network": "Cable / antenna",
+          "commercial_seconds_heard": 592.4,
+          "commercial_seconds_covered": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_program_interruption_s": 0.0,
+          "scorable_commercial_s": 592.4,
+          "scorable_program_s": 13777.9,
+          "unscorable_s": 35.0
+        },
+        {
+          "session": "hush_20261012_204200",
+          "network": "Cable / antenna",
+          "commercial_seconds_heard": 2944.3,
+          "commercial_seconds_covered": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_program_interruption_s": 0.0,
+          "scorable_commercial_s": 2944.3,
+          "scorable_program_s": 10167.5,
+          "unscorable_s": 0
+        }
+      ],
+      "T_high": 1.1,
+      "T_low": -0.1
+    },
+    "redzone": {
+      "population": "block",
+      "commercial_seconds_heard": 0.0,
+      "commercial_seconds_covered": 0.0,
+      "program_seconds_covered": 0.0,
+      "false_cover_incidents": 0,
+      "worst_program_interruption_s": 0.0,
+      "sessions": [
+        {
+          "session": "hush_20260913_150934",
+          "network": "FOX",
+          "commercial_seconds_heard": 0.0,
+          "commercial_seconds_covered": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_program_interruption_s": 0.0,
+          "scorable_commercial_s": 0,
+          "scorable_program_s": 7200.0,
+          "unscorable_s": 0
+        }
+      ],
+      "T_high": 1.1,
+      "T_low": -0.1
+    },
+    "scripted": {
+      "population": "block",
+      "commercial_seconds_heard": 2382.2,
+      "commercial_seconds_covered": 0.0,
+      "program_seconds_covered": 0.0,
+      "false_cover_incidents": 0,
+      "worst_program_interruption_s": 0.0,
+      "sessions": [
+        {
+          "session": "hush_20261007_220650",
+          "network": "Hulu",
+          "commercial_seconds_heard": 1521.3,
+          "commercial_seconds_covered": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_program_interruption_s": 0.0,
+          "scorable_commercial_s": 1521.3,
+          "scorable_program_s": 10209.7,
+          "unscorable_s": 0
+        },
+        {
+          "session": "hush_20260827_135935",
+          "network": "Hulu",
+          "commercial_seconds_heard": 860.9,
+          "commercial_seconds_covered": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_program_interruption_s": 0.0,
+          "scorable_commercial_s": 860.9,
+          "scorable_program_s": 6039.1,
+          "unscorable_s": 0
+        }
+      ],
+      "T_high": 1.1,
+      "T_low": -0.1
+    },
+    "football": {
+      "population": "block",
+      "commercial_seconds_heard": 17555.7,
+      "commercial_seconds_covered": 0.0,
+      "program_seconds_covered": 0.0,
+      "false_cover_incidents": 0,
+      "worst_program_interruption_s": 0.0,
+      "sessions": [
+        {
+          "session": "hush_20260909_213047",
+          "network": "NBC",
+          "commercial_seconds_heard": 2849.9,
+          "commercial_seconds_covered": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_program_interruption_s": 0.0,
+          "scorable_commercial_s": 2849.9,
+          "scorable_program_s": 6523.1,
+          "unscorable_s": 0
+        },
+        {
+          "session": "hush_20260913_210542",
+          "network": "NBC",
+          "commercial_seconds_heard": 3052.5,
+          "commercial_seconds_covered": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_program_interruption_s": 0.0,
+          "scorable_commercial_s": 3052.5,
+          "scorable_program_s": 9547.5,
+          "unscorable_s": 0
+        },
+        {
+          "session": "hush_20261008_205100",
+          "network": "Prime Video",
+          "commercial_seconds_heard": 2583.4,
+          "commercial_seconds_covered": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_program_interruption_s": 0.0,
+          "scorable_commercial_s": 2583.4,
+          "scorable_program_s": 7617.0,
+          "unscorable_s": 240.0
+        },
+        {
+          "session": "hush_20261011_204300",
+          "network": "Cable / antenna",
+          "commercial_seconds_heard": 592.4,
+          "commercial_seconds_covered": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_program_interruption_s": 0.0,
+          "scorable_commercial_s": 592.4,
+          "scorable_program_s": 13777.9,
+          "unscorable_s": 35.0
+        },
+        {
+          "session": "hush_20261012_204200",
+          "network": "Cable / antenna",
+          "commercial_seconds_heard": 2944.3,
+          "commercial_seconds_covered": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_program_interruption_s": 0.0,
+          "scorable_commercial_s": 2944.3,
+          "scorable_program_s": 10167.5,
+          "unscorable_s": 0
+        },
+        {
+          "session": "hush_20261010_222400",
+          "network": "Cable / antenna",
+          "commercial_seconds_heard": 1081.8,
+          "commercial_seconds_covered": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_program_interruption_s": 0.0,
+          "scorable_commercial_s": 1081.8,
+          "scorable_program_s": 4983.0,
+          "unscorable_s": 0
+        },
+        {
+          "session": "hush_20261011_135700",
+          "network": "Cable / antenna",
+          "commercial_seconds_heard": 983.0,
+          "commercial_seconds_covered": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_program_interruption_s": 0.0,
+          "scorable_commercial_s": 983.0,
+          "scorable_program_s": 3913.8,
+          "unscorable_s": 0
+        },
+        {
+          "session": "hush_20260914_212529",
+          "network": "ESPN",
+          "commercial_seconds_heard": 1804.0,
+          "commercial_seconds_covered": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_program_interruption_s": 0.0,
+          "scorable_commercial_s": 1804.0,
+          "scorable_program_s": 5095.0,
+          "unscorable_s": 0
+        },
+        {
+          "session": "hush_20260924_220624",
+          "network": "Prime",
+          "commercial_seconds_heard": 1664.4,
+          "commercial_seconds_covered": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_program_interruption_s": 0.0,
+          "scorable_commercial_s": 1664.4,
+          "scorable_program_s": 5935.6,
+          "unscorable_s": 0
+        }
+      ],
+      "T_high": 1.1,
+      "T_low": -0.1
+    }
+  },
+  "v1_evaluation": {
+    "population": "v1",
+    "commercial_seconds_heard": 8159.9,
+    "commercial_seconds_covered": 25.0,
+    "program_seconds_covered": 0.0,
+    "false_cover_incidents": 0,
+    "worst_program_interruption_s": 0.0,
+    "sessions": [
+      {
+        "session": "hush_20261008_205100",
+        "network": "Prime Video",
+        "commercial_seconds_heard": 2563.4,
+        "commercial_seconds_covered": 20.0,
+        "program_seconds_covered": 0.0,
+        "false_cover_incidents": 0,
+        "worst_program_interruption_s": 0.0,
+        "scorable_commercial_s": 2583.4,
+        "scorable_program_s": 7617.0,
+        "unscorable_s": 240.0
+      },
+      {
+        "session": "hush_20261010_222400",
+        "network": "Cable / antenna",
+        "commercial_seconds_heard": 1081.8,
+        "commercial_seconds_covered": 0.0,
+        "program_seconds_covered": 0.0,
+        "false_cover_incidents": 0,
+        "worst_program_interruption_s": 0.0,
+        "scorable_commercial_s": 1081.8,
+        "scorable_program_s": 4983.0,
+        "unscorable_s": 0
+      },
+      {
+        "session": "hush_20261011_135700",
+        "network": "Cable / antenna",
+        "commercial_seconds_heard": 983.0,
+        "commercial_seconds_covered": 0.0,
+        "program_seconds_covered": 0.0,
+        "false_cover_incidents": 0,
+        "worst_program_interruption_s": 0.0,
+        "scorable_commercial_s": 983.0,
+        "scorable_program_s": 3913.8,
+        "unscorable_s": 0
+      },
+      {
+        "session": "hush_20261011_204300",
+        "network": "Cable / antenna",
+        "commercial_seconds_heard": 592.4,
+        "commercial_seconds_covered": 0.0,
+        "program_seconds_covered": 0.0,
+        "false_cover_incidents": 0,
+        "worst_program_interruption_s": 0.0,
+        "scorable_commercial_s": 592.4,
+        "scorable_program_s": 13777.9,
+        "unscorable_s": 35.0
+      },
+      {
+        "session": "hush_20261012_204200",
+        "network": "Cable / antenna",
+        "commercial_seconds_heard": 2939.3,
+        "commercial_seconds_covered": 5.0,
+        "program_seconds_covered": 0.0,
+        "false_cover_incidents": 0,
+        "worst_program_interruption_s": 0.0,
+        "scorable_commercial_s": 2944.3,
+        "scorable_program_s": 10167.5,
+        "unscorable_s": 0
+      }
+    ]
+  },
+  "calibration_frontier": [
+    {
+      "T_high": 0.9,
+      "T_low": 0.05,
+      "commercial_seconds_covered": 4582.2,
+      "program_seconds_covered": 3624.8,
+      "false_cover_incidents": 59,
+      "worst_program_interruption_s": 860.0
+    },
+    {
+      "T_high": 0.9,
+      "T_low": 0.1,
+      "commercial_seconds_covered": 4340.7,
+      "program_seconds_covered": 2941.3,
+      "false_cover_incidents": 68,
+      "worst_program_interruption_s": 473.0
+    },
+    {
+      "T_high": 0.9,
+      "T_low": 0.2,
+      "commercial_seconds_covered": 4189.1,
+      "program_seconds_covered": 2464.9,
+      "false_cover_incidents": 79,
+      "worst_program_interruption_s": 449.0
+    },
+    {
+      "T_high": 0.9,
+      "T_low": 0.3,
+      "commercial_seconds_covered": 4040.4,
+      "program_seconds_covered": 2182.6,
+      "false_cover_incidents": 88,
+      "worst_program_interruption_s": 320.0
+    },
+    {
+      "T_high": 0.9,
+      "T_low": 0.4,
+      "commercial_seconds_covered": 3602.7,
+      "program_seconds_covered": 1899.3,
+      "false_cover_incidents": 94,
+      "worst_program_interruption_s": 214.0
+    },
+    {
+      "T_high": 0.95,
+      "T_low": 0.05,
+      "commercial_seconds_covered": 4305.4,
+      "program_seconds_covered": 2999.6,
+      "false_cover_incidents": 51,
+      "worst_program_interruption_s": 859.0
+    },
+    {
+      "T_high": 0.95,
+      "T_low": 0.1,
+      "commercial_seconds_covered": 4183.7,
+      "program_seconds_covered": 2473.3,
+      "false_cover_incidents": 53,
+      "worst_program_interruption_s": 471.0
+    },
+    {
+      "T_high": 0.95,
+      "T_low": 0.2,
+      "commercial_seconds_covered": 3965.7,
+      "program_seconds_covered": 2084.3,
+      "false_cover_incidents": 57,
+      "worst_program_interruption_s": 396.0
+    },
+    {
+      "T_high": 0.95,
+      "T_low": 0.3,
+      "commercial_seconds_covered": 3790.3,
+      "program_seconds_covered": 1819.7,
+      "false_cover_incidents": 61,
+      "worst_program_interruption_s": 267.0
+    },
+    {
+      "T_high": 0.95,
+      "T_low": 0.4,
+      "commercial_seconds_covered": 3286.8,
+      "program_seconds_covered": 1601.2,
+      "false_cover_incidents": 65,
+      "worst_program_interruption_s": 204.0
+    },
+    {
+      "T_high": 0.97,
+      "T_low": 0.05,
+      "commercial_seconds_covered": 4247.7,
+      "program_seconds_covered": 2907.3,
+      "false_cover_incidents": 48,
+      "worst_program_interruption_s": 859.0
+    },
+    {
+      "T_high": 0.97,
+      "T_low": 0.1,
+      "commercial_seconds_covered": 4109.0,
+      "program_seconds_covered": 2312.0,
+      "false_cover_incidents": 49,
+      "worst_program_interruption_s": 398.0
+    },
+    {
+      "T_high": 0.97,
+      "T_low": 0.2,
+      "commercial_seconds_covered": 3826.4,
+      "program_seconds_covered": 1967.6,
+      "false_cover_incidents": 51,
+      "worst_program_interruption_s": 395.0
+    },
+    {
+      "T_high": 0.97,
+      "T_low": 0.3,
+      "commercial_seconds_covered": 3629.1,
+      "program_seconds_covered": 1618.9,
+      "false_cover_incidents": 51,
+      "worst_program_interruption_s": 266.0
+    },
+    {
+      "T_high": 0.97,
+      "T_low": 0.4,
+      "commercial_seconds_covered": 3049.3,
+      "program_seconds_covered": 1417.7,
+      "false_cover_incidents": 51,
+      "worst_program_interruption_s": 203.0
+    },
+    {
+      "T_high": 0.99,
+      "T_low": 0.05,
+      "commercial_seconds_covered": 3628.4,
+      "program_seconds_covered": 2755.6,
+      "false_cover_incidents": 38,
+      "worst_program_interruption_s": 858.0
+    },
+    {
+      "T_high": 0.99,
+      "T_low": 0.1,
+      "commercial_seconds_covered": 3478.7,
+      "program_seconds_covered": 2218.3,
+      "false_cover_incidents": 39,
+      "worst_program_interruption_s": 396.0
+    },
+    {
+      "T_high": 0.99,
+      "T_low": 0.2,
+      "commercial_seconds_covered": 3108.1,
+      "program_seconds_covered": 1849.9,
+      "false_cover_incidents": 40,
+      "worst_program_interruption_s": 393.0
+    },
+    {
+      "T_high": 0.99,
+      "T_low": 0.3,
+      "commercial_seconds_covered": 2978.8,
+      "program_seconds_covered": 1478.2,
+      "false_cover_incidents": 40,
+      "worst_program_interruption_s": 264.0
+    },
+    {
+      "T_high": 0.99,
+      "T_low": 0.4,
+      "commercial_seconds_covered": 2345.4,
+      "program_seconds_covered": 1227.6,
+      "false_cover_incidents": 38,
+      "worst_program_interruption_s": 201.0
+    },
+    {
+      "T_high": 0.995,
+      "T_low": 0.05,
+      "commercial_seconds_covered": 2962.6,
+      "program_seconds_covered": 2422.4,
+      "false_cover_incidents": 31,
+      "worst_program_interruption_s": 858.0
+    },
+    {
+      "T_high": 0.995,
+      "T_low": 0.1,
+      "commercial_seconds_covered": 2758.7,
+      "program_seconds_covered": 1915.3,
+      "false_cover_incidents": 31,
+      "worst_program_interruption_s": 378.0
+    },
+    {
+      "T_high": 0.995,
+      "T_low": 0.2,
+      "commercial_seconds_covered": 2505.1,
+      "program_seconds_covered": 1466.9,
+      "false_cover_incidents": 30,
+      "worst_program_interruption_s": 331.0
+    },
+    {
+      "T_high": 0.995,
+      "T_low": 0.3,
+      "commercial_seconds_covered": 2416.7,
+      "program_seconds_covered": 1219.3,
+      "false_cover_incidents": 30,
+      "worst_program_interruption_s": 202.0
+    },
+    {
+      "T_high": 0.995,
+      "T_low": 0.4,
+      "commercial_seconds_covered": 1991.1,
+      "program_seconds_covered": 989.9,
+      "false_cover_incidents": 28,
+      "worst_program_interruption_s": 139.0
+    },
+    {
+      "T_high": 0.999,
+      "T_low": 0.05,
+      "commercial_seconds_covered": 2401.5,
+      "program_seconds_covered": 2120.5,
+      "false_cover_incidents": 26,
+      "worst_program_interruption_s": 675.0
+    },
+    {
+      "T_high": 0.999,
+      "T_low": 0.1,
+      "commercial_seconds_covered": 2195.2,
+      "program_seconds_covered": 1361.8,
+      "false_cover_incidents": 23,
+      "worst_program_interruption_s": 333.0
+    },
+    {
+      "T_high": 0.999,
+      "T_low": 0.2,
+      "commercial_seconds_covered": 1731.6,
+      "program_seconds_covered": 1102.4,
+      "false_cover_incidents": 20,
+      "worst_program_interruption_s": 330.0
+    },
+    {
+      "T_high": 0.999,
+      "T_low": 0.3,
+      "commercial_seconds_covered": 1660.3,
+      "program_seconds_covered": 965.7,
+      "false_cover_incidents": 20,
+      "worst_program_interruption_s": 201.0
+    },
+    {
+      "T_high": 0.999,
+      "T_low": 0.4,
+      "commercial_seconds_covered": 1315.0,
+      "program_seconds_covered": 659.0,
+      "false_cover_incidents": 16,
+      "worst_program_interruption_s": 138.0
+    }
+  ],
+  "evaluation_frontier_not_used_for_selection": [
+    {
+      "T_high": 0.9,
+      "T_low": 0.05,
+      "commercial_seconds_covered": 7916.0,
+      "program_seconds_covered": 16982.2,
+      "false_cover_incidents": 144,
+      "worst_program_interruption_s": 2313.0
+    },
+    {
+      "T_high": 0.9,
+      "T_low": 0.1,
+      "commercial_seconds_covered": 7792.9,
+      "program_seconds_covered": 14719.3,
+      "false_cover_incidents": 187,
+      "worst_program_interruption_s": 982.2
+    },
+    {
+      "T_high": 0.9,
+      "T_low": 0.2,
+      "commercial_seconds_covered": 7538.2,
+      "program_seconds_covered": 12709.0,
+      "false_cover_incidents": 237,
+      "worst_program_interruption_s": 982.2
+    },
+    {
+      "T_high": 0.9,
+      "T_low": 0.3,
+      "commercial_seconds_covered": 7214.1,
+      "program_seconds_covered": 10627.3,
+      "false_cover_incidents": 286,
+      "worst_program_interruption_s": 585.0
+    },
+    {
+      "T_high": 0.9,
+      "T_low": 0.4,
+      "commercial_seconds_covered": 6855.5,
+      "program_seconds_covered": 9226.9,
+      "false_cover_incidents": 333,
+      "worst_program_interruption_s": 535.0
+    },
+    {
+      "T_high": 0.95,
+      "T_low": 0.05,
+      "commercial_seconds_covered": 7750.0,
+      "program_seconds_covered": 16035.2,
+      "false_cover_incidents": 120,
+      "worst_program_interruption_s": 2312.0
+    },
+    {
+      "T_high": 0.95,
+      "T_low": 0.1,
+      "commercial_seconds_covered": 7605.9,
+      "program_seconds_covered": 13423.3,
+      "false_cover_incidents": 146,
+      "worst_program_interruption_s": 982.2
+    },
+    {
+      "T_high": 0.95,
+      "T_low": 0.2,
+      "commercial_seconds_covered": 7280.1,
+      "program_seconds_covered": 11490.1,
+      "false_cover_incidents": 181,
+      "worst_program_interruption_s": 982.2
+    },
+    {
+      "T_high": 0.95,
+      "T_low": 0.3,
+      "commercial_seconds_covered": 6914.0,
+      "program_seconds_covered": 9377.4,
+      "false_cover_incidents": 219,
+      "worst_program_interruption_s": 574.0
+    },
+    {
+      "T_high": 0.95,
+      "T_low": 0.4,
+      "commercial_seconds_covered": 6505.4,
+      "program_seconds_covered": 7852.0,
+      "false_cover_incidents": 249,
+      "worst_program_interruption_s": 522.0
+    },
+    {
+      "T_high": 0.97,
+      "T_low": 0.05,
+      "commercial_seconds_covered": 7399.2,
+      "program_seconds_covered": 15287.9,
+      "false_cover_incidents": 111,
+      "worst_program_interruption_s": 2312.0
+    },
+    {
+      "T_high": 0.97,
+      "T_low": 0.1,
+      "commercial_seconds_covered": 7227.1,
+      "program_seconds_covered": 12585.0,
+      "false_cover_incidents": 133,
+      "worst_program_interruption_s": 982.2
+    },
+    {
+      "T_high": 0.97,
+      "T_low": 0.2,
+      "commercial_seconds_covered": 6860.4,
+      "program_seconds_covered": 10621.7,
+      "false_cover_incidents": 155,
+      "worst_program_interruption_s": 982.2
+    },
+    {
+      "T_high": 0.97,
+      "T_low": 0.3,
+      "commercial_seconds_covered": 6524.1,
+      "program_seconds_covered": 8350.3,
+      "false_cover_incidents": 183,
+      "worst_program_interruption_s": 526.0
+    },
+    {
+      "T_high": 0.97,
+      "T_low": 0.4,
+      "commercial_seconds_covered": 6084.4,
+      "program_seconds_covered": 6745.0,
+      "false_cover_incidents": 204,
+      "worst_program_interruption_s": 522.0
+    },
+    {
+      "T_high": 0.99,
+      "T_low": 0.05,
+      "commercial_seconds_covered": 6637.6,
+      "program_seconds_covered": 13418.4,
+      "false_cover_incidents": 91,
+      "worst_program_interruption_s": 2311.0
+    },
+    {
+      "T_high": 0.99,
+      "T_low": 0.1,
+      "commercial_seconds_covered": 6352.4,
+      "program_seconds_covered": 10803.7,
+      "false_cover_incidents": 99,
+      "worst_program_interruption_s": 982.2
+    },
+    {
+      "T_high": 0.99,
+      "T_low": 0.2,
+      "commercial_seconds_covered": 5731.5,
+      "program_seconds_covered": 8614.7,
+      "false_cover_incidents": 108,
+      "worst_program_interruption_s": 982.2
+    },
+    {
+      "T_high": 0.99,
+      "T_low": 0.3,
+      "commercial_seconds_covered": 5318.2,
+      "program_seconds_covered": 6423.2,
+      "false_cover_incidents": 124,
+      "worst_program_interruption_s": 524.0
+    },
+    {
+      "T_high": 0.99,
+      "T_low": 0.4,
+      "commercial_seconds_covered": 4732.6,
+      "program_seconds_covered": 4678.8,
+      "false_cover_incidents": 134,
+      "worst_program_interruption_s": 520.0
+    },
+    {
+      "T_high": 0.995,
+      "T_low": 0.05,
+      "commercial_seconds_covered": 5721.2,
+      "program_seconds_covered": 12098.9,
+      "false_cover_incidents": 80,
+      "worst_program_interruption_s": 2193.0
+    },
+    {
+      "T_high": 0.995,
+      "T_low": 0.1,
+      "commercial_seconds_covered": 5349.2,
+      "program_seconds_covered": 9817.8,
+      "false_cover_incidents": 83,
+      "worst_program_interruption_s": 982.2
+    },
+    {
+      "T_high": 0.995,
+      "T_low": 0.2,
+      "commercial_seconds_covered": 4759.2,
+      "program_seconds_covered": 7395.9,
+      "false_cover_incidents": 85,
+      "worst_program_interruption_s": 982.2
+    },
+    {
+      "T_high": 0.995,
+      "T_low": 0.3,
+      "commercial_seconds_covered": 4355.0,
+      "program_seconds_covered": 5186.4,
+      "false_cover_incidents": 92,
+      "worst_program_interruption_s": 523.0
+    },
+    {
+      "T_high": 0.995,
+      "T_low": 0.4,
+      "commercial_seconds_covered": 3867.9,
+      "program_seconds_covered": 3552.5,
+      "false_cover_incidents": 97,
+      "worst_program_interruption_s": 519.0
+    },
+    {
+      "T_high": 0.999,
+      "T_low": 0.05,
+      "commercial_seconds_covered": 3384.3,
+      "program_seconds_covered": 8004.0,
+      "false_cover_incidents": 42,
+      "worst_program_interruption_s": 1984.0
+    },
+    {
+      "T_high": 0.999,
+      "T_low": 0.1,
+      "commercial_seconds_covered": 3118.1,
+      "program_seconds_covered": 5955.2,
+      "false_cover_incidents": 41,
+      "worst_program_interruption_s": 881.0
+    },
+    {
+      "T_high": 0.999,
+      "T_low": 0.2,
+      "commercial_seconds_covered": 2675.6,
+      "program_seconds_covered": 3600.4,
+      "false_cover_incidents": 38,
+      "worst_program_interruption_s": 474.0
+    },
+    {
+      "T_high": 0.999,
+      "T_low": 0.3,
+      "commercial_seconds_covered": 2398.2,
+      "program_seconds_covered": 2641.8,
+      "false_cover_incidents": 38,
+      "worst_program_interruption_s": 473.0
+    },
+    {
+      "T_high": 0.999,
+      "T_low": 0.4,
+      "commercial_seconds_covered": 2185.9,
+      "program_seconds_covered": 1646.1,
+      "false_cover_incidents": 39,
+      "worst_program_interruption_s": 463.0
+    }
+  ],
+  "dsp_missed_starts": {
+    "n": 50,
+    "detected": 0,
+    "evidence_before_boundary": 0,
+    "rows": [
+      {
+        "session": "hush_20260909_213047",
+        "network": "NBC",
+        "start": 6.07,
+        "length_s": 135.5,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 135.5,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20260909_213047",
+        "network": "NBC",
+        "start": 623.347,
+        "length_s": 183.0,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 183.0,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20260909_213047",
+        "network": "NBC",
+        "start": 1000.416,
+        "length_s": 47.7,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 47.7,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20260909_213047",
+        "network": "NBC",
+        "start": 1074.332,
+        "length_s": 180.9,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 180.9,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20260909_213047",
+        "network": "NBC",
+        "start": 3104.995,
+        "length_s": 28.3,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 28.3,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20260909_213047",
+        "network": "NBC",
+        "start": 3445.405,
+        "length_s": 130.7,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 130.7,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20260913_210542",
+        "network": "NBC",
+        "start": 1547.184,
+        "length_s": 136.0,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 136.0,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20260913_210542",
+        "network": "NBC",
+        "start": 2089.268,
+        "length_s": 31.1,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 31.1,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20260913_210542",
+        "network": "NBC",
+        "start": 2689.595,
+        "length_s": 31.4,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 31.4,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20260913_210542",
+        "network": "NBC",
+        "start": 4479.459,
+        "length_s": 117.5,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 117.5,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20260913_210542",
+        "network": "NBC",
+        "start": 5289.058,
+        "length_s": 136.2,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 136.2,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20260913_210542",
+        "network": "NBC",
+        "start": 5870.284,
+        "length_s": 127.4,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 127.4,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20260914_212529",
+        "network": "ESPN",
+        "start": 166.64,
+        "length_s": 139.1,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 139.1,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20260914_212529",
+        "network": "ESPN",
+        "start": 512.855,
+        "length_s": 121.9,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 121.9,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20260914_212529",
+        "network": "ESPN",
+        "start": 1029.664,
+        "length_s": 49.5,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 49.5,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20260914_212529",
+        "network": "ESPN",
+        "start": 1243.169,
+        "length_s": 65.0,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 65.0,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20260914_212529",
+        "network": "ESPN",
+        "start": 3180.107,
+        "length_s": 110.1,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 110.1,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20260914_212529",
+        "network": "ESPN",
+        "start": 4244.241,
+        "length_s": 134.7,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 134.7,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20260914_212529",
+        "network": "ESPN",
+        "start": 5019.615,
+        "length_s": 137.7,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 137.7,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20260914_212529",
+        "network": "ESPN",
+        "start": 5665.368,
+        "length_s": 120.3,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 120.3,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20260914_212529",
+        "network": "ESPN",
+        "start": 6344.634,
+        "length_s": 126.0,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 126.0,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20260924_220624",
+        "network": "Prime",
+        "start": 1490.038,
+        "length_s": 121.2,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 121.2,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20260924_220624",
+        "network": "Prime",
+        "start": 4337.154,
+        "length_s": 155.6,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 155.6,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20260924_220624",
+        "network": "Prime",
+        "start": 5354.826,
+        "length_s": 163.8,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 163.8,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20260924_220624",
+        "network": "Prime",
+        "start": 6028.84,
+        "length_s": 151.9,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 151.9,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20260924_220624",
+        "network": "Prime",
+        "start": 6854.004,
+        "length_s": 166.4,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 166.4,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20261008_205100",
+        "network": "Prime Video",
+        "start": 139.874,
+        "length_s": 237.0,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 197.0,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20261008_205100",
+        "network": "Prime Video",
+        "start": 2396.185,
+        "length_s": 33.6,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 33.6,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20261008_205100",
+        "network": "Prime Video",
+        "start": 7677.017,
+        "length_s": 120.8,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 120.8,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20261008_205100",
+        "network": "Prime Video",
+        "start": 9604.933,
+        "length_s": 149.2,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 149.2,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20261010_222400",
+        "network": "Cable / antenna",
+        "start": 403.71,
+        "length_s": 58.8,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 58.8,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20261010_222400",
+        "network": "Cable / antenna",
+        "start": 2369.207,
+        "length_s": 195.9,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 195.9,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20261010_222400",
+        "network": "Cable / antenna",
+        "start": 3567.641,
+        "length_s": 386.0,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 386.0,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20261011_135700",
+        "network": "Cable / antenna",
+        "start": 1298.306,
+        "length_s": 130.8,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 130.8,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20261011_135700",
+        "network": "Cable / antenna",
+        "start": 3735.542,
+        "length_s": 179.0,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 179.0,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20261012_204200",
+        "network": "Cable / antenna",
+        "start": 103.529,
+        "length_s": 28.9,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 28.9,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20261012_204200",
+        "network": "Cable / antenna",
+        "start": 1504.507,
+        "length_s": 135.5,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 135.5,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20261012_204200",
+        "network": "Cable / antenna",
+        "start": 1783.756,
+        "length_s": 117.9,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 117.9,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20261012_204200",
+        "network": "Cable / antenna",
+        "start": 2284.253,
+        "length_s": 116.8,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 116.8,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20261012_204200",
+        "network": "Cable / antenna",
+        "start": 3553.789,
+        "length_s": 152.3,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 152.3,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20261012_204200",
+        "network": "Cable / antenna",
+        "start": 3737.485,
+        "length_s": 222.2,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 222.2,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20261012_204200",
+        "network": "Cable / antenna",
+        "start": 4586.785,
+        "length_s": 130.1,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 130.1,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20261012_204200",
+        "network": "Cable / antenna",
+        "start": 5080.063,
+        "length_s": 136.5,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 136.5,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20261012_204200",
+        "network": "Cable / antenna",
+        "start": 6838.538,
+        "length_s": 137.7,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 137.7,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20261012_204200",
+        "network": "Cable / antenna",
+        "start": 7554.311,
+        "length_s": 119.0,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 119.0,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20261012_204200",
+        "network": "Cable / antenna",
+        "start": 8272.239,
+        "length_s": 128.0,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 128.0,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20261012_204200",
+        "network": "Cable / antenna",
+        "start": 8849.06,
+        "length_s": 125.6,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 125.6,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20261012_204200",
+        "network": "Cable / antenna",
+        "start": 9809.843,
+        "length_s": 66.8,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 66.8,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20261012_204200",
+        "network": "Cable / antenna",
+        "start": 11072.409,
+        "length_s": 51.3,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 51.3,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      },
+      {
+        "session": "hush_20261012_204200",
+        "network": "Cable / antenna",
+        "start": 12194.922,
+        "length_s": 198.2,
+        "detected": false,
+        "earliest_cover_s": null,
+        "delay_s": null,
+        "commercial_seconds_still_heard": 198.2,
+        "evidence_before_boundary": false,
+        "dsp": "no_within_3s"
+      }
+    ]
+  },
+  "top_errors": [
+    {
+      "kind": "commercial_heard",
+      "session": "hush_20260913_210542",
+      "start": 6838.403,
+      "seconds": 417.9
+    },
+    {
+      "kind": "commercial_heard",
+      "session": "hush_20261010_222400",
+      "start": 3567.641,
+      "seconds": 386.0
+    },
+    {
+      "kind": "commercial_heard",
+      "session": "hush_20260913_210542",
+      "start": 3470.982,
+      "seconds": 244.9
+    },
+    {
+      "kind": "commercial_heard",
+      "session": "hush_20260914_212529",
+      "start": 1538.857,
+      "seconds": 228.6
+    },
+    {
+      "kind": "commercial_heard",
+      "session": "hush_20261012_204200",
+      "start": 3737.485,
+      "seconds": 222.2
+    },
+    {
+      "kind": "commercial_heard",
+      "session": "hush_20260909_213047",
+      "start": 7641.664,
+      "seconds": 207.8
+    },
+    {
+      "kind": "commercial_heard",
+      "session": "hush_20261012_204200",
+      "start": 12194.922,
+      "seconds": 198.2
+    },
+    {
+      "kind": "commercial_heard",
+      "session": "hush_20261008_205100",
+      "start": 139.874,
+      "seconds": 197.0
+    },
+    {
+      "kind": "commercial_heard",
+      "session": "hush_20260913_210542",
+      "start": 9187.148,
+      "seconds": 195.9
+    },
+    {
+      "kind": "commercial_heard",
+      "session": "hush_20261010_222400",
+      "start": 2369.207,
+      "seconds": 195.9
+    },
+    {
+      "kind": "commercial_heard",
+      "session": "hush_20261010_222400",
+      "start": 3009.899,
+      "seconds": 195.5
+    },
+    {
+      "kind": "commercial_heard",
+      "session": "hush_20260909_213047",
+      "start": 8020.205,
+      "seconds": 187.2
+    },
+    {
+      "kind": "commercial_heard",
+      "session": "hush_20260913_210542",
+      "start": 3072.966,
+      "seconds": 187.1
+    },
+    {
+      "kind": "commercial_heard",
+      "session": "hush_20260909_213047",
+      "start": 623.347,
+      "seconds": 183.0
+    },
+    {
+      "kind": "commercial_heard",
+      "session": "hush_20260909_213047",
+      "start": 1074.332,
+      "seconds": 180.9
+    },
+    {
+      "kind": "commercial_heard",
+      "session": "hush_20261011_135700",
+      "start": 3735.542,
+      "seconds": 179.0
+    },
+    {
+      "kind": "commercial_heard",
+      "session": "hush_20260909_213047",
+      "start": 7000.981,
+      "seconds": 177.3
+    },
+    {
+      "kind": "commercial_heard",
+      "session": "hush_20260909_213047",
+      "start": 8413.747,
+      "seconds": 171.6
+    },
+    {
+      "kind": "commercial_heard",
+      "session": "hush_20260924_220624",
+      "start": 6854.004,
+      "seconds": 166.4
+    },
+    {
+      "kind": "commercial_heard",
+      "session": "hush_20261012_204200",
+      "start": 6254.226,
+      "seconds": 164.1
+    }
+  ],
+  "calibration_reliability": [
+    {
+      "p_lo": 0.0,
+      "n": 8815,
+      "commercial_rate": 0.01
+    },
+    {
+      "p_lo": 0.1,
+      "n": 1258,
+      "commercial_rate": 0.077
+    },
+    {
+      "p_lo": 0.2,
+      "n": 734,
+      "commercial_rate": 0.125
+    },
+    {
+      "p_lo": 0.3,
+      "n": 898,
+      "commercial_rate": 0.351
+    },
+    {
+      "p_lo": 0.4,
+      "n": 830,
+      "commercial_rate": 0.339
+    },
+    {
+      "p_lo": 0.5,
+      "n": 697,
+      "commercial_rate": 0.283
+    },
+    {
+      "p_lo": 0.6,
+      "n": 674,
+      "commercial_rate": 0.378
+    },
+    {
+      "p_lo": 0.7,
+      "n": 821,
+      "commercial_rate": 0.482
+    },
+    {
+      "p_lo": 0.8,
+      "n": 1194,
+      "commercial_rate": 0.622
+    },
+    {
+      "p_lo": 0.9,
+      "n": 3394,
+      "commercial_rate": 0.704
+    }
+  ],
+  "by_network_evaluation": {
+    "Prime Video": {
+      "additional_commercial_s": -20.0,
+      "program_s": 0.0
+    },
+    "Cable / antenna": {
+      "additional_commercial_s": -5.0,
+      "program_s": 0.0
+    }
+  },
+  "wall_s": 160.5,
+  "max_rss_bytes": 362217472
+}

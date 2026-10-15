@@ -1,0 +1,12 @@
+{
+  "system": "universal_v4_speaker_enrollment",
+  "verdict": "NOT_MEASURED",
+  "mute_policy": false,
+  "verified_enrollments": 0,
+  "refused_as_enrollment": [
+    ".booth.json",
+    "cluster ids",
+    "booth_present"
+  ],
+  "booth_files_read": false
+}

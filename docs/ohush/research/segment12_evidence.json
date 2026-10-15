@@ -1,0 +1,290 @@
+{
+  "decision_segment_zero_based": 11,
+  "decision_segment_label_in_handoff": 12,
+  "track_run": "run29",
+  "note": "Joined by timestamp within 0.05s and audio distance within 0.002. Not by segment index.",
+  "decision_events": 30,
+  "matched_return_rows": [
+    {
+      "decision_t": 189.013,
+      "track_t": 189.013,
+      "audio_world_score": 0.2825,
+      "track_audio_departure": 0.2825,
+      "decision_source": "auto",
+      "state": "REPLACEMENT_TO_PROGRAM",
+      "speaker_score": 0.0,
+      "booth_present": false,
+      "similarity_to_booth": 0.2425,
+      "cluster_id": "c0010",
+      "booth_ids": [
+        "c0001",
+        "c0002",
+        "c0004",
+        "c0005"
+      ],
+      "hearing": "REPLACEMENT",
+      "machine": "MUTED"
+    },
+    {
+      "decision_t": 221.013,
+      "track_t": 221.013,
+      "audio_world_score": 0.234,
+      "track_audio_departure": 0.234,
+      "decision_source": "auto",
+      "state": "REPLACEMENT_TO_PROGRAM",
+      "speaker_score": 0.0,
+      "booth_present": true,
+      "similarity_to_booth": 0.1479,
+      "cluster_id": "c0013",
+      "booth_ids": [
+        "c0001",
+        "c0002",
+        "c0004",
+        "c0005"
+      ],
+      "hearing": "REPLACEMENT",
+      "machine": "MUTED"
+    },
+    {
+      "decision_t": 224.0,
+      "track_t": 224.0,
+      "audio_world_score": 0.264,
+      "track_audio_departure": 0.264,
+      "decision_source": "auto",
+      "state": "REPLACEMENT_TO_PROGRAM",
+      "speaker_score": 0.0,
+      "booth_present": true,
+      "similarity_to_booth": 0.1202,
+      "cluster_id": "c0013",
+      "booth_ids": [
+        "c0001",
+        "c0002",
+        "c0004",
+        "c0005"
+      ],
+      "hearing": "REPLACEMENT",
+      "machine": "MUTED"
+    },
+    {
+      "decision_t": 226.005,
+      "track_t": 226.005,
+      "audio_world_score": 0.2506,
+      "track_audio_departure": 0.2506,
+      "decision_source": "auto",
+      "state": "REPLACEMENT_TO_PROGRAM",
+      "speaker_score": 0.0,
+      "booth_present": true,
+      "similarity_to_booth": 0.1293,
+      "cluster_id": "c0013",
+      "booth_ids": [
+        "c0001",
+        "c0002",
+        "c0004",
+        "c0005"
+      ],
+      "hearing": "REPLACEMENT",
+      "machine": "MUTED"
+    },
+    {
+      "decision_t": 228.011,
+      "track_t": 228.011,
+      "audio_world_score": 0.26,
+      "track_audio_departure": 0.26,
+      "decision_source": "auto",
+      "state": "REPLACEMENT_TO_PROGRAM",
+      "speaker_score": 0.0,
+      "booth_present": true,
+      "similarity_to_booth": 0.1136,
+      "cluster_id": "c0013",
+      "booth_ids": [
+        "c0001",
+        "c0002",
+        "c0004",
+        "c0005"
+      ],
+      "hearing": "REPLACEMENT",
+      "machine": "MUTED"
+    },
+    {
+      "decision_t": 231.04,
+      "track_t": 231.04,
+      "audio_world_score": 0.2576,
+      "track_audio_departure": 0.2576,
+      "decision_source": "auto",
+      "state": "REPLACEMENT_TO_PROGRAM",
+      "speaker_score": 0.0,
+      "booth_present": false,
+      "similarity_to_booth": 0.1461,
+      "cluster_id": "c0013",
+      "booth_ids": [
+        "c0001",
+        "c0002",
+        "c0004",
+        "c0005"
+      ],
+      "hearing": "REPLACEMENT",
+      "machine": "MUTED"
+    },
+    {
+      "decision_t": 237.013,
+      "track_t": 237.013,
+      "audio_world_score": 0.2318,
+      "track_audio_departure": 0.2318,
+      "decision_source": "auto",
+      "state": "REPLACEMENT_TO_PROGRAM",
+      "speaker_score": 0.0,
+      "booth_present": false,
+      "similarity_to_booth": 0.1211,
+      "cluster_id": "c0013",
+      "booth_ids": [
+        "c0001",
+        "c0002",
+        "c0004",
+        "c0005"
+      ],
+      "hearing": "REPLACEMENT",
+      "machine": "MUTED"
+    },
+    {
+      "decision_t": 241.024,
+      "track_t": 241.024,
+      "audio_world_score": 0.1945,
+      "track_audio_departure": 0.1945,
+      "decision_source": "auto",
+      "state": "REPLACEMENT_TO_PROGRAM",
+      "speaker_score": 0.0,
+      "booth_present": false,
+      "similarity_to_booth": 0.1379,
+      "cluster_id": "c0013",
+      "booth_ids": [
+        "c0001",
+        "c0002",
+        "c0004",
+        "c0005"
+      ],
+      "hearing": "REPLACEMENT",
+      "machine": "MUTED"
+    },
+    {
+      "decision_t": 262.016,
+      "track_t": 262.016,
+      "audio_world_score": 0.19,
+      "track_audio_departure": 0.19,
+      "decision_source": "auto",
+      "state": "REPLACEMENT_TO_PROGRAM",
+      "speaker_score": 1.0,
+      "booth_present": true,
+      "similarity_to_booth": 0.455,
+      "cluster_id": "c0010",
+      "booth_ids": [
+        "c0001",
+        "c0002",
+        "c0004",
+        "c0005"
+      ],
+      "hearing": "REPLACEMENT",
+      "machine": "MUTED"
+    },
+    {
+      "decision_t": 285.013,
+      "track_t": 285.013,
+      "audio_world_score": 0.1147,
+      "track_audio_departure": 0.1147,
+      "decision_source": "auto",
+      "state": "REPLACEMENT_TO_PROGRAM",
+      "speaker_score": 1.0,
+      "booth_present": true,
+      "similarity_to_booth": 0.8715,
+      "cluster_id": "c0016",
+      "booth_ids": [
+        "c0001",
+        "c0002",
+        "c0004",
+        "c0005"
+      ],
+      "hearing": "REPLACEMENT",
+      "machine": "MUTED"
+    },
+    {
+      "decision_t": 599.04,
+      "track_t": 599.04,
+      "audio_world_score": 0.3448,
+      "track_audio_departure": 0.3448,
+      "decision_source": "auto",
+      "state": "REPLACEMENT_TO_PROGRAM",
+      "speaker_score": 0.0,
+      "booth_present": true,
+      "similarity_to_booth": 0.1829,
+      "cluster_id": "c0020",
+      "booth_ids": [
+        "c0001",
+        "c0002",
+        "c0003",
+        "c0004"
+      ],
+      "hearing": "REPLACEMENT",
+      "machine": "MUTED"
+    },
+    {
+      "decision_t": 610.005,
+      "track_t": 610.005,
+      "audio_world_score": 0.3903,
+      "track_audio_departure": 0.3903,
+      "decision_source": "auto",
+      "state": "REPLACEMENT_TO_PROGRAM",
+      "speaker_score": 0.0,
+      "booth_present": false,
+      "similarity_to_booth": 0.1418,
+      "cluster_id": "c0021",
+      "booth_ids": [
+        "c0001",
+        "c0002",
+        "c0003",
+        "c0004"
+      ],
+      "hearing": "REPLACEMENT",
+      "machine": "MUTED"
+    },
+    {
+      "decision_t": 618.027,
+      "track_t": 618.027,
+      "audio_world_score": 0.317,
+      "track_audio_departure": 0.317,
+      "decision_source": "auto",
+      "state": "REPLACEMENT_TO_PROGRAM",
+      "speaker_score": 0.0,
+      "booth_present": false,
+      "similarity_to_booth": 0.133,
+      "cluster_id": "c0022",
+      "booth_ids": [
+        "c0001",
+        "c0002",
+        "c0003",
+        "c0004"
+      ],
+      "hearing": "REPLACEMENT",
+      "machine": "MUTED"
+    },
+    {
+      "decision_t": 621.013,
+      "track_t": 621.013,
+      "audio_world_score": 0.3177,
+      "track_audio_departure": 0.3177,
+      "decision_source": "auto",
+      "state": "REPLACEMENT_TO_PROGRAM",
+      "speaker_score": 1.0,
+      "booth_present": true,
+      "similarity_to_booth": 0.7054,
+      "cluster_id": "c0010",
+      "booth_ids": [
+        "c0001",
+        "c0002",
+        "c0003",
+        "c0004"
+      ],
+      "hearing": "REPLACEMENT",
+      "machine": "MUTED"
+    }
+  ],
+  "unmatched_returns": 1
+}

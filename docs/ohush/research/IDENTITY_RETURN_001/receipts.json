@@ -1,0 +1,66 @@
+{
+  "experiment": "IDENTITY-RETURN-001",
+  "git_head": "eedcb444c2546e06f6b3cea16dc2efb92b8d6506",
+  "command": ".venv/bin/python experiments/measurement/identity_return_001.py",
+  "holdouts_opened": false,
+  "embeddings_recomputed": false,
+  "thresholds_fit": false,
+  "live_workers_modified": false,
+  "configuration": {
+    "quick_s": 10.0,
+    "false_return_max_rate": 0.2,
+    "departure_coverage_min": 0.5,
+    "applies_to": "causal path only; oracle-start cannot satisfy it",
+    "speaker_match_cosine": 0.25,
+    "speaker_presence_s": 30.0,
+    "self_distance": "snapshot median distance to its own centroid",
+    "reference": "window ends in (trigger-210s, trigger-30s], span at least 60s, no commercial audio",
+    "horizons_s": [
+      2.0,
+      5.0,
+      10.0,
+      15.0,
+      30.0
+    ],
+    "published_return_horizon_s": 120.0,
+    "causal_cover_s": 60.0
+  },
+  "inputs": {
+    "experiments/annotations/truth_events.jsonl": "a5e97a6d9b0af1a39355d610b32374cb974903b86b09cb625549019224a3313b",
+    "experiments/gold/GOLD_DEV_V1.json": "32edca84443477a151c31e8be671660a7b1dd18ef015ba3d5f9241f6d364ac6e",
+    "experiments/gold/GOLD_REPLICATION_V1.json": "b36b6c1b7550696c7ddf3c5308901f00f289c1659eed1f3d4554db6c131ed3f0",
+    "experiments/measurement/identity_return_001.py": "97c7f8bb0fae6c6d27e20e4b5078c53abfdc98da3e2bfbca8021acc7c0513d72",
+    "experiments/exp003/hush_20260914_212529/program_cloud.parquet": "1aa17f53e2cac975c29b92f03a7ee198203c65b29b4fa5a5caceb62699e7a382",
+    "experiments/exp005/hush_20260914_212529/semantic.parquet": "5d9746ccffdd86f982914232e167a1906620f862c6792a75558cda712933e812",
+    "experiments/exp005/hush_20260914_212529/semantic_embeddings.npy": "1e5c31d955130813e87f4a885f9e873264fe5296a32f3ebb64e3df187c39031b",
+    "experiments/exp002/hush_20260914_212529/speaker_timeline.parquet": "13b8ffbdd356646c633cf4b0c34c2864844f0491796244d1a9bba3b3a32d57da",
+    "experiments/exp003b/hush_20260914_212529/freezes.json": "a8ccc0733c669e0af19d8d7de8a998c4b063627dc48c3d98eaa7956d86ccec06",
+    "experiments/exp003/hush_20260924_220624/program_cloud.parquet": "1859362f18157423a00b641d07137c2138f79f5cd6b97fdc28422b470cbab722",
+    "experiments/exp005/hush_20260924_220624/semantic.parquet": "18d4d6cb082348e77252dcaf9b28d5effeaad8a8225a801f2d08ae4465bc2a21",
+    "experiments/exp005/hush_20260924_220624/semantic_embeddings.npy": "d306688c0b8e3bb6256a248ccaa69778df2a1a00e4d560e6856c4e7d23385eb9",
+    "experiments/exp002/hush_20260924_220624/speaker_timeline.parquet": "2dbdc49f7afeac67fb3fb2ffe3848b24cc6c62e2c85e88aa2772d600567f2515",
+    "experiments/exp003b/hush_20260924_220624/freezes.json": "4252f6034bb246d951ec9693ed5793cef1b3afcfd12e1876468059ed827c521e",
+    "experiments/exp003/hush_20260827_135935/program_cloud.parquet": "03abc0f8a71286ef783ade98d2af0ec3a0519be08ed9a10402e9fad38d2ce061",
+    "experiments/exp005/hush_20260827_135935/semantic.parquet": "5a68d4a6eb41049a7234dd621b2daf21ee2b057a03bff86a5447ed828b3e98d1",
+    "experiments/exp005/hush_20260827_135935/semantic_embeddings.npy": "4ab8a134f7ac5c7525aef309d563144badcd344d9fa398bfb786448972894c5b",
+    "experiments/exp002/hush_20260827_135935/speaker_timeline.parquet": "f165828c03b393b7c9d5340ce6d92d730381af4b856fa1a9b5652d443636d77f",
+    "experiments/exp003b/hush_20260827_135935/freezes.json": "f074054159351e7fe7220e68dbcb236e3d9b7cfc8f5f93a6f94a4f3bc15efad5"
+  },
+  "integrity": {
+    "n_breaks": 39,
+    "n_timeline_rows": 15684,
+    "oracle_rows_labeled": true,
+    "sessions": [
+      "hush_20260914_212529",
+      "hush_20260924_220624",
+      "hush_20260827_135935"
+    ],
+    "holdouts_absent": true,
+    "acoustic_window_s": 10.0
+  },
+  "outputs": {
+    "per_break_results.csv": "0cf491c5ad6d247a4a7ab58ea764c6488e9f9fbe6e3ba18bded3abdddf4fb905",
+    "timeline.jsonl": "730dddb348b5f4e7ef5fa4a698bf9d04b065ae2ecf5a8063bd87cd79a1f770c2",
+    "coverage_summary.json": "87e9b602e92ba8a5bf3a26cc84610029847bd77197133f6dcca226a63bd2b75c"
+  }
+}

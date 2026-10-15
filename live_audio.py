@@ -152,7 +152,20 @@ def host_resampling(
     return False
 
 
-def query_audio_devices() -> list[dict[str, Any]]:
+def refresh_audio_host() -> None:
+    """Force PortAudio/Core Audio to rescan devices (USB hotplug)."""
+    try:
+        if getattr(sd, "_initialized", False):
+            sd._terminate()
+        sd._initialize()
+    except Exception:
+        # Best-effort: a later query_devices() still returns the last known list.
+        pass
+
+
+def query_audio_devices(*, refresh: bool = False) -> list[dict[str, Any]]:
+    if refresh:
+        refresh_audio_host()
     found = []
     for index, device in enumerate(sd.query_devices()):
         found.append(

@@ -1,0 +1,34 @@
+{
+  "wall_s": 628.0,
+  "windows": 367,
+  "start": {
+    "n": 133,
+    "strong_before": 12,
+    "strong_after": 0,
+    "weak_before": 6,
+    "quarter": 5,
+    "timeout": 1,
+    "clock": 0,
+    "empty": 1
+  },
+  "control": {
+    "n": 135,
+    "strong_before": 0,
+    "strong_after": 0,
+    "weak_before": 0,
+    "quarter": 6,
+    "timeout": 0,
+    "clock": 0,
+    "empty": 0
+  },
+  "redzone": {
+    "n": 40,
+    "strong_before": 0,
+    "strong_after": 0,
+    "weak_before": 2,
+    "quarter": 2,
+    "timeout": 1,
+    "clock": 0,
+    "empty": 0
+  }
+}

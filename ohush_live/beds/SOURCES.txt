@@ -1,5 +1,6 @@
-Local family-test beds. These Mixkit files stay in this folder for tonight.
-They are not a stock library and should not be shipped as standalone downloads.
+Local family-test beds. Mixkit files stay in this folder for the older
+sports/noise set. Soft / EDM beds are generated in ohush_live/sounds.py
+(no separate downloads, no vocals).
 
 stadium.wav
   Mixkit "Big crowd talking loop" (id 364), about 59 seconds, looped.
@@ -13,8 +14,16 @@ fireplace.wav
   Mixkit "Campfire night wind" (id 1736), about 31 seconds, looped.
   The crackle-only fireplace clips were under 25 seconds.
 
-pink, brown, and silence are generated in ohush_live/sounds.py.
+Generated beds (ohush_live/sounds.py):
+  neon / charge / volt / drop — instrumental EDM only (no words):
+    neon   progressive house ~128 BPM
+    charge big-room ~130 BPM
+    volt   techno ~136 BPM
+    drop   festival drop ~128 BPM
+  hush, ocean, stream, birds, breeze, night, chimes, piano, pad, harp, meadow,
+  plus pink, brown, and silence.
 
-All three recordings are scaled well below normal game level.
+Default cover sound is "neon".
+
 Mixkit's free sound-effect license allows use in a project.
 https://mixkit.co/license/#sfxFree

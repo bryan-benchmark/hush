@@ -1,0 +1,13 @@
+{
+  "experiment": "VIBE_STARTER_001",
+  "instructions": "Fill during real commercial breaks. Prefer Wednesday Night tracks first.",
+  "conditions": [
+    "silence",
+    "wednesday_night",
+    "friends_over",
+    "cocktail_lounge",
+    "rainy_night",
+    "stadium"
+  ],
+  "rows": []
+}

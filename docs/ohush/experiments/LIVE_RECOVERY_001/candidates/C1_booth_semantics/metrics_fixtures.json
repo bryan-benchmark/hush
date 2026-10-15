@@ -1,0 +1,166 @@
+{
+  "defect_peak": {
+    "A_permanent_booth_veto": {
+      "result": {
+        "final": "PLAY",
+        "reasons": []
+      },
+      "expect": {
+        "final": "PLAY"
+      },
+      "pass": true,
+      "defect": "A",
+      "title": "booth_locked with no speech must not block solo audio mute"
+    },
+    "B_false_booth_return": {
+      "result": {
+        "final": "PLAY",
+        "reasons": [
+          "solo_audio_depart",
+          "booth_voice"
+        ]
+      },
+      "expect": {
+        "final": "PLAY",
+        "reason": "booth_voice"
+      },
+      "pass": true,
+      "defect": "B",
+      "title": "generic continuity/recurring must not return as booth_voice"
+    },
+    "C_verified_booth_still_protected": {
+      "result": {
+        "final": "PLAY",
+        "reasons": []
+      },
+      "expect": {
+        "final": "PLAY"
+      },
+      "pass": true,
+      "defect": "safety",
+      "title": "verified booth speech still blocks solo audio mute"
+    },
+    "C_verified_booth_return": {
+      "result": {
+        "final": "PLAY",
+        "reasons": [
+          "solo_audio_depart",
+          "booth_voice"
+        ]
+      },
+      "expect": {
+        "final": "PLAY",
+        "reason": "booth_voice"
+      },
+      "pass": true,
+      "defect": "safety",
+      "title": "verified booth voice returns immediately from cover"
+    },
+    "A_outro_hold_still_protects": {
+      "result": {
+        "final": "PLAY",
+        "reasons": []
+      },
+      "expect": {
+        "final": "PLAY"
+      },
+      "pass": true,
+      "defect": "safety",
+      "title": "bounded booth_present linger still blocks mute"
+    }
+  },
+  "candidate": {
+    "A_permanent_booth_veto": {
+      "result": {
+        "final": "MUTED",
+        "reasons": [
+          "solo_audio_depart"
+        ]
+      },
+      "expect": {
+        "final": "MUTED",
+        "reason": "solo_audio_depart"
+      },
+      "pass": true,
+      "defect": "A",
+      "title": "booth_locked with no speech must not block solo audio mute"
+    },
+    "B_false_booth_return": {
+      "result": {
+        "final": "MUTED",
+        "reasons": [
+          "solo_audio_depart"
+        ]
+      },
+      "expect": {
+        "final": "MUTED",
+        "forbid_reason": "booth_voice"
+      },
+      "pass": true,
+      "defect": "B",
+      "title": "generic continuity/recurring must not return as booth_voice"
+    },
+    "C_verified_booth_still_protected": {
+      "result": {
+        "final": "PLAY",
+        "reasons": []
+      },
+      "expect": {
+        "final": "PLAY"
+      },
+      "pass": true,
+      "defect": "safety",
+      "title": "verified booth speech still blocks solo audio mute"
+    },
+    "C_verified_booth_return": {
+      "result": {
+        "final": "PLAY",
+        "reasons": [
+          "solo_audio_depart",
+          "booth_voice"
+        ]
+      },
+      "expect": {
+        "final": "PLAY",
+        "reason": "booth_voice"
+      },
+      "pass": true,
+      "defect": "safety",
+      "title": "verified booth voice returns immediately from cover"
+    },
+    "A_outro_hold_still_protects": {
+      "result": {
+        "final": "PLAY",
+        "reasons": []
+      },
+      "expect": {
+        "final": "PLAY"
+      },
+      "pass": true,
+      "defect": "safety",
+      "title": "bounded booth_present linger still blocks mute"
+    }
+  },
+  "gates": {
+    "A_permanent_booth_veto": {
+      "defect_peak_matches_broken_expect": true,
+      "candidate_matches_fixed_expect": true
+    },
+    "B_false_booth_return": {
+      "defect_peak_matches_broken_expect": true,
+      "candidate_matches_fixed_expect": true
+    },
+    "C_verified_booth_still_protected": {
+      "defect_peak_matches_broken_expect": true,
+      "candidate_matches_fixed_expect": true
+    },
+    "C_verified_booth_return": {
+      "defect_peak_matches_broken_expect": true,
+      "candidate_matches_fixed_expect": true
+    },
+    "A_outro_hold_still_protects": {
+      "defect_peak_matches_broken_expect": true,
+      "candidate_matches_fixed_expect": true
+    }
+  }
+}

@@ -1,0 +1,1613 @@
+{
+  "rule": {
+    "near_s": 3.0,
+    "budgets_per_hour": [
+      1.0,
+      0.5,
+      0.1
+    ],
+    "development_session": "hush_20260914_212529",
+    "score_selection": "highest ESPN average precision among level, rise, ratio; 80% finite required",
+    "acceptance": "score > ESPN threshold"
+  },
+  "episode_counts": {
+    "fresh_start": 59,
+    "inside_pod": 2001,
+    "program": 5466,
+    "ongoing_start": 59,
+    "ongoing_overlaps_start": 59,
+    "fresh_end": 41,
+    "ongoing_overlaps_end": 49,
+    "redzone": 947
+  },
+  "cnn_hashes": {
+    "hush_20260827_135935": {
+      "program_cloud_sha256": "03abc0f8a71286ef783ade98d2af0ec3a0519be08ed9a10402e9fad38d2ce061",
+      "checkpoint_sha256": "0dc499e40e9761ef5ea061ffc77697697f277f6a960894903df3ada000e34b31",
+      "first_defined_window_end": 80.0
+    },
+    "hush_20260909_213047": {
+      "program_cloud_sha256": "4ca30645c2c16730ae810383f3129e1f97772eebbed94ae69111363a3ef7f30a",
+      "checkpoint_sha256": "0dc499e40e9761ef5ea061ffc77697697f277f6a960894903df3ada000e34b31",
+      "first_defined_window_end": 80.0
+    },
+    "hush_20260913_150934": {
+      "program_cloud_sha256": "80ebe6a7672f42d221d2cd4a23f083cbc025a325fac601ed4bf9e3c1e160d0dc",
+      "checkpoint_sha256": "0dc499e40e9761ef5ea061ffc77697697f277f6a960894903df3ada000e34b31",
+      "first_defined_window_end": 80.0
+    },
+    "hush_20260913_210542": {
+      "program_cloud_sha256": "3b1ddae71e0aff69383868a2308f69bb4a55a46a2632139a6ad13720971e5100",
+      "checkpoint_sha256": "0dc499e40e9761ef5ea061ffc77697697f277f6a960894903df3ada000e34b31",
+      "first_defined_window_end": 80.0
+    },
+    "hush_20260914_212529": {
+      "program_cloud_sha256": "1aa17f53e2cac975c29b92f03a7ee198203c65b29b4fa5a5caceb62699e7a382",
+      "checkpoint_sha256": "0dc499e40e9761ef5ea061ffc77697697f277f6a960894903df3ada000e34b31",
+      "first_defined_window_end": 80.0
+    },
+    "hush_20260924_220624": {
+      "program_cloud_sha256": "1859362f18157423a00b641d07137c2138f79f5cd6b97fdc28422b470cbab722",
+      "checkpoint_sha256": "0dc499e40e9761ef5ea061ffc77697697f277f6a960894903df3ada000e34b31",
+      "first_defined_window_end": 80.0
+    },
+    "hush_20261007_220650": {
+      "program_cloud_sha256": "ca7d9eadae00f17c3e69d64dc356c3be044540f99fac441bf44246e65d7cc40a",
+      "checkpoint_sha256": "0dc499e40e9761ef5ea061ffc77697697f277f6a960894903df3ada000e34b31",
+      "first_defined_window_end": 80.0
+    }
+  },
+  "cnn_missing_football_sessions": [
+    "hush_20261008_205100",
+    "hush_20261011_204300",
+    "hush_20261012_204200",
+    "hush_20261010_222400",
+    "hush_20261011_135700"
+  ],
+  "evaluation_sessions": [
+    "hush_20260909_213047",
+    "hush_20260913_210542",
+    "hush_20260924_220624"
+  ],
+  "score_selection": {
+    "eligible": [
+      {
+        "score": "level",
+        "finite_positive_fraction": 1.0,
+        "finite_negative_fraction": 0.9792,
+        "average_precision": 0.379,
+        "n_positive": 5,
+        "n_negative": 471
+      },
+      {
+        "score": "rise",
+        "finite_positive_fraction": 1.0,
+        "finite_negative_fraction": 0.973,
+        "average_precision": 0.2919,
+        "n_positive": 5,
+        "n_negative": 468
+      },
+      {
+        "score": "ratio",
+        "finite_positive_fraction": 1.0,
+        "finite_negative_fraction": 0.973,
+        "average_precision": 0.1569,
+        "n_positive": 5,
+        "n_negative": 468
+      }
+    ],
+    "rejected": [],
+    "chosen": "level",
+    "average_precision": 0.379,
+    "prevalence": 0.0105
+  },
+  "budgets": [
+    {
+      "budget_per_hour": 1.0,
+      "espn_allowed_false_accepts": 1,
+      "threshold": 0.311449356809653,
+      "comparison": "score > threshold",
+      "development": {
+        "starts": 15,
+        "fresh_candidate_starts_within_3s": 5,
+        "accepted_starts": {
+          "3": 2,
+          "5": 2,
+          "10": 2,
+          "30": 2
+        },
+        "fraction_of_starts": {
+          "3": 0.1333,
+          "5": 0.1333,
+          "10": 0.1333,
+          "30": 0.1333
+        },
+        "fraction_of_fresh_3s_candidates": 0.4,
+        "rejected_fresh_3s_candidates": 3,
+        "fresh_3s_missing_score": 0,
+        "delay_s": {
+          "3": {
+            "median_s": 3.899,
+            "p95_s": 3.908
+          },
+          "5": {
+            "median_s": 3.899,
+            "p95_s": 3.908
+          },
+          "10": {
+            "median_s": 3.899,
+            "p95_s": 3.908
+          },
+          "30": {
+            "median_s": 3.899,
+            "p95_s": 3.908
+          }
+        },
+        "program_episodes": 481,
+        "accepted_program_episodes": 1,
+        "program_hours": 1.415,
+        "false_accepts_per_hour": 0.707,
+        "inside_pod_episodes": 231,
+        "accepted_inside_pod_episodes": 35,
+        "redzone_episodes": 0,
+        "accepted_redzone_episodes": 0,
+        "redzone_hours": 0.0,
+        "redzone_false_accepts_per_hour": null,
+        "recordings_with_no_false_accepts": [],
+        "worst_recording": {
+          "session": "hush_20260914_212529",
+          "program_episodes": 481,
+          "accepted_program_episodes": 1,
+          "false_accepts_per_hour": 0.707,
+          "program_hours": 1.415
+        },
+        "per_recording": [
+          {
+            "session": "hush_20260914_212529",
+            "program_episodes": 481,
+            "accepted_program_episodes": 1,
+            "false_accepts_per_hour": 0.707,
+            "program_hours": 1.415
+          }
+        ]
+      },
+      "evaluation_football": {
+        "starts": 54,
+        "fresh_candidate_starts_within_3s": 18,
+        "accepted_starts": {
+          "3": 5,
+          "5": 5,
+          "10": 5,
+          "30": 5
+        },
+        "fraction_of_starts": {
+          "3": 0.0926,
+          "5": 0.0926,
+          "10": 0.0926,
+          "30": 0.0926
+        },
+        "fraction_of_fresh_3s_candidates": 0.2778,
+        "rejected_fresh_3s_candidates": 12,
+        "fresh_3s_missing_score": 1,
+        "delay_s": {
+          "3": {
+            "median_s": 2.001,
+            "p95_s": 2.775
+          },
+          "5": {
+            "median_s": 2.001,
+            "p95_s": 2.775
+          },
+          "10": {
+            "median_s": 2.001,
+            "p95_s": 2.775
+          },
+          "30": {
+            "median_s": 2.001,
+            "p95_s": 2.775
+          }
+        },
+        "program_episodes": 1003,
+        "accepted_program_episodes": 32,
+        "program_hours": 6.111,
+        "false_accepts_per_hour": 5.236,
+        "inside_pod_episodes": 758,
+        "accepted_inside_pod_episodes": 135,
+        "redzone_episodes": 0,
+        "accepted_redzone_episodes": 0,
+        "redzone_hours": 0.0,
+        "redzone_false_accepts_per_hour": null,
+        "recordings_with_no_false_accepts": [],
+        "worst_recording": {
+          "session": "hush_20260913_210542",
+          "program_episodes": 524,
+          "accepted_program_episodes": 20,
+          "false_accepts_per_hour": 7.541,
+          "program_hours": 2.652
+        },
+        "per_recording": [
+          {
+            "session": "hush_20260909_213047",
+            "program_episodes": 370,
+            "accepted_program_episodes": 5,
+            "false_accepts_per_hour": 2.762,
+            "program_hours": 1.81
+          },
+          {
+            "session": "hush_20260913_210542",
+            "program_episodes": 524,
+            "accepted_program_episodes": 20,
+            "false_accepts_per_hour": 7.541,
+            "program_hours": 2.652
+          },
+          {
+            "session": "hush_20260924_220624",
+            "program_episodes": 109,
+            "accepted_program_episodes": 7,
+            "false_accepts_per_hour": 4.246,
+            "program_hours": 1.649
+          }
+        ]
+      },
+      "redzone": {
+        "starts": 0,
+        "fresh_candidate_starts_within_3s": 0,
+        "accepted_starts": {
+          "3": 0,
+          "5": 0,
+          "10": 0,
+          "30": 0
+        },
+        "fraction_of_starts": {
+          "3": null,
+          "5": null,
+          "10": null,
+          "30": null
+        },
+        "fraction_of_fresh_3s_candidates": null,
+        "rejected_fresh_3s_candidates": 0,
+        "fresh_3s_missing_score": 0,
+        "delay_s": {
+          "3": {
+            "median_s": null,
+            "p95_s": null
+          },
+          "5": {
+            "median_s": null,
+            "p95_s": null
+          },
+          "10": {
+            "median_s": null,
+            "p95_s": null
+          },
+          "30": {
+            "median_s": null,
+            "p95_s": null
+          }
+        },
+        "program_episodes": 0,
+        "accepted_program_episodes": 0,
+        "program_hours": 0.0,
+        "false_accepts_per_hour": null,
+        "inside_pod_episodes": 0,
+        "accepted_inside_pod_episodes": 0,
+        "redzone_episodes": 947,
+        "accepted_redzone_episodes": 4,
+        "redzone_hours": 1.999,
+        "redzone_false_accepts_per_hour": 2.001,
+        "recordings_with_no_false_accepts": [],
+        "worst_recording": null,
+        "per_recording": []
+      }
+    },
+    {
+      "budget_per_hour": 0.5,
+      "espn_allowed_false_accepts": 0,
+      "threshold": 0.3347242700735067,
+      "comparison": "score > threshold",
+      "development": {
+        "starts": 15,
+        "fresh_candidate_starts_within_3s": 5,
+        "accepted_starts": {
+          "3": 0,
+          "5": 0,
+          "10": 0,
+          "30": 0
+        },
+        "fraction_of_starts": {
+          "3": 0.0,
+          "5": 0.0,
+          "10": 0.0,
+          "30": 0.0
+        },
+        "fraction_of_fresh_3s_candidates": 0.0,
+        "rejected_fresh_3s_candidates": 5,
+        "fresh_3s_missing_score": 0,
+        "delay_s": {
+          "3": {
+            "median_s": null,
+            "p95_s": null
+          },
+          "5": {
+            "median_s": null,
+            "p95_s": null
+          },
+          "10": {
+            "median_s": null,
+            "p95_s": null
+          },
+          "30": {
+            "median_s": null,
+            "p95_s": null
+          }
+        },
+        "program_episodes": 481,
+        "accepted_program_episodes": 0,
+        "program_hours": 1.415,
+        "false_accepts_per_hour": 0.0,
+        "inside_pod_episodes": 231,
+        "accepted_inside_pod_episodes": 22,
+        "redzone_episodes": 0,
+        "accepted_redzone_episodes": 0,
+        "redzone_hours": 0.0,
+        "redzone_false_accepts_per_hour": null,
+        "recordings_with_no_false_accepts": [
+          "hush_20260914_212529"
+        ],
+        "worst_recording": {
+          "session": "hush_20260914_212529",
+          "program_episodes": 481,
+          "accepted_program_episodes": 0,
+          "false_accepts_per_hour": 0.0,
+          "program_hours": 1.415
+        },
+        "per_recording": [
+          {
+            "session": "hush_20260914_212529",
+            "program_episodes": 481,
+            "accepted_program_episodes": 0,
+            "false_accepts_per_hour": 0.0,
+            "program_hours": 1.415
+          }
+        ]
+      },
+      "evaluation_football": {
+        "starts": 54,
+        "fresh_candidate_starts_within_3s": 18,
+        "accepted_starts": {
+          "3": 3,
+          "5": 3,
+          "10": 3,
+          "30": 3
+        },
+        "fraction_of_starts": {
+          "3": 0.0556,
+          "5": 0.0556,
+          "10": 0.0556,
+          "30": 0.0556
+        },
+        "fraction_of_fresh_3s_candidates": 0.1667,
+        "rejected_fresh_3s_candidates": 14,
+        "fresh_3s_missing_score": 1,
+        "delay_s": {
+          "3": {
+            "median_s": 2.001,
+            "p95_s": 2.502
+          },
+          "5": {
+            "median_s": 2.001,
+            "p95_s": 2.502
+          },
+          "10": {
+            "median_s": 2.001,
+            "p95_s": 2.502
+          },
+          "30": {
+            "median_s": 2.001,
+            "p95_s": 2.502
+          }
+        },
+        "program_episodes": 1003,
+        "accepted_program_episodes": 22,
+        "program_hours": 6.111,
+        "false_accepts_per_hour": 3.6,
+        "inside_pod_episodes": 758,
+        "accepted_inside_pod_episodes": 104,
+        "redzone_episodes": 0,
+        "accepted_redzone_episodes": 0,
+        "redzone_hours": 0.0,
+        "redzone_false_accepts_per_hour": null,
+        "recordings_with_no_false_accepts": [],
+        "worst_recording": {
+          "session": "hush_20260913_210542",
+          "program_episodes": 524,
+          "accepted_program_episodes": 13,
+          "false_accepts_per_hour": 4.902,
+          "program_hours": 2.652
+        },
+        "per_recording": [
+          {
+            "session": "hush_20260909_213047",
+            "program_episodes": 370,
+            "accepted_program_episodes": 3,
+            "false_accepts_per_hour": 1.657,
+            "program_hours": 1.81
+          },
+          {
+            "session": "hush_20260913_210542",
+            "program_episodes": 524,
+            "accepted_program_episodes": 13,
+            "false_accepts_per_hour": 4.902,
+            "program_hours": 2.652
+          },
+          {
+            "session": "hush_20260924_220624",
+            "program_episodes": 109,
+            "accepted_program_episodes": 6,
+            "false_accepts_per_hour": 3.639,
+            "program_hours": 1.649
+          }
+        ]
+      },
+      "redzone": {
+        "starts": 0,
+        "fresh_candidate_starts_within_3s": 0,
+        "accepted_starts": {
+          "3": 0,
+          "5": 0,
+          "10": 0,
+          "30": 0
+        },
+        "fraction_of_starts": {
+          "3": null,
+          "5": null,
+          "10": null,
+          "30": null
+        },
+        "fraction_of_fresh_3s_candidates": null,
+        "rejected_fresh_3s_candidates": 0,
+        "fresh_3s_missing_score": 0,
+        "delay_s": {
+          "3": {
+            "median_s": null,
+            "p95_s": null
+          },
+          "5": {
+            "median_s": null,
+            "p95_s": null
+          },
+          "10": {
+            "median_s": null,
+            "p95_s": null
+          },
+          "30": {
+            "median_s": null,
+            "p95_s": null
+          }
+        },
+        "program_episodes": 0,
+        "accepted_program_episodes": 0,
+        "program_hours": 0.0,
+        "false_accepts_per_hour": null,
+        "inside_pod_episodes": 0,
+        "accepted_inside_pod_episodes": 0,
+        "redzone_episodes": 947,
+        "accepted_redzone_episodes": 4,
+        "redzone_hours": 1.999,
+        "redzone_false_accepts_per_hour": 2.001,
+        "recordings_with_no_false_accepts": [],
+        "worst_recording": null,
+        "per_recording": []
+      }
+    },
+    {
+      "budget_per_hour": 0.1,
+      "espn_allowed_false_accepts": 0,
+      "threshold": 0.3347242700735067,
+      "comparison": "score > threshold",
+      "development": {
+        "starts": 15,
+        "fresh_candidate_starts_within_3s": 5,
+        "accepted_starts": {
+          "3": 0,
+          "5": 0,
+          "10": 0,
+          "30": 0
+        },
+        "fraction_of_starts": {
+          "3": 0.0,
+          "5": 0.0,
+          "10": 0.0,
+          "30": 0.0
+        },
+        "fraction_of_fresh_3s_candidates": 0.0,
+        "rejected_fresh_3s_candidates": 5,
+        "fresh_3s_missing_score": 0,
+        "delay_s": {
+          "3": {
+            "median_s": null,
+            "p95_s": null
+          },
+          "5": {
+            "median_s": null,
+            "p95_s": null
+          },
+          "10": {
+            "median_s": null,
+            "p95_s": null
+          },
+          "30": {
+            "median_s": null,
+            "p95_s": null
+          }
+        },
+        "program_episodes": 481,
+        "accepted_program_episodes": 0,
+        "program_hours": 1.415,
+        "false_accepts_per_hour": 0.0,
+        "inside_pod_episodes": 231,
+        "accepted_inside_pod_episodes": 22,
+        "redzone_episodes": 0,
+        "accepted_redzone_episodes": 0,
+        "redzone_hours": 0.0,
+        "redzone_false_accepts_per_hour": null,
+        "recordings_with_no_false_accepts": [
+          "hush_20260914_212529"
+        ],
+        "worst_recording": {
+          "session": "hush_20260914_212529",
+          "program_episodes": 481,
+          "accepted_program_episodes": 0,
+          "false_accepts_per_hour": 0.0,
+          "program_hours": 1.415
+        },
+        "per_recording": [
+          {
+            "session": "hush_20260914_212529",
+            "program_episodes": 481,
+            "accepted_program_episodes": 0,
+            "false_accepts_per_hour": 0.0,
+            "program_hours": 1.415
+          }
+        ]
+      },
+      "evaluation_football": {
+        "starts": 54,
+        "fresh_candidate_starts_within_3s": 18,
+        "accepted_starts": {
+          "3": 3,
+          "5": 3,
+          "10": 3,
+          "30": 3
+        },
+        "fraction_of_starts": {
+          "3": 0.0556,
+          "5": 0.0556,
+          "10": 0.0556,
+          "30": 0.0556
+        },
+        "fraction_of_fresh_3s_candidates": 0.1667,
+        "rejected_fresh_3s_candidates": 14,
+        "fresh_3s_missing_score": 1,
+        "delay_s": {
+          "3": {
+            "median_s": 2.001,
+            "p95_s": 2.502
+          },
+          "5": {
+            "median_s": 2.001,
+            "p95_s": 2.502
+          },
+          "10": {
+            "median_s": 2.001,
+            "p95_s": 2.502
+          },
+          "30": {
+            "median_s": 2.001,
+            "p95_s": 2.502
+          }
+        },
+        "program_episodes": 1003,
+        "accepted_program_episodes": 22,
+        "program_hours": 6.111,
+        "false_accepts_per_hour": 3.6,
+        "inside_pod_episodes": 758,
+        "accepted_inside_pod_episodes": 104,
+        "redzone_episodes": 0,
+        "accepted_redzone_episodes": 0,
+        "redzone_hours": 0.0,
+        "redzone_false_accepts_per_hour": null,
+        "recordings_with_no_false_accepts": [],
+        "worst_recording": {
+          "session": "hush_20260913_210542",
+          "program_episodes": 524,
+          "accepted_program_episodes": 13,
+          "false_accepts_per_hour": 4.902,
+          "program_hours": 2.652
+        },
+        "per_recording": [
+          {
+            "session": "hush_20260909_213047",
+            "program_episodes": 370,
+            "accepted_program_episodes": 3,
+            "false_accepts_per_hour": 1.657,
+            "program_hours": 1.81
+          },
+          {
+            "session": "hush_20260913_210542",
+            "program_episodes": 524,
+            "accepted_program_episodes": 13,
+            "false_accepts_per_hour": 4.902,
+            "program_hours": 2.652
+          },
+          {
+            "session": "hush_20260924_220624",
+            "program_episodes": 109,
+            "accepted_program_episodes": 6,
+            "false_accepts_per_hour": 3.639,
+            "program_hours": 1.649
+          }
+        ]
+      },
+      "redzone": {
+        "starts": 0,
+        "fresh_candidate_starts_within_3s": 0,
+        "accepted_starts": {
+          "3": 0,
+          "5": 0,
+          "10": 0,
+          "30": 0
+        },
+        "fraction_of_starts": {
+          "3": null,
+          "5": null,
+          "10": null,
+          "30": null
+        },
+        "fraction_of_fresh_3s_candidates": null,
+        "rejected_fresh_3s_candidates": 0,
+        "fresh_3s_missing_score": 0,
+        "delay_s": {
+          "3": {
+            "median_s": null,
+            "p95_s": null
+          },
+          "5": {
+            "median_s": null,
+            "p95_s": null
+          },
+          "10": {
+            "median_s": null,
+            "p95_s": null
+          },
+          "30": {
+            "median_s": null,
+            "p95_s": null
+          }
+        },
+        "program_episodes": 0,
+        "accepted_program_episodes": 0,
+        "program_hours": 0.0,
+        "false_accepts_per_hour": null,
+        "inside_pod_episodes": 0,
+        "accepted_inside_pod_episodes": 0,
+        "redzone_episodes": 947,
+        "accepted_redzone_episodes": 4,
+        "redzone_hours": 1.999,
+        "redzone_false_accepts_per_hour": 2.001,
+        "recordings_with_no_false_accepts": [],
+        "worst_recording": null,
+        "per_recording": []
+      }
+    }
+  ],
+  "published_cnn14_exceedance": [
+    {
+      "session": "hush_20260827_135935",
+      "content": "scripted",
+      "program_hours": 1.676,
+      "published_freezes": 13,
+      "freezes_per_program_hour": 7.757,
+      "program_episodes_with_exceedance": 13,
+      "fresh_start_episodes_with_exceedance": 0,
+      "program_episodes": 525,
+      "fresh_start_episodes": 2
+    },
+    {
+      "session": "hush_20260909_213047",
+      "content": "sports",
+      "program_hours": 1.81,
+      "published_freezes": 11,
+      "freezes_per_program_hour": 6.076,
+      "program_episodes_with_exceedance": 3,
+      "fresh_start_episodes_with_exceedance": 1,
+      "program_episodes": 370,
+      "fresh_start_episodes": 7
+    },
+    {
+      "session": "hush_20260913_150934",
+      "content": "sports",
+      "program_hours": 1.999,
+      "published_freezes": 12,
+      "freezes_per_program_hour": 6.002,
+      "program_episodes_with_exceedance": 0,
+      "fresh_start_episodes_with_exceedance": 0,
+      "program_episodes": 0,
+      "fresh_start_episodes": 0
+    },
+    {
+      "session": "hush_20260913_210542",
+      "content": "sports",
+      "program_hours": 2.652,
+      "published_freezes": 17,
+      "freezes_per_program_hour": 6.41,
+      "program_episodes_with_exceedance": 9,
+      "fresh_start_episodes_with_exceedance": 0,
+      "program_episodes": 524,
+      "fresh_start_episodes": 5
+    },
+    {
+      "session": "hush_20260914_212529",
+      "content": "sports",
+      "program_hours": 1.415,
+      "published_freezes": 10,
+      "freezes_per_program_hour": 7.069,
+      "program_episodes_with_exceedance": 1,
+      "fresh_start_episodes_with_exceedance": 1,
+      "program_episodes": 481,
+      "fresh_start_episodes": 5
+    },
+    {
+      "session": "hush_20260924_220624",
+      "content": "sports",
+      "program_hours": 1.649,
+      "published_freezes": 11,
+      "freezes_per_program_hour": 6.672,
+      "program_episodes_with_exceedance": 4,
+      "fresh_start_episodes_with_exceedance": 1,
+      "program_episodes": 109,
+      "fresh_start_episodes": 6
+    },
+    {
+      "session": "hush_20261007_220650",
+      "content": "scripted",
+      "program_hours": 2.836,
+      "published_freezes": 21,
+      "freezes_per_program_hour": 7.405,
+      "program_episodes_with_exceedance": 22,
+      "fresh_start_episodes_with_exceedance": 0,
+      "program_episodes": 948,
+      "fresh_start_episodes": 7
+    }
+  ],
+  "start_causes_at_1_per_hour": {
+    "no_dsp_candidate": 50,
+    "cnn_evidence_insufficient": 15,
+    "dsp_already_active": 37,
+    "accepted": 7,
+    "cnn_evidence_unavailable": 27
+  },
+  "end_causes": {
+    "no_dsp_candidate_and_no_verified_speaker": 97,
+    "fresh_dsp_episode_no_verified_speaker": 35
+  },
+  "speaker_identity": {
+    "verified_enrollments": 0,
+    "reason": "Cluster ids, booth_present, and .booth.json were not audited on these recordings. They are not used as program-speaker evidence."
+  },
+  "pr_curve_evaluation_football": [
+    {
+      "precision": 0.0,
+      "recall": 0.0
+    },
+    {
+      "precision": 0.1667,
+      "recall": 0.0588
+    },
+    {
+      "precision": 0.0909,
+      "recall": 0.0588
+    },
+    {
+      "precision": 0.125,
+      "recall": 0.1176
+    },
+    {
+      "precision": 0.0952,
+      "recall": 0.1176
+    },
+    {
+      "precision": 0.1154,
+      "recall": 0.1765
+    },
+    {
+      "precision": 0.129,
+      "recall": 0.2353
+    },
+    {
+      "precision": 0.1389,
+      "recall": 0.2941
+    },
+    {
+      "precision": 0.122,
+      "recall": 0.2941
+    },
+    {
+      "precision": 0.1087,
+      "recall": 0.2941
+    },
+    {
+      "precision": 0.098,
+      "recall": 0.2941
+    },
+    {
+      "precision": 0.1071,
+      "recall": 0.3529
+    },
+    {
+      "precision": 0.1311,
+      "recall": 0.4706
+    },
+    {
+      "precision": 0.1212,
+      "recall": 0.4706
+    },
+    {
+      "precision": 0.1127,
+      "recall": 0.4706
+    },
+    {
+      "precision": 0.1053,
+      "recall": 0.4706
+    },
+    {
+      "precision": 0.0988,
+      "recall": 0.4706
+    },
+    {
+      "precision": 0.093,
+      "recall": 0.4706
+    },
+    {
+      "precision": 0.0989,
+      "recall": 0.5294
+    },
+    {
+      "precision": 0.0938,
+      "recall": 0.5294
+    },
+    {
+      "precision": 0.0891,
+      "recall": 0.5294
+    },
+    {
+      "precision": 0.0943,
+      "recall": 0.5882
+    },
+    {
+      "precision": 0.0901,
+      "recall": 0.5882
+    },
+    {
+      "precision": 0.0862,
+      "recall": 0.5882
+    },
+    {
+      "precision": 0.0826,
+      "recall": 0.5882
+    },
+    {
+      "precision": 0.0794,
+      "recall": 0.5882
+    },
+    {
+      "precision": 0.084,
+      "recall": 0.6471
+    },
+    {
+      "precision": 0.0809,
+      "recall": 0.6471
+    },
+    {
+      "precision": 0.078,
+      "recall": 0.6471
+    },
+    {
+      "precision": 0.0753,
+      "recall": 0.6471
+    },
+    {
+      "precision": 0.0728,
+      "recall": 0.6471
+    },
+    {
+      "precision": 0.0705,
+      "recall": 0.6471
+    },
+    {
+      "precision": 0.0683,
+      "recall": 0.6471
+    },
+    {
+      "precision": 0.0663,
+      "recall": 0.6471
+    },
+    {
+      "precision": 0.0643,
+      "recall": 0.6471
+    },
+    {
+      "precision": 0.0682,
+      "recall": 0.7059
+    },
+    {
+      "precision": 0.0663,
+      "recall": 0.7059
+    },
+    {
+      "precision": 0.0645,
+      "recall": 0.7059
+    },
+    {
+      "precision": 0.0628,
+      "recall": 0.7059
+    },
+    {
+      "precision": 0.0612,
+      "recall": 0.7059
+    },
+    {
+      "precision": 0.0597,
+      "recall": 0.7059
+    },
+    {
+      "precision": 0.0583,
+      "recall": 0.7059
+    },
+    {
+      "precision": 0.0569,
+      "recall": 0.7059
+    },
+    {
+      "precision": 0.0556,
+      "recall": 0.7059
+    },
+    {
+      "precision": 0.0543,
+      "recall": 0.7059
+    },
+    {
+      "precision": 0.0531,
+      "recall": 0.7059
+    },
+    {
+      "precision": 0.0519,
+      "recall": 0.7059
+    },
+    {
+      "precision": 0.0551,
+      "recall": 0.7647
+    },
+    {
+      "precision": 0.0539,
+      "recall": 0.7647
+    },
+    {
+      "precision": 0.0569,
+      "recall": 0.8235
+    },
+    {
+      "precision": 0.0558,
+      "recall": 0.8235
+    },
+    {
+      "precision": 0.0547,
+      "recall": 0.8235
+    },
+    {
+      "precision": 0.0536,
+      "recall": 0.8235
+    },
+    {
+      "precision": 0.0526,
+      "recall": 0.8235
+    },
+    {
+      "precision": 0.0517,
+      "recall": 0.8235
+    },
+    {
+      "precision": 0.0507,
+      "recall": 0.8235
+    },
+    {
+      "precision": 0.0498,
+      "recall": 0.8235
+    },
+    {
+      "precision": 0.049,
+      "recall": 0.8235
+    },
+    {
+      "precision": 0.0515,
+      "recall": 0.8824
+    },
+    {
+      "precision": 0.0507,
+      "recall": 0.8824
+    },
+    {
+      "precision": 0.0498,
+      "recall": 0.8824
+    },
+    {
+      "precision": 0.049,
+      "recall": 0.8824
+    },
+    {
+      "precision": 0.0482,
+      "recall": 0.8824
+    },
+    {
+      "precision": 0.0475,
+      "recall": 0.8824
+    },
+    {
+      "precision": 0.0467,
+      "recall": 0.8824
+    },
+    {
+      "precision": 0.046,
+      "recall": 0.8824
+    },
+    {
+      "precision": 0.0453,
+      "recall": 0.8824
+    },
+    {
+      "precision": 0.0476,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0469,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0462,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0456,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0449,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0443,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0437,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0431,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0426,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.042,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0415,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0409,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0404,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0399,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0394,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0389,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0385,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.038,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0376,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0371,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0367,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0363,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0359,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0355,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0351,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0347,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0343,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.034,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0336,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0333,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0329,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0326,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0323,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0319,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0316,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0313,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.031,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0307,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0304,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0301,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0299,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0296,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0293,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.029,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0288,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0285,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0283,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.028,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0278,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0275,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0273,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0271,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0268,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0266,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0264,
+      "recall": 0.9412
+    },
+    {
+      "precision": 0.0278,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0276,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0274,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0272,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0269,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0267,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0265,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0263,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0261,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0259,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0257,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0255,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0253,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0251,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.025,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0248,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0246,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0244,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0243,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0241,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0239,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0237,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0236,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0234,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0233,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0231,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0229,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0228,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0226,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0225,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0223,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0222,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.022,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0219,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0218,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0216,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0215,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0214,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0212,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0211,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.021,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0208,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0207,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0206,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0205,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0203,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0202,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0201,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.02,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0199,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0197,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0196,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0195,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0194,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0193,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0192,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0191,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.019,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0189,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0188,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0187,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0186,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0185,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0184,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0183,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0182,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0181,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.018,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0179,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0178,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0177,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0176,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0175,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0174,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0173,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0172,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0172,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0171,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.017,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.0169,
+      "recall": 1.0
+    }
+  ],
+  "verdict": "INCONCLUSIVE",
+  "compute": {
+    "wall_s": 63.1,
+    "max_rss_bytes": 331563008
+  }
+}

@@ -1,0 +1,5205 @@
+diff --git a/apps/monitor/src/app/api/live/boot/route.ts b/apps/monitor/src/app/api/live/boot/route.ts
+index 2eea334..b8d4abf 100644
+--- a/apps/monitor/src/app/api/live/boot/route.ts
++++ b/apps/monitor/src/app/api/live/boot/route.ts
+@@ -6,11 +6,15 @@ export const dynamic = "force-dynamic";
+ 
+ export async function POST() {
+   const boot = await ensureLive();
+-  if (!boot.ok) {
++  // Engine may finish warming a beat after ensureLive's wait window.
++  const state = await liveFetch("/state");
++  if (!boot.ok && !(state.res.ok && state.json)) {
+     return NextResponse.json({ ok: false, error: boot.error }, { status: 503 });
+   }
++  if (!state.res.ok) {
++    return NextResponse.json({ ok: false, error: boot.error || "Could not get ready." }, { status: 503 });
++  }
+   const devices = await liveFetch("/devices");
+-  const state = await liveFetch("/state");
+   return NextResponse.json({
+     ok: true,
+     devices: devices.json,
+diff --git a/apps/monitor/src/app/globals.css b/apps/monitor/src/app/globals.css
+index 68c55c8..2500823 100644
+--- a/apps/monitor/src/app/globals.css
++++ b/apps/monitor/src/app/globals.css
+@@ -37,6 +37,11 @@ body {
+   font-family: var(--font-display), Georgia, serif;
+ }
+ 
++html:has(.desk.light),
++html:has(.desk.light) body {
++  background: #f3eef8;
++}
++
+ button,
+ input {
+   font: inherit;
+@@ -1466,24 +1471,43 @@ input {
+   --ink: #2a1244;
+   --ink-soft: #6a567c;
+   --paper: #ffffff;
+-  --wash: #f7f3fb;
++  --wash: #f3eef8;
+   --line: rgba(59, 22, 85, 0.12);
+   --accent: #5b2a86;
+   --accent-soft: #a88fd4;
+   --good: #1f7a4d;
+   --warn: #b42318;
+   position: relative;
++  width: 100%;
+   min-height: 100vh;
+-  max-width: 640px;
++  min-height: 100dvh;
++  max-width: 430px;
+   margin: 0 auto;
+-  padding: 1.25rem 1.1rem 6.5rem;
++  padding: 0;
+   display: flex;
+   flex-direction: column;
+-  gap: 1rem;
++  gap: 0;
+   color: var(--ink);
+-  background:
+-    radial-gradient(ellipse 90% 40% at 50% -8%, rgba(184, 156, 230, 0.28), transparent 60%),
+-    linear-gradient(180deg, #ffffff 0%, var(--wash) 100%);
++  background: var(--wash);
++  overflow: hidden;
++}
++
++.desk.light.app-shell {
++  box-shadow: 0 0 0 1px rgba(42, 18, 68, 0.06);
++}
++
++.setup-layout,
++.live-layout {
++  display: flex;
++  flex-direction: column;
++  gap: 0.75rem;
++}
++
++.live-col {
++  display: flex;
++  flex-direction: column;
++  gap: 0.75rem;
++  min-width: 0;
+ }
+ 
+ .desk.light .atmosphere {
+@@ -1496,71 +1520,208 @@ input {
+   background: transparent;
+ }
+ 
+-.desk.light .masthead {
++.app-header {
++  position: sticky;
++  top: 0;
++  z-index: 20;
+   display: flex;
+   align-items: center;
+-  justify-content: flex-start;
+-  margin: 0 0 0.35rem;
+-  padding: 0.35rem 0.15rem 0.55rem;
+-  background: transparent;
++  justify-content: space-between;
++  gap: 0.75rem;
++  padding:
++    calc(0.7rem + env(safe-area-inset-top, 0px))
++    1rem
++    0.7rem;
++  background: rgba(255, 255, 255, 0.92);
++  border-bottom: 1px solid var(--line);
++  backdrop-filter: blur(14px);
++  -webkit-backdrop-filter: blur(14px);
++}
++
++.app-header.live-header {
++  align-items: center;
++}
++
++.mode-toggle {
++  display: inline-flex;
++  flex-shrink: 0;
++  align-items: center;
++  padding: 0.15rem;
++  border-radius: 999px;
++  border: 1px solid var(--line);
++  background: #f4eef8;
++  gap: 0.1rem;
++}
++
++.mode-toggle button {
+   border: 0;
+-  box-shadow: none;
++  background: transparent;
++  color: var(--ink-soft);
++  font-family: var(--font-mono), ui-monospace, monospace;
++  font-size: 0.62rem;
++  letter-spacing: 0.08em;
++  text-transform: uppercase;
++  padding: 0.4rem 0.65rem;
++  border-radius: 999px;
++  cursor: pointer;
++  line-height: 1;
+ }
+ 
+-.desk.light .masthead-brand {
++.mode-toggle.live button.on {
++  background: #2a1244;
++  color: #ffffff;
++}
++
++.mode-toggle.test {
++  border-color: rgba(196, 104, 18, 0.35);
++  background: #fff4e8;
++}
++
++.mode-toggle.test button.on {
++  background: #c46812;
++  color: #ffffff;
++}
++
++.desk.light.test-mode .app-header {
++  border-bottom-color: rgba(196, 104, 18, 0.18);
++}
++
++.app-brand {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+-  gap: 0.2rem;
++  gap: 0.15rem;
++  min-width: 0;
++}
++
++.app-brand.compact {
++  flex-shrink: 0;
+ }
+ 
+ .desk.light .brand-hero {
+-  height: 1.85rem;
++  height: 1.7rem;
+   width: auto;
+-  max-width: 132px;
++  max-width: 118px;
+   display: block;
+   object-fit: contain;
+ }
+ 
+ .desk.light .masthead-sub {
+   margin: 0;
+-  padding-left: 0.1rem;
+   color: var(--ink-soft);
+   font-family: var(--font-mono), ui-monospace, monospace;
+-  font-size: 0.68rem;
++  font-size: 0.62rem;
+   letter-spacing: 0.08em;
+   text-transform: uppercase;
+ }
+ 
+ .desk.light .brand-bar {
+-  height: 2.35rem;
++  height: 1.55rem;
+   width: auto;
+-  max-width: 148px;
++  max-width: 108px;
+   object-fit: contain;
+ }
+ 
+-.site-bar {
++.app-scroll {
++  flex: 1;
++  min-height: 0;
++  overflow-y: auto;
++  -webkit-overflow-scrolling: touch;
++  padding: 0.85rem 1rem 1.25rem;
++  display: flex;
++  flex-direction: column;
++  gap: 0.75rem;
++}
++
++.app-group {
++  background: var(--paper);
++  border: 1px solid var(--line);
++  border-radius: 16px;
++  overflow: hidden;
++}
++
++.app-group-label {
++  margin: 0;
++  padding: 0.7rem 1rem 0;
++  color: var(--ink-soft);
++  font-size: 0.68rem;
++  letter-spacing: 0.1em;
++  text-transform: uppercase;
++  font-family: var(--font-mono), ui-monospace, monospace;
++}
++
++.app-group-label.row {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+-  gap: 0.85rem;
+-  padding: 0.55rem 0.85rem;
+-  border-radius: 18px;
+-  background: rgba(255, 255, 255, 0.82);
+-  border: 1px solid rgba(91, 42, 134, 0.1);
+-  box-shadow: 0 10px 28px rgba(59, 22, 85, 0.06);
+-  backdrop-filter: blur(10px);
++  gap: 0.5rem;
++  padding-right: 0.55rem;
++  text-align: left;
++}
++
++.app-group-body {
++  padding: 0.75rem 1rem 1rem;
++}
++
++.app-group-body.center {
++  display: flex;
++  flex-direction: column;
++  align-items: flex-start;
++  gap: 0.55rem;
++  padding: 1.25rem 1rem;
++}
++
++.app-title {
++  margin: 0;
++  font-family: var(--font-display), Georgia, serif;
++  font-size: 1.35rem;
++  font-weight: 700;
++}
++
++.app-dock {
++  position: sticky;
++  bottom: 0;
++  z-index: 20;
++  display: grid;
++  grid-template-columns: 1fr;
++  gap: 0.55rem;
++  padding:
++    0.75rem 1rem
++    calc(0.85rem + env(safe-area-inset-bottom, 0px));
++  background: rgba(255, 255, 255, 0.94);
++  border-top: 1px solid var(--line);
++  backdrop-filter: blur(14px);
++  -webkit-backdrop-filter: blur(14px);
++}
++
++.app-dock.twin {
++  grid-template-columns: 1fr 1fr;
++}
++
++.app-dock .start-ohush {
++  margin-top: 0;
++}
++
++.setup-hint {
++  margin: 0;
++  text-align: center;
++  color: var(--ink-soft);
++  font-family: var(--font-mono), ui-monospace, monospace;
++  font-size: 0.68rem;
++  letter-spacing: 0.06em;
++  text-transform: uppercase;
+ }
+ 
+ .site-meta {
+   text-align: right;
+   min-width: 0;
++  flex: 1;
+ }
+ 
+ .meta-title {
+   margin: 0;
+   font-family: var(--font-display), Georgia, serif;
+-  font-size: 1rem;
++  font-size: 0.98rem;
+   font-weight: 700;
+   white-space: nowrap;
+   overflow: hidden;
+@@ -1568,18 +1729,18 @@ input {
+ }
+ 
+ .meta-sub {
+-  margin: 0.15rem 0 0;
++  margin: 0.12rem 0 0;
+   color: var(--ink-soft);
+-  font-size: 0.82rem;
++  font-size: 0.78rem;
+ }
+ 
+ .panel,
+ .status {
+   background: var(--paper);
+   border: 1px solid var(--line);
+-  border-radius: 20px;
+-  padding: 1.15rem 1.15rem 1.25rem;
+-  box-shadow: 0 10px 30px rgba(42, 18, 68, 0.05);
++  border-radius: 16px;
++  padding: 1rem;
++  box-shadow: none;
+ }
+ 
+ .status.break {
+@@ -1635,6 +1796,10 @@ input {
+   margin-top: 0.95rem;
+ }
+ 
++.field.tight {
++  margin-top: 0.35rem;
++}
++
+ .field span {
+   color: var(--ink-soft);
+   font-size: 0.72rem;
+@@ -1646,13 +1811,15 @@ input {
+ .desk.light .field input,
+ .desk.light .field select {
+   width: 100%;
+-  border-radius: 14px;
++  border-radius: 12px;
+   border: 1px solid var(--line);
+-  background: #fbfafc;
++  background: #f8f5fb;
+   color: var(--ink);
+-  padding: 0.9rem 1rem;
++  padding: 0.85rem 0.95rem;
+   font-size: 1rem;
+   font-family: var(--font-display), Georgia, serif;
++  appearance: none;
++  -webkit-appearance: none;
+ }
+ 
+ .desk.light .field input:focus,
+@@ -1667,152 +1834,668 @@ input {
+   margin: 1.35rem 0 1.1rem;
+ }
+ 
+-.chip-row {
+-  display: flex;
+-  flex-wrap: wrap;
+-  gap: 0.5rem;
+-  margin-top: 0.85rem;
+-}
+-
+-.desk.light .chip,
+-.desk.light .btn,
+-.desk.light .text-btn {
+-  font-family: var(--font-display), Georgia, serif;
+-  font-size: 0.95rem;
+-  cursor: pointer;
+-}
+-
+-.desk.light .chip {
+-  background: #f4eef8;
+-  color: var(--ink);
+-  border: 1px solid transparent;
+-  border-radius: 999px;
+-  padding: 0.7rem 0.95rem;
+-  min-height: 44px;
+-}
+-
+-.desk.light .chip.on {
+-  background: linear-gradient(135deg, #c4a6ef 0%, #5b2a86 100%);
+-  color: #ffffff;
+-}
+-
+-.desk.light .chip.danger {
+-  background: #fff1f0;
+-  color: var(--warn);
+-}
+-
+-.desk.light .btn {
+-  border: 0;
+-  border-radius: 16px;
+-  padding: 0.95rem 1.1rem;
+-  min-height: 52px;
+-  font-weight: 700;
+-}
+-
+-.desk.light .btn.primary {
+-  background: linear-gradient(135deg, #b899e8 0%, #4e2178 100%);
+-  color: #ffffff;
++.field-label {
++  margin: 1rem 0 0.4rem;
++  color: var(--ink-soft);
++  font-size: 0.68rem;
++  letter-spacing: 0.1em;
++  text-transform: uppercase;
++  font-family: var(--font-mono), ui-monospace, monospace;
+ }
+ 
+-.desk.light .btn.show {
+-  background: var(--good);
+-  color: #ffffff;
++.field-label.tight {
++  margin: 0 0 0.4rem;
+ }
+ 
+-.desk.light .btn.ad {
+-  background: var(--warn);
+-  color: #ffffff;
++.app-group-body > .field-label:first-child,
++.app-group-body > .field:first-child {
++  margin-top: 0;
+ }
+ 
+-.desk.light .btn.wide {
+-  width: 100%;
+-  margin-top: 1.1rem;
++.app-group.setup-card {
++  padding: 0.9rem 1rem 1rem;
++  display: flex;
++  flex-direction: column;
++  gap: 0.75rem;
++  overflow: visible;
++  height: auto;
+ }
+ 
+-.desk.light .btn:disabled,
+-.desk.light .chip:disabled {
+-  opacity: 0.45;
+-  cursor: default;
++.setup-listening-body {
++  display: flex;
++  flex-direction: column;
+ }
+ 
+-.desk.light .text-btn {
+-  margin-top: 0.65rem;
+-  background: transparent;
+-  border: 0;
+-  color: var(--ink-soft);
+-  text-decoration: underline;
+-  padding: 0.4rem 0;
+-  min-height: 44px;
++.setup-type-name {
++  gap: 0.8rem;
+ }
+ 
+-.desk.light .desk-error {
+-  color: var(--warn);
+-  margin: 0.75rem 0 0;
++.setup-title {
++  margin: 0;
++  font-family: var(--font-display), Georgia, serif;
++  font-size: 1.2rem;
++  font-weight: 700;
++  color: var(--ink);
++  letter-spacing: -0.02em;
+ }
+ 
+-.action-dock {
+-  display: grid;
+-  grid-template-columns: 1fr 1fr;
+-  gap: 0.65rem;
++.setup-title-row {
++  display: flex;
++  align-items: center;
++  justify-content: space-between;
++  gap: 0.75rem;
+ }
+ 
+-.rate-block {
+-  margin-top: 1rem;
++.setup-block {
+   display: flex;
+   flex-direction: column;
+-  gap: 0.35rem;
++  gap: 0.55rem;
+ }
+ 
+-.rate-block > span {
++.setup-sub {
++  margin: 0;
+   color: var(--ink-soft);
+-  font-size: 0.72rem;
+-  letter-spacing: 0.1em;
++  font-size: 0.7rem;
++  letter-spacing: 0.12em;
+   text-transform: uppercase;
+   font-family: var(--font-mono), ui-monospace, monospace;
+ }
+ 
+-.break-list,
+-.replay-list {
+-  list-style: none;
+-  margin: 0.4rem 0 0;
+-  padding: 0;
+-  display: flex;
+-  flex-direction: column;
+-  gap: 0.85rem;
++.setup-help {
++  margin: 0;
++  color: var(--ink-soft);
++  font-size: 0.88rem;
++  line-height: 1.4;
+ }
+ 
+-.break-list li,
+-.replay-list li {
++.setup-start {
+   display: flex;
+   flex-direction: column;
++  align-items: flex-start;
+   gap: 0.45rem;
+-  padding-top: 0.75rem;
+-  border-top: 1px solid var(--line);
++  margin-top: 0.85rem;
++  padding-top: 0;
+ }
+ 
+-.break-list li:first-child,
+-.replay-list li:first-child {
+-  border-top: 0;
+-  padding-top: 0;
++.setup-start .start-ohush {
++  width: auto;
++  min-width: 11.5rem;
++  padding: 0 1.25rem;
+ }
+ 
+-.break-list strong {
+-  display: block;
+-  font-family: var(--font-display), Georgia, serif;
++.setup-start .setup-hint {
++  text-align: left;
+ }
+ 
+-.break-list span {
+-  color: var(--ink-soft);
+-  font-size: 0.88rem;
++.desk.light .icon-tip.refresh-inline {
++  width: 2.35rem;
++  height: 2.35rem;
++  min-height: 2.35rem;
++  border-radius: 10px;
++  background: #ffffff;
++  border: 1px solid var(--line);
++  overflow: visible;
++  z-index: 3;
+ }
+ 
+-.replay-list audio {
+-  width: 100%;
++.desk.light .icon-tip.refresh-inline .icon-tip-bubble {
++  top: calc(100% + 0.45rem);
++  bottom: auto;
++  transform: translateX(-50%) translateY(-4px);
+ }
+ 
+-.desk.light .meter-label,
+-.desk.light .meter-db {
+-  color: var(--ink);
++.desk.light .icon-tip.refresh-inline .icon-tip-bubble::after {
++  top: auto;
++  bottom: 100%;
++  border-top-color: transparent;
++  border-bottom-color: #2a1244;
++}
++
++.desk.light .icon-tip.refresh-inline:hover .icon-tip-bubble,
++.desk.light .icon-tip.refresh-inline:focus-visible .icon-tip-bubble {
++  transform: translateX(-50%) translateY(0);
++}
++
++.lead.tight {
++  margin-top: 0.15rem;
++  margin-bottom: 0.15rem;
++  font-size: 0.9rem;
++}
++
++.desk.light .start-ohush {
++  display: inline-flex;
++  align-items: center;
++  justify-content: center;
++  gap: 0.55rem;
++  width: auto;
++  margin-top: 0;
++  min-height: 3.05rem;
++  border: 0;
++  border-radius: 14px;
++  background: linear-gradient(135deg, #b899e8 0%, #4e2178 100%);
++  color: #ffffff;
++  font-family: var(--font-display), Georgia, serif;
++  font-size: 1.05rem;
++  font-weight: 700;
++  cursor: pointer;
++}
++
++.desk.light .start-ohush:disabled {
++  opacity: 0.45;
++  cursor: default;
++}
++
++.desk.light .start-ohush-icon {
++  display: inline-flex;
++}
++
++.desk.light .start-ohush-icon svg {
++  width: 1.35rem;
++  height: 1.35rem;
++}
++
++.field-with-icon {
++  display: inline-flex;
++  align-items: center;
++  gap: 0.4rem;
++}
++
++.field-icon {
++  display: inline-flex;
++  color: var(--accent);
++}
++
++.field-icon svg {
++  width: 16px;
++  height: 16px;
++}
++
++.icon-grid,
++.icon-row {
++  display: flex;
++  flex-wrap: wrap;
++  justify-content: center;
++  gap: 0.65rem;
++  margin-top: 0.35rem;
++}
++
++.desk.light .kind-grid {
++  display: grid;
++  grid-template-columns: repeat(4, minmax(0, 1fr));
++  gap: 0.45rem;
++}
++
++.desk.light .kind-grid .icon-tip {
++  width: 100%;
++  height: auto;
++  min-height: 3.35rem;
++  aspect-ratio: 1.55 / 1;
++  border-radius: 12px;
++  padding: 0.3rem 0.2rem;
++  background: #f4eef8;
++  border: 1.5px solid transparent;
++  opacity: 0.88;
++}
++
++.kind-chip {
++  display: flex;
++  flex-direction: column;
++  align-items: center;
++  justify-content: center;
++  gap: 0.15rem;
++  width: 100%;
++}
++
++.kind-label {
++  font-family: var(--font-display), Georgia, serif;
++  font-size: 0.68rem;
++  font-weight: 600;
++  line-height: 1;
++  color: var(--ink-soft);
++}
++
++.desk.light .kind-grid .icon-tip svg {
++  width: 1.35rem;
++  height: 1.35rem;
++}
++
++.desk.light .kind-grid .icon-tip.pick-on,
++.desk.light .kind-grid .icon-tip.on {
++  background: #ffffff;
++  border: 2.5px solid var(--ink);
++  box-shadow:
++    0 0 0 3px rgba(42, 18, 68, 0.1),
++    0 8px 18px rgba(42, 18, 68, 0.08);
++  opacity: 1;
++}
++
++.desk.light .kind-grid .icon-tip.pick-on .kind-label,
++.desk.light .kind-grid .icon-tip.on .kind-label {
++  color: var(--ink);
++  font-weight: 700;
++}
++
++.service-picker {
++  display: flex;
++  flex-direction: column;
++  gap: 0.5rem;
++}
++
++.service-grid {
++  display: grid;
++  grid-template-columns: repeat(3, minmax(0, 1fr));
++  gap: 0.5rem;
++}
++
++.service-chip {
++  display: flex;
++  flex-direction: column;
++  align-items: center;
++  justify-content: center;
++  gap: 0.35rem;
++  width: 100%;
++  padding: 0.15rem 0.2rem;
++}
++
++.service-logo {
++  display: block;
++  width: 2.15rem;
++  height: 2.15rem;
++  object-fit: contain;
++  flex-shrink: 0;
++}
++
++.service-label {
++  display: block;
++  max-width: 100%;
++  color: var(--ink);
++  font-family: var(--font-display), Georgia, serif;
++  font-size: 0.72rem;
++  font-weight: 600;
++  line-height: 1.15;
++  text-align: center;
++  white-space: nowrap;
++  overflow: hidden;
++  text-overflow: ellipsis;
++}
++
++.desk.light .service-grid .icon-tip.service-tile {
++  width: 100%;
++  height: auto;
++  min-height: 4.55rem;
++  aspect-ratio: auto;
++  border-radius: 14px;
++  padding: 0.5rem 0.35rem 0.45rem;
++  display: inline-flex;
++  align-items: center;
++  justify-content: center;
++  background: #f4eef8;
++  border: 1.5px solid transparent;
++  opacity: 0.88;
++}
++
++.desk.light .service-grid .icon-tip.service-tile.service-off {
++  background: #f4eef8;
++  border: 1.5px solid transparent;
++  opacity: 0.88;
++}
++
++.desk.light .service-grid .icon-tip.service-tile.service-on,
++.desk.light .service-grid .icon-tip.service-tile.on {
++  background: #ffffff;
++  border: 2.5px solid var(--ink);
++  box-shadow:
++    0 0 0 3px rgba(42, 18, 68, 0.12),
++    0 8px 18px rgba(42, 18, 68, 0.08);
++  opacity: 1;
++}
++
++.desk.light .service-grid .icon-tip.service-tile.service-off .service-label {
++  color: var(--ink-soft);
++}
++
++.desk.light .service-grid .icon-tip.service-tile.service-on .service-label,
++.desk.light .service-grid .icon-tip.service-tile.on .service-label {
++  color: var(--ink);
++  font-weight: 700;
++}
++
++.desk.light .icon-tip.pick-off {
++  background: #f4eef8;
++  border: 1.5px solid transparent;
++  opacity: 0.88;
++}
++
++.desk.light .icon-tip.pick-on {
++  background: #ffffff;
++  border: 2.5px solid var(--ink);
++  box-shadow:
++    0 0 0 3px rgba(42, 18, 68, 0.1),
++    0 8px 18px rgba(42, 18, 68, 0.08);
++  opacity: 1;
++}
++
++.service-more {
++  padding: 0.5rem;
++  border-radius: 14px;
++  background: #f7f3fb;
++  border: 1px solid var(--line);
++}
++
++.desk.light .service-more .icon-tip.service-tile {
++  min-height: 4.7rem;
++}
++
++.desk.light .service-more .service-logo {
++  width: 1.9rem;
++  height: 1.9rem;
++}
++
++.desk.light .service-more .service-label {
++  font-size: 0.68rem;
++}
++
++.icon-grid.compact {
++  margin-top: 0;
++}
++
++.icon-grid.sounds .icon-tip {
++  flex: 1 1 calc(33.33% - 0.65rem);
++  max-width: 6.25rem;
++}
++
++.desk.light .icon-tip {
++  position: relative;
++  display: inline-flex;
++  align-items: center;
++  justify-content: center;
++  width: 3.9rem;
++  height: 3.9rem;
++  min-height: 3.9rem;
++  padding: 0;
++  border-radius: 18px;
++  border: 1.5px solid var(--line);
++  background: #ffffff;
++  color: var(--ink);
++  cursor: pointer;
++  overflow: visible;
++}
++
++.desk.light .icon-tip svg {
++  width: 1.7rem;
++  height: 1.7rem;
++}
++
++.desk.light .icon-tip.lg {
++  width: 4.35rem;
++  height: 4.35rem;
++}
++
++.desk.light .icon-tip.on {
++  background: #ffffff;
++  border-color: var(--ink);
++  border-width: 2.5px;
++  color: var(--ink);
++  box-shadow: 0 0 0 1px rgba(42, 18, 68, 0.08);
++}
++
++.desk.light .icon-tip.danger {
++  background: #fff8f7;
++  border-color: rgba(180, 35, 24, 0.35);
++  color: var(--warn);
++}
++
++.desk.light .icon-tip.danger.on {
++  border-color: var(--warn);
++  border-width: 2.5px;
++}
++
++.status-line {
++  display: flex;
++  flex-direction: column;
++  gap: 0.15rem;
++  margin: 0 0 0.75rem;
++  padding: 0.85rem 1rem;
++  border-radius: 12px;
++  border: 1.5px solid var(--line);
++  background: #fbfafc;
++}
++
++.status-line strong {
++  font-family: var(--font-display), Georgia, serif;
++  font-size: 1.05rem;
++}
++
++.status-line span {
++  color: var(--ink-soft);
++  font-size: 0.92rem;
++}
++
++.status-line.game {
++  border-color: rgba(31, 122, 77, 0.45);
++  background: #f4fbf7;
++}
++
++.status-line.break {
++  border-color: rgba(180, 35, 24, 0.4);
++  background: #fff8f7;
++}
++
++.desk.light .live-action {
++  display: inline-flex;
++  align-items: center;
++  justify-content: center;
++  gap: 0.45rem;
++  width: 100%;
++  min-height: 3.1rem;
++  border: 0;
++  border-radius: 14px;
++  color: #ffffff;
++  font-family: var(--font-display), Georgia, serif;
++  font-size: 1rem;
++  font-weight: 700;
++  cursor: pointer;
++}
++
++.desk.light .live-action.show {
++  background: var(--good);
++}
++
++.desk.light .live-action.ad {
++  background: var(--warn);
++}
++
++.desk.light .live-action:disabled {
++  opacity: 0.45;
++  cursor: default;
++}
++
++.desk.light .live-action span {
++  display: inline-flex;
++}
++
++.desk.light .live-action svg {
++  width: 1.25rem;
++  height: 1.25rem;
++}
++
++.live-more {
++  margin-top: 1rem;
++  border-top: 1px solid var(--line);
++  padding-top: 0.75rem;
++}
++
++.live-more.flat {
++  margin: 0;
++  border-top: 1px solid var(--line);
++  padding: 0;
++}
++
++.live-more.flat:first-child {
++  border-top: 0;
++}
++
++.live-more summary {
++  cursor: pointer;
++  color: var(--ink-soft);
++  font-family: var(--font-mono), ui-monospace, monospace;
++  font-size: 0.68rem;
++  letter-spacing: 0.1em;
++  text-transform: uppercase;
++  list-style: none;
++}
++
++.live-more.flat > summary {
++  padding: 0.85rem 1rem;
++}
++
++.live-more summary::-webkit-details-marker {
++  display: none;
++}
++
++.live-more[open] summary {
++  margin-bottom: 0;
++  color: var(--ink);
++}
++
++.live-more.flat[open] > summary {
++  border-bottom: 1px solid var(--line);
++}
++
++.desk.light .icon-tip:disabled {
++  opacity: 0.45;
++  cursor: default;
++}
++
++.desk.light .icon-tip .icon-badge {
++  position: absolute;
++  right: 0.35rem;
++  bottom: 0.25rem;
++  font-style: normal;
++  font-size: 0.65rem;
++  font-family: var(--font-mono), ui-monospace, monospace;
++  line-height: 1;
++}
++
++.desk.light .icon-tip-bubble {
++  position: absolute;
++  left: 50%;
++  bottom: calc(100% + 0.45rem);
++  transform: translateX(-50%) translateY(4px);
++  padding: 0.35rem 0.55rem;
++  border-radius: 8px;
++  background: #2a1244;
++  color: #ffffff;
++  font-family: var(--font-display), Georgia, serif;
++  font-size: 0.78rem;
++  white-space: nowrap;
++  opacity: 0;
++  pointer-events: none;
++  transition: opacity 120ms ease, transform 120ms ease;
++  z-index: 40;
++}
++
++.desk.light .icon-tip-bubble::after {
++  content: "";
++  position: absolute;
++  top: 100%;
++  left: 50%;
++  margin-left: -5px;
++  border: 5px solid transparent;
++  border-top-color: #2a1244;
++}
++
++.desk.light .icon-tip:hover .icon-tip-bubble,
++.desk.light .icon-tip:focus-visible .icon-tip-bubble {
++  opacity: 1;
++  transform: translateX(-50%) translateY(0);
++}
++
++.preview-banner {
++  margin: 0;
++  padding: 0.4rem 1rem;
++  background: #fff4e8;
++  color: #8a4b0f;
++  font-size: 0.72rem;
++  text-align: center;
++  font-family: var(--font-mono), ui-monospace, monospace;
++  border-bottom: 1px solid rgba(196, 104, 18, 0.2);
++}
++
++.desk.light .desk-error {
++  color: var(--warn);
++  margin: 0.75rem 0 0;
++}
++
++.action-dock {
++  display: none;
++}
++
++.desk.light .meter-compact {
++  margin-top: 0.15rem;
++}
++
++.desk.light .meter-compact .meter-label {
++  font-size: 0.68rem;
++}
++
++.rate-block {
++  margin-top: 1rem;
++  display: flex;
++  flex-direction: column;
++  gap: 0.35rem;
++}
++
++.rate-block > span {
++  color: var(--ink-soft);
++  font-size: 0.72rem;
++  letter-spacing: 0.1em;
++  text-transform: uppercase;
++  font-family: var(--font-mono), ui-monospace, monospace;
++}
++
++.break-list,
++.replay-list {
++  list-style: none;
++  margin: 0.4rem 0 0;
++  padding: 0;
++  display: flex;
++  flex-direction: column;
++  gap: 0.85rem;
++}
++
++.break-list li,
++.replay-list li {
++  display: flex;
++  flex-direction: column;
++  gap: 0.45rem;
++  padding-top: 0.75rem;
++  border-top: 1px solid var(--line);
++}
++
++.break-list li:first-child,
++.replay-list li:first-child {
++  border-top: 0;
++  padding-top: 0;
++}
++
++.break-list strong {
++  display: block;
++  font-family: var(--font-display), Georgia, serif;
++}
++
++.break-list span {
++  color: var(--ink-soft);
++  font-size: 0.88rem;
++}
++
++.replay-list audio {
++  width: 100%;
++}
++
++.desk.light .meter-label,
++.desk.light .meter-db {
++  color: var(--ink);
+ }
+ 
+ .desk.light .meter-track {
+@@ -1823,51 +2506,87 @@ input {
+   font-family: var(--font-mono), ui-monospace, monospace;
+ }
+ 
+-@media (max-width: 640px) {
++@media (min-width: 720px) {
++  html:has(.desk.light),
++  html:has(.desk.light) body {
++    background: #ebe4f2;
++  }
++
+   .desk.light {
+-    padding: 0.9rem 0.85rem 7rem;
+-    gap: 0.85rem;
++    max-width: 980px;
++    min-height: calc(100dvh - 2rem);
++    margin: 1rem auto;
++    border-radius: 24px;
++    overflow: hidden;
++  }
++
++  .desk.light.app-shell {
++    box-shadow:
++      0 0 0 1px rgba(42, 18, 68, 0.06),
++      0 18px 50px rgba(42, 18, 68, 0.08);
+   }
+ 
+-  .site-bar {
+-    align-items: flex-start;
++  .app-header {
++    padding-left: 1.25rem;
++    padding-right: 1.25rem;
+   }
+ 
+-  .action-dock {
+-    position: sticky;
+-    bottom: 0.7rem;
+-    z-index: 5;
+-    padding: 0.55rem;
+-    border-radius: 18px;
+-    background: rgba(255, 255, 255, 0.92);
+-    border: 1px solid var(--line);
+-    backdrop-filter: blur(10px);
+-    box-shadow: 0 12px 30px rgba(42, 18, 68, 0.12);
++  .app-scroll {
++    padding: 1rem 1.25rem 1.35rem;
++    gap: 1rem;
+   }
+ 
+-  .desk.light .btn.show,
+-  .desk.light .btn.ad {
+-    font-size: 0.92rem;
+-    padding: 0.85rem 0.6rem;
++  .setup-layout,
++  .live-layout {
++    display: grid;
++    grid-template-columns: 1.1fr 0.9fr;
++    gap: 1rem;
++    align-items: start;
+   }
+ 
+-  .chip-row.sounds .chip {
+-    flex: 1 1 calc(33.33% - 0.5rem);
+-    text-align: center;
++  .live-layout {
++    grid-template-columns: 1fr 1fr;
+   }
+-}
+ 
+-@media (min-width: 641px) {
+-  .desk.light {
+-    padding: 2rem 1.25rem 3rem;
++  .desk.light .kind-grid .icon-tip {
++    min-height: 3.1rem;
++    aspect-ratio: 1.7 / 1;
++  }
++
++  .desk.light .service-grid .icon-tip.service-tile {
++    min-height: 4.35rem;
+   }
+ 
+-  .desk.light .masthead {
+-    padding: 0.45rem 0 0.65rem;
++  .app-dock {
++    padding-left: 1.25rem;
++    padding-right: 1.25rem;
+   }
+ 
+-  .desk.light .brand-hero {
+-    height: 2.05rem;
+-    max-width: 148px;
++  .app-dock.twin {
++    max-width: 520px;
++    margin-left: auto;
++  }
++
++  .desk.light .service-grid .service-logo {
++    width: 2.15rem;
++    height: 2.15rem;
++  }
++
++  .desk.light .service-label {
++    font-size: 0.76rem;
++  }
++}
++
++@media (min-width: 1100px) {
++  .desk.light {
++    max-width: 1080px;
++  }
++}
++
++@media (max-width: 719px) {
++  .desk.light {
++    max-width: 430px;
++    border-radius: 0;
++    margin: 0 auto;
+   }
+ }
+diff --git a/apps/monitor/src/app/layout.tsx b/apps/monitor/src/app/layout.tsx
+index c07c34c..e07de91 100644
+--- a/apps/monitor/src/app/layout.tsx
++++ b/apps/monitor/src/app/layout.tsx
+@@ -21,6 +21,10 @@ export const metadata: Metadata = {
+ 
+ export const viewport: Viewport = {
+   themeColor: "#ffffff",
++  width: "device-width",
++  initialScale: 1,
++  maximumScale: 1,
++  viewportFit: "cover",
+   // iOS auto-link detection rewrites text into <a> tags and breaks hydration.
+   formatDetection: {
+     telephone: false,
+diff --git a/apps/monitor/src/components/LiveMeter.tsx b/apps/monitor/src/components/LiveMeter.tsx
+index 470a9e0..6d689ec 100644
+--- a/apps/monitor/src/components/LiveMeter.tsx
++++ b/apps/monitor/src/components/LiveMeter.tsx
+@@ -12,16 +12,17 @@ function levelFromDbfs(dbfs: number) {
+ }
+ 
+ export function LiveMeter({ dbfs, recording, label, compact }: Props) {
+-  const level = levelFromDbfs(dbfs);
++  const levelDb = Number.isFinite(dbfs) ? dbfs : -100;
++  const level = levelFromDbfs(levelDb);
+   const pct = `${(level * 100).toFixed(1)}%`;
+-  const hot = dbfs > -3;
+-  const silent = dbfs <= -95;
++  const hot = levelDb > -3;
++  const silent = levelDb <= -95;
+   const tone = hot ? "#ff5a3c" : silent ? "#a894b8" : "#3dd68c";
+ 
+   return (
+     <div
+       className={compact ? "meter meter-compact" : "meter"}
+-      aria-label={`${label ? `${label} ` : ""}Peak ${dbfs.toFixed(1)} dBFS`}
++      aria-label={`${label ? `${label} ` : ""}Peak ${levelDb.toFixed(1)} dBFS`}
+     >
+       {label ? <p className="meter-label">{label}</p> : null}
+       <div className="meter-track">
+@@ -42,7 +43,7 @@ export function LiveMeter({ dbfs, recording, label, compact }: Props) {
+       </div>
+       <div className="meter-readout">
+         <span className="meter-db" style={{ color: tone }}>
+-          {dbfs.toFixed(1)}
++          {levelDb.toFixed(1)}
+         </span>
+         <span className="meter-unit">dBFS</span>
+       </div>
+diff --git a/apps/monitor/src/components/SportsDashboard.tsx b/apps/monitor/src/components/SportsDashboard.tsx
+index 8fc412f..d80a65e 100644
+--- a/apps/monitor/src/components/SportsDashboard.tsx
++++ b/apps/monitor/src/components/SportsDashboard.tsx
+@@ -1,23 +1,195 @@
+ "use client";
+ 
+-import { useCallback, useEffect, useMemo, useState } from "react";
++import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
+ import { BrandMark } from "@/components/BrandMark";
++import { Icons, IconTip } from "@/components/IconTip";
+ import { LiveMeter } from "@/components/LiveMeter";
+ 
++function isTestQuery() {
++  if (typeof window === "undefined") return false;
++  const params = new URLSearchParams(window.location.search);
++  return params.get("preview") === "live" || params.get("mode") === "test";
++}
++
++function syncModeQuery(testMode: boolean) {
++  if (typeof window === "undefined") return;
++  const url = new URL(window.location.href);
++  if (testMode) {
++    url.searchParams.set("mode", "test");
++    url.searchParams.delete("preview");
++  } else {
++    url.searchParams.delete("mode");
++    url.searchParams.delete("preview");
++  }
++  window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
++}
++
++function ModeToggle({
++  testMode,
++  onChange,
++}: {
++  testMode: boolean;
++  onChange: (next: boolean) => void;
++}) {
++  return (
++    <div className={testMode ? "mode-toggle test" : "mode-toggle live"} role="group" aria-label="Session mode">
++      <button
++        type="button"
++        className={!testMode ? "on" : ""}
++        aria-pressed={!testMode}
++        onClick={() => onChange(false)}
++      >
++        Live
++      </button>
++      <button
++        type="button"
++        className={testMode ? "on" : ""}
++        aria-pressed={testMode}
++        onClick={() => onChange(true)}
++      >
++        Test
++      </button>
++    </div>
++  );
++}
++
+ const SOUND_LABEL: Record<string, string> = {
+   silence: "Silence",
++  neon: "Neon",
++  charge: "Charge",
++  volt: "Volt",
++  drop: "Drop",
++  hush: "Hush",
++  pad: "Warm pad",
++  ocean: "Ocean",
++  stream: "Stream",
++  birds: "Birds",
++  breeze: "Breeze",
++  night: "Night",
++  chimes: "Chimes",
++  piano: "Soft piano",
++  harp: "Harp",
++  meadow: "Meadow",
+   stadium: "Crowd",
+   rain: "Rain",
+   fireplace: "Fire",
+-  pink: "Pink",
+-  brown: "Brown",
++  pink: "Pink noise",
++  brown: "Brown noise",
++};
++
++const SOUND_ICON: Record<string, ReactNode> = {
++  silence: Icons.silence,
++  neon: Icons.neon,
++  charge: Icons.charge,
++  volt: Icons.volt,
++  drop: Icons.drop,
++  hush: Icons.hush,
++  pad: Icons.pad,
++  ocean: Icons.ocean,
++  stream: Icons.stream,
++  birds: Icons.birds,
++  breeze: Icons.breeze,
++  night: Icons.night,
++  chimes: Icons.chimes,
++  piano: Icons.piano,
++  harp: Icons.harp,
++  meadow: Icons.meadow,
++  stadium: Icons.crowd,
++  rain: Icons.rain,
++  fireplace: Icons.fire,
++  pink: Icons.pink,
++  brown: Icons.brown,
+ };
+ 
+-const SERVICES = ["Prime Video", "Netflix", "YouTube TV", "Hulu", "Cable / antenna", "Other"];
++type ServiceOption = { id: string; tip: string; slug: string; label: string };
++
++const PRIMARY_SERVICES: ServiceOption[] = [
++  { id: "Cable / antenna", tip: "TV / cable", slug: "cable", label: "TV" },
++  { id: "Prime Video", tip: "Prime Video", slug: "prime", label: "Prime" },
++  { id: "Netflix", tip: "Netflix", slug: "netflix", label: "Netflix" },
++  { id: "YouTube TV", tip: "YouTube TV", slug: "youtube", label: "YouTube TV" },
++  { id: "Hulu", tip: "Hulu", slug: "hulu", label: "Hulu" },
++];
++
++const MORE_SERVICES: ServiceOption[] = [
++  { id: "Max", tip: "Max", slug: "max", label: "Max" },
++  { id: "Paramount+", tip: "Paramount+", slug: "paramount", label: "Paramount+" },
++  { id: "Apple TV", tip: "Apple TV", slug: "appletv", label: "Apple TV" },
++  { id: "Peacock", tip: "Peacock", slug: "peacock", label: "Peacock" },
++  { id: "Roku", tip: "Roku Channel / device", slug: "roku", label: "Roku" },
++  { id: "Fubo", tip: "Fubo", slug: "fubo", label: "Fubo" },
++  { id: "Tubi", tip: "Tubi", slug: "tubi", label: "Tubi" },
++  { id: "Crunchyroll", tip: "Crunchyroll", slug: "crunchyroll", label: "Crunchyroll" },
++  { id: "Plex", tip: "Plex", slug: "plex", label: "Plex" },
++  { id: "Twitch", tip: "Twitch", slug: "twitch", label: "Twitch" },
++  { id: "Spotify", tip: "Spotify", slug: "spotify", label: "Spotify" },
++  { id: "Mubi", tip: "Mubi", slug: "mubi", label: "Mubi" },
++  { id: "HBO", tip: "HBO", slug: "hbomax", label: "HBO" },
++  { id: "Other", tip: "Something else", slug: "other", label: "Other" },
++];
++
++function ServiceMark({ slug, label }: { slug: string; label: string }) {
++  return (
++    <span className="service-chip">
++      <img className="service-logo" src={`/brand/services/${slug}.svg?v=3`} alt="" draggable={false} />
++      <span className="service-label">{label}</span>
++    </span>
++  );
++}
++
++function ServicePicker({
++  value,
++  onChange,
++}: {
++  value: string;
++  onChange: (id: string) => void;
++}) {
++  const inMore = MORE_SERVICES.some((row) => row.id === value);
++  const [open, setOpen] = useState(inMore);
++
++  useEffect(() => {
++    if (inMore) setOpen(true);
++  }, [inMore]);
++
++  const render = (row: ServiceOption) => (
++    <IconTip
++      key={row.id}
++      tip={row.tip}
++      active={value === row.id}
++      className={["service-tile", value === row.id ? "service-on" : "service-off"].join(" ")}
++      onClick={() => onChange(row.id)}
++    >
++      <ServiceMark slug={row.slug} label={row.label} />
++    </IconTip>
++  );
++
++  return (
++    <div className="service-picker">
++      <div className="service-grid" role="group" aria-label="Service">
++        {PRIMARY_SERVICES.map(render)}
++        <IconTip
++          tip={open ? "Hide more services" : "More streaming services"}
++          active={open || inMore}
++          className={["service-tile", open || inMore ? "service-on" : "service-off"].join(" ")}
++          onClick={() => setOpen((current) => !current)}
++        >
++          <ServiceMark slug="other" label="More" />
++        </IconTip>
++      </div>
++      {open ? (
++        <div className="service-grid service-more" role="group" aria-label="More streaming services">
++          {MORE_SERVICES.map(render)}
++        </div>
++      ) : null}
++    </div>
++  );
++}
++
+ const KINDS = [
+-  { id: "sports", label: "Live sports" },
+-  { id: "scripted", label: "A show" },
+-  { id: "other", label: "Something else" },
++  { id: "sports", tip: "Live sports", label: "Sports", icon: Icons.sports },
++  { id: "tv", tip: "TV show", label: "TV", icon: Icons.tv },
++  { id: "movie", tip: "Movie", label: "Movie", icon: Icons.movie },
++  { id: "other", tip: "Something else", label: "Other", icon: Icons.other },
+ ];
+ 
+ type DeskState = {
+@@ -28,6 +200,7 @@ type DeskState = {
+   timestamp: number;
+   input_dbfs: number;
+   recording: boolean;
++  resumable?: boolean;
+   input_name: string;
+   output_name: string;
+   error: string;
+@@ -43,7 +216,7 @@ type Device = { index: number; name: string };
+ const EMPTY: DeskState = {
+   state: "PROGRAM",
+   auto: true,
+-  replacement: "stadium",
++  replacement: "hush",
+   sounds: Object.keys(SOUND_LABEL),
+   timestamp: 0,
+   input_dbfs: -100,
+@@ -58,6 +231,64 @@ const EMPTY: DeskState = {
+   content: "sports",
+ };
+ 
++const PREVIEW: DeskState = {
++  ...EMPTY,
++  recording: true,
++  show: "Buccaneers at Cowboys",
++  service: "Prime Video",
++  content: "sports",
++  state: "REPLACEMENT",
++  replacement: "hush",
++  timestamp: 742,
++  input_dbfs: -18.4,
++  input_name: "USB Optical",
++  output_name: "External Headphones",
++  events: [
++    { t: 510, state: "PROGRAM_TO_REPLACEMENT", decision_source: "auto", replacement: "hush" },
++    { t: 640, state: "REPLACEMENT_TO_PROGRAM", decision_source: "human", replacement: "hush" },
++    { t: 700, state: "PROGRAM_TO_REPLACEMENT", decision_source: "human", replacement: "ocean" },
++  ],
++};
++
++function asDeskState(value: unknown): DeskState | null {
++  if (!value || typeof value !== "object") return null;
++  const row = value as Partial<DeskState>;
++  if (typeof row.state !== "string") return null;
++  return {
++    ...EMPTY,
++    state: row.state === "REPLACEMENT" ? "REPLACEMENT" : "PROGRAM",
++    auto: row.auto !== false,
++    replacement: typeof row.replacement === "string" ? row.replacement : EMPTY.replacement,
++    sounds: Array.isArray(row.sounds) && row.sounds.length ? row.sounds.map(String) : EMPTY.sounds,
++    timestamp: Number.isFinite(Number(row.timestamp)) ? Number(row.timestamp) : 0,
++    input_dbfs: Number.isFinite(Number(row.input_dbfs)) ? Number(row.input_dbfs) : EMPTY.input_dbfs,
++    recording: Boolean(row.recording),
++    resumable: Boolean(row.resumable),
++    input_name: typeof row.input_name === "string" ? row.input_name : "",
++    output_name: typeof row.output_name === "string" ? row.output_name : "",
++    error: typeof row.error === "string" ? row.error : "",
++    events: Array.isArray(row.events) ? row.events : [],
++    chunks: Array.isArray(row.chunks) ? row.chunks.map(String) : [],
++    show: typeof row.show === "string" ? row.show : "",
++    service: typeof row.service === "string" ? row.service : "",
++    content: typeof row.content === "string" ? row.content : "sports",
++  };
++}
++
++function restoreForm(nextState: DeskState, setters: {
++  setShow: (v: string) => void;
++  setService: (v: string) => void;
++  setContent: (v: string) => void;
++  setInputName: (v: string) => void;
++  setOutputName: (v: string) => void;
++}) {
++  if (nextState.show) setters.setShow(nextState.show);
++  if (nextState.service) setters.setService(nextState.service);
++  if (nextState.content) setters.setContent(nextState.content);
++  if (nextState.input_name) setters.setInputName(nextState.input_name);
++  if (nextState.output_name) setters.setOutputName(nextState.output_name);
++}
++
+ function clock(seconds: number) {
+   const s = Math.max(0, Math.floor(seconds));
+   const h = Math.floor(s / 3600);
+@@ -66,46 +297,45 @@ function clock(seconds: number) {
+   return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(r).padStart(2, "0")}`;
+ }
+ 
+-function pickDefault(devices: Device[], prefer: RegExp) {
+-  return devices.find((row) => prefer.test(row.name))?.name || devices[0]?.name || "";
+-}
+-
+ export function SportsDashboard() {
++  const [testMode, setTestMode] = useState(false);
+   const [desk, setDesk] = useState<DeskState>(EMPTY);
+   const [ready, setReady] = useState(false);
+   const [bootError, setBootError] = useState("");
+   const [inputs, setInputs] = useState<Device[]>([]);
+   const [outputs, setOutputs] = useState<Device[]>([]);
+-  const [show, setShow] = useState("Buccaneers at Cowboys");
+-  const [service, setService] = useState("Prime Video");
+-  const [content, setContent] = useState("sports");
++  const [show, setShow] = useState("");
++  const [service, setService] = useState("");
++  const [content, setContent] = useState("");
+   const [inputName, setInputName] = useState("");
+   const [outputName, setOutputName] = useState("");
+   const [busy, setBusy] = useState(false);
+   const [playing, setPlaying] = useState<string | null>(null);
++  const setupReady =
++    Boolean(service.trim()) &&
++    Boolean(content.trim()) &&
++    Boolean(show.trim()) &&
++    Boolean(inputName.trim()) &&
++    Boolean(outputName.trim()) &&
++    inputs.some((row) => row.name === inputName) &&
++    outputs.some((row) => row.name === outputName);
+ 
+   const applyState = useCallback((next: DeskState) => {
+-    setDesk({
+-      ...EMPTY,
+-      ...next,
+-      events: next.events ?? [],
+-      chunks: next.chunks ?? [],
+-      sounds: next.sounds?.length ? next.sounds : EMPTY.sounds,
+-    });
++    setDesk(next);
+   }, []);
+ 
+   const boot = useCallback(async () => {
+     setBootError("");
+     try {
+       const res = await fetch("/api/live/boot", { method: "POST" });
+-      const payload = (await res.json()) as {
++      const payload = (await res.json().catch(() => null)) as {
+         ok?: boolean;
+         error?: string;
+         devices?: { inputs?: Device[]; outputs?: Device[] };
+-        state?: DeskState;
+-      };
+-      if (!res.ok || payload.ok === false) {
+-        setBootError(payload.error || "Could not get ready.");
++        state?: unknown;
++      } | null;
++      if (!res.ok || !payload || payload.ok === false) {
++        setBootError(payload?.error || "Could not get ready.");
+         setReady(false);
+         return;
+       }
+@@ -113,12 +343,12 @@ export function SportsDashboard() {
+       const nextOutputs = payload.devices?.outputs ?? [];
+       setInputs(nextInputs);
+       setOutputs(nextOutputs);
+-      setInputName((current) => current || pickDefault(nextInputs, /usb|optical|capture/i));
+-      setOutputName((current) => current || pickDefault(nextOutputs, /headphone|external|airpods/i));
+-      if (payload.state) applyState(payload.state);
+-      if (payload.state?.show) setShow(payload.state.show);
+-      if (payload.state?.service) setService(payload.state.service);
+-      if (payload.state?.content) setContent(payload.state.content);
++      const nextState = asDeskState(payload.state);
++      if (nextState) {
++        applyState(nextState);
++        // Restore last show/devices so refresh can jump back without retyping.
++        restoreForm(nextState, { setShow, setService, setContent, setInputName, setOutputName });
++      }
+       setReady(true);
+     } catch {
+       setBootError("Could not get ready on this Mac.");
+@@ -127,18 +357,69 @@ export function SportsDashboard() {
+   }, [applyState]);
+ 
+   useEffect(() => {
++    const startInTest = isTestQuery();
++    setTestMode(startInTest);
++    syncModeQuery(startInTest);
++    if (startInTest) {
++      setReady(true);
++      return;
++    }
+     void boot();
+   }, [boot]);
+ 
+   useEffect(() => {
+-    if (!ready) return;
++    if (!testMode) return;
++    let cancelled = false;
++    let timer = 0;
++    const arm = () =>
++      window.setTimeout(() => {
++        if (cancelled) return;
++        const switchToLive = window.confirm(
++          "Test mode has been on for over 1 minute.\n\nSwitch back to Live?",
++        );
++        if (switchToLive) {
++          setTestMode(false);
++          syncModeQuery(false);
++          setDesk((current) => (current.recording ? EMPTY : current));
++          void boot();
++          return;
++        }
++        timer = arm();
++      }, 60_000);
++    timer = arm();
++    return () => {
++      cancelled = true;
++      window.clearTimeout(timer);
++    };
++  }, [testMode, boot]);
++
++  const changeMode = useCallback(
++    (nextTest: boolean) => {
++      if (nextTest === testMode) return;
++      if (nextTest && desk.recording && !testMode) {
++        window.alert("Stop the live session before switching to Test.");
++        return;
++      }
++      if (!nextTest && testMode && desk.recording) {
++        setDesk(EMPTY);
++      }
++      setTestMode(nextTest);
++      syncModeQuery(nextTest);
++      if (!nextTest && !ready) void boot();
++      if (!nextTest && ready && !desk.recording) void boot();
++    },
++    [boot, desk.recording, ready, testMode],
++  );
++
++  useEffect(() => {
++    if (!ready || testMode) return;
+     let cancelled = false;
+     const tick = async () => {
+       try {
+         const res = await fetch("/api/live/state", { cache: "no-store" });
+         if (!res.ok) return;
+-        const next = (await res.json()) as DeskState;
+-        if (!cancelled) applyState(next);
++        const next = asDeskState(await res.json().catch(() => null));
++        if (!cancelled && next) applyState(next);
+       } catch {
+         // keep last good frame
+       }
+@@ -149,41 +430,62 @@ export function SportsDashboard() {
+       cancelled = true;
+       clearInterval(timer);
+     };
+-  }, [ready, applyState]);
++  }, [ready, applyState, testMode]);
+ 
+   const refreshDevices = useCallback(async () => {
+     try {
+       const res = await fetch("/api/live/devices", { cache: "no-store" });
+       if (!res.ok) return;
+-      const payload = (await res.json()) as { inputs?: Device[]; outputs?: Device[] };
++      const payload = (await res.json().catch(() => null)) as {
++        inputs?: Device[];
++        outputs?: Device[];
++      } | null;
++      if (!payload) return;
+       const nextInputs = payload.inputs ?? [];
+       const nextOutputs = payload.outputs ?? [];
+       setInputs(nextInputs);
+       setOutputs(nextOutputs);
+-      setInputName((current) =>
+-        nextInputs.some((row) => row.name === current)
+-          ? current
+-          : pickDefault(nextInputs, /usb|optical|capture/i),
+-      );
+-      setOutputName((current) =>
+-        nextOutputs.some((row) => row.name === current)
+-          ? current
+-          : pickDefault(nextOutputs, /headphone|external|airpods|usb/i),
+-      );
++      setInputName((current) => (nextInputs.some((row) => row.name === current) ? current : ""));
++      setOutputName((current) => (nextOutputs.some((row) => row.name === current) ? current : ""));
+     } catch {
+       // keep last list
+     }
+   }, []);
+ 
+   useEffect(() => {
+-    if (!ready || desk.recording) return;
++    if (!ready || desk.recording || testMode) return;
+     void refreshDevices();
+     const timer = setInterval(() => void refreshDevices(), 1500);
+     return () => clearInterval(timer);
+-  }, [ready, desk.recording, refreshDevices]);
++  }, [ready, desk.recording, refreshDevices, testMode]);
++
++  // In Test mode, still list devices so setup can be completed.
++  useEffect(() => {
++    if (!ready || !testMode || desk.recording) return;
++    void refreshDevices();
++    const timer = setInterval(() => void refreshDevices(), 2500);
++    return () => clearInterval(timer);
++  }, [ready, testMode, desk.recording, refreshDevices]);
+ 
+   const post = useCallback(
+     async (path: string, body: unknown = {}) => {
++      if (testMode) {
++        if (path === "/override") {
++          const action = String((body as { action?: string }).action || "");
++          setDesk((current) => {
++            const next = { ...current };
++            if (action === "play") next.state = "PROGRAM";
++            if (action === "mute") next.state = "REPLACEMENT";
++            if (action === "auto") next.auto = !current.auto;
++            if (action.startsWith("sound_")) next.replacement = action.slice(6);
++            return next;
++          });
++        }
++        if (path === "/stop") {
++          setDesk(EMPTY);
++        }
++        return desk;
++      }
+       setBusy(true);
+       try {
+         const res = await fetch(`/api/live${path}`, {
+@@ -191,21 +493,37 @@ export function SportsDashboard() {
+           headers: { "Content-Type": "application/json" },
+           body: JSON.stringify(body),
+         });
+-        const payload = (await res.json().catch(() => null)) as DeskState | null;
++        const payload = asDeskState(await res.json().catch(() => null));
+         if (payload) applyState(payload);
+         return payload;
++      } catch {
++        return null;
+       } finally {
+         setBusy(false);
+       }
+     },
+-    [applyState],
++    [applyState, testMode, desk],
+   );
+ 
+   const start = async () => {
++    if (!setupReady || busy) return;
++    if (testMode) {
++      setDesk({
++        ...PREVIEW,
++        show: show.trim(),
++        service: service.trim(),
++        content: content.trim(),
++        input_name: inputName,
++        output_name: outputName,
++        recording: true,
++      });
++      setBootError("");
++      return;
++    }
+     const payload = await post("/start", {
+-      show,
+-      service,
+-      content,
++      show: show.trim(),
++      service: service.trim(),
++      content: content.trim(),
+       input: inputName,
+       output: outputName,
+     });
+@@ -239,122 +557,183 @@ export function SportsDashboard() {
+ 
+   if (!ready) {
+     return (
+-      <main className="desk light">
+-        <header className="masthead">
+-          <div className="masthead-brand">
++      <main className="desk light app-shell">
++        <header className="app-header">
++          <div className="app-brand">
+             <BrandMark tone="color" className="brand-hero" />
+             <p className="masthead-sub">Take Down Big Audio</p>
+           </div>
++          <ModeToggle testMode={testMode} onChange={changeMode} />
+         </header>
+-        <section className="panel">
+-          <h1>Getting ready</h1>
+-          <p className="lead">One moment while OHush wakes up on this Mac.</p>
+-          {bootError ? (
+-            <>
+-              <p className="desk-error">{bootError}</p>
+-              <button className="btn primary" onClick={() => void boot()}>
+-                Try again
+-              </button>
+-            </>
+-          ) : (
+-            <p className="soft">Starting…</p>
+-          )}
+-        </section>
++        <div className="app-scroll">
++          <section className="app-group">
++            <div className="app-group-body center">
++              <h1 className="app-title">Getting ready</h1>
++              <p className="lead">One moment while OHush wakes up on this Mac.</p>
++              {bootError ? (
++                <>
++                  <p className="desk-error">{bootError}</p>
++                  <IconTip tip="Try again" onClick={() => void boot()}>
++                    {Icons.refresh}
++                  </IconTip>
++                </>
++              ) : (
++                <p className="soft">Starting…</p>
++              )}
++            </div>
++          </section>
++        </div>
+       </main>
+     );
+   }
+ 
+   if (!desk.recording) {
+     return (
+-      <main className="desk light">
+-        <header className="masthead">
+-          <div className="masthead-brand">
++      <main className={testMode ? "desk light app-shell test-mode" : "desk light app-shell"}>
++        <header className="app-header">
++          <div className="app-brand">
+             <BrandMark tone="color" className="brand-hero" />
+             <p className="masthead-sub">Take Down Big Audio</p>
+           </div>
++          <ModeToggle testMode={testMode} onChange={changeMode} />
+         </header>
++        {testMode ? <p className="preview-banner">Test mode · nothing is recorded</p> : null}
+ 
+-        <section className="panel">
+-          <h1>What are you watching?</h1>
+-          <label className="field">
+-            <span>Title</span>
+-            <input
+-              value={show}
+-              onChange={(event) => setShow(event.target.value)}
+-              placeholder="Buccaneers at Cowboys"
+-              autoFocus
+-            />
+-          </label>
+-          <label className="field">
+-            <span>Where</span>
+-            <select value={service} onChange={(event) => setService(event.target.value)}>
+-              {SERVICES.map((name) => (
+-                <option key={name} value={name}>
+-                  {name}
+-                </option>
+-              ))}
+-            </select>
+-          </label>
+-          <div className="chip-row" role="group" aria-label="Kind of show">
+-            {KINDS.map((kind) => (
+-              <button
+-                key={kind.id}
+-                type="button"
+-                className={content === kind.id ? "chip on" : "chip"}
+-                onClick={() => setContent(kind.id)}
+-              >
+-                {kind.label}
+-              </button>
+-            ))}
+-          </div>
++        <div className="app-scroll setup-layout">
++          <section className="app-group setup-card">
++            <h2 className="setup-title">Content</h2>
+ 
+-          <hr className="rule" />
++            <div className="setup-block">
++              <p className="setup-sub">Provider</p>
++              <ServicePicker value={service} onChange={setService} />
++            </div>
+ 
+-          <h2>How should we listen?</h2>
+-          <p className="lead">
+-            Turn the TV speakers down. Leave optical into the USB box. Send this Mac to your soundbar over aux — or
+-            whatever output appears when you plug it in.
+-          </p>
+-          <label className="field">
+-            <span>From the TV</span>
+-            <select value={inputName} onChange={(event) => setInputName(event.target.value)}>
+-              {inputs.map((device) => (
+-                <option key={device.index} value={device.name}>
+-                  {device.name}
+-                </option>
+-              ))}
+-            </select>
+-          </label>
+-          <label className="field">
+-            <span>Hear it on</span>
+-            <select value={outputName} onChange={(event) => setOutputName(event.target.value)}>
+-              {outputs.map((device) => (
+-                <option key={device.index} value={device.name}>
+-                  {device.name}
+-                </option>
+-              ))}
+-            </select>
+-          </label>
+-          <button type="button" className="text-btn" onClick={() => void refreshDevices()}>
+-            Refresh devices
+-          </button>
+-          {(bootError || desk.error) && <p className="desk-error">{bootError || desk.error}</p>}
+-          <button
+-            className="btn primary wide"
+-            disabled={busy || !show.trim() || !inputName || !outputName}
+-            onClick={() => void start()}
+-          >
+-            Start watching
+-          </button>
+-        </section>
++            <div className="setup-block setup-type-name">
++              <div className="setup-block">
++                <p className="setup-sub">Type</p>
++                <div className="kind-grid" role="group" aria-label="Type">
++                  {KINDS.map((kind) => (
++                    <IconTip
++                      key={kind.id}
++                      tip={kind.tip}
++                      active={content === kind.id}
++                      className={content === kind.id ? "pick-on" : "pick-off"}
++                      onClick={() => setContent(kind.id)}
++                    >
++                      <span className="kind-chip">
++                        {kind.icon}
++                        <span className="kind-label">{kind.label}</span>
++                      </span>
++                    </IconTip>
++                  ))}
++                </div>
++              </div>
++
++              <div className="setup-block">
++                <p className="setup-sub">Name</p>
++                <label className="field tight">
++                  <input
++                    value={show}
++                    onChange={(event) => setShow(event.target.value)}
++                    placeholder="e.g. Buccaneers at Cowboys"
++                    autoFocus
++                  />
++                </label>
++              </div>
++            </div>
++          </section>
++
++          <section className="app-group setup-card setup-listening">
++            <div className="setup-title-row">
++              <h2 className="setup-title">Listening</h2>
++              <IconTip tip="Refresh devices" className="refresh-inline" onClick={() => void refreshDevices()}>
++                {Icons.refresh}
++              </IconTip>
++            </div>
++            <div className="setup-block setup-listening-body">
++              <p className="setup-help">
++                Mute the TV speakers. Run optical into the USB box. Send Mac audio to the soundbar with aux.
++              </p>
++              <label className="field">
++                <span className="field-with-icon">
++                  <span className="field-icon">{Icons.mic}</span>
++                  Input
++                </span>
++                <select value={inputName} onChange={(event) => setInputName(event.target.value)}>
++                  <option value="" disabled>
++                    Choose input…
++                  </option>
++                  {inputs.map((device) => (
++                    <option key={device.index} value={device.name}>
++                      {device.name}
++                    </option>
++                  ))}
++                </select>
++              </label>
++              <label className="field">
++                <span className="field-with-icon">
++                  <span className="field-icon">{Icons.speaker}</span>
++                  Output
++                </span>
++                <select value={outputName} onChange={(event) => setOutputName(event.target.value)}>
++                  <option value="" disabled>
++                    Choose output…
++                  </option>
++                  {outputs.map((device) => (
++                    <option key={device.index} value={device.name}>
++                      {device.name}
++                    </option>
++                  ))}
++                </select>
++              </label>
++              {(bootError || desk.error) && <p className="desk-error">{bootError || desk.error}</p>}
++              <div className="setup-start">
++                {desk.resumable ? (
++                  <p className="setup-hint">You never stopped — jump back in with the same show and devices.</p>
++                ) : !setupReady ? (
++                  <p className="setup-hint">
++                    {[
++                      !service.trim() && "provider",
++                      !content.trim() && "type",
++                      !show.trim() && "name",
++                      !inputName.trim() && "input",
++                      !outputName.trim() && "output",
++                    ]
++                      .filter(Boolean)
++                      .join(" · ")}
++                  </p>
++                ) : null}
++                <button
++                  type="button"
++                  className="start-ohush"
++                  disabled={busy || !setupReady}
++                  onClick={() => void start()}
++                >
++                  <span className="start-ohush-icon">{Icons.start}</span>
++                  {desk.resumable ? "Jump back in" : "Start OHush"}
++                </button>
++              </div>
++            </div>
++          </section>
++        </div>
+       </main>
+     );
+   }
+ 
+   return (
+-    <main className={commercial ? "desk light live break" : "desk light live"}>
+-      <header className="site-bar">
+-        <BrandMark tone="color" className="brand-bar" />
++    <main
++      className={[
++        "desk light app-shell live",
++        commercial ? "break" : "",
++        testMode ? "test-mode" : "",
++      ]
++        .filter(Boolean)
++        .join(" ")}
++    >
++      <header className="app-header live-header">
++        <div className="app-brand compact">
++          <BrandMark tone="color" className="brand-bar" />
++        </div>
+         <div className="site-meta">
+           <p className="meta-title">{title}</p>
+           <p className="meta-sub">
+@@ -362,149 +741,191 @@ export function SportsDashboard() {
+             <span className="mono"> · {clock(desk.timestamp)}</span>
+           </p>
+         </div>
++        <ModeToggle testMode={testMode} onChange={changeMode} />
+       </header>
+ 
+-      <section className={commercial ? "status break" : "status game"}>
+-        <p className="status-kicker">{commercial ? "Commercial break" : "Now playing"}</p>
+-        <h1>{commercial ? SOUND_LABEL[desk.replacement] ?? desk.replacement : title}</h1>
+-        <p className="lead">{desk.auto ? "Ads swap automatically. You can always override." : "You’re driving every swap."}</p>
+-      </section>
++      {testMode ? <p className="preview-banner">Test mode · nothing is recorded</p> : null}
+ 
+-      <div className="action-dock">
+-        <button className="btn show" disabled={busy} onClick={() => void post("/override", { action: "play" })}>
+-          Back to the show
+-        </button>
+-        <button className="btn ad" disabled={busy} onClick={() => void post("/override", { action: "mute" })}>
+-          Cover this ad
+-        </button>
+-      </div>
++      <div className="app-scroll live-layout">
++        <div className="live-col">
++          <section className="app-group">
++            <p className="app-group-label">Now Hearing</p>
++            <div className="app-group-body">
++              <div className={commercial ? "status-line break" : "status-line game"}>
++                <strong>{commercial ? "Commercial break" : "The show"}</strong>
++                <span>{commercial ? SOUND_LABEL[desk.replacement] ?? desk.replacement : title}</span>
++              </div>
++              <LiveMeter dbfs={desk.input_dbfs} recording={!testMode} label="TV signal" compact />
++            </div>
++          </section>
+ 
+-      <section className="panel">
+-        <h2>During ads, play</h2>
+-        <div className="chip-row sounds">
+-          {(desk.sounds.length ? desk.sounds : Object.keys(SOUND_LABEL)).map((name) => (
+-            <button
+-              key={name}
+-              type="button"
+-              className={desk.replacement === name ? "chip on" : "chip"}
+-              disabled={busy}
+-              onClick={() => void post("/override", { action: `sound_${name}` })}
+-            >
+-              {SOUND_LABEL[name] ?? name}
+-            </button>
+-          ))}
+-        </div>
+-        <div className="rate-block">
+-          <span>How’s this sound?</span>
+-          <div className="chip-row">
+-            {[1, 2, 3, 4, 5].map((score) => (
+-              <button
+-                key={score}
+-                type="button"
+-                className="chip"
+-                disabled={busy}
+-                onClick={() => void post("/override", { action: `rate${score}` })}
+-              >
+-                {score}
+-              </button>
+-            ))}
+-          </div>
+-          <div className="chip-row">
+-            <button type="button" className="chip" disabled={busy} onClick={() => void post("/override", { action: "want_yes" })}>
+-              Keep every break
+-            </button>
+-            <button type="button" className="chip" disabled={busy} onClick={() => void post("/override", { action: "want_no" })}>
+-              Not every break
+-            </button>
+-          </div>
+-        </div>
+-      </section>
+-
+-      <section className="panel">
+-        <LiveMeter dbfs={desk.input_dbfs} recording label="TV signal" />
+-        <div className="chip-row" style={{ marginTop: "1rem" }}>
+-          <button
+-            type="button"
+-            className="chip"
+-            disabled={busy}
+-            onClick={() =>
+-              void (async () => {
+-                await post("/label", { verdict: "program", about: desk.timestamp });
+-                await post("/override", { action: "play" });
+-              })()
+-            }
+-          >
+-            That was the show
+-          </button>
+-          <button
+-            type="button"
+-            className="chip"
+-            disabled={busy}
+-            onClick={() =>
+-              void (async () => {
+-                await post("/label", { verdict: "commercial", about: desk.timestamp });
+-                if (!commercial) await post("/override", { action: "mute" });
+-              })()
+-            }
+-          >
+-            That was an ad
+-          </button>
+-          <button type="button" className="chip" disabled={busy} onClick={() => void post("/override", { action: "auto" })}>
+-            {desk.auto ? "Pause auto" : "Resume auto"}
+-          </button>
+-          <button
+-            type="button"
+-            className="chip danger"
+-            disabled={busy}
+-            onClick={() => {
+-              if (window.confirm("Stop watching and end this recording?")) void post("/stop", {});
+-            }}
+-          >
+-            End session
+-          </button>
++          <section className="app-group">
++            <p className="app-group-label">Quick Fix</p>
++            <div className="app-group-body">
++              <div className="icon-grid">
++                <IconTip
++                  tip="That was the show"
++                  disabled={busy}
++                  onClick={() =>
++                    void (async () => {
++                      await post("/label", { verdict: "program", about: desk.timestamp });
++                      await post("/override", { action: "play" });
++                    })()
++                  }
++                >
++                  {Icons.fixShow}
++                </IconTip>
++                <IconTip
++                  tip="That was an ad"
++                  disabled={busy}
++                  onClick={() =>
++                    void (async () => {
++                      await post("/label", { verdict: "commercial", about: desk.timestamp });
++                      if (!commercial) await post("/override", { action: "mute" });
++                    })()
++                  }
++                >
++                  {Icons.fixAd}
++                </IconTip>
++                <IconTip
++                  tip={desk.auto ? "Auto on — tap to pause" : "Auto off — tap to resume"}
++                  active={desk.auto}
++                  disabled={busy}
++                  onClick={() => void post("/override", { action: "auto" })}
++                >
++                  {desk.auto ? Icons.autoOn : Icons.autoOff}
++                </IconTip>
++                <IconTip
++                  tip="End session"
++                  danger
++                  disabled={busy}
++                  onClick={() => {
++                    const message = testMode
++                      ? "End this test session?"
++                      : "Stop watching and end this recording?";
++                    if (window.confirm(message)) void post("/stop", {});
++                  }}
++                >
++                  {Icons.stop}
++                </IconTip>
++              </div>
++            </div>
++          </section>
+         </div>
+-      </section>
+-
+-      <section className="panel">
+-        <h2>Breaks tonight</h2>
+-        <ol className="break-list">
+-          {breaks.length === 0 ? <li className="soft">No ads marked yet. Cover one anytime.</li> : null}
+-          {breaks.map((span) => (
+-            <li key={`${span.start}-${span.live}`}>
+-              <div>
+-                <strong>
+-                  {clock(span.start)} – {span.live ? "now" : clock(span.end)}
+-                </strong>
+-                <span>{SOUND_LABEL[span.sound] ?? span.sound}</span>
++
++        <div className="live-col">
++          <section className="app-group">
++            <p className="app-group-label">Ad Sound</p>
++            <div className="app-group-body">
++              <div className="icon-grid sounds" role="group" aria-label="Ad sound">
++                {(desk.sounds.length ? desk.sounds : Object.keys(SOUND_LABEL)).map((name) => (
++                  <IconTip
++                    key={name}
++                    tip={SOUND_LABEL[name] ?? name}
++                    active={desk.replacement === name}
++                    disabled={busy}
++                    onClick={() => void post("/override", { action: `sound_${name}` })}
++                  >
++                    {SOUND_ICON[name] ?? Icons.more}
++                  </IconTip>
++                ))}
+               </div>
+-              <div className="chip-row">
+-                <button type="button" className="chip" disabled={busy} onClick={() => void post("/label", { verdict: "program", about: span.start })}>
+-                  Was show
+-                </button>
+-                <button type="button" className="chip" disabled={busy} onClick={() => void post("/label", { verdict: "commercial", about: span.start })}>
+-                  Was ad
+-                </button>
++            </div>
++          </section>
++
++          <section className="app-group">
++            <details className="live-more flat">
++              <summary>Rate this sound</summary>
++              <div className="app-group-body">
++                <div className="icon-grid">
++                  {[1, 2, 3, 4, 5].map((score) => (
++                    <IconTip
++                      key={score}
++                      tip={`Pleasantness ${score} of 5`}
++                      disabled={busy}
++                      onClick={() => void post("/override", { action: `rate${score}` })}
++                    >
++                      {Icons.star}
++                      <em className="icon-badge">{score}</em>
++                    </IconTip>
++                  ))}
++                  <IconTip tip="Keep every break" disabled={busy} onClick={() => void post("/override", { action: "want_yes" })}>
++                    {Icons.keep}
++                  </IconTip>
++                  <IconTip tip="Not every break" disabled={busy} onClick={() => void post("/override", { action: "want_no" })}>
++                    {Icons.skip}
++                  </IconTip>
++                </div>
+               </div>
+-            </li>
+-          ))}
+-        </ol>
+-      </section>
+-
+-      {desk.chunks.length ? (
+-        <section className="panel">
+-          <h2>Replay</h2>
+-          <ul className="replay-list">
+-            {desk.chunks.map((name) => (
+-              <li key={name}>
+-                <button type="button" className="chip" onClick={() => setPlaying(name)}>
+-                  {name.replace("audio_", "Part ").replace(".wav", "")}
+-                </button>
+-                {playing === name ? <audio controls autoPlay src={`http://127.0.0.1:8770/media/${name}`} /> : null}
+-              </li>
+-            ))}
+-          </ul>
+-        </section>
+-      ) : null}
++            </details>
++            <details className="live-more flat">
++              <summary>Breaks tonight ({breaks.length})</summary>
++              <div className="app-group-body">
++                <ol className="break-list">
++                  {breaks.length === 0 ? <li className="soft">No ads marked yet.</li> : null}
++                  {breaks.map((span) => (
++                    <li key={`${span.start}-${span.live}`}>
++                      <div>
++                        <strong>
++                          {clock(span.start)} – {span.live ? "now" : clock(span.end)}
++                        </strong>
++                        <span>{SOUND_LABEL[span.sound] ?? span.sound}</span>
++                      </div>
++                      <div className="icon-grid compact">
++                        <IconTip tip="Was the show" disabled={busy} onClick={() => void post("/label", { verdict: "program", about: span.start })}>
++                          {Icons.fixShow}
++                        </IconTip>
++                        <IconTip tip="Was an ad" disabled={busy} onClick={() => void post("/label", { verdict: "commercial", about: span.start })}>
++                          {Icons.fixAd}
++                        </IconTip>
++                      </div>
++                    </li>
++                  ))}
++                </ol>
++              </div>
++            </details>
++            {desk.chunks.length ? (
++              <details className="live-more flat">
++                <summary>Replay</summary>
++                <div className="app-group-body">
++                  <ul className="replay-list">
++                    {desk.chunks.map((name) => (
++                      <li key={name}>
++                        <IconTip tip={`Play ${name}`} onClick={() => setPlaying(name)}>
++                          {Icons.replay}
++                        </IconTip>
++                        <span className="soft">{name.replace("audio_", "Part ").replace(".wav", "")}</span>
++                        {playing === name ? <audio controls autoPlay src={`http://127.0.0.1:8770/media/${name}`} /> : null}
++                      </li>
++                    ))}
++                  </ul>
++                </div>
++              </details>
++            ) : null}
++          </section>
++        </div>
++      </div>
++
++      <footer className="app-dock twin">
++        <button
++          type="button"
++          className="live-action show"
++          disabled={busy}
++          onClick={() => void post("/override", { action: "play" })}
++        >
++          <span>{Icons.play}</span>
++          Show
++        </button>
++        <button
++          type="button"
++          className="live-action ad"
++          disabled={busy}
++          onClick={() => void post("/override", { action: "mute" })}
++        >
++          <span>{Icons.mute}</span>
++          Cover ad
++        </button>
++      </footer>
+     </main>
+   );
+ }
+diff --git a/apps/monitor/src/lib/liveEngine.ts b/apps/monitor/src/lib/liveEngine.ts
+index 6e30c89..201ed75 100644
+--- a/apps/monitor/src/lib/liveEngine.ts
++++ b/apps/monitor/src/lib/liveEngine.ts
+@@ -1,5 +1,5 @@
+ import { spawn, type ChildProcess } from "node:child_process";
+-import { existsSync, mkdirSync, writeFileSync } from "node:fs";
++import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+ import { join } from "node:path";
+ 
+ export const LIVE_ORIGIN = "http://127.0.0.1:8770";
+@@ -21,31 +21,82 @@ const PID_FILE = join(REPO, "ohush_live", "sessions", ".desk.pid");
+ declare global {
+   // eslint-disable-next-line no-var
+   var __ohushLiveChild: ChildProcess | undefined;
++  // eslint-disable-next-line no-var
++  var __ohushLiveStarting: Promise<{ ok: boolean; error?: string }> | undefined;
+ }
+ 
+ async function ping(): Promise<boolean> {
+   try {
+-    const res = await fetch(`${LIVE_ORIGIN}/state`, { cache: "no-store" });
++    const res = await fetch(`${LIVE_ORIGIN}/state`, { cache: "no-store", signal: AbortSignal.timeout(800) });
+     return res.ok;
+   } catch {
+     return false;
+   }
+ }
+ 
+-export async function ensureLive(): Promise<{ ok: boolean; error?: string }> {
++function readPid(): number | null {
++  try {
++    const raw = readFileSync(PID_FILE, "utf8").trim();
++    const pid = Number(raw);
++    return Number.isFinite(pid) && pid > 0 ? pid : null;
++  } catch {
++    return null;
++  }
++}
++
++function pidAlive(pid: number): boolean {
++  try {
++    process.kill(pid, 0);
++    return true;
++  } catch {
++    return false;
++  }
++}
++
++async function waitForLive(ms: number): Promise<boolean> {
++  const steps = Math.ceil(ms / 250);
++  for (let i = 0; i < steps; i += 1) {
++    if (await ping()) return true;
++    await new Promise((r) => setTimeout(r, 250));
++  }
++  return false;
++}
++
++function childRunning(child: ChildProcess | undefined): boolean {
++  if (!child || child.killed) return false;
++  if (child.exitCode != null || child.signalCode != null) return false;
++  const pid = child.pid;
++  return typeof pid === "number" && pidAlive(pid);
++}
++
++async function startLiveOnce(): Promise<{ ok: boolean; error?: string }> {
+   if (await ping()) return { ok: true };
+ 
+   if (!existsSync(PYTHON)) {
+     return { ok: false, error: "OHush is not ready on this Mac yet." };
+   }
+ 
+-  if (global.__ohushLiveChild && !global.__ohushLiveChild.killed) {
+-    for (let i = 0; i < 40; i += 1) {
+-      await new Promise((r) => setTimeout(r, 250));
+-      if (await ping()) return { ok: true };
++  // Another engine is still warming (or live). Wait — never kill it.
++  // Killing used to wipe an in-memory session the user never Stopped.
++  const existing = readPid();
++  if (existing && pidAlive(existing)) {
++    if (await waitForLive(90_000)) return { ok: true };
++    if (await ping()) return { ok: true };
++    // Pid file can go stale after a crash; only then fall through to spawn.
++    if (pidAlive(existing)) {
++      return { ok: false, error: "Still warming up. Try again in a moment." };
+     }
+   }
+ 
++  if (childRunning(global.__ohushLiveChild)) {
++    if (await waitForLive(90_000)) return { ok: true };
++    if (await ping()) return { ok: true };
++    if (childRunning(global.__ohushLiveChild)) {
++      return { ok: false, error: "Still warming up. Try again in a moment." };
++    }
++  }
++  global.__ohushLiveChild = undefined;
++
+   const child = spawn(PYTHON, ["-m", "ohush_live.sports_daemon"], {
+     cwd: REPO,
+     detached: true,
+@@ -62,16 +113,40 @@ export async function ensureLive(): Promise<{ ok: boolean; error?: string }> {
+     // pid file is optional
+   }
+ 
+-  for (let i = 0; i < 80; i += 1) {
+-    await new Promise((r) => setTimeout(r, 250));
+-    if (await ping()) return { ok: true };
+-    if (child.exitCode != null) {
+-      return { ok: false, error: "Could not start listening on this Mac." };
+-    }
++  // make_beds + first PortAudio open can exceed a minute on a loaded Mac.
++  if (await waitForLive(180_000)) return { ok: true };
++  if (await ping()) return { ok: true };
++  if (child.exitCode != null || !childRunning(child)) {
++    global.__ohushLiveChild = undefined;
++    return { ok: false, error: "Could not start listening on this Mac." };
+   }
+   return { ok: false, error: "Still warming up. Try again in a moment." };
+ }
+ 
++function externalEngine(): boolean {
++  const mode = (process.env.OHUSH_ENGINE || "").trim().toLowerCase();
++  return mode === "external" || mode === "1" || mode === "true";
++}
++
++export async function ensureLive(): Promise<{ ok: boolean; error?: string }> {
++  if (await ping()) return { ok: true };
++  // Game-night / desk mode: UI hot-reloads; engine is started separately and
++  // must never be spawned or killed from Next.
++  if (externalEngine()) {
++    return {
++      ok: false,
++      error: "Start the engine first: ./scripts/desk engine",
++    };
++  }
++  // Collapse concurrent boot/state/device calls into one spawn attempt.
++  if (!global.__ohushLiveStarting) {
++    global.__ohushLiveStarting = startLiveOnce().finally(() => {
++      global.__ohushLiveStarting = undefined;
++    });
++  }
++  return global.__ohushLiveStarting;
++}
++
+ export async function liveFetch(path: string, init?: RequestInit) {
+   const res = await fetch(`${LIVE_ORIGIN}${path}`, {
+     ...init,
+diff --git a/live_audio.py b/live_audio.py
+index f4f039b..0f393ee 100644
+--- a/live_audio.py
++++ b/live_audio.py
+@@ -152,7 +152,20 @@ def host_resampling(
+     return False
+ 
+ 
+-def query_audio_devices() -> list[dict[str, Any]]:
++def refresh_audio_host() -> None:
++    """Force PortAudio/Core Audio to rescan devices (USB hotplug)."""
++    try:
++        if getattr(sd, "_initialized", False):
++            sd._terminate()
++        sd._initialize()
++    except Exception:
++        # Best-effort: a later query_devices() still returns the last known list.
++        pass
++
++
++def query_audio_devices(*, refresh: bool = False) -> list[dict[str, Any]]:
++    if refresh:
++        refresh_audio_host()
+     found = []
+     for index, device in enumerate(sd.query_devices()):
+         found.append(
+diff --git a/ohush_live/README.md b/ohush_live/README.md
+index 03206fb..287e4dc 100644
+--- a/ohush_live/README.md
++++ b/ohush_live/README.md
+@@ -17,10 +17,20 @@ Turn the television speakers down. Leave the optical output running. Listen on t
+ 
+ Use the output name this Mac actually has. For four seconds you should hear the television through the Mac. For the next four you should hear nothing, while the printed input level stays up. If that level collapses, the mute reached the source and tonight's gate will not work until the optical path stays live.
+ 
+-3. Open the app at http://127.0.0.1:3010/ (`npm run dev` in apps/monitor if needed). Tell it what you are watching, pick the TV optical input and your headphones, then press Start watching. The page starts listening for you. Hotkeys still work in the terminal if you launched the listener yourself: F8 mute, F9 play, F10 auto, S sound, 1-5 pleasant, y/n every break.
++3. Prefer the split desk so UI hot-reload cannot kill listening:
+ 
+-The beds stay quiet, so they sit under the picture instead of replacing the commercial with another show. Stadium starts on a diffuse crowd loop, not a cheer or a chant. Rain and fireplace are longer field recordings. Pink, brown, and silence are generated. Sources are listed in `ohush_live/beds/SOURCES.txt`.
++```bash
++./scripts/desk engine    # terminal 1 — leave this alone during the game
++./scripts/desk ui        # terminal 2 — Next on :3010, hot-reloads freely
++# or one shot: ./scripts/desk up
++```
++
++`OHUSH_ENGINE=external` means the monitor only talks to `:8770`; it will not spawn or kill the engine. Threshold / bed / Python changes need `./scripts/desk restart-engine` (session auto-resumes if you never clicked Stop). Plain `npm run dev` still auto-starts the engine for quick checks.
++
++4. Open http://127.0.0.1:3010/. Tell it what you are watching, pick the TV optical input and your headphones, then press Start. Hotkeys still work in the engine terminal: F8 mute, F9 play, F10 auto, S sound, 1-5 pleasant, y/n every break.
++
++Replacement beds are RMS-matched to each other, then gain-followed to the recent program level so cover audio sits near the TV loudness instead of dropping to a quiet bed. Default cover is hush (light shush). Soft options include pad, ocean, stream, birds, breeze, night, chimes, piano, harp, and meadow; the older crowd/rain/fire/noise set stays available. Sources are listed in `ohush_live/beds/SOURCES.txt`.
+ 
+-Automatic mute still needs the speaker vote and the audio vote to agree. A manual play stays on through the current break. If return looks possible but not strong, you get a short cue and the replacement keeps playing until F9. F10 off means the helper only watches.
++Automatic mute needs two live families to agree, or audio alone when speaker/semantic are unavailable. A disagreeing live speaker still blocks. Manual Show only holds auto-mute when leaving a covered break; pressing Show while already on program does not block the next ad. Live audio warm-up is 25s (product-only). If return looks possible but not strong, you get a short cue and the replacement keeps playing until F9. F10 off means the helper only watches.
+ 
+ The first launch can download the speaker model into `ohush_live/cache`. Closed chunks upload on their own to `gs://hushdev-748439071367-research/live/`. The open chunk is not uploaded. If that uploader stops, recording continues.
+diff --git a/ohush_live/audio_worker.py b/ohush_live/audio_worker.py
+index 4db0af4..63ac79b 100644
+--- a/ohush_live/audio_worker.py
++++ b/ohush_live/audio_worker.py
+@@ -7,6 +7,7 @@ Does not write into experiments/.
+ from __future__ import annotations
+ 
+ import json
++import os
+ import sys
+ from pathlib import Path
+ 
+@@ -16,8 +17,8 @@ REPO = Path(__file__).resolve().parents[1]
+ sys.path.insert(0, str(REPO))
+ sys.path.insert(0, str(REPO / "src"))
+ 
+-from hush.program_cloud import MEMORY_S, MIN_REFERENCE_S, SR, WINDOW_S  # noqa: E402
+-from ohush_live.policy import AUDIO_RETURN, AUDIO_STRONG  # noqa: E402
++from hush.program_cloud import MEMORY_S, SR, WINDOW_S  # noqa: E402
++from ohush_live.policy import AUDIO_MIN_REFERENCE_S, AUDIO_RETURN, AUDIO_STRONG  # noqa: E402
+ 
+ CHECKPOINT = REPO / "experiments" / "exp003" / "models" / "Cnn14_mAP=0.431.pth"
+ 
+@@ -40,7 +41,10 @@ def main() -> None:
+             labels_csv,
+         )
+     nnpack.set_flags(False)
+-    torch.set_num_threads(4)
++    # One thread — many daemons × 4 threads was jetsamming the MacBook.
++    torch.set_num_threads(1)
++    os.environ.setdefault("OMP_NUM_THREADS", "1")
++    os.environ.setdefault("MKL_NUM_THREADS", "1")
+     torch.set_grad_enabled(False)
+     tagger = AudioTagging(checkpoint_path=str(CHECKPOINT), device="cpu")
+     window = int(WINDOW_S * SR)
+@@ -98,7 +102,7 @@ def _latest(matrix: np.ndarray, ends: np.ndarray) -> float | None:
+     if chosen.size == 0:
+         return None
+     span = float(ends[chosen[-1]] - ends[chosen[0]])
+-    if span + 1e-9 < MIN_REFERENCE_S:
++    if span + 1e-9 < AUDIO_MIN_REFERENCE_S:
+         return None
+     centroid = matrix[chosen].mean(axis=0)
+     norm = np.linalg.norm(centroid)
+diff --git a/ohush_live/beds/SOURCES.txt b/ohush_live/beds/SOURCES.txt
+index 5aab92c..98b5b2d 100644
+--- a/ohush_live/beds/SOURCES.txt
++++ b/ohush_live/beds/SOURCES.txt
+@@ -1,5 +1,6 @@
+-Local family-test beds. These Mixkit files stay in this folder for tonight.
+-They are not a stock library and should not be shipped as standalone downloads.
++Local family-test beds. Mixkit files stay in this folder for the older
++sports/noise set. Soft / EDM beds are generated in ohush_live/sounds.py
++(no separate downloads, no vocals).
+ 
+ stadium.wav
+   Mixkit "Big crowd talking loop" (id 364), about 59 seconds, looped.
+@@ -13,8 +14,16 @@ fireplace.wav
+   Mixkit "Campfire night wind" (id 1736), about 31 seconds, looped.
+   The crackle-only fireplace clips were under 25 seconds.
+ 
+-pink, brown, and silence are generated in ohush_live/sounds.py.
++Generated beds (ohush_live/sounds.py):
++  neon / charge / volt / drop — instrumental EDM only (no words):
++    neon   progressive house ~128 BPM
++    charge big-room ~130 BPM
++    volt   techno ~136 BPM
++    drop   festival drop ~128 BPM
++  hush, ocean, stream, birds, breeze, night, chimes, piano, pad, harp, meadow,
++  plus pink, brown, and silence.
++
++Default cover sound is "neon".
+ 
+-All three recordings are scaled well below normal game level.
+ Mixkit's free sound-effect license allows use in a project.
+ https://mixkit.co/license/#sfxFree
+diff --git a/ohush_live/gate.py b/ohush_live/gate.py
+index 5631e20..c808dae 100644
+--- a/ohush_live/gate.py
++++ b/ohush_live/gate.py
+@@ -16,17 +16,28 @@ class ListenerGate:
+         self.replacement = DEFAULT_REPLACEMENT
+         self.auto = True
+         self._prime = prime_frames
+-        self._cap = prime_frames * 4
++        # Keep only a little slack past prime. Separate in/out streams used to
++        # let the ring grow to 4x prime (~800 ms) and lip-sync fell apart.
++        self._cap = prime_frames * 2
++        self._slack = max(2048, prime_frames // 4)
+         self._ring = np.zeros((self._cap, 2), dtype=np.int16)
+         self._read = 0
+         self._write = 0
+         self._count = 0
+         self._beds = beds
++        # Whole-bed RMS so quiet intros (rain fade-in) do not starve the gain stage.
++        self._bed_rms = {
++            name: float(np.sqrt(np.mean(np.square(audio.astype(np.float64) / 32768.0)))) or 1e-6
++            for name, audio in beds.items()
++        }
+         self._pos = 0
+         self._earcon = earcon
+         self._earcon_at = 0
+         self._earcon_left = 0
+         self.input_peak = 0
++        self._input_rms = 0.0
++        self._match_rms = 0.10
++        self._dropped = 0
+         self._idx = np.arange(16384)
+         self._lock = threading.Lock()
+ 
+@@ -36,7 +47,18 @@ class ListenerGate:
+             return
+         with self._lock:
+             self.input_peak = int(np.max(np.abs(audio)))
++            # Cheap RMS from int16 — avoid float cast of every sample in the callback.
++            block_rms = float(np.sqrt(np.mean(np.square(audio.astype(np.float32))))) / 32768.0
++            # Fast rise / slow fall so we lock onto TV loudness without chasing dips.
++            alpha = 0.35 if block_rms >= self._input_rms else 0.05
++            self._input_rms = ((1.0 - alpha) * self._input_rms) + (alpha * block_rms)
++            # Follow the TV level while program is live; freeze that target on mute
++            # so a loud commercial does not shove the bed up further mid-break.
++            if self.mode == "program" and self._input_rms > 0.01:
++                self._match_rms = self._input_rms
+             self._write_ring(audio)
++            # Drop oldest samples when input outruns output so delay stays near prime.
++            self._discard_down_to(self._prime + self._slack)
+ 
+     def render(self, out: np.ndarray) -> None:
+         count = out.shape[0]
+@@ -48,7 +70,7 @@ class ListenerGate:
+                 else:
+                     out[:] = taken
+             else:
+-                self._discard_down_to_prime()
++                self._discard_down_to(self._prime)
+                 self._fill_bed(out)
+                 self._mix_earcon(out)
+ 
+@@ -90,6 +112,14 @@ class ListenerGate:
+             return -100.0
+         return 20.0 * math.log10(peak / 32768.0)
+ 
++    def lag_ms(self, rate: int = 48000) -> float:
++        with self._lock:
++            return 1000.0 * self._count / float(rate)
++
++    def dropped_frames(self) -> int:
++        with self._lock:
++            return self._dropped
++
+     def _write_ring(self, audio: np.ndarray) -> None:
+         count = audio.shape[0]
+         if count >= self._cap:
+@@ -112,12 +142,13 @@ class ListenerGate:
+             return None
+         return self._read_from_ring(count)
+ 
+-    def _discard_down_to_prime(self) -> None:
+-        extra = self._count - self._prime
++    def _discard_down_to(self, keep: int) -> None:
++        extra = self._count - keep
+         if extra <= 0:
+             return
+         self._read = (self._read + extra) % self._cap
+         self._count -= extra
++        self._dropped += extra
+ 
+     def _read_from_ring(self, count: int) -> np.ndarray:
+         end = self._read + count
+@@ -134,8 +165,17 @@ class ListenerGate:
+         bed = self._beds[self.replacement]
+         count = out.shape[0]
+         idx = (self._idx[:count] + self._pos) % len(bed)
+-        out[:] = bed[idx]
++        chunk = bed[idx]
+         self._pos = (self._pos + count) % len(bed)
++        if self.replacement == "silence":
++            out.fill(0)
++            return
++        # Match bed loudness to the recent program level so cover sounds track the TV.
++        bed_rms = self._bed_rms.get(self.replacement, 0.1)
++        target = max(0.05, min(0.28, self._match_rms))
++        gain = min(8.0, target / bed_rms)
++        scaled = np.rint(chunk.astype(np.float64) * gain)
++        out[:] = np.clip(scaled, -32768, 32767).astype(np.int16)
+ 
+     def _mix_earcon(self, out: np.ndarray) -> None:
+         if self._earcon_left <= 0:
+diff --git a/ohush_live/policy.py b/ohush_live/policy.py
+index 8a6d528..2d74c09 100644
+--- a/ohush_live/policy.py
++++ b/ohush_live/policy.py
+@@ -1,20 +1,45 @@
+-"""Product rules for tonight. These are not Exp002–005 constants and must not be copied back into them.
++"""Product rules for live cover. These are not Exp002–005 constants and must not be copied back into them.
+ 
+-Speaker drop 0.35 and return score 0.25 match the frozen listing definitions so the
+-live speaker vote means the same thing as a collapse or a return event. The audio
+-bars are product choices taken from the already-finished Prime overlay
+-(pod median about 0.20, program median about 0.06), not fit to tonight.
++Speaker drop / return listing bars still match Exp002 definitions for the speaker
++worker. Audio bars below are product live thresholds fit to tonight's optical
++sports feed (program usually ~0.05–0.10, ads rising through ~0.14–0.35). Exp003
++offline MIN_REFERENCE_S=60 is intentionally NOT used here.
++
++Quorum: missing families are unavailable, not a "no". Solo audio may mute when
++speaker is null or not currently protecting the booth. Knowing booth identities
++never blocks commercial detection by itself.
++
++Exp001–005 scoring code is untouched.
+ """
+ 
+ PRODUCT = "OHUSH_LIVE_V0"
+ 
+-AUDIO_STRONG = 0.18
+-AUDIO_RETURN = 0.10
++AUDIO_STRONG = 0.22
++AUDIO_RETURN = 0.12
++# Live-only warm-up so the first break is not blind. Exp003 stays at 60s.
++AUDIO_MIN_REFERENCE_S = 15.0
+ SPEAKER_DROP = 0.35
++# Exp002 return listing floor. Product booth speech bypasses this — hearing
++# a *verified* booth identity always lifts cover (see state._booth_heard).
+ SPEAKER_RETURN = 0.25
++# Verified booth identity via embedding match (stricter than Exp002 cluster glue).
++SPEAKER_BOOTH_MATCH = 0.55
++# Bounded outro/bumper gap after the last *verified* booth line.
++# Knowing who Al is must never imply he is still talking.
++BOOTH_HOLD_S = 8.0
++# Remember booth crew under ohush_live/sessions/.booth.json (identity only).
++BOOTH_MIN_CUMULATIVE_S = 6.0
++BOOTH_MIN_OCCURRENCES = 2
++BOOTH_TOP_N = 4
+ 
+-MUTE_PERSIST_S = 3.0
+-PLAY_PERSIST_S = 5.0
+-MIN_MUTE_HOLD_S = 8.0
++MUTE_PERSIST_S = 2.5
++SOLO_MUTE_PERSIST_S = 4.0
++PLAY_PERSIST_S = 3.0
++SOLO_PLAY_PERSIST_S = 3.0
++# Booth voice return is immediate — do not make the user wait out a hold.
++BOOTH_RETURN_PERSIST_S = 0.0
++SOLO_SPEAKER_PLAY_PERSIST_S = 1.0
++MIN_MUTE_HOLD_S = 6.0
+ 
+ MIN_AGREE = 2
++SOLO_FAMILY = "audio"
+diff --git a/ohush_live/sounds.py b/ohush_live/sounds.py
+index 749e1b3..5e6ba57 100644
+--- a/ohush_live/sounds.py
++++ b/ohush_live/sounds.py
+@@ -1,7 +1,10 @@
+-"""Quiet replacement beds for a family listen.
++"""Replacement beds for a family listen.
+ 
+-Pink, brown, and silence are generated. Stadium, rain, and fireplace prefer
+-local Mixkit recordings in ohush_live/beds when those files are present.
++Older beds (stadium/rain/fireplace) prefer Mixkit files in ohush_live/beds when
++present. Soft beds: hush (light shush), neon/charge/volt/drop (instrumental EDM —
++no vocals), ocean, stream, birds, breeze, night, chimes, piano, pad, harp, meadow.
++
++All non-silence beds are RMS-matched so cover loudness tracks the TV.
+ """
+ 
+ from __future__ import annotations
+@@ -13,22 +16,70 @@ import soundfile as sf
+ 
+ RATE = 48000
+ LOOP_S = 12.0
+-BED_PEAK = 0.05
++# Target RMS in float [-1, 1]. ~-20 dBFS — present, not crushingly loud.
++BED_RMS = 0.10
++BED_PEAK_CAP = 0.90
++# Kept for callers/tests that imported the old peak constant.
++BED_PEAK = BED_RMS * 0.5
+ BED_DIR = Path(__file__).resolve().parent / "beds"
+ 
++# Soft defaults first — the vetoed sports/noise set stays available at the end.
++GENERATED_BEDS = (
++    "hush",
++    "neon",
++    "charge",
++    "volt",
++    "drop",
++    "ocean",
++    "stream",
++    "birds",
++    "breeze",
++    "night",
++    "chimes",
++    "piano",
++    "pad",
++    "harp",
++    "meadow",
++    "stadium",
++    "rain",
++    "fireplace",
++    "pink",
++    "brown",
++)
++RECORDING_BEDS = ("stadium", "rain", "fireplace")
++
+ 
+ def make_beds(rate: int = RATE, use_recordings: bool = True) -> dict[str, np.ndarray]:
+     frames = int(LOOP_S * rate)
+-    beds = {
++    makers = {
++        "hush": _hush,
++        "neon": _neon,
++        "charge": _charge,
++        "volt": _volt,
++        "drop": _drop,
++        "ocean": _ocean,
++        "stream": _stream,
++        "birds": _birds,
++        "breeze": _breeze,
++        "night": _night,
++        "chimes": _chimes,
++        "piano": _piano,
++        "pad": _pad,
++        "harp": _harp,
++        "meadow": _meadow,
++        "stadium": _stadium,
++        "rain": _rain,
++        "fireplace": _fireplace,
++        "pink": lambda f, r: _colored(np.random.default_rng(11), f, 1.0),
++        "brown": lambda f, r: _colored(np.random.default_rng(13), f, 2.0),
++    }
++    beds: dict[str, np.ndarray] = {
+         "silence": np.zeros((frames, 2), dtype=np.int16),
+-        "stadium": _stereo(_stadium(frames, rate), rate, BED_PEAK),
+-        "rain": _stereo(_rain(frames, rate), rate, BED_PEAK * 0.85),
+-        "fireplace": _stereo(_fireplace(frames, rate), rate, BED_PEAK),
+-        "pink": _stereo(_colored(np.random.default_rng(11), frames, 1.0), rate, BED_PEAK * 0.7),
+-        "brown": _stereo(_colored(np.random.default_rng(13), frames, 2.0), rate, BED_PEAK * 0.8),
+     }
++    for name in GENERATED_BEDS:
++        beds[name] = _stereo(makers[name](frames, rate), rate)
+     if use_recordings:
+-        for name in ("stadium", "rain", "fireplace"):
++        for name in RECORDING_BEDS:
+             loaded = _read_recording(name)
+             if loaded is not None:
+                 beds[name] = loaded
+@@ -39,16 +90,409 @@ def _read_recording(name: str) -> np.ndarray | None:
+     path = BED_DIR / f"{name}.wav"
+     if not path.is_file():
+         return None
+-    audio, rate = sf.read(path, dtype="int16", always_2d=True)
++    audio, rate = sf.read(path, dtype="float64", always_2d=True)
+     if rate != RATE or audio.shape[1] != 2:
+         raise RuntimeError(f"{path.name} must be {RATE} Hz stereo")
+-    return np.ascontiguousarray(audio)
++    audio = _trim_edges(audio, rate)
++    audio = _densest_loop(audio, rate, LOOP_S)
++    audio = _flatten_dynamics(audio)
++    return _to_int16(_normalize_rms(audio))
++
++
++def _trim_edges(audio: np.ndarray, rate: int, floor: float = 0.003) -> np.ndarray:
++    """Drop leading/trailing near-silence so beds do not start mute."""
++    level = np.mean(np.abs(audio), axis=1)
++    live = np.flatnonzero(level >= floor)
++    if live.size == 0:
++        return audio
++    pad = int(0.05 * rate)
++    start = max(0, int(live[0]) - pad)
++    end = min(audio.shape[0], int(live[-1]) + pad)
++    if end - start < rate:
++        return audio
++    return audio[start:end]
++
++
++def _densest_loop(audio: np.ndarray, rate: int, seconds: float) -> np.ndarray:
++    """Keep the loudest contiguous loop so sparse rain/fire files stay present."""
++    want = int(seconds * rate)
++    if audio.shape[0] <= want:
++        return audio
++    power = np.mean(np.square(audio), axis=1)
++    csum = np.concatenate([[0.0], np.cumsum(power)])
++    window = csum[want:] - csum[:-want]
++    best_i = int(np.argmax(window))
++    return audio[best_i : best_i + want]
++
++
++def _flatten_dynamics(audio: np.ndarray) -> np.ndarray:
++    """Mild compression so crackle/drops do not steal the RMS budget."""
++    peak = np.maximum(np.max(np.abs(audio), axis=1, keepdims=True), 1e-6)
++    gain = np.power(peak, -0.35)
++    return audio * gain
+ 
+ 
+ def make_earcon(rate: int = RATE) -> np.ndarray:
+     tone = np.concatenate([_tone(880, 0.12, rate), _tone(660, 0.16, rate)])
+     stereo = np.column_stack([tone, tone])
+-    return _scale(stereo, 0.08)
++    return _to_int16(_normalize_rms(stereo, target_rms=0.06, peak_cap=0.25))
++
++
++def _hush(frames: int, rate: int) -> np.ndarray:
++    """Light shush bed — soft breathy noise, not pink/brown wall."""
++    rng = np.random.default_rng(20261030)
++    t = np.arange(frames) / rate
++    # Gentle under-bed + a "shh" band that breathes slowly.
++    under = _band(_colored(rng, frames, 1.3), rate, 120, 1200) * 0.45
++    shush = _band(_colored(rng, frames, 0.55), rate, 1800, 7000)
++    breath = 0.72 + 0.28 * np.sin(2 * np.pi * t / 8.5)
++    # Tiny irregular softens so it does not sound like a fan stuck on.
++    flutter = 0.92 + 0.08 * _band(_leaky(rng, frames, 0.995), rate, 0.2, 8)
++    return under + 0.7 * shush * breath * flutter
++
++
++def _neon(frames: int, rate: int) -> np.ndarray:
++    """Instrumental progressive house — 128 BPM, supersaw + sidechain, no vocals."""
++    rng = np.random.default_rng(20261050)
++    return _edm_bed(
++        rng,
++        frames,
++        rate,
++        bpm=128.0,
++        bass_notes=(55.0, 55.0, 65.41, 73.42),
++        lead_notes=(220.0, 277.18, 329.63, 370.0),
++        style="progress",
++        drive=1.35,
++    )
++
++
++def _charge(frames: int, rate: int) -> np.ndarray:
++    """Big-room instrumental — 130 BPM, wide saws, hard clap, festival energy."""
++    rng = np.random.default_rng(20261051)
++    return _edm_bed(
++        rng,
++        frames,
++        rate,
++        bpm=130.0,
++        bass_notes=(49.0, 49.0, 61.74, 55.0),
++        lead_notes=(196.0, 246.94, 293.66, 392.0),
++        style="bigroom",
++        drive=1.55,
++    )
++
++
++def _volt(frames: int, rate: int) -> np.ndarray:
++    """Peak-time techno — 136 BPM, rolling bass, industrial hats, no vocals."""
++    rng = np.random.default_rng(20261052)
++    return _edm_bed(
++        rng,
++        frames,
++        rate,
++        bpm=136.0,
++        bass_notes=(55.0, 58.27, 55.0, 65.41),
++        lead_notes=(110.0, 164.81, 220.0, 246.94),
++        style="techno",
++        drive=1.45,
++    )
++
++
++def _drop(frames: int, rate: int) -> np.ndarray:
++    """Festival drop loop — 128 BPM, supersaw stabs + sub hits, instrumental only."""
++    rng = np.random.default_rng(20261053)
++    return _edm_bed(
++        rng,
++        frames,
++        rate,
++        bpm=128.0,
++        bass_notes=(41.2, 41.2, 55.0, 61.74),
++        lead_notes=(329.63, 392.0, 493.88, 587.33),
++        style="drop",
++        drive=1.65,
++    )
++
++
++def _edm_bed(
++    rng: np.random.Generator,
++    frames: int,
++    rate: int,
++    *,
++    bpm: float,
++    bass_notes: tuple[float, ...],
++    lead_notes: tuple[float, ...],
++    style: str,
++    drive: float,
++) -> np.ndarray:
++    """Instrumental EDM bed — kick/bass/hats/synths only. No voices, no samples of speech."""
++    out = np.zeros(frames, dtype=np.float64)
++    beat = max(1, int(round(rate * 60.0 / bpm)))
++    pump = np.ones(frames, dtype=np.float64)
++    t_all = np.arange(frames) / rate
++    gain = 1.15
++
++    # Supersaw lead (detuned sines) — the EDM "no words" hook.
++    lead = np.zeros(frames, dtype=np.float64)
++    detune = (-0.012, -0.005, 0.0, 0.005, 0.012)
++    for note in lead_notes[:3]:
++        for cents in detune:
++            lead += np.sin(2 * np.pi * note * (1.0 + cents) * t_all)
++    lead /= max(1, 3 * len(detune))
++    # Gate pattern by style.
++    if style == "techno":
++        gate_steps = [0.0, 0.5]
++        gate_len = 0.12
++    elif style == "drop":
++        gate_steps = [0.0, 0.25, 0.5, 0.75]
++        gate_len = 0.09
++    elif style == "bigroom":
++        gate_steps = [0.0, 0.5]
++        gate_len = 0.16
++    else:
++        gate_steps = [0.0, 0.5]
++        gate_len = 0.14
++    gate = np.zeros(frames, dtype=np.float64)
++    n_beats = max(1, (frames + beat - 1) // beat)
++    for beat_i in range(n_beats):
++        start = beat_i * beat
++        for frac in gate_steps:
++            hit = start + int(frac * beat)
++            n = min(int(gate_len * rate), frames - hit)
++            if n > 8:
++                gate[hit : hit + n] = np.maximum(gate[hit : hit + n], np.hanning(n))
++    # Slow filter swell so it feels alive across the 12s loop.
++    sweep = 0.55 + 0.45 * (0.5 + 0.5 * np.sin(2 * np.pi * t_all / 6.0))
++    lead = _band(lead * gate * sweep, rate, 180, 5200 if style != "techno" else 2800)
++    lead *= 0.72 * gain * drive
++
++    # Air / noise riser texture (instrumental hiss, not speech).
++    air = _band(_colored(rng, frames, 0.7), rate, 800, 10000) * (0.05 * gain)
++    if style in ("drop", "bigroom"):
++        # Short noise whoosh every 4 beats.
++        for beat_i in range(0, n_beats, 4):
++            hit = beat_i * beat
++            n = min(int(0.35 * rate), frames - hit)
++            if n > 16:
++                whoosh = _band(rng.standard_normal(n), rate, 2000, 12000) * np.linspace(0.05, 1.0, n)
++                out[hit : hit + n] += 0.12 * gain * whoosh
++
++    for beat_i in range(n_beats):
++        start = beat_i * beat
++        if start >= frames:
++            break
++        step = beat_i % 4
++
++        # Four-on-the-floor kick.
++        n_kick = min(int(0.16 * rate), frames - start)
++        if n_kick > 8:
++            t = np.arange(n_kick) / rate
++            env = np.exp(-t * (22.0 if style == "techno" else 16.0))
++            freq = (110.0 if style == "drop" else 95.0) * np.exp(-t * 32.0) + 40.0
++            kick = np.tanh(drive * 1.8 * np.sin(2 * np.pi * np.cumsum(freq) / rate) * env)
++            click_n = min(int(0.014 * rate), n_kick)
++            click = _band(rng.standard_normal(click_n), rate, 3000, 11000) * np.hanning(click_n)
++            out[start : start + n_kick] += 1.05 * gain * kick
++            out[start : start + click_n] += 0.18 * gain * click
++            duck_n = min(int(0.2 * rate), frames - start)
++            duck_t = np.arange(duck_n) / rate
++            pump[start : start + duck_n] *= 0.18 + 0.82 * (1.0 - np.exp(-duck_t * 18.0))
++
++        # Clap / snare on 2 and 4.
++        if step in (1, 3):
++            n = min(int(0.13 * rate), frames - start)
++            if n > 8:
++                body = _band(rng.standard_normal(n), rate, 800, 5500)
++                top = _band(rng.standard_normal(n), rate, 5000, 12000)
++                t = np.arange(n) / rate
++                env = np.exp(-t * 24.0)
++                tone = np.sin(2 * np.pi * 200.0 * t) * np.exp(-t * 45.0)
++                level = 0.38 if style == "bigroom" else 0.3
++                out[start : start + n] += level * gain * drive * (0.7 * body + 0.35 * top + 0.25 * tone) * env
++
++        # Hats — 16ths for energy.
++        for frac in (0.0, 0.25, 0.5, 0.75):
++            hit = start + int(frac * beat)
++            if hit + 40 >= frames:
++                continue
++            n_hat = min(int(0.03 * rate), frames - hit)
++            hat = _band(rng.standard_normal(n_hat), rate, 7500, 16000)
++            t = np.arange(n_hat) / rate
++            level = 0.14 * gain * (1.0 if frac in (0.0, 0.5) else 0.7)
++            if style == "techno":
++                level *= 1.15
++            out[hit : hit + n_hat] += level * hat * np.exp(-t * 90.0)
++
++        # Offbeat open hat.
++        oh = start + int(0.5 * beat)
++        n_oh = min(int(0.1 * rate), frames - oh)
++        if n_oh > 16:
++            hat = _band(rng.standard_normal(n_oh), rate, 5500, 14000)
++            t = np.arange(n_oh) / rate
++            out[oh : oh + n_oh] += 0.09 * gain * hat * np.exp(-t * 16.0)
++
++        # Rolling / pumping bass — instrumental only.
++        note = bass_notes[(beat_i // 4) % len(bass_notes)]
++        bass_hits = [0.0, 0.5] if style != "techno" else [0.0, 0.25, 0.5, 0.75]
++        for frac in bass_hits:
++            hit = start + int(frac * beat)
++            if hit >= frames:
++                continue
++            n = min(int(0.38 * 60.0 / bpm * rate), frames - hit)
++            if n < 16:
++                continue
++            t = np.arange(n) / rate
++            env = (1.0 - np.exp(-t * 50.0)) * np.exp(-t * (4.5 if style == "techno" else 3.0))
++            tone = 0.75 * np.sin(2 * np.pi * note * t) + 0.3 * np.sin(2 * np.pi * note * 2.0 * t)
++            if style == "drop":
++                tone += 0.15 * np.sin(2 * np.pi * note * 0.5 * t)
++            tone = np.tanh(drive * 2.0 * tone)
++            out[hit : hit + n] += (0.58 if frac == 0.0 else 0.42) * gain * tone * env
++
++    out += (lead + air) * pump
++    out = 0.65 * out + 0.35 * _band(out, rate, 45, 220)
++    out = np.tanh(0.95 * drive * out)
++    return out
++
++
++def _ocean(frames: int, rate: int) -> np.ndarray:
++    rng = np.random.default_rng(20261021)
++    t = np.arange(frames) / rate
++    surf = _band(_colored(rng, frames, 0.7), rate, 80, 900)
++    swell = 0.55 + 0.45 * (0.5 + 0.5 * np.sin(2 * np.pi * t / 9.0))
++    foam = _band(np.diff(_leaky(rng, frames, 0.55), prepend=0.0), rate, 600, 4000) * 0.25
++    return surf * swell + foam * (0.7 + 0.3 * swell)
++
++
++def _stream(frames: int, rate: int) -> np.ndarray:
++    rng = np.random.default_rng(20261022)
++    flow = _band(_colored(rng, frames, 0.4), rate, 200, 3500)
++    gurgle = _band(np.diff(_leaky(rng, frames, 0.7), prepend=0.0), rate, 800, 6000)
++    pulse = 0.8 + 0.2 * np.sin(2 * np.pi * np.arange(frames) / (rate * 5.5))
++    return (0.7 * flow + 0.3 * gurgle) * pulse
++
++
++def _birds(frames: int, rate: int) -> np.ndarray:
++    rng = np.random.default_rng(20261023)
++    air = _band(_colored(rng, frames, 1.2), rate, 100, 600) * 0.15
++    out = np.array(air, copy=True)
++    cursor = int(0.4 * rate)
++    while cursor < frames - int(0.4 * rate):
++        freq = float(rng.uniform(1800, 4200))
++        chirp_n = int(rng.uniform(0.06, 0.16) * rate)
++        t = np.arange(chirp_n) / rate
++        sweep = freq * (1.0 + 0.12 * np.sin(2 * np.pi * 18 * t))
++        env = np.hanning(chirp_n) ** 1.4
++        out[cursor : cursor + chirp_n] += 0.55 * np.sin(2 * np.pi * np.cumsum(sweep) / rate) * env
++        cursor += int(rng.uniform(0.7, 2.2) * rate)
++    return out
++
++
++def _breeze(frames: int, rate: int) -> np.ndarray:
++    rng = np.random.default_rng(20261024)
++    air = _band(_colored(rng, frames, 1.4), rate, 120, 1800)
++    slow = 0.7 + 0.3 * np.sin(2 * np.pi * np.arange(frames) / (rate * 13.0))
++    return air * slow
++
++
++def _night(frames: int, rate: int) -> np.ndarray:
++    rng = np.random.default_rng(20261025)
++    bed = _band(_colored(rng, frames, 1.6), rate, 80, 700) * 0.35
++    out = np.array(bed, copy=True)
++    # Soft cricket-like ticks — present enough to hold loudness after RMS match.
++    cursor = int(0.15 * rate)
++    while cursor < frames - 200:
++        n = int(rng.integers(50, 110))
++        t = np.arange(n) / rate
++        tick = np.sin(2 * np.pi * rng.uniform(3600, 5000) * t) * np.hanning(n)
++        out[cursor : cursor + n] += 0.35 * tick
++        cursor += int(rng.uniform(0.05, 0.22) * rate)
++        if rng.random() < 0.08:
++            cursor += int(rng.uniform(0.35, 0.9) * rate)
++    return out
++
++
++def _chimes(frames: int, rate: int) -> np.ndarray:
++    rng = np.random.default_rng(20261026)
++    # Soft pentatonic metal — sparse, not doorbell spam.
++    notes = np.array([523.25, 587.33, 659.25, 783.99, 880.0, 1046.5])
++    air = _band(_colored(rng, frames, 1.8), rate, 100, 400) * 0.05
++    out = np.array(air, copy=True)
++    cursor = int(0.5 * rate)
++    while cursor < frames - int(1.5 * rate):
++        freq = float(rng.choice(notes))
++        n = int(rng.uniform(1.2, 2.8) * rate)
++        t = np.arange(n) / rate
++        env = np.exp(-t * rng.uniform(1.2, 2.0))
++        partial = (
++            0.7 * np.sin(2 * np.pi * freq * t)
++            + 0.22 * np.sin(2 * np.pi * freq * 2.01 * t)
++            + 0.08 * np.sin(2 * np.pi * freq * 3.02 * t)
++        )
++        out[cursor : cursor + n] += 0.45 * partial * env
++        cursor += int(rng.uniform(1.6, 3.4) * rate)
++    return out
++
++
++def _piano(frames: int, rate: int) -> np.ndarray:
++    rng = np.random.default_rng(20261027)
++    # Quiet open fifths / soft keys — ambient, not a song.
++    chord_sets = [
++        (261.63, 392.00, 523.25),
++        (220.00, 329.63, 440.00),
++        (196.00, 293.66, 392.00),
++        (246.94, 369.99, 493.88),
++    ]
++    felt = _band(_colored(rng, frames, 2.0), rate, 40, 200) * 0.04
++    out = np.array(felt, copy=True)
++    cursor = int(0.3 * rate)
++    idx = 0
++    while cursor < frames - int(2.0 * rate):
++        freqs = chord_sets[idx % len(chord_sets)]
++        idx += 1
++        n = int(2.4 * rate)
++        t = np.arange(n) / rate
++        env = np.exp(-t * 0.9) * (1.0 - 0.35 * t / t[-1])
++        tone = sum(np.sin(2 * np.pi * f * t) * (0.5 / (i + 1)) for i, f in enumerate(freqs))
++        out[cursor : cursor + n] += 0.5 * tone * env
++        cursor += int(rng.uniform(2.0, 3.2) * rate)
++    return out
++
++
++def _pad(frames: int, rate: int) -> np.ndarray:
++    rng = np.random.default_rng(20261028)
++    t = np.arange(frames) / rate
++    # Warm low pad — least likely to get a veto.
++    a = np.sin(2 * np.pi * 110.0 * t)
++    b = np.sin(2 * np.pi * 164.81 * t + 0.2)
++    c = np.sin(2 * np.pi * 220.0 * t + 0.4)
++    slow = 0.75 + 0.25 * np.sin(2 * np.pi * t / 11.0)
++    breath = _band(_colored(rng, frames, 1.5), rate, 80, 500) * 0.12
++    return (0.45 * a + 0.35 * b + 0.2 * c) * slow + breath
++
++
++def _harp(frames: int, rate: int) -> np.ndarray:
++    rng = np.random.default_rng(20261029)
++    scale = np.array([261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33])
++    air = _band(_colored(rng, frames, 1.7), rate, 80, 350) * 0.06
++    out = np.array(air, copy=True)
++    cursor = int(0.25 * rate)
++    while cursor < frames - int(0.8 * rate):
++        run = int(rng.integers(3, 6))
++        start = int(rng.integers(0, len(scale) - run))
++        for step in range(run):
++            freq = float(scale[start + step])
++            n = int(0.55 * rate)
++            if cursor + n >= frames:
++                break
++            t = np.arange(n) / rate
++            env = np.exp(-t * 3.2)
++            out[cursor : cursor + n] += 0.35 * np.sin(2 * np.pi * freq * t) * env
++            cursor += int(0.09 * rate)
++        cursor += int(rng.uniform(1.4, 2.6) * rate)
++    return out
++
++
++def _meadow(frames: int, rate: int) -> np.ndarray:
++    # Light air + distant soft life — calmer than stadium, less hiss than rain.
++    return 0.55 * _breeze(frames, rate) + 0.30 * _birds(frames, rate) + 0.15 * _night(frames, rate)
+ 
+ 
+ def _stadium(frames: int, rate: int) -> np.ndarray:
+@@ -79,6 +523,23 @@ def _fireplace(frames: int, rate: int) -> np.ndarray:
+     return 0.55 * rumble + 0.45 * crackle
+ 
+ 
++def _band(mono: np.ndarray, rate: int, low_hz: float, high_hz: float) -> np.ndarray:
++    spec = np.fft.rfft(mono)
++    freqs = np.fft.rfftfreq(mono.size, d=1.0 / rate)
++    mask = (freqs >= low_hz) & (freqs <= high_hz)
++    # Soft edges
++    soft = np.ones_like(freqs)
++    soft[freqs < low_hz] = 0.0
++    soft[freqs > high_hz] = 0.0
++    width = max(20.0, (high_hz - low_hz) * 0.08)
++    rise = (freqs >= low_hz) & (freqs < low_hz + width)
++    fall = (freqs <= high_hz) & (freqs > high_hz - width)
++    soft[rise] = (freqs[rise] - low_hz) / width
++    soft[fall] = (high_hz - freqs[fall]) / width
++    soft[~mask & ~rise & ~fall] = 0.0
++    return np.fft.irfft(spec * soft, n=mono.size)
++
++
+ def _colored(rng: np.random.Generator, frames: int, slope: float) -> np.ndarray:
+     spec = np.fft.rfft(rng.standard_normal(frames))
+     freqs = np.arange(spec.size, dtype=np.float64)
+@@ -104,10 +565,10 @@ def _tone(freq: float, seconds: float, rate: int) -> np.ndarray:
+     return np.sin(2 * np.pi * freq * t) * np.hanning(t.size)
+ 
+ 
+-def _stereo(mono: np.ndarray, rate: int, peak: float) -> np.ndarray:
++def _stereo(mono: np.ndarray, rate: int) -> np.ndarray:
+     looped = _loop(mono, rate)
+     other = np.roll(looped, rate // 200)
+-    return _scale(np.column_stack([looped, 0.85 * other]), peak)
++    return _to_int16(_normalize_rms(np.column_stack([looped, 0.85 * other])))
+ 
+ 
+ def _loop(mono: np.ndarray, rate: int, fade_s: float = 0.3) -> np.ndarray:
+@@ -120,7 +581,25 @@ def _loop(mono: np.ndarray, rate: int, fade_s: float = 0.3) -> np.ndarray:
+     return audio[:-fade]
+ 
+ 
+-def _scale(audio: np.ndarray, peak: float) -> np.ndarray:
+-    loudest = float(np.max(np.abs(audio))) or 1.0
+-    scaled = audio / loudest * peak
+-    return np.clip(np.rint(scaled * 32767.0), -32768, 32767).astype(np.int16)
++def _normalize_rms(
++    audio: np.ndarray,
++    target_rms: float = BED_RMS,
++    peak_cap: float = BED_PEAK_CAP,
++) -> np.ndarray:
++    """Match loudness by RMS. Soft-clip peaks so sparse beds stay present."""
++    samples = np.asarray(audio, dtype=np.float64)
++    rms = float(np.sqrt(np.mean(np.square(samples)))) or 1.0
++    scaled = samples * (target_rms / rms)
++    peak = float(np.max(np.abs(scaled))) or 1.0
++    if peak > peak_cap:
++        scaled = peak_cap * np.tanh(scaled / peak_cap)
++        rms2 = float(np.sqrt(np.mean(np.square(scaled)))) or 1.0
++        scaled *= target_rms / rms2
++        peak2 = float(np.max(np.abs(scaled))) or 1.0
++        if peak2 > 0.99:
++            scaled *= 0.99 / peak2
++    return scaled
++
++
++def _to_int16(audio: np.ndarray) -> np.ndarray:
++    return np.clip(np.rint(audio * 32767.0), -32768, 32767).astype(np.int16)
+diff --git a/ohush_live/speaker_worker.py b/ohush_live/speaker_worker.py
+index 805288b..f7a6426 100644
+--- a/ohush_live/speaker_worker.py
++++ b/ohush_live/speaker_worker.py
+@@ -2,6 +2,10 @@
+ 
+ Reads float32 mono at 16 kHz on stdin. Model files go under ohush_live/cache,
+ never under experiments/.
++
++Product booth lock: top announcer voices (Al, color, etc.) are persisted with
++prototypes so intro/outro recognition survives an engine bounce. Hearing any
++booth voice always signals program.
+ """
+ 
+ from __future__ import annotations
+@@ -18,6 +22,7 @@ sys.path.insert(0, str(REPO))
+ sys.path.insert(0, str(REPO / "src"))
+ 
+ CACHE = REPO / "ohush_live" / "cache"
++BOOTH_PATH = REPO / "ohush_live" / "sessions" / ".booth.json"
+ os.environ.setdefault("HF_HOME", str(CACHE / "hf"))
+ os.environ.setdefault("HUGGINGFACE_HUB_CACHE", str(CACHE / "hf" / "hub"))
+ os.environ.setdefault("TORCH_HOME", str(CACHE / "torch"))
+@@ -36,16 +41,27 @@ from hush.speaker_memory import (  # noqa: E402
+     VAD_MIN_SPEECH_MS,
+     VAD_SPEECH_PAD_MS,
+     VAD_THRESHOLD,
++    _Cluster,
++    _unit,
++)
++from ohush_live.policy import (  # noqa: E402
++    BOOTH_MIN_CUMULATIVE_S,
++    BOOTH_MIN_OCCURRENCES,
++    BOOTH_TOP_N,
++    SPEAKER_BOOTH_MATCH,
++    SPEAKER_DROP,
++    SPEAKER_RETURN,
+ )
+-from ohush_live.policy import SPEAKER_DROP, SPEAKER_RETURN  # noqa: E402
+ 
+ 
+ def main() -> None:
+     import torch
+-    from silero_vad import get_speech_timestamps, load_silero_vad
++    from silero_vad import load_silero_vad
+     from speechbrain.inference.speaker import EncoderClassifier
+ 
+-    torch.set_num_threads(4)
++    torch.set_num_threads(1)
++    os.environ.setdefault("OMP_NUM_THREADS", "1")
++    os.environ.setdefault("MKL_NUM_THREADS", "1")
+     torch.set_grad_enabled(False)
+     torch.backends.nnpack.set_flags(False)
+     vad = load_silero_vad()
+@@ -57,13 +73,25 @@ def main() -> None:
+         run_opts={"device": "cpu"},
+     )
+     memory = OnlineSpeakerMemory()
++    booth_protos = _load_booth()
++    _seed_memory(memory, booth_protos)
+     history: list[dict] = []
+     continuity_hist: list[tuple[float, float]] = []
+     buf = np.zeros(0, dtype=np.float32)
+     seen = 0
+     hop = SR
+     win = int(EMBED_WIN_S * SR)
+-    print(json.dumps({"family": "speaker", "available": True, "match_cosine": MATCH_COSINE}), flush=True)
++    print(
++        json.dumps(
++            {
++                "family": "speaker",
++                "available": True,
++                "match_cosine": MATCH_COSINE,
++                "booth_ids": sorted(booth_protos),
++            }
++        ),
++        flush=True,
++    )
+     while True:
+         block = sys.stdin.buffer.read(hop * 4)
+         if not block:
+@@ -77,6 +105,7 @@ def main() -> None:
+         frame = buf[-win:]
+         speech = _speech_seconds(vad, frame)
+         if speech < 0.5:
++            booth = _booth_ids(memory, booth_protos)
+             print(
+                 json.dumps(
+                     {
+@@ -87,6 +116,10 @@ def main() -> None:
+                         "return": 0.0,
+                         "strong_return": False,
+                         "speech": False,
++                        "recurring": False,
++                        "booth_present": False,
++                        "booth_ids": sorted(booth),
++                        "continuity": None,
+                     }
+                 ),
+                 flush=True,
+@@ -106,6 +139,33 @@ def main() -> None:
+             drop = max(prior) - cont
+             strong = drop + 1e-9 >= max(DROP_MIN, SPEAKER_DROP)
+         ret = float(row["program_speaker_return_score"])
++        booth = _booth_ids(memory, booth_protos)
++        cluster_id = row.get("assigned_cluster_id")
++        recurring = bool(row.get("speaker_is_recurring"))
++        sim_booth = _similarity_to_booth(emb, memory, booth_protos, booth)
++        # Verified booth only: known cluster id or strong prototype match.
++        # Recurring / continuity alone is NOT booth identity.
++        booth_present = bool(cluster_id and cluster_id in booth)
++        if sim_booth is not None and sim_booth + 1e-9 >= SPEAKER_BOOTH_MATCH:
++            booth_present = True
++        # Keep prototypes fresh for Al / color / sideline across restarts.
++        if booth_present and cluster_id:
++            unit = _unit(emb)
++            booth_protos[str(cluster_id)] = unit.tolist()
++            # Refresh any matched legacy booth id that already has an embedding.
++            for bid, proto in list(booth_protos.items()):
++                if not proto:
++                    continue
++                try:
++                    prior = _unit(np.asarray(proto, dtype=np.float64))
++                except Exception:
++                    continue
++                if float(np.dot(unit, prior)) >= SPEAKER_BOOTH_MATCH:
++                    booth_protos[bid] = unit.tolist()
++            _save_booth(booth_protos)
++            booth = _booth_ids(memory, booth_protos)
++        if booth_present:
++            ret = max(ret, 1.0)
+         print(
+             json.dumps(
+                 {
+@@ -114,8 +174,14 @@ def main() -> None:
+                     "departure": None if drop is None else round(drop, 4),
+                     "strong_departure": bool(strong),
+                     "return": round(ret, 4),
+-                    "strong_return": ret + 1e-9 >= max(RETURN_EVENT_MIN, SPEAKER_RETURN),
++                    "strong_return": bool(booth_present)
++                    or ret + 1e-9 >= max(RETURN_EVENT_MIN, SPEAKER_RETURN),
+                     "speech": True,
++                    "recurring": recurring,
++                    "booth_present": booth_present,
++                    "booth_ids": sorted(booth),
++                    "cluster_id": cluster_id,
++                    "similarity_to_booth": None if sim_booth is None else round(sim_booth, 4),
+                     "continuity": None if cont is None else round(cont, 4),
+                 }
+             ),
+@@ -125,8 +191,121 @@ def main() -> None:
+             buf = buf[-win * 4 :]
+ 
+ 
++def _booth_ids(memory: OnlineSpeakerMemory, booth_protos: dict[str, list[float]]) -> set[str]:
++    """Announcer crew: persisted booth + top live talkers."""
++    ids = set(booth_protos)
++    scored: list[tuple[float, int, str]] = []
++    for cluster in memory.clusters:
++        if cluster.cum_s < BOOTH_MIN_CUMULATIVE_S:
++            continue
++        if cluster.occurrence_count < BOOTH_MIN_OCCURRENCES:
++            continue
++        scored.append((cluster.cum_s, cluster.occurrence_count, cluster.cluster_id))
++    scored.sort(reverse=True)
++    for _, _, cid in scored[:BOOTH_TOP_N]:
++        ids.add(cid)
++    return ids
++
++
++def _similarity_to_booth(
++    emb: np.ndarray,
++    memory: OnlineSpeakerMemory,
++    booth_protos: dict[str, list[float]],
++    booth_ids: set[str],
++) -> float | None:
++    """Match current speech to any locked announcer — even if cluster id drifted."""
++    unit = _unit(emb)
++    best: float | None = None
++    for bid, proto in booth_protos.items():
++        if not proto:
++            continue
++        try:
++            sim = float(np.dot(unit, _unit(np.asarray(proto, dtype=np.float64))))
++        except Exception:
++            continue
++        best = sim if best is None else max(best, sim)
++    for cluster in memory.clusters:
++        if cluster.cluster_id not in booth_ids:
++            continue
++        sim = float(np.dot(unit, cluster.proto))
++        best = sim if best is None else max(best, sim)
++    return best
++
++
++def _load_booth() -> dict[str, list[float]]:
++    """Return id -> prototype. Empty list means id known, embedding not yet saved."""
++    try:
++        raw = json.loads(BOOTH_PATH.read_text(encoding="utf-8"))
++    except (OSError, json.JSONDecodeError):
++        return {}
++    if not isinstance(raw, dict):
++        return {}
++    out: dict[str, list[float]] = {}
++    protos = raw.get("protos") if isinstance(raw.get("protos"), dict) else None
++    if isinstance(protos, dict):
++        for key, value in protos.items():
++            if isinstance(value, list) and value:
++                out[str(key)] = [float(x) for x in value]
++            else:
++                out[str(key)] = []
++    ids = raw.get("ids")
++    if isinstance(ids, list):
++        for key in ids:
++            out.setdefault(str(key), [])
++    if not out and all(isinstance(v, list) for v in raw.values()):
++        # Legacy shape: {cluster_id: proto}
++        for key, value in raw.items():
++            if isinstance(value, list) and value:
++                out[str(key)] = [float(x) for x in value]
++    return out
++
++
++def _save_booth(booth_protos: dict[str, list[float]]) -> None:
++    if not booth_protos:
++        return
++    BOOTH_PATH.parent.mkdir(parents=True, exist_ok=True)
++    # Cap to top crew so ad voices do not accumulate forever.
++    # Prefer entries that already have embeddings.
++    ranked = sorted(
++        booth_protos.items(),
++        key=lambda item: (1 if item[1] else 0, len(item[1])),
++        reverse=True,
++    )[: max(BOOTH_TOP_N, 4)]
++    payload = {
++        "product": "OHUSH_LIVE_V0",
++        "ids": [key for key, _ in ranked],
++        "protos": {key: value for key, value in ranked if value},
++    }
++    BOOTH_PATH.write_text(json.dumps(payload) + "\n", encoding="utf-8")
++
++
++def _seed_memory(memory: OnlineSpeakerMemory, booth_protos: dict[str, list[float]]) -> None:
++    """Warm the matcher with last game's announcer voices."""
++    for index, (cid, proto) in enumerate(booth_protos.items(), start=1):
++        if not proto:
++            continue
++        try:
++            arr = _unit(np.asarray(proto, dtype=np.float64))
++        except Exception:
++            continue
++        memory.clusters.append(
++            _Cluster(
++                cluster_id=cid if str(cid).startswith("c") else f"booth{index:02d}",
++                proto=arr.copy(),
++                n_emb=8,
++                cum_s=max(BOOTH_MIN_CUMULATIVE_S, 12.0),
++                first_seen=0.0,
++                last_seen=0.0,
++                occurrence_count=max(BOOTH_MIN_OCCURRENCES, 4),
++            )
++        )
++    if any(booth_protos.values()):
++        memory._next_id = max(memory._next_id, len(memory.clusters) + 1)
++
++
+ def _speech_seconds(vad, frame: np.ndarray) -> float:
+     import torch
++    from silero_vad import get_speech_timestamps
+ 
+     stamps = get_speech_timestamps(
+         torch.from_numpy(frame),
+diff --git a/ohush_live/sports.py b/ohush_live/sports.py
+index 828c1d9..53a3564 100644
+--- a/ohush_live/sports.py
++++ b/ohush_live/sports.py
+@@ -7,8 +7,31 @@ SCIENTIFIC_AUTHORITY = False
+ ALLOWED_TO_CHANGE_EXP001_005 = False
+ DATASET_ROLE = "live_dev"
+ 
+-REPLACEMENTS = ("silence", "stadium", "rain", "fireplace", "pink", "brown")
+-DEFAULT_REPLACEMENT = "stadium"
++# Soft beds first (wife veto round); older sports/noise beds kept at the end.
++REPLACEMENTS = (
++    "silence",
++    "neon",
++    "charge",
++    "volt",
++    "drop",
++    "hush",
++    "pad",
++    "ocean",
++    "stream",
++    "birds",
++    "breeze",
++    "night",
++    "chimes",
++    "piano",
++    "harp",
++    "meadow",
++    "stadium",
++    "rain",
++    "fireplace",
++    "pink",
++    "brown",
++)
++DEFAULT_REPLACEMENT = "neon"
+ CHUNK_MINUTES = 15
+ HINT_STREAK_S = 3.0
+ 
+@@ -28,7 +51,7 @@ class ReturnHint:
+         if not in_replacement:
+             self.reset()
+             return False
+-        if return_votes == 1:
++        if return_votes >= 1:
+             self.streak += dt
+         else:
+             self.streak = 0.0
+@@ -39,33 +62,39 @@ class ReturnHint:
+ 
+ 
+ class AutoLatch:
+-    """A manual press holds for the current break. The next break can be automatic."""
++    """Manual Show during a covered break holds auto-mute until that break ends.
++
++    Pressing Show while already on program must NOT block the next ad — that
++    bug left departure_votes=1 forever suppressed and mute_streak stuck at 0.
++
++    Manual Cover must NEVER block auto-return. Tonight's logs showed play_streak
++    stuck at 0 for 25s+ of program-like audio because suppress_play returned
++    False whenever return_votes>=1 (exactly when the show was back).
++    """
+ 
+     def __init__(self) -> None:
+         self.suppress_mute = False
+-        self.suppress_play = False
+ 
+-    def human_play(self) -> None:
+-        self.suppress_mute = True
+-        self.suppress_play = False
++    def human_play(self, *, was_replacement: bool) -> None:
++        self.suppress_mute = bool(was_replacement)
+ 
+-    def human_mute(self) -> None:
+-        self.suppress_play = True
++    def human_mute(self, *, was_program: bool) -> None:
++        # Cover is a one-shot correction. Keep hunting for program return.
++        del was_program
+         self.suppress_mute = False
+ 
+     def allow_auto_mute(self, departure_votes: int) -> bool:
+         if not self.suppress_mute:
+             return True
+-        if departure_votes < 2:
++        # Hold only while the break that was covered is still signaling.
++        if departure_votes <= 0:
+             self.suppress_mute = False
++            return True
+         return False
+ 
+     def allow_auto_play(self, return_votes: int) -> bool:
+-        if not self.suppress_play:
+-            return True
+-        if return_votes < 2:
+-            self.suppress_play = False
+-        return False
++        del return_votes
++        return True
+ 
+ 
+ def family_score(families: dict, name: str, kind: str) -> float | None:
+@@ -86,7 +115,22 @@ def votes(families: dict, key: str) -> int:
+     return count
+ 
+ 
+-def decision_row(timestamp: float, state: str, source: str, families: dict, replacement: str, human: bool) -> dict:
++def decision_row(
++    timestamp: float,
++    state: str,
++    source: str,
++    families: dict,
++    replacement: str,
++    human: bool,
++    *,
++    noop: bool = False,
++    prior_hearing: str | None = None,
++    departure_votes: int | None = None,
++    return_votes: int | None = None,
++    lag_ms: float | None = None,
++    mute_streak_s: float | None = None,
++    play_streak_s: float | None = None,
++) -> dict:
+     kind = "return" if state == "REPLACEMENT_TO_PROGRAM" else "departure"
+     return {
+         "t": round(float(timestamp), 3),
+@@ -98,6 +142,13 @@ def decision_row(timestamp: float, state: str, source: str, families: dict, repl
+         "score_kind": kind,
+         "replacement": replacement,
+         "human_override": human,
++        "noop": bool(noop),
++        "prior_hearing": prior_hearing,
++        "departure_votes": departure_votes,
++        "return_votes": return_votes,
++        "lag_ms": None if lag_ms is None else round(float(lag_ms), 1),
++        "mute_streak_s": None if mute_streak_s is None else round(float(mute_streak_s), 2),
++        "play_streak_s": None if play_streak_s is None else round(float(play_streak_s), 2),
+         "product": PRODUCT,
+         "scientific_authority": SCIENTIFIC_AUTHORITY,
+         "allowed_to_change_exp001_005": ALLOWED_TO_CHANGE_EXP001_005,
+diff --git a/ohush_live/sports_daemon.py b/ohush_live/sports_daemon.py
+index 3adc93e..a5e2462 100644
+--- a/ohush_live/sports_daemon.py
++++ b/ohush_live/sports_daemon.py
+@@ -7,7 +7,9 @@ receives closed chunks only. Neither is allowed to stop the recording.
+ from __future__ import annotations
+ 
+ import argparse
++import fcntl
+ import json
++import os
+ import queue
+ import re
+ import select
+@@ -41,6 +43,7 @@ from ohush_live.chunks import ChunkWriter  # noqa: E402
+ from ohush_live.daemon import _pump, _spawn, _write_pcm  # noqa: E402
+ from ohush_live.gate import ListenerGate  # noqa: E402
+ from ohush_live.sounds import make_beds, make_earcon  # noqa: E402
++from ohush_live.policy import BOOTH_HOLD_S  # noqa: E402
+ from ohush_live.sports import (  # noqa: E402
+     CHUNK_MINUTES,
+     PRODUCT,
+@@ -57,6 +60,56 @@ RATE = 48000
+ CHANNELS = 2
+ HOST = "127.0.0.1"
+ PORT = 8770
++ACTIVE_PATH = REPO / "ohush_live" / "sessions" / ".active_desk.json"
++BOOTH_PATH = REPO / "ohush_live" / "sessions" / ".booth.json"
++
++
++def _load_booth_ids() -> list[str]:
++    """Announcer crew remembered across restarts (Al, color, etc.)."""
++    try:
++        raw = json.loads(BOOTH_PATH.read_text(encoding="utf-8"))
++    except (OSError, json.JSONDecodeError):
++        return []
++    if not isinstance(raw, dict):
++        return []
++    ids = raw.get("ids")
++    if isinstance(ids, list) and ids:
++        return [str(x) for x in ids][:8]
++    protos = raw.get("protos")
++    if isinstance(protos, dict) and protos:
++        return [str(x) for x in protos.keys()][:8]
++    return []
++
++
++def _read_active() -> dict | None:
++    try:
++        raw = json.loads(ACTIVE_PATH.read_text(encoding="utf-8"))
++    except (OSError, json.JSONDecodeError):
++        return None
++    return raw if isinstance(raw, dict) else None
++
++
++def _write_active(payload: dict) -> None:
++    ACTIVE_PATH.parent.mkdir(parents=True, exist_ok=True)
++    ACTIVE_PATH.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
++
++
++def _mark_active_stopped(active: dict | None = None) -> None:
++    row = dict(active or _read_active() or {})
++    if not row:
++        return
++    row["recording"] = False
++    _write_active(row)
++
++
++def _next_chunk_number(folder: Path) -> int:
++    highest = -1
++    for path in folder.glob("audio_*.wav"):
++        try:
++            highest = max(highest, int(path.stem.split("_")[1]))
++        except (IndexError, ValueError):
++            continue
++    return highest + 1
+ 
+ 
+ class SportsSession:
+@@ -74,9 +127,14 @@ class SportsSession:
+         self.overrides = (folder / "overrides.jsonl").open("a", encoding="utf-8")
+         self.ratings = (folder / "ratings.jsonl").open("a", encoding="utf-8")
+         self.labels = (folder / "labels.jsonl").open("a", encoding="utf-8")
++        # Vote / lag / near-miss trail so ad in-out flapping is diagnosable after the fact.
++        self.track = (folder / "track.jsonl").open("a", encoding="utf-8")
+         self.events: list[dict] = []
+         self.levels: list[dict] = []
++        self._last_track_t = -1.0
+         self.live = {"recording": False, "input_name": "", "output_name": "", "error": "", "open_chunk": ""}
++        self._booth_hold_until = 0.0
++        self._booth_ids: list[str] = _load_booth_ids()
+         self.meta = {
+             "product": PRODUCT,
+             "scientific_authority": False,
+@@ -91,6 +149,16 @@ class SportsSession:
+             "input_path": "tv_optical_pcm",
+             "chunk_minutes": CHUNK_MINUTES,
+         }
++        prior = folder / "session.json"
++        if prior.is_file():
++            try:
++                saved = json.loads(prior.read_text(encoding="utf-8"))
++                if isinstance(saved, dict):
++                    for key in ("show", "service", "content"):
++                        if saved.get(key):
++                            self.meta[key] = saved[key]
++            except (OSError, json.JSONDecodeError):
++                pass
+         self._write_meta()
+ 
+     def _write_meta(self) -> None:
+@@ -121,25 +189,70 @@ class SportsSession:
+             with self._lock:
+                 self.families[family] = None
+             return
++        # Handshake-only {"available": true} must not count as a live vote.
++        if "departure" not in message and "return" not in message and "strong_departure" not in message:
++            return
+         reading = {
+             "departure": message.get("departure"),
+             "strong_departure": bool(message.get("strong_departure")),
+             "return": message.get("return"),
+             "strong_return": bool(message.get("strong_return")),
++            "speech": bool(message.get("speech")),
++            "recurring": bool(message.get("recurring")),
++            "booth_present": bool(message.get("booth_present")),
++            "continuity": message.get("continuity"),
++            "cluster_id": message.get("cluster_id"),
++            "similarity_to_booth": message.get("similarity_to_booth"),
+         }
+         now = float(message.get("t") or self.clock())
+         with self._lock:
++            if family == "speaker":
++                ids = message.get("booth_ids")
++                if isinstance(ids, list) and ids:
++                    self._booth_ids = [str(x) for x in ids][:4]
++                # Identity metadata only — never a mute veto by itself.
++                reading["booth_locked"] = bool(self._booth_ids)
++                reading["booth_ids"] = list(self._booth_ids)
++                # Bounded outro hold starts only on verified booth speech.
++                if reading["speech"] and reading["booth_present"]:
++                    self._booth_hold_until = max(self._booth_hold_until, now + BOOTH_HOLD_S)
+             if family == "speaker" and message.get("speech") is False:
+-                if now <= self._speaker_hold_until and self.families["speaker"]:
+-                    held = dict(self.families["speaker"])
++                prior = self.families.get("speaker")
++                # Keep a recent broadcaster-return vote through short pauses so
++                # cover does not stick between intro sentences.
++                if prior and prior.get("strong_return") and now <= self._speaker_hold_until:
++                    return
++                # Brief outro linger after the last *verified* booth line.
++                if now <= self._booth_hold_until and prior and prior.get("booth_present"):
++                    self.families["speaker"] = {
++                        "departure": None,
++                        "strong_departure": False,
++                        "return": None,
++                        "strong_return": False,
++                        "speech": False,
++                        "recurring": False,
++                        "booth_present": True,
++                        "booth_locked": bool(self._booth_ids),
++                        "continuity": None,
++                        "cluster_id": prior.get("cluster_id"),
++                        "similarity_to_booth": prior.get("similarity_to_booth"),
++                        "booth_ids": list(self._booth_ids),
++                    }
++                    return
++                if now <= self._speaker_hold_until and prior:
++                    held = dict(prior)
+                     held["strong_return"] = False
+                     held["return"] = 0.0
++                    held["booth_present"] = False
+                     self.families["speaker"] = held
+                 else:
++                    # No synthetic booth lock when the worker is quiet.
+                     self.families["speaker"] = None
+                 return
+             if family == "speaker" and reading["strong_departure"]:
+                 self._speaker_hold_until = now + 10.0
++            if family == "speaker" and reading["strong_return"]:
++                self._speaker_hold_until = max(self._speaker_hold_until, now + 8.0)
+             self.families[family] = reading
+ 
+     def tick(self, gate: ListenerGate) -> None:
+@@ -147,15 +260,67 @@ class SportsSession:
+             families = dict(self.families)
+             timestamp = self.samples / RATE
+             auto = gate.auto
+-        level = {"t": round(timestamp, 1), "db": round(gate.input_dbfs(), 1)}
++        level = {
++            "t": round(timestamp, 1),
++            "db": round(gate.input_dbfs(), 1),
++            "lag_ms": round(gate.lag_ms(RATE), 1),
++        }
+         if not self.levels or self.levels[-1]["t"] != level["t"]:
+             self.levels.append(level)
+             if len(self.levels) > 20000:
+                 del self.levels[:1000]
++        # booth_locked = identities known (metadata). Never invent a speaker
++        # reading that vetoes commercial detection when the worker is quiet.
++        if self._booth_ids and families.get("speaker"):
++            sp = dict(families["speaker"])
++            sp["booth_locked"] = True
++            sp["booth_ids"] = list(self._booth_ids)
++            families["speaker"] = sp
++        # Expire outro hold without leaving a zombie speaker family.
++        if (
++            families.get("speaker")
++            and families["speaker"].get("booth_present")
++            and not families["speaker"].get("speech")
++            and timestamp > self._booth_hold_until
++        ):
++            families["speaker"] = None
++            self.families["speaker"] = None
++        departure = votes(families, "strong_departure")
++        # Verified booth speech counts as a return vote for hints even when
++        # Exp002 return_score is still 0 (needs 30s absence).
++        sp_now = families.get("speaker") or {}
++        booth_back = bool(sp_now.get("speech") and sp_now.get("booth_present"))
++        returning = votes(families, "strong_return") + (1 if booth_back else 0)
++        alive = sum(1 for reading in families.values() if reading is not None)
++        diag = self.machine.diagnostics()
++        # Sample every second while armed, or whenever votes are hot / lag is fat.
++        hot = departure > 0 or returning > 0 or level["lag_ms"] > 350 or booth_back
++        if timestamp - self._last_track_t >= 1.0 or hot:
++            self._last_track_t = timestamp
++            self._append(
++                self.track,
++                {
++                    "t": round(timestamp, 3),
++                    "event": "track",
++                    "hearing": "REPLACEMENT" if gate.mode == "replacement" else "PROGRAM",
++                    "machine": diag["state"],
++                    "auto": auto,
++                    "departure_votes": departure,
++                    "return_votes": returning,
++                    "families_alive": alive,
++                    "mute_streak_s": diag["mute_streak_s"],
++                    "play_streak_s": diag["play_streak_s"],
++                    "muted_for_s": self.machine.muted_for(timestamp),
++                    "lag_ms": level["lag_ms"],
++                    "dropped_frames": gate.dropped_frames(),
++                    "speaker": families.get("speaker"),
++                    "audio": families.get("audio"),
++                    "semantic": families.get("semantic"),
++                    "product": PRODUCT,
++                },
++            )
+         if not auto:
+             return
+-        departure = votes(families, "strong_departure")
+-        returning = votes(families, "strong_return")
+         if gate.mode == "replacement" and self.hint.update(True, returning, 1.0):
+             gate.cue_return()
+             self._append(self.decisions, {"t": round(timestamp, 3), "event": "return_hint", "product": PRODUCT})
+@@ -169,26 +334,51 @@ class SportsSession:
+             return
+         if event["state_after"] == "MUTED":
+             gate.play_replacement()
+-            self._log_decision(timestamp, "PROGRAM_TO_REPLACEMENT", "auto", families, gate.replacement, False)
++            self._log_decision(timestamp, "PROGRAM_TO_REPLACEMENT", "auto", families, gate.replacement, False, gate=gate)
+         elif event["state_after"] == "PLAY":
+             gate.play_program()
+             self.hint.reset()
+-            self._log_decision(timestamp, "REPLACEMENT_TO_PROGRAM", "auto", families, gate.replacement, False)
++            self._log_decision(timestamp, "REPLACEMENT_TO_PROGRAM", "auto", families, gate.replacement, False, gate=gate)
+ 
+     def human(self, gate: ListenerGate, action: str) -> None:
+         timestamp = self.clock()
+         prior = "replacement" if gate.mode == "replacement" else "program"
+         if action == "mute":
+-            self.latch.human_mute()
++            noop = prior == "replacement"
++            self.latch.human_mute(was_program=prior == "program")
+             gate.play_replacement()
+-            self.machine.manual(timestamp, "mute", self._families())
+-            self._log_decision(timestamp, "PROGRAM_TO_REPLACEMENT", "human", self._families(), gate.replacement, True)
++            if not noop:
++                self.machine.manual(timestamp, "mute", self._families())
++            self._log_decision(
++                timestamp,
++                "PROGRAM_TO_REPLACEMENT",
++                "human",
++                self._families(),
++                gate.replacement,
++                True,
++                noop=noop,
++                prior_hearing=prior,
++                gate=gate,
++            )
+         elif action == "play":
+-            self.latch.human_play()
++            noop = prior == "program"
++            # Only hold auto-mute when leaving a covered break — not when already on Show.
++            self.latch.human_play(was_replacement=prior == "replacement")
+             gate.play_program()
+             self.hint.reset()
+-            self.machine.manual(timestamp, "play", self._families())
+-            self._log_decision(timestamp, "REPLACEMENT_TO_PROGRAM", "human", self._families(), gate.replacement, True)
++            if not noop:
++                self.machine.manual(timestamp, "play", self._families())
++            self._log_decision(
++                timestamp,
++                "REPLACEMENT_TO_PROGRAM",
++                "human",
++                self._families(),
++                gate.replacement,
++                True,
++                noop=noop,
++                prior_hearing=prior,
++                gate=gate,
++            )
+         elif action == "auto":
+             gate.auto = not gate.auto
+             action = "auto_on" if gate.auto else "auto_off"
+@@ -260,6 +450,7 @@ class SportsSession:
+             for path in sorted(self.folder.glob("audio_*.wav"))
+             if path.name != open_name and path.stat().st_size > 44
+         ]
++        diag = self.machine.diagnostics()
+         return {
+             "product": PRODUCT,
+             "state": "REPLACEMENT" if gate.mode == "replacement" else "PROGRAM",
+@@ -268,6 +459,11 @@ class SportsSession:
+             "sounds": list(REPLACEMENTS),
+             "timestamp": round(self.clock(), 3),
+             "input_dbfs": round(gate.input_dbfs(), 1),
++            "lag_ms": round(gate.lag_ms(RATE), 1),
++            "departure_votes": votes(families, "strong_departure"),
++            "return_votes": votes(families, "strong_return"),
++            "mute_streak_s": diag["mute_streak_s"],
++            "play_streak_s": diag["play_streak_s"],
+             "recording": bool(self.live["recording"]),
+             "input_name": self.live["input_name"],
+             "output_name": self.live["output_name"],
+@@ -280,22 +476,52 @@ class SportsSession:
+             "show": self.meta.get("show") or "",
+             "service": self.meta.get("service") or "",
+             "content": self.meta.get("content") or "sports",
++            "booth_ids": list(self._booth_ids),
++            "resumable": bool((_read_active() or {}).get("recording")) and not bool(self.live["recording"]),
+             "scientific_authority": False,
+             "dataset_role": "live_dev",
+         }
+ 
+     def close(self) -> None:
+-        for handle in (self.decisions, self.overrides, self.ratings, self.labels):
++        for handle in (self.decisions, self.overrides, self.ratings, self.labels, self.track):
+             handle.close()
+ 
+     def _families(self) -> dict:
+         with self._lock:
+             return dict(self.families)
+ 
+-    def _log_decision(self, timestamp, state, source, families, replacement, human) -> None:
+-        row = decision_row(timestamp, state, source, families, replacement, human)
++    def _log_decision(
++        self,
++        timestamp,
++        state,
++        source,
++        families,
++        replacement,
++        human,
++        *,
++        noop: bool = False,
++        prior_hearing: str | None = None,
++        gate: ListenerGate | None = None,
++    ) -> None:
++        diag = self.machine.diagnostics()
++        row = decision_row(
++            timestamp,
++            state,
++            source,
++            families,
++            replacement,
++            human,
++            noop=noop,
++            prior_hearing=prior_hearing,
++            departure_votes=votes(families, "strong_departure"),
++            return_votes=votes(families, "strong_return"),
++            lag_ms=None if gate is None else gate.lag_ms(RATE),
++            mute_streak_s=diag["mute_streak_s"],
++            play_streak_s=diag["play_streak_s"],
++        )
+         self._append(self.decisions, row)
+-        print(f"{timestamp:8.1f}  {state}  {source}  {replacement}", flush=True)
++        tag = " noop" if noop else ""
++        print(f"{timestamp:8.1f}  {state}  {source}  {replacement}{tag}", flush=True)
+ 
+     def _append(self, handle, row: dict) -> None:
+         handle.write(json.dumps(row) + "\n")
+@@ -336,10 +562,32 @@ class Desk:
+         self._record_thread: threading.Thread | None = None
+         self._writer: ChunkWriter | None = None
+         self._next_chunk = 0
++        self._upload = upload
+         self._uploader = None
+-        if upload:
++        # ML workers are heavy (Torch). Spawn only when a session actually starts.
++        self._audio_proc = None
++        self._speaker_proc = None
++        self._workers_started = False
++        self._next_chunk = _next_chunk_number(folder)
++
++    def _active_payload(self, *, recording: bool) -> dict:
++        return {
++            "recording": recording,
++            "show": self.session.meta.get("show") or "",
++            "service": self.session.meta.get("service") or "",
++            "content": self.session.meta.get("content") or "sports",
++            "input": self.session.live.get("input_name") or "",
++            "output": self.session.live.get("output_name") or "",
++            "folder": str(self.folder),
++        }
++
++    def _ensure_workers(self) -> None:
++        if self._workers_started:
++            return
++        self._workers_started = True
++        if self._upload and self._uploader is None:
+             self._uploader = subprocess.Popen(
+-                [sys.executable, "-m", "ohush_live.chunk_uploader", str(folder)],
++                [sys.executable, "-m", "ohush_live.chunk_uploader", str(self.folder)],
+                 cwd=str(REPO),
+                 stdin=subprocess.PIPE,
+             )
+@@ -351,6 +599,7 @@ class Desk:
+             threading.Thread(target=_pump, args=(self._audio_proc, self.session), daemon=True).start()
+         if self._speaker_proc:
+             threading.Thread(target=_pump, args=(self._speaker_proc, self.session), daemon=True).start()
++        print("detectors warming (audio + speaker)", flush=True)
+ 
+     def start(self, input_name: str, output_name: str) -> str:
+         with self._lock:
+@@ -365,6 +614,7 @@ class Desk:
+             except LiveControlError as exc:
+                 self.session.live["error"] = str(exc)
+                 return str(exc)
++            self._ensure_workers()
+             stop = threading.Event()
+             record_q: queue.Queue = queue.Queue(maxsize=256)
+             detect_q: queue.Queue = queue.Queue(maxsize=64)
+@@ -385,6 +635,7 @@ class Desk:
+             self.session.live["output_name"] = speakers["name"]
+             self.session.live["error"] = ""
+             self.session.live["open_chunk"] = writer.path.name if writer.path else ""
++            _write_active(self._active_payload(recording=True))
+ 
+         record_thread.start()
+         threading.Thread(
+@@ -401,15 +652,18 @@ class Desk:
+                 print(exc, flush=True)
+             finally:
+                 if self.session.live["recording"]:
+-                    self.end()
++                    # Keep .active_desk.json so refresh / engine restart can jump back in.
++                    self.end(clear_active=False)
+ 
+         threading.Thread(target=_listen, daemon=True).start()
+         print(f"{PRODUCT}  in={source['name']}  out={speakers['name']}", flush=True)
+         return ""
+ 
+-    def end(self) -> None:
++    def end(self, *, clear_active: bool = False) -> None:
+         with self._lock:
+             if not self.session.live["recording"]:
++                if clear_active:
++                    _mark_active_stopped(self._active_payload(recording=False))
+                 return
+             stop = self._stop
+             record_q = self._record_q
+@@ -428,19 +682,44 @@ class Desk:
+             self._next_chunk = writer.number
+             if last is not None:
+                 _send_upload(self._uploader, last)
++        if clear_active:
++            _mark_active_stopped(self._active_payload(recording=False))
+         print("recording paused", flush=True)
+ 
+     def shutdown(self) -> None:
+-        self.end()
+-        for name in ("decisions.jsonl", "overrides.jsonl", "ratings.jsonl", "labels.jsonl", "session.json"):
++        # Do not clear active intent — only an explicit Stop should.
++        self.end(clear_active=False)
++        for name in (
++            "decisions.jsonl",
++            "overrides.jsonl",
++            "ratings.jsonl",
++            "labels.jsonl",
++            "track.jsonl",
++            "session.json",
++        ):
+             _send_upload(self._uploader, self.folder / name)
+         self.session.close()
+-        if self._uploader is not None and self._uploader.stdin is not None:
+-            self._uploader.stdin.close()
++        for proc in (self._audio_proc, self._speaker_proc, self._uploader):
++            if proc is None:
++                continue
++            try:
++                if proc.stdin is not None:
++                    proc.stdin.close()
++            except Exception:
++                pass
++            try:
++                proc.terminate()
++            except Exception:
++                pass
++        self._audio_proc = None
++        self._speaker_proc = None
++        self._uploader = None
+ 
+ 
+-def _devices() -> dict:
+-    rows = query_audio_devices()
++def _devices(*, refresh: bool = False) -> dict:
++    # PortAudio caches the device list for the process lifetime unless we reinit.
++    # Never reinit while a stream is open.
++    rows = query_audio_devices(refresh=refresh)
+     def slim(row: dict) -> dict:
+         return {"index": row["index"], "name": row["name"]}
+ 
+@@ -489,7 +768,8 @@ def _serve(desk: Desk) -> None:
+                 self._send(200, session.snapshot(gate))
+                 return
+             if path == "/devices":
+-                self._send(200, _devices())
++                # Rescan USB/Core Audio unless a live stream is open.
++                self._send(200, _devices(refresh=not bool(session.live.get("recording"))))
+                 return
+             if path.startswith("/media/"):
+                 name = Path(path).name
+@@ -537,7 +817,7 @@ def _serve(desk: Desk) -> None:
+                 self._send(code, {**session.snapshot(gate), "error": err or session.live["error"]})
+                 return
+             if path == "/stop":
+-                desk.end()
++                desk.end(clear_active=True)
+                 self._send(200, session.snapshot(gate))
+                 return
+             if path == "/label":
+@@ -695,6 +975,26 @@ def _preflight(gate: ListenerGate, input_index: int, output_index: int) -> None:
+     _run_streams(gate, record_q, detect_q, input_index, output_index, stop)
+ 
+ 
++def _acquire_singleton():
++    """One engine only. Spawning during make_beds used to pile up Torch workers and jetsam the Mac."""
++    folder = REPO / "ohush_live" / "sessions"
++    folder.mkdir(parents=True, exist_ok=True)
++    lock_path = folder / ".desk.lock"
++    pid_path = folder / ".desk.pid"
++    handle = open(lock_path, "a+", encoding="utf-8")
++    try:
++        fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
++    except BlockingIOError:
++        handle.close()
++        return None
++    handle.seek(0)
++    handle.truncate()
++    handle.write(str(os.getpid()))
++    handle.flush()
++    pid_path.write_text(str(os.getpid()), encoding="utf-8")
++    return handle
++
++
+ def main() -> None:
+     parser = argparse.ArgumentParser(description=PRODUCT)
+     parser.add_argument("--input-device", default="USB")
+@@ -712,9 +1012,25 @@ def main() -> None:
+         speakers = _device(args.output_device, "output")
+         _preflight(ListenerGate(make_beds(), make_earcon()), source["index"], speakers["index"])
+         return
++    lock = _acquire_singleton()
++    if lock is None:
++        print("engine already running — not starting a second copy", flush=True)
++        return
+     stamp = datetime.now().strftime("%Y-%m-%d-tnf")
+-    folder = Path(args.session) if args.session else REPO / "ohush_live" / "sessions" / stamp
++    active = _read_active()
++    if args.session:
++        folder = Path(args.session)
++    elif active and active.get("recording") and active.get("folder"):
++        folder = Path(str(active["folder"]))
++    else:
++        folder = REPO / "ohush_live" / "sessions" / stamp
+     desk = Desk(folder, upload=not args.no_upload)
++    if active and not desk.session.meta.get("show"):
++        desk.session.configure(
++            str(active.get("show") or ""),
++            str(active.get("service") or ""),
++            str(active.get("content") or "sports"),
++        )
+     threading.Thread(target=_serve, args=(desk,), daemon=True).start()
+     process_stop = threading.Event()
+     threading.Thread(target=_keys, args=(desk.session, desk.gate, process_stop), daemon=True).start()
+@@ -722,6 +1038,17 @@ def main() -> None:
+         err = desk.start(args.input_device, args.output_device)
+         if err:
+             raise SystemExit(err)
++    elif active and active.get("recording") and active.get("input") and active.get("output"):
++        desk.session.configure(
++            str(active.get("show") or ""),
++            str(active.get("service") or ""),
++            str(active.get("content") or "sports"),
++        )
++        err = desk.start(str(active["input"]), str(active["output"]))
++        if err:
++            print(f"could not resume open session: {err}", flush=True)
++        else:
++            print("resumed open session (Stop was never clicked)", flush=True)
+     print("Turn the TV speakers down. Leave optical audio running. Listen on this Mac.", flush=True)
+     print("Dashboard  http://127.0.0.1:3010/", flush=True)
+     print(f"Engine     http://{HOST}:{PORT}/   F8 mute  F9 play  F10 auto  S sound  1-5 pleasant  y/n every break", flush=True)
+@@ -735,6 +1062,11 @@ def main() -> None:
+         process_stop.set()
+         desk.shutdown()
+         print("recording closed", flush=True)
++        try:
++            fcntl.flock(lock.fileno(), fcntl.LOCK_UN)
++            lock.close()
++        except Exception:
++            pass
+ 
+ 
+ if __name__ == "__main__":
+diff --git a/ohush_live/state.py b/ohush_live/state.py
+index e0a0ce4..8a6010c 100644
+--- a/ohush_live/state.py
++++ b/ohush_live/state.py
+@@ -1,13 +1,26 @@
+-"""Asymmetric mute state. Departure can mute. Return must be strong and persistent."""
++"""Asymmetric mute state. Departure can mute. Return must be strong and persistent.
++
++Knowing booth identities is not the same as hearing them. Protect verified
++booth speech and a bounded outro hold only. Generic continuity / recurrence
++must not lift cover.
++"""
+ 
+ from __future__ import annotations
+ 
+ from ohush_live.policy import (
++    AUDIO_RETURN,
++    AUDIO_STRONG,
++    BOOTH_RETURN_PERSIST_S,
+     MIN_AGREE,
+     MIN_MUTE_HOLD_S,
+     MUTE_PERSIST_S,
+     PLAY_PERSIST_S,
+     PRODUCT,
++    SOLO_FAMILY,
++    SOLO_MUTE_PERSIST_S,
++    SOLO_PLAY_PERSIST_S,
++    SOLO_SPEAKER_PLAY_PERSIST_S,
++    SPEAKER_BOOTH_MATCH,
+ )
+ 
+ 
+@@ -18,6 +31,18 @@ class Machine:
+         self._play_streak = 0.0
+         self._muted_at: float | None = None
+ 
++    def diagnostics(self) -> dict:
++        return {
++            "state": self.state,
++            "mute_streak_s": round(self._mute_streak, 2),
++            "play_streak_s": round(self._play_streak, 2),
++        }
++
++    def muted_for(self, timestamp: float) -> float | None:
++        if self._muted_at is None:
++            return None
++        return round(max(0.0, timestamp - self._muted_at), 2)
++
+     def manual(self, timestamp: float, action: str, families: dict) -> dict:
+         if action not in ("mute", "play"):
+             raise ValueError(action)
+@@ -30,32 +55,38 @@ class Machine:
+         return event
+ 
+     def step(self, timestamp: float, dt: float, families: dict) -> dict | None:
+-        departure = _votes(families, "strong_departure")
+-        returning = _votes(families, "strong_return")
+         if self.state == "PLAY":
+             self._play_streak = 0.0
+-            if departure >= MIN_AGREE:
++            yes, need, tag, persist = _quorum(families, depart=True)
++            if yes >= need:
+                 self._mute_streak += dt
+             else:
+                 self._mute_streak = 0.0
+-            if self._mute_streak + 1e-9 >= MUTE_PERSIST_S:
++            if self._mute_streak + 1e-9 >= persist:
+                 self.state = "MUTED"
+                 self._muted_at = timestamp
+                 self._mute_streak = 0.0
+-                return self._event(timestamp, "MUTED", families, f"{MIN_AGREE}_of_strong", False)
++                return self._event(timestamp, "MUTED", families, tag, False)
+             return None
+ 
+-        held = self._muted_at is not None and timestamp - self._muted_at + 1e-9 < MIN_MUTE_HOLD_S
+-        if held or returning < MIN_AGREE:
++        # Verified booth in the clear: never sit on cover through a mute hold.
++        booth = _booth_heard(families.get("speaker"))
++        held = (
++            not booth
++            and self._muted_at is not None
++            and timestamp - self._muted_at + 1e-9 < MIN_MUTE_HOLD_S
++        )
++        yes, need, tag, persist = _quorum(families, depart=False)
++        if held or yes < need:
+             self._play_streak = 0.0
+             return None
+         self._play_streak += dt
+-        if self._play_streak + 1e-9 < PLAY_PERSIST_S:
++        if self._play_streak + 1e-9 < persist:
+             return None
+         self.state = "PLAY"
+         self._muted_at = None
+         self._play_streak = 0.0
+-        return self._event(timestamp, "PLAY", families, f"{MIN_AGREE}_of_return", False)
++        return self._event(timestamp, "PLAY", families, tag, False)
+ 
+     def _event(self, timestamp: float, after: str, families: dict, reason: str, manual: bool) -> dict:
+         return {
+@@ -74,14 +105,106 @@ class Machine:
+         }
+ 
+ 
+-def _votes(families: dict, key: str) -> int:
+-    votes = 0
+-    for reading in families.values():
+-        if reading is None:
++def _family_yes(name: str, reading: dict, *, depart: bool) -> bool:
++    """Product vote. Audio uses the raw distance so thresholds stay in policy.py."""
++    if depart:
++        if name == "audio":
++            value = reading.get("departure")
++            if value is not None and float(value) >= AUDIO_STRONG:
++                return True
++            return bool(reading.get("strong_departure"))
++        return bool(reading.get("strong_departure"))
++    if name == "speaker" and _booth_heard(reading):
++        return True
++    if name == "audio":
++        value = reading.get("departure")
++        if value is not None and float(value) <= AUDIO_RETURN:
++            return True
++        return bool(reading.get("strong_return"))
++    return bool(reading.get("strong_return"))
++
++
++def _alive(reading: dict | None) -> bool:
++    """True when the family has a real score — identity metadata alone does not count."""
++    if reading is None:
++        return False
++    # Active booth protection (speech or bounded outro hold) is real evidence.
++    if reading.get("booth_present"):
++        return True
++    if reading.get("departure") is not None or reading.get("return") is not None:
++        return True
++    return bool(reading.get("strong_departure") or reading.get("strong_return"))
++
++
++def _booth_match(speaker: dict) -> bool:
++    """Verified booth identity — not 'familiar' or 'recurring'."""
++    if speaker.get("booth_present"):
++        return True
++    sim = speaker.get("similarity_to_booth")
++    return sim is not None and float(sim) + 1e-9 >= SPEAKER_BOOTH_MATCH
++
++
++def _booth_heard(speaker: dict | None) -> bool:
++    """True only when a verified booth announcer is speaking now."""
++    if not speaker or not speaker.get("speech"):
++        return False
++    return _booth_match(speaker)
++
++
++def _booth_still_talking(speaker: dict | None) -> bool:
++    """Booth speech now, or bounded outro linger (booth_present without speech)."""
++    if not speaker:
++        return False
++    if _booth_heard(speaker):
++        return True
++    # Outro hold: daemon may keep booth_present=True briefly after last line.
++    return bool(speaker.get("booth_present"))
++
++
++def _present_for(families: dict, *, depart: bool) -> dict:
++    """Families that may vote. Non-booth speaker chatter does not raise the mute bar."""
++    out: dict = {}
++    for name, reading in families.items():
++        if not _alive(reading):
++            continue
++        if depart and name == "speaker":
++            if _booth_still_talking(reading):
++                out[name] = reading
++            elif reading.get("strong_departure"):
++                out[name] = reading
++            # else: speaker unavailable for commercial detection
+             continue
+-        if reading.get(key):
+-            votes += 1
+-    return votes
++        out[name] = reading
++    return out
++
++
++def _quorum(families: dict, *, depart: bool) -> tuple[int, int, str, float]:
++    """Return (yes_votes, needed, reason_tag, persist_s)."""
++    present = _present_for(families, depart=depart)
++    yes = sum(1 for name, reading in present.items() if _family_yes(name, reading, depart=depart))
++    if not present:
++        return 0, 10**9, "no_families", 10**9
++    # Verified booth voice → leave cover immediately.
++    if not depart:
++        speaker = present.get("speaker")
++        if _booth_heard(speaker):
++            return 1, 1, "booth_voice", BOOTH_RETURN_PERSIST_S
++        if speaker is not None and _family_yes("speaker", speaker, depart=False):
++            return 1, 1, "speaker_return", SOLO_SPEAKER_PLAY_PERSIST_S
++    # Protect verified booth speech / outro hold only — never "booth_locked" alone.
++    speaker = present.get("speaker")
++    if depart and _booth_still_talking(speaker):
++        return 0, 10**9, "booth_still_talking", 10**9
++    if len(present) == 1:
++        name = next(iter(present))
++        if name != SOLO_FAMILY:
++            return yes, 10**9, "solo_non_audio", 10**9
++        persist = SOLO_MUTE_PERSIST_S if depart else SOLO_PLAY_PERSIST_S
++        tag = "solo_audio_depart" if depart else "solo_audio_return"
++        return yes, 1, tag, persist
++    persist = MUTE_PERSIST_S if depart else PLAY_PERSIST_S
++    tag = f"{MIN_AGREE}_of_strong" if depart else f"{MIN_AGREE}_of_return"
++    return yes, MIN_AGREE, tag, persist
+ 
+ 
+ def _score(families: dict, name: str, kind: str) -> float | None:
+diff --git a/tests/test_ohush_live_sports.py b/tests/test_ohush_live_sports.py
+index 98b3896..6184689 100644
+--- a/tests/test_ohush_live_sports.py
++++ b/tests/test_ohush_live_sports.py
+@@ -29,11 +29,45 @@ class SportsTests(unittest.TestCase):
+     def test_silence_bed_is_silent_and_stadium_is_not(self):
+         beds = make_beds(use_recordings=False)
+         self.assertEqual(int(np.max(np.abs(beds["silence"]))), 0)
+-        self.assertGreater(int(np.max(np.abs(beds["stadium"]))), 100)
+-        self.assertLess(int(np.max(np.abs(beds["stadium"]))), 2500)
++        self.assertGreater(int(np.max(np.abs(beds["stadium"]))), 1000)
++        self.assertLess(int(np.max(np.abs(beds["stadium"]))), 30000)
++        # Beds share a loudness target so rain/pink are not whisper-quiet vs crowd.
++        def _rms(name: str) -> float:
++            return float(np.sqrt(np.mean(np.square(beds[name].astype(np.float64) / 32768.0))))
++
++        for name in (
++            "hush",
++            "neon",
++            "charge",
++            "volt",
++            "drop",
++            "stadium",
++            "rain",
++            "fireplace",
++            "pink",
++            "brown",
++            "ocean",
++            "stream",
++            "birds",
++            "breeze",
++            "night",
++            "chimes",
++            "piano",
++            "pad",
++            "harp",
++            "meadow",
++        ):
++            self.assertGreater(_rms(name), 0.06, name)
+         self.assertFalse(np.array_equal(beds["stadium"], beds["rain"]))
+         self.assertFalse(np.array_equal(beds["pink"], beds["brown"]))
++        self.assertFalse(np.array_equal(beds["ocean"], beds["pad"]))
++        self.assertFalse(np.array_equal(beds["hush"], beds["pink"]))
++        self.assertFalse(np.array_equal(beds["neon"], beds["charge"]))
++        self.assertFalse(np.array_equal(beds["volt"], beds["drop"]))
+         self.assertIn("fireplace", beds)
++        self.assertIn("harp", beds)
++        self.assertIn("hush", beds)
++        self.assertIn("neon", beds)
+ 
+     def test_program_passthrough_after_prime(self):
+         beds = make_beds(use_recordings=False)
+@@ -44,6 +78,18 @@ class SportsTests(unittest.TestCase):
+         gate.render(out)
+         self.assertTrue(np.all(out == 400))
+ 
++    def test_ring_does_not_grow_past_prime_slack(self):
++        beds = make_beds(use_recordings=False)
++        gate = ListenerGate(beds, make_earcon(), prime_frames=64)
++        block = np.zeros((32, 2), dtype=np.int16)
++        out = np.zeros((16, 2), dtype=np.int16)
++        for _ in range(40):
++            gate.push(block)
++            # Output intentionally slower than input.
++            if _ % 3 == 0:
++                gate.render(out)
++        self.assertLessEqual(gate._count, gate._prime + gate._slack)
++
+     def test_closed_chunk_is_not_the_open_file(self):
+         with TemporaryDirectory() as tmp:
+             folder = Path(tmp)
+@@ -54,14 +100,26 @@ class SportsTests(unittest.TestCase):
+             self.assertNotEqual(writer.path, first[0])
+             self.assertIsNone(writer.close())
+ 
+-    def test_manual_play_holds_through_the_current_break(self):
++    def test_manual_play_from_cover_holds_until_departure_quiet(self):
+         latch = AutoLatch()
+-        latch.human_play()
+-        self.assertFalse(latch.allow_auto_mute(2))
++        latch.human_play(was_replacement=True)
+         self.assertFalse(latch.allow_auto_mute(2))
+-        self.assertFalse(latch.allow_auto_mute(0))
++        self.assertFalse(latch.allow_auto_mute(1))
++        self.assertTrue(latch.allow_auto_mute(0))
+         self.assertTrue(latch.allow_auto_mute(2))
+ 
++    def test_manual_play_while_already_on_show_does_not_block_ads(self):
++        latch = AutoLatch()
++        latch.human_play(was_replacement=False)
++        self.assertTrue(latch.allow_auto_mute(1))
++
++    def test_manual_cover_never_blocks_auto_return(self):
++        latch = AutoLatch()
++        latch.human_mute(was_program=True)
++        # Program-like return_votes must still be allowed — this was the stuck-cover bug.
++        self.assertTrue(latch.allow_auto_play(1))
++        self.assertTrue(latch.allow_auto_play(0))
++
+     def test_hint_does_not_unmute(self):
+         machine = Machine()
+         machine.state = "MUTED"
+@@ -72,11 +130,11 @@ class SportsTests(unittest.TestCase):
+         self.assertEqual(machine.state, "MUTED")
+ 
+     def test_decision_is_not_science(self):
+-        row = decision_row(1.5, "PROGRAM_TO_REPLACEMENT", "auto", {"speaker": None, "audio": None, "semantic": None}, "stadium", False)
++        row = decision_row(1.5, "PROGRAM_TO_REPLACEMENT", "auto", {"speaker": None, "audio": None, "semantic": None}, "hush", False)
+         self.assertFalse(row["scientific_authority"])
+         self.assertFalse(row["allowed_to_change_exp001_005"])
+         self.assertEqual(row["dataset_role"], "live_dev")
+-        self.assertEqual(row["replacement"], "stadium")
++        self.assertEqual(row["replacement"], "hush")
+ 
+     def test_uploader_command_does_not_delete(self):
+         command = cp_command(Path("audio_0001.wav"), "gs://bucket/live/s/audio_0001.wav", "abc")
+diff --git a/tests/test_ohush_live_state.py b/tests/test_ohush_live_state.py
+index 58a673a..5a3f80d 100644
+--- a/tests/test_ohush_live_state.py
++++ b/tests/test_ohush_live_state.py
+@@ -1,4 +1,8 @@
+-"""OHUSH_LIVE_V0 state machine. No audio, no experiment files."""
++"""OHUSH_LIVE_V0 state machine. No audio, no experiment files.
++
++Spec (audit 2026-10-08): knowing booth identities ≠ believing they are talking.
++Protect verified booth speech + bounded outro hold only.
++"""
+ 
+ import unittest
+ 
+@@ -15,21 +19,24 @@ def reading(departure=None, strong_departure=False, ret=None, strong_return=Fals
+ 
+ 
+ class StateTests(unittest.TestCase):
+-    def test_one_family_does_not_mute(self):
++    def test_one_family_yes_one_no_does_not_mute(self):
+         machine = Machine()
+         families = {
+             "audio": reading(0.3, True),
+             "speaker": reading(0.1, False),
+             "semantic": None,
+         }
+-        for t in range(1, 12):
++        # Non-booth speaker with no strong_departure is ignored for depart.
++        for t in range(1, 4):
+             self.assertIsNone(machine.step(t, 1.0, families))
+-        self.assertEqual(machine.state, "PLAY")
++        event = machine.step(4, 1.0, families)
++        self.assertEqual(event["state_after"], "MUTED")
++        self.assertEqual(event["reason"], "solo_audio_depart")
+ 
+-    def test_two_families_mute_after_three_seconds(self):
++    def test_two_families_mute_after_persist(self):
+         machine = Machine()
+         families = {
+-            "audio": reading(0.22, True),
++            "audio": reading(0.25, True),
+             "speaker": reading(0.4, True),
+             "semantic": None,
+         }
+@@ -41,27 +48,117 @@ class StateTests(unittest.TestCase):
+         self.assertFalse(event["manual_override"])
+         self.assertEqual(machine.state, "MUTED")
+ 
+-    def test_abstain_is_not_a_vote(self):
++    def test_solo_audio_mutes_when_others_unavailable(self):
++        """Ad2-class: audio strong, speaker/semantic null → product may cover."""
+         machine = Machine()
+         families = {
+             "audio": reading(0.3, True),
+             "speaker": None,
+             "semantic": None,
+         }
+-        for t in range(1, 8):
++        for t in range(1, 4):
++            self.assertIsNone(machine.step(t, 1.0, families))
++        event = machine.step(4, 1.0, families)
++        self.assertIsNotNone(event)
++        self.assertEqual(event["state_after"], "MUTED")
++        self.assertEqual(event["reason"], "solo_audio_depart")
++
++    def test_solo_audio_uses_score_even_if_flag_false(self):
++        """Audio score at/above AUDIO_STRONG mutes even when the worker flag lags."""
++        machine = Machine()
++        families = {
++            "audio": reading(0.23, False),
++            "speaker": None,
++            "semantic": None,
++        }
++        for t in range(1, 4):
++            self.assertIsNone(machine.step(t, 1.0, families))
++        event = machine.step(4, 1.0, families)
++        self.assertIsNotNone(event)
++        self.assertEqual(event["state_after"], "MUTED")
++
++    def test_booth_talking_blocks_solo_audio_mute(self):
++        """Verified announcer speaking — do not cover on audio alone."""
++        machine = Machine()
++        families = {
++            "audio": reading(0.3, True),
++            "speaker": {
++                "departure": 0.02,
++                "strong_departure": False,
++                "return": 0.0,
++                "strong_return": False,
++                "speech": True,
++                "recurring": True,
++                "booth_present": True,
++                "continuity": 0.3,
++            },
++            "semantic": None,
++        }
++        for t in range(1, 12):
+             self.assertIsNone(machine.step(t, 1.0, families))
+         self.assertEqual(machine.state, "PLAY")
+ 
+-    def test_return_waits_and_needs_two_families(self):
++    def test_booth_locked_alone_does_not_block_solo_audio_mute(self):
++        """Remembered announcer IDs must never veto commercial detection."""
++        machine = Machine()
++        families = {
++            "audio": reading(0.3, True),
++            "speaker": {
++                "departure": None,
++                "strong_departure": False,
++                "return": 0.0,
++                "strong_return": False,
++                "speech": False,
++                "recurring": False,
++                "booth_present": False,
++                "booth_locked": True,
++                "continuity": None,
++            },
++            "semantic": None,
++        }
++        for t in range(1, 4):
++            self.assertIsNone(machine.step(t, 1.0, families))
++        event = machine.step(4, 1.0, families)
++        self.assertIsNotNone(event)
++        self.assertEqual(event["state_after"], "MUTED")
++        self.assertEqual(event["reason"], "solo_audio_depart")
++
++    def test_empty_placeholder_families_do_not_block_solo_audio(self):
++        machine = Machine()
++        empty = reading(None, False, None, False)
++        families = {
++            "audio": reading(0.3, True),
++            "speaker": empty,
++            "semantic": empty,
++        }
++        for t in range(1, 4):
++            self.assertIsNone(machine.step(t, 1.0, families))
++        event = machine.step(4, 1.0, families)
++        self.assertEqual(event["state_after"], "MUTED")
++        self.assertEqual(event["reason"], "solo_audio_depart")
++
++    def test_solo_speaker_does_not_mute(self):
++        machine = Machine()
++        families = {
++            "audio": None,
++            "speaker": reading(0.5, True),
++            "semantic": None,
++        }
++        for t in range(1, 12):
++            self.assertIsNone(machine.step(t, 1.0, families))
++        self.assertEqual(machine.state, "PLAY")
++
++    def test_return_waits_and_needs_two_families_when_both_alive(self):
+         machine = Machine()
+         mute = {
+-            "audio": reading(0.22, True),
++            "audio": reading(0.25, True),
+             "speaker": reading(0.4, True),
+             "semantic": None,
+         }
+         machine.step(1, 1.0, mute)
+         machine.step(2, 1.0, mute)
+         machine.step(3, 1.0, mute)
++        self.assertEqual(machine.state, "MUTED")
+         one = {
+             "audio": reading(0.05, False, 0.05, True),
+             "speaker": reading(0.2, False, 0.0, False),
+@@ -75,13 +172,151 @@ class StateTests(unittest.TestCase):
+             "speaker": reading(0.1, False, 0.4, True),
+             "semantic": None,
+         }
+-        self.assertIsNone(machine.step(11, 1.0, both))
+-        self.assertIsNone(machine.step(12, 1.0, both))
+-        self.assertIsNone(machine.step(13, 1.0, both))
+-        self.assertIsNone(machine.step(14, 1.0, both))
+-        event = machine.step(15, 1.0, both)
++        # muted_at=3, hold 6s → open at t=9; speaker persist 1s → PLAY at t=9.
++        event = machine.step(9, 1.0, both)
+         self.assertIsNotNone(event)
+         self.assertEqual(event["state_after"], "PLAY")
++        self.assertEqual(event["reason"], "speaker_return")
++
++    def test_solo_audio_return_after_hold(self):
++        machine = Machine()
++        mute = {
++            "audio": reading(0.3, True),
++            "speaker": None,
++            "semantic": None,
++        }
++        for t in range(1, 5):
++            machine.step(t, 1.0, mute)
++        self.assertEqual(machine.state, "MUTED")
++        back = {
++            "audio": reading(0.05, False, 0.05, True),
++            "speaker": None,
++            "semantic": None,
++        }
++        # muted_at=4, hold 6s → open at t=10; solo play persist 3s → t=12.
++        for t in range(5, 12):
++            self.assertIsNone(machine.step(t, 1.0, back))
++        event = machine.step(12, 1.0, back)
++        self.assertIsNotNone(event)
++        self.assertEqual(event["state_after"], "PLAY")
++        self.assertEqual(event["reason"], "solo_audio_return")
++
++    def test_al_michaels_booth_voice_returns_immediately(self):
++        """Verified booth (Al) always lifts cover — even during mute hold."""
++        machine = Machine()
++        mute = {
++            "audio": reading(0.3, True),
++            "speaker": None,
++            "semantic": None,
++        }
++        for t in range(1, 5):
++            machine.step(t, 1.0, mute)
++        self.assertEqual(machine.state, "MUTED")
++        voice = {
++            "audio": reading(0.25, True, 0.25, False),
++            "speaker": {
++                "departure": 0.05,
++                "strong_departure": False,
++                "return": 0.0,
++                "strong_return": False,
++                "speech": True,
++                "recurring": False,
++                "booth_present": True,
++                "similarity_to_booth": 0.81,
++                "cluster_id": "c0001",
++            },
++            "semantic": None,
++        }
++        event = machine.step(5, 1.0, voice)
++        self.assertIsNotNone(event)
++        self.assertEqual(event["state_after"], "PLAY")
++        self.assertEqual(event["reason"], "booth_voice")
++
++    def test_verified_similarity_returns(self):
++        """Prototype match at SPEAKER_BOOTH_MATCH lifts cover."""
++        machine = Machine()
++        mute = {
++            "audio": reading(0.3, True),
++            "speaker": None,
++            "semantic": None,
++        }
++        for t in range(1, 5):
++            machine.step(t, 1.0, mute)
++        self.assertEqual(machine.state, "MUTED")
++        voice = {
++            "audio": reading(0.25, True, 0.25, False),
++            "speaker": {
++                "departure": 0.05,
++                "strong_departure": False,
++                "return": 0.0,
++                "strong_return": False,
++                "speech": True,
++                "recurring": False,
++                "booth_present": False,
++                "booth_locked": True,
++                "similarity_to_booth": 0.72,
++                "cluster_id": "c0099",
++            },
++            "semantic": None,
++        }
++        event = machine.step(5, 1.0, voice)
++        self.assertIsNotNone(event)
++        self.assertEqual(event["state_after"], "PLAY")
++        self.assertEqual(event["reason"], "booth_voice")
++
++    def test_generic_continuity_does_not_return_as_booth(self):
++        """Audit repro: continuity 0.14 + recurring must NOT un-mute into an ad."""
++        machine = Machine()
++        mute = {
++            "audio": reading(0.3, True),
++            "speaker": None,
++            "semantic": None,
++        }
++        for t in range(1, 5):
++            machine.step(t, 1.0, mute)
++        self.assertEqual(machine.state, "MUTED")
++        fake = {
++            "audio": reading(0.30, True, 0.30, False),
++            "speaker": {
++                "departure": 0.05,
++                "strong_departure": False,
++                "return": 0.0,
++                "strong_return": False,
++                "speech": True,
++                "recurring": True,
++                "booth_present": False,
++                "booth_locked": True,
++                "continuity": 0.14,
++                "similarity_to_booth": 0.10,
++                "cluster_id": "c0099",
++            },
++            "semantic": None,
++        }
++        for t in range(5, 20):
++            self.assertIsNone(machine.step(t, 1.0, fake))
++        self.assertEqual(machine.state, "MUTED")
++
++    def test_al_outro_hold_blocks_mute_through_bumper_gap(self):
++        """Bounded booth_present linger (no speech) through outro handoff."""
++        machine = Machine()
++        families = {
++            "audio": reading(0.3, True),
++            "speaker": {
++                "departure": None,
++                "strong_departure": False,
++                "return": None,
++                "strong_return": False,
++                "speech": False,
++                "recurring": False,
++                "booth_present": True,
++                "booth_locked": True,
++                "continuity": None,
++            },
++            "semantic": None,
++        }
++        for t in range(1, 14):
++            self.assertIsNone(machine.step(t, 1.0, families))
++        self.assertEqual(machine.state, "PLAY")
+ 
+     def test_manual_play_is_immediate(self):
+         machine = Machine()

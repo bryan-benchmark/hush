@@ -1,0 +1,52 @@
+Missed realtime ads — 2026-10-08-tnf
+=====================================
+
+Human-caught commercials (labels / Cover ad):
+  Ad1  about t≈23.1s   human mute t=23.85   scores: audio=null speaker=null
+  Ad2  about t≈379.6s  human mute t=380.16  scores: audio=0.2725 (STRONG) speaker=null
+
+Zero auto PROGRAM_TO_REPLACEMENT in this session.
+
+Root causes
+-----------
+1) Audio cold start (Ad1 impossible)
+   program_cloud MIN_REFERENCE_S=60s + WINDOW_S=10s → first scoreable
+   audio distance at t≈80s offline. At Ad1 every family was null → 0 votes.
+
+2) MIN_AGREE=2 with only one live family (Ad2)
+   At Ad2 audio was clearly strong (offline ≥0.25 from ~371s; live 0.2725)
+   but speaker_score stayed null and semantic is never spawned.
+   Machine needs 2 strong_departure votes → audio alone cannot mute.
+   MUTE_PERSIST_S=3s would add more delay even if votes existed.
+
+3) Speaker vote often absent
+   Speaker worker clears on non-speech; recurring prototypes need
+   RECUR_MIN_SPAN_S=60s. Sports/ad speech patterns leave speaker=null
+   for long stretches, so the second required vote never arrives.
+
+4) Semantic family is a stub
+   families["semantic"] exists but no semantic_worker is started →
+   effective detectors = audio + speaker only.
+
+Offline audio replay (same Cnn14 / thresholds)
+  first scoreable t=80.0
+  strong near Ad2: t=371..410 (except a gap at 404)
+  strong early false-ish after warm-up: t=81,82,83,99 (session was
+  already human-covered then; not used for auto mute)
+
+What would have caught Ad2 tonight
+  Allow mute on 1 strong family when the other is unavailable, OR
+  get speaker/semantic voting, OR lower MIN_AGREE when only one
+  family is alive — without changing Exp001–005 constants.
+
+Product fix shipped (ohush_live/state.py + policy.py, Exp001–005 untouched)
+  - Missing families = unavailable, not a "no"
+  - Solo audio strong → mute after SOLO_MUTE_PERSIST_S; reason solo_audio_depart
+  - Two live families still need both to agree; active speaker "no" still blocks
+  - Manual Show while already on program does NOT latch-block the next ad
+
+2026-10-08 evening miss (after solo path shipped)
+  - Auto never fired: PROGRAM audio peaked at ~0.167, AUDIO_STRONG was 0.18
+  - Fix: AUDIO_STRONG=0.14, live MIN_REFERENCE=15s, Machine uses raw audio score,
+    solo mute persist 2s. Worker restarted with daemon.
+

@@ -1,0 +1,25 @@
+{
+  "starts": {
+    "n": 136,
+    "min_before_boundary": 59,
+    "min_after_boundary": 77,
+    "offset_p50": 0.09,
+    "le_m60_before": 84,
+    "le_m60_after": 81,
+    "le_m60_either": 103
+  },
+  "ends": {
+    "n": 133,
+    "min_before_boundary": 72,
+    "min_after_boundary": 61,
+    "offset_p50": -0.125,
+    "le_m60_before": 89,
+    "le_m60_after": 72,
+    "le_m60_either": 97
+  },
+  "program_half_seconds": {
+    "n": 2080,
+    "min_db_p50": -40.99,
+    "le_m60": 283
+  }
+}

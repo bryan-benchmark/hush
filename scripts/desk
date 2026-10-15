@@ -1,0 +1,149 @@
+#!/usr/bin/env bash
+# Split desk: long-lived audio engine + hot-reloading UI.
+# The UI never owns/kills the engine, so Next refresh cannot drop a live session.
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
+
+PYTHON="${ROOT}/.venv/bin/python"
+PID_FILE="${ROOT}/ohush_live/sessions/.desk.pid"
+LOG_FILE="${ROOT}/ohush_live/sessions/.desk.log"
+ENGINE_URL="http://127.0.0.1:8770/state"
+UI_URL="http://127.0.0.1:3010/"
+
+die() { echo "desk: $*" >&2; exit 1; }
+
+engine_up() {
+  curl -sf --max-time 1 "$ENGINE_URL" >/dev/null 2>&1
+}
+
+read_pid() {
+  if [[ -f "$PID_FILE" ]]; then
+    tr -d '[:space:]' <"$PID_FILE"
+  fi
+}
+
+pid_alive() {
+  local pid="${1:-}"
+  [[ -n "$pid" ]] && kill -0 "$pid" 2>/dev/null
+}
+
+cmd_status() {
+  if engine_up; then
+    "$PYTHON" - <<'PY'
+import json, urllib.request
+d = json.load(urllib.request.urlopen("http://127.0.0.1:8770/state", timeout=2))
+print(
+    "engine  up",
+    f"recording={d.get('recording')}",
+    f"show={d.get('show')!r}",
+    f"t={d.get('timestamp')}",
+)
+PY
+  else
+    echo "engine  down"
+  fi
+  if curl -sf --max-time 1 "$UI_URL" >/dev/null 2>&1; then
+    echo "ui      up  $UI_URL"
+  else
+    echo "ui      down"
+  fi
+}
+
+cmd_engine() {
+  if engine_up; then
+    echo "engine already up on :8770"
+    cmd_status
+    return 0
+  fi
+  [[ -x "$PYTHON" ]] || die "missing $PYTHON — create the venv first"
+  mkdir -p "$(dirname "$PID_FILE")"
+  # Keep the Mac awake while listening; leave this process alone during a game.
+  nohup caffeinate -i "$PYTHON" -m ohush_live.sports_daemon >>"$LOG_FILE" 2>&1 &
+  local pid=$!
+  echo "$pid" >"$PID_FILE"
+  echo "engine starting pid=$pid  log=$LOG_FILE"
+  for _ in $(seq 1 120); do
+    if engine_up; then
+      echo "engine ready  $ENGINE_URL"
+      cmd_status
+      return 0
+    fi
+    if ! pid_alive "$pid"; then
+      die "engine exited while warming — see $LOG_FILE"
+    fi
+    sleep 1
+  done
+  die "engine still warming after 120s — see $LOG_FILE"
+}
+
+cmd_engine_stop() {
+  if engine_up; then
+    local pid
+    pid="$(curl -sf --max-time 1 "$ENGINE_URL" >/dev/null; read_pid || true)"
+    # Prefer the singleton pid file; fall back to the listener.
+    pid="$(read_pid || true)"
+    if ! pid_alive "${pid:-}"; then
+      pid="$(lsof -nP -iTCP:8770 -sTCP:LISTEN -t 2>/dev/null | head -1 || true)"
+    fi
+    if pid_alive "${pid:-}"; then
+      echo "stopping engine pid=$pid (session resumes on next start if you never Stopped)"
+      kill -TERM "$pid" 2>/dev/null || true
+      for _ in $(seq 1 20); do
+        engine_up || break
+        sleep 0.25
+      done
+    fi
+  fi
+  rm -f "$PID_FILE"
+  echo "engine stopped"
+}
+
+cmd_ui() {
+  cd "${ROOT}/apps/monitor"
+  # External mode: Next only talks to :8770. It will not spawn or kill the engine.
+  export OHUSH_ENGINE=external
+  exec npm run dev
+}
+
+cmd_up() {
+  cmd_engine
+  echo "ui hot-reloads freely; leave the engine alone"
+  cmd_ui
+}
+
+cmd_restart_engine() {
+  cmd_engine_stop
+  cmd_engine
+}
+
+usage() {
+  cat <<'EOF'
+Usage: ./scripts/desk <command>
+
+  up               Start engine (if needed), then hot-reload UI
+  engine           Start long-lived audio engine only
+  engine-stop      Stop engine (does not clear resume intent)
+  restart-engine   Bounce engine; auto-resumes if you never clicked Stop
+  ui               Next.js on :3010 with OHUSH_ENGINE=external
+  status           Show engine + UI
+
+Game-night habit:
+  terminal 1:  ./scripts/desk engine
+  terminal 2:  ./scripts/desk ui
+  edit UI freely — engine keeps listening
+  threshold/bed changes need:  ./scripts/desk restart-engine
+EOF
+}
+
+case "${1:-}" in
+  up) cmd_up ;;
+  engine) cmd_engine ;;
+  engine-stop) cmd_engine_stop ;;
+  restart-engine) cmd_restart_engine ;;
+  ui) cmd_ui ;;
+  status) cmd_status ;;
+  ""|-h|--help|help) usage ;;
+  *) die "unknown command: $1 (try help)" ;;
+esac

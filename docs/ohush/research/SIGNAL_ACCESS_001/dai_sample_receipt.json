@@ -1,0 +1,71 @@
+{
+  "observation": "Google published DAI live sample, one session, two playlist fetches",
+  "permission": "Google documents this stream for testing client apps. Network code 21775744923. Asset key c-rArva4ShKVIAkNfy6HUQ. Stream content name: Big Buck Bunny (Live), HLS.",
+  "source": "https://developers.google.com/ad-manager/dynamic-ad-insertion/streams",
+  "session_opened_utc": "2026-10-15T02:20:18Z",
+  "stream_id": "cd75a709-fd44-4ab3-bedc-7ec2858d1153:CHS",
+  "create_status": 201,
+  "playlist_clock": "EXT-X-PROGRAM-DATE-TIME, offset -07:00",
+  "acoustic_playback": false,
+  "optical_capture": false,
+  "scte35_binary_in_media_playlist": false,
+  "ext_x_daterange_in_media_playlist": false,
+  "metadata_poll": {
+    "ad_breaks": [
+      {
+        "id": "0003193632",
+        "type": "",
+        "duration_s": 0,
+        "expected_duration_s": 30,
+        "ads": 0,
+        "slate_duration_s": 30
+      },
+      {
+        "id": "0003193633",
+        "type": "mid",
+        "duration_s": 30,
+        "expected_duration_s": 30,
+        "ads": [
+          {"position": 1, "duration_s": 10.01, "title": "External - Pod Midroll 1"},
+          {"position": 2, "duration_s": 10.01, "title": "External - Pod Midroll 2"},
+          {"position": 3, "duration_s": 9.98, "title": "External - Pod Midroll 3"}
+        ]
+      },
+      {
+        "id": "0003193634",
+        "type": "mid",
+        "duration_s": 30,
+        "expected_duration_s": 30,
+        "ads": [
+          {"position": 1, "duration_s": 10.01, "title": "External - Pod Midroll 1"},
+          {"position": 2, "duration_s": 10.01, "title": "External - Pod Midroll 2"},
+          {"position": 3, "duration_s": 9.98, "title": "External - Pod Midroll 3"}
+        ]
+      }
+    ]
+  },
+  "snapshot_1": {
+    "variant_bandwidth": 257000,
+    "cue_in_pdt": "2026-10-14T19:19:39.558055-07:00",
+    "content_after_cue_in_s": 29.95833,
+    "content_host": "storage.googleapis.com testtopbox-public Big Buck Bunny",
+    "cue_out": "EXT-X-CUE-OUT:30",
+    "cue_out_pdt": "2026-10-14T19:20:09.516385-07:00",
+    "cue_out_minus_cue_in_s": 29.95833,
+    "closing_cue_in_for_this_break": "not yet in the live window",
+    "discontinuity_tags_also_inside_content": true
+  },
+  "snapshot_2": {
+    "cue_out": "EXT-X-CUE-OUT:30",
+    "cue_out_pdt": "2026-10-14T19:22:09.474715-07:00",
+    "pod_segment_durations_s": [10.01, 10.01, 9.98],
+    "pod_segment_sum_s": 30.0,
+    "pod_host": "dai.google.com linear pods, session-specific path",
+    "cue_in_pdt": "2026-10-14T19:22:39.474715-07:00",
+    "cue_in_minus_cue_out_s": 30.0,
+    "content_segments_after_cue_in": 3,
+    "content_segment_duration_s": 10.0
+  },
+  "semantic_reading": "On this stitched session manifest, EXT-X-CUE-OUT:30 brackets segments Google served as an ad pod. The matching metadata calls the break type mid, duration 30, three ads. A separate metadata break is slate with duration 0 and expected duration 30. Playlist time was not compared with a played waveform.",
+  "mute_authorization": false
+}

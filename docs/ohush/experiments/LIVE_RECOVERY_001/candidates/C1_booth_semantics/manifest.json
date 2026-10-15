@@ -1,0 +1,12 @@
+{
+  "candidate_id": "C1_booth_semantics",
+  "parent_baseline": "defect_peak_from_audit_zip",
+  "experiment": "LIVE_RECOVERY_001",
+  "scientific_authority": false,
+  "code_root": "docs/ohush/experiments/LIVE_RECOVERY_001/candidates/C1_booth_semantics/code",
+  "state_sha256": "a25c0add4153308b21f7b7f9af1b9bf8389b5fb604df8c48aeff85f47d61a375",
+  "track_sha256": "f4850eccecfb8bbf734fefce0854fb3fe0677e6f339d9f6abe1672d4a02be442",
+  "label_version": "gold-manifest.json:PROVISIONAL",
+  "decision": "PASS",
+  "live_output_enabled": false
+}

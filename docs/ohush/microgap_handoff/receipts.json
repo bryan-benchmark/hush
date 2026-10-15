@@ -1,0 +1,89 @@
+{
+  "packet": "ohush_microgap_2026-10-14",
+  "git_head": "eedcb444c2546e06f6b3cea16dc2efb92b8d6506",
+  "working_tree": "dirty; this packet is not a commit",
+  "ffmpeg": null,
+  "excluded": {
+    "experiments/gold/HOLDOUT_V1.json": "sealed holdout manifest, not included",
+    "experiments/gold/DATASETS_V1.json": "names the sealed holdouts, not included",
+    "annotations truth ledger": "may contain holdout rows, not included",
+    "recordings": "audio stays on disk, not included"
+  },
+  "files": [
+    {
+      "path": "PROMPT_FOR_GPT.md",
+      "bytes": 2231,
+      "sha256": "7ac1ae1ca1c9955c0fc89dbf791e571f243232555a65d6f4c621fe584f46f8fd"
+    },
+    {
+      "path": "STATUS.md",
+      "bytes": 3441,
+      "sha256": "2ae7325ea6c3fda6194d7073e63fc53eedd5cc52c20044f97d5b2a8a8add27b7"
+    },
+    {
+      "path": "census/REPORT.md",
+      "bytes": 4682,
+      "sha256": "04cc1a7023a0f578d839c02bfb22ddbde286ada25be68007fbef6f6f91fb256a"
+    },
+    {
+      "path": "census/corroboration.json",
+      "bytes": 12475,
+      "sha256": "343d9e1a73eb1a061c7a02f23200e3f7339ebcd5de5c6022ec1f3d8f7e11cc3f"
+    },
+    {
+      "path": "census/results.json",
+      "bytes": 24897,
+      "sha256": "8a4c7ca57ab6062e68024fbce029eec5367d90b89d4234557ca0a39d2ddffd88"
+    },
+    {
+      "path": "code/corroborate.py",
+      "bytes": 6724,
+      "sha256": "a5e5a8c4801cd323f8264ab16b053d902211947eb0e73704cc63de8ebc1c98ea"
+    },
+    {
+      "path": "code/scan.py",
+      "bytes": 9240,
+      "sha256": "9d0590e0e2467768af7ed5972e6e04cab2a4dd0d62d249ac62ae1d9533b41b87"
+    },
+    {
+      "path": "code/test_microgap_census.py",
+      "bytes": 770,
+      "sha256": "398a86affef43336119617ec6b5d8968f9b0904bcd978c8a66797f8e304db746"
+    },
+    {
+      "path": "gold/GOLD_DATASET_20261013.json",
+      "bytes": 3304,
+      "sha256": "4944a8559e933593d74e20162d3bc695eff2c632370c004c042976ae9ab1b725"
+    },
+    {
+      "path": "gold/GOLD_DEV_V1.json",
+      "bytes": 732,
+      "sha256": "32edca84443477a151c31e8be671660a7b1dd18ef015ba3d5f9241f6d364ac6e"
+    },
+    {
+      "path": "gold/GOLD_REPLICATION_V1.json",
+      "bytes": 1092,
+      "sha256": "b36b6c1b7550696c7ddf3c5308901f00f289c1659eed1f3d4554db6c131ed3f0"
+    },
+    {
+      "path": "prior/EXP01_REPORT.md",
+      "bytes": 8266,
+      "sha256": "d9059e42c18be14d4b41c4334005df9de03cf67d62bd2468464af5b4c64ecfe9"
+    },
+    {
+      "path": "prior/EXP01_results.json",
+      "bytes": 24897,
+      "sha256": "36323d7cd76eb527819aea94fe43eaf6988a8f1fd4ae1ab63ab906652b1561df"
+    },
+    {
+      "path": "prior/FINGERPRINT_REPORT.md",
+      "bytes": 18965,
+      "sha256": "48ff9621799fbd8708ad578183b7929d28485a160521f3c791bb814f72d6c251"
+    },
+    {
+      "path": "unit_test.txt",
+      "bytes": 14,
+      "sha256": "39db2701be7d88b9edfced57ccf255a70956106e304c11a3289c857dcb415a9d"
+    }
+  ]
+}

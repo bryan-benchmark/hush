@@ -7,6 +7,7 @@ Does not write into experiments/.
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -16,8 +17,8 @@ REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "src"))
 
-from hush.program_cloud import MEMORY_S, MIN_REFERENCE_S, SR, WINDOW_S  # noqa: E402
-from ohush_live.policy import AUDIO_RETURN, AUDIO_STRONG  # noqa: E402
+from hush.program_cloud import MEMORY_S, SR, WINDOW_S  # noqa: E402
+from ohush_live.policy import AUDIO_MIN_REFERENCE_S, AUDIO_RETURN, AUDIO_STRONG  # noqa: E402
 
 CHECKPOINT = REPO / "experiments" / "exp003" / "models" / "Cnn14_mAP=0.431.pth"
 
@@ -40,7 +41,10 @@ def main() -> None:
             labels_csv,
         )
     nnpack.set_flags(False)
-    torch.set_num_threads(4)
+    # One thread — many daemons × 4 threads was jetsamming the MacBook.
+    torch.set_num_threads(1)
+    os.environ.setdefault("OMP_NUM_THREADS", "1")
+    os.environ.setdefault("MKL_NUM_THREADS", "1")
     torch.set_grad_enabled(False)
     tagger = AudioTagging(checkpoint_path=str(CHECKPOINT), device="cpu")
     window = int(WINDOW_S * SR)
@@ -98,7 +102,7 @@ def _latest(matrix: np.ndarray, ends: np.ndarray) -> float | None:
     if chosen.size == 0:
         return None
     span = float(ends[chosen[-1]] - ends[chosen[0]])
-    if span + 1e-9 < MIN_REFERENCE_S:
+    if span + 1e-9 < AUDIO_MIN_REFERENCE_S:
         return None
     centroid = matrix[chosen].mean(axis=0)
     norm = np.linalg.norm(centroid)

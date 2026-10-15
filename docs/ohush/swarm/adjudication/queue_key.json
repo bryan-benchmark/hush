@@ -1,0 +1,426 @@
+[
+  {
+    "id": "q001",
+    "session": "hush_20260909_213047",
+    "network": "NBC",
+    "reason": "dsp_miss_nbc",
+    "candidate_kind": "start",
+    "center_s": 623.347
+  },
+  {
+    "id": "q002",
+    "session": "hush_20260909_213047",
+    "network": "NBC",
+    "reason": "dsp_miss_nbc",
+    "candidate_kind": "start",
+    "center_s": 1000.416
+  },
+  {
+    "id": "q003",
+    "session": "hush_20260909_213047",
+    "network": "NBC",
+    "reason": "dsp_miss_nbc",
+    "candidate_kind": "start",
+    "center_s": 1074.332
+  },
+  {
+    "id": "q004",
+    "session": "hush_20260909_213047",
+    "network": "NBC",
+    "reason": "dsp_miss_nbc",
+    "candidate_kind": "start",
+    "center_s": 3104.995
+  },
+  {
+    "id": "q005",
+    "session": "hush_20260924_220624",
+    "network": "Prime",
+    "reason": "dsp_miss_prime",
+    "candidate_kind": "start",
+    "center_s": 1490.038
+  },
+  {
+    "id": "q006",
+    "session": "hush_20260924_220624",
+    "network": "Prime",
+    "reason": "dsp_miss_prime",
+    "candidate_kind": "start",
+    "center_s": 4337.154
+  },
+  {
+    "id": "q007",
+    "session": "hush_20261008_205100",
+    "network": "Prime Video",
+    "reason": "dsp_miss_prime_video",
+    "candidate_kind": "start",
+    "center_s": 139.874
+  },
+  {
+    "id": "q008",
+    "session": "hush_20261008_205100",
+    "network": "Prime Video",
+    "reason": "dsp_miss_prime_video",
+    "candidate_kind": "start",
+    "center_s": 2396.185
+  },
+  {
+    "id": "q009",
+    "session": "hush_20260914_212529",
+    "network": "ESPN",
+    "reason": "dsp_miss_espn",
+    "candidate_kind": "start",
+    "center_s": 166.64
+  },
+  {
+    "id": "q010",
+    "session": "hush_20260914_212529",
+    "network": "ESPN",
+    "reason": "dsp_miss_espn",
+    "candidate_kind": "start",
+    "center_s": 512.855
+  },
+  {
+    "id": "q011",
+    "session": "hush_20261010_222400",
+    "network": "Cable / antenna",
+    "reason": "dsp_miss_cable",
+    "candidate_kind": "start",
+    "center_s": 403.71
+  },
+  {
+    "id": "q012",
+    "session": "hush_20261010_222400",
+    "network": "Cable / antenna",
+    "reason": "dsp_miss_cable",
+    "candidate_kind": "start",
+    "center_s": 2369.207
+  },
+  {
+    "id": "q013",
+    "session": "hush_20261010_222400",
+    "network": "Cable / antenna",
+    "reason": "dsp_miss_cable",
+    "candidate_kind": "start",
+    "center_s": 3567.641
+  },
+  {
+    "id": "q014",
+    "session": "hush_20260909_213047",
+    "network": "NBC",
+    "reason": "dsp_hit_nbc",
+    "candidate_kind": "start",
+    "center_s": 1608.591
+  },
+  {
+    "id": "q015",
+    "session": "hush_20260909_213047",
+    "network": "NBC",
+    "reason": "dsp_hit_nbc",
+    "candidate_kind": "start",
+    "center_s": 2066.723
+  },
+  {
+    "id": "q016",
+    "session": "hush_20260909_213047",
+    "network": "NBC",
+    "reason": "dsp_hit_nbc",
+    "candidate_kind": "start",
+    "center_s": 2514.392
+  },
+  {
+    "id": "q017",
+    "session": "hush_20260924_220624",
+    "network": "Prime",
+    "reason": "dsp_hit_prime",
+    "candidate_kind": "start",
+    "center_s": 234.244
+  },
+  {
+    "id": "q018",
+    "session": "hush_20260924_220624",
+    "network": "Prime",
+    "reason": "dsp_hit_prime",
+    "candidate_kind": "start",
+    "center_s": 913.442
+  },
+  {
+    "id": "q019",
+    "session": "hush_20261008_205100",
+    "network": "Prime Video",
+    "reason": "dsp_hit_prime_video",
+    "candidate_kind": "start",
+    "center_s": 571.674
+  },
+  {
+    "id": "q020",
+    "session": "hush_20261008_205100",
+    "network": "Prime Video",
+    "reason": "dsp_hit_prime_video",
+    "candidate_kind": "start",
+    "center_s": 1003.282
+  },
+  {
+    "id": "q021",
+    "session": "hush_20260914_212529",
+    "network": "ESPN",
+    "reason": "dsp_hit_espn",
+    "candidate_kind": "start",
+    "center_s": 1538.857
+  },
+  {
+    "id": "q022",
+    "session": "hush_20260914_212529",
+    "network": "ESPN",
+    "reason": "dsp_hit_espn",
+    "candidate_kind": "start",
+    "center_s": 2072.112
+  },
+  {
+    "id": "q023",
+    "session": "hush_20261010_222400",
+    "network": "Cable / antenna",
+    "reason": "dsp_hit_cable",
+    "candidate_kind": "start",
+    "center_s": 38.382
+  },
+  {
+    "id": "q024",
+    "session": "hush_20261010_222400",
+    "network": "Cable / antenna",
+    "reason": "dsp_hit_cable",
+    "candidate_kind": "start",
+    "center_s": 1257.31
+  },
+  {
+    "id": "q025",
+    "session": "hush_20261010_222400",
+    "network": "Cable / antenna",
+    "reason": "dsp_hit_cable",
+    "candidate_kind": "start",
+    "center_s": 3009.899
+  },
+  {
+    "id": "q026",
+    "session": "hush_20260909_213047",
+    "network": "NBC",
+    "reason": "gold_end",
+    "candidate_kind": "end",
+    "center_s": 141.539
+  },
+  {
+    "id": "q027",
+    "session": "hush_20260909_213047",
+    "network": "NBC",
+    "reason": "gold_end",
+    "candidate_kind": "end",
+    "center_s": 806.324
+  },
+  {
+    "id": "q028",
+    "session": "hush_20260914_212529",
+    "network": "ESPN",
+    "reason": "gold_end",
+    "candidate_kind": "end",
+    "center_s": 305.767
+  },
+  {
+    "id": "q029",
+    "session": "hush_20260914_212529",
+    "network": "ESPN",
+    "reason": "gold_end",
+    "candidate_kind": "end",
+    "center_s": 634.732
+  },
+  {
+    "id": "q030",
+    "session": "hush_20260924_220624",
+    "network": "Prime",
+    "reason": "gold_end",
+    "candidate_kind": "end",
+    "center_s": 49.585
+  },
+  {
+    "id": "q031",
+    "session": "hush_20261008_205100",
+    "network": "Prime Video",
+    "reason": "gold_end",
+    "candidate_kind": "end",
+    "center_s": 376.9
+  },
+  {
+    "id": "q032",
+    "session": "hush_20261010_222400",
+    "network": "Cable / antenna",
+    "reason": "gold_end",
+    "candidate_kind": "end",
+    "center_s": 151.12
+  },
+  {
+    "id": "q033",
+    "session": "hush_20261010_222400",
+    "network": "Cable / antenna",
+    "reason": "gold_end",
+    "candidate_kind": "end",
+    "center_s": 462.524
+  },
+  {
+    "id": "q034",
+    "session": "hush_20260909_213047",
+    "network": "NBC",
+    "reason": "program_far",
+    "candidate_kind": "program",
+    "center_s": 240.0
+  },
+  {
+    "id": "q035",
+    "session": "hush_20260913_210542",
+    "network": "NBC",
+    "reason": "program_far",
+    "candidate_kind": "program",
+    "center_s": 240.0
+  },
+  {
+    "id": "q036",
+    "session": "hush_20261008_205100",
+    "network": "Prime Video",
+    "reason": "program_far",
+    "candidate_kind": "program",
+    "center_s": 440.0
+  },
+  {
+    "id": "q037",
+    "session": "hush_20261011_204300",
+    "network": "Cable / antenna",
+    "reason": "program_far",
+    "candidate_kind": "program",
+    "center_s": 200.0
+  },
+  {
+    "id": "q038",
+    "session": "hush_20261012_204200",
+    "network": "Cable / antenna",
+    "reason": "program_far",
+    "candidate_kind": "program",
+    "center_s": 400.0
+  },
+  {
+    "id": "q039",
+    "session": "hush_20261010_222400",
+    "network": "Cable / antenna",
+    "reason": "program_far",
+    "candidate_kind": "program",
+    "center_s": 240.0
+  },
+  {
+    "id": "q040",
+    "session": "hush_20261011_135700",
+    "network": "Cable / antenna",
+    "reason": "program_far",
+    "candidate_kind": "program",
+    "center_s": 360.0
+  },
+  {
+    "id": "q041",
+    "session": "hush_20260914_212529",
+    "network": "ESPN",
+    "reason": "program_far",
+    "candidate_kind": "program",
+    "center_s": 400.0
+  },
+  {
+    "id": "q042",
+    "session": "hush_20260924_220624",
+    "network": "Prime",
+    "reason": "program_far",
+    "candidate_kind": "program",
+    "center_s": 440.0
+  },
+  {
+    "id": "q043",
+    "session": "hush_20260913_150934",
+    "network": "FOX",
+    "reason": "redzone",
+    "candidate_kind": "redzone",
+    "center_s": 500.0
+  },
+  {
+    "id": "q044",
+    "session": "hush_20260913_150934",
+    "network": "FOX",
+    "reason": "redzone",
+    "candidate_kind": "redzone",
+    "center_s": 1600.0
+  },
+  {
+    "id": "q045",
+    "session": "hush_20260913_150934",
+    "network": "FOX",
+    "reason": "redzone",
+    "candidate_kind": "redzone",
+    "center_s": 2800.0
+  },
+  {
+    "id": "q046",
+    "session": "hush_20260913_150934",
+    "network": "FOX",
+    "reason": "redzone",
+    "candidate_kind": "redzone",
+    "center_s": 4200.0
+  },
+  {
+    "id": "q047",
+    "session": "hush_20260913_150934",
+    "network": "FOX",
+    "reason": "redzone",
+    "candidate_kind": "redzone",
+    "center_s": 5600.0
+  },
+  {
+    "id": "q048",
+    "session": "hush_20260909_213047",
+    "network": "NBC",
+    "reason": "pod_interior",
+    "candidate_kind": "interior",
+    "center_s": 46.07
+  },
+  {
+    "id": "q049",
+    "session": "hush_20260909_213047",
+    "network": "NBC",
+    "reason": "pod_interior",
+    "candidate_kind": "interior",
+    "center_s": 663.347
+  },
+  {
+    "id": "q050",
+    "session": "hush_20260909_213047",
+    "network": "NBC",
+    "reason": "pod_interior",
+    "candidate_kind": "interior",
+    "center_s": 1114.332
+  },
+  {
+    "id": "q051",
+    "session": "hush_20260909_213047",
+    "network": "NBC",
+    "reason": "pod_interior",
+    "candidate_kind": "interior",
+    "center_s": 1648.591
+  },
+  {
+    "id": "q052",
+    "session": "hush_20260909_213047",
+    "network": "NBC",
+    "reason": "pod_interior",
+    "candidate_kind": "interior",
+    "center_s": 2106.723
+  },
+  {
+    "id": "q053",
+    "session": "hush_20260909_213047",
+    "network": "NBC",
+    "reason": "pod_interior",
+    "candidate_kind": "interior",
+    "center_s": 2554.392
+  }
+]

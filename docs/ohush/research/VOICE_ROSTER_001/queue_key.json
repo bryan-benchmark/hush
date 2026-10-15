@@ -1,0 +1,465 @@
+[
+  {
+    "session": "hush_20260924_220624",
+    "cluster_id": "c0008",
+    "heard_seconds": 1283.8,
+    "play_start": 3173.7,
+    "ad_voice": false,
+    "ad_share": 0.001,
+    "ask": "Longest voice. On Thursday Night Football that should be Al Michaels.",
+    "id": "v001",
+    "rank": 1
+  },
+  {
+    "session": "hush_20260924_220624",
+    "cluster_id": "c0002",
+    "heard_seconds": 1155.5,
+    "play_start": 3255.5,
+    "ad_voice": false,
+    "ad_share": 0.008,
+    "ask": "Second voice. On Thursday Night Football that should be Kirk Herbstreit.",
+    "id": "v002",
+    "rank": 2
+  },
+  {
+    "session": "hush_20260924_220624",
+    "cluster_id": "c0024",
+    "heard_seconds": 0,
+    "play_start": 4460.0,
+    "ad_voice": false,
+    "ad_share": 0,
+    "ask": "This is the Thursday Night Football on Prime line. It is the show, not a person in the booth.",
+    "id": "v003",
+    "rank": 3
+  },
+  {
+    "session": "hush_20260913_210542",
+    "cluster_id": "c0015",
+    "heard_seconds": 2322.8,
+    "play_start": 4992.9,
+    "ad_voice": false,
+    "ad_share": 0.002,
+    "id": "v004",
+    "rank": 4
+  },
+  {
+    "session": "hush_20260914_212529",
+    "cluster_id": "c0001",
+    "heard_seconds": 2161.4,
+    "play_start": 3050.0,
+    "ad_voice": false,
+    "ad_share": 0.001,
+    "id": "v005",
+    "rank": 5
+  },
+  {
+    "session": "hush_20260913_210542",
+    "cluster_id": "c0013",
+    "heard_seconds": 2066.7,
+    "play_start": 4663.9,
+    "ad_voice": false,
+    "ad_share": 0.0,
+    "id": "v006",
+    "rank": 6
+  },
+  {
+    "session": "hush_20260913_150934",
+    "cluster_id": "c0001",
+    "heard_seconds": 1954.6,
+    "play_start": 3435.6,
+    "ad_voice": false,
+    "ad_share": 0.0,
+    "id": "v007",
+    "rank": 7
+  },
+  {
+    "session": "hush_20260909_213047",
+    "cluster_id": "c0001",
+    "heard_seconds": 1886.2,
+    "play_start": 3361.8,
+    "ad_voice": false,
+    "ad_share": 0.014,
+    "id": "v008",
+    "rank": 8
+  },
+  {
+    "session": "hush_20260909_213047",
+    "cluster_id": "c0014",
+    "heard_seconds": 1212.0,
+    "play_start": 4346.1,
+    "ad_voice": false,
+    "ad_share": 0.0,
+    "id": "v009",
+    "rank": 9
+  },
+  {
+    "session": "hush_20260914_212529",
+    "cluster_id": "c0049",
+    "heard_seconds": 834.8,
+    "play_start": 5635.4,
+    "ad_voice": false,
+    "ad_share": 0.0,
+    "id": "v010",
+    "rank": 10
+  },
+  {
+    "session": "hush_20260924_220624",
+    "cluster_id": "c0126",
+    "heard_seconds": 512.3,
+    "play_start": 5600.5,
+    "ad_voice": false,
+    "ad_share": 0.0,
+    "id": "v011",
+    "rank": 11
+  },
+  {
+    "session": "hush_20260913_150934",
+    "cluster_id": "c0010",
+    "heard_seconds": 464.3,
+    "play_start": 4096.4,
+    "ad_voice": false,
+    "ad_share": 0.0,
+    "id": "v012",
+    "rank": 12
+  },
+  {
+    "session": "hush_20260924_220624",
+    "cluster_id": "c0007",
+    "heard_seconds": 445.6,
+    "play_start": 6392.1,
+    "ad_voice": false,
+    "ad_share": 0.008,
+    "id": "v013",
+    "rank": 13
+  },
+  {
+    "session": "hush_20260913_210542",
+    "cluster_id": "c0178",
+    "heard_seconds": 373.9,
+    "play_start": 11462.4,
+    "ad_voice": false,
+    "ad_share": 0.0,
+    "id": "v014",
+    "rank": 14
+  },
+  {
+    "session": "hush_20260924_220624",
+    "cluster_id": "c0125",
+    "heard_seconds": 361.4,
+    "play_start": 6508.0,
+    "ad_voice": false,
+    "ad_share": 0.006,
+    "id": "v015",
+    "rank": 15
+  },
+  {
+    "session": "hush_20260913_210542",
+    "cluster_id": "c0076",
+    "heard_seconds": 329.0,
+    "play_start": 8891.4,
+    "ad_voice": false,
+    "ad_share": 0.0,
+    "id": "v016",
+    "rank": 16
+  },
+  {
+    "session": "hush_20260909_213047",
+    "cluster_id": "c0020",
+    "heard_seconds": 319.2,
+    "play_start": 7211.6,
+    "ad_voice": false,
+    "ad_share": 0.01,
+    "id": "v017",
+    "rank": 17
+  },
+  {
+    "session": "hush_20260913_150934",
+    "cluster_id": "c0006",
+    "heard_seconds": 285.7,
+    "play_start": 2214.7,
+    "ad_voice": false,
+    "ad_share": 0.0,
+    "id": "v018",
+    "rank": 18
+  },
+  {
+    "session": "hush_20260913_150934",
+    "cluster_id": "c0034",
+    "heard_seconds": 269.2,
+    "play_start": 4762.4,
+    "ad_voice": false,
+    "ad_share": 0.0,
+    "id": "v019",
+    "rank": 19
+  },
+  {
+    "session": "hush_20260924_220624",
+    "cluster_id": "c0127",
+    "heard_seconds": 242.1,
+    "play_start": 5111.3,
+    "ad_voice": false,
+    "ad_share": 0.0,
+    "id": "v020",
+    "rank": 20
+  },
+  {
+    "session": "hush_20260913_210542",
+    "cluster_id": "c0061",
+    "heard_seconds": 241.3,
+    "play_start": 3538.9,
+    "ad_voice": false,
+    "ad_share": 0.144,
+    "id": "v021",
+    "rank": 21
+  },
+  {
+    "session": "hush_20260913_150934",
+    "cluster_id": "c0008",
+    "heard_seconds": 231.1,
+    "play_start": 2591.0,
+    "ad_voice": false,
+    "ad_share": 0.0,
+    "id": "v022",
+    "rank": 22
+  },
+  {
+    "session": "hush_20260913_150934",
+    "cluster_id": "c0005",
+    "heard_seconds": 204.1,
+    "play_start": 2330.0,
+    "ad_voice": false,
+    "ad_share": 0.0,
+    "id": "v023",
+    "rank": 23
+  },
+  {
+    "session": "hush_20260914_212529",
+    "cluster_id": "c0002",
+    "heard_seconds": 195.3,
+    "play_start": 4471.2,
+    "ad_voice": false,
+    "ad_share": 0.0,
+    "id": "v024",
+    "rank": 24
+  },
+  {
+    "session": "hush_20260909_213047",
+    "cluster_id": "c0037",
+    "heard_seconds": 190.6,
+    "play_start": 8959.6,
+    "ad_voice": false,
+    "ad_share": 0.096,
+    "id": "v025",
+    "rank": 25
+  },
+  {
+    "session": "hush_20260909_213047",
+    "cluster_id": "c0017",
+    "heard_seconds": 185.3,
+    "play_start": 7268.4,
+    "ad_voice": false,
+    "ad_share": 0.019,
+    "id": "v026",
+    "rank": 26
+  },
+  {
+    "session": "hush_20260913_210542",
+    "cluster_id": "c0006",
+    "heard_seconds": 141.1,
+    "play_start": 6844.1,
+    "ad_voice": true,
+    "ad_share": 0.869,
+    "id": "v027",
+    "rank": 27
+  },
+  {
+    "session": "hush_20260909_213047",
+    "cluster_id": "c0002",
+    "heard_seconds": 121.8,
+    "play_start": 1230.0,
+    "ad_voice": true,
+    "ad_share": 0.76,
+    "id": "v028",
+    "rank": 28
+  },
+  {
+    "session": "hush_20260913_210542",
+    "cluster_id": "c0046",
+    "heard_seconds": 109.4,
+    "play_start": 3658.8,
+    "ad_voice": true,
+    "ad_share": 0.833,
+    "id": "v029",
+    "rank": 29
+  },
+  {
+    "session": "hush_20260913_210542",
+    "cluster_id": "c0049",
+    "heard_seconds": 105.3,
+    "play_start": 5552.8,
+    "ad_voice": true,
+    "ad_share": 0.625,
+    "id": "v030",
+    "rank": 30
+  },
+  {
+    "session": "hush_20260914_212529",
+    "cluster_id": "c0012",
+    "heard_seconds": 81.6,
+    "play_start": 1572.7,
+    "ad_voice": true,
+    "ad_share": 0.954,
+    "id": "v031",
+    "rank": 31
+  },
+  {
+    "session": "hush_20260924_220624",
+    "cluster_id": "c0024",
+    "heard_seconds": 81.0,
+    "play_start": 3625.6,
+    "ad_voice": true,
+    "ad_share": 0.935,
+    "id": "v032",
+    "rank": 32
+  },
+  {
+    "session": "hush_20260909_213047",
+    "cluster_id": "c0120",
+    "heard_seconds": 78.6,
+    "play_start": 7136.4,
+    "ad_voice": true,
+    "ad_share": 0.983,
+    "id": "v033",
+    "rank": 33
+  },
+  {
+    "session": "hush_20260913_210542",
+    "cluster_id": "c0002",
+    "heard_seconds": 76.6,
+    "play_start": 6349.3,
+    "ad_voice": true,
+    "ad_share": 0.787,
+    "id": "v034",
+    "rank": 34
+  },
+  {
+    "session": "hush_20260913_210542",
+    "cluster_id": "c0012",
+    "heard_seconds": 76.6,
+    "play_start": 8402.8,
+    "ad_voice": true,
+    "ad_share": 0.728,
+    "id": "v035",
+    "rank": 35
+  },
+  {
+    "session": "hush_20260914_212529",
+    "cluster_id": "c0015",
+    "heard_seconds": 75.4,
+    "play_start": 4327.1,
+    "ad_voice": true,
+    "ad_share": 0.969,
+    "id": "v036",
+    "rank": 36
+  },
+  {
+    "session": "hush_20260913_210542",
+    "cluster_id": "c0009",
+    "heard_seconds": 72.2,
+    "play_start": 11809.2,
+    "ad_voice": true,
+    "ad_share": 0.507,
+    "id": "v037",
+    "rank": 37
+  },
+  {
+    "session": "hush_20260909_213047",
+    "cluster_id": "c0073",
+    "heard_seconds": 71.6,
+    "play_start": 5507.6,
+    "ad_voice": true,
+    "ad_share": 1.0,
+    "id": "v038",
+    "rank": 38
+  },
+  {
+    "session": "hush_20260924_220624",
+    "cluster_id": "c0032",
+    "heard_seconds": 71.6,
+    "play_start": 971.9,
+    "ad_voice": true,
+    "ad_share": 1.0,
+    "id": "v039",
+    "rank": 39
+  },
+  {
+    "session": "hush_20260913_210542",
+    "cluster_id": "c0089",
+    "heard_seconds": 71.0,
+    "play_start": 3199.9,
+    "ad_voice": true,
+    "ad_share": 0.942,
+    "id": "v040",
+    "rank": 40
+  },
+  {
+    "session": "hush_20260909_213047",
+    "cluster_id": "c0119",
+    "heard_seconds": 68.5,
+    "play_start": 8554.8,
+    "ad_voice": true,
+    "ad_share": 0.94,
+    "id": "v041",
+    "rank": 41
+  },
+  {
+    "session": "hush_20260914_212529",
+    "cluster_id": "c0009",
+    "heard_seconds": 67.0,
+    "play_start": 3244.0,
+    "ad_voice": true,
+    "ad_share": 1.0,
+    "id": "v042",
+    "rank": 42
+  },
+  {
+    "session": "hush_20260914_212529",
+    "cluster_id": "c0011",
+    "heard_seconds": 66.1,
+    "play_start": 1291.7,
+    "ad_voice": true,
+    "ad_share": 1.0,
+    "id": "v043",
+    "rank": 43
+  },
+  {
+    "session": "hush_20260913_210542",
+    "cluster_id": "c0027",
+    "heard_seconds": 66.0,
+    "play_start": 2222.0,
+    "ad_voice": true,
+    "ad_share": 0.809,
+    "id": "v044",
+    "rank": 44
+  },
+  {
+    "session": "hush_20260914_212529",
+    "cluster_id": "c0042",
+    "heard_seconds": 65.3,
+    "play_start": 4306.7,
+    "ad_voice": true,
+    "ad_share": 1.0,
+    "id": "v045",
+    "rank": 45
+  },
+  {
+    "session": "hush_20260924_220624",
+    "cluster_id": "c0021",
+    "heard_seconds": 62.8,
+    "play_start": 6063.0,
+    "ad_voice": true,
+    "ad_share": 1.0,
+    "id": "v046",
+    "rank": 46
+  }
+]

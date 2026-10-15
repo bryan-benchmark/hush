@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import wave
+from datetime import datetime
 from pathlib import Path
 
 
@@ -22,6 +23,7 @@ class ChunkWriter:
         self.number = start_number
         self.frames = 0
         self.path: Path | None = None
+        self.opened_at: dict[str, datetime] = {}
         self._wav: wave.Wave_write | None = None
         folder.mkdir(parents=True, exist_ok=True)
         self._open_next()
@@ -64,6 +66,7 @@ class ChunkWriter:
         self.number += 1
         self.frames = 0
         self.path = self.folder / f"audio_{self.number:04d}.wav"
+        self.opened_at[self.path.name] = datetime.now().astimezone()
         handle = wave.open(str(self.path), "wb")
         handle.setnchannels(self.channels)
         handle.setsampwidth(2)

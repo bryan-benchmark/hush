@@ -1,0 +1,672 @@
+{
+  "clock": {
+    "all_target_commercials": {
+      "n": 166,
+      "median_s": 123.944,
+      "p10_s": 49.604,
+      "p90_s": 174.442,
+      "within_7_5s_of_120": 31,
+      "within_7_5s_of_135": 40,
+      "within_7_5s_of_either": 71
+    },
+    "football_only": {
+      "n": 136,
+      "median_s": 132.794,
+      "p10_s": 48.715,
+      "p90_s": 181.941,
+      "within_7_5s_of_120": 31,
+      "within_7_5s_of_135": 40,
+      "within_7_5s_of_either": 71
+    },
+    "by_network_football": {
+      "Cable / antenna": {
+        "n": 44,
+        "median_s": 129.151,
+        "p10_s": 53.53,
+        "p90_s": 190.539,
+        "within_7_5s_of_120": 9,
+        "within_7_5s_of_135": 14,
+        "within_7_5s_of_either": 23
+      },
+      "ESPN": {
+        "n": 15,
+        "median_s": 125.973,
+        "p10_s": 55.69,
+        "p90_s": 138.558,
+        "within_7_5s_of_120": 4,
+        "within_7_5s_of_135": 6,
+        "within_7_5s_of_either": 10
+      },
+      "NBC": {
+        "n": 41,
+        "median_s": 136.375,
+        "p10_s": 54.48,
+        "p90_s": 187.151,
+        "within_7_5s_of_120": 4,
+        "within_7_5s_of_135": 17,
+        "within_7_5s_of_either": 21
+      },
+      "Prime": {
+        "n": 13,
+        "median_s": 122.298,
+        "p10_s": 91.778,
+        "p90_s": 162.188,
+        "within_7_5s_of_120": 5,
+        "within_7_5s_of_135": 1,
+        "within_7_5s_of_either": 6
+      },
+      "Prime Video": {
+        "n": 23,
+        "median_s": 121.578,
+        "p10_s": 34.795,
+        "p90_s": 152.853,
+        "within_7_5s_of_120": 9,
+        "within_7_5s_of_135": 2,
+        "within_7_5s_of_either": 11
+      }
+    },
+    "hypothetical_timer_football_only": {
+      "fixed_120": {
+        "n": 136,
+        "early_ad_seconds_if_unmuted_then": 3138.8,
+        "late_program_seconds_if_still_muted": 1810.4,
+        "median_abs_error_s": 17.545
+      },
+      "fixed_135": {
+        "n": 136,
+        "early_ad_seconds_if_unmuted_then": 1967.5,
+        "late_program_seconds_if_still_muted": 2679.1,
+        "median_abs_error_s": 14.604
+      },
+      "within_game_running_median": {
+        "n_predicted": 131,
+        "early_ad_seconds_if_unmuted_then": 2387.1,
+        "late_program_seconds_if_still_muted": 2391.5,
+        "median_abs_error_s": 16.192
+      }
+    },
+    "note": "A timer error assumes the mute is already on. It is not a start detector and it is not an authorized unmute rule."
+  },
+  "forensics": {
+    "format": "Every closed session used here is 48 kHz stereo PCM. Commercials are not a different sample rate or codec inside this capture.",
+    "causal_rule": "Compare the 1 s after the boundary with the 2 s before it. Available 1 s after the boundary. Splice ratio 3 was not fit.",
+    "n_start_windows": 164,
+    "n_program_windows": 480,
+    "splice_starts": 0,
+    "splice_program_controls": 0,
+    "leave_one_recording_features": {
+      "delta_rms_db": {
+        "starts_exceeding_other_recordings_program_p95": 71,
+        "starts_tested": 164,
+        "program_windows_exceeding_same_bar": 24,
+        "program_windows_tested": 440,
+        "program_false_fraction": 0.0545
+      },
+      "delta_crest": {
+        "starts_exceeding_other_recordings_program_p95": 40,
+        "starts_tested": 164,
+        "program_windows_exceeding_same_bar": 24,
+        "program_windows_tested": 440,
+        "program_false_fraction": 0.0545
+      },
+      "delta_centroid": {
+        "starts_exceeding_other_recordings_program_p95": 62,
+        "starts_tested": 164,
+        "program_windows_exceeding_same_bar": 19,
+        "program_windows_tested": 440,
+        "program_false_fraction": 0.0432
+      },
+      "delta_flatness": {
+        "starts_exceeding_other_recordings_program_p95": 74,
+        "starts_tested": 164,
+        "program_windows_exceeding_same_bar": 22,
+        "program_windows_tested": 440,
+        "program_false_fraction": 0.05
+      },
+      "delta_stereo_corr": {
+        "starts_exceeding_other_recordings_program_p95": 44,
+        "starts_tested": 164,
+        "program_windows_exceeding_same_bar": 20,
+        "program_windows_tested": 440,
+        "program_false_fraction": 0.0455
+      },
+      "delta_side_ratio": {
+        "starts_exceeding_other_recordings_program_p95": 31,
+        "starts_tested": 164,
+        "program_windows_exceeding_same_bar": 21,
+        "program_windows_tested": 440,
+        "program_false_fraction": 0.0477
+      },
+      "delta_high_ratio": {
+        "starts_exceeding_other_recordings_program_p95": 31,
+        "starts_tested": 164,
+        "program_windows_exceeding_same_bar": 23,
+        "program_windows_tested": 440,
+        "program_false_fraction": 0.0523
+      },
+      "overlap": {
+        "flatness": 74,
+        "rms": 71,
+        "centroid": 62,
+        "flatness_and_rms": 54,
+        "flatness_only": 12,
+        "rms_only": 15,
+        "centroid_only": 12,
+        "any_of_three": 103
+      },
+      "flux_ratio_starts": {
+        "n": 164,
+        "p50": 0.972,
+        "p90": 1.293
+      },
+      "flux_ratio_program": {
+        "n": 473,
+        "p50": 0.883,
+        "p90": 1.043
+      }
+    },
+    "redzone_program_windows": {
+      "delta_rms_db": {
+        "false_hits": 1,
+        "tested": 40,
+        "other_recordings_program_p95": 9.79367
+      },
+      "delta_crest": {
+        "false_hits": 2,
+        "tested": 40,
+        "other_recordings_program_p95": 6.020887
+      },
+      "delta_centroid": {
+        "false_hits": 5,
+        "tested": 40,
+        "other_recordings_program_p95": 1652.848264
+      },
+      "delta_flatness": {
+        "false_hits": 4,
+        "tested": 40,
+        "other_recordings_program_p95": 0.077202
+      },
+      "delta_stereo_corr": {
+        "false_hits": 4,
+        "tested": 40,
+        "other_recordings_program_p95": 0.361816
+      },
+      "delta_side_ratio": {
+        "false_hits": 5,
+        "tested": 40,
+        "other_recordings_program_p95": 0.31406
+      },
+      "delta_high_ratio": {
+        "false_hits": 2,
+        "tested": 40,
+        "other_recordings_program_p95": 0.241279
+      }
+    },
+    "sept9_nbc_vs_published_cnn14": {
+      "note": "Joined to AUDIO_SIGNAL_REPLICATION_001/nbc_breaks.csv by start time. CNN causal hit is the published first exceedance during the break, including hits under 10 s that still contain pre-break audio. This join does not retune either detector.",
+      "starts_joined": 20,
+      "dsp_any_of_three": 12,
+      "cnn_causal_hit_recorded": 11,
+      "both": 5,
+      "dsp_only": 7,
+      "cnn_only": 6,
+      "neither": 2,
+      "breaks": [
+        {
+          "start_s": 6.07,
+          "dsp_flatness": false,
+          "dsp_rms": false,
+          "dsp_centroid": true,
+          "dsp_any_of_three": true,
+          "cnn_failure": "signal_unavailable",
+          "cnn_median_rises": false,
+          "cnn_causal_hit_s": null
+        },
+        {
+          "start_s": 623.347,
+          "dsp_flatness": false,
+          "dsp_rms": false,
+          "dsp_centroid": false,
+          "dsp_any_of_three": false,
+          "cnn_failure": "causal_hit_within_30s",
+          "cnn_median_rises": true,
+          "cnn_causal_hit_s": 20.653
+        },
+        {
+          "start_s": 1000.416,
+          "dsp_flatness": false,
+          "dsp_rms": false,
+          "dsp_centroid": true,
+          "dsp_any_of_three": true,
+          "cnn_failure": "rises_without_causal_hit_during_the_break",
+          "cnn_median_rises": true,
+          "cnn_causal_hit_s": null
+        },
+        {
+          "start_s": 1074.332,
+          "dsp_flatness": true,
+          "dsp_rms": false,
+          "dsp_centroid": false,
+          "dsp_any_of_three": true,
+          "cnn_failure": "rises_without_causal_hit_during_the_break",
+          "cnn_median_rises": true,
+          "cnn_causal_hit_s": null
+        },
+        {
+          "start_s": 1608.591,
+          "dsp_flatness": false,
+          "dsp_rms": true,
+          "dsp_centroid": false,
+          "dsp_any_of_three": true,
+          "cnn_failure": "causal_hit_window_still_contains_prebreak_audio",
+          "cnn_median_rises": true,
+          "cnn_causal_hit_s": 3.409
+        },
+        {
+          "start_s": 2066.723,
+          "dsp_flatness": false,
+          "dsp_rms": false,
+          "dsp_centroid": true,
+          "dsp_any_of_three": true,
+          "cnn_failure": "rises_without_causal_hit_during_the_break",
+          "cnn_median_rises": true,
+          "cnn_causal_hit_s": null
+        },
+        {
+          "start_s": 2514.392,
+          "dsp_flatness": false,
+          "dsp_rms": false,
+          "dsp_centroid": false,
+          "dsp_any_of_three": false,
+          "cnn_failure": "rises_without_causal_hit_during_the_break",
+          "cnn_median_rises": true,
+          "cnn_causal_hit_s": null
+        },
+        {
+          "start_s": 2894.999,
+          "dsp_flatness": false,
+          "dsp_rms": false,
+          "dsp_centroid": false,
+          "dsp_any_of_three": false,
+          "cnn_failure": "causal_hit_window_still_contains_prebreak_audio",
+          "cnn_median_rises": true,
+          "cnn_causal_hit_s": 8.001
+        },
+        {
+          "start_s": 3104.995,
+          "dsp_flatness": false,
+          "dsp_rms": false,
+          "dsp_centroid": false,
+          "dsp_any_of_three": false,
+          "cnn_failure": "median_does_not_rise",
+          "cnn_median_rises": false,
+          "cnn_causal_hit_s": null
+        },
+        {
+          "start_s": 3445.405,
+          "dsp_flatness": false,
+          "dsp_rms": false,
+          "dsp_centroid": false,
+          "dsp_any_of_three": false,
+          "cnn_failure": "causal_hit_within_30s",
+          "cnn_median_rises": true,
+          "cnn_causal_hit_s": 12.595
+        },
+        {
+          "start_s": 3942.562,
+          "dsp_flatness": true,
+          "dsp_rms": true,
+          "dsp_centroid": true,
+          "dsp_any_of_three": true,
+          "cnn_failure": "rises_without_causal_hit_during_the_break",
+          "cnn_median_rises": true,
+          "cnn_causal_hit_s": null
+        },
+        {
+          "start_s": 4474.953,
+          "dsp_flatness": false,
+          "dsp_rms": true,
+          "dsp_centroid": false,
+          "dsp_any_of_three": true,
+          "cnn_failure": "rises_without_causal_hit_during_the_break",
+          "cnn_median_rises": true,
+          "cnn_causal_hit_s": null
+        },
+        {
+          "start_s": 5428.523,
+          "dsp_flatness": false,
+          "dsp_rms": false,
+          "dsp_centroid": true,
+          "dsp_any_of_three": true,
+          "cnn_failure": "causal_hit_window_still_contains_prebreak_audio",
+          "cnn_median_rises": true,
+          "cnn_causal_hit_s": 0.477
+        },
+        {
+          "start_s": 6074.159,
+          "dsp_flatness": false,
+          "dsp_rms": true,
+          "dsp_centroid": true,
+          "dsp_any_of_three": true,
+          "cnn_failure": "causal_hit_window_still_contains_prebreak_audio",
+          "cnn_median_rises": true,
+          "cnn_causal_hit_s": 4.841
+        },
+        {
+          "start_s": 6356.97,
+          "dsp_flatness": true,
+          "dsp_rms": true,
+          "dsp_centroid": true,
+          "dsp_any_of_three": true,
+          "cnn_failure": "causal_hit_within_30s",
+          "cnn_median_rises": true,
+          "cnn_causal_hit_s": 16.03
+        },
+        {
+          "start_s": 7000.981,
+          "dsp_flatness": false,
+          "dsp_rms": false,
+          "dsp_centroid": false,
+          "dsp_any_of_three": false,
+          "cnn_failure": "causal_hit_within_30s",
+          "cnn_median_rises": true,
+          "cnn_causal_hit_s": 24.019
+        },
+        {
+          "start_s": 7641.664,
+          "dsp_flatness": false,
+          "dsp_rms": false,
+          "dsp_centroid": false,
+          "dsp_any_of_three": false,
+          "cnn_failure": "causal_hit_window_still_contains_prebreak_audio",
+          "cnn_median_rises": true,
+          "cnn_causal_hit_s": 6.336
+        },
+        {
+          "start_s": 8020.205,
+          "dsp_flatness": true,
+          "dsp_rms": true,
+          "dsp_centroid": false,
+          "dsp_any_of_three": true,
+          "cnn_failure": "causal_hit_after_30s",
+          "cnn_median_rises": true,
+          "cnn_causal_hit_s": 39.795
+        },
+        {
+          "start_s": 8413.747,
+          "dsp_flatness": true,
+          "dsp_rms": true,
+          "dsp_centroid": true,
+          "dsp_any_of_three": true,
+          "cnn_failure": "rises_without_causal_hit_during_the_break",
+          "cnn_median_rises": true,
+          "cnn_causal_hit_s": null
+        },
+        {
+          "start_s": 9200.578,
+          "dsp_flatness": false,
+          "dsp_rms": false,
+          "dsp_centroid": false,
+          "dsp_any_of_three": false,
+          "cnn_failure": "causal_hit_after_30s",
+          "cnn_median_rises": true,
+          "cnn_causal_hit_s": 39.422
+        }
+      ]
+    }
+  },
+  "music": {
+    "signature": "24 log-frequency bands, 80 Hz to 8 kHz, 2 s immediately before the boundary",
+    "near_copy_cosine": 0.9,
+    "average_spectrum_before_starts": {
+      "NBC": {
+        "boundaries": 41,
+        "recordings": 2,
+        "within_recording_motifs_of_at_least_3": 1,
+        "largest_motif": 41,
+        "median_cosine_among_boundaries": 0.9797,
+        "median_cosine_to_same_recording_program": 0.9492,
+        "leave_one_recording_matches": 41,
+        "leave_one_recording_tested": 41,
+        "leave_one_recording_program_false_matches": 72,
+        "leave_one_recording_program_windows": 80
+      },
+      "ESPN": {
+        "boundaries": 15,
+        "recordings": 1,
+        "within_recording_motifs_of_at_least_3": 1,
+        "largest_motif": 15,
+        "median_cosine_among_boundaries": 0.9868,
+        "median_cosine_to_same_recording_program": 0.94,
+        "leave_one_recording_matches": 0,
+        "leave_one_recording_tested": 0,
+        "leave_one_recording_program_false_matches": 0,
+        "leave_one_recording_program_windows": 0
+      },
+      "Prime": {
+        "boundaries": 12,
+        "recordings": 1,
+        "within_recording_motifs_of_at_least_3": 1,
+        "largest_motif": 12,
+        "median_cosine_among_boundaries": 0.9742,
+        "median_cosine_to_same_recording_program": 0.901,
+        "leave_one_recording_matches": 0,
+        "leave_one_recording_tested": 0,
+        "leave_one_recording_program_false_matches": 0,
+        "leave_one_recording_program_windows": 0
+      },
+      "Prime Video": {
+        "boundaries": 23,
+        "recordings": 1,
+        "within_recording_motifs_of_at_least_3": 1,
+        "largest_motif": 23,
+        "median_cosine_among_boundaries": 0.9766,
+        "median_cosine_to_same_recording_program": 0.9451,
+        "leave_one_recording_matches": 0,
+        "leave_one_recording_tested": 0,
+        "leave_one_recording_program_false_matches": 0,
+        "leave_one_recording_program_windows": 0
+      },
+      "Cable / antenna": {
+        "boundaries": 44,
+        "recordings": 4,
+        "within_recording_motifs_of_at_least_3": 1,
+        "largest_motif": 44,
+        "median_cosine_among_boundaries": 0.9802,
+        "median_cosine_to_same_recording_program": 0.9474,
+        "leave_one_recording_matches": 44,
+        "leave_one_recording_tested": 44,
+        "leave_one_recording_program_false_matches": 135,
+        "leave_one_recording_program_windows": 160
+      }
+    },
+    "average_spectrum_before_ends": {
+      "NBC": {
+        "boundaries": 41,
+        "recordings": 2,
+        "within_recording_motifs_of_at_least_3": 1,
+        "largest_motif": 40,
+        "median_cosine_among_boundaries": 0.9641,
+        "median_cosine_to_same_recording_program": 0.9406,
+        "leave_one_recording_matches": 38,
+        "leave_one_recording_tested": 41,
+        "leave_one_recording_program_false_matches": 71,
+        "leave_one_recording_program_windows": 80
+      },
+      "ESPN": {
+        "boundaries": 14,
+        "recordings": 1,
+        "within_recording_motifs_of_at_least_3": 1,
+        "largest_motif": 14,
+        "median_cosine_among_boundaries": 0.9289,
+        "median_cosine_to_same_recording_program": 0.9336,
+        "leave_one_recording_matches": 0,
+        "leave_one_recording_tested": 0,
+        "leave_one_recording_program_false_matches": 0,
+        "leave_one_recording_program_windows": 0
+      },
+      "Prime": {
+        "boundaries": 12,
+        "recordings": 1,
+        "within_recording_motifs_of_at_least_3": 1,
+        "largest_motif": 12,
+        "median_cosine_among_boundaries": 0.9396,
+        "median_cosine_to_same_recording_program": 0.9169,
+        "leave_one_recording_matches": 0,
+        "leave_one_recording_tested": 0,
+        "leave_one_recording_program_false_matches": 0,
+        "leave_one_recording_program_windows": 0
+      },
+      "Prime Video": {
+        "boundaries": 21,
+        "recordings": 1,
+        "within_recording_motifs_of_at_least_3": 1,
+        "largest_motif": 20,
+        "median_cosine_among_boundaries": 0.9374,
+        "median_cosine_to_same_recording_program": 0.9519,
+        "leave_one_recording_matches": 0,
+        "leave_one_recording_tested": 0,
+        "leave_one_recording_program_false_matches": 0,
+        "leave_one_recording_program_windows": 0
+      },
+      "Cable / antenna": {
+        "boundaries": 43,
+        "recordings": 4,
+        "within_recording_motifs_of_at_least_3": 1,
+        "largest_motif": 43,
+        "median_cosine_among_boundaries": 0.9665,
+        "median_cosine_to_same_recording_program": 0.9492,
+        "leave_one_recording_matches": 42,
+        "leave_one_recording_tested": 43,
+        "leave_one_recording_program_false_matches": 141,
+        "leave_one_recording_program_windows": 160
+      }
+    },
+    "chroma_sequence_before_starts": {
+      "NBC": {
+        "boundaries": 41,
+        "recordings": 2,
+        "within_recording_motifs_of_at_least_3": 1,
+        "largest_motif": 40,
+        "median_cosine_among_boundaries": 0.9222,
+        "median_cosine_to_same_recording_program": 0.9315,
+        "leave_one_recording_matches": 39,
+        "leave_one_recording_tested": 41,
+        "leave_one_recording_program_false_matches": 79,
+        "leave_one_recording_program_windows": 80
+      },
+      "ESPN": {
+        "boundaries": 15,
+        "recordings": 1,
+        "within_recording_motifs_of_at_least_3": 1,
+        "largest_motif": 13,
+        "median_cosine_among_boundaries": 0.8889,
+        "median_cosine_to_same_recording_program": 0.911,
+        "leave_one_recording_matches": 0,
+        "leave_one_recording_tested": 0,
+        "leave_one_recording_program_false_matches": 0,
+        "leave_one_recording_program_windows": 0
+      },
+      "Prime": {
+        "boundaries": 12,
+        "recordings": 1,
+        "within_recording_motifs_of_at_least_3": 1,
+        "largest_motif": 11,
+        "median_cosine_among_boundaries": 0.9009,
+        "median_cosine_to_same_recording_program": 0.8975,
+        "leave_one_recording_matches": 0,
+        "leave_one_recording_tested": 0,
+        "leave_one_recording_program_false_matches": 0,
+        "leave_one_recording_program_windows": 0
+      },
+      "Prime Video": {
+        "boundaries": 23,
+        "recordings": 1,
+        "within_recording_motifs_of_at_least_3": 1,
+        "largest_motif": 23,
+        "median_cosine_among_boundaries": 0.9326,
+        "median_cosine_to_same_recording_program": 0.9198,
+        "leave_one_recording_matches": 0,
+        "leave_one_recording_tested": 0,
+        "leave_one_recording_program_false_matches": 0,
+        "leave_one_recording_program_windows": 0
+      },
+      "Cable / antenna": {
+        "boundaries": 44,
+        "recordings": 4,
+        "within_recording_motifs_of_at_least_3": 1,
+        "largest_motif": 42,
+        "median_cosine_among_boundaries": 0.9212,
+        "median_cosine_to_same_recording_program": 0.9251,
+        "leave_one_recording_matches": 40,
+        "leave_one_recording_tested": 44,
+        "leave_one_recording_program_false_matches": 139,
+        "leave_one_recording_program_windows": 160
+      }
+    },
+    "chroma_sequence_before_ends": {
+      "NBC": {
+        "boundaries": 41,
+        "recordings": 2,
+        "within_recording_motifs_of_at_least_3": 1,
+        "largest_motif": 40,
+        "median_cosine_among_boundaries": 0.9367,
+        "median_cosine_to_same_recording_program": 0.9338,
+        "leave_one_recording_matches": 40,
+        "leave_one_recording_tested": 41,
+        "leave_one_recording_program_false_matches": 78,
+        "leave_one_recording_program_windows": 80
+      },
+      "ESPN": {
+        "boundaries": 14,
+        "recordings": 1,
+        "within_recording_motifs_of_at_least_3": 1,
+        "largest_motif": 14,
+        "median_cosine_among_boundaries": 0.9308,
+        "median_cosine_to_same_recording_program": 0.928,
+        "leave_one_recording_matches": 0,
+        "leave_one_recording_tested": 0,
+        "leave_one_recording_program_false_matches": 0,
+        "leave_one_recording_program_windows": 0
+      },
+      "Prime": {
+        "boundaries": 12,
+        "recordings": 1,
+        "within_recording_motifs_of_at_least_3": 1,
+        "largest_motif": 11,
+        "median_cosine_among_boundaries": 0.9257,
+        "median_cosine_to_same_recording_program": 0.9172,
+        "leave_one_recording_matches": 0,
+        "leave_one_recording_tested": 0,
+        "leave_one_recording_program_false_matches": 0,
+        "leave_one_recording_program_windows": 0
+      },
+      "Prime Video": {
+        "boundaries": 21,
+        "recordings": 1,
+        "within_recording_motifs_of_at_least_3": 1,
+        "largest_motif": 15,
+        "median_cosine_among_boundaries": 0.8801,
+        "median_cosine_to_same_recording_program": 0.8962,
+        "leave_one_recording_matches": 0,
+        "leave_one_recording_tested": 0,
+        "leave_one_recording_program_false_matches": 0,
+        "leave_one_recording_program_windows": 0
+      },
+      "Cable / antenna": {
+        "boundaries": 43,
+        "recordings": 4,
+        "within_recording_motifs_of_at_least_3": 1,
+        "largest_motif": 40,
+        "median_cosine_among_boundaries": 0.9177,
+        "median_cosine_to_same_recording_program": 0.918,
+        "leave_one_recording_matches": 39,
+        "leave_one_recording_tested": 43,
+        "leave_one_recording_program_false_matches": 138,
+        "leave_one_recording_program_windows": 160
+      }
+    },
+    "placement": "These windows are placed with the closed boundary. A match in the 2 s before the start is audio that has already played by the labeled IN. It is not proof of a detector that runs without that label."
+  },
+  "n_commercials": 166
+}

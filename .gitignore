@@ -25,6 +25,8 @@ apps/monitor/.git/
 # Local live runtime
 ohush_live/cache/
 ohush_live/beds/src/
+ohush_live/vibes/src/
+ohush_live/vibes/processed/
 ohush_live/sessions/
 ohush_live/sessions/**
 

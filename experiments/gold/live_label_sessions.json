@@ -1,0 +1,88 @@
+{
+  "id": "LIVE_LABEL_SESSIONS",
+  "note": "Symlinked sittings for the labeler. Audio remains in ohush_live/sessions. Not interval gold.",
+  "sittings": [
+    {
+      "session": "hush_20261008_205100",
+      "title": "Thu Oct 8 \u00b7 Prime \u00b7 Bucs at Cowboys",
+      "day": "2026-10-08",
+      "show": "Bucs at Cowboys",
+      "service": "Prime Video",
+      "started_at": "2026-10-08T20:51:41.351374-04:00",
+      "audio_seconds": 10440.364,
+      "chunks": 33,
+      "gaps": [
+        {
+          "after_elapsed_s": 295.936,
+          "wall_gap_s": 3070.8,
+          "resumes": "2026-10-08T21:47:48.041628-04:00"
+        },
+        {
+          "after_elapsed_s": 299.904,
+          "wall_gap_s": 136.9,
+          "resumes": "2026-10-08T21:50:08.916517-04:00"
+        },
+        {
+          "after_elapsed_s": 307.243,
+          "wall_gap_s": 187.4,
+          "resumes": "2026-10-08T21:53:23.643605-04:00"
+        }
+      ],
+      "source_folder": "ohush_live/sessions/2026-10-08-tnf"
+    },
+    {
+      "session": "hush_20261010_222400",
+      "title": "Sat Oct 10 \u00b7 cable \u00b7 Browns at Jets",
+      "day": "2026-10-10",
+      "show": "Browns at Jets",
+      "service": "Cable / antenna",
+      "started_at": "2026-10-10T22:24:26.526060-04:00",
+      "audio_seconds": 6064.768,
+      "chunks": 8,
+      "gaps": [],
+      "source_folder": "ohush_live/sessions/2026-10-10-tnf"
+    },
+    {
+      "session": "hush_20261011_135700",
+      "title": "Sun Oct 11 afternoon \u00b7 cable",
+      "day": "2026-10-11",
+      "show": "Sunday afternoon football",
+      "service": "Cable / antenna",
+      "started_at": "2026-10-11T13:57:21.283219-04:00",
+      "audio_seconds": 4896.768,
+      "chunks": 6,
+      "gaps": [],
+      "source_folder": "ohush_live/sessions/2026-10-10-tnf"
+    },
+    {
+      "session": "hush_20261011_204300",
+      "title": "Sun Oct 11 night",
+      "day": "2026-10-11",
+      "show": "Sunday night",
+      "service": "Cable / antenna",
+      "started_at": "2026-10-11T20:43:56.080601-04:00",
+      "audio_seconds": 14405.376,
+      "chunks": 17,
+      "gaps": [
+        {
+          "after_elapsed_s": 123.563,
+          "wall_gap_s": 1388.1,
+          "resumes": "2026-10-11T21:09:07.782887-04:00"
+        }
+      ],
+      "source_folder": "ohush_live/sessions/2026-10-11-tnf"
+    },
+    {
+      "session": "hush_20261012_204200",
+      "title": "Mon Oct 12 \u00b7 Monday Night Football",
+      "day": "2026-10-12",
+      "show": "Monday Night Football",
+      "service": "Cable / antenna",
+      "started_at": "2026-10-12T20:42:16.014022-04:00",
+      "audio_seconds": 13111.808,
+      "chunks": 15,
+      "gaps": [],
+      "source_folder": "ohush_live/sessions/2026-10-11-tnf"
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "alignment": "unverified duration candidate",
+  "source_wav": "ohush_live/sessions/2026-10-08-tnf/audio_0044.wav",
+  "track": "frozen run29",
+  "do_not_treat_as_identity_proof": true,
+  "excerpts": [
+    {
+      "file": "docs/ohush/research/booth_excerpts/run29_c0001.wav",
+      "source": "ohush_live/sessions/2026-10-08-tnf/audio_0044.wav",
+      "start_s": 23.021,
+      "duration_s": 10.0,
+      "sha256": "213965b469441efe9ad8041d63cbfc151e21fea69df7fb5a8ce3b6cb1632de84",
+      "track_run": "run29",
+      "track_t": 24.021,
+      "why": "highest similarity for c0001 inside run29",
+      "alignment": "duration candidate only: audio_0044.wav is 0.13s from run29 t_end. Not a sample-locked join."
+    },
+    {
+      "file": "docs/ohush/research/booth_excerpts/run29_c0002.wav",
+      "source": "ohush_live/sessions/2026-10-08-tnf/audio_0044.wav",
+      "start_s": 761.027,
+      "duration_s": 10.0,
+      "sha256": "2e82344179fe535028f1bc91cb1ce24ac6e205a7cd4c69b41ce882a77be3aceb",
+      "track_run": "run29",
+      "track_t": 762.027,
+      "why": "highest similarity for c0002 inside run29",
+      "alignment": "duration candidate only: audio_0044.wav is 0.13s from run29 t_end. Not a sample-locked join."
+    },
+    {
+      "file": "docs/ohush/research/booth_excerpts/run29_c0015.wav",
+      "source": "ohush_live/sessions/2026-10-08-tnf/audio_0044.wav",
+      "start_s": 276.035,
+      "duration_s": 10.0,
+      "sha256": "e2ef4a55b56f92956118def6014b3439f23faf8a2a255494a9ab4b2b18ccc331",
+      "track_run": "run29",
+      "track_t": 277.035,
+      "why": "similarity 1.0 for c0015 inside run29; id is in frozen .booth.json and not in that row's booth_ids",
+      "alignment": "duration candidate only: audio_0044.wav is 0.13s from run29 t_end. Not a sample-locked join."
+    },
+    {
+      "file": "docs/ohush/research/booth_excerpts/run29_c0017.wav",
+      "source": "ohush_live/sessions/2026-10-08-tnf/audio_0044.wav",
+      "start_s": 374.04,
+      "duration_s": 10.0,
+      "sha256": "fbd8fb5ddb323c851930a1d5411126dcbe5fc8beb6ec328068364015289e4300",
+      "track_run": "run29",
+      "track_t": 375.04,
+      "why": "only c0017 speech row in run29",
+      "alignment": "duration candidate only: audio_0044.wav is 0.13s from run29 t_end. Not a sample-locked join."
+    },
+    {
+      "file": "docs/ohush/research/booth_excerpts/run29_c0013_t221.wav",
+      "source": "ohush_live/sessions/2026-10-08-tnf/audio_0044.wav",
+      "start_s": 220.013,
+      "duration_s": 10.0,
+      "sha256": "45d0169aedfc90bc75e41c8f31707abd363561c5328160d04b4c55a9641a33ab",
+      "track_run": "run29",
+      "track_t": 221.013,
+      "why": "suspicious uncover: booth_present true, similarity 0.148, cluster not in booth_ids",
+      "alignment": "duration candidate only: audio_0044.wav is 0.13s from run29 t_end. Not a sample-locked join."
+    },
+    {
+      "file": "docs/ohush/research/booth_excerpts/run29_c0016_t285.wav",
+      "source": "ohush_live/sessions/2026-10-08-tnf/audio_0044.wav",
+      "start_s": 284.013,
+      "duration_s": 10.0,
+      "sha256": "7295428065022a9ca99ecf05fd660e30bf4f0bfc31d1c66f4eae1c2bccf1b4d9",
+      "track_run": "run29",
+      "track_t": 285.013,
+      "why": "high similarity 0.87 on cluster c0016, which is not a trusted id",
+      "alignment": "duration candidate only: audio_0044.wav is 0.13s from run29 t_end. Not a sample-locked join."
+    },
+    {
+      "file": "docs/ohush/research/booth_excerpts/run29_c0010_t621.wav",
+      "source": "ohush_live/sessions/2026-10-08-tnf/audio_0044.wav",
+      "start_s": 620.013,
+      "duration_s": 10.0,
+      "sha256": "3d10ff07ca917d60797d42accab02f942ac303c4fcf6a85decb6a59e7e390e9e",
+      "track_run": "run29",
+      "track_t": 621.013,
+      "why": "similarity 0.705 during the one-second human-cover flap",
+      "alignment": "duration candidate only: audio_0044.wav is 0.13s from run29 t_end. Not a sample-locked join."
+    }
+  ]
+}

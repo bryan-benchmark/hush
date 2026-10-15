@@ -1,0 +1,458 @@
+{
+  "system": "microgap_corroboration_001",
+  "ffmpeg_binary": null,
+  "ffmpeg_note": "ffmpeg was not on PATH. This is a separate 30 ms RMS run at -80 dBFS, the coarse setting named in the handoff. It is not an ffmpeg log and not a selected threshold.",
+  "mute_policy": false,
+  "october_used": false,
+  "holdouts_opened": false,
+  "formats": [
+    {
+      "session": "hush_20260827_135935",
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "chunks_overlapping_closed_coverage": 8,
+      "chunks_in_session": 15,
+      "format_ok": true,
+      "mismatches": [],
+      "chunks": [
+        {
+          "file": "audio_0001.wav",
+          "start_s": 0.0,
+          "end_s": 900.0,
+          "samplerate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "frames": 43200000,
+          "expected_frames_from_session_json": 43200000,
+          "frame_delta": 0
+        },
+        {
+          "file": "audio_0002.wav",
+          "start_s": 900.0,
+          "end_s": 1800.0,
+          "samplerate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "frames": 43200000,
+          "expected_frames_from_session_json": 43200000,
+          "frame_delta": 0
+        },
+        {
+          "file": "audio_0003.wav",
+          "start_s": 1800.0,
+          "end_s": 2700.0,
+          "samplerate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "frames": 43200000,
+          "expected_frames_from_session_json": 43200000,
+          "frame_delta": 0
+        },
+        {
+          "file": "audio_0004.wav",
+          "start_s": 2700.0,
+          "end_s": 3600.0,
+          "samplerate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "frames": 43200000,
+          "expected_frames_from_session_json": 43200000,
+          "frame_delta": 0
+        },
+        {
+          "file": "audio_0005.wav",
+          "start_s": 3600.0,
+          "end_s": 4500.0,
+          "samplerate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "frames": 43200000,
+          "expected_frames_from_session_json": 43200000,
+          "frame_delta": 0
+        },
+        {
+          "file": "audio_0006.wav",
+          "start_s": 4500.0,
+          "end_s": 5400.0,
+          "samplerate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "frames": 43200000,
+          "expected_frames_from_session_json": 43200000,
+          "frame_delta": 0
+        },
+        {
+          "file": "audio_0007.wav",
+          "start_s": 5400.0,
+          "end_s": 6300.0,
+          "samplerate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "frames": 43200000,
+          "expected_frames_from_session_json": 43200000,
+          "frame_delta": 0
+        },
+        {
+          "file": "audio_0008.wav",
+          "start_s": 6300.0,
+          "end_s": 7200.0,
+          "samplerate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "frames": 43200000,
+          "expected_frames_from_session_json": 43200000,
+          "frame_delta": 0
+        }
+      ]
+    },
+    {
+      "session": "hush_20260914_212529",
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "chunks_overlapping_closed_coverage": 8,
+      "chunks_in_session": 11,
+      "format_ok": true,
+      "mismatches": [],
+      "chunks": [
+        {
+          "file": "audio_0001.wav",
+          "start_s": 0.0,
+          "end_s": 900.0,
+          "samplerate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "frames": 43200000,
+          "expected_frames_from_session_json": 43200000,
+          "frame_delta": 0
+        },
+        {
+          "file": "audio_0002.wav",
+          "start_s": 900.0,
+          "end_s": 1800.0,
+          "samplerate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "frames": 43200000,
+          "expected_frames_from_session_json": 43200000,
+          "frame_delta": 0
+        },
+        {
+          "file": "audio_0003.wav",
+          "start_s": 1800.0,
+          "end_s": 2700.0,
+          "samplerate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "frames": 43200000,
+          "expected_frames_from_session_json": 43200000,
+          "frame_delta": 0
+        },
+        {
+          "file": "audio_0004.wav",
+          "start_s": 2700.0,
+          "end_s": 3600.0,
+          "samplerate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "frames": 43200000,
+          "expected_frames_from_session_json": 43200000,
+          "frame_delta": 0
+        },
+        {
+          "file": "audio_0005.wav",
+          "start_s": 3600.0,
+          "end_s": 4500.0,
+          "samplerate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "frames": 43200000,
+          "expected_frames_from_session_json": 43200000,
+          "frame_delta": 0
+        },
+        {
+          "file": "audio_0006.wav",
+          "start_s": 4500.0,
+          "end_s": 5400.0,
+          "samplerate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "frames": 43200000,
+          "expected_frames_from_session_json": 43200000,
+          "frame_delta": 0
+        },
+        {
+          "file": "audio_0007.wav",
+          "start_s": 5400.0,
+          "end_s": 6300.0,
+          "samplerate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "frames": 43200000,
+          "expected_frames_from_session_json": 43200000,
+          "frame_delta": 0
+        },
+        {
+          "file": "audio_0008.wav",
+          "start_s": 6300.0,
+          "end_s": 7200.0,
+          "samplerate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "frames": 43200000,
+          "expected_frames_from_session_json": 43200000,
+          "frame_delta": 0
+        }
+      ]
+    },
+    {
+      "session": "hush_20260924_220624",
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "chunks_overlapping_closed_coverage": 9,
+      "chunks_in_session": 9,
+      "format_ok": false,
+      "mismatches": [
+        {
+          "file": "audio_0009.wav",
+          "start_s": 7200.0,
+          "end_s": 7919.893,
+          "samplerate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "frames": 34554880,
+          "expected_frames_from_session_json": 34554864,
+          "frame_delta": 16
+        }
+      ],
+      "chunks": [
+        {
+          "file": "audio_0001.wav",
+          "start_s": 0.0,
+          "end_s": 900.0,
+          "samplerate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "frames": 43200000,
+          "expected_frames_from_session_json": 43200000,
+          "frame_delta": 0
+        },
+        {
+          "file": "audio_0002.wav",
+          "start_s": 900.0,
+          "end_s": 1800.0,
+          "samplerate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "frames": 43200000,
+          "expected_frames_from_session_json": 43200000,
+          "frame_delta": 0
+        },
+        {
+          "file": "audio_0003.wav",
+          "start_s": 1800.0,
+          "end_s": 2700.0,
+          "samplerate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "frames": 43200000,
+          "expected_frames_from_session_json": 43200000,
+          "frame_delta": 0
+        },
+        {
+          "file": "audio_0004.wav",
+          "start_s": 2700.0,
+          "end_s": 3600.0,
+          "samplerate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "frames": 43200000,
+          "expected_frames_from_session_json": 43200000,
+          "frame_delta": 0
+        },
+        {
+          "file": "audio_0005.wav",
+          "start_s": 3600.0,
+          "end_s": 4500.0,
+          "samplerate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "frames": 43200000,
+          "expected_frames_from_session_json": 43200000,
+          "frame_delta": 0
+        },
+        {
+          "file": "audio_0006.wav",
+          "start_s": 4500.0,
+          "end_s": 5400.0,
+          "samplerate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "frames": 43200000,
+          "expected_frames_from_session_json": 43200000,
+          "frame_delta": 0
+        },
+        {
+          "file": "audio_0007.wav",
+          "start_s": 5400.0,
+          "end_s": 6300.0,
+          "samplerate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "frames": 43200000,
+          "expected_frames_from_session_json": 43200000,
+          "frame_delta": 0
+        },
+        {
+          "file": "audio_0008.wav",
+          "start_s": 6300.0,
+          "end_s": 7200.0,
+          "samplerate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "frames": 43200000,
+          "expected_frames_from_session_json": 43200000,
+          "frame_delta": 0
+        },
+        {
+          "file": "audio_0009.wav",
+          "start_s": 7200.0,
+          "end_s": 7919.893,
+          "samplerate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "frames": 34554880,
+          "expected_frames_from_session_json": 34554864,
+          "frame_delta": 16
+        }
+      ]
+    }
+  ],
+  "silence": [
+    {
+      "session": "hush_20260827_135935",
+      "threshold_db": -80.0,
+      "window_s": 0.03,
+      "minimum_duration_s": 0.03,
+      "events": 57,
+      "program_events_per_hour": 1.79,
+      "within_break_per_hour": 146.36,
+      "starts": 11,
+      "recall": {
+        "0.25": {
+          "starts_descriptive": 10,
+          "starts_causal": 1,
+          "ends_descriptive": 9,
+          "ends_causal": 0
+        },
+        "0.5": {
+          "starts_descriptive": 10,
+          "starts_causal": 2,
+          "ends_descriptive": 10,
+          "ends_causal": 1
+        },
+        "1.0": {
+          "starts_descriptive": 10,
+          "starts_causal": 5,
+          "ends_descriptive": 11,
+          "ends_causal": 3
+        },
+        "2.0": {
+          "starts_descriptive": 11,
+          "starts_causal": 5,
+          "ends_descriptive": 11,
+          "ends_causal": 8
+        },
+        "5.0": {
+          "starts_descriptive": 11,
+          "starts_causal": 8,
+          "ends_descriptive": 11,
+          "ends_causal": 8
+        }
+      }
+    },
+    {
+      "session": "hush_20260914_212529",
+      "threshold_db": -80.0,
+      "window_s": 0.03,
+      "minimum_duration_s": 0.03,
+      "events": 129,
+      "program_events_per_hour": 51.58,
+      "within_break_per_hour": 93.79,
+      "starts": 15,
+      "recall": {
+        "0.25": {
+          "starts_descriptive": 2,
+          "starts_causal": 0,
+          "ends_descriptive": 3,
+          "ends_causal": 0
+        },
+        "0.5": {
+          "starts_descriptive": 2,
+          "starts_causal": 0,
+          "ends_descriptive": 5,
+          "ends_causal": 1
+        },
+        "1.0": {
+          "starts_descriptive": 2,
+          "starts_causal": 1,
+          "ends_descriptive": 8,
+          "ends_causal": 2
+        },
+        "2.0": {
+          "starts_descriptive": 3,
+          "starts_causal": 2,
+          "ends_descriptive": 9,
+          "ends_causal": 4
+        },
+        "5.0": {
+          "starts_descriptive": 4,
+          "starts_causal": 3,
+          "ends_descriptive": 10,
+          "ends_causal": 5
+        }
+      }
+    },
+    {
+      "session": "hush_20260924_220624",
+      "threshold_db": -80.0,
+      "window_s": 0.03,
+      "minimum_duration_s": 0.03,
+      "events": 71,
+      "program_events_per_hour": 3.64,
+      "within_break_per_hour": 93.01,
+      "starts": 13,
+      "recall": {
+        "0.25": {
+          "starts_descriptive": 9,
+          "starts_causal": 0,
+          "ends_descriptive": 10,
+          "ends_causal": 1
+        },
+        "0.5": {
+          "starts_descriptive": 11,
+          "starts_causal": 1,
+          "ends_descriptive": 10,
+          "ends_causal": 2
+        },
+        "1.0": {
+          "starts_descriptive": 11,
+          "starts_causal": 4,
+          "ends_descriptive": 10,
+          "ends_causal": 3
+        },
+        "2.0": {
+          "starts_descriptive": 11,
+          "starts_causal": 9,
+          "ends_descriptive": 11,
+          "ends_causal": 9
+        },
+        "5.0": {
+          "starts_descriptive": 12,
+          "starts_causal": 10,
+          "ends_descriptive": 11,
+          "ends_causal": 9
+        }
+      }
+    }
+  ]
+}

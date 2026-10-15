@@ -1,0 +1,613 @@
+{
+  "purpose": "identity probes only. not commercial boundaries.",
+  "clip_seconds": 18.0,
+  "clips": [
+    {
+      "id": "netflix-01",
+      "file": "clips/netflix-01.wav",
+      "session": "hush_20260910_205330",
+      "start_seconds": 1191.0,
+      "clock": "19:51",
+      "wall": "Thu 9:13 pm",
+      "group": "netflix",
+      "ask": "Is this still the 49ers game?",
+      "note": "Early in the Netflix capture.",
+      "choices": [
+        {
+          "id": "game",
+          "label": "Still the 49ers game"
+        },
+        {
+          "id": "other",
+          "label": "A different show"
+        },
+        {
+          "id": "unsure",
+          "label": "Can't tell"
+        }
+      ]
+    },
+    {
+      "id": "netflix-02",
+      "file": "clips/netflix-02.wav",
+      "session": "hush_20260910_205330",
+      "start_seconds": 5391.0,
+      "clock": "1:29:51",
+      "wall": "Thu 10:23 pm",
+      "group": "netflix",
+      "ask": "Is this still the 49ers game?",
+      "note": "Around 90 minutes, last time this was heard as football.",
+      "choices": [
+        {
+          "id": "game",
+          "label": "Still the 49ers game"
+        },
+        {
+          "id": "other",
+          "label": "A different show"
+        },
+        {
+          "id": "unsure",
+          "label": "Can't tell"
+        }
+      ]
+    },
+    {
+      "id": "netflix-03",
+      "file": "clips/netflix-03.wav",
+      "session": "hush_20260910_205330",
+      "start_seconds": 8091.0,
+      "clock": "2:14:51",
+      "wall": "Thu 11:08 pm",
+      "group": "netflix",
+      "ask": "Is this still the 49ers game?",
+      "note": "Looking for the handoff out of the game.",
+      "choices": [
+        {
+          "id": "game",
+          "label": "Still the 49ers game"
+        },
+        {
+          "id": "other",
+          "label": "A different show"
+        },
+        {
+          "id": "unsure",
+          "label": "Can't tell"
+        }
+      ]
+    },
+    {
+      "id": "netflix-04",
+      "file": "clips/netflix-04.wav",
+      "session": "hush_20260910_205330",
+      "start_seconds": 10791.0,
+      "clock": "2:59:51",
+      "wall": "Thu 11:53 pm",
+      "group": "netflix",
+      "ask": "Is this still the 49ers game?",
+      "note": "Looking for the handoff out of the game.",
+      "choices": [
+        {
+          "id": "game",
+          "label": "Still the 49ers game"
+        },
+        {
+          "id": "other",
+          "label": "A different show"
+        },
+        {
+          "id": "unsure",
+          "label": "Can't tell"
+        }
+      ]
+    },
+    {
+      "id": "netflix-05",
+      "file": "clips/netflix-05.wav",
+      "session": "hush_20260910_205330",
+      "start_seconds": 13491.0,
+      "clock": "3:44:51",
+      "wall": "Fri 12:38 am",
+      "group": "netflix",
+      "ask": "Is this still the 49ers game?",
+      "note": "Looking for the handoff out of the game.",
+      "choices": [
+        {
+          "id": "game",
+          "label": "Still the 49ers game"
+        },
+        {
+          "id": "other",
+          "label": "A different show"
+        },
+        {
+          "id": "unsure",
+          "label": "Can't tell"
+        }
+      ]
+    },
+    {
+      "id": "netflix-06",
+      "file": "clips/netflix-06.wav",
+      "session": "hush_20260910_205330",
+      "start_seconds": 16191.0,
+      "clock": "4:29:51",
+      "wall": "Fri 1:23 am",
+      "group": "netflix",
+      "ask": "Is this still the 49ers game?",
+      "note": "Looking for the handoff out of the game.",
+      "choices": [
+        {
+          "id": "game",
+          "label": "Still the 49ers game"
+        },
+        {
+          "id": "other",
+          "label": "A different show"
+        },
+        {
+          "id": "unsure",
+          "label": "Can't tell"
+        }
+      ]
+    },
+    {
+      "id": "netflix-07",
+      "file": "clips/netflix-07.wav",
+      "session": "hush_20260910_205330",
+      "start_seconds": 21591.0,
+      "clock": "5:59:51",
+      "wall": "Fri 2:53 am",
+      "group": "netflix",
+      "ask": "Is this still the 49ers game?",
+      "note": "Well after a normal game length.",
+      "choices": [
+        {
+          "id": "game",
+          "label": "Still the 49ers game"
+        },
+        {
+          "id": "other",
+          "label": "A different show"
+        },
+        {
+          "id": "unsure",
+          "label": "Can't tell"
+        }
+      ]
+    },
+    {
+      "id": "netflix-08",
+      "file": "clips/netflix-08.wav",
+      "session": "hush_20260910_205330",
+      "start_seconds": 29691.0,
+      "clock": "8:14:51",
+      "wall": "Fri 5:08 am",
+      "group": "netflix",
+      "ask": "Is this still the 49ers game?",
+      "note": "Late in the 9-hour file.",
+      "choices": [
+        {
+          "id": "game",
+          "label": "Still the 49ers game"
+        },
+        {
+          "id": "other",
+          "label": "A different show"
+        },
+        {
+          "id": "unsure",
+          "label": "Can't tell"
+        }
+      ]
+    },
+    {
+      "id": "oct11-09",
+      "file": "clips/oct11-09.wav",
+      "session": "2026-10-11-tnf",
+      "start_seconds": 291.0,
+      "clock": "4:51",
+      "wall": "Sun 9:11 pm",
+      "group": "oct11",
+      "ask": "What is playing?",
+      "note": "Sunday night. This folder is labeled MNF.",
+      "choices": [
+        {
+          "id": "football",
+          "label": "Football"
+        },
+        {
+          "id": "other",
+          "label": "Not football"
+        },
+        {
+          "id": "unsure",
+          "label": "Can't tell"
+        }
+      ]
+    },
+    {
+      "id": "oct11-10",
+      "file": "clips/oct11-10.wav",
+      "session": "2026-10-11-tnf",
+      "start_seconds": 7191.0,
+      "clock": "1:59:51",
+      "wall": "Sun 11:06 pm",
+      "group": "oct11",
+      "ask": "What is playing?",
+      "note": "Sunday night, two hours later.",
+      "choices": [
+        {
+          "id": "same",
+          "label": "Same game as the last clip"
+        },
+        {
+          "id": "different_game",
+          "label": "Football, a different game"
+        },
+        {
+          "id": "other",
+          "label": "Not football"
+        },
+        {
+          "id": "unsure",
+          "label": "Can't tell"
+        }
+      ]
+    },
+    {
+      "id": "oct11-11",
+      "file": "clips/oct11-11.wav",
+      "session": "2026-10-11-tnf",
+      "start_seconds": 13491.0,
+      "clock": "3:44:51",
+      "wall": "Mon 12:51 am",
+      "group": "oct11",
+      "ask": "What is playing?",
+      "note": "End of the Sunday-night block, about 1am.",
+      "choices": [
+        {
+          "id": "same",
+          "label": "Same game as the last clip"
+        },
+        {
+          "id": "different_game",
+          "label": "Football, a different game"
+        },
+        {
+          "id": "other",
+          "label": "Not football"
+        },
+        {
+          "id": "unsure",
+          "label": "Can't tell"
+        }
+      ]
+    },
+    {
+      "id": "oct11-12",
+      "file": "clips/oct11-12.wav",
+      "session": "2026-10-11-tnf",
+      "start_seconds": 14751.0,
+      "clock": "4:05:51",
+      "wall": "Mon 8:48 pm",
+      "group": "oct11",
+      "ask": "What is playing?",
+      "note": "Monday night. Same folder, after a 19-hour gap.",
+      "choices": [
+        {
+          "id": "same",
+          "label": "Same game as the last clip"
+        },
+        {
+          "id": "different_game",
+          "label": "Football, a different game"
+        },
+        {
+          "id": "other",
+          "label": "Not football"
+        },
+        {
+          "id": "unsure",
+          "label": "Can't tell"
+        }
+      ]
+    },
+    {
+      "id": "oct11-13",
+      "file": "clips/oct11-13.wav",
+      "session": "2026-10-11-tnf",
+      "start_seconds": 19791.0,
+      "clock": "5:29:51",
+      "wall": "Mon 10:12 pm",
+      "group": "oct11",
+      "ask": "What is playing?",
+      "note": "Monday night, middle of that block.",
+      "choices": [
+        {
+          "id": "same",
+          "label": "Same game as the last clip"
+        },
+        {
+          "id": "different_game",
+          "label": "Football, a different game"
+        },
+        {
+          "id": "other",
+          "label": "Not football"
+        },
+        {
+          "id": "unsure",
+          "label": "Can't tell"
+        }
+      ]
+    },
+    {
+      "id": "oct11-14",
+      "file": "clips/oct11-14.wav",
+      "session": "2026-10-11-tnf",
+      "start_seconds": 25911.0,
+      "clock": "7:11:51",
+      "wall": "Mon 11:54 pm",
+      "group": "oct11",
+      "ask": "What is playing?",
+      "note": "Monday night, near the end.",
+      "choices": [
+        {
+          "id": "same",
+          "label": "Same game as the last clip"
+        },
+        {
+          "id": "different_game",
+          "label": "Football, a different game"
+        },
+        {
+          "id": "other",
+          "label": "Not football"
+        },
+        {
+          "id": "unsure",
+          "label": "Can't tell"
+        }
+      ]
+    },
+    {
+      "id": "oct10-15",
+      "file": "clips/oct10-15.wav",
+      "session": "2026-10-10-tnf",
+      "start_seconds": 291.0,
+      "clock": "4:51",
+      "wall": "Sat 10:29 pm",
+      "group": "oct10",
+      "ask": "What is playing?",
+      "note": "Saturday night. This folder is labeled Browns at Jets.",
+      "choices": [
+        {
+          "id": "football",
+          "label": "Football"
+        },
+        {
+          "id": "other",
+          "label": "Not football"
+        },
+        {
+          "id": "unsure",
+          "label": "Can't tell"
+        }
+      ]
+    },
+    {
+      "id": "oct10-16",
+      "file": "clips/oct10-16.wav",
+      "session": "2026-10-10-tnf",
+      "start_seconds": 5331.0,
+      "clock": "1:28:51",
+      "wall": "Sat 11:53 pm",
+      "group": "oct10",
+      "ask": "What is playing?",
+      "note": "Saturday night, near the end of that block.",
+      "choices": [
+        {
+          "id": "same",
+          "label": "Same game as the last clip"
+        },
+        {
+          "id": "different_game",
+          "label": "Football, a different game"
+        },
+        {
+          "id": "other",
+          "label": "Not football"
+        },
+        {
+          "id": "unsure",
+          "label": "Can't tell"
+        }
+      ]
+    },
+    {
+      "id": "oct10-17",
+      "file": "clips/oct10-17.wav",
+      "session": "2026-10-10-tnf",
+      "start_seconds": 7551.0,
+      "clock": "2:05:51",
+      "wall": "Sun 2:22 pm",
+      "group": "oct10",
+      "ask": "What is playing?",
+      "note": "Sunday afternoon. Same folder, after a 14-hour gap.",
+      "choices": [
+        {
+          "id": "same",
+          "label": "Same game as the last clip"
+        },
+        {
+          "id": "different_game",
+          "label": "Football, a different game"
+        },
+        {
+          "id": "other",
+          "label": "Not football"
+        },
+        {
+          "id": "unsure",
+          "label": "Can't tell"
+        }
+      ]
+    },
+    {
+      "id": "oct10-18",
+      "file": "clips/oct10-18.wav",
+      "session": "2026-10-10-tnf",
+      "start_seconds": 10461.0,
+      "clock": "2:54:21",
+      "wall": "Sun 3:10 pm",
+      "group": "oct10",
+      "ask": "What is playing?",
+      "note": "Sunday afternoon, near the end of that block.",
+      "choices": [
+        {
+          "id": "same",
+          "label": "Same game as the last clip"
+        },
+        {
+          "id": "different_game",
+          "label": "Football, a different game"
+        },
+        {
+          "id": "other",
+          "label": "Not football"
+        },
+        {
+          "id": "unsure",
+          "label": "Can't tell"
+        }
+      ]
+    },
+    {
+      "id": "cable-19",
+      "file": "clips/cable-19.wav",
+      "session": "hush_20260827_214906",
+      "start_seconds": 291.0,
+      "clock": "4:51",
+      "wall": "Thu 9:53 pm",
+      "group": "cable",
+      "ask": "Is this the missing cable show?",
+      "note": "Aug 27, about 10 minutes, scripted. No show or channel named yet.",
+      "choices": [
+        {
+          "id": "cable",
+          "label": "Cable or antenna, one show, normal ads"
+        },
+        {
+          "id": "no",
+          "label": "Not that"
+        },
+        {
+          "id": "unsure",
+          "label": "Can't tell"
+        }
+      ]
+    },
+    {
+      "id": "cable-20",
+      "file": "clips/cable-20.wav",
+      "session": "hush_20260901_221145",
+      "start_seconds": 111.0,
+      "clock": "1:51",
+      "wall": "Tue 10:13 pm",
+      "group": "cable",
+      "ask": "Is this the missing cable show?",
+      "note": "Sep 1, start of the hour.",
+      "choices": [
+        {
+          "id": "cable",
+          "label": "Cable or antenna, one show, normal ads"
+        },
+        {
+          "id": "no",
+          "label": "Not that"
+        },
+        {
+          "id": "unsure",
+          "label": "Can't tell"
+        }
+      ]
+    },
+    {
+      "id": "cable-21",
+      "file": "clips/cable-21.wav",
+      "session": "hush_20260901_221145",
+      "start_seconds": 1491.0,
+      "clock": "24:51",
+      "wall": "Tue 10:36 pm",
+      "group": "cable",
+      "ask": "Is this the missing cable show?",
+      "note": "Sep 1, middle of the hour.",
+      "choices": [
+        {
+          "id": "cable",
+          "label": "Cable or antenna, one show, normal ads"
+        },
+        {
+          "id": "no",
+          "label": "Not that"
+        },
+        {
+          "id": "unsure",
+          "label": "Can't tell"
+        }
+      ]
+    },
+    {
+      "id": "cable-22",
+      "file": "clips/cable-22.wav",
+      "session": "hush_20260901_221145",
+      "start_seconds": 2991.0,
+      "clock": "49:51",
+      "wall": "Tue 11:01 pm",
+      "group": "cable",
+      "ask": "Is this the missing cable show?",
+      "note": "Sep 1, late in the hour. Family Guy and Desperate Housewives were both heard in this file.",
+      "choices": [
+        {
+          "id": "cable",
+          "label": "Cable or antenna, one show, normal ads"
+        },
+        {
+          "id": "no",
+          "label": "Not that"
+        },
+        {
+          "id": "unsure",
+          "label": "Can't tell"
+        }
+      ]
+    },
+    {
+      "id": "cable-23",
+      "file": "clips/cable-23.wav",
+      "session": "hush_20260912_215850",
+      "start_seconds": 1791.0,
+      "clock": "29:51",
+      "wall": "Sat 10:28 pm",
+      "group": "cable",
+      "ask": "Is this the missing cable show?",
+      "note": "Sep 12. Previously heard as a Rick and Morty stream with no ads.",
+      "choices": [
+        {
+          "id": "cable",
+          "label": "Cable or antenna, one show, normal ads"
+        },
+        {
+          "id": "no",
+          "label": "Not that"
+        },
+        {
+          "id": "unsure",
+          "label": "Can't tell"
+        }
+      ]
+    }
+  ]
+}

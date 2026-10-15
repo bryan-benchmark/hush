@@ -1,0 +1,97 @@
+{
+  "id": "GOLD_DATASET_20261013",
+  "truth_ledger": "experiments/annotations/truth_events.jsonl",
+  "coverage": [
+    {
+      "session": "hush_20261007_220650",
+      "from_seconds": 20,
+      "to_seconds": 11751,
+      "from_sample": 960000,
+      "to_sample": 564048000,
+      "fully_annotated": true,
+      "note": "Marked from timeline mode. No ad inside this range means no ad.",
+      "created_at": "2026-10-13T15:06:13.927Z"
+    },
+    {
+      "session": "hush_20260909_213047",
+      "from_seconds": 0,
+      "to_seconds": 9373,
+      "from_sample": 0,
+      "to_sample": 449904000,
+      "fully_annotated": true,
+      "note": "Marked from timeline mode. No ad inside this range means no ad.",
+      "created_at": "2026-10-13T15:50:00.669Z"
+    },
+    {
+      "session": "hush_20260913_150934",
+      "from_seconds": 0,
+      "to_seconds": 7200,
+      "from_sample": 0,
+      "to_sample": 345600000,
+      "fully_annotated": true,
+      "note": "Marked from timeline mode. No ad inside this range means no ad.",
+      "created_at": "2026-10-13T16:25:02.548Z"
+    },
+    {
+      "session": "hush_20260913_210542",
+      "from_seconds": 0,
+      "to_seconds": 12600,
+      "from_sample": 0,
+      "to_sample": 604800000,
+      "fully_annotated": true,
+      "note": "Marked from timeline mode. No ad inside this range means no ad.",
+      "created_at": "2026-10-13T17:40:42.537Z"
+    },
+    {
+      "session": "hush_20261008_205100",
+      "from_seconds": 0,
+      "to_seconds": 10440.364,
+      "from_sample": 0,
+      "to_sample": 501137472,
+      "fully_annotated": true,
+      "note": "Marked from timeline mode. No ad inside this range means no ad.",
+      "created_at": "2026-10-13T19:32:24.633Z"
+    },
+    {
+      "session": "hush_20261011_204300",
+      "from_seconds": 0,
+      "to_seconds": 14405.376,
+      "from_sample": 0,
+      "to_sample": 691458048,
+      "fully_annotated": true,
+      "note": "Marked from timeline mode. No ad inside this range means no ad.",
+      "created_at": "2026-10-13T19:44:16.692Z"
+    },
+    {
+      "session": "hush_20261012_204200",
+      "from_seconds": 0,
+      "to_seconds": 13111.808,
+      "from_sample": 0,
+      "to_sample": 629366784,
+      "fully_annotated": true,
+      "note": "Marked from timeline mode. No ad inside this range means no ad.",
+      "created_at": "2026-10-13T20:15:23.733Z"
+    },
+    {
+      "session": "hush_20261010_222400",
+      "from_seconds": 0,
+      "to_seconds": 6064.768,
+      "from_sample": 0,
+      "to_sample": 291108864,
+      "fully_annotated": true,
+      "note": "Marked from timeline mode. No ad inside this range means no ad.",
+      "created_at": "2026-10-13T20:27:52.599Z"
+    },
+    {
+      "session": "hush_20261011_135700",
+      "from_seconds": 0,
+      "to_seconds": 4896.768,
+      "from_sample": 0,
+      "to_sample": 235044864,
+      "fully_annotated": true,
+      "note": "Marked from timeline mode. No ad inside this range means no ad.",
+      "created_at": "2026-10-13T20:40:58.215Z"
+    }
+  ],
+  "note": "October Hulu, NBC Patriots at Seahawks, FOX Falcons at Steelers 0–7200 s, NBC Cowboys at Giants. Empty until those spans are listened through. A fully_annotated range means the span was heard; no commercial inside it means no commercial. Does not replace GOLD_REPLICATION_V1."
+}

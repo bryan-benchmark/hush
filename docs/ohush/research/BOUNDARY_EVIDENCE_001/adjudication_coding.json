@@ -1,0 +1,2648 @@
+{
+  "summary": {
+    "n_saved_rows": 248,
+    "n_clips": 53,
+    "collar_s": 0.2,
+    "returns_queue_labeled": false,
+    "gold_edited": false,
+    "by_reason": {
+      "dsp_miss_nbc": 4,
+      "dsp_miss_prime": 2,
+      "dsp_miss_prime_video": 2,
+      "dsp_miss_espn": 2,
+      "dsp_miss_cable": 3,
+      "dsp_hit_nbc": 3,
+      "dsp_hit_prime": 2,
+      "dsp_hit_prime_video": 2,
+      "dsp_hit_espn": 2,
+      "dsp_hit_cable": 3,
+      "gold_end": 8,
+      "program_far": 9,
+      "redzone": 5,
+      "pod_interior": 6
+    },
+    "starts": {
+      "n": 25,
+      "break_edge_within_200ms": 15,
+      "already_commercial_before_clip": 2,
+      "gold_inside_gap": 11,
+      "gold_inside_creative": 7,
+      "dsp_miss": {
+        "n": 13,
+        "break_edge_within_200ms": 6,
+        "already_commercial_before_clip": [
+          "q013"
+        ],
+        "gold_inside_gap": 3,
+        "gold_inside_creative": 5,
+        "creative_onset_delta_s": [
+          -1.08,
+          2.88,
+          0.92,
+          -0.24,
+          0.85,
+          1.16,
+          1.0,
+          3.39,
+          2.51,
+          -0.38,
+          2.02,
+          -0.07,
+          -0.04
+        ],
+        "ids_edge_outside_collar": [
+          "q001",
+          "q002",
+          "q004",
+          "q008",
+          "q009",
+          "q010",
+          "q011"
+        ]
+      },
+      "dsp_hit": {
+        "n": 12,
+        "break_edge_within_200ms": 9,
+        "already_commercial_before_clip": [
+          "q023"
+        ],
+        "gold_inside_gap": 8,
+        "gold_inside_creative": 2,
+        "creative_onset_delta_s": [
+          0.01,
+          0.69,
+          0.7,
+          1.08,
+          0.08,
+          0.51,
+          1.45,
+          -0.37,
+          3.0,
+          2.18,
+          -0.73,
+          2.52
+        ],
+        "ids_edge_outside_collar": [
+          "q021",
+          "q024",
+          "q025"
+        ]
+      }
+    }
+  },
+  "clips": [
+    {
+      "id": "q001",
+      "session": "hush_20260909_213047",
+      "network": "NBC",
+      "reason": "dsp_miss_nbc",
+      "candidate_kind": "start",
+      "center_s": 623.347,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 8.78,
+          "what": "maria taylor telling us about upcoming games",
+          "phase": "booth"
+        },
+        {
+          "start_s": 8.92,
+          "end_s": 20,
+          "what": "outro music with apple siri ad ontop",
+          "phase": "music_and_ad"
+        }
+      ],
+      "phase_at_gold": [
+        "music_and_ad"
+      ],
+      "creative_onset_delta_s": -1.08,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": -1.08,
+      "booth_onset_delta_s": -10.0,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 1.08,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": true
+    },
+    {
+      "id": "q002",
+      "session": "hush_20260909_213047",
+      "network": "NBC",
+      "reason": "dsp_miss_nbc",
+      "candidate_kind": "start",
+      "center_s": 1000.416,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 9,
+          "what": "maria taylor outro ad toyota",
+          "phase": "booth_promo"
+        },
+        {
+          "start_s": 9.01,
+          "end_s": 12.14,
+          "what": "crowd noise and outro music",
+          "phase": "crowd"
+        },
+        {
+          "start_s": 12.31,
+          "end_s": 12.75,
+          "what": "gap for commercial queue",
+          "phase": "gap"
+        },
+        {
+          "start_s": 12.88,
+          "end_s": 19.98,
+          "what": "commercial starting - chevy i think",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "crowd"
+      ],
+      "creative_onset_delta_s": 2.88,
+      "gap_onset_delta_s": 2.31,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": -10.0,
+      "crowd_onset_delta_s": -0.99,
+      "nearest_break_edge_s": 2.31,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q003",
+      "session": "hush_20260909_213047",
+      "network": "NBC",
+      "reason": "dsp_miss_nbc",
+      "candidate_kind": "start",
+      "center_s": 1074.332,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 9.93,
+          "what": "\"this has been toyota halftime\" music and announcment before commercials",
+          "phase": "booth"
+        },
+        {
+          "start_s": 10.02,
+          "end_s": 10.86,
+          "what": "dead noise for commercial to start",
+          "phase": "gap"
+        },
+        {
+          "start_s": 10.92,
+          "end_s": 19.97,
+          "what": "the voice commercial",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [],
+      "creative_onset_delta_s": 0.92,
+      "gap_onset_delta_s": 0.02,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": -10.0,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 0.02,
+      "break_edge_within_collar": true,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q004",
+      "session": "hush_20260909_213047",
+      "network": "NBC",
+      "reason": "dsp_miss_nbc",
+      "candidate_kind": "start",
+      "center_s": 3104.995,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 2.07,
+          "what": "mike tirico",
+          "phase": "booth"
+        },
+        {
+          "start_s": 2.12,
+          "end_s": 3.22,
+          "what": "ambient crowd noise during broadcaster pause",
+          "phase": "crowd"
+        },
+        {
+          "start_s": 3.3,
+          "end_s": 6.15,
+          "what": "mike tirico saying back in 30 seconds",
+          "phase": "booth"
+        },
+        {
+          "start_s": 6.2,
+          "end_s": 9.69,
+          "what": "ambient crowd and stadium noise filler",
+          "phase": "crowd"
+        },
+        {
+          "start_s": 9.76,
+          "end_s": 18.01,
+          "what": "30 second commercial starting",
+          "phase": "commercial"
+        },
+        {
+          "start_s": 18.09,
+          "end_s": 19.09,
+          "what": "stream lag",
+          "phase": "lag"
+        },
+        {
+          "start_s": 19.25,
+          "end_s": 19.99,
+          "what": "commercial continuing",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "commercial"
+      ],
+      "creative_onset_delta_s": -0.24,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": -10.0,
+      "crowd_onset_delta_s": -7.88,
+      "nearest_break_edge_s": 0.24,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": true
+    },
+    {
+      "id": "q005",
+      "session": "hush_20260924_220624",
+      "network": "Prime",
+      "reason": "dsp_miss_prime",
+      "candidate_kind": "start",
+      "center_s": 1490.038,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 1.48,
+          "what": "al michaels outro to commercial above music",
+          "phase": "booth"
+        },
+        {
+          "start_s": 1.51,
+          "end_s": 9.77,
+          "what": "music outro no broadcaster",
+          "phase": "music"
+        },
+        {
+          "start_s": 9.8,
+          "end_s": 10.85,
+          "what": "gap for commercial to start",
+          "phase": "gap"
+        },
+        {
+          "start_s": 10.85,
+          "end_s": 19.99,
+          "what": "tmobile commercial",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "gap"
+      ],
+      "creative_onset_delta_s": 0.85,
+      "gap_onset_delta_s": -0.2,
+      "music_onset_delta_s": -8.49,
+      "booth_onset_delta_s": -10.0,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 0.2,
+      "break_edge_within_collar": true,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": true,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q006",
+      "session": "hush_20260924_220624",
+      "network": "Prime",
+      "reason": "dsp_miss_prime",
+      "candidate_kind": "start",
+      "center_s": 4337.154,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 1,
+          "what": "al michaels signing off before commerical with outro music",
+          "phase": "booth"
+        },
+        {
+          "start_s": 1.17,
+          "end_s": 9.69,
+          "what": "TNF outro music",
+          "phase": "music"
+        },
+        {
+          "start_s": 9.77,
+          "end_s": 11.02,
+          "what": "gap for commercials to start",
+          "phase": "gap"
+        },
+        {
+          "start_s": 11.16,
+          "end_s": 20,
+          "what": "commercial - movie trailer",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "gap"
+      ],
+      "creative_onset_delta_s": 1.16,
+      "gap_onset_delta_s": -0.23,
+      "music_onset_delta_s": -8.83,
+      "booth_onset_delta_s": -10.0,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 0.23,
+      "break_edge_within_collar": true,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": true,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q007",
+      "session": "hush_20261008_205100",
+      "network": "Prime Video",
+      "reason": "dsp_miss_prime_video",
+      "candidate_kind": "start",
+      "center_s": 139.874,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0.02,
+          "end_s": 3.11,
+          "what": "al michaels over outro music",
+          "phase": "music"
+        },
+        {
+          "start_s": 3.2,
+          "end_s": 9.91,
+          "what": "outro music into commerical break",
+          "phase": "music"
+        },
+        {
+          "start_s": 9.94,
+          "end_s": 10.92,
+          "what": "gap break for commercials to start",
+          "phase": "gap"
+        },
+        {
+          "start_s": 11,
+          "end_s": 19.96,
+          "what": "draft kings ad",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "gap"
+      ],
+      "creative_onset_delta_s": 1.0,
+      "gap_onset_delta_s": -0.06,
+      "music_onset_delta_s": -9.98,
+      "booth_onset_delta_s": null,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 0.06,
+      "break_edge_within_collar": true,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": true,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q008",
+      "session": "hush_20261008_205100",
+      "network": "Prime Video",
+      "reason": "dsp_miss_prime_video",
+      "candidate_kind": "start",
+      "center_s": 2396.185,
+      "saved_judgment": "return",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 9.5,
+          "what": "al michaels covering the 2 min warning about to happen, 'we're back in 30 seconds'",
+          "phase": "booth"
+        },
+        {
+          "start_s": 9.6,
+          "end_s": 13.49,
+          "what": "outro music /noise to fill gap",
+          "phase": "music"
+        },
+        {
+          "start_s": 13.39,
+          "end_s": 20,
+          "what": "tmobile commerical",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "music"
+      ],
+      "creative_onset_delta_s": 3.39,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": -0.4,
+      "booth_onset_delta_s": -10.0,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 3.39,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q009",
+      "session": "hush_20260914_212529",
+      "network": "ESPN",
+      "reason": "dsp_miss_espn",
+      "candidate_kind": "start",
+      "center_s": 166.64,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 7.33,
+          "what": "joe buck with outro music",
+          "phase": "music"
+        },
+        {
+          "start_s": 7.39,
+          "end_s": 12.39,
+          "what": "outro music continues no broadcaster",
+          "phase": "music"
+        },
+        {
+          "start_s": 12.51,
+          "end_s": 19.9,
+          "what": "video game commercial and then vince vaughn",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "music"
+      ],
+      "creative_onset_delta_s": 2.51,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": -10.0,
+      "booth_onset_delta_s": null,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 2.51,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q010",
+      "session": "hush_20260914_212529",
+      "network": "ESPN",
+      "reason": "dsp_miss_espn",
+      "candidate_kind": "start",
+      "center_s": 512.855,
+      "saved_judgment": "dictated",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 5.03,
+          "what": "joe buck outro wiht outro music",
+          "phase": "music"
+        },
+        {
+          "start_s": 4.97,
+          "end_s": 9.61,
+          "what": "outro music alone",
+          "phase": "music"
+        },
+        {
+          "start_s": 9.62,
+          "end_s": 19.89,
+          "what": "commerical - a world of fistbumps",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "commercial"
+      ],
+      "creative_onset_delta_s": -0.38,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": -10.0,
+      "booth_onset_delta_s": null,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 0.38,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": true
+    },
+    {
+      "id": "q011",
+      "session": "hush_20261010_222400",
+      "network": "Cable / antenna",
+      "reason": "dsp_miss_cable",
+      "candidate_kind": "start",
+      "center_s": 403.71,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0.07,
+          "end_s": 3.87,
+          "what": "chris fowler",
+          "phase": "booth"
+        },
+        {
+          "start_s": 3.87,
+          "end_s": 5.71,
+          "what": "stream lag",
+          "phase": "lag"
+        },
+        {
+          "start_s": 5.74,
+          "end_s": 9.56,
+          "what": "chris fowler and crowd outro",
+          "phase": "booth"
+        },
+        {
+          "start_s": 9.68,
+          "end_s": 11.94,
+          "what": "crowd outro",
+          "phase": "crowd"
+        },
+        {
+          "start_s": 12.02,
+          "end_s": 19.98,
+          "what": "nissan pathfinder commercial",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "crowd"
+      ],
+      "creative_onset_delta_s": 2.02,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": -9.93,
+      "crowd_onset_delta_s": -0.32,
+      "nearest_break_edge_s": 2.02,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q012",
+      "session": "hush_20261010_222400",
+      "network": "Cable / antenna",
+      "reason": "dsp_miss_cable",
+      "candidate_kind": "start",
+      "center_s": 2369.207,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 8.67,
+          "what": "chris folwer outro before commercial",
+          "phase": "booth"
+        },
+        {
+          "start_s": 8.6,
+          "end_s": 9.87,
+          "what": "crowd noise alone outro",
+          "phase": "crowd"
+        },
+        {
+          "start_s": 9.93,
+          "end_s": 17.89,
+          "what": "nick saban express delivery commercial",
+          "phase": "commercial"
+        },
+        {
+          "start_s": 17.97,
+          "end_s": 19.38,
+          "what": "stream lag",
+          "phase": "lag"
+        },
+        {
+          "start_s": 19.42,
+          "end_s": 19.99,
+          "what": "nick saban commercial express delivery",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "commercial"
+      ],
+      "creative_onset_delta_s": -0.07,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": -10.0,
+      "crowd_onset_delta_s": -1.4,
+      "nearest_break_edge_s": 0.07,
+      "break_edge_within_collar": true,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": true
+    },
+    {
+      "id": "q013",
+      "session": "hush_20261010_222400",
+      "network": "Cable / antenna",
+      "reason": "dsp_miss_cable",
+      "candidate_kind": "start",
+      "center_s": 3567.641,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 8.9,
+          "what": "chevy commercial",
+          "phase": "commercial"
+        },
+        {
+          "start_s": 9.09,
+          "end_s": 9.81,
+          "what": "stream lag",
+          "phase": "lag"
+        },
+        {
+          "start_s": 9.96,
+          "end_s": 20,
+          "what": "chevy commercial",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "commercial"
+      ],
+      "creative_onset_delta_s": -0.04,
+      "gap_onset_delta_s": -0.91,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": null,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 0.91,
+      "break_edge_within_collar": true,
+      "already_commercial_before_clip": true,
+      "has_program_audio": false,
+      "gold_inside_gap": false,
+      "gold_inside_creative": true
+    },
+    {
+      "id": "q014",
+      "session": "hush_20260909_213047",
+      "network": "NBC",
+      "reason": "dsp_hit_nbc",
+      "candidate_kind": "start",
+      "center_s": 1608.591,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 5.76,
+          "what": "mike tirico outro for injury",
+          "phase": "booth"
+        },
+        {
+          "start_s": 5.76,
+          "end_s": 9.45,
+          "what": "ambient crowd noise before break for injury timeout",
+          "phase": "crowd"
+        },
+        {
+          "start_s": 9.62,
+          "end_s": 10.03,
+          "what": "break for commercial to start",
+          "phase": "gap"
+        },
+        {
+          "start_s": 10.01,
+          "end_s": 19.96,
+          "what": "commerical",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "gap"
+      ],
+      "creative_onset_delta_s": 0.01,
+      "gap_onset_delta_s": -0.38,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": -10.0,
+      "crowd_onset_delta_s": -4.24,
+      "nearest_break_edge_s": 0.38,
+      "break_edge_within_collar": true,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": true,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q015",
+      "session": "hush_20260909_213047",
+      "network": "NBC",
+      "reason": "dsp_hit_nbc",
+      "candidate_kind": "start",
+      "center_s": 2066.723,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 4.17,
+          "what": "mike tirico on top of outro music",
+          "phase": "music"
+        },
+        {
+          "start_s": 4.25,
+          "end_s": 9.72,
+          "what": "outro music before commercial",
+          "phase": "music"
+        },
+        {
+          "start_s": 9.82,
+          "end_s": 10.6,
+          "what": "break for commercial to start",
+          "phase": "gap"
+        },
+        {
+          "start_s": 10.69,
+          "end_s": 15.63,
+          "what": "apple commercial starting",
+          "phase": "commercial"
+        },
+        {
+          "start_s": 15.69,
+          "end_s": 16.59,
+          "what": "stream lag",
+          "phase": "lag"
+        },
+        {
+          "start_s": 16.72,
+          "end_s": 19.97,
+          "what": "commercial apple continuing",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "gap"
+      ],
+      "creative_onset_delta_s": 0.69,
+      "gap_onset_delta_s": -0.18,
+      "music_onset_delta_s": -10.0,
+      "booth_onset_delta_s": null,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 0.18,
+      "break_edge_within_collar": true,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": true,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q016",
+      "session": "hush_20260909_213047",
+      "network": "NBC",
+      "reason": "dsp_hit_nbc",
+      "candidate_kind": "start",
+      "center_s": 2514.392,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 6.13,
+          "what": "mike tirico with outro music",
+          "phase": "music"
+        },
+        {
+          "start_s": 6.25,
+          "end_s": 9.89,
+          "what": "outro music announcer stops",
+          "phase": "music"
+        },
+        {
+          "start_s": 9.97,
+          "end_s": 10.66,
+          "what": "break for commerical to start",
+          "phase": "gap"
+        },
+        {
+          "start_s": 10.7,
+          "end_s": 19.93,
+          "what": "starlink commercial",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "gap"
+      ],
+      "creative_onset_delta_s": 0.7,
+      "gap_onset_delta_s": -0.03,
+      "music_onset_delta_s": -10.0,
+      "booth_onset_delta_s": null,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 0.03,
+      "break_edge_within_collar": true,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": true,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q017",
+      "session": "hush_20260924_220624",
+      "network": "Prime",
+      "reason": "dsp_hit_prime",
+      "candidate_kind": "start",
+      "center_s": 234.244,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 4.78,
+          "what": "al michaels with outro music",
+          "phase": "music"
+        },
+        {
+          "start_s": 4.87,
+          "end_s": 9.79,
+          "what": "outro music no al michaels",
+          "phase": "music"
+        },
+        {
+          "start_s": 9.88,
+          "end_s": 11.03,
+          "what": "break for commercial to start",
+          "phase": "gap"
+        },
+        {
+          "start_s": 11.08,
+          "end_s": 19.96,
+          "what": "movie trailer",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "gap"
+      ],
+      "creative_onset_delta_s": 1.08,
+      "gap_onset_delta_s": -0.12,
+      "music_onset_delta_s": -10.0,
+      "booth_onset_delta_s": null,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 0.12,
+      "break_edge_within_collar": true,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": true,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q018",
+      "session": "hush_20260924_220624",
+      "network": "Prime",
+      "reason": "dsp_hit_prime",
+      "candidate_kind": "start",
+      "center_s": 913.442,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 0.35,
+          "what": "al michaels with outro music",
+          "phase": "music"
+        },
+        {
+          "start_s": 0.41,
+          "end_s": 8.85,
+          "what": "outro music before break",
+          "phase": "music"
+        },
+        {
+          "start_s": 8.93,
+          "end_s": 9.97,
+          "what": "break for commericals to start",
+          "phase": "gap"
+        },
+        {
+          "start_s": 10.08,
+          "end_s": 19.98,
+          "what": "breast cancer ad",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [],
+      "creative_onset_delta_s": 0.08,
+      "gap_onset_delta_s": -1.07,
+      "music_onset_delta_s": -10.0,
+      "booth_onset_delta_s": null,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 1.07,
+      "break_edge_within_collar": true,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q019",
+      "session": "hush_20261008_205100",
+      "network": "Prime Video",
+      "reason": "dsp_hit_prime_video",
+      "candidate_kind": "start",
+      "center_s": 571.674,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 7.87,
+          "what": "al michaels on top of outro music",
+          "phase": "music"
+        },
+        {
+          "start_s": 8,
+          "end_s": 9.34,
+          "what": "outro no more al michaels",
+          "phase": "music"
+        },
+        {
+          "start_s": 9.33,
+          "end_s": 10.43,
+          "what": "gap for commercial break",
+          "phase": "gap"
+        },
+        {
+          "start_s": 10.51,
+          "end_s": 19.99,
+          "what": "fanduel commercial",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "gap"
+      ],
+      "creative_onset_delta_s": 0.51,
+      "gap_onset_delta_s": -0.67,
+      "music_onset_delta_s": -10.0,
+      "booth_onset_delta_s": null,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 0.67,
+      "break_edge_within_collar": true,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": true,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q020",
+      "session": "hush_20261008_205100",
+      "network": "Prime Video",
+      "reason": "dsp_hit_prime_video",
+      "candidate_kind": "start",
+      "center_s": 1003.282,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 8.45,
+          "what": "al michaels on top of outro music",
+          "phase": "music"
+        },
+        {
+          "start_s": 8.46,
+          "end_s": 9.82,
+          "what": "outro music alone no more al michaels",
+          "phase": "music"
+        },
+        {
+          "start_s": 9.89,
+          "end_s": 11.37,
+          "what": "break for commercial gap",
+          "phase": "gap"
+        },
+        {
+          "start_s": 11.45,
+          "end_s": 19.99,
+          "what": "commercial",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "gap"
+      ],
+      "creative_onset_delta_s": 1.45,
+      "gap_onset_delta_s": -0.11,
+      "music_onset_delta_s": -10.0,
+      "booth_onset_delta_s": null,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 0.11,
+      "break_edge_within_collar": true,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": true,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q021",
+      "session": "hush_20260914_212529",
+      "network": "ESPN",
+      "reason": "dsp_hit_espn",
+      "candidate_kind": "start",
+      "center_s": 1538.857,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0.07,
+          "end_s": 0.55,
+          "what": "outro music with generic announcer dude ontop",
+          "phase": "music"
+        },
+        {
+          "start_s": 0.65,
+          "end_s": 9.54,
+          "what": "outro music alone",
+          "phase": "music"
+        },
+        {
+          "start_s": 9.63,
+          "end_s": 12.27,
+          "what": "deal dash commercial",
+          "phase": "commercial"
+        },
+        {
+          "start_s": 12.28,
+          "end_s": 16.41,
+          "what": "stream gap",
+          "phase": "lag"
+        },
+        {
+          "start_s": 16.45,
+          "end_s": 19.98,
+          "what": "deal dash ad",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "commercial"
+      ],
+      "creative_onset_delta_s": -0.37,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": -9.93,
+      "booth_onset_delta_s": null,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 0.37,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": true
+    },
+    {
+      "id": "q022",
+      "session": "hush_20260914_212529",
+      "network": "ESPN",
+      "reason": "dsp_hit_espn",
+      "candidate_kind": "start",
+      "center_s": 2072.112,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 8.82,
+          "what": "joe buck on top of outro music",
+          "phase": "music"
+        },
+        {
+          "start_s": 8.87,
+          "end_s": 9.74,
+          "what": "outro music alone",
+          "phase": "music"
+        },
+        {
+          "start_s": 9.79,
+          "end_s": 10.35,
+          "what": "stream lag gap",
+          "phase": "lag"
+        },
+        {
+          "start_s": 10.45,
+          "end_s": 12.99,
+          "what": "outro music",
+          "phase": "music"
+        },
+        {
+          "start_s": 13,
+          "end_s": 19.98,
+          "what": "erin andrews ethos commercial",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "lag"
+      ],
+      "creative_onset_delta_s": 3.0,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": -10.0,
+      "booth_onset_delta_s": null,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 3.0,
+      "break_edge_within_collar": true,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": true,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q023",
+      "session": "hush_20261010_222400",
+      "network": "Cable / antenna",
+      "reason": "dsp_hit_cable",
+      "candidate_kind": "start",
+      "center_s": 38.382,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 4.03,
+          "what": "stream lag",
+          "phase": "lag"
+        },
+        {
+          "start_s": 4.09,
+          "end_s": 7.33,
+          "what": "commercial",
+          "phase": "commercial"
+        },
+        {
+          "start_s": 7.32,
+          "end_s": 12.16,
+          "what": "stream lag",
+          "phase": "lag"
+        },
+        {
+          "start_s": 12.18,
+          "end_s": 19.9,
+          "what": "commerical",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "lag"
+      ],
+      "creative_onset_delta_s": 2.18,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": null,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 2.18,
+      "break_edge_within_collar": true,
+      "already_commercial_before_clip": true,
+      "has_program_audio": false,
+      "gold_inside_gap": true,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q024",
+      "session": "hush_20261010_222400",
+      "network": "Cable / antenna",
+      "reason": "dsp_hit_cable",
+      "candidate_kind": "start",
+      "center_s": 1257.31,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0.04,
+          "end_s": 0.47,
+          "what": "broadcaster and outro music",
+          "phase": "music"
+        },
+        {
+          "start_s": 0.58,
+          "end_s": 1.92,
+          "what": "outro music alone",
+          "phase": "music"
+        },
+        {
+          "start_s": 1.93,
+          "end_s": 3.78,
+          "what": "stream lag",
+          "phase": "lag"
+        },
+        {
+          "start_s": 3.85,
+          "end_s": 9.14,
+          "what": "outro music",
+          "phase": "music"
+        },
+        {
+          "start_s": 9.27,
+          "end_s": 19.97,
+          "what": "google ad",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "commercial"
+      ],
+      "creative_onset_delta_s": -0.73,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": -9.96,
+      "booth_onset_delta_s": null,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 0.73,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": true
+    },
+    {
+      "id": "q025",
+      "session": "hush_20261010_222400",
+      "network": "Cable / antenna",
+      "reason": "dsp_hit_cable",
+      "candidate_kind": "start",
+      "center_s": 3009.899,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 11.3,
+          "what": "berman outro",
+          "phase": "booth"
+        },
+        {
+          "start_s": 11.29,
+          "end_s": 12.47,
+          "what": "gap for commercial start",
+          "phase": "gap"
+        },
+        {
+          "start_s": 12.52,
+          "end_s": 19.89,
+          "what": "autotrader commercial",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "booth"
+      ],
+      "creative_onset_delta_s": 2.52,
+      "gap_onset_delta_s": 1.29,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": -10.0,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 1.29,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q026",
+      "session": "hush_20260909_213047",
+      "network": "NBC",
+      "reason": "gold_end",
+      "candidate_kind": "end",
+      "center_s": 141.539,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 9.51,
+          "what": "line of fire commercial",
+          "phase": "commercial"
+        },
+        {
+          "start_s": 9.55,
+          "end_s": 10.77,
+          "what": "gap for broadcast to start",
+          "phase": "gap"
+        },
+        {
+          "start_s": 10.73,
+          "end_s": 11.82,
+          "what": "intro music",
+          "phase": "music"
+        },
+        {
+          "start_s": 11.92,
+          "end_s": 20,
+          "what": "intro music and mike tirico intro on top",
+          "phase": "booth"
+        }
+      ],
+      "phase_at_gold": [
+        "gap"
+      ],
+      "creative_onset_delta_s": -10.0,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": 0.73,
+      "booth_onset_delta_s": 1.92,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 10.0,
+      "break_edge_within_collar": true,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": true,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q027",
+      "session": "hush_20260909_213047",
+      "network": "NBC",
+      "reason": "gold_end",
+      "candidate_kind": "end",
+      "center_s": 806.324,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 5.73,
+          "what": "make what matters commercial",
+          "phase": "commercial"
+        },
+        {
+          "start_s": 5.85,
+          "end_s": 9.99,
+          "what": "political ad",
+          "phase": "commercial"
+        },
+        {
+          "start_s": 10.09,
+          "end_s": 11.51,
+          "what": "commercial gap break",
+          "phase": "gap"
+        },
+        {
+          "start_s": 11.6,
+          "end_s": 18.78,
+          "what": "intro music",
+          "phase": "music"
+        },
+        {
+          "start_s": 18.73,
+          "end_s": 19.93,
+          "what": "intro music plus \"welcome to toyota halftime\"",
+          "phase": "booth"
+        }
+      ],
+      "phase_at_gold": [],
+      "creative_onset_delta_s": -10.0,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": 1.6,
+      "booth_onset_delta_s": 8.73,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 10.0,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q028",
+      "session": "hush_20260914_212529",
+      "network": "ESPN",
+      "reason": "gold_end",
+      "candidate_kind": "end",
+      "center_s": 305.767,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 14.87,
+          "what": "shipstation commercial",
+          "phase": "commercial"
+        },
+        {
+          "start_s": 15.02,
+          "end_s": 17.63,
+          "what": "intro music alone back from commerical break",
+          "phase": "music"
+        },
+        {
+          "start_s": 17.68,
+          "end_s": 19.99,
+          "what": "joe buck on top of intro music beck from commercial",
+          "phase": "booth"
+        }
+      ],
+      "phase_at_gold": [
+        "commercial"
+      ],
+      "creative_onset_delta_s": -10.0,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": 5.02,
+      "booth_onset_delta_s": 7.68,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 10.0,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": true
+    },
+    {
+      "id": "q029",
+      "session": "hush_20260914_212529",
+      "network": "ESPN",
+      "reason": "gold_end",
+      "candidate_kind": "end",
+      "center_s": 634.732,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 10.34,
+          "what": "super bowl commercial",
+          "phase": "commercial"
+        },
+        {
+          "start_s": 10.46,
+          "end_s": 11.48,
+          "what": "gap for broadcast change",
+          "phase": "gap"
+        },
+        {
+          "start_s": 11.57,
+          "end_s": 13.21,
+          "what": "ambient crowd noise an dmusic back from break",
+          "phase": "crowd"
+        },
+        {
+          "start_s": 13.22,
+          "end_s": 18.89,
+          "what": "troy aikman on top of ambient crowd noise an dmusic back from break",
+          "phase": "booth"
+        },
+        {
+          "start_s": 18.93,
+          "end_s": 19.69,
+          "what": "stream lag",
+          "phase": "lag"
+        },
+        {
+          "start_s": 18.93,
+          "end_s": 19.67,
+          "what": "stream lag",
+          "phase": "lag"
+        }
+      ],
+      "phase_at_gold": [
+        "commercial"
+      ],
+      "creative_onset_delta_s": -10.0,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": 3.22,
+      "crowd_onset_delta_s": 1.57,
+      "nearest_break_edge_s": 10.0,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": true
+    },
+    {
+      "id": "q030",
+      "session": "hush_20260924_220624",
+      "network": "Prime",
+      "reason": "gold_end",
+      "candidate_kind": "end",
+      "center_s": 49.585,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 9.51,
+          "what": "miller lite commercial walkin",
+          "phase": "commercial"
+        },
+        {
+          "start_s": 9.54,
+          "end_s": 10.53,
+          "what": "gap for braodcast change",
+          "phase": "gap"
+        },
+        {
+          "start_s": 10.55,
+          "end_s": 19.99,
+          "what": "al michaels starting broadcast with an ad for a network tv show",
+          "phase": "announcer_promo"
+        }
+      ],
+      "phase_at_gold": [
+        "gap"
+      ],
+      "creative_onset_delta_s": -10.0,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": null,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 10.0,
+      "break_edge_within_collar": true,
+      "already_commercial_before_clip": true,
+      "has_program_audio": false,
+      "gold_inside_gap": true,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q031",
+      "session": "hush_20261008_205100",
+      "network": "Prime Video",
+      "reason": "gold_end",
+      "candidate_kind": "end",
+      "center_s": 376.9,
+      "saved_judgment": "dictated",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 9.6,
+          "what": "social reckoning trailer",
+          "phase": "commercial"
+        },
+        {
+          "start_s": 9.75,
+          "end_s": 10.64,
+          "what": "gap for broadcast change back",
+          "phase": "gap"
+        },
+        {
+          "start_s": 10.81,
+          "end_s": 12.3,
+          "what": "back from break intro noises for broadcaster to talk over",
+          "phase": "music"
+        },
+        {
+          "start_s": 12.4,
+          "end_s": 19.98,
+          "what": "al michaels on top of intro noises doing a detailed thing on a player",
+          "phase": "booth"
+        }
+      ],
+      "phase_at_gold": [
+        "gap"
+      ],
+      "creative_onset_delta_s": -10.0,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": 0.81,
+      "booth_onset_delta_s": 2.4,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 10.0,
+      "break_edge_within_collar": true,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": true,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q032",
+      "session": "hush_20261010_222400",
+      "network": "Cable / antenna",
+      "reason": "gold_end",
+      "candidate_kind": "end",
+      "center_s": 151.12,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 1.78,
+          "what": "commercial ending",
+          "phase": "commercial"
+        },
+        {
+          "start_s": 1.89,
+          "end_s": 7.04,
+          "what": "tiny ad for future nfl games",
+          "phase": "commercial"
+        },
+        {
+          "start_s": 7.09,
+          "end_s": 9.32,
+          "what": "broadcast gap",
+          "phase": "gap"
+        },
+        {
+          "start_s": 9.41,
+          "end_s": 14.16,
+          "what": "intro for college football back from break chris fowler",
+          "phase": "booth"
+        },
+        {
+          "start_s": 14.24,
+          "end_s": 15.54,
+          "what": "stream lag",
+          "phase": "lag"
+        },
+        {
+          "start_s": 15.54,
+          "end_s": 19.98,
+          "what": "chris fowler intro about dr pepper",
+          "phase": "booth"
+        }
+      ],
+      "phase_at_gold": [
+        "booth"
+      ],
+      "creative_onset_delta_s": -10.0,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": -0.59,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 10.0,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q033",
+      "session": "hush_20261010_222400",
+      "network": "Cable / antenna",
+      "reason": "gold_end",
+      "candidate_kind": "end",
+      "center_s": 462.524,
+      "saved_judgment": "dictated",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 8.8,
+          "what": "autozone commerical",
+          "phase": "commercial"
+        },
+        {
+          "start_s": 8.8,
+          "end_s": 10.76,
+          "what": "streaming lag gap",
+          "phase": "lag"
+        },
+        {
+          "start_s": 10.79,
+          "end_s": 18.96,
+          "what": "college football 3rd broadcaster",
+          "phase": "booth"
+        },
+        {
+          "start_s": 19.06,
+          "end_s": 19.83,
+          "what": "stream lag",
+          "phase": "lag"
+        }
+      ],
+      "phase_at_gold": [
+        "lag"
+      ],
+      "creative_onset_delta_s": -10.0,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": 0.79,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 10.0,
+      "break_edge_within_collar": true,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": true,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q034",
+      "session": "hush_20260909_213047",
+      "network": "NBC",
+      "reason": "program_far",
+      "candidate_kind": "program",
+      "center_s": 240.0,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 6.93,
+          "what": "mike tirico - well be back in 30 seconds",
+          "phase": "booth"
+        },
+        {
+          "start_s": 7,
+          "end_s": 10.08,
+          "what": "ambient crowd noise and transition noise to aws commercial",
+          "phase": "crowd"
+        },
+        {
+          "start_s": 10.1,
+          "end_s": 20,
+          "what": "aws commercial",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "crowd"
+      ],
+      "creative_onset_delta_s": 0.1,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": -10.0,
+      "crowd_onset_delta_s": -3.0,
+      "nearest_break_edge_s": 0.1,
+      "break_edge_within_collar": true,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q035",
+      "session": "hush_20260913_210542",
+      "network": "NBC",
+      "reason": "program_far",
+      "candidate_kind": "program",
+      "center_s": 240.0,
+      "saved_judgment": "dictated",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 11.04,
+          "what": "chris collingsworth excited explaining a play",
+          "phase": "booth"
+        },
+        {
+          "start_s": 11.16,
+          "end_s": 13.29,
+          "what": "ambient crowd noise in broadcaster pause",
+          "phase": "crowd"
+        },
+        {
+          "start_s": 13.33,
+          "end_s": 16.15,
+          "what": "chris collingsworth excited",
+          "phase": "booth"
+        },
+        {
+          "start_s": 16.24,
+          "end_s": 17.99,
+          "what": "crowd noise and presnap noises",
+          "phase": "crowd"
+        },
+        {
+          "start_s": 17.95,
+          "end_s": 19.19,
+          "what": "mike tirico",
+          "phase": "booth"
+        },
+        {
+          "start_s": 19.29,
+          "end_s": 19.98,
+          "what": "ambient crowd noise presnap",
+          "phase": "crowd"
+        }
+      ],
+      "phase_at_gold": [
+        "booth"
+      ],
+      "creative_onset_delta_s": null,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": -10.0,
+      "crowd_onset_delta_s": 1.16,
+      "nearest_break_edge_s": null,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q036",
+      "session": "hush_20261008_205100",
+      "network": "Prime Video",
+      "reason": "program_far",
+      "candidate_kind": "program",
+      "center_s": 440.0,
+      "saved_judgment": "dictated",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 16.38,
+          "what": "kirk herbstreit explaining a complex thought",
+          "phase": "booth"
+        },
+        {
+          "start_s": 16.5,
+          "end_s": 17.72,
+          "what": "pause between broadcasters",
+          "phase": "booth"
+        },
+        {
+          "start_s": 17.8,
+          "end_s": 19.98,
+          "what": "al michaels talking with pre snap commotion",
+          "phase": "crowd"
+        }
+      ],
+      "phase_at_gold": [
+        "booth"
+      ],
+      "creative_onset_delta_s": null,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": -10.0,
+      "crowd_onset_delta_s": 7.8,
+      "nearest_break_edge_s": null,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q037",
+      "session": "hush_20261011_204300",
+      "network": "Cable / antenna",
+      "reason": "program_far",
+      "candidate_kind": "program",
+      "center_s": 200.0,
+      "saved_judgment": "dictated",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 1.75,
+          "what": "mike tirico plue pre snap commotion",
+          "phase": "crowd"
+        },
+        {
+          "start_s": 1.78,
+          "end_s": 8.87,
+          "what": "presnap commotion",
+          "phase": "crowd"
+        },
+        {
+          "start_s": 8.83,
+          "end_s": 9.93,
+          "what": "mike tirico",
+          "phase": "booth"
+        },
+        {
+          "start_s": 10,
+          "end_s": 11.25,
+          "what": "crowd noise",
+          "phase": "crowd"
+        },
+        {
+          "start_s": 11.31,
+          "end_s": 12.25,
+          "what": "tirico",
+          "phase": "booth"
+        },
+        {
+          "start_s": 12.3,
+          "end_s": 17.21,
+          "what": "referee annoucement",
+          "phase": "booth"
+        }
+      ],
+      "phase_at_gold": [
+        "crowd"
+      ],
+      "creative_onset_delta_s": null,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": -1.17,
+      "crowd_onset_delta_s": -10.0,
+      "nearest_break_edge_s": null,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q038",
+      "session": "hush_20261012_204200",
+      "network": "Cable / antenna",
+      "reason": "program_far",
+      "candidate_kind": "program",
+      "center_s": 400.0,
+      "saved_judgment": "dictated",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 1.46,
+          "what": "ambient crowd noise",
+          "phase": "crowd"
+        },
+        {
+          "start_s": 1.42,
+          "end_s": 6.26,
+          "what": "joe buck",
+          "phase": "booth"
+        },
+        {
+          "start_s": 6.4,
+          "end_s": 12.85,
+          "what": "referee announcement",
+          "phase": "booth"
+        },
+        {
+          "start_s": 12.88,
+          "end_s": 16.87,
+          "what": "joe buck",
+          "phase": "booth"
+        },
+        {
+          "start_s": 17.96,
+          "end_s": 20,
+          "what": "joe buck",
+          "phase": "booth"
+        }
+      ],
+      "phase_at_gold": [
+        "booth"
+      ],
+      "creative_onset_delta_s": null,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": -8.58,
+      "crowd_onset_delta_s": -10.0,
+      "nearest_break_edge_s": null,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q039",
+      "session": "hush_20261010_222400",
+      "network": "Cable / antenna",
+      "reason": "program_far",
+      "candidate_kind": "program",
+      "center_s": 240.0,
+      "saved_judgment": "dictated",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 13.04,
+          "what": "kirk herbstreit",
+          "phase": "booth"
+        },
+        {
+          "start_s": 13.06,
+          "end_s": 14.26,
+          "what": "streaming lag",
+          "phase": "lag"
+        },
+        {
+          "start_s": 14.32,
+          "end_s": 18.44,
+          "what": "kirk herbstreit",
+          "phase": "booth"
+        },
+        {
+          "start_s": 18.68,
+          "end_s": 19.93,
+          "what": "chris fowler",
+          "phase": "booth"
+        }
+      ],
+      "phase_at_gold": [
+        "booth"
+      ],
+      "creative_onset_delta_s": null,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": -10.0,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": null,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q040",
+      "session": "hush_20261011_135700",
+      "network": "Cable / antenna",
+      "reason": "program_far",
+      "candidate_kind": "program",
+      "center_s": 360.0,
+      "saved_judgment": "program",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 1.3,
+          "what": "play by play unknown",
+          "phase": "booth"
+        },
+        {
+          "start_s": 2.27,
+          "end_s": 8.1,
+          "what": "random color commetnator unknown",
+          "phase": "booth"
+        },
+        {
+          "start_s": 10.02,
+          "end_s": 20,
+          "what": "random color commentato runknown",
+          "phase": "booth"
+        }
+      ],
+      "phase_at_gold": [],
+      "creative_onset_delta_s": null,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": -10.0,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": null,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q041",
+      "session": "hush_20260914_212529",
+      "network": "ESPN",
+      "reason": "program_far",
+      "candidate_kind": "program",
+      "center_s": 400.0,
+      "saved_judgment": "dictated",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 4.93,
+          "what": "joe buck",
+          "phase": "booth"
+        },
+        {
+          "start_s": 5,
+          "end_s": 5.95,
+          "what": "whistles",
+          "phase": "crowd"
+        },
+        {
+          "start_s": 6.1,
+          "end_s": 8.53,
+          "what": "joe buck",
+          "phase": "booth"
+        },
+        {
+          "start_s": 8.69,
+          "end_s": 11.38,
+          "what": "crowd and stadium noise in broadcaster pause",
+          "phase": "crowd"
+        },
+        {
+          "start_s": 11.53,
+          "end_s": 12.56,
+          "what": "joe buck",
+          "phase": "booth"
+        },
+        {
+          "start_s": 12.69,
+          "end_s": 14.93,
+          "what": "steram lag",
+          "phase": "lag"
+        },
+        {
+          "start_s": 15.11,
+          "end_s": 20,
+          "what": "joe buck",
+          "phase": "booth"
+        }
+      ],
+      "phase_at_gold": [
+        "crowd"
+      ],
+      "creative_onset_delta_s": null,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": -10.0,
+      "crowd_onset_delta_s": -5.0,
+      "nearest_break_edge_s": null,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q042",
+      "session": "hush_20260924_220624",
+      "network": "Prime",
+      "reason": "program_far",
+      "candidate_kind": "program",
+      "center_s": 440.0,
+      "saved_judgment": "dictated",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 7.24,
+          "what": "kirk herbstreit & presnap commotion",
+          "phase": "crowd"
+        },
+        {
+          "start_s": 8.17,
+          "end_s": 14.6,
+          "what": "al michaels excited with play starting",
+          "phase": "booth"
+        },
+        {
+          "start_s": 14.62,
+          "end_s": 17.47,
+          "what": "kirk herbstreit laughing",
+          "phase": "booth"
+        },
+        {
+          "start_s": 17.54,
+          "end_s": 19.88,
+          "what": "al michaels",
+          "phase": "booth"
+        }
+      ],
+      "phase_at_gold": [
+        "booth"
+      ],
+      "creative_onset_delta_s": null,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": -1.83,
+      "crowd_onset_delta_s": -10.0,
+      "nearest_break_edge_s": null,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q043",
+      "session": "hush_20260913_150934",
+      "network": "FOX",
+      "reason": "redzone",
+      "candidate_kind": "redzone",
+      "center_s": 500.0,
+      "saved_judgment": "program",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 11.24,
+          "what": "scott hanson red zone",
+          "phase": "booth"
+        },
+        {
+          "start_s": 11.21,
+          "end_s": 12.66,
+          "what": "stream lag",
+          "phase": "lag"
+        },
+        {
+          "start_s": 12.75,
+          "end_s": 14.72,
+          "what": "scott hansen redzone",
+          "phase": "booth"
+        },
+        {
+          "start_s": 14.8,
+          "end_s": 19.96,
+          "what": "random play by play announcer",
+          "phase": "booth"
+        }
+      ],
+      "phase_at_gold": [
+        "booth"
+      ],
+      "creative_onset_delta_s": null,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": -10.0,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": null,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q044",
+      "session": "hush_20260913_150934",
+      "network": "FOX",
+      "reason": "redzone",
+      "candidate_kind": "redzone",
+      "center_s": 1600.0,
+      "saved_judgment": "program",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 6.29,
+          "what": "random play by play (within redzone)",
+          "phase": "booth"
+        },
+        {
+          "start_s": 6.32,
+          "end_s": 7.7,
+          "what": "stream lag",
+          "phase": "lag"
+        },
+        {
+          "start_s": 7.68,
+          "end_s": 16.85,
+          "what": "scott hansen ontop of play by play",
+          "phase": "booth"
+        },
+        {
+          "start_s": 16.93,
+          "end_s": 19.89,
+          "what": "play by play only",
+          "phase": "booth"
+        }
+      ],
+      "phase_at_gold": [
+        "booth"
+      ],
+      "creative_onset_delta_s": null,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": -10.0,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": null,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q045",
+      "session": "hush_20260913_150934",
+      "network": "FOX",
+      "reason": "redzone",
+      "candidate_kind": "redzone",
+      "center_s": 2800.0,
+      "saved_judgment": "dictated",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 9.15,
+          "what": "scott hansen redzone",
+          "phase": "booth"
+        },
+        {
+          "start_s": 9.16,
+          "end_s": 10.41,
+          "what": "stream lag",
+          "phase": "lag"
+        },
+        {
+          "start_s": 10.44,
+          "end_s": 19.92,
+          "what": "scott hansen redzone",
+          "phase": "booth"
+        }
+      ],
+      "phase_at_gold": [
+        "lag"
+      ],
+      "creative_onset_delta_s": null,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": -10.0,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": null,
+      "break_edge_within_collar": true,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": true,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q046",
+      "session": "hush_20260913_150934",
+      "network": "FOX",
+      "reason": "redzone",
+      "candidate_kind": "redzone",
+      "center_s": 4200.0,
+      "saved_judgment": "program",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 7.09,
+          "what": "play by play announcer excited within redzone",
+          "phase": "booth"
+        },
+        {
+          "start_s": 7.27,
+          "end_s": 8.6,
+          "what": "stream lag",
+          "phase": "lag"
+        },
+        {
+          "start_s": 8.72,
+          "end_s": 19.91,
+          "what": "scott hansen red zone",
+          "phase": "booth"
+        }
+      ],
+      "phase_at_gold": [
+        "booth"
+      ],
+      "creative_onset_delta_s": null,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": -10.0,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": null,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q047",
+      "session": "hush_20260913_150934",
+      "network": "FOX",
+      "reason": "redzone",
+      "candidate_kind": "redzone",
+      "center_s": 5600.0,
+      "saved_judgment": "program",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 11.1,
+          "what": "scott hansen redzone",
+          "phase": "booth"
+        },
+        {
+          "start_s": 11.27,
+          "end_s": 12.08,
+          "what": "stream lag",
+          "phase": "lag"
+        },
+        {
+          "start_s": 12.07,
+          "end_s": 15.79,
+          "what": "scott hansen red zone",
+          "phase": "booth"
+        },
+        {
+          "start_s": 15.77,
+          "end_s": 17.86,
+          "what": "crowd noise presnap",
+          "phase": "crowd"
+        },
+        {
+          "start_s": 17.96,
+          "end_s": 19.97,
+          "what": "crowd noise plus play by play announcer",
+          "phase": "crowd"
+        }
+      ],
+      "phase_at_gold": [
+        "booth"
+      ],
+      "creative_onset_delta_s": null,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": -10.0,
+      "crowd_onset_delta_s": 5.77,
+      "nearest_break_edge_s": null,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": false
+    },
+    {
+      "id": "q048",
+      "session": "hush_20260909_213047",
+      "network": "NBC",
+      "reason": "pod_interior",
+      "candidate_kind": "interior",
+      "center_s": 46.07,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 20,
+          "what": "USAA commercial",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "commercial"
+      ],
+      "creative_onset_delta_s": -10.0,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": null,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 10.0,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": true,
+      "has_program_audio": false,
+      "gold_inside_gap": false,
+      "gold_inside_creative": true
+    },
+    {
+      "id": "q049",
+      "session": "hush_20260909_213047",
+      "network": "NBC",
+      "reason": "pod_interior",
+      "candidate_kind": "interior",
+      "center_s": 663.347,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 20,
+          "what": "commercial - not sure if trailer or not",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "commercial"
+      ],
+      "creative_onset_delta_s": -10.0,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": null,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 10.0,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": true,
+      "has_program_audio": false,
+      "gold_inside_gap": false,
+      "gold_inside_creative": true
+    },
+    {
+      "id": "q050",
+      "session": "hush_20260909_213047",
+      "network": "NBC",
+      "reason": "pod_interior",
+      "candidate_kind": "interior",
+      "center_s": 1114.332,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 0.82,
+          "what": "peacock outro ad",
+          "phase": "music_and_ad"
+        },
+        {
+          "start_s": 0.89,
+          "end_s": 19.95,
+          "what": "HSS Ad",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "commercial"
+      ],
+      "creative_onset_delta_s": -9.11,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": -10.0,
+      "booth_onset_delta_s": null,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 9.11,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": true,
+      "has_program_audio": false,
+      "gold_inside_gap": false,
+      "gold_inside_creative": true
+    },
+    {
+      "id": "q051",
+      "session": "hush_20260909_213047",
+      "network": "NBC",
+      "reason": "pod_interior",
+      "candidate_kind": "interior",
+      "center_s": 1648.591,
+      "saved_judgment": "dictated",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 4.82,
+          "what": "ambient crowd noise or stadium noise as outro",
+          "phase": "crowd"
+        },
+        {
+          "start_s": 4.88,
+          "end_s": 19.94,
+          "what": "tmobile billy bob thorton",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "commercial"
+      ],
+      "creative_onset_delta_s": -5.12,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": null,
+      "crowd_onset_delta_s": -10.0,
+      "nearest_break_edge_s": 5.12,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": false,
+      "has_program_audio": true,
+      "gold_inside_gap": false,
+      "gold_inside_creative": true
+    },
+    {
+      "id": "q052",
+      "session": "hush_20260909_213047",
+      "network": "NBC",
+      "reason": "pod_interior",
+      "candidate_kind": "interior",
+      "center_s": 2106.723,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 0,
+          "end_s": 20,
+          "what": "commercial unknown",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "commercial"
+      ],
+      "creative_onset_delta_s": -10.0,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": null,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 10.0,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": true,
+      "has_program_audio": false,
+      "gold_inside_gap": false,
+      "gold_inside_creative": true
+    },
+    {
+      "id": "q053",
+      "session": "hush_20260909_213047",
+      "network": "NBC",
+      "reason": "pod_interior",
+      "candidate_kind": "interior",
+      "center_s": 2554.392,
+      "saved_judgment": "commercial",
+      "regions": [
+        {
+          "start_s": 5.46,
+          "end_s": 17.22,
+          "what": "commercial",
+          "phase": "commercial"
+        },
+        {
+          "start_s": 17.74,
+          "end_s": 20,
+          "what": "commercial",
+          "phase": "commercial"
+        }
+      ],
+      "phase_at_gold": [
+        "commercial"
+      ],
+      "creative_onset_delta_s": -4.54,
+      "gap_onset_delta_s": null,
+      "music_onset_delta_s": null,
+      "booth_onset_delta_s": null,
+      "crowd_onset_delta_s": null,
+      "nearest_break_edge_s": 4.54,
+      "break_edge_within_collar": false,
+      "already_commercial_before_clip": true,
+      "has_program_audio": false,
+      "gold_inside_gap": false,
+      "gold_inside_creative": true
+    }
+  ]
+}

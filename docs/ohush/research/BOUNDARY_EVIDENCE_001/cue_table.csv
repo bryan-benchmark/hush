@@ -1,0 +1,54 @@
+id,network,reason,candidate_kind,center_s,phase_at_gold,creative_onset_delta_s,gap_onset_delta_s,music_onset_delta_s,booth_onset_delta_s,nearest_break_edge_s,break_edge_within_collar,already_commercial_before_clip
+q001,NBC,dsp_miss_nbc,start,623.347,music_and_ad,-1.08,,-1.08,-10.0,1.08,False,False
+q002,NBC,dsp_miss_nbc,start,1000.416,crowd,2.88,2.31,,-10.0,2.31,False,False
+q003,NBC,dsp_miss_nbc,start,1074.332,,0.92,0.02,,-10.0,0.02,True,False
+q004,NBC,dsp_miss_nbc,start,3104.995,commercial,-0.24,,,-10.0,0.24,False,False
+q005,Prime,dsp_miss_prime,start,1490.038,gap,0.85,-0.2,-8.49,-10.0,0.2,True,False
+q006,Prime,dsp_miss_prime,start,4337.154,gap,1.16,-0.23,-8.83,-10.0,0.23,True,False
+q007,Prime Video,dsp_miss_prime_video,start,139.874,gap,1.0,-0.06,-9.98,,0.06,True,False
+q008,Prime Video,dsp_miss_prime_video,start,2396.185,music,3.39,,-0.4,-10.0,3.39,False,False
+q009,ESPN,dsp_miss_espn,start,166.64,music,2.51,,-10.0,,2.51,False,False
+q010,ESPN,dsp_miss_espn,start,512.855,commercial,-0.38,,-10.0,,0.38,False,False
+q011,Cable / antenna,dsp_miss_cable,start,403.71,crowd,2.02,,,-9.93,2.02,False,False
+q012,Cable / antenna,dsp_miss_cable,start,2369.207,commercial,-0.07,,,-10.0,0.07,True,False
+q013,Cable / antenna,dsp_miss_cable,start,3567.641,commercial,-0.04,-0.91,,,0.91,True,True
+q014,NBC,dsp_hit_nbc,start,1608.591,gap,0.01,-0.38,,-10.0,0.38,True,False
+q015,NBC,dsp_hit_nbc,start,2066.723,gap,0.69,-0.18,-10.0,,0.18,True,False
+q016,NBC,dsp_hit_nbc,start,2514.392,gap,0.7,-0.03,-10.0,,0.03,True,False
+q017,Prime,dsp_hit_prime,start,234.244,gap,1.08,-0.12,-10.0,,0.12,True,False
+q018,Prime,dsp_hit_prime,start,913.442,,0.08,-1.07,-10.0,,1.07,True,False
+q019,Prime Video,dsp_hit_prime_video,start,571.674,gap,0.51,-0.67,-10.0,,0.67,True,False
+q020,Prime Video,dsp_hit_prime_video,start,1003.282,gap,1.45,-0.11,-10.0,,0.11,True,False
+q021,ESPN,dsp_hit_espn,start,1538.857,commercial,-0.37,,-9.93,,0.37,False,False
+q022,ESPN,dsp_hit_espn,start,2072.112,lag,3.0,,-10.0,,3.0,True,False
+q023,Cable / antenna,dsp_hit_cable,start,38.382,lag,2.18,,,,2.18,True,True
+q024,Cable / antenna,dsp_hit_cable,start,1257.31,commercial,-0.73,,-9.96,,0.73,False,False
+q025,Cable / antenna,dsp_hit_cable,start,3009.899,booth,2.52,1.29,,-10.0,1.29,False,False
+q026,NBC,gold_end,end,141.539,gap,-10.0,,0.73,1.92,10.0,True,False
+q027,NBC,gold_end,end,806.324,,-10.0,,1.6,8.73,10.0,False,False
+q028,ESPN,gold_end,end,305.767,commercial,-10.0,,5.02,7.68,10.0,False,False
+q029,ESPN,gold_end,end,634.732,commercial,-10.0,,,3.22,10.0,False,False
+q030,Prime,gold_end,end,49.585,gap,-10.0,,,,10.0,True,True
+q031,Prime Video,gold_end,end,376.9,gap,-10.0,,0.81,2.4,10.0,True,False
+q032,Cable / antenna,gold_end,end,151.12,booth,-10.0,,,-0.59,10.0,False,False
+q033,Cable / antenna,gold_end,end,462.524,lag,-10.0,,,0.79,10.0,True,False
+q034,NBC,program_far,program,240.0,crowd,0.1,,,-10.0,0.1,True,False
+q035,NBC,program_far,program,240.0,booth,,,,-10.0,,False,False
+q036,Prime Video,program_far,program,440.0,booth,,,,-10.0,,False,False
+q037,Cable / antenna,program_far,program,200.0,crowd,,,,-1.17,,False,False
+q038,Cable / antenna,program_far,program,400.0,booth,,,,-8.58,,False,False
+q039,Cable / antenna,program_far,program,240.0,booth,,,,-10.0,,False,False
+q040,Cable / antenna,program_far,program,360.0,,,,,-10.0,,False,False
+q041,ESPN,program_far,program,400.0,crowd,,,,-10.0,,False,False
+q042,Prime,program_far,program,440.0,booth,,,,-1.83,,False,False
+q043,FOX,redzone,redzone,500.0,booth,,,,-10.0,,False,False
+q044,FOX,redzone,redzone,1600.0,booth,,,,-10.0,,False,False
+q045,FOX,redzone,redzone,2800.0,lag,,,,-10.0,,True,False
+q046,FOX,redzone,redzone,4200.0,booth,,,,-10.0,,False,False
+q047,FOX,redzone,redzone,5600.0,booth,,,,-10.0,,False,False
+q048,NBC,pod_interior,interior,46.07,commercial,-10.0,,,,10.0,False,True
+q049,NBC,pod_interior,interior,663.347,commercial,-10.0,,,,10.0,False,True
+q050,NBC,pod_interior,interior,1114.332,commercial,-9.11,,-10.0,,9.11,False,True
+q051,NBC,pod_interior,interior,1648.591,commercial,-5.12,,,,5.12,False,False
+q052,NBC,pod_interior,interior,2106.723,commercial,-10.0,,,,10.0,False,True
+q053,NBC,pod_interior,interior,2554.392,commercial,-4.54,,,,4.54,False,True

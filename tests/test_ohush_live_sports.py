@@ -29,11 +29,45 @@ class SportsTests(unittest.TestCase):
     def test_silence_bed_is_silent_and_stadium_is_not(self):
         beds = make_beds(use_recordings=False)
         self.assertEqual(int(np.max(np.abs(beds["silence"]))), 0)
-        self.assertGreater(int(np.max(np.abs(beds["stadium"]))), 100)
-        self.assertLess(int(np.max(np.abs(beds["stadium"]))), 2500)
+        self.assertGreater(int(np.max(np.abs(beds["stadium"]))), 1000)
+        self.assertLess(int(np.max(np.abs(beds["stadium"]))), 30000)
+        # Beds share a loudness target so rain/pink are not whisper-quiet vs crowd.
+        def _rms(name: str) -> float:
+            return float(np.sqrt(np.mean(np.square(beds[name].astype(np.float64) / 32768.0))))
+
+        for name in (
+            "hush",
+            "neon",
+            "charge",
+            "volt",
+            "drop",
+            "stadium",
+            "rain",
+            "fireplace",
+            "pink",
+            "brown",
+            "ocean",
+            "stream",
+            "birds",
+            "breeze",
+            "night",
+            "chimes",
+            "piano",
+            "pad",
+            "harp",
+            "meadow",
+        ):
+            self.assertGreater(_rms(name), 0.06, name)
         self.assertFalse(np.array_equal(beds["stadium"], beds["rain"]))
         self.assertFalse(np.array_equal(beds["pink"], beds["brown"]))
+        self.assertFalse(np.array_equal(beds["ocean"], beds["pad"]))
+        self.assertFalse(np.array_equal(beds["hush"], beds["pink"]))
+        self.assertFalse(np.array_equal(beds["neon"], beds["charge"]))
+        self.assertFalse(np.array_equal(beds["volt"], beds["drop"]))
         self.assertIn("fireplace", beds)
+        self.assertIn("harp", beds)
+        self.assertIn("hush", beds)
+        self.assertIn("neon", beds)
 
     def test_program_passthrough_after_prime(self):
         beds = make_beds(use_recordings=False)
@@ -43,6 +77,18 @@ class SportsTests(unittest.TestCase):
         out = np.zeros((32, 2), dtype=np.int16)
         gate.render(out)
         self.assertTrue(np.all(out == 400))
+
+    def test_ring_does_not_grow_past_prime_slack(self):
+        beds = make_beds(use_recordings=False)
+        gate = ListenerGate(beds, make_earcon(), prime_frames=64)
+        block = np.zeros((32, 2), dtype=np.int16)
+        out = np.zeros((16, 2), dtype=np.int16)
+        for _ in range(40):
+            gate.push(block)
+            # Output intentionally slower than input.
+            if _ % 3 == 0:
+                gate.render(out)
+        self.assertLessEqual(gate._count, gate._prime + gate._slack)
 
     def test_closed_chunk_is_not_the_open_file(self):
         with TemporaryDirectory() as tmp:
@@ -54,13 +100,25 @@ class SportsTests(unittest.TestCase):
             self.assertNotEqual(writer.path, first[0])
             self.assertIsNone(writer.close())
 
-    def test_manual_play_holds_through_the_current_break(self):
+    def test_manual_play_from_cover_holds_until_departure_quiet(self):
         latch = AutoLatch()
-        latch.human_play()
+        latch.human_play(was_replacement=True)
         self.assertFalse(latch.allow_auto_mute(2))
-        self.assertFalse(latch.allow_auto_mute(2))
-        self.assertFalse(latch.allow_auto_mute(0))
+        self.assertFalse(latch.allow_auto_mute(1))
+        self.assertTrue(latch.allow_auto_mute(0))
         self.assertTrue(latch.allow_auto_mute(2))
+
+    def test_manual_play_while_already_on_show_does_not_block_ads(self):
+        latch = AutoLatch()
+        latch.human_play(was_replacement=False)
+        self.assertTrue(latch.allow_auto_mute(1))
+
+    def test_manual_cover_never_blocks_auto_return(self):
+        latch = AutoLatch()
+        latch.human_mute(was_program=True)
+        # Program-like return_votes must still be allowed — this was the stuck-cover bug.
+        self.assertTrue(latch.allow_auto_play(1))
+        self.assertTrue(latch.allow_auto_play(0))
 
     def test_hint_does_not_unmute(self):
         machine = Machine()
@@ -72,11 +130,11 @@ class SportsTests(unittest.TestCase):
         self.assertEqual(machine.state, "MUTED")
 
     def test_decision_is_not_science(self):
-        row = decision_row(1.5, "PROGRAM_TO_REPLACEMENT", "auto", {"speaker": None, "audio": None, "semantic": None}, "stadium", False)
+        row = decision_row(1.5, "PROGRAM_TO_REPLACEMENT", "auto", {"speaker": None, "audio": None, "semantic": None}, "hush", False)
         self.assertFalse(row["scientific_authority"])
         self.assertFalse(row["allowed_to_change_exp001_005"])
         self.assertEqual(row["dataset_role"], "live_dev")
-        self.assertEqual(row["replacement"], "stadium")
+        self.assertEqual(row["replacement"], "hush")
 
     def test_uploader_command_does_not_delete(self):
         command = cp_command(Path("audio_0001.wav"), "gs://bucket/live/s/audio_0001.wav", "abc")

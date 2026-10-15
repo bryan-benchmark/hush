@@ -6,7 +6,13 @@ import { denial, labelVisible } from "@/lib/datasets";
 
 export const runtime = "nodejs";
 
-const EVENT_CLASSES = new Set(["commercial", "network_promo", "sponsorship", "other"]);
+const EVENT_CLASSES = new Set([
+  "commercial",
+  "network_promo",
+  "sponsorship",
+  "other",
+  "program",
+]);
 const ACTIONS = new Set(["mute", "play", "unsure"]);
 const CONFIDENCE = new Set(["certain", "unsure"]);
 

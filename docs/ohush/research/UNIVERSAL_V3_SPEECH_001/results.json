@@ -1,0 +1,153 @@
+{
+  "system": "universal_v3_speech_evidence",
+  "mute_policy": false,
+  "chunk_s": 20.0,
+  "model": "faster-whisper base.en int8 cpu beam 1",
+  "football_pods": 136,
+  "strong_events": 25,
+  "weak_events": 59,
+  "pods_with_strong_phrase_spoken_in_the_30s_before_the_start": 12,
+  "of_those_known_before_the_start": 3,
+  "strong_events_at_least_15s_from_every_pod": 10,
+  "redzone_strong_events": 3,
+  "examples_before": [
+    {
+      "session": "hush_20260909_213047",
+      "network": "NBC",
+      "start": 623.347274,
+      "spoken_end": 621.92,
+      "available_at": 640.0,
+      "phrase": "when we come back"
+    },
+    {
+      "session": "hush_20260909_213047",
+      "network": "NBC",
+      "start": 7000.980657,
+      "spoken_end": 6997.2,
+      "available_at": 7000.0,
+      "phrase": "after these messages"
+    },
+    {
+      "session": "hush_20260913_210542",
+      "network": "NBC",
+      "start": 8671.036946999999,
+      "spoken_end": 8667.26,
+      "available_at": 8680.0,
+      "phrase": "after these messages"
+    },
+    {
+      "session": "hush_20261008_205100",
+      "network": "Prime Video",
+      "start": 8802.614656,
+      "spoken_end": 8783.88,
+      "available_at": 8800.0,
+      "phrase": "these messages"
+    },
+    {
+      "session": "hush_20261010_222400",
+      "network": "Cable / antenna",
+      "start": 1257.309861,
+      "spoken_end": 1247.66,
+      "available_at": 1260.0,
+      "phrase": "when we come back"
+    },
+    {
+      "session": "hush_20261011_135700",
+      "network": "Cable / antenna",
+      "start": 1298.306029,
+      "spoken_end": 1294.6,
+      "available_at": 1300.0,
+      "phrase": "back after this"
+    },
+    {
+      "session": "hush_20261011_204300",
+      "network": "Cable / antenna",
+      "start": 2598.830584,
+      "spoken_end": 2597.68,
+      "available_at": 2600.0,
+      "phrase": "when we come back"
+    },
+    {
+      "session": "hush_20261012_204200",
+      "network": "Cable / antenna",
+      "start": 655.340942,
+      "spoken_end": 646.26,
+      "available_at": 660.0,
+      "phrase": "when we come back"
+    },
+    {
+      "session": "hush_20261012_204200",
+      "network": "Cable / antenna",
+      "start": 2284.252524,
+      "spoken_end": 2277.0,
+      "available_at": 2280.0,
+      "phrase": "when we come back"
+    },
+    {
+      "session": "hush_20261012_204200",
+      "network": "Cable / antenna",
+      "start": 2558.7306120000003,
+      "spoken_end": 2542.28,
+      "available_at": 2560.0,
+      "phrase": "when we come back"
+    },
+    {
+      "session": "hush_20261012_204200",
+      "network": "Cable / antenna",
+      "start": 6636.525785,
+      "spoken_end": 6632.4,
+      "available_at": 6640.0,
+      "phrase": "back after this"
+    },
+    {
+      "session": "hush_20261012_204200",
+      "network": "Cable / antenna",
+      "start": 6838.538084,
+      "spoken_end": 6829.88,
+      "available_at": 6840.0,
+      "phrase": "when we come back"
+    }
+  ],
+  "wall_s": null,
+  "transcription": {
+    "sports_sessions": 10,
+    "chunk_s": 20.0,
+    "model": "faster-whisper base.en int8 cpu beam 1 vad_filter false",
+    "note": "Four workers. The 0-second score time is not the transcription time."
+  },
+  "unique_moments": {
+    "football_strong_moments": 18,
+    "phrase_rows_including_nested_duplicates": 25,
+    "redzone_moments": 1,
+    "redzone_phrase_rows": 3
+  },
+  "interpretation": {
+    "mute_policy": false,
+    "pods_spoken_in_the_30s_before_start": 12,
+    "of_those_recognizer_finished_before_the_start": 3,
+    "causal_leads_s": [
+      {
+        "session": "hush_20260909_213047",
+        "network": "NBC",
+        "words_finished_before_start_s": 3.8,
+        "recognizer_finished_before_start_s": 1.0,
+        "phrase": "after these messages"
+      },
+      {
+        "session": "hush_20261008_205100",
+        "network": "Prime Video",
+        "words_finished_before_start_s": 18.7,
+        "recognizer_finished_before_start_s": 2.6,
+        "phrase": "these messages"
+      },
+      {
+        "session": "hush_20261012_204200",
+        "network": "Cable / antenna",
+        "words_finished_before_start_s": 7.3,
+        "recognizer_finished_before_start_s": 4.3,
+        "phrase": "when we come back"
+      }
+    ],
+    "one_of_the_12_reads_as_a_garble": "hush_20261012_204200 spoken_end 6632.4 'yards back after this'"
+  }
+}

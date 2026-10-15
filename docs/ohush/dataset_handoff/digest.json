@@ -1,0 +1,209 @@
+{
+  "id": "DATASET_HANDOFF_2026-10-13",
+  "active_truth_events": 177,
+  "raw_truth_rows": 189,
+  "resolution": "Drop a row whose gold_id appears in another row's supersedes, and drop retracted rows.",
+  "scoring_target": "event_class commercial AND desired_action mute AND confidence not unsure, inside a fully_annotated range.",
+  "sittings": [
+    {
+      "manifest": "GOLD_DATASET_20261013",
+      "session": "hush_20261007_220650",
+      "from_seconds": 20,
+      "to_seconds": 11751,
+      "heard_hours": 3.26,
+      "fully_annotated": true,
+      "active_events": 19,
+      "event_classes": {
+        "commercial": 19
+      },
+      "target_commercials": 19,
+      "target_commercial_seconds": 1521.3,
+      "program_notes": []
+    },
+    {
+      "manifest": "GOLD_DATASET_20261013",
+      "session": "hush_20260909_213047",
+      "from_seconds": 0,
+      "to_seconds": 9373,
+      "heard_hours": 2.6,
+      "fully_annotated": true,
+      "active_events": 20,
+      "event_classes": {
+        "commercial": 20
+      },
+      "target_commercials": 20,
+      "target_commercial_seconds": 2849.9,
+      "program_notes": []
+    },
+    {
+      "manifest": "GOLD_DATASET_20261013",
+      "session": "hush_20260913_150934",
+      "from_seconds": 0,
+      "to_seconds": 7200,
+      "heard_hours": 2.0,
+      "fully_annotated": true,
+      "active_events": 1,
+      "event_classes": {
+        "program": 1
+      },
+      "target_commercials": 0,
+      "target_commercial_seconds": 0,
+      "program_notes": [
+        "redzone"
+      ]
+    },
+    {
+      "manifest": "GOLD_DATASET_20261013",
+      "session": "hush_20260913_210542",
+      "from_seconds": 0,
+      "to_seconds": 12600,
+      "heard_hours": 3.5,
+      "fully_annotated": true,
+      "active_events": 21,
+      "event_classes": {
+        "commercial": 21
+      },
+      "target_commercials": 21,
+      "target_commercial_seconds": 3052.5,
+      "program_notes": []
+    },
+    {
+      "manifest": "GOLD_DATASET_20261013",
+      "session": "hush_20261008_205100",
+      "from_seconds": 0,
+      "to_seconds": 10440.364,
+      "heard_hours": 2.9,
+      "fully_annotated": true,
+      "active_events": 23,
+      "event_classes": {
+        "commercial": 23
+      },
+      "target_commercials": 23,
+      "target_commercial_seconds": 2642.1,
+      "program_notes": []
+    },
+    {
+      "manifest": "GOLD_DATASET_20261013",
+      "session": "hush_20261011_204300",
+      "from_seconds": 0,
+      "to_seconds": 14405.376,
+      "heard_hours": 4.0,
+      "fully_annotated": true,
+      "active_events": 7,
+      "event_classes": {
+        "commercial": 6,
+        "program": 1
+      },
+      "target_commercials": 6,
+      "target_commercial_seconds": 626.4,
+      "program_notes": [
+        "gilmore girls"
+      ]
+    },
+    {
+      "manifest": "GOLD_DATASET_20261013",
+      "session": "hush_20261012_204200",
+      "from_seconds": 0,
+      "to_seconds": 13111.808,
+      "heard_hours": 3.64,
+      "fully_annotated": true,
+      "active_events": 25,
+      "event_classes": {
+        "commercial": 24,
+        "program": 1
+      },
+      "target_commercials": 24,
+      "target_commercial_seconds": 2944.3,
+      "program_notes": [
+        "news"
+      ]
+    },
+    {
+      "manifest": "GOLD_DATASET_20261013",
+      "session": "hush_20261010_222400",
+      "from_seconds": 0,
+      "to_seconds": 6064.768,
+      "heard_hours": 1.68,
+      "fully_annotated": true,
+      "active_events": 11,
+      "event_classes": {
+        "commercial": 6,
+        "program": 5
+      },
+      "target_commercials": 6,
+      "target_commercial_seconds": 1081.8,
+      "program_notes": [
+        "SNL",
+        "alabama georgia",
+        "end",
+        "gilmore girls",
+        "lsu"
+      ]
+    },
+    {
+      "manifest": "GOLD_DATASET_20261013",
+      "session": "hush_20261011_135700",
+      "from_seconds": 0,
+      "to_seconds": 4896.768,
+      "heard_hours": 1.36,
+      "fully_annotated": true,
+      "active_events": 11,
+      "event_classes": {
+        "commercial": 8,
+        "program": 3
+      },
+      "target_commercials": 8,
+      "target_commercial_seconds": 983.0,
+      "program_notes": [
+        "end",
+        "football"
+      ]
+    },
+    {
+      "manifest": "GOLD_REPLICATION_V1",
+      "session": "hush_20260924_220624",
+      "from_seconds": 0,
+      "to_seconds": 7600,
+      "heard_hours": 2.11,
+      "fully_annotated": true,
+      "active_events": 13,
+      "event_classes": {
+        "commercial": 13
+      },
+      "target_commercials": 13,
+      "target_commercial_seconds": 1664.4,
+      "program_notes": []
+    },
+    {
+      "manifest": "GOLD_REPLICATION_V1",
+      "session": "hush_20260827_135935",
+      "from_seconds": 300,
+      "to_seconds": 7200,
+      "heard_hours": 1.92,
+      "fully_annotated": true,
+      "active_events": 11,
+      "event_classes": {
+        "commercial": 11
+      },
+      "target_commercials": 11,
+      "target_commercial_seconds": 860.9,
+      "program_notes": []
+    },
+    {
+      "manifest": "GOLD_DEV_V1",
+      "session": "hush_20260914_212529",
+      "from_seconds": 0,
+      "to_seconds": 6899,
+      "heard_hours": 1.92,
+      "fully_annotated": true,
+      "active_events": 15,
+      "event_classes": {
+        "commercial": 15
+      },
+      "target_commercials": 15,
+      "target_commercial_seconds": 1804.0,
+      "program_notes": []
+    }
+  ],
+  "clock_warning": "hush_20261008_205100 times are captured audio in birth order. They are not the Thursday live-engine clock."
+}

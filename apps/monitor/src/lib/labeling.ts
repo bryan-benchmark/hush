@@ -604,12 +604,22 @@ export function listSessions() {
         audio_seconds?: number;
         started_at?: string;
         sample_rate_hz?: number;
+        show?: string;
+        service?: string;
+        content?: string;
+        label_queue?: boolean;
+        gaps?: unknown[];
       };
       out.push({
         session,
         audio_seconds: raw.audio_seconds ?? null,
         started_at: raw.started_at ?? null,
         sample_rate_hz: raw.sample_rate_hz ?? 48000,
+        show: typeof raw.show === "string" ? raw.show : "",
+        service: typeof raw.service === "string" ? raw.service : "",
+        content: typeof raw.content === "string" ? raw.content : "",
+        label_queue: Boolean(raw.label_queue),
+        gaps: Array.isArray(raw.gaps) ? raw.gaps.length : 0,
       });
     }
   }

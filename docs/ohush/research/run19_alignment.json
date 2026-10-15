@@ -1,0 +1,237 @@
+{
+  "question": "Does frozen run19 join audio_0023.wav?",
+  "scientific_authority": false,
+  "sample_locked": false,
+  "feature_aligned": true,
+  "join_accepted": false,
+  "rejection_reason": "No persisted sample counter or chunk-open timestamp ties engine t to a WAV sample. Duration agreement of 0.30 s is not a join. The frozen CNN14 distance series does line up with this file, but that is feature alignment, not a sample lock, so engine decisions are not attributed to these samples.",
+  "acceptance_rule": {
+    "sample_lock_requires": "a stored sample index or chunk-open time shared with engine t",
+    "feature_alignment_requires": "pearson r >= 0.85, third-wise offset span <= 1 s, and r at least 0.25 above the best alternative file",
+    "commercial_labels_used": false,
+    "live_reference_s": 15.0,
+    "window_s": 10.0,
+    "memory_s": 180.0,
+    "embedding": "Cnn14_mAP=0.431.pth"
+  },
+  "anchors": {
+    "frozen_track_rows": 5368,
+    "frozen_track_runs": 32,
+    "run_index": 19,
+    "run_rows": 644,
+    "run_t_end": 675.029,
+    "track_has_sample_index": false,
+    "track_has_wall_clock": false,
+    "track_events": [
+      "track"
+    ],
+    "chunk_writer_persists_open_time": false,
+    "decisions_have_only_relative_t": true,
+    "dropped_frames_max": 13171328,
+    "lag_ms_median": 242.7,
+    "logged_audio_scores": 624,
+    "logged_score_t0": 36.011,
+    "logged_score_t1": 675.029,
+    "duration_delta_s": 0.299,
+    "note": "Engine t and the WAV sample index are separate clocks. File mtime is when the chunk was last written, not a timestamp stored beside t."
+  },
+  "candidate": {
+    "name": "audio_0023.wav",
+    "sha256": "b423248e609b1a9dc9699f5b5fb5e40a5dfb03bf4ce0523d48e91055ddfe7fb9",
+    "duration_s": 675.328,
+    "frames": 32415744,
+    "bytes": 129663020
+  },
+  "comparisons": [
+    {
+      "file": "audio_0023.wav",
+      "sha256": "b423248e609b1a9dc9699f5b5fb5e40a5dfb03bf4ce0523d48e91055ddfe7fb9",
+      "duration_s": 675.328,
+      "defined_wav_scores": 641,
+      "best_wide": {
+        "offset_s": -1.0,
+        "pairs": 624,
+        "pearson_r": 0.9915,
+        "mae": 0.0091
+      },
+      "best_fine": {
+        "offset_s": -1.25,
+        "pairs": 624,
+        "pearson_r": 0.9915,
+        "mae": 0.0091
+      },
+      "top_fine": [
+        {
+          "offset_s": -1.25,
+          "pairs": 624,
+          "pearson_r": 0.9915,
+          "mae": 0.0091
+        },
+        {
+          "offset_s": -1.0,
+          "pairs": 624,
+          "pearson_r": 0.9915,
+          "mae": 0.0091
+        },
+        {
+          "offset_s": -0.75,
+          "pairs": 624,
+          "pearson_r": 0.9915,
+          "mae": 0.0091
+        },
+        {
+          "offset_s": -1.5,
+          "pairs": 624,
+          "pearson_r": 0.9909,
+          "mae": 0.0093
+        },
+        {
+          "offset_s": -2.25,
+          "pairs": 623,
+          "pearson_r": 0.9818,
+          "mae": 0.012
+        }
+      ],
+      "thirds": [
+        {
+          "third": 1,
+          "engine_t0": 36.011,
+          "engine_t1": 249.017,
+          "best": {
+            "offset_s": -1.25,
+            "pairs": 214,
+            "pearson_r": 0.9956,
+            "mae": 0.0079
+          }
+        },
+        {
+          "third": 2,
+          "engine_t0": 249.017,
+          "engine_t1": 462.023,
+          "best": {
+            "offset_s": -1.25,
+            "pairs": 200,
+            "pearson_r": 0.9819,
+            "mae": 0.0098
+          }
+        },
+        {
+          "third": 3,
+          "engine_t0": 462.023,
+          "engine_t1": 675.029,
+          "best": {
+            "offset_s": -1.25,
+            "pairs": 210,
+            "pearson_r": 0.9765,
+            "mae": 0.0097
+          }
+        }
+      ]
+    },
+    {
+      "file": "audio_0044.wav",
+      "sha256": "b9156325da65b6637a7bc8f72d2da075a6f94522a3f992b6822a90023db8a170",
+      "duration_s": 780.16,
+      "defined_wav_scores": 746,
+      "best_wide": {
+        "offset_s": -87.0,
+        "pairs": 538,
+        "pearson_r": 0.6752,
+        "mae": 0.0558
+      },
+      "best_fine": {
+        "offset_s": -86.5,
+        "pairs": 539,
+        "pearson_r": 0.6757,
+        "mae": 0.0561
+      },
+      "top_fine": [
+        {
+          "offset_s": -86.5,
+          "pairs": 539,
+          "pearson_r": 0.6757,
+          "mae": 0.0561
+        },
+        {
+          "offset_s": -87.5,
+          "pairs": 538,
+          "pearson_r": 0.6755,
+          "mae": 0.0558
+        },
+        {
+          "offset_s": -87.25,
+          "pairs": 538,
+          "pearson_r": 0.6752,
+          "mae": 0.0558
+        },
+        {
+          "offset_s": -87.0,
+          "pairs": 538,
+          "pearson_r": 0.6752,
+          "mae": 0.0558
+        },
+        {
+          "offset_s": -86.75,
+          "pairs": 538,
+          "pearson_r": 0.6752,
+          "mae": 0.0558
+        }
+      ],
+      "thirds": []
+    },
+    {
+      "file": "audio_0027.wav",
+      "sha256": "a0b7a4be375d472eded8c6fc3c794e1b4e159479a064ba86a28504316a47fde1",
+      "duration_s": 900.0,
+      "defined_wav_scores": 866,
+      "best_wide": {
+        "offset_s": -50.0,
+        "pairs": 575,
+        "pearson_r": 0.6766,
+        "mae": 0.0491
+      },
+      "best_fine": {
+        "offset_s": -50.5,
+        "pairs": 575,
+        "pearson_r": 0.6774,
+        "mae": 0.049
+      },
+      "top_fine": [
+        {
+          "offset_s": -50.5,
+          "pairs": 575,
+          "pearson_r": 0.6774,
+          "mae": 0.049
+        },
+        {
+          "offset_s": -51.5,
+          "pairs": 574,
+          "pearson_r": 0.6766,
+          "mae": 0.0491
+        },
+        {
+          "offset_s": -50.25,
+          "pairs": 575,
+          "pearson_r": 0.6766,
+          "mae": 0.0491
+        },
+        {
+          "offset_s": -50.0,
+          "pairs": 575,
+          "pearson_r": 0.6766,
+          "mae": 0.0491
+        },
+        {
+          "offset_s": -49.75,
+          "pairs": 575,
+          "pearson_r": 0.6766,
+          "mae": 0.0491
+        }
+      ],
+      "thirds": []
+    }
+  ],
+  "alternative_best_r": 0.6774,
+  "third_offset_span_s": 0.0,
+  "frozen_track_sha256": "f4850eccecfb8bbf734fefce0854fb3fe0677e6f339d9f6abe1672d4a02be442"
+}

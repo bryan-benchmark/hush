@@ -6,5 +6,6 @@ export default async function LabelPage({
   searchParams: Promise<{ task?: string }>;
 }) {
   const { task } = await searchParams;
-  return <LabelApp task={task === "all" ? undefined : "replication"} />;
+  const mode = task === "all" ? undefined : task === "dataset" ? "dataset" : "replication";
+  return <LabelApp task={mode} />;
 }

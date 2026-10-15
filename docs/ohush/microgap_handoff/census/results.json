@@ -1,0 +1,874 @@
+{
+  "system": "microgap_census_001",
+  "mute_policy": false,
+  "retunes_exp001": false,
+  "october_used": false,
+  "holdouts_opened": false,
+  "window_s": 0.005,
+  "thresholds_db": [
+    -120.0,
+    -100.0,
+    -85.0,
+    -70.0,
+    -55.0,
+    -40.0
+  ],
+  "sessions": [
+    {
+      "coverage_s": 6900.0,
+      "commercial_s": 860.874,
+      "program_s": 6039.126,
+      "pods": 11,
+      "boundary_min_5ms_db": {
+        "n": 11,
+        "median": -101.8,
+        "p10": -106.7,
+        "p90": -95.1
+      },
+      "program_min_5ms_db": {
+        "n": 202,
+        "median": -52.6,
+        "p10": -61.3,
+        "p90": -40.8
+      },
+      "program_grid_n": 202,
+      "thresholds": [
+        {
+          "threshold_db": -120.0,
+          "events": 1,
+          "program_events": 0,
+          "program_events_per_hour": 0.0,
+          "within_break_events": 0,
+          "within_break_per_hour": 0.0,
+          "chunk_seam_events": 0,
+          "median_duration_s": 0.005,
+          "starts": 11,
+          "recall": {
+            "0.25": {
+              "starts_descriptive": 1,
+              "starts_causal": 1,
+              "ends_descriptive": 0,
+              "ends_causal": 0
+            },
+            "0.5": {
+              "starts_descriptive": 1,
+              "starts_causal": 1,
+              "ends_descriptive": 0,
+              "ends_causal": 0
+            },
+            "1.0": {
+              "starts_descriptive": 1,
+              "starts_causal": 1,
+              "ends_descriptive": 0,
+              "ends_causal": 0
+            },
+            "2.0": {
+              "starts_descriptive": 1,
+              "starts_causal": 1,
+              "ends_descriptive": 0,
+              "ends_causal": 0
+            },
+            "5.0": {
+              "starts_descriptive": 1,
+              "starts_causal": 1,
+              "ends_descriptive": 0,
+              "ends_causal": 0
+            }
+          }
+        },
+        {
+          "threshold_db": -100.0,
+          "events": 1018,
+          "program_events": 226,
+          "program_events_per_hour": 134.72,
+          "within_break_events": 149,
+          "within_break_per_hour": 623.09,
+          "chunk_seam_events": 0,
+          "median_duration_s": 0.005,
+          "starts": 11,
+          "recall": {
+            "0.25": {
+              "starts_descriptive": 7,
+              "starts_causal": 5,
+              "ends_descriptive": 8,
+              "ends_causal": 6
+            },
+            "0.5": {
+              "starts_descriptive": 7,
+              "starts_causal": 5,
+              "ends_descriptive": 10,
+              "ends_causal": 8
+            },
+            "1.0": {
+              "starts_descriptive": 7,
+              "starts_causal": 5,
+              "ends_descriptive": 11,
+              "ends_causal": 8
+            },
+            "2.0": {
+              "starts_descriptive": 8,
+              "starts_causal": 6,
+              "ends_descriptive": 11,
+              "ends_causal": 8
+            },
+            "5.0": {
+              "starts_descriptive": 8,
+              "starts_causal": 6,
+              "ends_descriptive": 11,
+              "ends_causal": 8
+            }
+          }
+        },
+        {
+          "threshold_db": -85.0,
+          "events": 103,
+          "program_events": 9,
+          "program_events_per_hour": 5.37,
+          "within_break_events": 66,
+          "within_break_per_hour": 276.0,
+          "chunk_seam_events": 0,
+          "median_duration_s": 0.045,
+          "starts": 11,
+          "recall": {
+            "0.25": {
+              "starts_descriptive": 10,
+              "starts_causal": 1,
+              "ends_descriptive": 9,
+              "ends_causal": 0
+            },
+            "0.5": {
+              "starts_descriptive": 10,
+              "starts_causal": 2,
+              "ends_descriptive": 10,
+              "ends_causal": 1
+            },
+            "1.0": {
+              "starts_descriptive": 10,
+              "starts_causal": 5,
+              "ends_descriptive": 11,
+              "ends_causal": 3
+            },
+            "2.0": {
+              "starts_descriptive": 11,
+              "starts_causal": 6,
+              "ends_descriptive": 11,
+              "ends_causal": 8
+            },
+            "5.0": {
+              "starts_descriptive": 11,
+              "starts_causal": 8,
+              "ends_descriptive": 11,
+              "ends_causal": 8
+            }
+          }
+        },
+        {
+          "threshold_db": -70.0,
+          "events": 466,
+          "program_events": 174,
+          "program_events_per_hour": 103.72,
+          "within_break_events": 72,
+          "within_break_per_hour": 301.09,
+          "chunk_seam_events": 0,
+          "median_duration_s": 0.01,
+          "starts": 11,
+          "recall": {
+            "0.25": {
+              "starts_descriptive": 11,
+              "starts_causal": 2,
+              "ends_descriptive": 9,
+              "ends_causal": 3
+            },
+            "0.5": {
+              "starts_descriptive": 11,
+              "starts_causal": 3,
+              "ends_descriptive": 10,
+              "ends_causal": 5
+            },
+            "1.0": {
+              "starts_descriptive": 11,
+              "starts_causal": 6,
+              "ends_descriptive": 11,
+              "ends_causal": 7
+            },
+            "2.0": {
+              "starts_descriptive": 11,
+              "starts_causal": 6,
+              "ends_descriptive": 11,
+              "ends_causal": 10
+            },
+            "5.0": {
+              "starts_descriptive": 11,
+              "starts_causal": 8,
+              "ends_descriptive": 11,
+              "ends_causal": 10
+            }
+          }
+        },
+        {
+          "threshold_db": -55.0,
+          "events": 18906,
+          "program_events": 18349,
+          "program_events_per_hour": 10938.07,
+          "within_break_events": 329,
+          "within_break_per_hour": 1375.81,
+          "chunk_seam_events": 0,
+          "median_duration_s": 0.01,
+          "starts": 11,
+          "recall": {
+            "0.25": {
+              "starts_descriptive": 11,
+              "starts_causal": 1,
+              "ends_descriptive": 10,
+              "ends_causal": 1
+            },
+            "0.5": {
+              "starts_descriptive": 11,
+              "starts_causal": 2,
+              "ends_descriptive": 10,
+              "ends_causal": 2
+            },
+            "1.0": {
+              "starts_descriptive": 11,
+              "starts_causal": 6,
+              "ends_descriptive": 11,
+              "ends_causal": 4
+            },
+            "2.0": {
+              "starts_descriptive": 11,
+              "starts_causal": 6,
+              "ends_descriptive": 11,
+              "ends_causal": 9
+            },
+            "5.0": {
+              "starts_descriptive": 11,
+              "starts_causal": 8,
+              "ends_descriptive": 11,
+              "ends_causal": 10
+            }
+          }
+        },
+        {
+          "threshold_db": -40.0,
+          "events": 43046,
+          "program_events": 39409,
+          "program_events_per_hour": 23492.21,
+          "within_break_events": 3522,
+          "within_break_per_hour": 14728.3,
+          "chunk_seam_events": 7,
+          "median_duration_s": 0.01,
+          "starts": 11,
+          "recall": {
+            "0.25": {
+              "starts_descriptive": 11,
+              "starts_causal": 1,
+              "ends_descriptive": 10,
+              "ends_causal": 0
+            },
+            "0.5": {
+              "starts_descriptive": 11,
+              "starts_causal": 2,
+              "ends_descriptive": 10,
+              "ends_causal": 0
+            },
+            "1.0": {
+              "starts_descriptive": 11,
+              "starts_causal": 6,
+              "ends_descriptive": 11,
+              "ends_causal": 1
+            },
+            "2.0": {
+              "starts_descriptive": 11,
+              "starts_causal": 6,
+              "ends_descriptive": 11,
+              "ends_causal": 7
+            },
+            "5.0": {
+              "starts_descriptive": 11,
+              "starts_causal": 10,
+              "ends_descriptive": 11,
+              "ends_causal": 11
+            }
+          }
+        }
+      ],
+      "session": "hush_20260827_135935",
+      "service": "Hulu",
+      "program": "Gilmore Girls",
+      "from_s": 300.0,
+      "to_s": 7200.0,
+      "chunk_seams_inside": 7
+    },
+    {
+      "coverage_s": 6899.0,
+      "commercial_s": 1804.047,
+      "program_s": 5094.953,
+      "pods": 15,
+      "boundary_min_5ms_db": {
+        "n": 15,
+        "median": -44.8,
+        "p10": -85.9,
+        "p90": -36.5
+      },
+      "program_min_5ms_db": {
+        "n": 171,
+        "median": -35.6,
+        "p10": -45.7,
+        "p90": -30.2
+      },
+      "program_grid_n": 171,
+      "thresholds": [
+        {
+          "threshold_db": -120.0,
+          "events": 9,
+          "program_events": 0,
+          "program_events_per_hour": 0.0,
+          "within_break_events": 8,
+          "within_break_per_hour": 15.96,
+          "chunk_seam_events": 0,
+          "median_duration_s": 0.005,
+          "starts": 15,
+          "recall": {
+            "0.25": {
+              "starts_descriptive": 0,
+              "starts_causal": 0,
+              "ends_descriptive": 0,
+              "ends_causal": 0
+            },
+            "0.5": {
+              "starts_descriptive": 0,
+              "starts_causal": 0,
+              "ends_descriptive": 0,
+              "ends_causal": 0
+            },
+            "1.0": {
+              "starts_descriptive": 0,
+              "starts_causal": 0,
+              "ends_descriptive": 1,
+              "ends_causal": 0
+            },
+            "2.0": {
+              "starts_descriptive": 0,
+              "starts_causal": 0,
+              "ends_descriptive": 1,
+              "ends_causal": 0
+            },
+            "5.0": {
+              "starts_descriptive": 0,
+              "starts_causal": 0,
+              "ends_descriptive": 1,
+              "ends_causal": 0
+            }
+          }
+        },
+        {
+          "threshold_db": -100.0,
+          "events": 24,
+          "program_events": 1,
+          "program_events_per_hour": 0.71,
+          "within_break_events": 18,
+          "within_break_per_hour": 35.92,
+          "chunk_seam_events": 0,
+          "median_duration_s": 0.025,
+          "starts": 15,
+          "recall": {
+            "0.25": {
+              "starts_descriptive": 0,
+              "starts_causal": 0,
+              "ends_descriptive": 1,
+              "ends_causal": 1
+            },
+            "0.5": {
+              "starts_descriptive": 0,
+              "starts_causal": 0,
+              "ends_descriptive": 1,
+              "ends_causal": 1
+            },
+            "1.0": {
+              "starts_descriptive": 0,
+              "starts_causal": 0,
+              "ends_descriptive": 1,
+              "ends_causal": 1
+            },
+            "2.0": {
+              "starts_descriptive": 0,
+              "starts_causal": 0,
+              "ends_descriptive": 1,
+              "ends_causal": 1
+            },
+            "5.0": {
+              "starts_descriptive": 0,
+              "starts_causal": 0,
+              "ends_descriptive": 1,
+              "ends_causal": 1
+            }
+          }
+        },
+        {
+          "threshold_db": -85.0,
+          "events": 409,
+          "program_events": 103,
+          "program_events_per_hour": 72.78,
+          "within_break_events": 185,
+          "within_break_per_hour": 369.17,
+          "chunk_seam_events": 0,
+          "median_duration_s": 0.01,
+          "starts": 15,
+          "recall": {
+            "0.25": {
+              "starts_descriptive": 2,
+              "starts_causal": 0,
+              "ends_descriptive": 3,
+              "ends_causal": 1
+            },
+            "0.5": {
+              "starts_descriptive": 2,
+              "starts_causal": 0,
+              "ends_descriptive": 5,
+              "ends_causal": 2
+            },
+            "1.0": {
+              "starts_descriptive": 2,
+              "starts_causal": 1,
+              "ends_descriptive": 8,
+              "ends_causal": 3
+            },
+            "2.0": {
+              "starts_descriptive": 3,
+              "starts_causal": 3,
+              "ends_descriptive": 9,
+              "ends_causal": 4
+            },
+            "5.0": {
+              "starts_descriptive": 5,
+              "starts_causal": 4,
+              "ends_descriptive": 10,
+              "ends_causal": 5
+            }
+          }
+        },
+        {
+          "threshold_db": -70.0,
+          "events": 231,
+          "program_events": 88,
+          "program_events_per_hour": 62.18,
+          "within_break_events": 124,
+          "within_break_per_hour": 247.44,
+          "chunk_seam_events": 0,
+          "median_duration_s": 0.145,
+          "starts": 15,
+          "recall": {
+            "0.25": {
+              "starts_descriptive": 3,
+              "starts_causal": 0,
+              "ends_descriptive": 6,
+              "ends_causal": 2
+            },
+            "0.5": {
+              "starts_descriptive": 7,
+              "starts_causal": 0,
+              "ends_descriptive": 7,
+              "ends_causal": 2
+            },
+            "1.0": {
+              "starts_descriptive": 7,
+              "starts_causal": 1,
+              "ends_descriptive": 10,
+              "ends_causal": 5
+            },
+            "2.0": {
+              "starts_descriptive": 8,
+              "starts_causal": 3,
+              "ends_descriptive": 10,
+              "ends_causal": 6
+            },
+            "5.0": {
+              "starts_descriptive": 9,
+              "starts_causal": 4,
+              "ends_descriptive": 11,
+              "ends_causal": 7
+            }
+          }
+        },
+        {
+          "threshold_db": -55.0,
+          "events": 780,
+          "program_events": 122,
+          "program_events_per_hour": 86.2,
+          "within_break_events": 580,
+          "within_break_per_hour": 1157.4,
+          "chunk_seam_events": 0,
+          "median_duration_s": 0.01,
+          "starts": 15,
+          "recall": {
+            "0.25": {
+              "starts_descriptive": 4,
+              "starts_causal": 0,
+              "ends_descriptive": 6,
+              "ends_causal": 2
+            },
+            "0.5": {
+              "starts_descriptive": 12,
+              "starts_causal": 2,
+              "ends_descriptive": 7,
+              "ends_causal": 2
+            },
+            "1.0": {
+              "starts_descriptive": 12,
+              "starts_causal": 3,
+              "ends_descriptive": 11,
+              "ends_causal": 5
+            },
+            "2.0": {
+              "starts_descriptive": 13,
+              "starts_causal": 5,
+              "ends_descriptive": 11,
+              "ends_causal": 6
+            },
+            "5.0": {
+              "starts_descriptive": 13,
+              "starts_causal": 5,
+              "ends_descriptive": 13,
+              "ends_causal": 8
+            }
+          }
+        },
+        {
+          "threshold_db": -40.0,
+          "events": 14094,
+          "program_events": 9116,
+          "program_events_per_hour": 6441.2,
+          "within_break_events": 4589,
+          "within_break_per_hour": 9157.41,
+          "chunk_seam_events": 1,
+          "median_duration_s": 0.005,
+          "starts": 15,
+          "recall": {
+            "0.25": {
+              "starts_descriptive": 10,
+              "starts_causal": 3,
+              "ends_descriptive": 11,
+              "ends_causal": 3
+            },
+            "0.5": {
+              "starts_descriptive": 14,
+              "starts_causal": 6,
+              "ends_descriptive": 12,
+              "ends_causal": 4
+            },
+            "1.0": {
+              "starts_descriptive": 15,
+              "starts_causal": 11,
+              "ends_descriptive": 12,
+              "ends_causal": 8
+            },
+            "2.0": {
+              "starts_descriptive": 15,
+              "starts_causal": 14,
+              "ends_descriptive": 13,
+              "ends_causal": 12
+            },
+            "5.0": {
+              "starts_descriptive": 15,
+              "starts_causal": 15,
+              "ends_descriptive": 15,
+              "ends_causal": 14
+            }
+          }
+        }
+      ],
+      "session": "hush_20260914_212529",
+      "service": "ESPN",
+      "program": "MNF",
+      "from_s": 0.0,
+      "to_s": 6899.0,
+      "chunk_seams_inside": 7
+    },
+    {
+      "coverage_s": 7600.0,
+      "commercial_s": 1664.355,
+      "program_s": 5935.645,
+      "pods": 13,
+      "boundary_min_5ms_db": {
+        "n": 13,
+        "median": -90.7,
+        "p10": -94.1,
+        "p90": -64.4
+      },
+      "program_min_5ms_db": {
+        "n": 196,
+        "median": -46.0,
+        "p10": -58.7,
+        "p90": -40.2
+      },
+      "program_grid_n": 196,
+      "thresholds": [
+        {
+          "threshold_db": -120.0,
+          "events": 57,
+          "program_events": 4,
+          "program_events_per_hour": 2.43,
+          "within_break_events": 31,
+          "within_break_per_hour": 67.05,
+          "chunk_seam_events": 0,
+          "median_duration_s": 0.02,
+          "starts": 13,
+          "recall": {
+            "0.25": {
+              "starts_descriptive": 0,
+              "starts_causal": 0,
+              "ends_descriptive": 4,
+              "ends_causal": 0
+            },
+            "0.5": {
+              "starts_descriptive": 3,
+              "starts_causal": 1,
+              "ends_descriptive": 4,
+              "ends_causal": 1
+            },
+            "1.0": {
+              "starts_descriptive": 4,
+              "starts_causal": 2,
+              "ends_descriptive": 4,
+              "ends_causal": 3
+            },
+            "2.0": {
+              "starts_descriptive": 4,
+              "starts_causal": 2,
+              "ends_descriptive": 4,
+              "ends_causal": 3
+            },
+            "5.0": {
+              "starts_descriptive": 4,
+              "starts_causal": 2,
+              "ends_descriptive": 4,
+              "ends_causal": 3
+            }
+          }
+        },
+        {
+          "threshold_db": -100.0,
+          "events": 86,
+          "program_events": 8,
+          "program_events_per_hour": 4.85,
+          "within_break_events": 55,
+          "within_break_per_hour": 118.97,
+          "chunk_seam_events": 0,
+          "median_duration_s": 0.01,
+          "starts": 13,
+          "recall": {
+            "0.25": {
+              "starts_descriptive": 1,
+              "starts_causal": 1,
+              "ends_descriptive": 4,
+              "ends_causal": 0
+            },
+            "0.5": {
+              "starts_descriptive": 5,
+              "starts_causal": 2,
+              "ends_descriptive": 4,
+              "ends_causal": 1
+            },
+            "1.0": {
+              "starts_descriptive": 5,
+              "starts_causal": 3,
+              "ends_descriptive": 4,
+              "ends_causal": 3
+            },
+            "2.0": {
+              "starts_descriptive": 5,
+              "starts_causal": 3,
+              "ends_descriptive": 4,
+              "ends_causal": 3
+            },
+            "5.0": {
+              "starts_descriptive": 6,
+              "starts_causal": 4,
+              "ends_descriptive": 4,
+              "ends_causal": 3
+            }
+          }
+        },
+        {
+          "threshold_db": -85.0,
+          "events": 210,
+          "program_events": 7,
+          "program_events_per_hour": 4.25,
+          "within_break_events": 111,
+          "within_break_per_hour": 240.09,
+          "chunk_seam_events": 0,
+          "median_duration_s": 0.015,
+          "starts": 13,
+          "recall": {
+            "0.25": {
+              "starts_descriptive": 9,
+              "starts_causal": 5,
+              "ends_descriptive": 10,
+              "ends_causal": 2
+            },
+            "0.5": {
+              "starts_descriptive": 11,
+              "starts_causal": 7,
+              "ends_descriptive": 11,
+              "ends_causal": 3
+            },
+            "1.0": {
+              "starts_descriptive": 11,
+              "starts_causal": 7,
+              "ends_descriptive": 12,
+              "ends_causal": 7
+            },
+            "2.0": {
+              "starts_descriptive": 11,
+              "starts_causal": 9,
+              "ends_descriptive": 12,
+              "ends_causal": 9
+            },
+            "5.0": {
+              "starts_descriptive": 12,
+              "starts_causal": 10,
+              "ends_descriptive": 12,
+              "ends_causal": 9
+            }
+          }
+        },
+        {
+          "threshold_db": -70.0,
+          "events": 659,
+          "program_events": 332,
+          "program_events_per_hour": 201.36,
+          "within_break_events": 275,
+          "within_break_per_hour": 594.83,
+          "chunk_seam_events": 0,
+          "median_duration_s": 0.005,
+          "starts": 13,
+          "recall": {
+            "0.25": {
+              "starts_descriptive": 10,
+              "starts_causal": 2,
+              "ends_descriptive": 10,
+              "ends_causal": 1
+            },
+            "0.5": {
+              "starts_descriptive": 12,
+              "starts_causal": 4,
+              "ends_descriptive": 11,
+              "ends_causal": 2
+            },
+            "1.0": {
+              "starts_descriptive": 12,
+              "starts_causal": 6,
+              "ends_descriptive": 12,
+              "ends_causal": 3
+            },
+            "2.0": {
+              "starts_descriptive": 12,
+              "starts_causal": 9,
+              "ends_descriptive": 12,
+              "ends_causal": 9
+            },
+            "5.0": {
+              "starts_descriptive": 13,
+              "starts_causal": 10,
+              "ends_descriptive": 12,
+              "ends_causal": 9
+            }
+          }
+        },
+        {
+          "threshold_db": -55.0,
+          "events": 5758,
+          "program_events": 3447,
+          "program_events_per_hour": 2090.62,
+          "within_break_events": 2172,
+          "within_break_per_hour": 4698.04,
+          "chunk_seam_events": 1,
+          "median_duration_s": 0.01,
+          "starts": 13,
+          "recall": {
+            "0.25": {
+              "starts_descriptive": 12,
+              "starts_causal": 2,
+              "ends_descriptive": 11,
+              "ends_causal": 1
+            },
+            "0.5": {
+              "starts_descriptive": 12,
+              "starts_causal": 3,
+              "ends_descriptive": 12,
+              "ends_causal": 1
+            },
+            "1.0": {
+              "starts_descriptive": 12,
+              "starts_causal": 7,
+              "ends_descriptive": 12,
+              "ends_causal": 2
+            },
+            "2.0": {
+              "starts_descriptive": 12,
+              "starts_causal": 11,
+              "ends_descriptive": 12,
+              "ends_causal": 9
+            },
+            "5.0": {
+              "starts_descriptive": 13,
+              "starts_causal": 12,
+              "ends_descriptive": 12,
+              "ends_causal": 10
+            }
+          }
+        },
+        {
+          "threshold_db": -40.0,
+          "events": 72124,
+          "program_events": 54458,
+          "program_events_per_hour": 33029.06,
+          "within_break_events": 17276,
+          "within_break_per_hour": 37367.99,
+          "chunk_seam_events": 6,
+          "median_duration_s": 0.01,
+          "starts": 13,
+          "recall": {
+            "0.25": {
+              "starts_descriptive": 12,
+              "starts_causal": 2,
+              "ends_descriptive": 12,
+              "ends_causal": 2
+            },
+            "0.5": {
+              "starts_descriptive": 12,
+              "starts_causal": 4,
+              "ends_descriptive": 12,
+              "ends_causal": 2
+            },
+            "1.0": {
+              "starts_descriptive": 12,
+              "starts_causal": 7,
+              "ends_descriptive": 12,
+              "ends_causal": 4
+            },
+            "2.0": {
+              "starts_descriptive": 12,
+              "starts_causal": 12,
+              "ends_descriptive": 12,
+              "ends_causal": 10
+            },
+            "5.0": {
+              "starts_descriptive": 13,
+              "starts_causal": 13,
+              "ends_descriptive": 13,
+              "ends_causal": 12
+            }
+          }
+        }
+      ],
+      "session": "hush_20260924_220624",
+      "service": "Prime",
+      "program": "Falcons at Packers",
+      "from_s": 0.0,
+      "to_s": 7600.0,
+      "chunk_seams_inside": 8
+    }
+  ],
+  "note": "Descriptive overlap can see both sides of a label. Causal credit requires the silence run to finish after the label. No threshold is an operating point."
+}

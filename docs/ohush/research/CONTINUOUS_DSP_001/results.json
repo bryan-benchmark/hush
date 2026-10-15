@@ -1,0 +1,1295 @@
+{
+  "rule": {
+    "grid": "integer recording seconds",
+    "credit": "boundary <= t <= boundary+W; prior 5 s is not credited",
+    "windows_s": [
+      1,
+      3,
+      5,
+      10,
+      30
+    ],
+    "pass_recall_within_3s": 0.5,
+    "fail_recall_within_3s": 0.25,
+    "collars_s": {
+      "pod": 10.0,
+      "program": 15.0
+    }
+  },
+  "reproduction": {
+    "matched_batch1": true,
+    "hits": {
+      "rms": 71,
+      "flatness": 74,
+      "centroid": 62
+    },
+    "overlap": {
+      "flatness_and_rms": 54,
+      "flatness_only": 12,
+      "rms_only": 15,
+      "centroid_only": 12,
+      "any_of_three": 103
+    },
+    "n_start_windows": 165,
+    "n_controls": 480,
+    "redzone_false": {
+      "rms": 1,
+      "flatness": 4,
+      "centroid": 5
+    },
+    "thresholds": {
+      "hush_20261007_220650": {
+        "rms": 8.506254660357246,
+        "flatness": 0.08269983605560981,
+        "centroid": 1699.5478611861647
+      },
+      "hush_20260909_213047": {
+        "rms": 9.847019546287484,
+        "flatness": 0.08269983605560981,
+        "centroid": 1764.4174690028674
+      },
+      "hush_20260913_150934": {
+        "rms": 9.79366967301749,
+        "flatness": 0.07720237879833221,
+        "centroid": 1652.8482636924198
+      },
+      "hush_20260913_210542": {
+        "rms": 8.55023417571776,
+        "flatness": 0.07895988202098564,
+        "centroid": 1699.5478611861647
+      },
+      "hush_20261008_205100": {
+        "rms": 9.79366967301749,
+        "flatness": 0.08269983605560981,
+        "centroid": 1764.4174690028674
+      },
+      "hush_20261011_204300": {
+        "rms": 8.55023417571776,
+        "flatness": 0.08269983605560981,
+        "centroid": 1756.2983678750936
+      },
+      "hush_20261012_204200": {
+        "rms": 9.847019546287484,
+        "flatness": 0.07720237879833221,
+        "centroid": 1730.2063789886927
+      },
+      "hush_20261010_222400": {
+        "rms": 8.536608900582712,
+        "flatness": 0.07712541739271596,
+        "centroid": 1672.0300747497702
+      },
+      "hush_20261011_135700": {
+        "rms": 8.120588981524627,
+        "flatness": 0.07677396372125381,
+        "centroid": 1699.5478611861647
+      },
+      "hush_20260914_212529": {
+        "rms": 9.847019546287484,
+        "flatness": 0.07706852667187174,
+        "centroid": 1756.2983678750936
+      },
+      "hush_20260924_220624": {
+        "rms": 9.847019546287484,
+        "flatness": 0.08269983605560981,
+        "centroid": 1758.2218228911884
+      },
+      "hush_20260827_135935": {
+        "rms": 9.79366967301749,
+        "flatness": 0.08269983605560981,
+        "centroid": 1756.2983678750936
+      }
+    }
+  },
+  "football_starts": {
+    "events": 136,
+    "eligible": 136,
+    "startup_or_grid_unavailable": 0,
+    "or": {
+      "within": {
+        "1": 61,
+        "3": 86,
+        "5": 94,
+        "10": 114,
+        "30": 131
+      },
+      "never_within_30s": 5,
+      "median_delay_s": 1.12,
+      "p95_delay_s": 22.354
+    },
+    "rms": {
+      "within": {
+        "1": 28,
+        "3": 36,
+        "5": 40,
+        "10": 47,
+        "30": 86
+      },
+      "never_within_30s": 50,
+      "median_delay_s": 7.673,
+      "p95_delay_s": 29.105
+    },
+    "flatness": {
+      "within": {
+        "1": 37,
+        "3": 68,
+        "5": 73,
+        "10": 89,
+        "30": 119
+      },
+      "never_within_30s": 17,
+      "median_delay_s": 1.841,
+      "p95_delay_s": 27.625
+    },
+    "centroid": {
+      "within": {
+        "1": 43,
+        "3": 67,
+        "5": 74,
+        "10": 94,
+        "30": 123
+      },
+      "never_within_30s": 13,
+      "median_delay_s": 2.433,
+      "p95_delay_s": 22.563
+    },
+    "already_active_in_prior_5s": 74,
+    "unique_within_30s": {
+      "rms": 2,
+      "flatness": 3,
+      "centroid": 7
+    },
+    "or_recall_within_3s": 0.6324,
+    "verdict": "PASS"
+  },
+  "football_ends": {
+    "events": 136,
+    "eligible": 132,
+    "startup_or_grid_unavailable": 4,
+    "or": {
+      "within": {
+        "1": 44,
+        "3": 63,
+        "5": 76,
+        "10": 86,
+        "30": 112
+      },
+      "never_within_30s": 20,
+      "median_delay_s": 1.794,
+      "p95_delay_s": 25.437
+    },
+    "rms": {
+      "within": {
+        "1": 32,
+        "3": 51,
+        "5": 61,
+        "10": 65,
+        "30": 83
+      },
+      "never_within_30s": 49,
+      "median_delay_s": 1.529,
+      "p95_delay_s": 22.517
+    },
+    "flatness": {
+      "within": {
+        "1": 24,
+        "3": 43,
+        "5": 47,
+        "10": 57,
+        "30": 91
+      },
+      "never_within_30s": 41,
+      "median_delay_s": 3.632,
+      "p95_delay_s": 26.514
+    },
+    "centroid": {
+      "within": {
+        "1": 24,
+        "3": 35,
+        "5": 42,
+        "10": 54,
+        "30": 87
+      },
+      "never_within_30s": 45,
+      "median_delay_s": 5.464,
+      "p95_delay_s": 26.071
+    },
+    "already_active_in_prior_5s": 96,
+    "unique_within_30s": {
+      "rms": 8,
+      "flatness": 5,
+      "centroid": 11
+    },
+    "or_recall_within_3s": 0.4773,
+    "verdict": "INCONCLUSIVE"
+  },
+  "all_starts": {
+    "events": 166,
+    "eligible": 166,
+    "startup_or_grid_unavailable": 0,
+    "or": {
+      "within": {
+        "1": 82,
+        "3": 111,
+        "5": 120,
+        "10": 141,
+        "30": 160
+      },
+      "never_within_30s": 6,
+      "median_delay_s": 0.962,
+      "p95_delay_s": 21.039
+    },
+    "rms": {
+      "within": {
+        "1": 48,
+        "3": 59,
+        "5": 63,
+        "10": 70,
+        "30": 109
+      },
+      "never_within_30s": 57,
+      "median_delay_s": 1.924,
+      "p95_delay_s": 28.744
+    },
+    "flatness": {
+      "within": {
+        "1": 51,
+        "3": 85,
+        "5": 91,
+        "10": 108,
+        "30": 143
+      },
+      "never_within_30s": 23,
+      "median_delay_s": 1.618,
+      "p95_delay_s": 27.896
+    },
+    "centroid": {
+      "within": {
+        "1": 56,
+        "3": 88,
+        "5": 98,
+        "10": 119,
+        "30": 151
+      },
+      "never_within_30s": 15,
+      "median_delay_s": 1.852,
+      "p95_delay_s": 22.266
+    },
+    "already_active_in_prior_5s": 101,
+    "unique_within_30s": {
+      "rms": 2,
+      "flatness": 4,
+      "centroid": 9
+    },
+    "or_recall_within_3s": 0.6687,
+    "verdict": "PASS"
+  },
+  "all_ends": {
+    "events": 166,
+    "eligible": 162,
+    "startup_or_grid_unavailable": 4,
+    "or": {
+      "within": {
+        "1": 64,
+        "3": 86,
+        "5": 102,
+        "10": 113,
+        "30": 140
+      },
+      "never_within_30s": 22,
+      "median_delay_s": 1.47,
+      "p95_delay_s": 23.488
+    },
+    "rms": {
+      "within": {
+        "1": 51,
+        "3": 71,
+        "5": 85,
+        "10": 90,
+        "30": 111
+      },
+      "never_within_30s": 51,
+      "median_delay_s": 1.285,
+      "p95_delay_s": 21.947
+    },
+    "flatness": {
+      "within": {
+        "1": 39,
+        "3": 62,
+        "5": 66,
+        "10": 76,
+        "30": 113
+      },
+      "never_within_30s": 49,
+      "median_delay_s": 1.999,
+      "p95_delay_s": 26.379
+    },
+    "centroid": {
+      "within": {
+        "1": 36,
+        "3": 51,
+        "5": 59,
+        "10": 73,
+        "30": 114
+      },
+      "never_within_30s": 48,
+      "median_delay_s": 4.188,
+      "p95_delay_s": 27.132
+    },
+    "already_active_in_prior_5s": 123,
+    "unique_within_30s": {
+      "rms": 8,
+      "flatness": 5,
+      "centroid": 11
+    },
+    "or_recall_within_3s": 0.5309,
+    "verdict": "PASS"
+  },
+  "overall_verdict": "INCONCLUSIVE",
+  "sept9_vs_cnn14": {
+    "starts": 20,
+    "dsp_or_within_30s": 19,
+    "dsp_or_within_3s": 14,
+    "cnn_causal_hit": 11,
+    "both_within_30s": 11,
+    "dsp_only_within_30s": 8,
+    "cnn_only": 0,
+    "neither_within_30s": 1,
+    "dsp_only_starts": [
+      6.069733,
+      1074.332477,
+      2066.723178,
+      2514.3919100000003,
+      3104.995311,
+      3942.561515,
+      4474.952535,
+      8413.747285
+    ],
+    "cnn_only_starts": [],
+    "missed_by_both": [
+      1000.415842
+    ]
+  },
+  "recordings": [
+    {
+      "session": "hush_20261007_220650",
+      "network": "Hulu",
+      "content": "scripted",
+      "show": "Gilmore Girls",
+      "coverage": [
+        20.0,
+        11751.0
+      ],
+      "missing_seconds": 0,
+      "thresholds": {
+        "rms": 8.506254660357246,
+        "flatness": 0.08269983605560981,
+        "centroid": 1699.5478611861647
+      },
+      "features": {
+        "or": {
+          "scanned": 11729,
+          "program_seconds": 10209,
+          "program_alarm_seconds": 1594,
+          "program_alarm_seconds_per_hour": 562.0922715251248,
+          "program_near_boundary_alarm_seconds": 136,
+          "program_near_boundary_seconds": 555,
+          "program_far_alarm_seconds": 1458,
+          "program_far_seconds": 9654,
+          "pod_alarm_seconds": 271,
+          "pod_seconds_on_grid": 1520
+        },
+        "rms": {
+          "scanned": 11729,
+          "program_seconds": 10209,
+          "program_alarm_seconds": 1197,
+          "program_alarm_seconds_per_hour": 422.09814869233026,
+          "program_near_boundary_alarm_seconds": 115,
+          "program_near_boundary_seconds": 555,
+          "program_far_alarm_seconds": 1082,
+          "program_far_seconds": 9654,
+          "pod_alarm_seconds": 93,
+          "pod_seconds_on_grid": 1520
+        },
+        "flatness": {
+          "scanned": 11729,
+          "program_seconds": 10209,
+          "program_alarm_seconds": 605,
+          "program_alarm_seconds_per_hour": 213.34116955627388,
+          "program_near_boundary_alarm_seconds": 66,
+          "program_near_boundary_seconds": 555,
+          "program_far_alarm_seconds": 539,
+          "program_far_seconds": 9654,
+          "pod_alarm_seconds": 43,
+          "pod_seconds_on_grid": 1520
+        },
+        "centroid": {
+          "scanned": 11729,
+          "program_seconds": 10209,
+          "program_alarm_seconds": 492,
+          "program_alarm_seconds_per_hour": 173.49397590361446,
+          "program_near_boundary_alarm_seconds": 42,
+          "program_near_boundary_seconds": 555,
+          "program_far_alarm_seconds": 450,
+          "program_far_seconds": 9654,
+          "pod_alarm_seconds": 204,
+          "pod_seconds_on_grid": 1520
+        }
+      },
+      "or_episodes": 1147,
+      "or_program_episodes": 952,
+      "or_program_episodes_per_hour": 335.70379077284747,
+      "pod_middle_or_alarm_seconds": 182,
+      "pod_middle_seconds": 1140,
+      "pod_near_end_or_alarm_seconds": 38,
+      "pod_near_end_seconds": 190,
+      "pod_near_start_or_alarm_seconds": 51,
+      "pod_near_start_seconds": 190
+    },
+    {
+      "session": "hush_20260909_213047",
+      "network": "NBC",
+      "content": "sports",
+      "show": "Patriots at Seahawks",
+      "coverage": [
+        0.0,
+        9373.0
+      ],
+      "missing_seconds": 0,
+      "thresholds": {
+        "rms": 9.847019546287484,
+        "flatness": 0.08269983605560981,
+        "centroid": 1764.4174690028674
+      },
+      "features": {
+        "or": {
+          "scanned": 9371,
+          "program_seconds": 6517,
+          "program_alarm_seconds": 515,
+          "program_alarm_seconds_per_hour": 284.4867270216357,
+          "program_near_boundary_alarm_seconds": 57,
+          "program_near_boundary_seconds": 586,
+          "program_far_alarm_seconds": 458,
+          "program_far_seconds": 5931,
+          "pod_alarm_seconds": 485,
+          "pod_seconds_on_grid": 2854
+        },
+        "rms": {
+          "scanned": 9371,
+          "program_seconds": 6517,
+          "program_alarm_seconds": 230,
+          "program_alarm_seconds_per_hour": 127.0523246892742,
+          "program_near_boundary_alarm_seconds": 31,
+          "program_near_boundary_seconds": 586,
+          "program_far_alarm_seconds": 199,
+          "program_far_seconds": 5931,
+          "pod_alarm_seconds": 219,
+          "pod_seconds_on_grid": 2854
+        },
+        "flatness": {
+          "scanned": 9371,
+          "program_seconds": 6517,
+          "program_alarm_seconds": 262,
+          "program_alarm_seconds_per_hour": 144.7291698634341,
+          "program_near_boundary_alarm_seconds": 31,
+          "program_near_boundary_seconds": 586,
+          "program_far_alarm_seconds": 231,
+          "program_far_seconds": 5931,
+          "pod_alarm_seconds": 258,
+          "pod_seconds_on_grid": 2854
+        },
+        "centroid": {
+          "scanned": 9371,
+          "program_seconds": 6517,
+          "program_alarm_seconds": 423,
+          "program_alarm_seconds_per_hour": 233.66579714592604,
+          "program_near_boundary_alarm_seconds": 36,
+          "program_near_boundary_seconds": 586,
+          "program_far_alarm_seconds": 387,
+          "program_far_seconds": 5931,
+          "pod_alarm_seconds": 375,
+          "pod_seconds_on_grid": 2854
+        }
+      },
+      "or_episodes": 680,
+      "or_program_episodes": 375,
+      "or_program_episodes_per_hour": 207.1505293846862,
+      "pod_middle_or_alarm_seconds": 401,
+      "pod_middle_seconds": 2454,
+      "pod_near_end_or_alarm_seconds": 41,
+      "pod_near_end_seconds": 200,
+      "pod_near_start_or_alarm_seconds": 43,
+      "pod_near_start_seconds": 200
+    },
+    {
+      "session": "hush_20260913_150934",
+      "network": "FOX",
+      "content": "sports",
+      "show": "Falcons at Steelers",
+      "coverage": [
+        0.0,
+        7200.0
+      ],
+      "missing_seconds": 0,
+      "thresholds": {
+        "rms": 9.79366967301749,
+        "flatness": 0.07720237879833221,
+        "centroid": 1652.8482636924198
+      },
+      "features": {
+        "or": {
+          "scanned": 7198,
+          "program_seconds": 7198,
+          "program_alarm_seconds": 1369,
+          "program_alarm_seconds_per_hour": 684.6901917199223,
+          "program_near_boundary_alarm_seconds": 0,
+          "program_near_boundary_seconds": 0,
+          "program_far_alarm_seconds": 1369,
+          "program_far_seconds": 7198,
+          "pod_alarm_seconds": 0,
+          "pod_seconds_on_grid": 0
+        },
+        "rms": {
+          "scanned": 7198,
+          "program_seconds": 7198,
+          "program_alarm_seconds": 341,
+          "program_alarm_seconds_per_hour": 170.54737427063074,
+          "program_near_boundary_alarm_seconds": 0,
+          "program_near_boundary_seconds": 0,
+          "program_far_alarm_seconds": 341,
+          "program_far_seconds": 7198,
+          "pod_alarm_seconds": 0,
+          "pod_seconds_on_grid": 0
+        },
+        "flatness": {
+          "scanned": 7198,
+          "program_seconds": 7198,
+          "program_alarm_seconds": 959,
+          "program_alarm_seconds_per_hour": 479.63323145318145,
+          "program_near_boundary_alarm_seconds": 0,
+          "program_near_boundary_seconds": 0,
+          "program_far_alarm_seconds": 959,
+          "program_far_seconds": 7198,
+          "pod_alarm_seconds": 0,
+          "pod_seconds_on_grid": 0
+        },
+        "centroid": {
+          "scanned": 7198,
+          "program_seconds": 7198,
+          "program_alarm_seconds": 1033,
+          "program_alarm_seconds_per_hour": 516.6435120866907,
+          "program_near_boundary_alarm_seconds": 0,
+          "program_near_boundary_seconds": 0,
+          "program_far_alarm_seconds": 1033,
+          "program_far_seconds": 7198,
+          "pod_alarm_seconds": 0,
+          "pod_seconds_on_grid": 0
+        }
+      },
+      "or_episodes": 947,
+      "or_program_episodes": 947,
+      "or_program_episodes_per_hour": 473.6315643234232,
+      "pod_middle_or_alarm_seconds": 0,
+      "pod_middle_seconds": 0,
+      "pod_near_end_or_alarm_seconds": 0,
+      "pod_near_end_seconds": 0,
+      "pod_near_start_or_alarm_seconds": 0,
+      "pod_near_start_seconds": 0
+    },
+    {
+      "session": "hush_20260913_210542",
+      "network": "NBC",
+      "content": "sports",
+      "show": "Cowboys at Giants",
+      "coverage": [
+        0.0,
+        12600.0
+      ],
+      "missing_seconds": 0,
+      "thresholds": {
+        "rms": 8.55023417571776,
+        "flatness": 0.07895988202098564,
+        "centroid": 1699.5478611861647
+      },
+      "features": {
+        "or": {
+          "scanned": 12598,
+          "program_seconds": 9548,
+          "program_alarm_seconds": 699,
+          "program_alarm_seconds_per_hour": 263.5525764558023,
+          "program_near_boundary_alarm_seconds": 45,
+          "program_near_boundary_seconds": 630,
+          "program_far_alarm_seconds": 654,
+          "program_far_seconds": 8918,
+          "pod_alarm_seconds": 448,
+          "pod_seconds_on_grid": 3050
+        },
+        "rms": {
+          "scanned": 12598,
+          "program_seconds": 9548,
+          "program_alarm_seconds": 219,
+          "program_alarm_seconds_per_hour": 82.57226644323418,
+          "program_near_boundary_alarm_seconds": 23,
+          "program_near_boundary_seconds": 630,
+          "program_far_alarm_seconds": 196,
+          "program_far_seconds": 8918,
+          "pod_alarm_seconds": 99,
+          "pod_seconds_on_grid": 3050
+        },
+        "flatness": {
+          "scanned": 12598,
+          "program_seconds": 9548,
+          "program_alarm_seconds": 262,
+          "program_alarm_seconds_per_hour": 98.78508588186008,
+          "program_near_boundary_alarm_seconds": 22,
+          "program_near_boundary_seconds": 630,
+          "program_far_alarm_seconds": 240,
+          "program_far_seconds": 8918,
+          "pod_alarm_seconds": 244,
+          "pod_seconds_on_grid": 3050
+        },
+        "centroid": {
+          "scanned": 12598,
+          "program_seconds": 9548,
+          "program_alarm_seconds": 501,
+          "program_alarm_seconds_per_hour": 188.89819857561795,
+          "program_near_boundary_alarm_seconds": 20,
+          "program_near_boundary_seconds": 630,
+          "program_far_alarm_seconds": 481,
+          "program_far_seconds": 8918,
+          "pod_alarm_seconds": 309,
+          "pod_seconds_on_grid": 3050
+        }
+      },
+      "or_episodes": 853,
+      "or_program_episodes": 526,
+      "or_program_episodes_per_hour": 198.32425638877254,
+      "pod_middle_or_alarm_seconds": 366,
+      "pod_middle_seconds": 2630,
+      "pod_near_end_or_alarm_seconds": 37,
+      "pod_near_end_seconds": 210,
+      "pod_near_start_or_alarm_seconds": 45,
+      "pod_near_start_seconds": 210
+    },
+    {
+      "session": "hush_20261008_205100",
+      "network": "Prime Video",
+      "content": "sports",
+      "show": "Bucs at Cowboys",
+      "coverage": [
+        0.0,
+        10440.364
+      ],
+      "missing_seconds": 417,
+      "thresholds": {
+        "rms": 9.79366967301749,
+        "flatness": 0.08269983605560981,
+        "centroid": 1764.4174690028674
+      },
+      "features": {
+        "or": {
+          "scanned": 10021,
+          "program_seconds": 7521,
+          "program_alarm_seconds": 129,
+          "program_alarm_seconds_per_hour": 61.74710809732748,
+          "program_near_boundary_alarm_seconds": 39,
+          "program_near_boundary_seconds": 616,
+          "program_far_alarm_seconds": 90,
+          "program_far_seconds": 6905,
+          "pod_alarm_seconds": 333,
+          "pod_seconds_on_grid": 2500
+        },
+        "rms": {
+          "scanned": 10021,
+          "program_seconds": 7521,
+          "program_alarm_seconds": 76,
+          "program_alarm_seconds_per_hour": 36.37814120462704,
+          "program_near_boundary_alarm_seconds": 29,
+          "program_near_boundary_seconds": 616,
+          "program_far_alarm_seconds": 47,
+          "program_far_seconds": 6905,
+          "pod_alarm_seconds": 78,
+          "pod_seconds_on_grid": 2500
+        },
+        "flatness": {
+          "scanned": 10021,
+          "program_seconds": 7521,
+          "program_alarm_seconds": 40,
+          "program_alarm_seconds_per_hour": 19.146390107698444,
+          "program_near_boundary_alarm_seconds": 22,
+          "program_near_boundary_seconds": 616,
+          "program_far_alarm_seconds": 18,
+          "program_far_seconds": 6905,
+          "pod_alarm_seconds": 107,
+          "pod_seconds_on_grid": 2500
+        },
+        "centroid": {
+          "scanned": 10021,
+          "program_seconds": 7521,
+          "program_alarm_seconds": 36,
+          "program_alarm_seconds_per_hour": 17.231751096928598,
+          "program_near_boundary_alarm_seconds": 7,
+          "program_near_boundary_seconds": 616,
+          "program_far_alarm_seconds": 29,
+          "program_far_seconds": 6905,
+          "pod_alarm_seconds": 256,
+          "pod_seconds_on_grid": 2500
+        }
+      },
+      "or_episodes": 351,
+      "or_program_episodes": 103,
+      "or_program_episodes_per_hour": 49.30195452732349,
+      "pod_middle_or_alarm_seconds": 256,
+      "pod_middle_seconds": 2074,
+      "pod_near_end_or_alarm_seconds": 35,
+      "pod_near_end_seconds": 203,
+      "pod_near_start_or_alarm_seconds": 42,
+      "pod_near_start_seconds": 230
+    },
+    {
+      "session": "hush_20261011_204300",
+      "network": "Cable / antenna",
+      "content": "sports",
+      "show": "Sunday night",
+      "coverage": [
+        0.0,
+        14405.376
+      ],
+      "missing_seconds": 4,
+      "thresholds": {
+        "rms": 8.55023417571776,
+        "flatness": 0.08269983605560981,
+        "centroid": 1756.2983678750936
+      },
+      "features": {
+        "or": {
+          "scanned": 14399,
+          "program_seconds": 13776,
+          "program_alarm_seconds": 1887,
+          "program_alarm_seconds_per_hour": 493.1184668989547,
+          "program_near_boundary_alarm_seconds": 26,
+          "program_near_boundary_seconds": 168,
+          "program_far_alarm_seconds": 1861,
+          "program_far_seconds": 13608,
+          "pod_alarm_seconds": 152,
+          "pod_seconds_on_grid": 623
+        },
+        "rms": {
+          "scanned": 14399,
+          "program_seconds": 13776,
+          "program_alarm_seconds": 1464,
+          "program_alarm_seconds_per_hour": 382.57839721254356,
+          "program_near_boundary_alarm_seconds": 19,
+          "program_near_boundary_seconds": 168,
+          "program_far_alarm_seconds": 1445,
+          "program_far_seconds": 13608,
+          "pod_alarm_seconds": 91,
+          "pod_seconds_on_grid": 623
+        },
+        "flatness": {
+          "scanned": 14399,
+          "program_seconds": 13776,
+          "program_alarm_seconds": 832,
+          "program_alarm_seconds_per_hour": 217.42160278745644,
+          "program_near_boundary_alarm_seconds": 18,
+          "program_near_boundary_seconds": 168,
+          "program_far_alarm_seconds": 814,
+          "program_far_seconds": 13608,
+          "pod_alarm_seconds": 98,
+          "pod_seconds_on_grid": 623
+        },
+        "centroid": {
+          "scanned": 14399,
+          "program_seconds": 13776,
+          "program_alarm_seconds": 634,
+          "program_alarm_seconds_per_hour": 165.6794425087108,
+          "program_near_boundary_alarm_seconds": 21,
+          "program_near_boundary_seconds": 168,
+          "program_far_alarm_seconds": 613,
+          "program_far_seconds": 13608,
+          "pod_alarm_seconds": 117,
+          "pod_seconds_on_grid": 623
+        }
+      },
+      "or_episodes": 1262,
+      "or_program_episodes": 1178,
+      "or_program_episodes_per_hour": 307.8397212543554,
+      "pod_middle_or_alarm_seconds": 122,
+      "pod_middle_seconds": 505,
+      "pod_near_end_or_alarm_seconds": 15,
+      "pod_near_end_seconds": 58,
+      "pod_near_start_or_alarm_seconds": 15,
+      "pod_near_start_seconds": 60
+    },
+    {
+      "session": "hush_20261012_204200",
+      "network": "Cable / antenna",
+      "content": "sports",
+      "show": "Monday Night Football",
+      "coverage": [
+        0.0,
+        13111.808
+      ],
+      "missing_seconds": 0,
+      "thresholds": {
+        "rms": 9.847019546287484,
+        "flatness": 0.07720237879833221,
+        "centroid": 1730.2063789886927
+      },
+      "features": {
+        "or": {
+          "scanned": 13109,
+          "program_seconds": 10166,
+          "program_alarm_seconds": 588,
+          "program_alarm_seconds_per_hour": 208.2234900649223,
+          "program_near_boundary_alarm_seconds": 44,
+          "program_near_boundary_seconds": 720,
+          "program_far_alarm_seconds": 544,
+          "program_far_seconds": 9446,
+          "pod_alarm_seconds": 340,
+          "pod_seconds_on_grid": 2943
+        },
+        "rms": {
+          "scanned": 13109,
+          "program_seconds": 10166,
+          "program_alarm_seconds": 220,
+          "program_alarm_seconds_per_hour": 77.90674798347433,
+          "program_near_boundary_alarm_seconds": 17,
+          "program_near_boundary_seconds": 720,
+          "program_far_alarm_seconds": 203,
+          "program_far_seconds": 9446,
+          "pod_alarm_seconds": 142,
+          "pod_seconds_on_grid": 2943
+        },
+        "flatness": {
+          "scanned": 13109,
+          "program_seconds": 10166,
+          "program_alarm_seconds": 337,
+          "program_alarm_seconds_per_hour": 119.33897304741295,
+          "program_near_boundary_alarm_seconds": 19,
+          "program_near_boundary_seconds": 720,
+          "program_far_alarm_seconds": 318,
+          "program_far_seconds": 9446,
+          "pod_alarm_seconds": 160,
+          "pod_seconds_on_grid": 2943
+        },
+        "centroid": {
+          "scanned": 13109,
+          "program_seconds": 10166,
+          "program_alarm_seconds": 407,
+          "program_alarm_seconds_per_hour": 144.1274837694275,
+          "program_near_boundary_alarm_seconds": 24,
+          "program_near_boundary_seconds": 720,
+          "program_far_alarm_seconds": 383,
+          "program_far_seconds": 9446,
+          "pod_alarm_seconds": 255,
+          "pod_seconds_on_grid": 2943
+        }
+      },
+      "or_episodes": 676,
+      "or_program_episodes": 446,
+      "or_program_episodes_per_hour": 157.93822545740704,
+      "pod_middle_or_alarm_seconds": 275,
+      "pod_middle_seconds": 2468,
+      "pod_near_end_or_alarm_seconds": 31,
+      "pod_near_end_seconds": 240,
+      "pod_near_start_or_alarm_seconds": 34,
+      "pod_near_start_seconds": 240
+    },
+    {
+      "session": "hush_20261010_222400",
+      "network": "Cable / antenna",
+      "content": "sports",
+      "show": "Browns at Jets",
+      "coverage": [
+        0.0,
+        6064.768
+      ],
+      "missing_seconds": 0,
+      "thresholds": {
+        "rms": 8.536608900582712,
+        "flatness": 0.07712541739271596,
+        "centroid": 1672.0300747497702
+      },
+      "features": {
+        "or": {
+          "scanned": 6062,
+          "program_seconds": 4979,
+          "program_alarm_seconds": 894,
+          "program_alarm_seconds_per_hour": 646.3948584053023,
+          "program_near_boundary_alarm_seconds": 42,
+          "program_near_boundary_seconds": 180,
+          "program_far_alarm_seconds": 852,
+          "program_far_seconds": 4799,
+          "pod_alarm_seconds": 169,
+          "pod_seconds_on_grid": 1083
+        },
+        "rms": {
+          "scanned": 6062,
+          "program_seconds": 4979,
+          "program_alarm_seconds": 505,
+          "program_alarm_seconds_per_hour": 365.1335609560153,
+          "program_near_boundary_alarm_seconds": 25,
+          "program_near_boundary_seconds": 180,
+          "program_far_alarm_seconds": 480,
+          "program_far_seconds": 4799,
+          "pod_alarm_seconds": 89,
+          "pod_seconds_on_grid": 1083
+        },
+        "flatness": {
+          "scanned": 6062,
+          "program_seconds": 4979,
+          "program_alarm_seconds": 615,
+          "program_alarm_seconds_per_hour": 444.66760393653345,
+          "program_near_boundary_alarm_seconds": 33,
+          "program_near_boundary_seconds": 180,
+          "program_far_alarm_seconds": 582,
+          "program_far_seconds": 4799,
+          "pod_alarm_seconds": 100,
+          "pod_seconds_on_grid": 1083
+        },
+        "centroid": {
+          "scanned": 6062,
+          "program_seconds": 4979,
+          "program_alarm_seconds": 518,
+          "program_alarm_seconds_per_hour": 374.5330387628038,
+          "program_near_boundary_alarm_seconds": 24,
+          "program_near_boundary_seconds": 180,
+          "program_far_alarm_seconds": 494,
+          "program_far_seconds": 4799,
+          "pod_alarm_seconds": 106,
+          "pod_seconds_on_grid": 1083
+        }
+      },
+      "or_episodes": 630,
+      "or_program_episodes": 528,
+      "or_program_episodes_per_hour": 381.76340630648724,
+      "pod_middle_or_alarm_seconds": 146,
+      "pod_middle_seconds": 963,
+      "pod_near_end_or_alarm_seconds": 11,
+      "pod_near_end_seconds": 60,
+      "pod_near_start_or_alarm_seconds": 12,
+      "pod_near_start_seconds": 60
+    },
+    {
+      "session": "hush_20261011_135700",
+      "network": "Cable / antenna",
+      "content": "sports",
+      "show": "Sunday afternoon football",
+      "coverage": [
+        0.0,
+        4896.768
+      ],
+      "missing_seconds": 0,
+      "thresholds": {
+        "rms": 8.120588981524627,
+        "flatness": 0.07677396372125381,
+        "centroid": 1699.5478611861647
+      },
+      "features": {
+        "or": {
+          "scanned": 4894,
+          "program_seconds": 3911,
+          "program_alarm_seconds": 477,
+          "program_alarm_seconds_per_hour": 439.0692917412427,
+          "program_near_boundary_alarm_seconds": 42,
+          "program_near_boundary_seconds": 236,
+          "program_far_alarm_seconds": 435,
+          "program_far_seconds": 3675,
+          "pod_alarm_seconds": 194,
+          "pod_seconds_on_grid": 983
+        },
+        "rms": {
+          "scanned": 4894,
+          "program_seconds": 3911,
+          "program_alarm_seconds": 347,
+          "program_alarm_seconds_per_hour": 319.40680132958323,
+          "program_near_boundary_alarm_seconds": 25,
+          "program_near_boundary_seconds": 236,
+          "program_far_alarm_seconds": 322,
+          "program_far_seconds": 3675,
+          "pod_alarm_seconds": 109,
+          "pod_seconds_on_grid": 983
+        },
+        "flatness": {
+          "scanned": 4894,
+          "program_seconds": 3911,
+          "program_alarm_seconds": 273,
+          "program_alarm_seconds_per_hour": 251.2912298644848,
+          "program_near_boundary_alarm_seconds": 20,
+          "program_near_boundary_seconds": 236,
+          "program_far_alarm_seconds": 253,
+          "program_far_seconds": 3675,
+          "pod_alarm_seconds": 112,
+          "pod_seconds_on_grid": 983
+        },
+        "centroid": {
+          "scanned": 4894,
+          "program_seconds": 3911,
+          "program_alarm_seconds": 305,
+          "program_alarm_seconds_per_hour": 280.7466121196625,
+          "program_near_boundary_alarm_seconds": 28,
+          "program_near_boundary_seconds": 236,
+          "program_far_alarm_seconds": 277,
+          "program_far_seconds": 3675,
+          "pod_alarm_seconds": 149,
+          "pod_seconds_on_grid": 983
+        }
+      },
+      "or_episodes": 388,
+      "or_program_episodes": 273,
+      "or_program_episodes_per_hour": 251.2912298644848,
+      "pod_middle_or_alarm_seconds": 149,
+      "pod_middle_seconds": 823,
+      "pod_near_end_or_alarm_seconds": 21,
+      "pod_near_end_seconds": 80,
+      "pod_near_start_or_alarm_seconds": 24,
+      "pod_near_start_seconds": 80
+    },
+    {
+      "session": "hush_20260914_212529",
+      "network": "ESPN",
+      "content": "sports",
+      "show": "MNF",
+      "coverage": [
+        0.0,
+        6899.0
+      ],
+      "missing_seconds": 0,
+      "thresholds": {
+        "rms": 9.847019546287484,
+        "flatness": 0.07706852667187174,
+        "centroid": 1756.2983678750936
+      },
+      "features": {
+        "or": {
+          "scanned": 6897,
+          "program_seconds": 5093,
+          "program_alarm_seconds": 665,
+          "program_alarm_seconds_per_hour": 470.0569408992735,
+          "program_near_boundary_alarm_seconds": 63,
+          "program_near_boundary_seconds": 435,
+          "program_far_alarm_seconds": 602,
+          "program_far_seconds": 4658,
+          "pod_alarm_seconds": 375,
+          "pod_seconds_on_grid": 1804
+        },
+        "rms": {
+          "scanned": 6897,
+          "program_seconds": 5093,
+          "program_alarm_seconds": 179,
+          "program_alarm_seconds_per_hour": 126.52660514431572,
+          "program_near_boundary_alarm_seconds": 26,
+          "program_near_boundary_seconds": 435,
+          "program_far_alarm_seconds": 153,
+          "program_far_seconds": 4658,
+          "pod_alarm_seconds": 110,
+          "pod_seconds_on_grid": 1804
+        },
+        "flatness": {
+          "scanned": 6897,
+          "program_seconds": 5093,
+          "program_alarm_seconds": 551,
+          "program_alarm_seconds_per_hour": 389.47575103082664,
+          "program_near_boundary_alarm_seconds": 44,
+          "program_near_boundary_seconds": 435,
+          "program_far_alarm_seconds": 507,
+          "program_far_seconds": 4658,
+          "pod_alarm_seconds": 227,
+          "pod_seconds_on_grid": 1804
+        },
+        "centroid": {
+          "scanned": 6897,
+          "program_seconds": 5093,
+          "program_alarm_seconds": 251,
+          "program_alarm_seconds_per_hour": 177.4199882191243,
+          "program_near_boundary_alarm_seconds": 32,
+          "program_near_boundary_seconds": 435,
+          "program_far_alarm_seconds": 219,
+          "program_far_seconds": 4658,
+          "pod_alarm_seconds": 224,
+          "pod_seconds_on_grid": 1804
+        }
+      },
+      "or_episodes": 725,
+      "or_program_episodes": 487,
+      "or_program_episodes_per_hour": 344.23718829766347,
+      "pod_middle_or_alarm_seconds": 311,
+      "pod_middle_seconds": 1504,
+      "pod_near_end_or_alarm_seconds": 35,
+      "pod_near_end_seconds": 150,
+      "pod_near_start_or_alarm_seconds": 29,
+      "pod_near_start_seconds": 150
+    },
+    {
+      "session": "hush_20260924_220624",
+      "network": "Prime",
+      "content": "sports",
+      "show": "Falcons at Packers",
+      "coverage": [
+        0.0,
+        7600.0
+      ],
+      "missing_seconds": 0,
+      "thresholds": {
+        "rms": 9.847019546287484,
+        "flatness": 0.08269983605560981,
+        "centroid": 1758.2218228911884
+      },
+      "features": {
+        "or": {
+          "scanned": 7598,
+          "program_seconds": 5935,
+          "program_alarm_seconds": 150,
+          "program_alarm_seconds_per_hour": 90.98567818028644,
+          "program_near_boundary_alarm_seconds": 28,
+          "program_near_boundary_seconds": 360,
+          "program_far_alarm_seconds": 122,
+          "program_far_seconds": 5575,
+          "pod_alarm_seconds": 206,
+          "pod_seconds_on_grid": 1663
+        },
+        "rms": {
+          "scanned": 7598,
+          "program_seconds": 5935,
+          "program_alarm_seconds": 62,
+          "program_alarm_seconds_per_hour": 37.60741364785173,
+          "program_near_boundary_alarm_seconds": 16,
+          "program_near_boundary_seconds": 360,
+          "program_far_alarm_seconds": 46,
+          "program_far_seconds": 5575,
+          "pod_alarm_seconds": 55,
+          "pod_seconds_on_grid": 1663
+        },
+        "flatness": {
+          "scanned": 7598,
+          "program_seconds": 5935,
+          "program_alarm_seconds": 51,
+          "program_alarm_seconds_per_hour": 30.93513058129739,
+          "program_near_boundary_alarm_seconds": 22,
+          "program_near_boundary_seconds": 360,
+          "program_far_alarm_seconds": 29,
+          "program_far_seconds": 5575,
+          "pod_alarm_seconds": 69,
+          "pod_seconds_on_grid": 1663
+        },
+        "centroid": {
+          "scanned": 7598,
+          "program_seconds": 5935,
+          "program_alarm_seconds": 100,
+          "program_alarm_seconds_per_hour": 60.65711878685763,
+          "program_near_boundary_alarm_seconds": 22,
+          "program_near_boundary_seconds": 360,
+          "program_far_alarm_seconds": 78,
+          "program_far_seconds": 5575,
+          "pod_alarm_seconds": 162,
+          "pod_seconds_on_grid": 1663
+        }
+      },
+      "or_episodes": 277,
+      "or_program_episodes": 112,
+      "or_program_episodes_per_hour": 67.93597304128055,
+      "pod_middle_or_alarm_seconds": 160,
+      "pod_middle_seconds": 1403,
+      "pod_near_end_or_alarm_seconds": 23,
+      "pod_near_end_seconds": 130,
+      "pod_near_start_or_alarm_seconds": 23,
+      "pod_near_start_seconds": 130
+    },
+    {
+      "session": "hush_20260827_135935",
+      "network": "Hulu",
+      "content": "scripted",
+      "show": "Gilmore Girls",
+      "coverage": [
+        300.0,
+        7200.0
+      ],
+      "missing_seconds": 0,
+      "thresholds": {
+        "rms": 9.79366967301749,
+        "flatness": 0.08269983605560981,
+        "centroid": 1756.2983678750936
+      },
+      "features": {
+        "or": {
+          "scanned": 6898,
+          "program_seconds": 6033,
+          "program_alarm_seconds": 768,
+          "program_alarm_seconds_per_hour": 458.2794629537544,
+          "program_near_boundary_alarm_seconds": 64,
+          "program_near_boundary_seconds": 330,
+          "program_far_alarm_seconds": 704,
+          "program_far_seconds": 5703,
+          "pod_alarm_seconds": 151,
+          "pod_seconds_on_grid": 865
+        },
+        "rms": {
+          "scanned": 6898,
+          "program_seconds": 6033,
+          "program_alarm_seconds": 551,
+          "program_alarm_seconds_per_hour": 328.7916459472899,
+          "program_near_boundary_alarm_seconds": 50,
+          "program_near_boundary_seconds": 330,
+          "program_far_alarm_seconds": 501,
+          "program_far_seconds": 5703,
+          "pod_alarm_seconds": 46,
+          "pod_seconds_on_grid": 865
+        },
+        "flatness": {
+          "scanned": 6898,
+          "program_seconds": 6033,
+          "program_alarm_seconds": 194,
+          "program_alarm_seconds_per_hour": 115.76330183988065,
+          "program_near_boundary_alarm_seconds": 36,
+          "program_near_boundary_seconds": 330,
+          "program_far_alarm_seconds": 158,
+          "program_far_seconds": 5703,
+          "pod_alarm_seconds": 35,
+          "pod_seconds_on_grid": 865
+        },
+        "centroid": {
+          "scanned": 6898,
+          "program_seconds": 6033,
+          "program_alarm_seconds": 266,
+          "program_alarm_seconds_per_hour": 158.72700149179514,
+          "program_near_boundary_alarm_seconds": 24,
+          "program_near_boundary_seconds": 330,
+          "program_far_alarm_seconds": 242,
+          "program_far_seconds": 5703,
+          "pod_alarm_seconds": 128,
+          "pod_seconds_on_grid": 865
+        }
+      },
+      "or_episodes": 637,
+      "or_program_episodes": 527,
+      "or_program_episodes_per_hour": 314.47041272998507,
+      "pod_middle_or_alarm_seconds": 90,
+      "pod_middle_seconds": 645,
+      "pod_near_end_or_alarm_seconds": 30,
+      "pod_near_end_seconds": 110,
+      "pod_near_start_or_alarm_seconds": 31,
+      "pod_near_start_seconds": 110
+    }
+  ],
+  "examples": {
+    "longest_program_episode": {
+      "session": "hush_20261007_220650",
+      "network": "Hulu",
+      "t_start": 7136,
+      "t_end": 7153,
+      "n_seconds": 18,
+      "available_at": 7137
+    },
+    "busiest_pod": {
+      "session": "hush_20261010_222400",
+      "start_s": 3567.641036,
+      "end_s": 3953.689108,
+      "or_alarm_seconds": 60,
+      "pod_grid_seconds": 386
+    }
+  },
+  "compute": {
+    "wall_s": 225.9,
+    "max_rss_bytes": 640581632
+  }
+}

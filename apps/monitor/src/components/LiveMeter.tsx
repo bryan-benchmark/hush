@@ -12,16 +12,17 @@ function levelFromDbfs(dbfs: number) {
 }
 
 export function LiveMeter({ dbfs, recording, label, compact }: Props) {
-  const level = levelFromDbfs(dbfs);
+  const levelDb = Number.isFinite(dbfs) ? dbfs : -100;
+  const level = levelFromDbfs(levelDb);
   const pct = `${(level * 100).toFixed(1)}%`;
-  const hot = dbfs > -3;
-  const silent = dbfs <= -95;
+  const hot = levelDb > -3;
+  const silent = levelDb <= -95;
   const tone = hot ? "#ff5a3c" : silent ? "#a894b8" : "#3dd68c";
 
   return (
     <div
       className={compact ? "meter meter-compact" : "meter"}
-      aria-label={`${label ? `${label} ` : ""}Peak ${dbfs.toFixed(1)} dBFS`}
+      aria-label={`${label ? `${label} ` : ""}Peak ${levelDb.toFixed(1)} dBFS`}
     >
       {label ? <p className="meter-label">{label}</p> : null}
       <div className="meter-track">
@@ -42,7 +43,7 @@ export function LiveMeter({ dbfs, recording, label, compact }: Props) {
       </div>
       <div className="meter-readout">
         <span className="meter-db" style={{ color: tone }}>
-          {dbfs.toFixed(1)}
+          {levelDb.toFixed(1)}
         </span>
         <span className="meter-unit">dBFS</span>
       </div>

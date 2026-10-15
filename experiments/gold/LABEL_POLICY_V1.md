@@ -22,7 +22,9 @@ Once a range is closed, do not move these labels because the detector disagrees.
 
 ```text
 event_class:
-commercial | network_promo | sponsorship | other
+commercial | network_promo | sponsorship | other | program
+
+`program` names a stretch of the show itself (football, news, RedZone). IN is when that show starts, OUT is when it changes or the recording leaves it. `desired_action` is `play`. The name goes in `note`. A program mark is not a commercial, and a closed range can contain program marks and zero commercials.
 
 desired_action:
 mute | play | unsure

@@ -1,0 +1,1112 @@
+{
+  "matcher": {
+    "implementation": "dpwe/audfprint Analyzer landmarks, density 100, sr 11025, match window 2 frames, reference shifts 1",
+    "published_min_count": 200,
+    "operating_min_count": 10,
+    "operating_selection": "smallest predeclared count with ESPN oracle program false IDs <= 1/hour",
+    "espn_curve": [
+      {
+        "count": 5,
+        "false_ids": 33,
+        "probed_seconds": 4410.0,
+        "per_hour": 26.93877551020408
+      },
+      {
+        "count": 10,
+        "false_ids": 1,
+        "probed_seconds": 4410.0,
+        "per_hour": 0.8163265306122448
+      },
+      {
+        "count": 20,
+        "false_ids": 0,
+        "probed_seconds": 4410.0,
+        "per_hour": 0.0
+      },
+      {
+        "count": 50,
+        "false_ids": 0,
+        "probed_seconds": 4410.0,
+        "per_hour": 0.0
+      },
+      {
+        "count": 200,
+        "false_ids": 0,
+        "probed_seconds": 4410.0,
+        "per_hour": 0.0
+      }
+    ],
+    "self_match_score": 634,
+    "self_match_hashes": 631
+  },
+  "scale": {
+    "commercials": 166,
+    "reference_hashes": 1735422,
+    "reference_audio_s": 20030.5,
+    "audio_fingerprinted_s": 110947.1,
+    "missing_s": 275.0,
+    "fingerprint_wall_s": 267.3,
+    "query_wall_s": 226.2,
+    "wall_s": 496.9,
+    "max_rss_bytes": 888963072,
+    "hashes_per_reference_minute": 5198.3,
+    "index_bytes_estimate": 13883376
+  },
+  "atlas_oracle_10s": [
+    {
+      "count": 10,
+      "cross_session_pods": 77,
+      "same_broadcaster": 19,
+      "other_broadcaster": 58,
+      "pods": 166
+    },
+    {
+      "count": 200,
+      "cross_session_pods": 9,
+      "same_broadcaster": 1,
+      "other_broadcaster": 8,
+      "pods": 166
+    }
+  ],
+  "within_session_10s_at_operating": 0,
+  "interior_oracle_median_score": 6.0,
+  "reports": [
+    {
+      "library": "oracle",
+      "count": 10,
+      "development": {
+        "program_false_ids": 1,
+        "probed_seconds": 4410.0,
+        "per_hour": 0.8163265306122448,
+        "openings": {
+          "1": {
+            "pods": 15,
+            "matched": 1
+          },
+          "2": {
+            "pods": 15,
+            "matched": 4
+          },
+          "3": {
+            "pods": 15,
+            "matched": 6
+          },
+          "5": {
+            "pods": 15,
+            "matched": 8
+          },
+          "10": {
+            "pods": 15,
+            "matched": 9
+          }
+        },
+        "dsp": {
+          "fresh_dsp": {
+            "3": {
+              "pods": 5,
+              "matched": 2
+            },
+            "5": {
+              "pods": 5,
+              "matched": 3
+            },
+            "10": {
+              "pods": 5,
+              "matched": 3
+            }
+          },
+          "ongoing_dsp": {
+            "3": {
+              "pods": 1,
+              "matched": 0
+            },
+            "5": {
+              "pods": 1,
+              "matched": 0
+            },
+            "10": {
+              "pods": 1,
+              "matched": 0
+            }
+          },
+          "no_dsp": {
+            "3": {
+              "pods": 9,
+              "matched": 4
+            },
+            "5": {
+              "pods": 9,
+              "matched": 5
+            },
+            "10": {
+              "pods": 9,
+              "matched": 6
+            }
+          }
+        }
+      },
+      "evaluation": {
+        "program_false_ids": 54,
+        "probed_seconds": 57210.0,
+        "per_hour": 3.3980073413738854,
+        "openings": {
+          "1": {
+            "pods": 121,
+            "matched": 3
+          },
+          "2": {
+            "pods": 121,
+            "matched": 27
+          },
+          "3": {
+            "pods": 121,
+            "matched": 39
+          },
+          "5": {
+            "pods": 121,
+            "matched": 56
+          },
+          "10": {
+            "pods": 121,
+            "matched": 63
+          }
+        },
+        "dsp": {
+          "fresh_dsp": {
+            "3": {
+              "pods": 44,
+              "matched": 13
+            },
+            "5": {
+              "pods": 44,
+              "matched": 19
+            },
+            "10": {
+              "pods": 44,
+              "matched": 20
+            }
+          },
+          "ongoing_dsp": {
+            "3": {
+              "pods": 36,
+              "matched": 13
+            },
+            "5": {
+              "pods": 36,
+              "matched": 19
+            },
+            "10": {
+              "pods": 36,
+              "matched": 20
+            }
+          },
+          "no_dsp": {
+            "3": {
+              "pods": 41,
+              "matched": 13
+            },
+            "5": {
+              "pods": 41,
+              "matched": 18
+            },
+            "10": {
+              "pods": 41,
+              "matched": 23
+            }
+          }
+        }
+      },
+      "redzone": {
+        "program_false_ids": 2,
+        "probed_seconds": 7170.0,
+        "per_hour": 1.00418410041841,
+        "openings": {
+          "1": {
+            "pods": 0,
+            "matched": 0
+          },
+          "2": {
+            "pods": 0,
+            "matched": 0
+          },
+          "3": {
+            "pods": 0,
+            "matched": 0
+          },
+          "5": {
+            "pods": 0,
+            "matched": 0
+          },
+          "10": {
+            "pods": 0,
+            "matched": 0
+          }
+        },
+        "dsp": {
+          "fresh_dsp": {
+            "3": {
+              "pods": 0,
+              "matched": 0
+            },
+            "5": {
+              "pods": 0,
+              "matched": 0
+            },
+            "10": {
+              "pods": 0,
+              "matched": 0
+            }
+          },
+          "ongoing_dsp": {
+            "3": {
+              "pods": 0,
+              "matched": 0
+            },
+            "5": {
+              "pods": 0,
+              "matched": 0
+            },
+            "10": {
+              "pods": 0,
+              "matched": 0
+            }
+          },
+          "no_dsp": {
+            "3": {
+              "pods": 0,
+              "matched": 0
+            },
+            "5": {
+              "pods": 0,
+              "matched": 0
+            },
+            "10": {
+              "pods": 0,
+              "matched": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "library": "oracle",
+      "count": 200,
+      "development": {
+        "program_false_ids": 0,
+        "probed_seconds": 4410.0,
+        "per_hour": 0.0,
+        "openings": {
+          "1": {
+            "pods": 15,
+            "matched": 0
+          },
+          "2": {
+            "pods": 15,
+            "matched": 0
+          },
+          "3": {
+            "pods": 15,
+            "matched": 0
+          },
+          "5": {
+            "pods": 15,
+            "matched": 0
+          },
+          "10": {
+            "pods": 15,
+            "matched": 2
+          }
+        },
+        "dsp": {
+          "fresh_dsp": {
+            "3": {
+              "pods": 5,
+              "matched": 0
+            },
+            "5": {
+              "pods": 5,
+              "matched": 0
+            },
+            "10": {
+              "pods": 5,
+              "matched": 0
+            }
+          },
+          "ongoing_dsp": {
+            "3": {
+              "pods": 1,
+              "matched": 0
+            },
+            "5": {
+              "pods": 1,
+              "matched": 0
+            },
+            "10": {
+              "pods": 1,
+              "matched": 0
+            }
+          },
+          "no_dsp": {
+            "3": {
+              "pods": 9,
+              "matched": 0
+            },
+            "5": {
+              "pods": 9,
+              "matched": 0
+            },
+            "10": {
+              "pods": 9,
+              "matched": 2
+            }
+          }
+        }
+      },
+      "evaluation": {
+        "program_false_ids": 0,
+        "probed_seconds": 57210.0,
+        "per_hour": 0.0,
+        "openings": {
+          "1": {
+            "pods": 121,
+            "matched": 0
+          },
+          "2": {
+            "pods": 121,
+            "matched": 0
+          },
+          "3": {
+            "pods": 121,
+            "matched": 0
+          },
+          "5": {
+            "pods": 121,
+            "matched": 0
+          },
+          "10": {
+            "pods": 121,
+            "matched": 7
+          }
+        },
+        "dsp": {
+          "fresh_dsp": {
+            "3": {
+              "pods": 44,
+              "matched": 0
+            },
+            "5": {
+              "pods": 44,
+              "matched": 0
+            },
+            "10": {
+              "pods": 44,
+              "matched": 2
+            }
+          },
+          "ongoing_dsp": {
+            "3": {
+              "pods": 36,
+              "matched": 0
+            },
+            "5": {
+              "pods": 36,
+              "matched": 0
+            },
+            "10": {
+              "pods": 36,
+              "matched": 1
+            }
+          },
+          "no_dsp": {
+            "3": {
+              "pods": 41,
+              "matched": 0
+            },
+            "5": {
+              "pods": 41,
+              "matched": 0
+            },
+            "10": {
+              "pods": 41,
+              "matched": 4
+            }
+          }
+        }
+      },
+      "redzone": {
+        "program_false_ids": 0,
+        "probed_seconds": 7170.0,
+        "per_hour": 0.0,
+        "openings": {
+          "1": {
+            "pods": 0,
+            "matched": 0
+          },
+          "2": {
+            "pods": 0,
+            "matched": 0
+          },
+          "3": {
+            "pods": 0,
+            "matched": 0
+          },
+          "5": {
+            "pods": 0,
+            "matched": 0
+          },
+          "10": {
+            "pods": 0,
+            "matched": 0
+          }
+        },
+        "dsp": {
+          "fresh_dsp": {
+            "3": {
+              "pods": 0,
+              "matched": 0
+            },
+            "5": {
+              "pods": 0,
+              "matched": 0
+            },
+            "10": {
+              "pods": 0,
+              "matched": 0
+            }
+          },
+          "ongoing_dsp": {
+            "3": {
+              "pods": 0,
+              "matched": 0
+            },
+            "5": {
+              "pods": 0,
+              "matched": 0
+            },
+            "10": {
+              "pods": 0,
+              "matched": 0
+            }
+          },
+          "no_dsp": {
+            "3": {
+              "pods": 0,
+              "matched": 0
+            },
+            "5": {
+              "pods": 0,
+              "matched": 0
+            },
+            "10": {
+              "pods": 0,
+              "matched": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "library": "chronological",
+      "count": 10,
+      "development": {
+        "program_false_ids": 0,
+        "probed_seconds": 4410.0,
+        "per_hour": 0.0,
+        "openings": {
+          "1": {
+            "pods": 15,
+            "matched": 1
+          },
+          "2": {
+            "pods": 15,
+            "matched": 4
+          },
+          "3": {
+            "pods": 15,
+            "matched": 6
+          },
+          "5": {
+            "pods": 15,
+            "matched": 7
+          },
+          "10": {
+            "pods": 15,
+            "matched": 8
+          }
+        },
+        "dsp": {
+          "fresh_dsp": {
+            "3": {
+              "pods": 5,
+              "matched": 2
+            },
+            "5": {
+              "pods": 5,
+              "matched": 2
+            },
+            "10": {
+              "pods": 5,
+              "matched": 2
+            }
+          },
+          "ongoing_dsp": {
+            "3": {
+              "pods": 1,
+              "matched": 0
+            },
+            "5": {
+              "pods": 1,
+              "matched": 0
+            },
+            "10": {
+              "pods": 1,
+              "matched": 0
+            }
+          },
+          "no_dsp": {
+            "3": {
+              "pods": 9,
+              "matched": 4
+            },
+            "5": {
+              "pods": 9,
+              "matched": 5
+            },
+            "10": {
+              "pods": 9,
+              "matched": 6
+            }
+          }
+        }
+      },
+      "evaluation": {
+        "program_false_ids": 33,
+        "probed_seconds": 57210.0,
+        "per_hour": 2.076560041950708,
+        "openings": {
+          "1": {
+            "pods": 121,
+            "matched": 1
+          },
+          "2": {
+            "pods": 121,
+            "matched": 18
+          },
+          "3": {
+            "pods": 121,
+            "matched": 24
+          },
+          "5": {
+            "pods": 121,
+            "matched": 33
+          },
+          "10": {
+            "pods": 121,
+            "matched": 40
+          }
+        },
+        "dsp": {
+          "fresh_dsp": {
+            "3": {
+              "pods": 44,
+              "matched": 8
+            },
+            "5": {
+              "pods": 44,
+              "matched": 11
+            },
+            "10": {
+              "pods": 44,
+              "matched": 12
+            }
+          },
+          "ongoing_dsp": {
+            "3": {
+              "pods": 36,
+              "matched": 6
+            },
+            "5": {
+              "pods": 36,
+              "matched": 9
+            },
+            "10": {
+              "pods": 36,
+              "matched": 10
+            }
+          },
+          "no_dsp": {
+            "3": {
+              "pods": 41,
+              "matched": 10
+            },
+            "5": {
+              "pods": 41,
+              "matched": 13
+            },
+            "10": {
+              "pods": 41,
+              "matched": 18
+            }
+          }
+        }
+      },
+      "redzone": {
+        "program_false_ids": 2,
+        "probed_seconds": 7170.0,
+        "per_hour": 1.00418410041841,
+        "openings": {
+          "1": {
+            "pods": 0,
+            "matched": 0
+          },
+          "2": {
+            "pods": 0,
+            "matched": 0
+          },
+          "3": {
+            "pods": 0,
+            "matched": 0
+          },
+          "5": {
+            "pods": 0,
+            "matched": 0
+          },
+          "10": {
+            "pods": 0,
+            "matched": 0
+          }
+        },
+        "dsp": {
+          "fresh_dsp": {
+            "3": {
+              "pods": 0,
+              "matched": 0
+            },
+            "5": {
+              "pods": 0,
+              "matched": 0
+            },
+            "10": {
+              "pods": 0,
+              "matched": 0
+            }
+          },
+          "ongoing_dsp": {
+            "3": {
+              "pods": 0,
+              "matched": 0
+            },
+            "5": {
+              "pods": 0,
+              "matched": 0
+            },
+            "10": {
+              "pods": 0,
+              "matched": 0
+            }
+          },
+          "no_dsp": {
+            "3": {
+              "pods": 0,
+              "matched": 0
+            },
+            "5": {
+              "pods": 0,
+              "matched": 0
+            },
+            "10": {
+              "pods": 0,
+              "matched": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "library": "chronological",
+      "count": 200,
+      "development": {
+        "program_false_ids": 0,
+        "probed_seconds": 4410.0,
+        "per_hour": 0.0,
+        "openings": {
+          "1": {
+            "pods": 15,
+            "matched": 0
+          },
+          "2": {
+            "pods": 15,
+            "matched": 0
+          },
+          "3": {
+            "pods": 15,
+            "matched": 0
+          },
+          "5": {
+            "pods": 15,
+            "matched": 0
+          },
+          "10": {
+            "pods": 15,
+            "matched": 1
+          }
+        },
+        "dsp": {
+          "fresh_dsp": {
+            "3": {
+              "pods": 5,
+              "matched": 0
+            },
+            "5": {
+              "pods": 5,
+              "matched": 0
+            },
+            "10": {
+              "pods": 5,
+              "matched": 0
+            }
+          },
+          "ongoing_dsp": {
+            "3": {
+              "pods": 1,
+              "matched": 0
+            },
+            "5": {
+              "pods": 1,
+              "matched": 0
+            },
+            "10": {
+              "pods": 1,
+              "matched": 0
+            }
+          },
+          "no_dsp": {
+            "3": {
+              "pods": 9,
+              "matched": 0
+            },
+            "5": {
+              "pods": 9,
+              "matched": 0
+            },
+            "10": {
+              "pods": 9,
+              "matched": 1
+            }
+          }
+        }
+      },
+      "evaluation": {
+        "program_false_ids": 0,
+        "probed_seconds": 57210.0,
+        "per_hour": 0.0,
+        "openings": {
+          "1": {
+            "pods": 121,
+            "matched": 0
+          },
+          "2": {
+            "pods": 121,
+            "matched": 0
+          },
+          "3": {
+            "pods": 121,
+            "matched": 0
+          },
+          "5": {
+            "pods": 121,
+            "matched": 0
+          },
+          "10": {
+            "pods": 121,
+            "matched": 6
+          }
+        },
+        "dsp": {
+          "fresh_dsp": {
+            "3": {
+              "pods": 44,
+              "matched": 0
+            },
+            "5": {
+              "pods": 44,
+              "matched": 0
+            },
+            "10": {
+              "pods": 44,
+              "matched": 2
+            }
+          },
+          "ongoing_dsp": {
+            "3": {
+              "pods": 36,
+              "matched": 0
+            },
+            "5": {
+              "pods": 36,
+              "matched": 0
+            },
+            "10": {
+              "pods": 36,
+              "matched": 1
+            }
+          },
+          "no_dsp": {
+            "3": {
+              "pods": 41,
+              "matched": 0
+            },
+            "5": {
+              "pods": 41,
+              "matched": 0
+            },
+            "10": {
+              "pods": 41,
+              "matched": 3
+            }
+          }
+        }
+      },
+      "redzone": {
+        "program_false_ids": 0,
+        "probed_seconds": 7170.0,
+        "per_hour": 0.0,
+        "openings": {
+          "1": {
+            "pods": 0,
+            "matched": 0
+          },
+          "2": {
+            "pods": 0,
+            "matched": 0
+          },
+          "3": {
+            "pods": 0,
+            "matched": 0
+          },
+          "5": {
+            "pods": 0,
+            "matched": 0
+          },
+          "10": {
+            "pods": 0,
+            "matched": 0
+          }
+        },
+        "dsp": {
+          "fresh_dsp": {
+            "3": {
+              "pods": 0,
+              "matched": 0
+            },
+            "5": {
+              "pods": 0,
+              "matched": 0
+            },
+            "10": {
+              "pods": 0,
+              "matched": 0
+            }
+          },
+          "ongoing_dsp": {
+            "3": {
+              "pods": 0,
+              "matched": 0
+            },
+            "5": {
+              "pods": 0,
+              "matched": 0
+            },
+            "10": {
+              "pods": 0,
+              "matched": 0
+            }
+          },
+          "no_dsp": {
+            "3": {
+              "pods": 0,
+              "matched": 0
+            },
+            "5": {
+              "pods": 0,
+              "matched": 0
+            },
+            "10": {
+              "pods": 0,
+              "matched": 0
+            }
+          }
+        }
+      }
+    }
+  ],
+  "robustness_espn_5s_oracle": {
+    "clean": {
+      "n": 15,
+      "median": 7.0
+    },
+    "gain_half": {
+      "n": 15,
+      "median": 7.0
+    },
+    "tanh_compress": {
+      "n": 15,
+      "median": 7.0
+    },
+    "resample_16000_roundtrip": {
+      "n": 15,
+      "median": 7.0
+    },
+    "noise_20db": {
+      "n": 15,
+      "median": 6.0
+    },
+    "shift_50ms": {
+      "n": 15,
+      "median": 7.0
+    }
+  },
+  "stream_chronological_hits_at_operating": {
+    "program_saved": 91,
+    "pod_saved": 813,
+    "hop_s": 5.0,
+    "probes": 22229
+  },
+  "false_match_examples": [
+    {
+      "session": "hush_20261008_205100",
+      "network": "Prime Video",
+      "content": "sports",
+      "t": 3390.0,
+      "library": "oracle",
+      "region": "program",
+      "score": 137,
+      "n_hashes": 293,
+      "raw": 143,
+      "offset": -130311,
+      "ref_session": "hush_20261011_204300",
+      "ref_start": 300.055269,
+      "ref_network": "Cable / antenna",
+      "same_session": false
+    },
+    {
+      "session": "hush_20260913_210542",
+      "network": "NBC",
+      "content": "sports",
+      "t": 1100.0,
+      "library": "oracle",
+      "region": "program",
+      "score": 108,
+      "n_hashes": 332,
+      "raw": 153,
+      "offset": -23016,
+      "ref_session": "hush_20260914_212529",
+      "ref_start": 512.855334,
+      "ref_network": "ESPN",
+      "same_session": false
+    },
+    {
+      "session": "hush_20261008_205100",
+      "network": "Prime Video",
+      "content": "sports",
+      "t": 3400.0,
+      "library": "oracle",
+      "region": "program",
+      "score": 93,
+      "n_hashes": 336,
+      "raw": 111,
+      "offset": -130264,
+      "ref_session": "hush_20261011_204300",
+      "ref_start": 300.055269,
+      "ref_network": "Cable / antenna",
+      "same_session": false
+    },
+    {
+      "session": "hush_20261008_205100",
+      "network": "Prime Video",
+      "content": "sports",
+      "t": 3410.0,
+      "library": "oracle",
+      "region": "program",
+      "score": 89,
+      "n_hashes": 318,
+      "raw": 97,
+      "offset": -130264,
+      "ref_session": "hush_20261011_204300",
+      "ref_start": 300.055269,
+      "ref_network": "Cable / antenna",
+      "same_session": false
+    },
+    {
+      "session": "hush_20260913_210542",
+      "network": "NBC",
+      "content": "sports",
+      "t": 12260.0,
+      "library": "oracle",
+      "region": "program",
+      "score": 48,
+      "n_hashes": 410,
+      "raw": 60,
+      "offset": -357826,
+      "ref_session": "hush_20260909_213047",
+      "ref_start": 3942.561515,
+      "ref_network": "NBC",
+      "same_session": false
+    },
+    {
+      "session": "hush_20260913_210542",
+      "network": "NBC",
+      "content": "sports",
+      "t": 1110.0,
+      "library": "oracle",
+      "region": "program",
+      "score": 38,
+      "n_hashes": 492,
+      "raw": 85,
+      "offset": -22340,
+      "ref_session": "hush_20260914_212529",
+      "ref_start": 512.855334,
+      "ref_network": "ESPN",
+      "same_session": false
+    },
+    {
+      "session": "hush_20260913_210542",
+      "network": "NBC",
+      "content": "sports",
+      "t": 50.0,
+      "library": "oracle",
+      "region": "program",
+      "score": 35,
+      "n_hashes": 384,
+      "raw": 46,
+      "offset": 228935,
+      "ref_session": "hush_20261008_205100",
+      "ref_start": 5331.899224,
+      "ref_network": "Prime Video",
+      "same_session": false
+    },
+    {
+      "session": "hush_20260909_213047",
+      "network": "NBC",
+      "content": "sports",
+      "t": 240.0,
+      "library": "oracle",
+      "region": "program",
+      "score": 29,
+      "n_hashes": 492,
+      "raw": 33,
+      "offset": 79660,
+      "ref_session": "hush_20260913_210542",
+      "ref_start": 2089.268214,
+      "ref_network": "NBC",
+      "same_session": false
+    }
+  ],
+  "verdict": "INCONCLUSIVE",
+  "dsp_kinds": {
+    "fresh_dsp": 49,
+    "no_dsp": 50,
+    "not_football": 30,
+    "ongoing_dsp": 37
+  }
+}

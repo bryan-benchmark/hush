@@ -1,0 +1,14 @@
+{
+  "product": "OHUSH_LIVE_V0_SPORTS",
+  "scientific_authority": false,
+  "allowed_to_change_exp001_005": false,
+  "dataset_role": "live_dev",
+  "show": "bucs cowbows 5",
+  "service": "Prime Video",
+  "content": "sports",
+  "temporal_mode": "live",
+  "delivery": "tv-optical",
+  "ad_insertion": "unknown",
+  "input_path": "tv_optical_pcm",
+  "chunk_minutes": 15
+}

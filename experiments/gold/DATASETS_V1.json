@@ -15,6 +15,26 @@
     "hush_20260920_200635": {
       "role": "holdout",
       "reason": "Pre-ship holdout. Audio is expected to be healthy. Do not listen while tuning."
+    },
+    "hush_20261008_205100": {
+      "role": "dev",
+      "reason": "Thu Oct 8 Prime Bucs at Cowboys. Symlinked from the live desk. Elapsed time is captured audio, not an engine run clock."
+    },
+    "hush_20261010_222400": {
+      "role": "dev",
+      "reason": "Sat Oct 10 cable Browns at Jets. Split out of the mixed live-desk folder."
+    },
+    "hush_20261011_135700": {
+      "role": "dev",
+      "reason": "Sun Oct 11 afternoon cable. Split out of the Saturday night folder."
+    },
+    "hush_20261011_204300": {
+      "role": "dev",
+      "reason": "Sun Oct 11 night cable. First sitting in the folder that also holds Monday."
+    },
+    "hush_20261012_204200": {
+      "role": "dev",
+      "reason": "Mon Oct 12 Monday Night Football. Split out of the Sunday night folder."
     }
   },
   "note": "Unlisted sessions are dev. A holdout may be scored by software. The labeler and review queue must not show it unless the request passes unseal=HOLDOUT_V1."
