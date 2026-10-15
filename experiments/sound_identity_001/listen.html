@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>OHush sound sketches</title>
+  <style>
+    :root { color-scheme: dark; }
+    body { font: 16px/1.45 system-ui, sans-serif; margin: 2rem auto; max-width: 42rem; padding: 0 1rem; background: #14120f; color: #f3efe6; }
+    h1 { font-size: 1.4rem; font-weight: 600; }
+    p { color: #c8c0b4; }
+    ol { list-style: none; padding: 0; }
+    li { border-top: 1px solid #3a342c; padding: 0.9rem 0; display: grid; grid-template-columns: 1fr auto; gap: 0.4rem 1rem; align-items: center; }
+    button, select { font: inherit; background: #2a261f; color: inherit; border: 1px solid #5c5348; border-radius: 6px; padding: 0.35rem 0.7rem; }
+    button.on { background: #efe6d6; color: #1a1612; }
+    .note { font-size: 0.85rem; color: #a3988c; }
+    .row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0; }
+  </style>
+</head>
+<body>
+  <h1>Sound sketches</h1>
+  <p>Seven one-minute originals, including silence. They are not installed in playback. A rating here is a first impression, not a result from a game.</p>
+  <div class="row">
+    <button id="shuffle" type="button">Shuffle order</button>
+    <button id="export" type="button">Download ratings</button>
+  </div>
+  <p class="note" id="order"></p>
+  <ol id="list"></ol>
+  <script>
+    const CLIPS = [
+      ["warm_air", "Warm Air", "Slow warmth. No beat and no melody."],
+      ["velvet_beat", "Velvet Beat", "Soft pulse at 72 BPM over the same warmth."],
+      ["light_shuffle", "Light Shuffle", "A lighter pulse at 88 BPM."],
+      ["slow_current", "Slow Current", "Moving texture, not a beat."],
+      ["sparse_mallets", "Sparse Mallets", "Occasional low notes over the warm bed."],
+      ["synthetic_arena", "Synthetic Arena", "Filtered noise. Not a stadium recording."],
+      ["silence", "Silence", "Digital silence. The baseline."]
+    ];
+    const ratings = {};
+    let audio = null;
+    let playing = null;
+    const list = document.getElementById("list");
+
+    function render(order) {
+      list.innerHTML = "";
+      document.getElementById("order").textContent = "Order: " + order.map((i) => CLIPS[i][1]).join(", ");
+      for (const index of order) {
+        const [id, title, blurb] = CLIPS[index];
+        const item = document.createElement("li");
+        const copy = document.createElement("div");
+        copy.innerHTML = "<strong>" + title + "</strong><div class='note'>" + blurb + "</div>";
+        const controls = document.createElement("div");
+        const play = document.createElement("button");
+        play.type = "button";
+        play.textContent = "Play";
+        play.addEventListener("click", () => toggle(id, play));
+        const select = document.createElement("select");
+        select.innerHTML = "<option value=''>Unrated</option>" + [1, 2, 3, 4, 5].map((n) => "<option value='" + n + "'>" + n + "</option>").join("");
+        select.value = ratings[id] || "";
+        select.addEventListener("change", () => { ratings[id] = select.value; });
+        controls.append(play, select);
+        item.append(copy, controls);
+        list.append(item);
+      }
+    }
+
+    function toggle(id, button) {
+      if (playing === id && audio && !audio.paused) {
+        audio.pause();
+        button.textContent = "Play";
+        button.classList.remove("on");
+        playing = null;
+        return;
+      }
+      if (audio) audio.pause();
+      for (const node of list.querySelectorAll("button")) {
+        node.textContent = "Play";
+        node.classList.remove("on");
+      }
+      audio = new Audio("renders/" + id + ".wav");
+      audio.play();
+      button.textContent = "Stop";
+      button.classList.add("on");
+      playing = id;
+      audio.addEventListener("ended", () => {
+        button.textContent = "Play";
+        button.classList.remove("on");
+        if (playing === id) playing = null;
+      });
+    }
+
+    function shuffle() {
+      const order = CLIPS.map((_, i) => i);
+      for (let i = order.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [order[i], order[j]] = [order[j], order[i]];
+      }
+      render(order);
+    }
+
+    document.getElementById("shuffle").addEventListener("click", shuffle);
+    document.getElementById("export").addEventListener("click", () => {
+      const body = JSON.stringify({ experiment: "SOUND_IDENTITY_001", rated_at: new Date().toISOString(), ratings }, null, 2);
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(new Blob([body], { type: "application/json" }));
+      link.download = "sound_identity_ratings.json";
+      link.click();
+    });
+    render(CLIPS.map((_, i) => i));
+  </script>
+</body>
+</html>

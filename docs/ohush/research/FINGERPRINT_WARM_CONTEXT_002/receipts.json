@@ -1,0 +1,12 @@
+{
+  "system": "fingerprint_warm_context_002",
+  "git_head": "33589b69013564fc794f29213359f41c5b724d94",
+  "decisions_sha256": "08b1b8d9a56c33681b493dff1d3337951ac9a51b812c83d2e6009afdefb86713",
+  "script_sha256": "0ba611dd6d26898bdaf8c9cd9107593ee9eafec937c50d40125d1b5bdb7b43ca",
+  "published_results_modified": false,
+  "replay_modified": false,
+  "known_ad_fingerprint_modified": false,
+  "holdouts_opened": false,
+  "playback": "PLAY",
+  "wall_s": 1203.3
+}

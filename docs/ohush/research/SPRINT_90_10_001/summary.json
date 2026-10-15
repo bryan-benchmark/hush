@@ -1,0 +1,169 @@
+{
+  "populations": {
+    "count10": {
+      "football": {
+        "program_s": 432.1,
+        "commercial_s": 3903.2,
+        "incidents": 72,
+        "worst_interruption_s": 25.1,
+        "premature_release_incidents": 186,
+        "commercial_seconds_after_premature_release": 6321.5,
+        "same_recording_program_s": 0.0,
+        "cross_recording_program_s": 0.0,
+        "same_recording_commercial_s": 0.0,
+        "cross_recording_commercial_s": 0.0
+      },
+      "redzone": {
+        "program_s": 10.0,
+        "commercial_s": 0.0,
+        "incidents": 2,
+        "worst_interruption_s": 5.0,
+        "premature_release_incidents": 0,
+        "commercial_seconds_after_premature_release": 0.0,
+        "same_recording_program_s": 0.0,
+        "cross_recording_program_s": 0.0,
+        "same_recording_commercial_s": 0.0,
+        "cross_recording_commercial_s": 0.0
+      }
+    },
+    "top1": {
+      "football": {
+        "program_s": 417.1,
+        "commercial_s": 3888.2,
+        "incidents": 69,
+        "worst_interruption_s": 25.1,
+        "premature_release_incidents": 184,
+        "commercial_seconds_after_premature_release": 6336.5,
+        "same_recording_program_s": 0.0,
+        "cross_recording_program_s": 0.0,
+        "same_recording_commercial_s": 0.0,
+        "cross_recording_commercial_s": 0.0
+      },
+      "redzone": {
+        "program_s": 10.0,
+        "commercial_s": 0.0,
+        "incidents": 2,
+        "worst_interruption_s": 5.0,
+        "premature_release_incidents": 0,
+        "commercial_seconds_after_premature_release": 0.0,
+        "same_recording_program_s": 0.0,
+        "cross_recording_program_s": 0.0,
+        "same_recording_commercial_s": 0.0,
+        "cross_recording_commercial_s": 0.0
+      }
+    },
+    "top5": {
+      "football": {
+        "program_s": 337.3,
+        "commercial_s": 3638.1,
+        "incidents": 57,
+        "worst_interruption_s": 25.1,
+        "premature_release_incidents": 177,
+        "commercial_seconds_after_premature_release": 6263.5,
+        "same_recording_program_s": 0.0,
+        "cross_recording_program_s": 0.0,
+        "same_recording_commercial_s": 0.0,
+        "cross_recording_commercial_s": 0.0
+      },
+      "redzone": {
+        "program_s": 5.0,
+        "commercial_s": 0.0,
+        "incidents": 1,
+        "worst_interruption_s": 5.0,
+        "premature_release_incidents": 0,
+        "commercial_seconds_after_premature_release": 0.0,
+        "same_recording_program_s": 0.0,
+        "cross_recording_program_s": 0.0,
+        "same_recording_commercial_s": 0.0,
+        "cross_recording_commercial_s": 0.0
+      }
+    },
+    "top10": {
+      "football": {
+        "program_s": 268.9,
+        "commercial_s": 3371.5,
+        "incidents": 51,
+        "worst_interruption_s": 20.0,
+        "premature_release_incidents": 176,
+        "commercial_seconds_after_premature_release": 6219.3,
+        "same_recording_program_s": 0.0,
+        "cross_recording_program_s": 0.0,
+        "same_recording_commercial_s": 0.0,
+        "cross_recording_commercial_s": 0.0
+      },
+      "redzone": {
+        "program_s": 0.0,
+        "commercial_s": 0.0,
+        "incidents": 0,
+        "worst_interruption_s": 0.0,
+        "premature_release_incidents": 0,
+        "commercial_seconds_after_premature_release": 0.0,
+        "same_recording_program_s": 0.0,
+        "cross_recording_program_s": 0.0,
+        "same_recording_commercial_s": 0.0,
+        "cross_recording_commercial_s": 0.0
+      }
+    },
+    "voice_guard": {
+      "football": {
+        "program_s": 299.8,
+        "commercial_s": 3438.6,
+        "incidents": 57,
+        "worst_interruption_s": 25.1,
+        "premature_release_incidents": 320,
+        "commercial_seconds_after_premature_release": 6604.2,
+        "same_recording_program_s": 10.6,
+        "cross_recording_program_s": 121.695,
+        "same_recording_commercial_s": 26.7,
+        "cross_recording_commercial_s": 437.905
+      },
+      "redzone": {
+        "program_s": 0.0,
+        "commercial_s": 0.0,
+        "incidents": 0,
+        "worst_interruption_s": 0.0,
+        "premature_release_incidents": 0,
+        "commercial_seconds_after_premature_release": 0.0,
+        "same_recording_program_s": 0.0,
+        "cross_recording_program_s": 10.0,
+        "same_recording_commercial_s": 0.0,
+        "cross_recording_commercial_s": 0.0
+      }
+    },
+    "v1": {
+      "football": {
+        "program_s": 0.0,
+        "commercial_s": 25.0,
+        "incidents": 0,
+        "worst_interruption_s": 0.0,
+        "premature_release_incidents": 2,
+        "commercial_seconds_after_premature_release": 328.5,
+        "same_recording_program_s": 0.0,
+        "cross_recording_program_s": 0.0,
+        "same_recording_commercial_s": 0.0,
+        "cross_recording_commercial_s": 0.0
+      },
+      "redzone": {
+        "program_s": 0.0,
+        "commercial_s": 0.0,
+        "incidents": 0,
+        "worst_interruption_s": 0.0,
+        "premature_release_incidents": 0,
+        "commercial_seconds_after_premature_release": 0.0,
+        "same_recording_program_s": 0.0,
+        "cross_recording_program_s": 0.0,
+        "same_recording_commercial_s": 0.0,
+        "cross_recording_commercial_s": 0.0
+      }
+    }
+  },
+  "hashes": {
+    "docs/ohush/research/UNIVERSAL_V1/decisions.jsonl": "08b1b8d9a56c33681b493dff1d3337951ac9a51b812c83d2e6009afdefb86713",
+    "docs/ohush/research/POD_REMOVAL_001/top_1_changed_queries.csv": "728d93798c3706b5924b84896286e2da55b15828c75081e36d2a60344b64bf61",
+    "docs/ohush/research/POD_REMOVAL_001/top_5_changed_queries.csv": "b26864a8609d60f274a5307bd72a9cbbd09673e3582d81bf168c12158c7a2b48",
+    "docs/ohush/research/POD_REMOVAL_001/top_10_changed_queries.csv": "61cd8a7107616bf007793c952e07ad5a3e806b795c913edcb0fa39ddc9cda4e3",
+    "docs/ohush/research/VOICE_ROSTER_001/names.jsonl": "944e747a79a767c873401f88b0ab94c6da58527368fb0fbc2b171e80c862cefb"
+  },
+  "continuation": "not_opened",
+  "reason": "None of the three changes keeps commercial coverage while clearing most of the 72 incidents."
+}

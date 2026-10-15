@@ -1,0 +1,398 @@
+{
+  "experiment_spec_version": "exp002-v1",
+  "truth_ledger_read": false,
+  "n_speech_regions": 677,
+  "speech_region_seconds": 2396.800000000001,
+  "speech_active_seconds": 2506,
+  "speech_active_fraction": 0.5118464052287581,
+  "n_embedding_windows": 2121,
+  "n_clusters": 90,
+  "n_recurring_clusters": 25,
+  "novel_window_fraction": 0.042432814710042434,
+  "causal_fraction_of_attributed_speech_on_already_recurring": 0.6640226403061229,
+  "end_state_fraction_of_speech_in_recurring_clusters": 0.8680245535714292,
+  "end_state_note": "end_state_fraction labels a cluster by whether it eventually recurred. It is descriptive. Causal scores never use that future status.",
+  "novel_window_duration_seconds": 151.79999999999936,
+  "attributed_speech_seconds": 2508.8000000000006,
+  "top_recurring_clusters": [
+    {
+      "cluster_id": "c0002",
+      "cumulative_speech_seconds": 604.6000000000001,
+      "occurrence_count": 37,
+      "first_seen": 23.7,
+      "last_seen": 3276.0,
+      "n_windows": 521
+    },
+    {
+      "cluster_id": "c0001",
+      "cumulative_speech_seconds": 411.6000000000005,
+      "occurrence_count": 33,
+      "first_seen": 0.9,
+      "last_seen": 3764.3,
+      "n_windows": 348
+    },
+    {
+      "cluster_id": "c0077",
+      "cumulative_speech_seconds": 324.10000000000036,
+      "occurrence_count": 16,
+      "first_seen": 2424.1,
+      "last_seen": 3754.3,
+      "n_windows": 288
+    },
+    {
+      "cluster_id": "c0083",
+      "cumulative_speech_seconds": 205.800000000002,
+      "occurrence_count": 16,
+      "first_seen": 3009.1,
+      "last_seen": 3742.3,
+      "n_windows": 178
+    },
+    {
+      "cluster_id": "c0072",
+      "cumulative_speech_seconds": 125.99999999999864,
+      "occurrence_count": 7,
+      "first_seen": 2188.7,
+      "last_seen": 2530.1,
+      "n_windows": 107
+    },
+    {
+      "cluster_id": "c0020",
+      "cumulative_speech_seconds": 64.89999999999986,
+      "occurrence_count": 12,
+      "first_seen": 264.0,
+      "last_seen": 2623.2,
+      "n_windows": 52
+    },
+    {
+      "cluster_id": "c0076",
+      "cumulative_speech_seconds": 47.00000000000091,
+      "occurrence_count": 5,
+      "first_seen": 2332.6,
+      "last_seen": 2529.9,
+      "n_windows": 40
+    },
+    {
+      "cluster_id": "c0075",
+      "cumulative_speech_seconds": 46.100000000000364,
+      "occurrence_count": 3,
+      "first_seen": 2289.5,
+      "last_seen": 2505.3,
+      "n_windows": 41
+    },
+    {
+      "cluster_id": "c0024",
+      "cumulative_speech_seconds": 44.19999999999948,
+      "occurrence_count": 8,
+      "first_seen": 488.3,
+      "last_seen": 3752.3,
+      "n_windows": 33
+    },
+    {
+      "cluster_id": "c0055",
+      "cumulative_speech_seconds": 39.7000000000005,
+      "occurrence_count": 5,
+      "first_seen": 1365.7,
+      "last_seen": 2601.8,
+      "n_windows": 34
+    },
+    {
+      "cluster_id": "c0004",
+      "cumulative_speech_seconds": 29.900000000000006,
+      "occurrence_count": 4,
+      "first_seen": 160.4,
+      "last_seen": 3757.3,
+      "n_windows": 23
+    },
+    {
+      "cluster_id": "c0053",
+      "cumulative_speech_seconds": 26.40000000000009,
+      "occurrence_count": 6,
+      "first_seen": 1362.2,
+      "last_seen": 2492.4,
+      "n_windows": 17
+    }
+  ],
+  "longest_speech_without_recurring": [
+    {
+      "start_seconds": 171.0,
+      "end_seconds": 282.0,
+      "span_seconds": 111.0,
+      "speech_without_recurring_seconds": 64
+    },
+    {
+      "start_seconds": 2291.0,
+      "end_seconds": 2361.0,
+      "span_seconds": 70.0,
+      "speech_without_recurring_seconds": 50
+    },
+    {
+      "start_seconds": 1342.0,
+      "end_seconds": 1403.0,
+      "span_seconds": 61.0,
+      "speech_without_recurring_seconds": 33
+    },
+    {
+      "start_seconds": 25.0,
+      "end_seconds": 85.0,
+      "span_seconds": 60.0,
+      "speech_without_recurring_seconds": 31
+    },
+    {
+      "start_seconds": 2235.0,
+      "end_seconds": 2290.0,
+      "span_seconds": 55.0,
+      "speech_without_recurring_seconds": 40
+    },
+    {
+      "start_seconds": 3765.0,
+      "end_seconds": 3810.0,
+      "span_seconds": 45.0,
+      "speech_without_recurring_seconds": 33
+    },
+    {
+      "start_seconds": 556.0,
+      "end_seconds": 599.0,
+      "span_seconds": 43.0,
+      "speech_without_recurring_seconds": 27
+    },
+    {
+      "start_seconds": 3059.0,
+      "end_seconds": 3097.0,
+      "span_seconds": 38.0,
+      "speech_without_recurring_seconds": 20
+    },
+    {
+      "start_seconds": 2040.0,
+      "end_seconds": 2072.0,
+      "span_seconds": 32.0,
+      "speech_without_recurring_seconds": 26
+    },
+    {
+      "start_seconds": 503.0,
+      "end_seconds": 531.0,
+      "span_seconds": 28.0,
+      "speech_without_recurring_seconds": 11
+    },
+    {
+      "start_seconds": 1946.0,
+      "end_seconds": 1973.0,
+      "span_seconds": 27.0,
+      "speech_without_recurring_seconds": 19
+    },
+    {
+      "start_seconds": 2116.0,
+      "end_seconds": 2143.0,
+      "span_seconds": 27.0,
+      "speech_without_recurring_seconds": 23
+    },
+    {
+      "start_seconds": 1312.0,
+      "end_seconds": 1338.0,
+      "span_seconds": 26.0,
+      "speech_without_recurring_seconds": 16
+    },
+    {
+      "start_seconds": 2175.0,
+      "end_seconds": 2196.0,
+      "span_seconds": 21.0,
+      "speech_without_recurring_seconds": 10
+    },
+    {
+      "start_seconds": 3018.0,
+      "end_seconds": 3036.0,
+      "span_seconds": 18.0,
+      "speech_without_recurring_seconds": 13
+    }
+  ],
+  "largest_continuity_drops": [
+    {
+      "timestamp_seconds": 161.0,
+      "continuity": 0.0,
+      "drop": 0.4935414905714506
+    },
+    {
+      "timestamp_seconds": 501.0,
+      "continuity": 0.0,
+      "drop": 0.545532765307486
+    },
+    {
+      "timestamp_seconds": 811.0,
+      "continuity": 0.0,
+      "drop": 0.6249010070010739
+    },
+    {
+      "timestamp_seconds": 1135.0,
+      "continuity": 0.24424793044155924,
+      "drop": 0.3890942620147537
+    },
+    {
+      "timestamp_seconds": 1311.0,
+      "continuity": 0.0,
+      "drop": 0.5302979537390264
+    },
+    {
+      "timestamp_seconds": 1957.0,
+      "continuity": 0.0,
+      "drop": 0.57949958424104
+    },
+    {
+      "timestamp_seconds": 2053.0,
+      "continuity": 0.0,
+      "drop": 0.39793064228549363
+    },
+    {
+      "timestamp_seconds": 2230.0,
+      "continuity": 0.1301554262755045,
+      "drop": 0.4581646303882272
+    },
+    {
+      "timestamp_seconds": 2534.0,
+      "continuity": 0.24673605743850474,
+      "drop": 0.4374085492341106
+    },
+    {
+      "timestamp_seconds": 2580.0,
+      "continuity": 0.049821651233935595,
+      "drop": 0.5957239326128214
+    },
+    {
+      "timestamp_seconds": 3023.0,
+      "continuity": 0.0,
+      "drop": 0.3783065145444739
+    },
+    {
+      "timestamp_seconds": 3073.0,
+      "continuity": 0.0,
+      "drop": 0.5121262930334871
+    },
+    {
+      "timestamp_seconds": 3274.0,
+      "continuity": 0.3751561556569865,
+      "drop": 0.35244065163620614
+    }
+  ],
+  "strongest_return_events": [
+    {
+      "timestamp_seconds": 438.0,
+      "return_score": 0.3687238331665175,
+      "cluster_id": "c0001"
+    },
+    {
+      "timestamp_seconds": 615.0,
+      "return_score": 0.6829216561485174,
+      "cluster_id": "c0002"
+    },
+    {
+      "timestamp_seconds": 667.0,
+      "return_score": 0.553773179110432,
+      "cluster_id": "c0001"
+    },
+    {
+      "timestamp_seconds": 869.0,
+      "return_score": 0.7476953719769379,
+      "cluster_id": "c0001"
+    },
+    {
+      "timestamp_seconds": 1001.0,
+      "return_score": 0.4432070715589724,
+      "cluster_id": "c0001"
+    },
+    {
+      "timestamp_seconds": 1072.0,
+      "return_score": 0.35683741543428943,
+      "cluster_id": "c0001"
+    },
+    {
+      "timestamp_seconds": 1140.0,
+      "return_score": 0.375493117919102,
+      "cluster_id": "c0001"
+    },
+    {
+      "timestamp_seconds": 1195.0,
+      "return_score": 0.444279097610409,
+      "cluster_id": "c0001"
+    },
+    {
+      "timestamp_seconds": 1470.0,
+      "return_score": 0.7635221006041845,
+      "cluster_id": "c0001"
+    },
+    {
+      "timestamp_seconds": 1657.0,
+      "return_score": 0.4297325901796534,
+      "cluster_id": "c0001"
+    },
+    {
+      "timestamp_seconds": 1752.0,
+      "return_score": 0.3697615299873756,
+      "cluster_id": "c0002"
+    },
+    {
+      "timestamp_seconds": 2077.0,
+      "return_score": 0.49976752348266473,
+      "cluster_id": "c0020"
+    },
+    {
+      "timestamp_seconds": 2200.0,
+      "return_score": 0.3767091775783925,
+      "cluster_id": "c0020"
+    },
+    {
+      "timestamp_seconds": 2511.0,
+      "return_score": 0.45664163774638444,
+      "cluster_id": "c0020"
+    },
+    {
+      "timestamp_seconds": 2653.0,
+      "return_score": 0.6084330449739995,
+      "cluster_id": "c0002"
+    },
+    {
+      "timestamp_seconds": 3286.0,
+      "return_score": 0.39690294115344993,
+      "cluster_id": "c0077"
+    },
+    {
+      "timestamp_seconds": 3458.0,
+      "return_score": 0.43927664123024385,
+      "cluster_id": "c0083"
+    },
+    {
+      "timestamp_seconds": 3548.0,
+      "return_score": 0.5153532715693511,
+      "cluster_id": "c0083"
+    },
+    {
+      "timestamp_seconds": 3604.0,
+      "return_score": 0.36378987530076645,
+      "cluster_id": "c0083"
+    },
+    {
+      "timestamp_seconds": 3690.0,
+      "return_score": 0.5349811947876632,
+      "cluster_id": "c0077"
+    }
+  ],
+  "similarity_when_matched": {
+    "p10": 0.3709439091848092,
+    "p50": 0.6115991324156778,
+    "p90": 0.7422958492819255
+  },
+  "similarity_when_novel": {
+    "p50": 0.20892814716337382,
+    "p90": 0.24569089542380718,
+    "max": 0.24957368493187004
+  },
+  "continuity_when_defined": {
+    "n": 3458,
+    "p50": 0.5337134810824743,
+    "p90": 0.6760034079989039
+  },
+  "first_recurring_window_end": 135.7,
+  "embedding_l2_norm": {
+    "min": 0.9999998807907104,
+    "max": 1.0000001192092896,
+    "mean": 1.0
+  },
+  "embedding_dim": 192
+}

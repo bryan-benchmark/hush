@@ -1,0 +1,678 @@
+{
+  "system": "fingerprint_warm_context_002",
+  "mute_policy": false,
+  "playback": "PLAY",
+  "frozen_files_modified": false,
+  "lead_s": 1.996916,
+  "lead_is_past_audio": true,
+  "counts_unchanged": {
+    "count_10": 10,
+    "count_200": 200
+  },
+  "holes_s": {
+    "cold": 275.0,
+    "warm": 280.0
+  },
+  "warm_blocks_with_no_preceding_audio": 12,
+  "reference_alignment": {
+    "nine_matches_near_s": 9809.7,
+    "nearest_90s_boundary_s": 9810.0,
+    "boundary_multiple": 109.0
+  },
+  "false_queries_on_a_file_chunk_boundary": [
+    2700.0,
+    4500.0
+  ],
+  "reproduction": {
+    "program_seconds_covered": 432.1,
+    "published_program_seconds_covered": 432.1,
+    "false_cover_incidents": 72,
+    "published_false_cover_incidents": 72,
+    "matches_published": true
+  },
+  "thirteen": [
+    {
+      "query_t0": 2700.0,
+      "cold_query_cold_reference": 19,
+      "warm_query_cold_reference": 4,
+      "cold_query_warm_reference": 16,
+      "warm_query_warm_reference": 4
+    },
+    {
+      "query_t0": 2790.0,
+      "cold_query_cold_reference": 25,
+      "warm_query_cold_reference": 4,
+      "cold_query_warm_reference": 21,
+      "warm_query_warm_reference": 4
+    },
+    {
+      "query_t0": 2880.0,
+      "cold_query_cold_reference": 11,
+      "warm_query_cold_reference": 4,
+      "cold_query_warm_reference": 11,
+      "warm_query_warm_reference": 4
+    },
+    {
+      "query_t0": 3960.0,
+      "cold_query_cold_reference": 20,
+      "warm_query_cold_reference": 4,
+      "cold_query_warm_reference": 13,
+      "warm_query_warm_reference": 4
+    },
+    {
+      "query_t0": 4050.0,
+      "cold_query_cold_reference": 17,
+      "warm_query_cold_reference": 4,
+      "cold_query_warm_reference": 16,
+      "warm_query_warm_reference": 4
+    },
+    {
+      "query_t0": 4140.0,
+      "cold_query_cold_reference": 20,
+      "warm_query_cold_reference": 3,
+      "cold_query_warm_reference": 17,
+      "warm_query_warm_reference": 3
+    },
+    {
+      "query_t0": 4230.0,
+      "cold_query_cold_reference": 13,
+      "warm_query_cold_reference": 3,
+      "cold_query_warm_reference": 13,
+      "warm_query_warm_reference": 3
+    },
+    {
+      "query_t0": 4320.0,
+      "cold_query_cold_reference": 17,
+      "warm_query_cold_reference": 4,
+      "cold_query_warm_reference": 14,
+      "warm_query_warm_reference": 4
+    },
+    {
+      "query_t0": 4500.0,
+      "cold_query_cold_reference": 18,
+      "warm_query_cold_reference": 4,
+      "cold_query_warm_reference": 16,
+      "warm_query_warm_reference": 4
+    },
+    {
+      "query_t0": 4590.0,
+      "cold_query_cold_reference": 15,
+      "warm_query_cold_reference": 3,
+      "cold_query_warm_reference": 15,
+      "warm_query_warm_reference": 3
+    },
+    {
+      "query_t0": 4680.0,
+      "cold_query_cold_reference": 13,
+      "warm_query_cold_reference": 5,
+      "cold_query_warm_reference": 9,
+      "warm_query_warm_reference": 5
+    },
+    {
+      "query_t0": 4770.0,
+      "cold_query_cold_reference": 14,
+      "warm_query_cold_reference": 3,
+      "cold_query_warm_reference": 9,
+      "warm_query_warm_reference": 3
+    },
+    {
+      "query_t0": 4860.0,
+      "cold_query_cold_reference": 15,
+      "warm_query_cold_reference": 4,
+      "cold_query_warm_reference": 13,
+      "warm_query_warm_reference": 4
+    }
+  ],
+  "repeated_content_controls": [
+    {
+      "session": "hush_20261008_205100",
+      "query_t0": 145.0,
+      "published_score": 272,
+      "cold_offset_s": 314.482,
+      "audio_correlation": 0.0276,
+      "cold_query_cold_reference": 272,
+      "warm_query_cold_reference": 272,
+      "cold_query_warm_reference": 272,
+      "warm_query_warm_reference": 272
+    },
+    {
+      "session": "hush_20261012_204200",
+      "query_t0": 5085.0,
+      "published_score": 208,
+      "cold_offset_s": 6873.796,
+      "audio_correlation": 0.0009,
+      "cold_query_cold_reference": 208,
+      "warm_query_cold_reference": 208,
+      "cold_query_warm_reference": 208,
+      "warm_query_warm_reference": 208
+    }
+  ],
+  "lookahead": {
+    "cold_block_start": [
+      {
+        "warm": false,
+        "buffer_ends_after_query_s": 0.0,
+        "identical": false,
+        "jaccard": 0.9903
+      },
+      {
+        "warm": false,
+        "buffer_ends_after_query_s": 2.0,
+        "identical": false,
+        "jaccard": 0.9956
+      },
+      {
+        "warm": false,
+        "buffer_ends_after_query_s": 5.0,
+        "identical": true,
+        "jaccard": 1.0
+      }
+    ],
+    "warm_block_start": [
+      {
+        "warm": true,
+        "buffer_ends_after_query_s": 0.0,
+        "identical": false,
+        "jaccard": 0.9939
+      },
+      {
+        "warm": true,
+        "buffer_ends_after_query_s": 2.0,
+        "identical": true,
+        "jaccard": 1.0
+      },
+      {
+        "warm": true,
+        "buffer_ends_after_query_s": 5.0,
+        "identical": true,
+        "jaccard": 1.0
+      }
+    ],
+    "note": "Past context is audio already received. These rows are how much audio after the query the peak picker still uses."
+  },
+  "arms": {
+    "cold_query_cold_reference": {
+      "count_10": {
+        "football": {
+          "commercial_seconds_covered": 3903.2,
+          "commercial_seconds_heard": 13652.5,
+          "program_seconds_covered": 432.1,
+          "false_cover_incidents": 72,
+          "worst_continuous_program_interruption_s": 25.1,
+          "premature_return_incidents": 186,
+          "return_delay_s": {
+            "n": 26,
+            "median": 5.256,
+            "p95": 9.552,
+            "still_covering_at_annotation_end": 2
+          },
+          "pods_with_any_cover": 105
+        },
+        "redzone": {
+          "commercial_seconds_covered": 0.0,
+          "commercial_seconds_heard": 0.0,
+          "program_seconds_covered": 10.0,
+          "false_cover_incidents": 2,
+          "worst_continuous_program_interruption_s": 5.0,
+          "premature_return_incidents": 0,
+          "return_delay_s": {
+            "n": 0,
+            "median": null,
+            "p95": null,
+            "still_covering_at_annotation_end": 0
+          },
+          "pods_with_any_cover": 0
+        },
+        "scripted": {
+          "commercial_seconds_covered": 108.5,
+          "commercial_seconds_heard": 2273.7,
+          "program_seconds_covered": 61.5,
+          "false_cover_incidents": 11,
+          "worst_continuous_program_interruption_s": 8.4,
+          "premature_return_incidents": 8,
+          "return_delay_s": {
+            "n": 3,
+            "median": 6.976,
+            "p95": 8.373,
+            "still_covering_at_annotation_end": 0
+          },
+          "pods_with_any_cover": 8
+        }
+      },
+      "count_200": {
+        "football": {
+          "commercial_seconds_covered": 25.0,
+          "commercial_seconds_heard": 17530.7,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_continuous_program_interruption_s": 0.0,
+          "premature_return_incidents": 2,
+          "return_delay_s": {
+            "n": 0,
+            "median": null,
+            "p95": null,
+            "still_covering_at_annotation_end": 0
+          },
+          "pods_with_any_cover": 2
+        },
+        "redzone": {
+          "commercial_seconds_covered": 0.0,
+          "commercial_seconds_heard": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_continuous_program_interruption_s": 0.0,
+          "premature_return_incidents": 0,
+          "return_delay_s": {
+            "n": 0,
+            "median": null,
+            "p95": null,
+            "still_covering_at_annotation_end": 0
+          },
+          "pods_with_any_cover": 0
+        },
+        "scripted": {
+          "commercial_seconds_covered": 0.0,
+          "commercial_seconds_heard": 2382.2,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_continuous_program_interruption_s": 0.0,
+          "premature_return_incidents": 0,
+          "return_delay_s": {
+            "n": 0,
+            "median": null,
+            "p95": null,
+            "still_covering_at_annotation_end": 0
+          },
+          "pods_with_any_cover": 0
+        }
+      }
+    },
+    "warm_query_cold_reference": {
+      "count_10": {
+        "football": {
+          "commercial_seconds_covered": 3908.2,
+          "commercial_seconds_heard": 13647.5,
+          "program_seconds_covered": 372.1,
+          "false_cover_incidents": 59,
+          "worst_continuous_program_interruption_s": 25.1,
+          "premature_return_incidents": 185,
+          "return_delay_s": {
+            "n": 26,
+            "median": 5.256,
+            "p95": 9.552,
+            "still_covering_at_annotation_end": 2
+          },
+          "pods_with_any_cover": 104
+        },
+        "redzone": {
+          "commercial_seconds_covered": 0.0,
+          "commercial_seconds_heard": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_continuous_program_interruption_s": 0.0,
+          "premature_return_incidents": 0,
+          "return_delay_s": {
+            "n": 0,
+            "median": null,
+            "p95": null,
+            "still_covering_at_annotation_end": 0
+          },
+          "pods_with_any_cover": 0
+        },
+        "scripted": {
+          "commercial_seconds_covered": 108.5,
+          "commercial_seconds_heard": 2273.7,
+          "program_seconds_covered": 26.5,
+          "false_cover_incidents": 4,
+          "worst_continuous_program_interruption_s": 8.4,
+          "premature_return_incidents": 8,
+          "return_delay_s": {
+            "n": 3,
+            "median": 6.976,
+            "p95": 8.373,
+            "still_covering_at_annotation_end": 0
+          },
+          "pods_with_any_cover": 8
+        }
+      },
+      "count_200": {
+        "football": {
+          "commercial_seconds_covered": 25.0,
+          "commercial_seconds_heard": 17530.7,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_continuous_program_interruption_s": 0.0,
+          "premature_return_incidents": 2,
+          "return_delay_s": {
+            "n": 0,
+            "median": null,
+            "p95": null,
+            "still_covering_at_annotation_end": 0
+          },
+          "pods_with_any_cover": 2
+        },
+        "redzone": {
+          "commercial_seconds_covered": 0.0,
+          "commercial_seconds_heard": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_continuous_program_interruption_s": 0.0,
+          "premature_return_incidents": 0,
+          "return_delay_s": {
+            "n": 0,
+            "median": null,
+            "p95": null,
+            "still_covering_at_annotation_end": 0
+          },
+          "pods_with_any_cover": 0
+        },
+        "scripted": {
+          "commercial_seconds_covered": 0.0,
+          "commercial_seconds_heard": 2382.2,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_continuous_program_interruption_s": 0.0,
+          "premature_return_incidents": 0,
+          "return_delay_s": {
+            "n": 0,
+            "median": null,
+            "p95": null,
+            "still_covering_at_annotation_end": 0
+          },
+          "pods_with_any_cover": 0
+        }
+      }
+    },
+    "cold_query_warm_reference": {
+      "count_10": {
+        "football": {
+          "commercial_seconds_covered": 3885.2,
+          "commercial_seconds_heard": 13670.5,
+          "program_seconds_covered": 415.2,
+          "false_cover_incidents": 68,
+          "worst_continuous_program_interruption_s": 25.1,
+          "premature_return_incidents": 183,
+          "return_delay_s": {
+            "n": 25,
+            "median": 5.391,
+            "p95": 9.552,
+            "still_covering_at_annotation_end": 2
+          },
+          "pods_with_any_cover": 105
+        },
+        "redzone": {
+          "commercial_seconds_covered": 0.0,
+          "commercial_seconds_heard": 0.0,
+          "program_seconds_covered": 10.0,
+          "false_cover_incidents": 2,
+          "worst_continuous_program_interruption_s": 5.0,
+          "premature_return_incidents": 0,
+          "return_delay_s": {
+            "n": 0,
+            "median": null,
+            "p95": null,
+            "still_covering_at_annotation_end": 0
+          },
+          "pods_with_any_cover": 0
+        },
+        "scripted": {
+          "commercial_seconds_covered": 108.5,
+          "commercial_seconds_heard": 2273.7,
+          "program_seconds_covered": 61.5,
+          "false_cover_incidents": 11,
+          "worst_continuous_program_interruption_s": 8.4,
+          "premature_return_incidents": 8,
+          "return_delay_s": {
+            "n": 3,
+            "median": 6.976,
+            "p95": 8.373,
+            "still_covering_at_annotation_end": 0
+          },
+          "pods_with_any_cover": 8
+        }
+      },
+      "count_200": {
+        "football": {
+          "commercial_seconds_covered": 25.0,
+          "commercial_seconds_heard": 17530.7,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_continuous_program_interruption_s": 0.0,
+          "premature_return_incidents": 2,
+          "return_delay_s": {
+            "n": 0,
+            "median": null,
+            "p95": null,
+            "still_covering_at_annotation_end": 0
+          },
+          "pods_with_any_cover": 2
+        },
+        "redzone": {
+          "commercial_seconds_covered": 0.0,
+          "commercial_seconds_heard": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_continuous_program_interruption_s": 0.0,
+          "premature_return_incidents": 0,
+          "return_delay_s": {
+            "n": 0,
+            "median": null,
+            "p95": null,
+            "still_covering_at_annotation_end": 0
+          },
+          "pods_with_any_cover": 0
+        },
+        "scripted": {
+          "commercial_seconds_covered": 0.0,
+          "commercial_seconds_heard": 2382.2,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_continuous_program_interruption_s": 0.0,
+          "premature_return_incidents": 0,
+          "return_delay_s": {
+            "n": 0,
+            "median": null,
+            "p95": null,
+            "still_covering_at_annotation_end": 0
+          },
+          "pods_with_any_cover": 0
+        }
+      }
+    },
+    "warm_query_warm_reference": {
+      "count_10": {
+        "football": {
+          "commercial_seconds_covered": 3900.2,
+          "commercial_seconds_heard": 13655.5,
+          "program_seconds_covered": 355.2,
+          "false_cover_incidents": 55,
+          "worst_continuous_program_interruption_s": 25.1,
+          "premature_return_incidents": 180,
+          "return_delay_s": {
+            "n": 25,
+            "median": 5.391,
+            "p95": 9.552,
+            "still_covering_at_annotation_end": 2
+          },
+          "pods_with_any_cover": 104
+        },
+        "redzone": {
+          "commercial_seconds_covered": 0.0,
+          "commercial_seconds_heard": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_continuous_program_interruption_s": 0.0,
+          "premature_return_incidents": 0,
+          "return_delay_s": {
+            "n": 0,
+            "median": null,
+            "p95": null,
+            "still_covering_at_annotation_end": 0
+          },
+          "pods_with_any_cover": 0
+        },
+        "scripted": {
+          "commercial_seconds_covered": 108.5,
+          "commercial_seconds_heard": 2273.7,
+          "program_seconds_covered": 26.5,
+          "false_cover_incidents": 4,
+          "worst_continuous_program_interruption_s": 8.4,
+          "premature_return_incidents": 8,
+          "return_delay_s": {
+            "n": 3,
+            "median": 6.976,
+            "p95": 8.373,
+            "still_covering_at_annotation_end": 0
+          },
+          "pods_with_any_cover": 8
+        }
+      },
+      "count_200": {
+        "football": {
+          "commercial_seconds_covered": 30.0,
+          "commercial_seconds_heard": 17525.7,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_continuous_program_interruption_s": 0.0,
+          "premature_return_incidents": 3,
+          "return_delay_s": {
+            "n": 0,
+            "median": null,
+            "p95": null,
+            "still_covering_at_annotation_end": 0
+          },
+          "pods_with_any_cover": 3
+        },
+        "redzone": {
+          "commercial_seconds_covered": 0.0,
+          "commercial_seconds_heard": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_continuous_program_interruption_s": 0.0,
+          "premature_return_incidents": 0,
+          "return_delay_s": {
+            "n": 0,
+            "median": null,
+            "p95": null,
+            "still_covering_at_annotation_end": 0
+          },
+          "pods_with_any_cover": 0
+        },
+        "scripted": {
+          "commercial_seconds_covered": 0.0,
+          "commercial_seconds_heard": 2382.2,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_continuous_program_interruption_s": 0.0,
+          "premature_return_incidents": 0,
+          "return_delay_s": {
+            "n": 0,
+            "median": null,
+            "p95": null,
+            "still_covering_at_annotation_end": 0
+          },
+          "pods_with_any_cover": 0
+        }
+      }
+    },
+    "warm_warm_decision_delayed_2s": {
+      "count_10": {
+        "football": {
+          "commercial_seconds_covered": 3848.8,
+          "commercial_seconds_heard": 13706.9,
+          "program_seconds_covered": 400.6,
+          "false_cover_incidents": 63,
+          "worst_continuous_program_interruption_s": 23.1,
+          "premature_return_incidents": 172,
+          "return_delay_s": {
+            "n": 30,
+            "median": 6.393,
+            "p95": 10.371,
+            "still_covering_at_annotation_end": 2
+          },
+          "pods_with_any_cover": 104
+        },
+        "redzone": {
+          "commercial_seconds_covered": 0.0,
+          "commercial_seconds_heard": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_continuous_program_interruption_s": 0.0,
+          "premature_return_incidents": 0,
+          "return_delay_s": {
+            "n": 0,
+            "median": null,
+            "p95": null,
+            "still_covering_at_annotation_end": 0
+          },
+          "pods_with_any_cover": 0
+        },
+        "scripted": {
+          "commercial_seconds_covered": 102.9,
+          "commercial_seconds_heard": 2279.3,
+          "program_seconds_covered": 32.1,
+          "false_cover_incidents": 4,
+          "worst_continuous_program_interruption_s": 10.0,
+          "premature_return_incidents": 8,
+          "return_delay_s": {
+            "n": 2,
+            "median": 8.163,
+            "p95": 8.976,
+            "still_covering_at_annotation_end": 0
+          },
+          "pods_with_any_cover": 7
+        }
+      }
+    },
+    "warm_warm_decision_delayed_5s": {
+      "count_10": {
+        "football": {
+          "commercial_seconds_covered": 3755.3,
+          "commercial_seconds_heard": 13800.4,
+          "program_seconds_covered": 485.0,
+          "false_cover_incidents": 64,
+          "worst_continuous_program_interruption_s": 20.1,
+          "premature_return_incidents": 170,
+          "return_delay_s": {
+            "n": 33,
+            "median": 8.709,
+            "p95": 12.51,
+            "still_covering_at_annotation_end": 2
+          },
+          "pods_with_any_cover": 104
+        },
+        "redzone": {
+          "commercial_seconds_covered": 0.0,
+          "commercial_seconds_heard": 0.0,
+          "program_seconds_covered": 0.0,
+          "false_cover_incidents": 0,
+          "worst_continuous_program_interruption_s": 0.0,
+          "premature_return_incidents": 0,
+          "return_delay_s": {
+            "n": 0,
+            "median": null,
+            "p95": null,
+            "still_covering_at_annotation_end": 0
+          },
+          "pods_with_any_cover": 0
+        },
+        "scripted": {
+          "commercial_seconds_covered": 98.1,
+          "commercial_seconds_heard": 2284.1,
+          "program_seconds_covered": 37.0,
+          "false_cover_incidents": 4,
+          "worst_continuous_program_interruption_s": 12.0,
+          "premature_return_incidents": 8,
+          "return_delay_s": {
+            "n": 1,
+            "median": 11.976,
+            "p95": 11.976,
+            "still_covering_at_annotation_end": 0
+          },
+          "pods_with_any_cover": 6
+        }
+      }
+    }
+  },
+  "wall_s": 1203.3
+}

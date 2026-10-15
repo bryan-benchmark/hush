@@ -31,7 +31,7 @@ from experiments.measurement.voice_guard_001 import (  # noqa: E402
     load_decisions,
     protection_for,
 )
-from experiments.universal_v1.replay import actions_for, cover_spans, overlap, subtract  # noqa: E402
+from experiments.universal_v1.replay import actions_for, cover_spans, intersect, overlap, subtract  # noqa: E402
 from experiments.universal_v4.speaker_enrollment import person_name  # noqa: E402
 from hush.speaker_memory import MATCH_COSINE  # noqa: E402
 
@@ -97,6 +97,9 @@ def main() -> None:
     per_session = []
     new_program = new_ad = 0.0
     old_program = old_ad = 0.0
+    football_incidents_before = football_incidents_after = 0
+    backfill_incidents_before = backfill_incidents_after = 0
+    football_worst_after = 0.0
     for sid, bag in sessions.items():
         if sid not in decisions and sid not in windows:
             continue
@@ -110,6 +113,8 @@ def main() -> None:
         kept10 = subtract(cover10, guard_spans)
         saved_program = overlap(program, cover10) - overlap(program, kept10)
         sacrificed_ad = overlap(ads[sid], cover10) - overlap(ads[sid], kept10)
+        before_incidents = intersect(cover10, program)
+        after_incidents = intersect(kept10, program)
         names: dict[str, dict[str, float]] = defaultdict(lambda: {"program": 0.0, "ad": 0.0})
         for row in guards:
             piece = [(row["start"], row["end"])]
@@ -125,12 +130,21 @@ def main() -> None:
             "v1_ad_muted_s": round(overlap(ads[sid], cover_v1), 3),
             "program_seconds_saved_s": round(saved_program, 3),
             "commercial_seconds_sacrificed_s": round(sacrificed_ad, 3),
+            "incidents_before": len(before_incidents),
+            "incidents_after": len(after_incidents),
+            "worst_interruption_after_s": round(max((end - start for start, end in after_incidents), default=0.0), 3),
             "names": {name: {key: round(value, 3) for key, value in block.items()} for name, block in sorted(names.items()) if block["program"] or block["ad"]},
         }
         per_session.append(record)
+        if bag["content"] == "sports" and sid != REDZONE:
+            football_incidents_before += len(before_incidents)
+            football_incidents_after += len(after_incidents)
+            football_worst_after = max(football_worst_after, max((end - start for start, end in after_incidents), default=0.0))
         if sid in BACKFILL:
             new_program += saved_program
             new_ad += sacrificed_ad
+            backfill_incidents_before += len(before_incidents)
+            backfill_incidents_after += len(after_incidents)
         elif bag["content"] == "sports" and sid != REDZONE:
             old_program += saved_program
             old_ad += sacrificed_ad
@@ -145,6 +159,8 @@ def main() -> None:
     prior_commercial = float(prior["football"]["commercial_seconds_sacrificed_s"])
     if abs(old_program - prior_program) > 0.02 or abs(old_ad - prior_commercial) > 0.02:
         raise SystemExit(f"earlier football giveback moved: program {old_program} ad {old_ad}")
+    if football_incidents_before != 72:
+        raise SystemExit(f"football incidents before the guard were {football_incidents_before}, not 72")
     inaccessible = 273.0
     payload = {
         "system": "ecapa_backfill_001",
@@ -165,7 +181,12 @@ def main() -> None:
             "program_seconds_protected_s": round(new_program, 3),
             "program_seconds_still_unprotected_s": round(inaccessible - new_program, 3),
             "commercial_seconds_exposed_s": round(new_ad, 3),
+            "incidents_before": backfill_incidents_before,
+            "incidents_after": backfill_incidents_after,
         },
+        "football_incidents_before": football_incidents_before,
+        "football_incidents_after": football_incidents_after,
+        "football_worst_interruption_after_s": round(football_worst_after, 3),
         "football_after": {
             "program_seconds_saved_s": round(old_program + new_program, 3),
             "commercial_seconds_sacrificed_s": round(old_ad + new_ad, 3),
@@ -194,7 +215,8 @@ def render(payload: dict) -> str:
         f"Of the {october['inaccessible_program_s']:.1f} false program seconds that had no speaker features, "
         f"{october['program_seconds_protected_s']:.1f} are now given back. "
         f"{october['program_seconds_still_unprotected_s']:.1f} stay covered. "
-        f"The same protection gives back {october['commercial_seconds_exposed_s']:.1f} commercial seconds on those recordings.",
+        f"The same protection gives back {october['commercial_seconds_exposed_s']:.1f} commercial seconds on those recordings. "
+        f"Incidents on those recordings go from {october['incidents_before']} to {october['incidents_after']}.",
         "",
         f"The earlier recordings still give back {payload['previously_saved_program_s']:.1f} program seconds and "
         f"{payload['previously_sacrificed_commercial_s']:.1f} commercial seconds. Their rows were checked against the frozen voice-guard result.",
@@ -202,7 +224,11 @@ def render(payload: dict) -> str:
         f"Together, {foot['program_seconds_saved_s']:.1f} of {PUBLISHED_PROGRAM_FALSE_S:.1f} false program seconds are given back, and "
         f"{foot['commercial_seconds_sacrificed_s']:.1f} commercial seconds are given back. "
         f"{foot['commercial_seconds_still_muted_s']:.1f} scorable commercial seconds stay muted, "
-        f"{foot['commercial_seconds_beyond_v1_s']:.1f} of them beyond Universal v1.",
+        f"{foot['commercial_seconds_beyond_v1_s']:.1f} of them beyond Universal v1. "
+        f"Football incidents go from {payload['football_incidents_before']} to {payload['football_incidents_after']}. "
+        f"The longest remaining program interruption is {payload['football_worst_interruption_after_s']:.1f} s.",
+        "",
+        "Two chunk files were shorter than `session.json`. 144 frames at 48 kHz were filled with silence on the Prime recording, and 16 frames on `hush_20261011_204300`. Later audio was not moved.",
         "",
         "| Session | Network | Count-10 program seconds | Program given back | Commercial given back |",
         "| --- | --- | ---: | ---: | ---: |",
@@ -222,7 +248,7 @@ def render(payload: dict) -> str:
         for name, block in row["names"].items():
             any_name = True
             lines.append(
-                f"- {name} on {row['network']}: {block['program']:.1f} program seconds given back, {block['ad']:.1f} commercial seconds given back."
+                f"- {name} on {row['session']}: {block['program']:.1f} program seconds given back, {block['ad']:.1f} commercial seconds given back."
             )
     if not any_name:
         lines.append("No earlier enrollment overlapped a count-10 cover on these recordings.")

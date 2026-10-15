@@ -1,0 +1,89 @@
+{
+  "experiment": "SOUND_IDENTITY_001",
+  "sketches": [
+    {
+      "name": "warm_air",
+      "sha256": "7f6baf1ccaf09ca161ac8954bbcd36c768101b4f49f1fa990444dc2b259a1859",
+      "duration_s": 60.0,
+      "sample_rate": 48000,
+      "channels": 2,
+      "rms": 0.07999,
+      "peak": 0.4851,
+      "centroid_hz": 953.3,
+      "low_pulses": 1,
+      "installed_in_gate": false
+    },
+    {
+      "name": "velvet_beat",
+      "sha256": "680cfdcde133a6491ba477426812d2b43ab3cd5ce0c82349a6e37eab4abe8c9c",
+      "duration_s": 60.0,
+      "sample_rate": 48000,
+      "channels": 2,
+      "rms": 0.08,
+      "peak": 0.7082,
+      "centroid_hz": 762.5,
+      "low_pulses": 72,
+      "installed_in_gate": false
+    },
+    {
+      "name": "light_shuffle",
+      "sha256": "f184e2a81015b1f328cd4c8cb51b9bc8bcdd79356479b22b0810b9103f58c33c",
+      "duration_s": 60.0,
+      "sample_rate": 48000,
+      "channels": 2,
+      "rms": 0.08,
+      "peak": 0.6524,
+      "centroid_hz": 957.8,
+      "low_pulses": 88,
+      "installed_in_gate": false
+    },
+    {
+      "name": "slow_current",
+      "sha256": "5ed3131e3789c9e36079c3597e8ccf42940b81ecac3abb7d2acca78b471914c1",
+      "duration_s": 60.0,
+      "sample_rate": 48000,
+      "channels": 2,
+      "rms": 0.07998,
+      "peak": 0.4976,
+      "centroid_hz": 1196.3,
+      "low_pulses": 0,
+      "installed_in_gate": false
+    },
+    {
+      "name": "sparse_mallets",
+      "sha256": "33953b6e7d6e12d600a52bddf69582bcf32cbf0279001406fac1b8699eb3a967",
+      "duration_s": 60.0,
+      "sample_rate": 48000,
+      "channels": 2,
+      "rms": 0.08,
+      "peak": 0.5121,
+      "centroid_hz": 938.4,
+      "low_pulses": 4,
+      "installed_in_gate": false
+    },
+    {
+      "name": "synthetic_arena",
+      "sha256": "be7c07a6585e0c4cce767a1f4d344a44df2c83ac49ca0afdc68662d2c162903d",
+      "duration_s": 60.0,
+      "sample_rate": 48000,
+      "channels": 2,
+      "rms": 0.07998,
+      "peak": 0.4578,
+      "centroid_hz": 1063.5,
+      "low_pulses": 0,
+      "installed_in_gate": false
+    },
+    {
+      "name": "silence",
+      "sha256": "92369fd1d9420602d066e79cec9b717752999222eaf0f1324151df7528c81492",
+      "duration_s": 60.0,
+      "sample_rate": 48000,
+      "channels": 2,
+      "rms": 0.0,
+      "peak": 0.0,
+      "centroid_hz": 0.0,
+      "low_pulses": 0,
+      "installed_in_gate": false
+    }
+  ]
+}

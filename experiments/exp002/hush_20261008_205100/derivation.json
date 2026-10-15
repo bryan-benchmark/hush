@@ -1,0 +1,44 @@
+{
+  "session": "hush_20261008_205100",
+  "t0": 0.0,
+  "t1": 10440.364,
+  "padded_chunks": [
+    {
+      "file": "audio_0005.wav",
+      "missing_frames_at_48k": 16
+    },
+    {
+      "file": "audio_0007.wav",
+      "missing_frames_at_48k": 16
+    },
+    {
+      "file": "audio_0009.wav",
+      "missing_frames_at_48k": 16
+    },
+    {
+      "file": "audio_0011.wav",
+      "missing_frames_at_48k": 16
+    },
+    {
+      "file": "audio_0013.wav",
+      "missing_frames_at_48k": 16
+    },
+    {
+      "file": "audio_0015.wav",
+      "missing_frames_at_48k": 16
+    },
+    {
+      "file": "audio_0030.wav",
+      "missing_frames_at_48k": 16
+    },
+    {
+      "file": "audio_0050.wav",
+      "missing_frames_at_48k": 16
+    },
+    {
+      "file": "audio_0052.wav",
+      "missing_frames_at_48k": 16
+    }
+  ],
+  "padded_frames_at_48k": 144
+}

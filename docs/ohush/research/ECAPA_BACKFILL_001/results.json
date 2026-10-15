@@ -1,0 +1,476 @@
+{
+  "system": "ecapa_backfill_001",
+  "mute_policy": false,
+  "playback": "PLAY",
+  "model": "speechbrain/spkrec-ecapa-voxceleb",
+  "voice_line": 0.25,
+  "voice_line_fit": false,
+  "count": 10,
+  "october_labels": 0,
+  "enrollment_windows": 94,
+  "enrollment_windows_refused_because_inside_a_commercial": 4,
+  "previously_saved_program_s": 27.506,
+  "previously_sacrificed_commercial_s": 88.894,
+  "prior_sessions_unchanged": true,
+  "october": {
+    "inaccessible_program_s": 273.0,
+    "program_seconds_protected_s": 104.79,
+    "program_seconds_still_unprotected_s": 168.21,
+    "commercial_seconds_exposed_s": 375.71,
+    "incidents_before": 51,
+    "incidents_after": 35
+  },
+  "football_incidents_before": 72,
+  "football_incidents_after": 57,
+  "football_worst_interruption_after_s": 25.129,
+  "football_after": {
+    "program_seconds_saved_s": 132.295,
+    "commercial_seconds_sacrificed_s": 464.605,
+    "program_seconds_still_false_s": 299.805,
+    "commercial_seconds_still_muted_s": 3438.595,
+    "commercial_seconds_beyond_v1_s": 3413.595
+  },
+  "sessions": [
+    {
+      "session": "hush_20261007_220650",
+      "network": "Hulu",
+      "content": "scripted",
+      "backfill": false,
+      "count10_program_covered_s": 61.512,
+      "count10_ad_muted_s": 108.488,
+      "v1_ad_muted_s": 0.0,
+      "program_seconds_saved_s": 0.0,
+      "commercial_seconds_sacrificed_s": 0.0,
+      "incidents_before": 11,
+      "incidents_after": 11,
+      "worst_interruption_after_s": 8.373,
+      "names": {}
+    },
+    {
+      "session": "hush_20260909_213047",
+      "network": "NBC",
+      "content": "sports",
+      "backfill": false,
+      "count10_program_covered_s": 0.0,
+      "count10_ad_muted_s": 5.0,
+      "v1_ad_muted_s": 0.0,
+      "program_seconds_saved_s": 0.0,
+      "commercial_seconds_sacrificed_s": 0.0,
+      "incidents_before": 0,
+      "incidents_after": 0,
+      "worst_interruption_after_s": 0.0,
+      "names": {}
+    },
+    {
+      "session": "hush_20260913_150934",
+      "network": "FOX",
+      "content": "sports",
+      "backfill": false,
+      "count10_program_covered_s": 10.0,
+      "count10_ad_muted_s": 0.0,
+      "v1_ad_muted_s": 0.0,
+      "program_seconds_saved_s": 10.0,
+      "commercial_seconds_sacrificed_s": 0.0,
+      "incidents_before": 2,
+      "incidents_after": 0,
+      "worst_interruption_after_s": 0.0,
+      "names": {
+        "Mike Tirico": {
+          "program": 10.0,
+          "ad": 0.0
+        }
+      }
+    },
+    {
+      "session": "hush_20260913_210542",
+      "network": "NBC",
+      "content": "sports",
+      "backfill": false,
+      "count10_program_covered_s": 122.769,
+      "count10_ad_muted_s": 837.231,
+      "v1_ad_muted_s": 0.0,
+      "program_seconds_saved_s": 11.9,
+      "commercial_seconds_sacrificed_s": 26.0,
+      "incidents_before": 14,
+      "incidents_after": 16,
+      "worst_interruption_after_s": 25.129,
+      "names": {
+        "Cris Collinsworth": {
+          "program": 2.7,
+          "ad": 2.0
+        },
+        "Mike Tirico": {
+          "program": 7.2,
+          "ad": 18.3
+        },
+        "Mike Tomlin": {
+          "program": 0.0,
+          "ad": 1.9
+        },
+        "Scott Hanson": {
+          "program": 2.0,
+          "ad": 3.8
+        }
+      }
+    },
+    {
+      "session": "hush_20261008_205100",
+      "network": "Prime Video",
+      "content": "sports",
+      "backfill": true,
+      "count10_program_covered_s": 57.241,
+      "count10_ad_muted_s": 558.123,
+      "v1_ad_muted_s": 20.0,
+      "program_seconds_saved_s": 40.214,
+      "commercial_seconds_sacrificed_s": 91.386,
+      "incidents_before": 12,
+      "incidents_after": 4,
+      "worst_interruption_after_s": 5.215,
+      "names": {
+        "Al Michaels": {
+          "program": 23.887,
+          "ad": 9.613
+        },
+        "Andrew Whitworth": {
+          "program": 0.0,
+          "ad": 2.3
+        },
+        "Clarissa Thompson": {
+          "program": 5.0,
+          "ad": 17.0
+        },
+        "Joe Buck": {
+          "program": 0.9,
+          "ad": 0.0
+        },
+        "Mike Tirico": {
+          "program": 0.3,
+          "ad": 4.6
+        },
+        "Richard Shermann": {
+          "program": 0.0,
+          "ad": 11.3
+        },
+        "Ryan Fitzpatrick": {
+          "program": 0.0,
+          "ad": 4.4
+        },
+        "Scott Hanson": {
+          "program": 0.0,
+          "ad": 17.2
+        },
+        "Steve Harvey": {
+          "program": 8.127,
+          "ad": 22.573
+        },
+        "Troy Aikman": {
+          "program": 2.0,
+          "ad": 2.4
+        }
+      }
+    },
+    {
+      "session": "hush_20261011_204300",
+      "network": "Cable / antenna",
+      "content": "sports",
+      "backfill": true,
+      "count10_program_covered_s": 20.0,
+      "count10_ad_muted_s": 270.0,
+      "v1_ad_muted_s": 0.0,
+      "program_seconds_saved_s": 15.0,
+      "commercial_seconds_sacrificed_s": 58.9,
+      "incidents_before": 4,
+      "incidents_after": 1,
+      "worst_interruption_after_s": 5.0,
+      "names": {
+        "Al Michaels": {
+          "program": 0.0,
+          "ad": 1.2
+        },
+        "Andrew Whitworth": {
+          "program": 0.0,
+          "ad": 9.3
+        },
+        "Bijan Robinson": {
+          "program": 0.0,
+          "ad": 9.4
+        },
+        "Clarissa Thompson": {
+          "program": 0.0,
+          "ad": 1.0
+        },
+        "Mike Tirico": {
+          "program": 10.2,
+          "ad": 3.9
+        },
+        "Mike Tomlin": {
+          "program": 0.0,
+          "ad": 10.3
+        },
+        "Richard Shermann": {
+          "program": 0.0,
+          "ad": 16.9
+        },
+        "Ryan Fitzpatrick": {
+          "program": 0.0,
+          "ad": 1.0
+        },
+        "Scott Hanson": {
+          "program": 0.0,
+          "ad": 1.7
+        },
+        "Steve Harvey": {
+          "program": 0.0,
+          "ad": 2.8
+        },
+        "Troy Aikman": {
+          "program": 4.8,
+          "ad": 1.4
+        }
+      }
+    },
+    {
+      "session": "hush_20261012_204200",
+      "network": "Cable / antenna",
+      "content": "sports",
+      "backfill": true,
+      "count10_program_covered_s": 58.625,
+      "count10_ad_muted_s": 1001.375,
+      "v1_ad_muted_s": 5.0,
+      "program_seconds_saved_s": 29.523,
+      "commercial_seconds_sacrificed_s": 166.677,
+      "incidents_before": 11,
+      "incidents_after": 8,
+      "worst_interruption_after_s": 8.2,
+      "names": {
+        "Al Michaels": {
+          "program": 0.0,
+          "ad": 6.1
+        },
+        "Andrew Whitworth": {
+          "program": 0.0,
+          "ad": 12.0
+        },
+        "Bijan Robinson": {
+          "program": 0.0,
+          "ad": 1.0
+        },
+        "Clarissa Thompson": {
+          "program": 0.0,
+          "ad": 2.3
+        },
+        "Cris Collinsworth": {
+          "program": 1.8,
+          "ad": 1.0
+        },
+        "Joe Buck": {
+          "program": 17.124,
+          "ad": 37.076
+        },
+        "Mike Tirico": {
+          "program": 0.0,
+          "ad": 49.8
+        },
+        "Mike Tomlin": {
+          "program": 0.0,
+          "ad": 3.8
+        },
+        "Richard Shermann": {
+          "program": 3.999,
+          "ad": 16.701
+        },
+        "Ryan Fitzpatrick": {
+          "program": 0.0,
+          "ad": 8.9
+        },
+        "Scott Hanson": {
+          "program": 0.0,
+          "ad": 16.4
+        },
+        "Steve Harvey": {
+          "program": 0.7,
+          "ad": 3.0
+        },
+        "Troy Aikman": {
+          "program": 5.9,
+          "ad": 8.6
+        }
+      }
+    },
+    {
+      "session": "hush_20261010_222400",
+      "network": "Cable / antenna",
+      "content": "sports",
+      "backfill": true,
+      "count10_program_covered_s": 57.641,
+      "count10_ad_muted_s": 222.359,
+      "v1_ad_muted_s": 0.0,
+      "program_seconds_saved_s": 1.6,
+      "commercial_seconds_sacrificed_s": 35.3,
+      "incidents_before": 9,
+      "incidents_after": 9,
+      "worst_interruption_after_s": 20.0,
+      "names": {
+        "Al Michaels": {
+          "program": 1.6,
+          "ad": 5.4
+        },
+        "Andrew Whitworth": {
+          "program": 0.0,
+          "ad": 2.0
+        },
+        "Bijan Robinson": {
+          "program": 0.0,
+          "ad": 11.0
+        },
+        "Richard Shermann": {
+          "program": 0.0,
+          "ad": 4.2
+        },
+        "Ryan Fitzpatrick": {
+          "program": 0.0,
+          "ad": 1.9
+        },
+        "Scott Hanson": {
+          "program": 0.0,
+          "ad": 6.1
+        },
+        "Steve Harvey": {
+          "program": 0.0,
+          "ad": 4.7
+        }
+      }
+    },
+    {
+      "session": "hush_20261011_135700",
+      "network": "Cable / antenna",
+      "content": "sports",
+      "backfill": true,
+      "count10_program_covered_s": 79.552,
+      "count10_ad_muted_s": 275.448,
+      "v1_ad_muted_s": 0.0,
+      "program_seconds_saved_s": 18.452,
+      "commercial_seconds_sacrificed_s": 23.448,
+      "incidents_before": 15,
+      "incidents_after": 13,
+      "worst_interruption_after_s": 5.4,
+      "names": {
+        "Al Michaels": {
+          "program": 0.0,
+          "ad": 2.3
+        },
+        "Andrew Whitworth": {
+          "program": 0.0,
+          "ad": 4.1
+        },
+        "Cris Collinsworth": {
+          "program": 0.0,
+          "ad": 3.3
+        },
+        "Scott Hanson": {
+          "program": 18.452,
+          "ad": 13.748
+        }
+      }
+    },
+    {
+      "session": "hush_20260914_212529",
+      "network": "ESPN",
+      "content": "sports",
+      "backfill": false,
+      "count10_program_covered_s": 16.598,
+      "count10_ad_muted_s": 503.402,
+      "v1_ad_muted_s": 0.0,
+      "program_seconds_saved_s": 5.495,
+      "commercial_seconds_sacrificed_s": 40.005,
+      "incidents_before": 3,
+      "incidents_after": 3,
+      "worst_interruption_after_s": 5.51,
+      "names": {
+        "Cris Collinsworth": {
+          "program": 0.0,
+          "ad": 2.3
+        },
+        "Joe Buck": {
+          "program": 0.7,
+          "ad": 1.8
+        },
+        "Mike Tirico": {
+          "program": 4.795,
+          "ad": 7.405
+        },
+        "Mike Tomlin": {
+          "program": 0.0,
+          "ad": 4.0
+        },
+        "Scott Hanson": {
+          "program": 0.0,
+          "ad": 12.5
+        },
+        "Steve Harvey": {
+          "program": 0.0,
+          "ad": 12.0
+        }
+      }
+    },
+    {
+      "session": "hush_20260924_220624",
+      "network": "Prime",
+      "content": "sports",
+      "backfill": false,
+      "count10_program_covered_s": 19.737,
+      "count10_ad_muted_s": 235.263,
+      "v1_ad_muted_s": 0.0,
+      "program_seconds_saved_s": 10.111,
+      "commercial_seconds_sacrificed_s": 22.889,
+      "incidents_before": 4,
+      "incidents_after": 3,
+      "worst_interruption_after_s": 6.674,
+      "names": {
+        "Al Michaels": {
+          "program": 0.0,
+          "ad": 1.4
+        },
+        "Andrew Whitworth": {
+          "program": 0.0,
+          "ad": 1.0
+        },
+        "Mike Tirico": {
+          "program": 0.0,
+          "ad": 1.0
+        },
+        "Mike Tomlin": {
+          "program": 4.0,
+          "ad": 0.0
+        },
+        "Richard Shermann": {
+          "program": 0.0,
+          "ad": 0.3
+        },
+        "Scott Hanson": {
+          "program": 6.111,
+          "ad": 3.489
+        },
+        "Steve Harvey": {
+          "program": 0.0,
+          "ad": 15.7
+        }
+      }
+    },
+    {
+      "session": "hush_20260827_135935",
+      "network": "Hulu",
+      "content": "scripted",
+      "backfill": false,
+      "count10_program_covered_s": 0.0,
+      "count10_ad_muted_s": 0.0,
+      "v1_ad_muted_s": 0.0,
+      "program_seconds_saved_s": 0.0,
+      "commercial_seconds_sacrificed_s": 0.0,
+      "incidents_before": 0,
+      "incidents_after": 0,
+      "worst_interruption_after_s": 0.0,
+      "names": {}
+    }
+  ]
+}

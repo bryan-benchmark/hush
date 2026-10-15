@@ -1,0 +1,121 @@
+arm,count,population,session,network,program_seconds_covered,commercial_seconds_covered,false_cover_incidents,worst_program_interruption_s,ad_seconds_heard,unscorable_s
+cold_query_cold_reference,count_10,football,hush_20260909_213047,NBC,0.0,5.0,0,0.0,2844.9,0
+cold_query_cold_reference,count_10,football,hush_20260913_210542,NBC,122.8,837.3,14,25.1,2215.2,0
+cold_query_cold_reference,count_10,football,hush_20261008_205100,Prime Video,57.2,558.1,12,7.2,2025.3,240.0
+cold_query_cold_reference,count_10,football,hush_20261011_204300,Cable / antenna,20.0,265.0,4,5.0,327.4,35.0
+cold_query_cold_reference,count_10,football,hush_20261012_204200,Cable / antenna,58.6,1001.3,11,10.0,1943.0,0
+cold_query_cold_reference,count_10,football,hush_20261010_222400,Cable / antenna,57.6,222.3,9,20.0,859.5,0
+cold_query_cold_reference,count_10,football,hush_20261011_135700,Cable / antenna,79.6,275.5,15,9.6,707.5,0
+cold_query_cold_reference,count_10,football,hush_20260914_212529,ESPN,16.6,503.4,3,7.5,1300.6,0
+cold_query_cold_reference,count_10,football,hush_20260924_220624,Prime,19.7,235.3,4,6.7,1429.1,0
+cold_query_cold_reference,count_10,redzone,hush_20260913_150934,FOX,10.0,0.0,2,5.0,0.0,0
+cold_query_cold_reference,count_10,scripted,hush_20261007_220650,Hulu,61.5,108.5,11,8.4,1412.8,0
+cold_query_cold_reference,count_10,scripted,hush_20260827_135935,Hulu,0.0,0.0,0,0.0,860.9,0
+cold_query_cold_reference,count_200,football,hush_20260909_213047,NBC,0.0,0.0,0,0.0,2849.9,0
+cold_query_cold_reference,count_200,football,hush_20260913_210542,NBC,0.0,0.0,0,0.0,3052.5,0
+cold_query_cold_reference,count_200,football,hush_20261008_205100,Prime Video,0.0,20.0,0,0.0,2563.4,240.0
+cold_query_cold_reference,count_200,football,hush_20261011_204300,Cable / antenna,0.0,0.0,0,0.0,592.4,35.0
+cold_query_cold_reference,count_200,football,hush_20261012_204200,Cable / antenna,0.0,5.0,0,0.0,2939.3,0
+cold_query_cold_reference,count_200,football,hush_20261010_222400,Cable / antenna,0.0,0.0,0,0.0,1081.8,0
+cold_query_cold_reference,count_200,football,hush_20261011_135700,Cable / antenna,0.0,0.0,0,0.0,983.0,0
+cold_query_cold_reference,count_200,football,hush_20260914_212529,ESPN,0.0,0.0,0,0.0,1804.0,0
+cold_query_cold_reference,count_200,football,hush_20260924_220624,Prime,0.0,0.0,0,0.0,1664.4,0
+cold_query_cold_reference,count_200,redzone,hush_20260913_150934,FOX,0.0,0.0,0,0.0,0.0,0
+cold_query_cold_reference,count_200,scripted,hush_20261007_220650,Hulu,0.0,0.0,0,0.0,1521.3,0
+cold_query_cold_reference,count_200,scripted,hush_20260827_135935,Hulu,0.0,0.0,0,0.0,860.9,0
+warm_query_cold_reference,count_10,football,hush_20260909_213047,NBC,0.0,5.0,0,0.0,2844.9,0
+warm_query_cold_reference,count_10,football,hush_20260913_210542,NBC,122.8,832.3,14,25.1,2220.2,0
+warm_query_cold_reference,count_10,football,hush_20261008_205100,Prime Video,62.2,558.1,13,7.2,2025.3,240.0
+warm_query_cold_reference,count_10,football,hush_20261011_204300,Cable / antenna,30.0,275.0,5,10.0,317.4,40.0
+warm_query_cold_reference,count_10,football,hush_20261012_204200,Cable / antenna,58.6,996.3,11,10.0,1948.0,0
+warm_query_cold_reference,count_10,football,hush_20261010_222400,Cable / antenna,47.6,222.3,7,20.0,859.5,0
+warm_query_cold_reference,count_10,football,hush_20261011_135700,Cable / antenna,14.6,275.5,2,9.6,707.5,0
+warm_query_cold_reference,count_10,football,hush_20260914_212529,ESPN,16.6,503.4,3,7.5,1300.6,0
+warm_query_cold_reference,count_10,football,hush_20260924_220624,Prime,19.7,240.3,4,6.7,1424.1,0
+warm_query_cold_reference,count_10,redzone,hush_20260913_150934,FOX,0.0,0.0,0,0.0,0.0,0
+warm_query_cold_reference,count_10,scripted,hush_20261007_220650,Hulu,26.5,108.5,4,8.4,1412.8,0
+warm_query_cold_reference,count_10,scripted,hush_20260827_135935,Hulu,0.0,0.0,0,0.0,860.9,0
+warm_query_cold_reference,count_200,football,hush_20260909_213047,NBC,0.0,0.0,0,0.0,2849.9,0
+warm_query_cold_reference,count_200,football,hush_20260913_210542,NBC,0.0,0.0,0,0.0,3052.5,0
+warm_query_cold_reference,count_200,football,hush_20261008_205100,Prime Video,0.0,20.0,0,0.0,2563.4,240.0
+warm_query_cold_reference,count_200,football,hush_20261011_204300,Cable / antenna,0.0,0.0,0,0.0,592.4,40.0
+warm_query_cold_reference,count_200,football,hush_20261012_204200,Cable / antenna,0.0,5.0,0,0.0,2939.3,0
+warm_query_cold_reference,count_200,football,hush_20261010_222400,Cable / antenna,0.0,0.0,0,0.0,1081.8,0
+warm_query_cold_reference,count_200,football,hush_20261011_135700,Cable / antenna,0.0,0.0,0,0.0,983.0,0
+warm_query_cold_reference,count_200,football,hush_20260914_212529,ESPN,0.0,0.0,0,0.0,1804.0,0
+warm_query_cold_reference,count_200,football,hush_20260924_220624,Prime,0.0,0.0,0,0.0,1664.4,0
+warm_query_cold_reference,count_200,redzone,hush_20260913_150934,FOX,0.0,0.0,0,0.0,0.0,0
+warm_query_cold_reference,count_200,scripted,hush_20261007_220650,Hulu,0.0,0.0,0,0.0,1521.3,0
+warm_query_cold_reference,count_200,scripted,hush_20260827_135935,Hulu,0.0,0.0,0,0.0,860.9,0
+cold_query_warm_reference,count_10,football,hush_20260909_213047,NBC,0.0,5.0,0,0.0,2844.9,0
+cold_query_warm_reference,count_10,football,hush_20260913_210542,NBC,122.8,842.3,14,25.1,2210.2,0
+cold_query_warm_reference,count_10,football,hush_20261008_205100,Prime Video,52.2,558.1,11,7.2,2025.3,240.0
+cold_query_warm_reference,count_10,football,hush_20261011_204300,Cable / antenna,20.0,265.0,4,5.0,327.4,35.0
+cold_query_warm_reference,count_10,football,hush_20261012_204200,Cable / antenna,63.6,996.3,12,10.0,1948.0,0
+cold_query_warm_reference,count_10,football,hush_20261010_222400,Cable / antenna,52.6,222.3,8,20.0,859.5,0
+cold_query_warm_reference,count_10,football,hush_20261011_135700,Cable / antenna,69.6,280.5,13,9.6,702.5,0
+cold_query_warm_reference,count_10,football,hush_20260914_212529,ESPN,16.6,493.4,3,7.5,1310.6,0
+cold_query_warm_reference,count_10,football,hush_20260924_220624,Prime,17.8,222.3,3,6.7,1442.1,0
+cold_query_warm_reference,count_10,redzone,hush_20260913_150934,FOX,10.0,0.0,2,5.0,0.0,0
+cold_query_warm_reference,count_10,scripted,hush_20261007_220650,Hulu,61.5,108.5,11,8.4,1412.8,0
+cold_query_warm_reference,count_10,scripted,hush_20260827_135935,Hulu,0.0,0.0,0,0.0,860.9,0
+cold_query_warm_reference,count_200,football,hush_20260909_213047,NBC,0.0,0.0,0,0.0,2849.9,0
+cold_query_warm_reference,count_200,football,hush_20260913_210542,NBC,0.0,0.0,0,0.0,3052.5,0
+cold_query_warm_reference,count_200,football,hush_20261008_205100,Prime Video,0.0,20.0,0,0.0,2563.4,240.0
+cold_query_warm_reference,count_200,football,hush_20261011_204300,Cable / antenna,0.0,0.0,0,0.0,592.4,35.0
+cold_query_warm_reference,count_200,football,hush_20261012_204200,Cable / antenna,0.0,5.0,0,0.0,2939.3,0
+cold_query_warm_reference,count_200,football,hush_20261010_222400,Cable / antenna,0.0,0.0,0,0.0,1081.8,0
+cold_query_warm_reference,count_200,football,hush_20261011_135700,Cable / antenna,0.0,0.0,0,0.0,983.0,0
+cold_query_warm_reference,count_200,football,hush_20260914_212529,ESPN,0.0,0.0,0,0.0,1804.0,0
+cold_query_warm_reference,count_200,football,hush_20260924_220624,Prime,0.0,0.0,0,0.0,1664.4,0
+cold_query_warm_reference,count_200,redzone,hush_20260913_150934,FOX,0.0,0.0,0,0.0,0.0,0
+cold_query_warm_reference,count_200,scripted,hush_20261007_220650,Hulu,0.0,0.0,0,0.0,1521.3,0
+cold_query_warm_reference,count_200,scripted,hush_20260827_135935,Hulu,0.0,0.0,0,0.0,860.9,0
+warm_query_warm_reference,count_10,football,hush_20260909_213047,NBC,0.0,5.0,0,0.0,2844.9,0
+warm_query_warm_reference,count_10,football,hush_20260913_210542,NBC,122.8,837.3,14,25.1,2215.2,0
+warm_query_warm_reference,count_10,football,hush_20261008_205100,Prime Video,52.2,558.1,11,7.2,2025.3,240.0
+warm_query_warm_reference,count_10,football,hush_20261011_204300,Cable / antenna,25.0,290.0,4,10.0,302.4,40.0
+warm_query_warm_reference,count_10,football,hush_20261012_204200,Cable / antenna,63.6,991.3,12,10.0,1953.0,0
+warm_query_warm_reference,count_10,football,hush_20261010_222400,Cable / antenna,42.6,222.3,6,20.0,859.5,0
+warm_query_warm_reference,count_10,football,hush_20261011_135700,Cable / antenna,14.6,280.5,2,9.6,702.5,0
+warm_query_warm_reference,count_10,football,hush_20260914_212529,ESPN,16.6,493.4,3,7.5,1310.6,0
+warm_query_warm_reference,count_10,football,hush_20260924_220624,Prime,17.8,222.3,3,6.7,1442.1,0
+warm_query_warm_reference,count_10,redzone,hush_20260913_150934,FOX,0.0,0.0,0,0.0,0.0,0
+warm_query_warm_reference,count_10,scripted,hush_20261007_220650,Hulu,26.5,108.5,4,8.4,1412.8,0
+warm_query_warm_reference,count_10,scripted,hush_20260827_135935,Hulu,0.0,0.0,0,0.0,860.9,0
+warm_query_warm_reference,count_200,football,hush_20260909_213047,NBC,0.0,0.0,0,0.0,2849.9,0
+warm_query_warm_reference,count_200,football,hush_20260913_210542,NBC,0.0,0.0,0,0.0,3052.5,0
+warm_query_warm_reference,count_200,football,hush_20261008_205100,Prime Video,0.0,20.0,0,0.0,2563.4,240.0
+warm_query_warm_reference,count_200,football,hush_20261011_204300,Cable / antenna,0.0,5.0,0,0.0,587.4,40.0
+warm_query_warm_reference,count_200,football,hush_20261012_204200,Cable / antenna,0.0,5.0,0,0.0,2939.3,0
+warm_query_warm_reference,count_200,football,hush_20261010_222400,Cable / antenna,0.0,0.0,0,0.0,1081.8,0
+warm_query_warm_reference,count_200,football,hush_20261011_135700,Cable / antenna,0.0,0.0,0,0.0,983.0,0
+warm_query_warm_reference,count_200,football,hush_20260914_212529,ESPN,0.0,0.0,0,0.0,1804.0,0
+warm_query_warm_reference,count_200,football,hush_20260924_220624,Prime,0.0,0.0,0,0.0,1664.4,0
+warm_query_warm_reference,count_200,redzone,hush_20260913_150934,FOX,0.0,0.0,0,0.0,0.0,0
+warm_query_warm_reference,count_200,scripted,hush_20261007_220650,Hulu,0.0,0.0,0,0.0,1521.3,0
+warm_query_warm_reference,count_200,scripted,hush_20260827_135935,Hulu,0.0,0.0,0,0.0,860.9,0
+warm_warm_decision_delayed_2s,count_10,football,hush_20260909_213047,NBC,0.0,5.0,0,0.0,2844.9,0
+warm_warm_decision_delayed_2s,count_10,football,hush_20260913_210542,NBC,137.2,822.8,18,23.1,2229.7,0
+warm_warm_decision_delayed_2s,count_10,football,hush_20261008_205100,Prime Video,58.2,550.1,11,9.2,2033.3,240.0
+warm_warm_decision_delayed_2s,count_10,football,hush_20261011_204300,Cable / antenna,25.0,288.0,4,10.0,304.4,40.0
+warm_warm_decision_delayed_2s,count_10,football,hush_20261012_204200,Cable / antenna,77.8,977.2,14,10.4,1967.1,0
+warm_warm_decision_delayed_2s,count_10,football,hush_20261010_222400,Cable / antenna,41.5,223.5,7,20.0,858.3,0
+warm_warm_decision_delayed_2s,count_10,football,hush_20261011_135700,Cable / antenna,16.6,278.5,2,11.6,704.5,0
+warm_warm_decision_delayed_2s,count_10,football,hush_20260914_212529,ESPN,22.5,487.4,4,9.5,1316.6,0
+warm_warm_decision_delayed_2s,count_10,football,hush_20260924_220624,Prime,21.8,216.3,3,8.7,1448.1,0
+warm_warm_decision_delayed_2s,count_10,redzone,hush_20260913_150934,FOX,0.0,0.0,0,0.0,0.0,0
+warm_warm_decision_delayed_2s,count_10,scripted,hush_20261007_220650,Hulu,32.1,102.9,4,10.0,1418.4,0
+warm_warm_decision_delayed_2s,count_10,scripted,hush_20260827_135935,Hulu,0.0,0.0,0,0.0,860.9,0
+warm_warm_decision_delayed_5s,count_10,football,hush_20260909_213047,NBC,0.0,5.0,0,0.0,2844.9,0
+warm_warm_decision_delayed_5s,count_10,football,hush_20260913_210542,NBC,166.0,794.0,19,20.1,2258.5,0
+warm_warm_decision_delayed_5s,count_10,football,hush_20261008_205100,Prime Video,67.3,538.1,10,12.2,2045.3,240.0
+warm_warm_decision_delayed_5s,count_10,football,hush_20261011_204300,Cable / antenna,27.2,282.7,5,10.0,309.7,40.0
+warm_warm_decision_delayed_5s,count_10,football,hush_20261012_204200,Cable / antenna,101.7,953.2,15,13.4,1991.1,0
+warm_warm_decision_delayed_5s,count_10,football,hush_20261010_222400,Cable / antenna,43.9,221.1,6,20.0,860.7,0
+warm_warm_decision_delayed_5s,count_10,football,hush_20261011_135700,Cable / antenna,19.6,275.5,2,14.6,707.5,0
+warm_warm_decision_delayed_5s,count_10,football,hush_20260914_212529,ESPN,31.5,478.4,4,12.5,1325.6,0
+warm_warm_decision_delayed_5s,count_10,football,hush_20260924_220624,Prime,27.8,207.3,3,11.7,1457.1,0
+warm_warm_decision_delayed_5s,count_10,redzone,hush_20260913_150934,FOX,0.0,0.0,0,0.0,0.0,0
+warm_warm_decision_delayed_5s,count_10,scripted,hush_20261007_220650,Hulu,37.0,98.1,4,12.0,1423.2,0
+warm_warm_decision_delayed_5s,count_10,scripted,hush_20260827_135935,Hulu,0.0,0.0,0,0.0,860.9,0

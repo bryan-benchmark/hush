@@ -1,0 +1,12 @@
+{
+  "session": "hush_20261011_204300",
+  "t0": 0.0,
+  "t1": 14405.376,
+  "padded_chunks": [
+    {
+      "file": "audio_0001.wav",
+      "missing_frames_at_48k": 16
+    }
+  ],
+  "padded_frames_at_48k": 16
+}

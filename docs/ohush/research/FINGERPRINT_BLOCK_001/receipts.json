@@ -1,0 +1,11 @@
+{
+  "git_head": "33589b69013564fc794f29213359f41c5b724d94",
+  "decisions_sha256": "08b1b8d9a56c33681b493dff1d3337951ac9a51b812c83d2e6009afdefb86713",
+  "holdouts_opened": false,
+  "thresholds_changed": false,
+  "extractor_modified": false,
+  "block_start_queries": 13,
+  "candidate": "isolated reader, 86 analyzer hops before each block",
+  "candidate_ledger": "candidate_ledger.json",
+  "published_decisions_modified": false
+}

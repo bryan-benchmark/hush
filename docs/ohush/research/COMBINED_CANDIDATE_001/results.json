@@ -1,0 +1,47 @@
+{
+  "system": "combined_candidate_001",
+  "mute_policy": false,
+  "playback": "PLAY",
+  "count": 10,
+  "voice_line": 0.25,
+  "selection": "top five pods chosen on this same ledger; exploratory",
+  "count10": {
+    "program_seconds_cleared": 0.0,
+    "commercial_seconds_lost": 0.0,
+    "incidents_cleared": 0,
+    "program_s": 432.1,
+    "commercial_muted_s": 3903.2,
+    "incidents": 72,
+    "worst_interruption_s": 25.129
+  },
+  "top5_removal": {
+    "program_seconds_cleared": 94.8,
+    "commercial_seconds_lost": 265.1,
+    "incidents_cleared": 15,
+    "program_s": 337.3,
+    "commercial_muted_s": 3638.1,
+    "incidents": 57,
+    "worst_interruption_s": 25.129
+  },
+  "voice_guard": {
+    "program_seconds_cleared": 132.3,
+    "commercial_seconds_lost": 464.6,
+    "incidents_cleared": 15,
+    "program_s": 299.8,
+    "commercial_muted_s": 3438.6,
+    "incidents": 57,
+    "worst_interruption_s": 25.129
+  },
+  "both": {
+    "program_seconds_cleared": 197.3,
+    "commercial_seconds_lost": 707.5,
+    "incidents_cleared": 29,
+    "program_s": 234.8,
+    "commercial_muted_s": 3195.7,
+    "incidents": 43,
+    "worst_interruption_s": 25.129
+  },
+  "shared_program_seconds": 29.8,
+  "shared_commercial_seconds": 22.2,
+  "enrollment_windows": 94
+}

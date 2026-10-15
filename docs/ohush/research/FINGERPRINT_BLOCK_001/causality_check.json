@@ -1,0 +1,126 @@
+{
+  "count_10": 10,
+  "count_200": 200,
+  "thresholds_changed": false,
+  "note": "Audio after the query is replaced with noise. Identical means the query landmarks did not use that future audio.",
+  "block_start_query": {
+    "query_t0": 2790.0,
+    "block_start": 2790.0,
+    "buffer_end": 2882.0,
+    "full_buffer_hashes": 1121,
+    "buffer_cut_2s_after_query_identical": false,
+    "truncation": [
+      {
+        "buffer_ends_after_query_s": 2.0,
+        "hashes": 1124,
+        "jaccard_with_full_buffer": 0.9956,
+        "identical_to_full_buffer": false
+      },
+      {
+        "buffer_ends_after_query_s": 5.0,
+        "hashes": 1121,
+        "jaccard_with_full_buffer": 1.0,
+        "identical_to_full_buffer": true
+      }
+    ],
+    "noise_note": "Replacing the rest of the block with noise holds the backward threshold up. The truncation rows are the latency test.",
+    "lags": [
+      {
+        "real_audio_kept_after_query_s": 0.0,
+        "hashes": 470,
+        "jaccard_with_full_buffer": 0.2851,
+        "identical_to_full_buffer": false
+      },
+      {
+        "real_audio_kept_after_query_s": 0.5,
+        "hashes": 615,
+        "jaccard_with_full_buffer": 0.3866,
+        "identical_to_full_buffer": false
+      },
+      {
+        "real_audio_kept_after_query_s": 1.0,
+        "hashes": 704,
+        "jaccard_with_full_buffer": 0.46,
+        "identical_to_full_buffer": false
+      },
+      {
+        "real_audio_kept_after_query_s": 1.5,
+        "hashes": 718,
+        "jaccard_with_full_buffer": 0.4747,
+        "identical_to_full_buffer": false
+      },
+      {
+        "real_audio_kept_after_query_s": 2.0,
+        "hashes": 718,
+        "jaccard_with_full_buffer": 0.4747,
+        "identical_to_full_buffer": false
+      },
+      {
+        "real_audio_kept_after_query_s": 3.0,
+        "hashes": 721,
+        "jaccard_with_full_buffer": 0.4795,
+        "identical_to_full_buffer": false
+      }
+    ]
+  },
+  "interior_query": {
+    "query_t0": 2810.0,
+    "block_start": 2790.0,
+    "buffer_end": 2882.0,
+    "full_buffer_hashes": 1051,
+    "buffer_cut_2s_after_query_identical": true,
+    "truncation": [
+      {
+        "buffer_ends_after_query_s": 2.0,
+        "hashes": 1051,
+        "jaccard_with_full_buffer": 1.0,
+        "identical_to_full_buffer": true
+      },
+      {
+        "buffer_ends_after_query_s": 5.0,
+        "hashes": 1051,
+        "jaccard_with_full_buffer": 1.0,
+        "identical_to_full_buffer": true
+      }
+    ],
+    "noise_note": "Replacing the rest of the block with noise holds the backward threshold up. The truncation rows are the latency test.",
+    "lags": [
+      {
+        "real_audio_kept_after_query_s": 0.0,
+        "hashes": 856,
+        "jaccard_with_full_buffer": 0.8127,
+        "identical_to_full_buffer": false
+      },
+      {
+        "real_audio_kept_after_query_s": 0.5,
+        "hashes": 962,
+        "jaccard_with_full_buffer": 0.9099,
+        "identical_to_full_buffer": false
+      },
+      {
+        "real_audio_kept_after_query_s": 1.0,
+        "hashes": 1051,
+        "jaccard_with_full_buffer": 1.0,
+        "identical_to_full_buffer": true
+      },
+      {
+        "real_audio_kept_after_query_s": 1.5,
+        "hashes": 1051,
+        "jaccard_with_full_buffer": 1.0,
+        "identical_to_full_buffer": true
+      },
+      {
+        "real_audio_kept_after_query_s": 2.0,
+        "hashes": 1051,
+        "jaccard_with_full_buffer": 1.0,
+        "identical_to_full_buffer": true
+      },
+      {
+        "real_audio_kept_after_query_s": 3.0,
+        "hashes": 1051,
+        "jaccard_with_full_buffer": 1.0,
+        "identical_to_full_buffer": true
+      }
+    ]
+  }
+}
