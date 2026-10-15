@@ -1,0 +1,12 @@
+{
+  "system": "causal_reference_parity_001",
+  "git_head": "cfe59cd9760d5f46a3197af83a45c488aaf48a52",
+  "decisions_sha256": "08b1b8d9a56c33681b493dff1d3337951ac9a51b812c83d2e6009afdefb86713",
+  "bounded_query_modified": false,
+  "thresholds_modified": false,
+  "gold_modified": false,
+  "holdouts_opened": false,
+  "ledger_scored": false,
+  "playback": "PLAY",
+  "chunk_boundary_reads": "Thursday 150 waveform lag and Thursday 160 hop and waveform windows. A one-sample chunk-boundary check refused those spans. The same slices were concatenated and fingerprinted. Nearby strict reads agree: 150 stays above 200 across several hops, and 160 stays near 26 except at the waveform lag."
+}

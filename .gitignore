@@ -21,6 +21,8 @@ apps/monitor/.git/
 *.parquet
 *.npy
 *.zip
+experiments/tonight_001/media/
+experiments/tonight_001/cache/
 
 # Local live runtime
 ohush_live/cache/

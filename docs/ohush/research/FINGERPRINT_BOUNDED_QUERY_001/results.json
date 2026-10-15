@@ -1,0 +1,157 @@
+{
+  "system": "fingerprint_bounded_query_001",
+  "mute_policy": false,
+  "playback": "PLAY",
+  "lead_s": 2.0,
+  "query_s": 5.0,
+  "buffer_ends_at_query_end": true,
+  "resampler_delay_s": -4.5e-05,
+  "gates": {
+    "causality": true,
+    "known_ads": false,
+    "block_artifact": false,
+    "ledger_run": false
+  },
+  "causality": [
+    {
+      "query_t0": 2790.0,
+      "bounded_equals_prefix_of_longer_read": true,
+      "bounded_hashes": 1106,
+      "jaccard_against_8s_future": 0.9892,
+      "jaccard_against_8s_noise": 0.3557,
+      "future_changes_the_hash": true
+    },
+    {
+      "query_t0": 2810.0,
+      "bounded_equals_prefix_of_longer_read": true,
+      "bounded_hashes": 1033,
+      "jaccard_against_8s_future": 0.9923,
+      "jaccard_against_8s_noise": 0.3613,
+      "future_changes_the_hash": true
+    },
+    {
+      "query_t0": 145.0,
+      "bounded_equals_prefix_of_longer_read": true,
+      "bounded_hashes": 359,
+      "jaccard_against_8s_future": 0.9944,
+      "jaccard_against_8s_noise": 0.9972,
+      "future_changes_the_hash": true
+    }
+  ],
+  "controls": [
+    {
+      "session": "hush_20261008_205100",
+      "query_t0": 145.0,
+      "published_score": 272,
+      "ref_session": "hush_20260924_220624",
+      "score": 33,
+      "n_hashes": 359,
+      "process_s": 0.0162,
+      "lead_clamped": false,
+      "origin": 143.0
+    },
+    {
+      "session": "hush_20261008_205100",
+      "query_t0": 150.0,
+      "published_score": 223,
+      "ref_session": "hush_20260924_220624",
+      "score": 137,
+      "n_hashes": 361,
+      "process_s": 0.0328,
+      "lead_clamped": false,
+      "origin": 148.0
+    },
+    {
+      "session": "hush_20261008_205100",
+      "query_t0": 155.0,
+      "published_score": 260,
+      "ref_session": "hush_20260924_220624",
+      "score": 92,
+      "n_hashes": 430,
+      "process_s": 0.0205,
+      "lead_clamped": false,
+      "origin": 153.0
+    },
+    {
+      "session": "hush_20261008_205100",
+      "query_t0": 160.0,
+      "published_score": 242,
+      "ref_session": "hush_20260924_220624",
+      "score": 26,
+      "n_hashes": 349,
+      "process_s": 0.0192,
+      "lead_clamped": false,
+      "origin": 158.0
+    },
+    {
+      "session": "hush_20261012_204200",
+      "query_t0": 5085.0,
+      "published_score": 208,
+      "ref_session": "hush_20260914_212529",
+      "score": 102,
+      "n_hashes": 346,
+      "process_s": 0.0181,
+      "lead_clamped": false,
+      "origin": 5083.0
+    }
+  ],
+  "collisions": [],
+  "hop_aligned_controls_if_gate_2_failed": [
+    {
+      "session": "hush_20261008_205100",
+      "query_t0": 145.0,
+      "published_score": 272,
+      "score": 57,
+      "n_hashes": 364,
+      "process_s": 0.0187,
+      "lead_clamped": false,
+      "origin": 143.0031,
+      "lead_s": 1.996916
+    },
+    {
+      "session": "hush_20261008_205100",
+      "query_t0": 150.0,
+      "published_score": 223,
+      "score": 227,
+      "n_hashes": 333,
+      "process_s": 0.0286,
+      "lead_clamped": false,
+      "origin": 148.0031,
+      "lead_s": 1.996916
+    },
+    {
+      "session": "hush_20261008_205100",
+      "query_t0": 155.0,
+      "published_score": 260,
+      "score": 43,
+      "n_hashes": 434,
+      "process_s": 0.0184,
+      "lead_clamped": false,
+      "origin": 153.0031,
+      "lead_s": 1.996916
+    },
+    {
+      "session": "hush_20261008_205100",
+      "query_t0": 160.0,
+      "published_score": 242,
+      "score": 31,
+      "n_hashes": 342,
+      "process_s": 0.016,
+      "lead_clamped": false,
+      "origin": 158.0031,
+      "lead_s": 1.996916
+    },
+    {
+      "session": "hush_20261012_204200",
+      "query_t0": 5085.0,
+      "published_score": 208,
+      "score": 206,
+      "n_hashes": 344,
+      "process_s": 0.0167,
+      "lead_clamped": false,
+      "origin": 5083.0031,
+      "lead_s": 1.996916
+    }
+  ],
+  "ledger": null
+}

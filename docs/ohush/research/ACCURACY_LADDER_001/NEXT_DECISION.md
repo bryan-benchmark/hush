@@ -1,5 +1,5 @@
 # Next decision
 
-The causal stream is in `docs/ohush/research/FINGERPRINT_CAUSAL_STREAM_001/REPORT.md`. Carrying the reader across cuts removes the 90-second boundary effect. The backward peak pass was still changing hashes at 8 seconds, so the gate fails. The two-second lead is not a prospective test. The 25.1-second interruption stays on the published reader until a stream is actually final.
+Bounded audfprint is closed. The parity check is in `docs/ohush/research/CAUSAL_REFERENCE_PARITY_001/REPORT.md`. The same seven-second cut on both sides restores the five advertisements only when the reference is placed on the waveform lag already measured: 258, 248, 280, 280, and 204. At the fingerprint alignment, four of the five stay under 200. The ledger was not scored. The next measurement is candidate retrieval plus waveform verification. Another audfprint context-length sweep is not that measurement.
 
 PLAY. Universal v1 unchanged. Holdouts sealed. No deployment.

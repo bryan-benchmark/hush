@@ -1,0 +1,497 @@
+{
+  "system": "exact_audio_confirm_001",
+  "playback": "PLAY",
+  "gold_modified": false,
+  "counts_modified": false,
+  "holdouts_opened": false,
+  "universal_v1_modified": false,
+  "fingerprint_causal_stream": "closed_fail_not_reopened",
+  "confirm_min": 0.85,
+  "gap": [
+    0.7383,
+    0.9021
+  ],
+  "inventory": {
+    "pairs": 29,
+    "confirm_min": 0.85,
+    "gap_below": 0.7383,
+    "gap_above": 0.9021,
+    "buckets": {
+      "ambiguous": [
+        "p08",
+        "p09",
+        "p11",
+        "p28",
+        "p29"
+      ],
+      "partial_copy": [
+        "p16",
+        "p17",
+        "p24",
+        "p25"
+      ],
+      "unrelated_collision": [
+        "p06",
+        "p14",
+        "p15",
+        "p26"
+      ],
+      "waveform_copy": [
+        "p01",
+        "p02",
+        "p03",
+        "p04",
+        "p05",
+        "p07",
+        "p10",
+        "p12",
+        "p13",
+        "p18",
+        "p19",
+        "p20",
+        "p21",
+        "p22",
+        "p23",
+        "p27"
+      ]
+    },
+    "copies_kept": 16,
+    "collisions": 4,
+    "copies_rejected": 0,
+    "collisions_accepted": 0,
+    "reviewer_labels_present": 0,
+    "ambiguous_left_for_a_human": [
+      "p08",
+      "p09",
+      "p11",
+      "p28",
+      "p29",
+      "p16",
+      "p17",
+      "p24",
+      "p25"
+    ]
+  },
+  "pair_recompute": [
+    {
+      "pair_id": "p01",
+      "saved_correlation": 0.9952,
+      "recomputed_correlation": 0.9952,
+      "abs_delta": 0.0,
+      "published_score": 272,
+      "reproduced_score": 272,
+      "accepted": true
+    },
+    {
+      "pair_id": "p02",
+      "saved_correlation": 0.9978,
+      "recomputed_correlation": 0.9978,
+      "abs_delta": 0.0,
+      "published_score": 223,
+      "reproduced_score": 223,
+      "accepted": true
+    },
+    {
+      "pair_id": "p03",
+      "saved_correlation": 0.9967,
+      "recomputed_correlation": 0.9967,
+      "abs_delta": 0.0,
+      "published_score": 260,
+      "reproduced_score": 260,
+      "accepted": true
+    },
+    {
+      "pair_id": "p04",
+      "saved_correlation": 0.9983,
+      "recomputed_correlation": 0.9983,
+      "abs_delta": 0.0,
+      "published_score": 242,
+      "reproduced_score": 242,
+      "accepted": true
+    },
+    {
+      "pair_id": "p05",
+      "saved_correlation": 0.9752,
+      "recomputed_correlation": 0.9752,
+      "abs_delta": 0.0,
+      "published_score": 208,
+      "reproduced_score": 208,
+      "accepted": true
+    },
+    {
+      "pair_id": "p06",
+      "saved_correlation": 0.0172,
+      "recomputed_correlation": 0.0172,
+      "abs_delta": 0.0,
+      "published_score": 27,
+      "reproduced_score": 27,
+      "accepted": false
+    },
+    {
+      "pair_id": "p07",
+      "saved_correlation": 0.9366,
+      "recomputed_correlation": 0.9366,
+      "abs_delta": 0.0,
+      "published_score": 135,
+      "reproduced_score": 135,
+      "accepted": true
+    },
+    {
+      "pair_id": "p08",
+      "saved_correlation": 0.5518,
+      "recomputed_correlation": 0.5518,
+      "abs_delta": 0.0,
+      "published_score": 18,
+      "reproduced_score": 18,
+      "accepted": false
+    },
+    {
+      "pair_id": "p09",
+      "saved_correlation": 0.4681,
+      "recomputed_correlation": 0.4681,
+      "abs_delta": 0.0,
+      "published_score": 103,
+      "reproduced_score": 103,
+      "accepted": false
+    },
+    {
+      "pair_id": "p10",
+      "saved_correlation": 0.9568,
+      "recomputed_correlation": 0.9568,
+      "abs_delta": 0.0,
+      "published_score": 145,
+      "reproduced_score": 145,
+      "accepted": true
+    },
+    {
+      "pair_id": "p11",
+      "saved_correlation": 0.6029,
+      "recomputed_correlation": 0.6029,
+      "abs_delta": 0.0,
+      "published_score": 15,
+      "reproduced_score": 15,
+      "accepted": false
+    },
+    {
+      "pair_id": "p12",
+      "saved_correlation": 0.9681,
+      "recomputed_correlation": 0.9681,
+      "abs_delta": 0.0,
+      "published_score": 42,
+      "reproduced_score": 42,
+      "accepted": true
+    },
+    {
+      "pair_id": "p13",
+      "status": "not_in_count_10_ledger"
+    },
+    {
+      "pair_id": "p14",
+      "status": "not_in_count_10_ledger"
+    },
+    {
+      "pair_id": "p15",
+      "status": "not_in_count_10_ledger"
+    },
+    {
+      "pair_id": "p16",
+      "saved_correlation": 0.5695,
+      "recomputed_correlation": 0.5695,
+      "abs_delta": 0.0,
+      "published_score": 27,
+      "reproduced_score": 27,
+      "accepted": false
+    },
+    {
+      "pair_id": "p17",
+      "saved_correlation": 0.564,
+      "recomputed_correlation": 0.564,
+      "abs_delta": 0.0,
+      "published_score": 25,
+      "reproduced_score": 25,
+      "accepted": false
+    },
+    {
+      "pair_id": "p18",
+      "saved_correlation": 0.9563,
+      "recomputed_correlation": 0.9563,
+      "abs_delta": 0.0,
+      "published_score": 103,
+      "reproduced_score": 103,
+      "accepted": true
+    },
+    {
+      "pair_id": "p19",
+      "saved_correlation": 0.9394,
+      "recomputed_correlation": 0.9394,
+      "abs_delta": 0.0,
+      "published_score": 59,
+      "reproduced_score": 59,
+      "accepted": true
+    },
+    {
+      "pair_id": "p20",
+      "saved_correlation": 0.9193,
+      "recomputed_correlation": 0.9193,
+      "abs_delta": 0.0,
+      "published_score": 55,
+      "reproduced_score": 55,
+      "accepted": true
+    },
+    {
+      "pair_id": "p21",
+      "saved_correlation": 0.9021,
+      "recomputed_correlation": 0.9021,
+      "abs_delta": 0.0,
+      "published_score": 53,
+      "reproduced_score": 53,
+      "accepted": true
+    },
+    {
+      "pair_id": "p22",
+      "saved_correlation": 0.9384,
+      "recomputed_correlation": 0.9384,
+      "abs_delta": 0.0,
+      "published_score": 79,
+      "reproduced_score": 79,
+      "accepted": true
+    },
+    {
+      "pair_id": "p23",
+      "saved_correlation": 0.9288,
+      "recomputed_correlation": 0.9288,
+      "abs_delta": 0.0,
+      "published_score": 24,
+      "reproduced_score": 24,
+      "accepted": true
+    },
+    {
+      "pair_id": "p24",
+      "saved_correlation": 0.2858,
+      "recomputed_correlation": 0.2858,
+      "abs_delta": 0.0,
+      "published_score": 10,
+      "reproduced_score": 10,
+      "accepted": false
+    },
+    {
+      "pair_id": "p25",
+      "saved_correlation": 0.7383,
+      "recomputed_correlation": 0.7383,
+      "abs_delta": 0.0,
+      "published_score": 16,
+      "reproduced_score": 16,
+      "accepted": false
+    },
+    {
+      "pair_id": "p26",
+      "saved_correlation": 0.0191,
+      "recomputed_correlation": 0.0191,
+      "abs_delta": 0.0,
+      "published_score": 12,
+      "reproduced_score": 12,
+      "accepted": false
+    },
+    {
+      "pair_id": "p27",
+      "saved_correlation": 0.9363,
+      "recomputed_correlation": 0.9363,
+      "abs_delta": 0.0,
+      "published_score": 19,
+      "reproduced_score": 19,
+      "accepted": true
+    },
+    {
+      "pair_id": "p28",
+      "saved_correlation": 0.274,
+      "recomputed_correlation": 0.274,
+      "abs_delta": 0.0,
+      "published_score": 13,
+      "reproduced_score": 13,
+      "accepted": false
+    },
+    {
+      "pair_id": "p29",
+      "saved_correlation": 0.2549,
+      "recomputed_correlation": 0.2549,
+      "abs_delta": 0.0,
+      "published_score": 48,
+      "reproduced_score": 48,
+      "accepted": false
+    }
+  ],
+  "audit_pairs_not_the_winning_reference": [
+    "p13",
+    "p14",
+    "p15"
+  ],
+  "count_200_kept": 5,
+  "count_200_total": 5,
+  "causal_clock": [
+    {
+      "pair_id": "p01",
+      "published_score": 272,
+      "score_from_audio_available_at_decision": 52,
+      "recovered": false
+    },
+    {
+      "pair_id": "p02",
+      "published_score": 223,
+      "score_from_audio_available_at_decision": 192,
+      "recovered": false
+    },
+    {
+      "pair_id": "p03",
+      "published_score": 260,
+      "score_from_audio_available_at_decision": 43,
+      "recovered": false
+    },
+    {
+      "pair_id": "p04",
+      "published_score": 242,
+      "score_from_audio_available_at_decision": 35,
+      "recovered": false
+    },
+    {
+      "pair_id": "p05",
+      "published_score": 208,
+      "score_from_audio_available_at_decision": 178,
+      "recovered": false
+    }
+  ],
+  "causal_clock_ok": false,
+  "hits": 906,
+  "accepted_hits": 407,
+  "rejected_hits": 499,
+  "score_mismatches": 0,
+  "holes_s": 275.0,
+  "baseline_count_10": {
+    "commercial_seconds_covered": 3903.2,
+    "program_seconds_covered": 432.1,
+    "false_cover_incidents": 72,
+    "worst_continuous_program_interruption_s": 25.1,
+    "redzone_program_seconds_covered": 10.0,
+    "unscorable_s": 275.0
+  },
+  "confirmed_count_10": {
+    "commercial_seconds_covered": 1910.4,
+    "commercial_seconds_retained_fraction": 0.4894,
+    "program_seconds_covered": 95.1,
+    "program_seconds_avoided": 337.0,
+    "program_seconds_remaining_fraction": 0.2201,
+    "false_cover_incidents": 17,
+    "worst_continuous_program_interruption_s": 15.0,
+    "redzone_program_seconds_covered": 0.0,
+    "redzone_false_cover_incidents": 0,
+    "unscorable_s": 275.0,
+    "sessions": [
+      {
+        "session": "hush_20260909_213047",
+        "network": "NBC",
+        "ad_seconds_heard": 2849.9,
+        "program_seconds_covered": 0.0,
+        "false_cover_incidents": 0,
+        "worst_program_interruption_s": 0.0,
+        "ad_seconds": 2849.9,
+        "program_seconds": 6523.1,
+        "unscorable_s": 0
+      },
+      {
+        "session": "hush_20260913_210542",
+        "network": "NBC",
+        "ad_seconds_heard": 2558.9,
+        "program_seconds_covered": 56.4,
+        "false_cover_incidents": 8,
+        "worst_program_interruption_s": 15.0,
+        "ad_seconds": 3052.5,
+        "program_seconds": 9547.5,
+        "unscorable_s": 0
+      },
+      {
+        "session": "hush_20261008_205100",
+        "network": "Prime Video",
+        "ad_seconds_heard": 2221.5,
+        "program_seconds_covered": 18.5,
+        "false_cover_incidents": 4,
+        "worst_program_interruption_s": 7.2,
+        "ad_seconds": 2583.4,
+        "program_seconds": 7617.0,
+        "unscorable_s": 240.0
+      },
+      {
+        "session": "hush_20261011_204300",
+        "network": "Cable / antenna",
+        "ad_seconds_heard": 442.4,
+        "program_seconds_covered": 0.0,
+        "false_cover_incidents": 0,
+        "worst_program_interruption_s": 0.0,
+        "ad_seconds": 592.4,
+        "program_seconds": 13777.9,
+        "unscorable_s": 35.0
+      },
+      {
+        "session": "hush_20261012_204200",
+        "network": "Cable / antenna",
+        "ad_seconds_heard": 2618.9,
+        "program_seconds_covered": 9.5,
+        "false_cover_incidents": 2,
+        "worst_program_interruption_s": 5.0,
+        "ad_seconds": 2944.3,
+        "program_seconds": 10167.5,
+        "unscorable_s": 0
+      },
+      {
+        "session": "hush_20261010_222400",
+        "network": "Cable / antenna",
+        "ad_seconds_heard": 1071.8,
+        "program_seconds_covered": 0.0,
+        "false_cover_incidents": 0,
+        "worst_program_interruption_s": 0.0,
+        "ad_seconds": 1081.8,
+        "program_seconds": 4983.0,
+        "unscorable_s": 0
+      },
+      {
+        "session": "hush_20261011_135700",
+        "network": "Cable / antenna",
+        "ad_seconds_heard": 862.5,
+        "program_seconds_covered": 4.6,
+        "false_cover_incidents": 1,
+        "worst_program_interruption_s": 4.6,
+        "ad_seconds": 983.0,
+        "program_seconds": 3913.8,
+        "unscorable_s": 0
+      },
+      {
+        "session": "hush_20260914_212529",
+        "network": "ESPN",
+        "ad_seconds_heard": 1468.4,
+        "program_seconds_covered": 4.4,
+        "false_cover_incidents": 1,
+        "worst_program_interruption_s": 4.4,
+        "ad_seconds": 1804.0,
+        "program_seconds": 5095.0,
+        "unscorable_s": 0
+      },
+      {
+        "session": "hush_20260924_220624",
+        "network": "Prime",
+        "ad_seconds_heard": 1551.0,
+        "program_seconds_covered": 1.7,
+        "false_cover_incidents": 1,
+        "worst_program_interruption_s": 1.7,
+        "ad_seconds": 1664.4,
+        "program_seconds": 5935.6,
+        "unscorable_s": 0
+      }
+    ]
+  },
+  "decision": "retire",
+  "reason": [
+    "confirmation gave up at least half of the published commercial seconds",
+    "audio available at the decision time does not recover the published alignment"
+  ],
+  "generator_built": false,
+  "diagnostic_not_a_causal_policy": true,
+  "wall_s": 38.5
+}

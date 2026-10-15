@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Tonight's queue</title>
+  <style>
+    :root { color-scheme: dark; }
+    body { margin: 0; font: 18px/1.35 system-ui, sans-serif; background: #12100e; color: #f6f1e8; }
+    main { max-width: 46rem; margin: 0 auto; padding: 1.25rem 1rem 3rem; }
+    h1 { font-size: 1.6rem; margin: 0 0 0.3rem; }
+    .muted { color: #b7ad9f; }
+    .groups, .reactions, .transport { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.8rem 0; }
+    button { font: inherit; border: 1px solid #6a6054; background: #2a241d; color: inherit; border-radius: 10px; padding: 0.7rem 0.95rem; }
+    button.on, button.primary { background: #f3eadc; color: #1b1612; }
+    button.big { font-size: 1.35rem; padding: 0.9rem 1.3rem; }
+    .now { font-size: 2rem; margin: 0.4rem 0 0; }
+    .meta { margin: 0.2rem 0 0.6rem; }
+    input[type="range"] { width: 12rem; }
+    ol { padding-left: 1.2rem; }
+    li { margin: 0.25rem 0; cursor: pointer; }
+    li.current { color: #f3eadc; font-weight: 650; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Tonight's queue</h1>
+    <p class="muted" id="status">Loading…</p>
+    <div class="groups" id="groups"></div>
+    <p class="now" id="title">—</p>
+    <p class="meta muted" id="meta"></p>
+    <div class="transport">
+      <button class="big" id="play" type="button">Play</button>
+      <button class="big primary" id="next" type="button">Next</button>
+      <button class="big" id="prev" type="button">Previous</button>
+      <button class="big" id="surprise" type="button">Surprise me</button>
+    </div>
+    <label class="muted">Volume <input id="volume" type="range" min="0" max="1" step="0.01" value="0.8" /></label>
+    <div class="reactions" id="reactions"></div>
+    <p class="muted" id="tally"></p>
+    <h2>Up next</h2>
+    <ol id="upcoming"></ol>
+    <button id="export" type="button">Download notes</button>
+    <p class="muted">Space plays. Arrow keys skip. New tracks show up on their own while the queue is still filling. This player is not the television mute. Marked breaks only.</p>
+  </main>
+  <script>
+    const REACTIONS = [
+      ["more", "More like this"],
+      ["no", "Not this"],
+      ["talk", "Hard to talk over"],
+      ["stay", "Wanted it to keep going"]
+    ];
+    const notes = JSON.parse(localStorage.getItem("tonight-001") || "{}");
+    let tracks = [];
+    let queue = [];
+    let index = 0;
+    let audio = null;
+    let group = "All";
+
+    function save() { localStorage.setItem("tonight-001", JSON.stringify(notes)); tally(); }
+
+    function tally() {
+      const counts = { more: 0, no: 0, talk: 0, stay: 0 };
+      for (const row of Object.values(notes)) for (const key of REACTIONS) if (row[key[0]]) counts[key[0]] += 1;
+      document.getElementById("tally").textContent =
+        "More like this " + counts.more + " · Not this " + counts.no + " · Hard to talk over " + counts.talk + " · Wanted it to keep going " + counts.stay;
+    }
+
+    function current() { return queue[index]; }
+
+    function show() {
+      const track = current();
+      document.getElementById("title").textContent = track ? track.title : "Nothing in this group";
+      document.getElementById("meta").textContent = track
+        ? (track.creator + " · " + track.group + " · " + track.duration_s + "s · " + (index + 1) + " of " + queue.length)
+        : "";
+      for (const button of document.querySelectorAll("#reactions button")) {
+        const on = track && notes[track.id] && notes[track.id][button.dataset.key];
+        button.classList.toggle("on", Boolean(on));
+      }
+      const list = document.getElementById("upcoming");
+      list.innerHTML = "";
+      queue.slice(index, index + 12).forEach((track, offset) => {
+        const item = document.createElement("li");
+        item.textContent = track.title + " — " + track.creator;
+        if (offset === 0) item.className = "current";
+        item.addEventListener("click", () => { index += offset; play(true); });
+        list.appendChild(item);
+      });
+    }
+
+    function play(force) {
+      const track = current();
+      if (!track) return;
+      if (audio && audio.dataset.id === track.id && !force) {
+        if (audio.paused) { audio.play(); document.getElementById("play").textContent = "Pause"; }
+        else { audio.pause(); document.getElementById("play").textContent = "Play"; }
+        return;
+      }
+      if (audio) audio.pause();
+      audio = new Audio(track.file);
+      audio.dataset.id = track.id;
+      audio.volume = Number(document.getElementById("volume").value);
+      audio.play();
+      document.getElementById("play").textContent = "Pause";
+      audio.addEventListener("ended", () => { document.getElementById("play").textContent = "Play"; });
+      show();
+    }
+
+    function setGroup(name) {
+      group = name;
+      queue = name === "All" ? tracks.slice() : tracks.filter((track) => track.group === name);
+      index = 0;
+      if (audio) audio.pause();
+      document.getElementById("play").textContent = "Play";
+      for (const button of document.querySelectorAll("#groups button")) button.classList.toggle("on", button.dataset.group === name);
+      show();
+    }
+
+    function react(key) {
+      const track = current();
+      if (!track) return;
+      notes[track.id] = notes[track.id] || { title: track.title, creator: track.creator, group: track.group };
+      notes[track.id][key] = !notes[track.id][key];
+      save();
+      show();
+    }
+
+    document.getElementById("play").addEventListener("click", () => play(false));
+    document.getElementById("next").addEventListener("click", () => { index = Math.min(queue.length - 1, index + 1); play(true); });
+    document.getElementById("prev").addEventListener("click", () => { index = Math.max(0, index - 1); play(true); });
+    document.getElementById("surprise").addEventListener("click", () => {
+      const choices = queue.map((_, i) => i).filter((i) => {
+        const row = notes[queue[i].id];
+        return i !== index && !(row && (row.more || row.no));
+      });
+      const pool = choices.length ? choices : queue.map((_, i) => i);
+      if (!pool.length) return;
+      index = pool[Math.floor(Math.random() * pool.length)];
+      play(true);
+    });
+    document.getElementById("volume").addEventListener("input", (event) => { if (audio) audio.volume = Number(event.target.value); });
+    document.getElementById("export").addEventListener("click", () => {
+      const blob = new Blob([JSON.stringify({ experiment: "TONIGHT_001", notes }, null, 2)], { type: "application/json" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "tonight_notes.json";
+      link.click();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.target.matches("input")) return;
+      if (event.code === "Space") { event.preventDefault(); play(false); }
+      if (event.code === "ArrowRight") { event.preventDefault(); index = Math.min(queue.length - 1, index + 1); play(true); }
+      if (event.code === "ArrowLeft") { event.preventDefault(); index = Math.max(0, index - 1); play(true); }
+    });
+
+    const reactions = document.getElementById("reactions");
+    for (const [key, label] of REACTIONS) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.dataset.key = key;
+      button.textContent = label;
+      button.addEventListener("click", () => react(key));
+      reactions.appendChild(button);
+    }
+
+    function ensureGroups() {
+      const names = ["All", ...new Set(tracks.map((track) => track.group))];
+      const bar = document.getElementById("groups");
+      for (const name of names) {
+        if (bar.querySelector(`[data-group="${CSS.escape(name)}"]`)) continue;
+        const button = document.createElement("button");
+        button.type = "button";
+        button.dataset.group = name;
+        button.textContent = name;
+        button.addEventListener("click", () => setGroup(name));
+        bar.appendChild(button);
+      }
+      for (const button of bar.querySelectorAll("button")) button.classList.toggle("on", button.dataset.group === group);
+    }
+
+    function absorb(catalog) {
+      const incoming = catalog.tracks || [];
+      const first = tracks.length === 0;
+      const currentId = queue[index] && queue[index].id;
+      tracks = incoming.slice();
+      const visible = group === "All" ? tracks.slice() : tracks.filter((track) => track.group === group);
+      if (first) {
+        queue = visible;
+      } else {
+        queue = visible;
+        const at = queue.findIndex((track) => track.id === currentId);
+        if (at >= 0) index = at;
+        else index = Math.min(index, Math.max(0, queue.length - 1));
+      }
+      ensureGroups();
+      const filling = catalog.complete ? "" : " More are still arriving.";
+      document.getElementById("status").textContent = tracks.length + " tracks ready." + filling + " Marked breaks only — detection stays out.";
+      if (first || incoming.length) show();
+    }
+
+    function refresh() {
+      fetch("catalog.json?t=" + Date.now()).then((response) => response.json()).then(absorb).catch(() => {});
+    }
+    refresh();
+    setInterval(refresh, 12000);
+    tally();
+  </script>
+</body>
+</html>
