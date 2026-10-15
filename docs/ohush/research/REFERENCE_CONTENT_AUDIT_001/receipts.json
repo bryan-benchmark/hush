@@ -1,0 +1,21 @@
+{
+  "system": "reference_content_audit_001",
+  "git_head": "482053cbb82657c72ed0b2b3e319fc119b515ce4",
+  "decisions_sha256": "08b1b8d9a56c33681b493dff1d3337951ac9a51b812c83d2e6009afdefb86713",
+  "library_rebuilt": false,
+  "gold_modified": false,
+  "thresholds_modified": false,
+  "holdouts_opened": false,
+  "playback": "PLAY",
+  "pairs": 29,
+  "busiest_replacement": {
+    "session": "hush_20260913_210542",
+    "pod_start": 6838.403,
+    "queries_at_least_10": 13
+  },
+  "lag_search_s": 2.0,
+    "transcripts": "existing five-second whisper scan, not a new listen",
+    "reviewer_labels": null,
+    "scores_reproduced": 29,
+    "clips": 58
+}

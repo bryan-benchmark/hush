@@ -1,0 +1,1868 @@
+{
+  "summary": {
+    "pairs": 29,
+    "relation_counts": {
+      "same_sound": 22,
+      "unrelated_sound": 4,
+      "shared_fragment": 3
+    },
+    "count_200": [
+      {
+        "pair_id": "p01",
+        "query_t0": 145.0,
+        "published_score": 272,
+        "reproduced_score": 272,
+        "aligned_ref_t0": 314.491066,
+        "nominal_mono_correlation": -0.009,
+        "best_positive_within_2s": 0.9952,
+        "best_lag_s": 0.0376,
+        "best_half_second_correlation": 0.9985,
+        "channels_at_nominal": {
+          "left_left": -0.0099,
+          "right_right": -0.0067,
+          "left_right": -0.0092,
+          "right_left": -0.0099,
+          "mono_inverted": 0.009
+        },
+        "relation": "same_sound"
+      },
+      {
+        "pair_id": "p02",
+        "query_t0": 150.0,
+        "published_score": 223,
+        "reproduced_score": 223,
+        "aligned_ref_t0": 319.483356,
+        "nominal_mono_correlation": 0.0315,
+        "best_positive_within_2s": 0.9978,
+        "best_lag_s": 0.0453,
+        "best_half_second_correlation": 0.9998,
+        "channels_at_nominal": {
+          "left_left": 0.0268,
+          "right_right": 0.0367,
+          "left_right": 0.03,
+          "right_left": 0.0317,
+          "mono_inverted": -0.0315
+        },
+        "relation": "same_sound"
+      },
+      {
+        "pair_id": "p03",
+        "query_t0": 155.0,
+        "published_score": 260,
+        "reproduced_score": 260,
+        "aligned_ref_t0": 324.475646,
+        "nominal_mono_correlation": -0.0225,
+        "best_positive_within_2s": 0.9967,
+        "best_lag_s": 0.053,
+        "best_half_second_correlation": 0.9998,
+        "channels_at_nominal": {
+          "left_left": -0.0172,
+          "right_right": -0.028,
+          "left_right": -0.0157,
+          "right_left": -0.0281,
+          "mono_inverted": 0.0225
+        },
+        "relation": "same_sound"
+      },
+      {
+        "pair_id": "p04",
+        "query_t0": 160.0,
+        "published_score": 242,
+        "reproduced_score": 242,
+        "aligned_ref_t0": 329.491156,
+        "nominal_mono_correlation": 0.0209,
+        "best_positive_within_2s": 0.9983,
+        "best_lag_s": 0.0375,
+        "best_half_second_correlation": 0.9996,
+        "channels_at_nominal": {
+          "left_left": 0.0203,
+          "right_right": 0.0201,
+          "left_right": 0.0203,
+          "right_left": 0.0224,
+          "mono_inverted": -0.0209
+        },
+        "relation": "same_sound"
+      },
+      {
+        "pair_id": "p05",
+        "query_t0": 5085.0,
+        "published_score": 208,
+        "reproduced_score": 208,
+        "aligned_ref_t0": 6873.803175,
+        "nominal_mono_correlation": 0.0866,
+        "best_positive_within_2s": 0.9752,
+        "best_lag_s": 0.0513,
+        "best_half_second_correlation": 0.9906,
+        "channels_at_nominal": {
+          "left_left": 0.0964,
+          "right_right": 0.0759,
+          "left_right": 0.0802,
+          "right_left": 0.0898,
+          "mono_inverted": -0.0866
+        },
+        "relation": "same_sound"
+      }
+    ],
+    "waveform_counts": {
+      "copy": 16,
+      "unrelated": 4,
+      "moderate": 2,
+      "partial": 4,
+      "fragment": 3
+    },
+    "content_counts": {
+      "advertisement_creative": 9,
+      "unrelated_collision": 4,
+      "uncertain": 3,
+      "promo": 5,
+      "shared_line_in_program": 2,
+      "promo_in_program": 1,
+      "promo_at_pod_edge": 2,
+      "ad_audio_in_program": 1,
+      "promo_fragment_in_program": 2
+    },
+    "lag_note": "Verified copies agree after a shift of about 31 to 53 ms. One hop, 23 ms, leaves the correlation near zero. Channel swap and polarity reversal do not."
+  },
+  "pairs": [
+    {
+      "pair_id": "p01",
+      "roles": [
+        "count_200"
+      ],
+      "query_session": "hush_20261008_205100",
+      "query_network": "Prime Video",
+      "query_t0": 145.0,
+      "query_t1": 150.0,
+      "published_score": 272,
+      "ref_session": "hush_20260924_220624",
+      "ref_network": "Prime",
+      "ref_pod_start": 234.244438,
+      "ref_pod_end": 356.542058,
+      "pod_duration_s": 122.298,
+      "score": 272,
+      "n_hashes": 413,
+      "offset_frames": 7299,
+      "aligned_ref_t0": 314.491066,
+      "position_in_pod_s": 80.247,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 5.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": "excitement at the speed of sports.  See a team balling out, but I'm to win.  Spot a player going off.",
+      "reference_transcript": "The game is rolling with DraftKings Live betting and you can stay tapped into the excitement the speed of sports. See a team  balling out, but I'm to win.  Spot a player going off. Take",
+      "nominal_mono_correlation": -0.009,
+      "channels_at_nominal": {
+        "left_left": -0.0099,
+        "right_right": -0.0067,
+        "left_right": -0.0092,
+        "right_left": -0.0099,
+        "mono_inverted": 0.009
+      },
+      "best_positive_within_2s": 0.9952,
+      "best_negative_within_2s": -0.1968,
+      "best_lag_s": 0.0376,
+      "within_one_hop": {
+        "correlation": 0.134,
+        "lag_s": 0.0188
+      },
+      "within_five_hops": {
+        "correlation": 0.9952,
+        "lag_s": 0.0376
+      },
+      "best_half_second_correlation": 0.9985,
+      "half_second_starts_at_s": 1.5,
+      "query_mid_rms": 0.02907,
+      "query_side_rms": 0.00241,
+      "relation": "same_sound",
+      "reviewer_label": null,
+      "blind": {
+        "a": "reference",
+        "b": "query",
+        "a_file": "clips/p01a.wav",
+        "b_file": "clips/p01b.wav"
+      },
+      "waveform_class": "copy",
+      "content_class": "advertisement_creative",
+      "content_note": "DraftKings live-betting spot. The next three windows continue it."
+    },
+    {
+      "pair_id": "p02",
+      "roles": [
+        "count_200"
+      ],
+      "query_session": "hush_20261008_205100",
+      "query_network": "Prime Video",
+      "query_t0": 150.0,
+      "query_t1": 155.0,
+      "published_score": 223,
+      "ref_session": "hush_20260924_220624",
+      "ref_network": "Prime",
+      "ref_pod_start": 234.244438,
+      "ref_pod_end": 356.542058,
+      "pod_duration_s": 122.298,
+      "score": 223,
+      "n_hashes": 332,
+      "offset_frames": 7299,
+      "aligned_ref_t0": 319.483356,
+      "position_in_pod_s": 85.239,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 5.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": "Take his total yards or stack your bets in a same game parlay.  Draft Kings the number...",
+      "reference_transcript": "the speed of sports. See a team  balling out, but I'm to win.  Spot a player going off. Take his total yards or stack your bets in a same game parlay.  Draft Kings, the number one small",
+      "nominal_mono_correlation": 0.0315,
+      "channels_at_nominal": {
+        "left_left": 0.0268,
+        "right_right": 0.0367,
+        "left_right": 0.03,
+        "right_left": 0.0317,
+        "mono_inverted": -0.0315
+      },
+      "best_positive_within_2s": 0.9978,
+      "best_negative_within_2s": -0.2015,
+      "best_lag_s": 0.0453,
+      "within_one_hop": {
+        "correlation": 0.0876,
+        "lag_s": -0.0038
+      },
+      "within_five_hops": {
+        "correlation": 0.9978,
+        "lag_s": 0.0453
+      },
+      "best_half_second_correlation": 0.9998,
+      "half_second_starts_at_s": 3.75,
+      "query_mid_rms": 0.02782,
+      "query_side_rms": 0.00215,
+      "relation": "same_sound",
+      "reviewer_label": null,
+      "blind": {
+        "a": "query",
+        "b": "reference",
+        "a_file": "clips/p02a.wav",
+        "b_file": "clips/p02b.wav"
+      },
+      "waveform_class": "copy",
+      "content_class": "advertisement_creative",
+      "content_note": "Same DraftKings spot, five seconds later."
+    },
+    {
+      "pair_id": "p03",
+      "roles": [
+        "count_200"
+      ],
+      "query_session": "hush_20261008_205100",
+      "query_network": "Prime Video",
+      "query_t0": 155.0,
+      "query_t1": 160.0,
+      "published_score": 260,
+      "ref_session": "hush_20260924_220624",
+      "ref_network": "Prime",
+      "ref_pod_start": 234.244438,
+      "ref_pod_end": 356.542058,
+      "pod_duration_s": 122.298,
+      "score": 260,
+      "n_hashes": 446,
+      "offset_frames": 7299,
+      "aligned_ref_t0": 324.475646,
+      "position_in_pod_s": 90.231,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 5.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": "for live betting is locked in.  So let's go.  News Sportsbook customer.",
+      "reference_transcript": "his total yards or stack your bets in a same game parlay.  Draft Kings, the number one small for live betting is locked in.  So let's go new sports  book customers bet.",
+      "nominal_mono_correlation": -0.0225,
+      "channels_at_nominal": {
+        "left_left": -0.0172,
+        "right_right": -0.028,
+        "left_right": -0.0157,
+        "right_left": -0.0281,
+        "mono_inverted": 0.0225
+      },
+      "best_positive_within_2s": 0.9967,
+      "best_negative_within_2s": -0.1916,
+      "best_lag_s": 0.053,
+      "within_one_hop": {
+        "correlation": -0.0944,
+        "lag_s": 0.012
+      },
+      "within_five_hops": {
+        "correlation": 0.9967,
+        "lag_s": 0.053
+      },
+      "best_half_second_correlation": 0.9998,
+      "half_second_starts_at_s": 0.0,
+      "query_mid_rms": 0.02864,
+      "query_side_rms": 0.00301,
+      "relation": "same_sound",
+      "reviewer_label": null,
+      "blind": {
+        "a": "query",
+        "b": "reference",
+        "a_file": "clips/p03a.wav",
+        "b_file": "clips/p03b.wav"
+      },
+      "waveform_class": "copy",
+      "content_class": "advertisement_creative",
+      "content_note": "Same DraftKings spot, five seconds later."
+    },
+    {
+      "pair_id": "p04",
+      "roles": [
+        "count_200"
+      ],
+      "query_session": "hush_20261008_205100",
+      "query_network": "Prime Video",
+      "query_t0": 160.0,
+      "query_t1": 165.0,
+      "published_score": 242,
+      "ref_session": "hush_20260924_220624",
+      "ref_network": "Prime",
+      "ref_pod_start": 234.244438,
+      "ref_pod_end": 356.542058,
+      "pod_duration_s": 122.298,
+      "score": 242,
+      "n_hashes": 343,
+      "offset_frames": 7299,
+      "aligned_ref_t0": 329.491156,
+      "position_in_pod_s": 95.247,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 5.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": "Get $150 in total bonus bets.  Download the app, use the pro",
+      "reference_transcript": "for live betting is locked in.  So let's go new sports  book customers bet. five bucks and get 150 in total bonus beds.  Download the app, use the promo code T.",
+      "nominal_mono_correlation": 0.0209,
+      "channels_at_nominal": {
+        "left_left": 0.0203,
+        "right_right": 0.0201,
+        "left_right": 0.0203,
+        "right_left": 0.0224,
+        "mono_inverted": -0.0209
+      },
+      "best_positive_within_2s": 0.9983,
+      "best_negative_within_2s": -0.176,
+      "best_lag_s": 0.0375,
+      "within_one_hop": {
+        "correlation": 0.1575,
+        "lag_s": 0.0198
+      },
+      "within_five_hops": {
+        "correlation": 0.9983,
+        "lag_s": 0.0375
+      },
+      "best_half_second_correlation": 0.9996,
+      "half_second_starts_at_s": 0.0,
+      "query_mid_rms": 0.03008,
+      "query_side_rms": 0.00266,
+      "relation": "same_sound",
+      "reviewer_label": null,
+      "blind": {
+        "a": "reference",
+        "b": "query",
+        "a_file": "clips/p04a.wav",
+        "b_file": "clips/p04b.wav"
+      },
+      "waveform_class": "copy",
+      "content_class": "advertisement_creative",
+      "content_note": "Same DraftKings spot, the bonus-bet close."
+    },
+    {
+      "pair_id": "p05",
+      "roles": [
+        "count_200"
+      ],
+      "query_session": "hush_20261012_204200",
+      "query_network": "Cable / antenna",
+      "query_t0": 5085.0,
+      "query_t1": 5090.0,
+      "published_score": 208,
+      "ref_session": "hush_20260914_212529",
+      "ref_network": "ESPN",
+      "ref_pod_start": 6852.563786,
+      "ref_pod_end": 6898.919587,
+      "pod_duration_s": 46.356,
+      "score": 208,
+      "n_hashes": 341,
+      "offset_frames": 77037,
+      "aligned_ref_t0": 6873.803175,
+      "position_in_pod_s": 21.239,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 5.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": "every morning. A little bit of salt give it a quick stir and then add their new chili  lime.",
+      "reference_transcript": "Chippola is new chili lime chips. It's so epic. All the chips get hand fried every morning A little bit of salt, give it a quick stir, and then add their new chili lime seasoning.  It's so...",
+      "nominal_mono_correlation": 0.0866,
+      "channels_at_nominal": {
+        "left_left": 0.0964,
+        "right_right": 0.0759,
+        "left_right": 0.0802,
+        "right_left": 0.0898,
+        "mono_inverted": -0.0866
+      },
+      "best_positive_within_2s": 0.9752,
+      "best_negative_within_2s": -0.1657,
+      "best_lag_s": 0.0513,
+      "within_one_hop": {
+        "correlation": 0.1315,
+        "lag_s": -0.0096
+      },
+      "within_five_hops": {
+        "correlation": 0.9752,
+        "lag_s": 0.0513
+      },
+      "best_half_second_correlation": 0.9906,
+      "half_second_starts_at_s": 1.25,
+      "query_mid_rms": 0.03357,
+      "query_side_rms": 0.00253,
+      "relation": "same_sound",
+      "reviewer_label": null,
+      "blind": {
+        "a": "reference",
+        "b": "query",
+        "a_file": "clips/p05a.wav",
+        "b_file": "clips/p05b.wav"
+      },
+      "waveform_class": "copy",
+      "content_class": "advertisement_creative",
+      "content_note": "Chili-lime chip spot. Both windows sit inside gold commercials."
+    },
+    {
+      "pair_id": "p06",
+      "roles": [
+        "top5_highest_score"
+      ],
+      "query_session": "hush_20261007_220650",
+      "query_network": "Hulu",
+      "query_t0": 1550.0,
+      "query_t1": 1555.0,
+      "published_score": 27,
+      "ref_session": "hush_20260913_210542",
+      "ref_network": "NBC",
+      "ref_pod_start": 9680.139945,
+      "ref_pod_end": 9820.856578,
+      "pod_duration_s": 140.717,
+      "score": 27,
+      "n_hashes": 908,
+      "offset_frames": 355725,
+      "aligned_ref_t0": 9809.92,
+      "position_in_pod_s": 129.78,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 0.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": null,
+      "reference_transcript": null,
+      "nominal_mono_correlation": -0.0015,
+      "channels_at_nominal": {
+        "left_left": 0.0012,
+        "right_right": -0.0005,
+        "left_right": -0.0039,
+        "right_left": 0.0002,
+        "mono_inverted": 0.0015
+      },
+      "best_positive_within_2s": 0.0172,
+      "best_negative_within_2s": -0.0174,
+      "best_lag_s": -0.7242,
+      "within_one_hop": {
+        "correlation": 0.0141,
+        "lag_s": -0.0161
+      },
+      "within_five_hops": {
+        "correlation": -0.0147,
+        "lag_s": 0.0283
+      },
+      "best_half_second_correlation": 0.0711,
+      "half_second_starts_at_s": 1.25,
+      "query_mid_rms": 2e-05,
+      "query_side_rms": 1e-05,
+      "relation": "unrelated_sound",
+      "reviewer_label": null,
+      "blind": {
+        "a": "query",
+        "b": "reference",
+        "a_file": "clips/p06a.wav",
+        "b_file": "clips/p06b.wav"
+      },
+      "waveform_class": "unrelated",
+      "content_class": "unrelated_collision",
+      "content_note": "Score 27 at 9809.92 s, the 9810 s analyzer boundary. Waveforms do not match."
+    },
+    {
+      "pair_id": "p07",
+      "roles": [
+        "top5_highest_score"
+      ],
+      "query_session": "hush_20260913_210542",
+      "query_network": "NBC",
+      "query_t0": 5795.0,
+      "query_t1": 5800.0,
+      "published_score": 135,
+      "ref_session": "hush_20260909_213047",
+      "ref_network": "NBC",
+      "ref_pod_start": 2514.3919100000003,
+      "ref_pod_end": 2647.199912,
+      "pod_duration_s": 132.808,
+      "score": 135,
+      "n_hashes": 475,
+      "offset_frames": -135876,
+      "aligned_ref_t0": 2639.969524,
+      "position_in_pod_s": 125.578,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 5.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": "Oh",
+      "reference_transcript": "McQueen is in the house.  Hey girl.  This is gonna be a problem. Oh, your hair looks beautiful.  Pick me and I'll give it to you.",
+      "nominal_mono_correlation": -0.0002,
+      "channels_at_nominal": {
+        "left_left": 0.0058,
+        "right_right": 0.0176,
+        "left_right": -0.0248,
+        "right_left": 0.0004,
+        "mono_inverted": 0.0002
+      },
+      "best_positive_within_2s": 0.9366,
+      "best_negative_within_2s": -0.2578,
+      "best_lag_s": 0.0381,
+      "within_one_hop": {
+        "correlation": -0.1102,
+        "lag_s": 0.01
+      },
+      "within_five_hops": {
+        "correlation": 0.9366,
+        "lag_s": 0.0381
+      },
+      "best_half_second_correlation": 0.9756,
+      "half_second_starts_at_s": 2.25,
+      "query_mid_rms": 0.07055,
+      "query_side_rms": 0.03134,
+      "relation": "same_sound",
+      "reviewer_label": null,
+      "blind": {
+        "a": "query",
+        "b": "reference",
+        "a_file": "clips/p07a.wav",
+        "b_file": "clips/p07b.wav"
+      },
+      "waveform_class": "copy",
+      "content_class": "advertisement_creative",
+      "content_note": "Both windows are the same spot and both sit inside gold commercials."
+    },
+    {
+      "pair_id": "p08",
+      "roles": [
+        "top5_median_position"
+      ],
+      "query_session": "hush_20261010_222400",
+      "query_network": "Cable / antenna",
+      "query_t0": 5645.0,
+      "query_t1": 5650.0,
+      "published_score": 18,
+      "ref_session": "hush_20260909_213047",
+      "ref_network": "NBC",
+      "ref_pod_start": 2514.3919100000003,
+      "ref_pod_end": 2647.199912,
+      "pod_duration_s": 132.808,
+      "score": 18,
+      "n_hashes": 912,
+      "offset_frames": -133543,
+      "aligned_ref_t0": 2544.140771,
+      "position_in_pod_s": 29.749,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 0.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": null,
+      "reference_transcript": null,
+      "nominal_mono_correlation": 0.5012,
+      "channels_at_nominal": {
+        "left_left": 0.4011,
+        "right_right": 0.4012,
+        "left_right": 0.3986,
+        "right_left": 0.402,
+        "mono_inverted": -0.5012
+      },
+      "best_positive_within_2s": 0.5518,
+      "best_negative_within_2s": -0.5433,
+      "best_lag_s": -1.751,
+      "within_one_hop": {
+        "correlation": 0.5448,
+        "lag_s": 0.0229
+      },
+      "within_five_hops": {
+        "correlation": 0.5494,
+        "lag_s": 0.0298
+      },
+      "best_half_second_correlation": 0.7832,
+      "half_second_starts_at_s": 3.75,
+      "query_mid_rms": 4e-05,
+      "query_side_rms": 1e-05,
+      "relation": "same_sound",
+      "reviewer_label": null,
+      "blind": {
+        "a": "query",
+        "b": "reference",
+        "a_file": "clips/p08a.wav",
+        "b_file": "clips/p08b.wav"
+      },
+      "waveform_class": "moderate",
+      "content_class": "uncertain",
+      "content_note": "Correlation stays near 0.55. The query is outside gold and the existing scan has no words."
+    },
+    {
+      "pair_id": "p09",
+      "roles": [
+        "top5_highest_score"
+      ],
+      "query_session": "hush_20260914_212529",
+      "query_network": "ESPN",
+      "query_t0": 1760.0,
+      "query_t1": 1765.0,
+      "published_score": 103,
+      "ref_session": "hush_20260909_213047",
+      "ref_network": "NBC",
+      "ref_pod_start": 1074.332477,
+      "ref_pod_end": 1255.237447,
+      "pod_duration_s": 180.905,
+      "score": 103,
+      "n_hashes": 575,
+      "offset_frames": -22155,
+      "aligned_ref_t0": 1245.564807,
+      "position_in_pod_s": 171.232,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 5.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": "NFL kickoff weekend is presented by NFL Sunday ticket and YouTube TV.",
+      "reference_transcript": "NFL kickoff weekend is presented by NFL Sunday ticket and YouTube. Watch every game every Sunday all in one place.",
+      "nominal_mono_correlation": 0.0043,
+      "channels_at_nominal": {
+        "left_left": 0.0112,
+        "right_right": -0.008,
+        "left_right": 0.0197,
+        "right_left": -0.0069,
+        "mono_inverted": -0.0043
+      },
+      "best_positive_within_2s": 0.4681,
+      "best_negative_within_2s": -0.5889,
+      "best_lag_s": -0.0287,
+      "within_one_hop": {
+        "correlation": -0.2302,
+        "lag_s": -0.0228
+      },
+      "within_five_hops": {
+        "correlation": -0.5889,
+        "lag_s": -0.0287
+      },
+      "best_half_second_correlation": 0.7444,
+      "half_second_starts_at_s": 4.0,
+      "query_mid_rms": 0.08356,
+      "query_side_rms": 0.02786,
+      "relation": "same_sound",
+      "reviewer_label": null,
+      "blind": {
+        "a": "reference",
+        "b": "query",
+        "a_file": "clips/p09a.wav",
+        "b_file": "clips/p09b.wav"
+      },
+      "waveform_class": "partial",
+      "content_class": "promo",
+      "content_note": "Both transcripts are the NFL Sunday Ticket kickoff line. The full window is not a sample copy."
+    },
+    {
+      "pair_id": "p10",
+      "roles": [
+        "top5_highest_score"
+      ],
+      "query_session": "hush_20260914_212529",
+      "query_network": "ESPN",
+      "query_t0": 6455.0,
+      "query_t1": 6460.0,
+      "published_score": 145,
+      "ref_session": "hush_20260909_213047",
+      "ref_network": "NBC",
+      "ref_pod_start": 6074.159173,
+      "ref_pod_end": 6210.449728,
+      "pod_duration_s": 136.291,
+      "score": 145,
+      "n_hashes": 485,
+      "offset_frames": -14543,
+      "aligned_ref_t0": 6117.320272,
+      "position_in_pod_s": 43.161,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 5.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": "Everyone's coming over and they want different NFL games.  We're gonna be the worst host if we can't...",
+      "reference_transcript": "all the time, only Royal Caribbean.  Everyone's coming over and they want different NFL... games. We're gonna be the worst host if we can't pull this off.  We're good. Watch up to four...",
+      "nominal_mono_correlation": 0.0105,
+      "channels_at_nominal": {
+        "left_left": 0.0209,
+        "right_right": 0.0474,
+        "left_right": -0.0046,
+        "right_left": -0.0274,
+        "mono_inverted": -0.0105
+      },
+      "best_positive_within_2s": 0.9568,
+      "best_negative_within_2s": -0.1967,
+      "best_lag_s": 0.041,
+      "within_one_hop": {
+        "correlation": 0.1057,
+        "lag_s": 0.0182
+      },
+      "within_five_hops": {
+        "correlation": 0.9568,
+        "lag_s": 0.041
+      },
+      "best_half_second_correlation": 0.9715,
+      "half_second_starts_at_s": 0.25,
+      "query_mid_rms": 0.06637,
+      "query_side_rms": 0.03261,
+      "relation": "same_sound",
+      "reviewer_label": null,
+      "blind": {
+        "a": "query",
+        "b": "reference",
+        "a_file": "clips/p10a.wav",
+        "b_file": "clips/p10b.wav"
+      },
+      "waveform_class": "copy",
+      "content_class": "advertisement_creative",
+      "content_note": "Same Royal Caribbean / NFL-host spot. Both windows sit inside gold commercials."
+    },
+    {
+      "pair_id": "p11",
+      "roles": [
+        "top5_median_position"
+      ],
+      "query_session": "hush_20261010_222400",
+      "query_network": "Cable / antenna",
+      "query_t0": 5630.0,
+      "query_t1": 5635.0,
+      "published_score": 15,
+      "ref_session": "hush_20260909_213047",
+      "ref_network": "NBC",
+      "ref_pod_start": 6074.159173,
+      "ref_pod_end": 6210.449728,
+      "pod_duration_s": 136.291,
+      "score": 15,
+      "n_hashes": 730,
+      "offset_frames": 23050,
+      "aligned_ref_t0": 6165.223039,
+      "position_in_pod_s": 91.064,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 0.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": null,
+      "reference_transcript": "Who'd implant pancreas and gallbladder problems? Tell your doctor if you experienced vision changes.",
+      "nominal_mono_correlation": 0.591,
+      "channels_at_nominal": {
+        "left_left": 0.4725,
+        "right_right": 0.471,
+        "left_right": 0.475,
+        "right_left": 0.4717,
+        "mono_inverted": -0.591
+      },
+      "best_positive_within_2s": 0.6029,
+      "best_negative_within_2s": -0.5698,
+      "best_lag_s": 0.4239,
+      "within_one_hop": {
+        "correlation": 0.5924,
+        "lag_s": 0.0008
+      },
+      "within_five_hops": {
+        "correlation": 0.5924,
+        "lag_s": 0.0008
+      },
+      "best_half_second_correlation": 0.7717,
+      "half_second_starts_at_s": 1.0,
+      "query_mid_rms": 4e-05,
+      "query_side_rms": 1e-05,
+      "relation": "same_sound",
+      "reviewer_label": null,
+      "blind": {
+        "a": "query",
+        "b": "reference",
+        "a_file": "clips/p11a.wav",
+        "b_file": "clips/p11b.wav"
+      },
+      "waveform_class": "moderate",
+      "content_class": "uncertain",
+      "content_note": "Correlation near 0.59. Reference scan is a drug disclaimer. Query scan is empty and the query is outside gold."
+    },
+    {
+      "pair_id": "p12",
+      "roles": [
+        "top5_highest_score"
+      ],
+      "query_session": "hush_20261010_222400",
+      "query_network": "Cable / antenna",
+      "query_t0": 1325.0,
+      "query_t1": 1330.0,
+      "published_score": 42,
+      "ref_session": "hush_20260924_220624",
+      "ref_network": "Prime",
+      "ref_pod_start": 3496.442224,
+      "ref_pod_end": 3633.0480049999996,
+      "pod_duration_s": 136.606,
+      "score": 42,
+      "n_hashes": 506,
+      "offset_frames": 96368,
+      "aligned_ref_t0": 3562.660862,
+      "position_in_pod_s": 66.219,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 5.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": "Get the best of both worlds.",
+      "reference_transcript": "Get the best of both worlds. Legendary flavor and real meat.",
+      "nominal_mono_correlation": 0.0049,
+      "channels_at_nominal": {
+        "left_left": -0.0154,
+        "right_right": 0.0129,
+        "left_right": 0.0023,
+        "right_left": 0.0173,
+        "mono_inverted": -0.0049
+      },
+      "best_positive_within_2s": 0.9681,
+      "best_negative_within_2s": -0.1717,
+      "best_lag_s": 0.0462,
+      "within_one_hop": {
+        "correlation": -0.0887,
+        "lag_s": 0.0015
+      },
+      "within_five_hops": {
+        "correlation": 0.9681,
+        "lag_s": 0.0462
+      },
+      "best_half_second_correlation": 0.9842,
+      "half_second_starts_at_s": 4.0,
+      "query_mid_rms": 0.06462,
+      "query_side_rms": 0.02602,
+      "relation": "same_sound",
+      "reviewer_label": null,
+      "blind": {
+        "a": "reference",
+        "b": "query",
+        "a_file": "clips/p12a.wav",
+        "b_file": "clips/p12b.wav"
+      },
+      "waveform_class": "copy",
+      "content_class": "advertisement_creative",
+      "content_note": "Same 'best of both worlds' spot. Both windows sit inside gold commercials."
+    },
+    {
+      "pair_id": "p13",
+      "roles": [
+        "replacement"
+      ],
+      "query_session": "hush_20260914_212529",
+      "query_network": "ESPN",
+      "query_t0": 6465.0,
+      "query_t1": 6470.0,
+      "published_score": 21,
+      "ref_session": "hush_20260913_210542",
+      "ref_network": "NBC",
+      "ref_pod_start": 6838.40341,
+      "ref_pod_end": 7256.290598,
+      "pod_duration_s": 417.887,
+      "score": 21,
+      "n_hashes": 345,
+      "offset_frames": 19778,
+      "aligned_ref_t0": 6924.236916,
+      "position_in_pod_s": 85.834,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 5.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": "Get NFL Sunday ticket now.  Eight payments of just $30 a month for new users.",
+      "reference_transcript": "Watch up to four NFL games at once so you don't miss the action. NFL Sunday ticket. Now eight  payments of just $30 a month for  new users.",
+      "nominal_mono_correlation": -0.0263,
+      "channels_at_nominal": {
+        "left_left": -0.0259,
+        "right_right": -0.0356,
+        "left_right": -0.0132,
+        "right_left": -0.0182,
+        "mono_inverted": 0.0263
+      },
+      "best_positive_within_2s": 0.9739,
+      "best_negative_within_2s": -0.2812,
+      "best_lag_s": 0.0397,
+      "within_one_hop": {
+        "correlation": 0.0627,
+        "lag_s": 0.0229
+      },
+      "within_five_hops": {
+        "correlation": 0.9739,
+        "lag_s": 0.0397
+      },
+      "best_half_second_correlation": 0.9871,
+      "half_second_starts_at_s": 0.75,
+      "query_mid_rms": 0.05883,
+      "query_side_rms": 0.02205,
+      "relation": "same_sound",
+      "reviewer_label": null,
+      "blind": {
+        "a": "reference",
+        "b": "query",
+        "a_file": "clips/p13a.wav",
+        "b_file": "clips/p13b.wav"
+      },
+      "waveform_class": "copy",
+      "content_class": "advertisement_creative",
+      "content_note": "Replacement pod. Same NFL Sunday Ticket line. Both windows sit inside gold commercials."
+    },
+    {
+      "pair_id": "p14",
+      "roles": [
+        "replacement"
+      ],
+      "query_session": "hush_20261007_220650",
+      "query_network": "Hulu",
+      "query_t0": 1100.0,
+      "query_t1": 1105.0,
+      "published_score": 20,
+      "ref_session": "hush_20260913_210542",
+      "ref_network": "NBC",
+      "ref_pod_start": 6838.40341,
+      "ref_pod_end": 7256.290598,
+      "pod_duration_s": 417.887,
+      "score": 20,
+      "n_hashes": 991,
+      "offset_frames": 254962,
+      "aligned_ref_t0": 7020.204989,
+      "position_in_pod_s": 181.802,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 0.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": null,
+      "reference_transcript": null,
+      "nominal_mono_correlation": -0.0002,
+      "channels_at_nominal": {
+        "left_left": 0.0008,
+        "right_right": 0.0077,
+        "left_right": -0.0021,
+        "right_left": -0.0068,
+        "mono_inverted": 0.0002
+      },
+      "best_positive_within_2s": 0.0165,
+      "best_negative_within_2s": -0.018,
+      "best_lag_s": -1.2613,
+      "within_one_hop": {
+        "correlation": -0.0129,
+        "lag_s": 0.019
+      },
+      "within_five_hops": {
+        "correlation": 0.0154,
+        "lag_s": -0.042
+      },
+      "best_half_second_correlation": 0.0703,
+      "half_second_starts_at_s": 3.0,
+      "query_mid_rms": 2e-05,
+      "query_side_rms": 1e-05,
+      "relation": "unrelated_sound",
+      "reviewer_label": null,
+      "blind": {
+        "a": "query",
+        "b": "reference",
+        "a_file": "clips/p14a.wav",
+        "b_file": "clips/p14b.wav"
+      },
+      "waveform_class": "unrelated",
+      "content_class": "unrelated_collision",
+      "content_note": "Score 20. Waveforms do not match. Query is outside gold."
+    },
+    {
+      "pair_id": "p15",
+      "roles": [
+        "replacement"
+      ],
+      "query_session": "hush_20261007_220650",
+      "query_network": "Hulu",
+      "query_t0": 1550.0,
+      "query_t1": 1555.0,
+      "published_score": 17,
+      "ref_session": "hush_20260913_210542",
+      "ref_network": "NBC",
+      "ref_pod_start": 6838.40341,
+      "ref_pod_end": 7256.290598,
+      "pod_duration_s": 417.887,
+      "score": 17,
+      "n_hashes": 908,
+      "offset_frames": 235575,
+      "aligned_ref_t0": 7020.042449,
+      "position_in_pod_s": 181.639,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 0.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": null,
+      "reference_transcript": null,
+      "nominal_mono_correlation": 0.0017,
+      "channels_at_nominal": {
+        "left_left": 0.0013,
+        "right_right": -0.0011,
+        "left_right": 0.0027,
+        "right_left": 0.0006,
+        "mono_inverted": -0.0017
+      },
+      "best_positive_within_2s": 0.0173,
+      "best_negative_within_2s": -0.0177,
+      "best_lag_s": 0.1832,
+      "within_one_hop": {
+        "correlation": 0.0138,
+        "lag_s": -0.0084
+      },
+      "within_five_hops": {
+        "correlation": 0.0153,
+        "lag_s": 0.0487
+      },
+      "best_half_second_correlation": 0.0684,
+      "half_second_starts_at_s": 1.5,
+      "query_mid_rms": 2e-05,
+      "query_side_rms": 1e-05,
+      "relation": "unrelated_sound",
+      "reviewer_label": null,
+      "blind": {
+        "a": "query",
+        "b": "reference",
+        "a_file": "clips/p15a.wav",
+        "b_file": "clips/p15b.wav"
+      },
+      "waveform_class": "unrelated",
+      "content_class": "unrelated_collision",
+      "content_note": "Score 17. Waveforms do not match. Query is outside gold."
+    },
+    {
+      "pair_id": "p16",
+      "roles": [
+        "nbc_false_cover"
+      ],
+      "query_session": "hush_20260913_210542",
+      "query_network": "NBC",
+      "query_t0": 40.0,
+      "query_t1": 45.0,
+      "published_score": 27,
+      "ref_session": "hush_20260909_213047",
+      "ref_network": "NBC",
+      "ref_pod_start": 2894.998688,
+      "ref_pod_end": 3038.8130610000003,
+      "pod_duration_s": 143.814,
+      "score": 27,
+      "n_hashes": 365,
+      "offset_frames": 124715,
+      "aligned_ref_t0": 2935.884626,
+      "position_in_pod_s": 40.886,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 0.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": "Self-drive, self-optimizing.",
+      "reference_transcript": "This is self.  Not a self drive, it's self optimizing, self healing.  It's the real deal.  Anyone's cool with this? Yeah.  Hey, are you good?  I don't know.",
+      "nominal_mono_correlation": -0.0097,
+      "channels_at_nominal": {
+        "left_left": -0.0087,
+        "right_right": -0.0108,
+        "left_right": -0.0092,
+        "right_left": -0.0099,
+        "mono_inverted": 0.0097
+      },
+      "best_positive_within_2s": 0.5695,
+      "best_negative_within_2s": -0.2104,
+      "best_lag_s": 0.0443,
+      "within_one_hop": {
+        "correlation": 0.0433,
+        "lag_s": -0.0124
+      },
+      "within_five_hops": {
+        "correlation": 0.5695,
+        "lag_s": 0.0443
+      },
+      "best_half_second_correlation": 0.9867,
+      "half_second_starts_at_s": 1.0,
+      "query_mid_rms": 0.02552,
+      "query_side_rms": 0.00134,
+      "relation": "same_sound",
+      "reviewer_label": null,
+      "blind": {
+        "a": "reference",
+        "b": "query",
+        "a_file": "clips/p16a.wav",
+        "b_file": "clips/p16b.wav"
+      },
+      "waveform_class": "partial",
+      "content_class": "shared_line_in_program",
+      "content_note": "Half-second correlation 0.99 on 'self-optimizing'. The rest of the window is not the same. Query is outside gold."
+    },
+    {
+      "pair_id": "p17",
+      "roles": [
+        "nbc_false_cover"
+      ],
+      "query_session": "hush_20260913_210542",
+      "query_network": "NBC",
+      "query_t0": 50.0,
+      "query_t1": 55.0,
+      "published_score": 25,
+      "ref_session": "hush_20260909_213047",
+      "ref_network": "NBC",
+      "ref_pod_start": 5428.523325,
+      "ref_pod_end": 5574.251005,
+      "pod_duration_s": 145.728,
+      "score": 25,
+      "n_hashes": 384,
+      "offset_frames": 235302,
+      "aligned_ref_t0": 5513.694331,
+      "position_in_pod_s": 85.171,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 0.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": "Self-drive, self-optimizing, self-optimizing.",
+      "reference_transcript": "No, so it's being paid performance and just wait till we move to self-driving  What do you think? Not just self-drive, self-optimizing, self-healing.  It's the real deal.  Anyone's cool with this?",
+      "nominal_mono_correlation": 0.0186,
+      "channels_at_nominal": {
+        "left_left": 0.0193,
+        "right_right": 0.0173,
+        "left_right": 0.0183,
+        "right_left": 0.0182,
+        "mono_inverted": -0.0186
+      },
+      "best_positive_within_2s": 0.564,
+      "best_negative_within_2s": -0.2185,
+      "best_lag_s": 0.0446,
+      "within_one_hop": {
+        "correlation": 0.0406,
+        "lag_s": -0.0121
+      },
+      "within_five_hops": {
+        "correlation": 0.564,
+        "lag_s": 0.0446
+      },
+      "best_half_second_correlation": 0.9644,
+      "half_second_starts_at_s": 2.5,
+      "query_mid_rms": 0.02778,
+      "query_side_rms": 0.00155,
+      "relation": "same_sound",
+      "reviewer_label": null,
+      "blind": {
+        "a": "query",
+        "b": "reference",
+        "a_file": "clips/p17a.wav",
+        "b_file": "clips/p17b.wav"
+      },
+      "waveform_class": "partial",
+      "content_class": "shared_line_in_program",
+      "content_note": "Same slogan, full-window correlation 0.56. Query is outside gold."
+    },
+    {
+      "pair_id": "p18",
+      "roles": [
+        "nbc_false_cover"
+      ],
+      "query_session": "hush_20260913_210542",
+      "query_network": "NBC",
+      "query_t0": 95.0,
+      "query_t1": 100.0,
+      "published_score": 103,
+      "ref_session": "hush_20260909_213047",
+      "ref_network": "NBC",
+      "ref_pod_start": 6.069733,
+      "ref_pod_end": 141.53869,
+      "pod_duration_s": 135.469,
+      "score": 103,
+      "n_hashes": 418,
+      "offset_frames": -2879,
+      "aligned_ref_t0": 28.142585,
+      "position_in_pod_s": 22.073,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 0.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": "Make this your most rewarding season ever with...",
+      "reference_transcript": "Make this your most rewarding season ever with FanDuel.",
+      "nominal_mono_correlation": 0.0566,
+      "channels_at_nominal": {
+        "left_left": 0.0463,
+        "right_right": 0.069,
+        "left_right": 0.0171,
+        "right_left": 0.059,
+        "mono_inverted": -0.0566
+      },
+      "best_positive_within_2s": 0.9563,
+      "best_negative_within_2s": -0.1848,
+      "best_lag_s": -0.0162,
+      "within_one_hop": {
+        "correlation": 0.9563,
+        "lag_s": -0.0162
+      },
+      "within_five_hops": {
+        "correlation": 0.9563,
+        "lag_s": -0.0162
+      },
+      "best_half_second_correlation": 0.9762,
+      "half_second_starts_at_s": 3.25,
+      "query_mid_rms": 0.07302,
+      "query_side_rms": 0.03589,
+      "relation": "same_sound",
+      "reviewer_label": null,
+      "blind": {
+        "a": "reference",
+        "b": "query",
+        "a_file": "clips/p18a.wav",
+        "b_file": "clips/p18b.wav"
+      },
+      "waveform_class": "copy",
+      "content_class": "promo_in_program",
+      "content_note": "FanDuel line, correlation 0.956. This hop is inside the 25.1 s interruption. Query is outside gold."
+    },
+    {
+      "pair_id": "p19",
+      "roles": [
+        "nbc_false_cover"
+      ],
+      "query_session": "hush_20260913_210542",
+      "query_network": "NBC",
+      "query_t0": 145.0,
+      "query_t1": 150.0,
+      "published_score": 59,
+      "ref_session": "hush_20260909_213047",
+      "ref_network": "NBC",
+      "ref_pod_start": 7641.664393,
+      "ref_pod_end": 7849.426667,
+      "pod_duration_s": 207.762,
+      "score": 59,
+      "n_hashes": 348,
+      "offset_frames": 331358,
+      "aligned_ref_t0": 7839.126349,
+      "position_in_pod_s": 197.462,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 5.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": "I'm lying and deceiving. I know what I heard. Are you willing to murder? I'm gonna throw it. Welcome.",
+      "reference_transcript": "the traitor's oath.  I'm just here to win the money.  Do you commit to lying and... I know what I heard.  Are you willing to murder?  I'm gonna throw that.  Welcome to the dark side.",
+      "nominal_mono_correlation": -0.1139,
+      "channels_at_nominal": {
+        "left_left": -0.0835,
+        "right_right": -0.0906,
+        "left_right": -0.0964,
+        "right_left": -0.1323,
+        "mono_inverted": 0.1139
+      },
+      "best_positive_within_2s": 0.9394,
+      "best_negative_within_2s": -0.2713,
+      "best_lag_s": 0.0315,
+      "within_one_hop": {
+        "correlation": -0.2313,
+        "lag_s": 0.0207
+      },
+      "within_five_hops": {
+        "correlation": 0.9394,
+        "lag_s": 0.0315
+      },
+      "best_half_second_correlation": 0.9743,
+      "half_second_starts_at_s": 2.75,
+      "query_mid_rms": 0.07856,
+      "query_side_rms": 0.03222,
+      "relation": "same_sound",
+      "reviewer_label": null,
+      "blind": {
+        "a": "query",
+        "b": "reference",
+        "a_file": "clips/p19a.wav",
+        "b_file": "clips/p19b.wav"
+      },
+      "waveform_class": "copy",
+      "content_class": "promo",
+      "content_note": "Traitors promo. The query window itself is inside a gold commercial."
+    },
+    {
+      "pair_id": "p20",
+      "roles": [
+        "nbc_false_cover"
+      ],
+      "query_session": "hush_20260913_210542",
+      "query_network": "NBC",
+      "query_t0": 915.0,
+      "query_t1": 920.0,
+      "published_score": 55,
+      "ref_session": "hush_20260909_213047",
+      "ref_network": "NBC",
+      "ref_pod_start": 2894.998688,
+      "ref_pod_end": 3038.8130610000003,
+      "pod_duration_s": 143.814,
+      "score": 55,
+      "n_hashes": 350,
+      "offset_frames": 90811,
+      "aligned_ref_t0": 3023.632834,
+      "position_in_pod_s": 128.634,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 3.525,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": "The Voice, September 21st on NBC and Peacock.",
+      "reference_transcript": "It got weird. 21st on NBC and TikTok.  Hey everyone, we have an on...",
+      "nominal_mono_correlation": -0.0509,
+      "channels_at_nominal": {
+        "left_left": -0.0949,
+        "right_right": -0.1775,
+        "left_right": 0.0604,
+        "right_left": 0.0635,
+        "mono_inverted": 0.0509
+      },
+      "best_positive_within_2s": 0.9193,
+      "best_negative_within_2s": -0.1565,
+      "best_lag_s": 0.0521,
+      "within_one_hop": {
+        "correlation": 0.096,
+        "lag_s": 0.0087
+      },
+      "within_five_hops": {
+        "correlation": 0.9193,
+        "lag_s": 0.0521
+      },
+      "best_half_second_correlation": 0.9726,
+      "half_second_starts_at_s": 1.25,
+      "query_mid_rms": 0.04391,
+      "query_side_rms": 0.02924,
+      "relation": "same_sound",
+      "reviewer_label": null,
+      "blind": {
+        "a": "reference",
+        "b": "query",
+        "a_file": "clips/p20a.wav",
+        "b_file": "clips/p20b.wav"
+      },
+      "waveform_class": "copy",
+      "content_class": "promo_at_pod_edge",
+      "content_note": "The Voice promo. 3.5 of the 5 query seconds are inside gold."
+    },
+    {
+      "pair_id": "p21",
+      "roles": [
+        "nbc_false_cover"
+      ],
+      "query_session": "hush_20260913_210542",
+      "query_network": "NBC",
+      "query_t0": 1105.0,
+      "query_t1": 1110.0,
+      "published_score": 53,
+      "ref_session": "hush_20260909_213047",
+      "ref_network": "NBC",
+      "ref_pod_start": 2514.3919100000003,
+      "ref_pod_end": 2647.199912,
+      "pod_duration_s": 132.808,
+      "score": 53,
+      "n_hashes": 308,
+      "offset_frames": 61207,
+      "aligned_ref_t0": 2526.214966,
+      "position_in_pod_s": 11.823,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 0.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": "satellite. These things will make possible a world in which we can be in instant contact.",
+      "reference_transcript": "through the communication satellite. These things will make possible a world in which we can be an instant contact with each other wherever we may be.",
+      "nominal_mono_correlation": 0.0163,
+      "channels_at_nominal": {
+        "left_left": -0.0004,
+        "right_right": 0.0316,
+        "left_right": 0.0099,
+        "right_left": 0.0208,
+        "mono_inverted": -0.0163
+      },
+      "best_positive_within_2s": 0.9021,
+      "best_negative_within_2s": -0.2002,
+      "best_lag_s": 0.0409,
+      "within_one_hop": {
+        "correlation": 0.1667,
+        "lag_s": 0.0185
+      },
+      "within_five_hops": {
+        "correlation": 0.9021,
+        "lag_s": 0.0409
+      },
+      "best_half_second_correlation": 0.9665,
+      "half_second_starts_at_s": 0.5,
+      "query_mid_rms": 0.06961,
+      "query_side_rms": 0.01864,
+      "relation": "same_sound",
+      "reviewer_label": null,
+      "blind": {
+        "a": "reference",
+        "b": "query",
+        "a_file": "clips/p21a.wav",
+        "b_file": "clips/p21b.wav"
+      },
+      "waveform_class": "copy",
+      "content_class": "ad_audio_in_program",
+      "content_note": "Same satellite spot, correlation 0.90. Query is outside gold."
+    },
+    {
+      "pair_id": "p22",
+      "roles": [
+        "nbc_false_cover"
+      ],
+      "query_session": "hush_20260913_210542",
+      "query_network": "NBC",
+      "query_t0": 3715.0,
+      "query_t1": 3720.0,
+      "published_score": 79,
+      "ref_session": "hush_20260909_213047",
+      "ref_network": "NBC",
+      "ref_pod_start": 1074.332477,
+      "ref_pod_end": 1255.237447,
+      "pod_duration_s": 180.905,
+      "score": 79,
+      "n_hashes": 423,
+      "offset_frames": -106398,
+      "aligned_ref_t0": 1244.450249,
+      "position_in_pod_s": 170.118,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 0.836,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": "NFL kickoff weekend is presented by NFL Sunday ticket and",
+      "reference_transcript": "on NBC.  Stream games live on your mobile device with NFL Plus. NFL kickoff weekend is presented by NFL Sunday ticket and YouTube.",
+      "nominal_mono_correlation": 0.0362,
+      "channels_at_nominal": {
+        "left_left": 0.0155,
+        "right_right": 0.0234,
+        "left_right": 0.0397,
+        "right_left": 0.0481,
+        "mono_inverted": -0.0362
+      },
+      "best_positive_within_2s": 0.9384,
+      "best_negative_within_2s": -0.1305,
+      "best_lag_s": 0.0366,
+      "within_one_hop": {
+        "correlation": -0.0824,
+        "lag_s": 0.0033
+      },
+      "within_five_hops": {
+        "correlation": 0.9384,
+        "lag_s": 0.0366
+      },
+      "best_half_second_correlation": 0.9716,
+      "half_second_starts_at_s": 2.0,
+      "query_mid_rms": 0.06221,
+      "query_side_rms": 0.02738,
+      "relation": "same_sound",
+      "reviewer_label": null,
+      "blind": {
+        "a": "reference",
+        "b": "query",
+        "a_file": "clips/p22a.wav",
+        "b_file": "clips/p22b.wav"
+      },
+      "waveform_class": "copy",
+      "content_class": "promo_at_pod_edge",
+      "content_note": "Sunday Ticket line. Under 1 query second is inside gold."
+    },
+    {
+      "pair_id": "p23",
+      "roles": [
+        "nbc_false_cover"
+      ],
+      "query_session": "hush_20260913_210542",
+      "query_network": "NBC",
+      "query_t0": 5420.0,
+      "query_t1": 5425.0,
+      "published_score": 24,
+      "ref_session": "hush_20260909_213047",
+      "ref_network": "NBC",
+      "ref_pod_start": 1608.591486,
+      "ref_pod_end": 1743.888067,
+      "pod_duration_s": 135.297,
+      "score": 24,
+      "n_hashes": 421,
+      "offset_frames": -158541,
+      "aligned_ref_t0": 1738.686984,
+      "position_in_pod_s": 130.095,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 5.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": "Just...  KGT Live, Tuesday and Wednesday on NBC and Peacock.",
+      "reference_transcript": "I think you could really win this competition.  That was just... AGT Live, Tuesday and Wednesday on NBC and Peacock.",
+      "nominal_mono_correlation": -0.1791,
+      "channels_at_nominal": {
+        "left_left": -0.2299,
+        "right_right": -0.2077,
+        "left_right": -0.0712,
+        "right_left": -0.0723,
+        "mono_inverted": 0.1791
+      },
+      "best_positive_within_2s": 0.9288,
+      "best_negative_within_2s": -0.2326,
+      "best_lag_s": 0.0074,
+      "within_one_hop": {
+        "correlation": 0.9288,
+        "lag_s": 0.0074
+      },
+      "within_five_hops": {
+        "correlation": 0.9288,
+        "lag_s": 0.0074
+      },
+      "best_half_second_correlation": 0.9641,
+      "half_second_starts_at_s": 2.5,
+      "query_mid_rms": 0.05708,
+      "query_side_rms": 0.03149,
+      "relation": "same_sound",
+      "reviewer_label": null,
+      "blind": {
+        "a": "query",
+        "b": "reference",
+        "a_file": "clips/p23a.wav",
+        "b_file": "clips/p23b.wav"
+      },
+      "waveform_class": "copy",
+      "content_class": "promo",
+      "content_note": "AGT Live promo. Both windows sit inside gold commercials."
+    },
+    {
+      "pair_id": "p24",
+      "roles": [
+        "nbc_false_cover"
+      ],
+      "query_session": "hush_20260913_210542",
+      "query_network": "NBC",
+      "query_t0": 5600.0,
+      "query_t1": 5605.0,
+      "published_score": 10,
+      "ref_session": "hush_20260909_213047",
+      "ref_network": "NBC",
+      "ref_pod_start": 2514.3919100000003,
+      "ref_pod_end": 2647.199912,
+      "pod_duration_s": 132.808,
+      "score": 10,
+      "n_hashes": 310,
+      "offset_frames": -130974,
+      "aligned_ref_t0": 2558.792562,
+      "position_in_pod_s": 44.401,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 5.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": "Meet my new co-star.",
+      "reference_transcript": "The drivel automobile is how it makes you feel. I could feel it.",
+      "nominal_mono_correlation": -0.0111,
+      "channels_at_nominal": {
+        "left_left": 0.0106,
+        "right_right": -0.0208,
+        "left_right": -0.0073,
+        "right_left": -0.0181,
+        "mono_inverted": 0.0111
+      },
+      "best_positive_within_2s": 0.2858,
+      "best_negative_within_2s": -0.1522,
+      "best_lag_s": 0.0176,
+      "within_one_hop": {
+        "correlation": 0.2858,
+        "lag_s": 0.0176
+      },
+      "within_five_hops": {
+        "correlation": 0.2858,
+        "lag_s": 0.0176
+      },
+      "best_half_second_correlation": 0.9914,
+      "half_second_starts_at_s": 1.25,
+      "query_mid_rms": 0.06219,
+      "query_side_rms": 0.02564,
+      "relation": "shared_fragment",
+      "reviewer_label": null,
+      "blind": {
+        "a": "reference",
+        "b": "query",
+        "a_file": "clips/p24a.wav",
+        "b_file": "clips/p24b.wav"
+      },
+      "waveform_class": "fragment",
+      "content_class": "uncertain",
+      "content_note": "Score 10. A half second correlates at 0.99 and the full window does not. Both are inside gold."
+    },
+    {
+      "pair_id": "p25",
+      "roles": [
+        "nbc_false_cover"
+      ],
+      "query_session": "hush_20260913_210542",
+      "query_network": "NBC",
+      "query_t0": 7250.0,
+      "query_t1": 7255.0,
+      "published_score": 16,
+      "ref_session": "hush_20260909_213047",
+      "ref_network": "NBC",
+      "ref_pod_start": 2894.998688,
+      "ref_pod_end": 3038.8130610000003,
+      "pod_duration_s": 143.814,
+      "score": 16,
+      "n_hashes": 322,
+      "offset_frames": -182785,
+      "aligned_ref_t0": 3005.730249,
+      "position_in_pod_s": 110.732,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 5.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": "It got weird.  The voice of September 21st.",
+      "reference_transcript": "It got weird. $1 a month.  I'm the queen L.A.T.I. at the age of command.  I am a f***.",
+      "nominal_mono_correlation": -0.0311,
+      "channels_at_nominal": {
+        "left_left": -0.0064,
+        "right_right": 0.0009,
+        "left_right": -0.0647,
+        "right_left": -0.0261,
+        "mono_inverted": 0.0311
+      },
+      "best_positive_within_2s": 0.7383,
+      "best_negative_within_2s": -0.2196,
+      "best_lag_s": 0.0411,
+      "within_one_hop": {
+        "correlation": 0.116,
+        "lag_s": 0.0228
+      },
+      "within_five_hops": {
+        "correlation": 0.7383,
+        "lag_s": 0.0411
+      },
+      "best_half_second_correlation": 0.9554,
+      "half_second_starts_at_s": 0.25,
+      "query_mid_rms": 0.065,
+      "query_side_rms": 0.03661,
+      "relation": "same_sound",
+      "reviewer_label": null,
+      "blind": {
+        "a": "query",
+        "b": "reference",
+        "a_file": "clips/p25a.wav",
+        "b_file": "clips/p25b.wav"
+      },
+      "waveform_class": "partial",
+      "content_class": "promo",
+      "content_note": "The Voice. Full-window correlation 0.74. Both windows sit inside gold."
+    },
+    {
+      "pair_id": "p26",
+      "roles": [
+        "nbc_false_cover"
+      ],
+      "query_session": "hush_20260913_210542",
+      "query_network": "NBC",
+      "query_t0": 7520.0,
+      "query_t1": 7525.0,
+      "published_score": 12,
+      "ref_session": "hush_20260909_213047",
+      "ref_network": "NBC",
+      "ref_pod_start": 7000.980657,
+      "ref_pod_end": 7178.243866000001,
+      "pod_duration_s": 177.263,
+      "score": 12,
+      "n_hashes": 583,
+      "offset_frames": -20033,
+      "aligned_ref_t0": 7054.825941,
+      "position_in_pod_s": 53.845,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 0.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": "Get a swag!",
+      "reference_transcript": null,
+      "nominal_mono_correlation": 0.0013,
+      "channels_at_nominal": {
+        "left_left": 0.004,
+        "right_right": -0.0025,
+        "left_right": 0.0061,
+        "right_left": -0.0036,
+        "mono_inverted": -0.0013
+      },
+      "best_positive_within_2s": 0.0191,
+      "best_negative_within_2s": -0.0201,
+      "best_lag_s": -0.0545,
+      "within_one_hop": {
+        "correlation": -0.0164,
+        "lag_s": 0.0072
+      },
+      "within_five_hops": {
+        "correlation": -0.0201,
+        "lag_s": -0.0545
+      },
+      "best_half_second_correlation": 0.0709,
+      "half_second_starts_at_s": 3.75,
+      "query_mid_rms": 0.05717,
+      "query_side_rms": 0.0394,
+      "relation": "unrelated_sound",
+      "reviewer_label": null,
+      "blind": {
+        "a": "reference",
+        "b": "query",
+        "a_file": "clips/p26a.wav",
+        "b_file": "clips/p26b.wav"
+      },
+      "waveform_class": "unrelated",
+      "content_class": "unrelated_collision",
+      "content_note": "Score 12. Waveforms do not match. Query is outside gold."
+    },
+    {
+      "pair_id": "p27",
+      "roles": [
+        "nbc_false_cover"
+      ],
+      "query_session": "hush_20260913_210542",
+      "query_network": "NBC",
+      "query_t0": 9375.0,
+      "query_t1": 9380.0,
+      "published_score": 19,
+      "ref_session": "hush_20260909_213047",
+      "ref_network": "NBC",
+      "ref_pod_start": 6074.159173,
+      "ref_pod_end": 6210.449728,
+      "pod_duration_s": 136.291,
+      "score": 19,
+      "n_hashes": 407,
+      "offset_frames": -136684,
+      "aligned_ref_t0": 6201.213968,
+      "position_in_pod_s": 127.055,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 5.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": "I don't know if it's where you are, you can get away with Marga.  Absolute carnage.",
+      "reference_transcript": "When nobody knows who you are, you can get away with Mark.  Absolutely. It's carnage.  A trade of new blood, Sept. 17 on NBC and Peacock.",
+      "nominal_mono_correlation": -0.0266,
+      "channels_at_nominal": {
+        "left_left": -0.0376,
+        "right_right": -0.0164,
+        "left_right": -0.0185,
+        "right_left": -0.0232,
+        "mono_inverted": 0.0266
+      },
+      "best_positive_within_2s": 0.9363,
+      "best_negative_within_2s": -0.1922,
+      "best_lag_s": 0.0476,
+      "within_one_hop": {
+        "correlation": 0.0884,
+        "lag_s": 0.0228
+      },
+      "within_five_hops": {
+        "correlation": 0.9363,
+        "lag_s": 0.0476
+      },
+      "best_half_second_correlation": 0.9785,
+      "half_second_starts_at_s": 0.25,
+      "query_mid_rms": 0.07826,
+      "query_side_rms": 0.02699,
+      "relation": "same_sound",
+      "reviewer_label": null,
+      "blind": {
+        "a": "query",
+        "b": "reference",
+        "a_file": "clips/p27a.wav",
+        "b_file": "clips/p27b.wav"
+      },
+      "waveform_class": "copy",
+      "content_class": "promo",
+      "content_note": "Traitors. Both windows sit inside gold commercials."
+    },
+    {
+      "pair_id": "p28",
+      "roles": [
+        "nbc_false_cover"
+      ],
+      "query_session": "hush_20260913_210542",
+      "query_network": "NBC",
+      "query_t0": 11830.0,
+      "query_t1": 11835.0,
+      "published_score": 13,
+      "ref_session": "hush_20260909_213047",
+      "ref_network": "NBC",
+      "ref_pod_start": 6074.159173,
+      "ref_pod_end": 6210.449728,
+      "pod_duration_s": 136.291,
+      "score": 13,
+      "n_hashes": 374,
+      "offset_frames": -242234,
+      "aligned_ref_t0": 6205.34712,
+      "position_in_pod_s": 131.188,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 0.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": "The traitors with blood Septimber 17th on NBC and Peacock TV shows today",
+      "reference_transcript": "It's carnage.  A trade of new blood, Sept. 17 on NBC and Peacock. As soon as we're done Chevrolet post game Maria Mike Devon and Jason Raptor.",
+      "nominal_mono_correlation": 0.0213,
+      "channels_at_nominal": {
+        "left_left": 0.0335,
+        "right_right": 0.0021,
+        "left_right": 0.0053,
+        "right_left": 0.0354,
+        "mono_inverted": -0.0213
+      },
+      "best_positive_within_2s": 0.274,
+      "best_negative_within_2s": -0.2327,
+      "best_lag_s": 0.2036,
+      "within_one_hop": {
+        "correlation": 0.084,
+        "lag_s": 0.0031
+      },
+      "within_five_hops": {
+        "correlation": 0.154,
+        "lag_s": 0.0563
+      },
+      "best_half_second_correlation": 0.5715,
+      "half_second_starts_at_s": 2.25,
+      "query_mid_rms": 0.07044,
+      "query_side_rms": 0.01976,
+      "relation": "shared_fragment",
+      "reviewer_label": null,
+      "blind": {
+        "a": "query",
+        "b": "reference",
+        "a_file": "clips/p28a.wav",
+        "b_file": "clips/p28b.wav"
+      },
+      "waveform_class": "fragment",
+      "content_class": "promo_fragment_in_program",
+      "content_note": "Shared Traitors date line. Full-window correlation 0.27. Query is outside gold."
+    },
+    {
+      "pair_id": "p29",
+      "roles": [
+        "nbc_false_cover"
+      ],
+      "query_session": "hush_20260913_210542",
+      "query_network": "NBC",
+      "query_t0": 12260.0,
+      "query_t1": 12265.0,
+      "published_score": 48,
+      "ref_session": "hush_20260909_213047",
+      "ref_network": "NBC",
+      "ref_pod_start": 3942.561515,
+      "ref_pod_end": 4075.105746,
+      "pod_duration_s": 132.544,
+      "score": 48,
+      "n_hashes": 410,
+      "offset_frames": -357826,
+      "aligned_ref_t0": 3951.293243,
+      "position_in_pod_s": 8.732,
+      "inside_reference_pod": true,
+      "query_seconds_inside_gold_commercial": 0.0,
+      "reference_seconds_inside_gold_commercial": 5.0,
+      "query_transcript": "I trust none of them.",
+      "reference_transcript": "Their goals stay undetected and murder.  I trust. None of them.  The rest of you will become.",
+      "nominal_mono_correlation": 0.0454,
+      "channels_at_nominal": {
+        "left_left": 0.0327,
+        "right_right": 0.0493,
+        "left_right": 0.0459,
+        "right_left": 0.0308,
+        "mono_inverted": -0.0454
+      },
+      "best_positive_within_2s": 0.2549,
+      "best_negative_within_2s": -0.2706,
+      "best_lag_s": 0.0586,
+      "within_one_hop": {
+        "correlation": 0.0896,
+        "lag_s": 0.0018
+      },
+      "within_five_hops": {
+        "correlation": -0.2706,
+        "lag_s": 0.0586
+      },
+      "best_half_second_correlation": -0.7523,
+      "half_second_starts_at_s": 2.25,
+      "query_mid_rms": 0.07581,
+      "query_side_rms": 0.02924,
+      "relation": "shared_fragment",
+      "reviewer_label": null,
+      "blind": {
+        "a": "reference",
+        "b": "query",
+        "a_file": "clips/p29a.wav",
+        "b_file": "clips/p29b.wav"
+      },
+      "waveform_class": "fragment",
+      "content_class": "promo_fragment_in_program",
+      "content_note": "Shared Traitors line. Full-window correlation 0.25. Query is outside gold."
+    }
+  ]
+}

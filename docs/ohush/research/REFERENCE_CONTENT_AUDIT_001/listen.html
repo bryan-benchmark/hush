@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Paired listen</title>
+  <style>
+    body { font-family: Georgia, serif; margin: 2rem; max-width: 40rem; }
+    p { line-height: 1.4; }
+    .pair { margin: 1.2rem 0 1.6rem; }
+  </style>
+</head>
+<body>
+  <p>Each pair is two five-second clips. A and B are in random order. The page does not say which side is the query.</p>
+  <div id="pairs"></div>
+  <script>
+    const root = document.getElementById("pairs");
+    for (let i = 1; i <= 29; i += 1) {
+      const id = "p" + String(i).padStart(2, "0");
+      const block = document.createElement("div");
+      block.className = "pair";
+      block.innerHTML = "<div>" + id + "</div>";
+      for (const side of ["a", "b"]) {
+        const audio = document.createElement("audio");
+        audio.controls = true;
+        audio.src = "clips/" + id + side + ".wav";
+        block.appendChild(audio);
+      }
+      root.appendChild(block);
+    }
+  </script>
+</body>
+</html>

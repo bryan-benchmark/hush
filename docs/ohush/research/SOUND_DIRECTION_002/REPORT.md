@@ -31,4 +31,4 @@ Same marked breaks, same loudness, order rotated, more than one evening. The sco
 
 The first four cells can be run with files already rendered. Personal music waits on a source the project is allowed to play, and on an explicit choice between resuming the song and starting a short piece. The fade question is separate and already has a constraint: the return stays fast enough that the missed program audio is the fade itself, about a quarter of a second, until the gate is changed.
 
-No numerical keep-rate was set. Music is the hypothesis to put next to silence, not the winner.
+No numerical keep-rate was set. Music is the hypothesis to put next to silence, not the winner. The screening for that hypothesis is `GROOVE_VARIED_001`.

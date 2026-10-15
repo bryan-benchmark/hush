@@ -9,14 +9,16 @@ Universal and Enhanced do not share an accuracy number. October recordings have 
 ## Read in this order
 
 1. `docs/ohush/swarm/SCOREBOARD.md`
-2. `docs/ohush/research/FINGERPRINT_WARM_CONTEXT_002/REPORT.md`, `NEXT_DECISION.md`, and `results.json`
-3. `docs/ohush/research/FINGERPRINT_BLOCK_001/REPORT.md` and `docs/ohush/research/BLOCK_START_CONTEXT_001/REPORT.md`
-4. `docs/ohush/research/SPRINT_90_10_001/REPORT.md` and `summary.json` and `session_comparison.csv`
-5. `docs/ohush/research/POD_REMOVAL_001/REPORT.md`
-6. `docs/ohush/research/ECAPA_BACKFILL_001/REPORT.md`
-7. `docs/ohush/research/COMBINED_CANDIDATE_001/REPORT.md`
-8. `docs/ohush/research/ACCURACY_LADDER_001/NEXT_DECISION.md`
-9. `docs/ohush/research/CUE_OPTICAL_001/REPORT.md` and `docs/ohush/research/SIGNAL_ACCESS_001/REPORT.md` for the Enhanced track only
+2. `docs/ohush/research/FINGERPRINT_CAUSAL_STREAM_001/REPORT.md`, `NEXT_DECISION.md`, `results.json`, `session_ledger.csv`, and `control_matches.csv`
+3. `docs/ohush/research/REFERENCE_CONTENT_AUDIT_001/REPORT.md`, `NEXT_DECISION.md`, `matched_pairs.csv`, and `reference_content_review.jsonl`
+4. `docs/ohush/research/FINGERPRINT_WARM_CONTEXT_002/REPORT.md`, `NEXT_DECISION.md`, and `results.json`
+5. `docs/ohush/research/FINGERPRINT_BLOCK_001/REPORT.md` and `docs/ohush/research/BLOCK_START_CONTEXT_001/REPORT.md`
+6. `docs/ohush/research/SPRINT_90_10_001/REPORT.md` and `summary.json` and `session_comparison.csv`
+7. `docs/ohush/research/POD_REMOVAL_001/REPORT.md`
+8. `docs/ohush/research/ECAPA_BACKFILL_001/REPORT.md`
+9. `docs/ohush/research/COMBINED_CANDIDATE_001/REPORT.md`
+10. `docs/ohush/research/ACCURACY_LADDER_001/NEXT_DECISION.md`
+11. `docs/ohush/research/CUE_OPTICAL_001/REPORT.md` and `docs/ohush/research/SIGNAL_ACCESS_001/REPORT.md` for the Enhanced track only
 
 The other `REPORT.md` files are the earlier closed measurements. Quote the file for every number.
 
@@ -32,7 +34,13 @@ The 13 afternoon false matches are the fingerprint reader restarting every 90 se
 
 On the full ledger, a warm query against the published cold references recovers 60.0 football program seconds and covers 5.0 more commercial seconds. Incidents go from 72 to 59. RedZone's 10.0 program seconds go to zero. Hulu on October 7 goes from 61.5 program seconds to 26.5, with commercial coverage unchanged. Count 200 stays 25.0 commercial seconds and 0 program seconds. The 25.1-second interruption is still the NBC September 13 tape. Thursday and Sunday night get worse, and that is inside the 60.0. Warming both sides recovers 76.9 program seconds and gives up 3.0 commercial seconds. That extra movement is not required for the 65-second rescue.
 
-This replay used the same recordings that exposed the defect. It is not a later capture. The two published matches at or above 200 keep their scores and correlate with the aligned reference at 0.028 and 0.001. Shifting every decision by the measured two-second lookahead makes the ledger worse. Adding these seconds to the voice-guard seconds is not a result. The next measurement is whether the reference pods themselves contain program audio. Known-ad continuation was not opened.
+This replay used the same recordings that exposed the defect. It is not a later capture. Shifting every decision by the measured two-second lookahead makes the ledger worse. Adding these seconds to the voice-guard seconds is not a result.
+
+The matches at or above 200 were then paired with the audio they point at. At the frame time the correlation is about zero. After a shift of 38 to 53 milliseconds it is 0.995 to 0.998 on Thursday and 0.975 on Monday. Thursday's four windows are one DraftKings spot. Monday is a chili-lime chip spot. One hop, 23 milliseconds, does not recover the correlation. Channel swap and polarity reversal do not either.
+
+The worst reference pod's strongest query is unrelated audio at 9809.92 seconds, correlation 0.017. Other queries on the high-damage pods are real creatives, correlations above 0.93. The 25.1-second interruption is the FanDuel promo, correlation 0.956, on a query the gold calls program. The pods were not deleted. Known-ad continuation was not opened. The listening clips are not in this zip.
+
+The causal clock was then run, in `FINGERPRINT_CAUSAL_STREAM_001`. Carrying the resampler and the peak state makes the same audio produce the same hashes in 7-, 45-, 90-, and 180-second pieces: 556,154 hashes, no holes, on the afternoon tape. The backward peak pass was still changing interior hashes at 8 seconds of later audio, so the first gate fails. The ledger at that window is not the published reader shifted later. Football count 10 covers 5,557.6 program seconds and 959 incidents. Count 200 covers 2.6 program seconds, on ESPN. The Thursday match stays on the same pod at 289. The Monday match stays on the same pod and falls from 208 to 35. This read's football holes are 155.0 seconds, not the published 275.0, so do not treat its commercial total as a gain. The warm replay's 280.0 against 275.0 is the same kind of hole mismatch. No new recording was made. The 25.1-second interruption stays on the published reader.
 
 CUE-OPTICAL-001 is opened and unscored. One Google DAI playlist shows a 30-second cue. Nothing played that session through a television.
 

@@ -1,0 +1,118 @@
+{
+  "horizon": {
+    "candidates": [
+      {
+        "horizon": 43,
+        "against": 86,
+        "same": false,
+        "left": 17734,
+        "right": 17612
+      },
+      {
+        "horizon": 86,
+        "against": 129,
+        "same": false,
+        "left": 17507,
+        "right": 17443
+      },
+      {
+        "horizon": 129,
+        "against": 172,
+        "same": false,
+        "left": 17379,
+        "right": 17308
+      },
+      {
+        "horizon": 172,
+        "against": 258,
+        "same": false,
+        "left": 17137,
+        "right": 17031
+      },
+      {
+        "horizon": 258,
+        "against": 344,
+        "same": false,
+        "left": 16841,
+        "right": 16619
+      }
+    ],
+    "frozen_horizon_frames": 344,
+    "settled": false,
+    "slice_s": 180.0
+  },
+  "equivalence": {
+    "session": "hush_20261011_135700",
+    "horizon_frames": 344,
+    "chunk_stable": true,
+    "comparisons": {
+      "chunk_45s": {
+        "same_finalized_hashes": true,
+        "same_ready_samples": true,
+        "base_hashes": 556154,
+        "other_hashes": 556154,
+        "only_base": 0,
+        "only_other": 0,
+        "holes": [],
+        "same_self_match_scores": true
+      },
+      "chunk_90s": {
+        "same_finalized_hashes": true,
+        "same_ready_samples": true,
+        "base_hashes": 556154,
+        "other_hashes": 556154,
+        "only_base": 0,
+        "only_other": 0,
+        "holes": [],
+        "same_self_match_scores": true
+      },
+      "chunk_180s": {
+        "same_finalized_hashes": true,
+        "same_ready_samples": true,
+        "base_hashes": 556154,
+        "other_hashes": 556154,
+        "only_base": 0,
+        "only_other": 0,
+        "holes": [],
+        "same_self_match_scores": true
+      }
+    },
+    "continuous_holes": []
+  },
+  "baselines": {
+    "decisions_sha256": "08b1b8d9a56c33681b493dff1d3337951ac9a51b812c83d2e6009afdefb86713",
+    "gold_sha256": {
+      "GOLD_DATASET_20261013.json": "4944a8559e933593d74e20162d3bc695eff2c632370c004c042976ae9ab1b725",
+      "GOLD_DEV_V1.json": "32edca84443477a151c31e8be671660a7b1dd18ef015ba3d5f9241f6d364ac6e",
+      "GOLD_REPLICATION_V1.json": "b36b6c1b7550696c7ddf3c5308901f00f289c1659eed1f3d4554db6c131ed3f0"
+    },
+    "holes_s_published": 275.0,
+    "holes_s_warm_replay": {
+      "cold": 275.0,
+      "warm": 280.0
+    },
+    "count_10_football": {
+      "commercial_covered_s": 3903.2,
+      "program_s": 432.1,
+      "incidents": 72
+    },
+    "count_200_football_commercial_covered_s": 25.0,
+    "controls": {
+      "prime_145": {
+        "score": 272,
+        "ref_session": "hush_20260924_220624",
+        "ref_start": 234.244
+      },
+      "monday_5085": {
+        "score": 208,
+        "ref_session": "hush_20260914_212529",
+        "ref_start": 6852.564
+      }
+    },
+    "gate_session_coverage": [
+      0,
+      4896.768
+    ],
+    "warm_hole_note": "The warm replay's extra 5.0 s is a read hole, not an advertisement gained at count 200."
+  }
+}
