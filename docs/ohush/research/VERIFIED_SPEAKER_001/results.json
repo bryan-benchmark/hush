@@ -1,0 +1,684 @@
+{
+  "system": "verified_speaker_001",
+  "mute_policy": false,
+  "match_cosine": 0.25,
+  "minimum_overlap_s": 1.0,
+  "threshold_fit": false,
+  "holdouts_opened": false,
+  "booth_files_read": false,
+  "redzone_session": "hush_20260913_150934",
+  "redzone_gold_commercials": 0,
+  "redzone_note": "Zero gold commercials describe this recording only. They do not say every RedZone broadcast is ad-free.",
+  "people": [
+    {
+      "name": "Al Michaels",
+      "sessions": [
+        "hush_20260924_220624"
+      ],
+      "clips": [
+        "v002"
+      ],
+      "windows": 7,
+      "labeled_seconds": 8.0,
+      "leave_one_clip": {
+        "available": false,
+        "reason": "one labeled clip",
+        "clips": 1,
+        "per_clip": []
+      },
+      "other_named_announcers": {
+        "n": 42,
+        "at_or_above_line": 2,
+        "rate": 0.047619047619047616,
+        "median": 0.04407128319144249,
+        "minimum": -0.14122852683067322
+      },
+      "other_program_voices": {
+        "n": 80,
+        "at_or_above_line": 5,
+        "rate": 0.0625,
+        "median": 0.007835814729332924,
+        "minimum": -0.15847638249397278
+      },
+      "labeled_ads": {
+        "n": 124,
+        "at_or_above_line": 2,
+        "rate": 0.016129032258064516,
+        "median": 0.011999223381280899,
+        "minimum": -0.12100722640752792
+      },
+      "labeled_promos": {
+        "n": 18,
+        "at_or_above_line": 0,
+        "rate": 0.0,
+        "median": 0.0651884414255619,
+        "minimum": -0.005589360371232033
+      },
+      "labeled_nonspeech": {
+        "n": 0,
+        "at_or_above_line": 0,
+        "rate": null,
+        "median": null,
+        "minimum": null
+      },
+      "gold_commercial_windows": {
+        "n": 5496,
+        "at_or_above_line": 59,
+        "rate": 0.010735080058224163,
+        "median": 0.016778158955276012,
+        "minimum": -0.274147093296051
+      }
+    },
+    {
+      "name": "Cris Collinsworth",
+      "sessions": [
+        "hush_20260909_213047",
+        "hush_20260913_210542"
+      ],
+      "clips": [
+        "v006",
+        "v009"
+      ],
+      "windows": 6,
+      "labeled_seconds": 6.45,
+      "leave_one_clip": {
+        "available": true,
+        "clips": 2,
+        "per_clip": [
+          {
+            "clip_id": "v009",
+            "session": "hush_20260909_213047",
+            "n": 1,
+            "at_or_above_line": 1,
+            "rate": 1.0,
+            "median": 0.43739771842956543,
+            "minimum": 0.43739771842956543
+          },
+          {
+            "clip_id": "v006",
+            "session": "hush_20260913_210542",
+            "n": 5,
+            "at_or_above_line": 4,
+            "rate": 0.8,
+            "median": 0.3305194675922394,
+            "minimum": 0.24107594788074493
+          }
+        ],
+        "n": 6,
+        "at_or_above_line": 5,
+        "rate": 0.8333333333333334,
+        "median": 0.37025994062423706,
+        "minimum": 0.24107594788074493
+      },
+      "other_named_announcers": {
+        "n": 43,
+        "at_or_above_line": 1,
+        "rate": 0.023255813953488372,
+        "median": 0.06825192272663116,
+        "minimum": -0.026857204735279083
+      },
+      "other_program_voices": {
+        "n": 80,
+        "at_or_above_line": 1,
+        "rate": 0.0125,
+        "median": 0.038300707936286926,
+        "minimum": -0.12133557349443436
+      },
+      "labeled_ads": {
+        "n": 124,
+        "at_or_above_line": 1,
+        "rate": 0.008064516129032258,
+        "median": 0.03445194475352764,
+        "minimum": -0.15688911080360413
+      },
+      "labeled_promos": {
+        "n": 18,
+        "at_or_above_line": 0,
+        "rate": 0.0,
+        "median": -0.042128557339310646,
+        "minimum": -0.10434157401323318
+      },
+      "labeled_nonspeech": {
+        "n": 0,
+        "at_or_above_line": 0,
+        "rate": null,
+        "median": null,
+        "minimum": null
+      },
+      "gold_commercial_windows": {
+        "n": 5496,
+        "at_or_above_line": 35,
+        "rate": 0.006368267831149927,
+        "median": 0.02557254396378994,
+        "minimum": -0.3203216791152954
+      }
+    },
+    {
+      "name": "Joe Buck",
+      "sessions": [
+        "hush_20260914_212529"
+      ],
+      "clips": [
+        "v005",
+        "v024"
+      ],
+      "windows": 5,
+      "labeled_seconds": 6.44,
+      "leave_one_clip": {
+        "available": true,
+        "clips": 2,
+        "per_clip": [
+          {
+            "clip_id": "v005",
+            "session": "hush_20260914_212529",
+            "n": 3,
+            "at_or_above_line": 3,
+            "rate": 1.0,
+            "median": 0.3554210066795349,
+            "minimum": 0.34874945878982544
+          },
+          {
+            "clip_id": "v024",
+            "session": "hush_20260914_212529",
+            "n": 2,
+            "at_or_above_line": 2,
+            "rate": 1.0,
+            "median": 0.3811015486717224,
+            "minimum": 0.3169148564338684
+          }
+        ],
+        "n": 5,
+        "at_or_above_line": 5,
+        "rate": 1.0,
+        "median": 0.3554210066795349,
+        "minimum": 0.3169148564338684
+      },
+      "other_named_announcers": {
+        "n": 44,
+        "at_or_above_line": 22,
+        "rate": 0.5,
+        "median": 0.24858710169792175,
+        "minimum": 0.01681503839790821
+      },
+      "other_program_voices": {
+        "n": 80,
+        "at_or_above_line": 12,
+        "rate": 0.15,
+        "median": 0.09402775764465332,
+        "minimum": -0.1261887550354004
+      },
+      "labeled_ads": {
+        "n": 124,
+        "at_or_above_line": 0,
+        "rate": 0.0,
+        "median": 0.029499052092432976,
+        "minimum": -0.10830921679735184
+      },
+      "labeled_promos": {
+        "n": 18,
+        "at_or_above_line": 0,
+        "rate": 0.0,
+        "median": 0.036977147683501244,
+        "minimum": -0.10412796586751938
+      },
+      "labeled_nonspeech": {
+        "n": 0,
+        "at_or_above_line": 0,
+        "rate": null,
+        "median": null,
+        "minimum": null
+      },
+      "gold_commercial_windows": {
+        "n": 5496,
+        "at_or_above_line": 51,
+        "rate": 0.009279475982532752,
+        "median": 0.018553906120359898,
+        "minimum": -0.22934715449810028
+      }
+    },
+    {
+      "name": "Mike Tirico",
+      "sessions": [
+        "hush_20260909_213047",
+        "hush_20260913_210542"
+      ],
+      "clips": [
+        "v004",
+        "v006",
+        "v008",
+        "v009"
+      ],
+      "windows": 14,
+      "labeled_seconds": 17.01,
+      "leave_one_clip": {
+        "available": true,
+        "clips": 4,
+        "per_clip": [
+          {
+            "clip_id": "v008",
+            "session": "hush_20260909_213047",
+            "n": 3,
+            "at_or_above_line": 3,
+            "rate": 1.0,
+            "median": 0.6543819904327393,
+            "minimum": 0.5692555904388428
+          },
+          {
+            "clip_id": "v009",
+            "session": "hush_20260909_213047",
+            "n": 3,
+            "at_or_above_line": 2,
+            "rate": 0.6666666666666666,
+            "median": 0.43498820066452026,
+            "minimum": 0.19834910333156586
+          },
+          {
+            "clip_id": "v006",
+            "session": "hush_20260913_210542",
+            "n": 2,
+            "at_or_above_line": 2,
+            "rate": 1.0,
+            "median": 0.6032019853591919,
+            "minimum": 0.5847989320755005
+          },
+          {
+            "clip_id": "v004",
+            "session": "hush_20260913_210542",
+            "n": 6,
+            "at_or_above_line": 6,
+            "rate": 1.0,
+            "median": 0.5945935249328613,
+            "minimum": 0.5302265882492065
+          }
+        ],
+        "n": 14,
+        "at_or_above_line": 13,
+        "rate": 0.9285714285714286,
+        "median": 0.5776760578155518,
+        "minimum": 0.19834910333156586
+      },
+      "other_named_announcers": {
+        "n": 35,
+        "at_or_above_line": 12,
+        "rate": 0.34285714285714286,
+        "median": 0.17696985602378845,
+        "minimum": -0.034325357526540756
+      },
+      "other_program_voices": {
+        "n": 80,
+        "at_or_above_line": 9,
+        "rate": 0.1125,
+        "median": 0.07746942341327667,
+        "minimum": -0.19173333048820496
+      },
+      "labeled_ads": {
+        "n": 124,
+        "at_or_above_line": 0,
+        "rate": 0.0,
+        "median": 0.0697672888636589,
+        "minimum": -0.22223545610904694
+      },
+      "labeled_promos": {
+        "n": 18,
+        "at_or_above_line": 1,
+        "rate": 0.05555555555555555,
+        "median": 0.17105736583471298,
+        "minimum": 0.042178377509117126
+      },
+      "labeled_nonspeech": {
+        "n": 0,
+        "at_or_above_line": 0,
+        "rate": null,
+        "median": null,
+        "minimum": null
+      },
+      "gold_commercial_windows": {
+        "n": 5496,
+        "at_or_above_line": 101,
+        "rate": 0.018377001455604076,
+        "median": 0.025227234698832035,
+        "minimum": -0.284717857837677
+      }
+    },
+    {
+      "name": "Scott Hanson",
+      "sessions": [
+        "hush_20260913_150934"
+      ],
+      "clips": [
+        "v007",
+        "v023"
+      ],
+      "windows": 15,
+      "labeled_seconds": 16.0,
+      "leave_one_clip": {
+        "available": true,
+        "clips": 2,
+        "per_clip": [
+          {
+            "clip_id": "v023",
+            "session": "hush_20260913_150934",
+            "n": 6,
+            "at_or_above_line": 6,
+            "rate": 1.0,
+            "median": 0.448397159576416,
+            "minimum": 0.25463035702705383
+          },
+          {
+            "clip_id": "v007",
+            "session": "hush_20260913_150934",
+            "n": 9,
+            "at_or_above_line": 9,
+            "rate": 1.0,
+            "median": 0.47765854001045227,
+            "minimum": 0.3372698128223419
+          }
+        ],
+        "n": 15,
+        "at_or_above_line": 15,
+        "rate": 1.0,
+        "median": 0.47765854001045227,
+        "minimum": 0.25463035702705383
+      },
+      "other_named_announcers": {
+        "n": 34,
+        "at_or_above_line": 4,
+        "rate": 0.11764705882352941,
+        "median": 0.17419905960559845,
+        "minimum": -0.08620978146791458
+      },
+      "other_program_voices": {
+        "n": 80,
+        "at_or_above_line": 10,
+        "rate": 0.125,
+        "median": 0.12124794721603394,
+        "minimum": -0.12779805064201355
+      },
+      "labeled_ads": {
+        "n": 124,
+        "at_or_above_line": 6,
+        "rate": 0.04838709677419355,
+        "median": 0.05434797890484333,
+        "minimum": -0.1728035807609558
+      },
+      "labeled_promos": {
+        "n": 18,
+        "at_or_above_line": 1,
+        "rate": 0.05555555555555555,
+        "median": 0.07351135462522507,
+        "minimum": -0.04122854024171829
+      },
+      "labeled_nonspeech": {
+        "n": 0,
+        "at_or_above_line": 0,
+        "rate": null,
+        "median": null,
+        "minimum": null
+      },
+      "gold_commercial_windows": {
+        "n": 5496,
+        "at_or_above_line": 187,
+        "rate": 0.034024745269286755,
+        "median": 0.030810877680778503,
+        "minimum": -0.25423502922058105
+      }
+    },
+    {
+      "name": "Troy Aikman",
+      "sessions": [
+        "hush_20260914_212529"
+      ],
+      "clips": [
+        "v005"
+      ],
+      "windows": 2,
+      "labeled_seconds": 1.3,
+      "leave_one_clip": {
+        "available": false,
+        "reason": "one labeled clip",
+        "clips": 1,
+        "per_clip": []
+      },
+      "other_named_announcers": {
+        "n": 47,
+        "at_or_above_line": 13,
+        "rate": 0.2765957446808511,
+        "median": 0.18031293153762817,
+        "minimum": -0.07127305865287781
+      },
+      "other_program_voices": {
+        "n": 80,
+        "at_or_above_line": 10,
+        "rate": 0.125,
+        "median": 0.12389534711837769,
+        "minimum": -0.09916162490844727
+      },
+      "labeled_ads": {
+        "n": 124,
+        "at_or_above_line": 1,
+        "rate": 0.008064516129032258,
+        "median": 0.020628679543733597,
+        "minimum": -0.11281748861074448
+      },
+      "labeled_promos": {
+        "n": 18,
+        "at_or_above_line": 0,
+        "rate": 0.0,
+        "median": 0.0317185390740633,
+        "minimum": -0.14858630299568176
+      },
+      "labeled_nonspeech": {
+        "n": 0,
+        "at_or_above_line": 0,
+        "rate": null,
+        "median": null,
+        "minimum": null
+      },
+      "gold_commercial_windows": {
+        "n": 5496,
+        "at_or_above_line": 55,
+        "rate": 0.010007278020378457,
+        "median": 0.01884610392153263,
+        "minimum": -0.25839942693710327
+      }
+    }
+  ],
+  "hanson_second_example_from_first": {
+    "n": 9,
+    "at_or_above_line": 9,
+    "rate": 1.0,
+    "median": 0.47765854001045227,
+    "minimum": 0.3372698128223419
+  },
+  "hanson_after_first_example": {
+    "n": 2934,
+    "at_or_above_line": 1489,
+    "rate": 0.5074982958418541,
+    "median": 0.2548328638076782,
+    "minimum": -0.19706574082374573
+  },
+  "hanson_after_first_example_runs": {
+    "first_available_s": 2340.7,
+    "n_runs": 367,
+    "covered_s": 1745.0999999999954,
+    "median_gap_s": 2.699999999999818,
+    "longest_gap_s": 71.39999999999964,
+    "gaps_over_30s": 27,
+    "gaps_over_60s": 5
+  },
+  "hanson_first_example_ends_s": 2338.0,
+  "hanson_mistakes_at_published_line": [
+    {
+      "cosine": 0.306,
+      "kind": "announcer",
+      "who": "mike tirico",
+      "clip_id": "v009",
+      "session": "hush_20260909_213047"
+    },
+    {
+      "cosine": 0.269,
+      "kind": "other_voice",
+      "who": "broadcaster - nfl on fox - not sure who, play by play",
+      "clip_id": "v018",
+      "session": "hush_20260913_150934"
+    },
+    {
+      "cosine": 0.258,
+      "kind": "other_voice",
+      "who": "nfl color commentator unknown",
+      "clip_id": "v022",
+      "session": "hush_20260913_150934"
+    },
+    {
+      "cosine": 0.264,
+      "kind": "other_voice",
+      "who": "whoever did color commentary for lions game on 9/13",
+      "clip_id": "v012",
+      "session": "hush_20260913_150934"
+    },
+    {
+      "cosine": 0.282,
+      "kind": "other_voice",
+      "who": "whoever did color commentary for lions game on 9/13",
+      "clip_id": "v012",
+      "session": "hush_20260913_150934"
+    },
+    {
+      "cosine": 0.281,
+      "kind": "other_voice",
+      "who": "lions play by play broadcaster for this game on 9/13",
+      "clip_id": "v019",
+      "session": "hush_20260913_150934"
+    },
+    {
+      "cosine": 0.348,
+      "kind": "other_voice",
+      "who": "lions play by play broadcaster for this game on 9/13",
+      "clip_id": "v019",
+      "session": "hush_20260913_150934"
+    },
+    {
+      "cosine": 0.308,
+      "kind": "other_voice",
+      "who": "lions play by play broadcaster for this game on 9/13",
+      "clip_id": "v019",
+      "session": "hush_20260913_150934"
+    },
+    {
+      "cosine": 0.264,
+      "kind": "ad",
+      "who": "subway ad",
+      "clip_id": "v044",
+      "session": "hush_20260913_210542"
+    },
+    {
+      "cosine": 0.272,
+      "kind": "ad",
+      "who": "subway ad",
+      "clip_id": "v044",
+      "session": "hush_20260913_210542"
+    },
+    {
+      "cosine": 0.351,
+      "kind": "ad",
+      "who": "honda civic commercial",
+      "clip_id": "v029",
+      "session": "hush_20260913_210542"
+    },
+    {
+      "cosine": 0.291,
+      "kind": "ad",
+      "who": "honda civic commercial",
+      "clip_id": "v029",
+      "session": "hush_20260913_210542"
+    },
+    {
+      "cosine": 0.252,
+      "kind": "ad",
+      "who": "honda civic commercial",
+      "clip_id": "v029",
+      "session": "hush_20260913_210542"
+    },
+    {
+      "cosine": 0.426,
+      "kind": "announcer",
+      "who": "mike tirico",
+      "clip_id": "v004",
+      "session": "hush_20260913_210542"
+    },
+    {
+      "cosine": 0.282,
+      "kind": "promo",
+      "who": "outro TNF talking about upcoming game on MNF - gray area if users want ot hear it",
+      "clip_id": "v030",
+      "session": "hush_20260913_210542"
+    },
+    {
+      "cosine": 0.272,
+      "kind": "other_voice",
+      "who": "mike tirico saying chevrolet postgame is coming up",
+      "clip_id": "v035",
+      "session": "hush_20260913_210542"
+    },
+    {
+      "cosine": 0.317,
+      "kind": "ad",
+      "who": "vyper chair ad",
+      "clip_id": "v036",
+      "session": "hush_20260914_212529"
+    },
+    {
+      "cosine": 0.317,
+      "kind": "announcer",
+      "who": "broadaster Joe Buck - excited, TD just scored",
+      "clip_id": "v024",
+      "session": "hush_20260914_212529"
+    },
+    {
+      "cosine": 0.402,
+      "kind": "announcer",
+      "who": "broadaster Joe Buck - excited, TD just scored",
+      "clip_id": "v024",
+      "session": "hush_20260914_212529"
+    },
+    {
+      "cosine": 0.261,
+      "kind": "other_voice",
+      "who": "troy aikman laughing, joe buck speaking same time,",
+      "clip_id": "v010",
+      "session": "hush_20260914_212529"
+    },
+    {
+      "cosine": 0.254,
+      "kind": "other_voice",
+      "who": "TNF Broadcaster Andrew Whitworth",
+      "clip_id": "v020",
+      "session": "hush_20260924_220624"
+    }
+  ],
+  "hanson_rest_of_redzone": {
+    "n": 4190,
+    "at_or_above_line": 2422,
+    "rate": 0.5780429594272076,
+    "median": 0.29715436697006226,
+    "minimum": -0.13675355911254883
+  },
+  "hanson_identity_including_examples": {
+    "first_available_s": 4.4,
+    "n_runs": 648,
+    "covered_s": 2869.5999999999935,
+    "median_gap_s": 2.5,
+    "longest_gap_s": 239.9000000000001,
+    "gaps_over_30s": 21,
+    "gaps_over_60s": 4
+  },
+  "hanson_identity_outside_examples": {
+    "first_available_s": 4.4,
+    "n_runs": 646,
+    "covered_s": 2853.699999999994,
+    "median_gap_s": 2.549999999999727,
+    "longest_gap_s": 239.9000000000001,
+    "gaps_over_30s": 21,
+    "gaps_over_60s": 4
+  }
+}

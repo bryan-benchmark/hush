@@ -1,0 +1,9 @@
+{
+  "git_head_local": "18c7179cfd0df1e4776f0d5b3bc25c30d25e8cff",
+  "github_main_seen_by_handoff": "18c7179cfd0df1e4776f0d5b3bc25c30d25e8cff",
+  "names_jsonl_sha256": "944e747a79a767c873401f88b0ab94c6da58527368fb0fbc2b171e80c862cefb",
+  "verified_jsonl_sha256": "22fc83f33ead1c3c2cc299b267cbd4240591969ba317eb81df50b8fdf1e9e008",
+  "decisions_jsonl_sha256": "08b1b8d9a56c33681b493dff1d3337951ac9a51b812c83d2e6009afdefb86713",
+  "holdouts_opened": false,
+  "annotations_rewritten": false
+}

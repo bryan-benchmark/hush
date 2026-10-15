@@ -1,0 +1,18 @@
+{
+  "git_head": "18c7179cfd0df1e4776f0d5b3bc25c30d25e8cff",
+  "decisions_sha256": "08b1b8d9a56c33681b493dff1d3337951ac9a51b812c83d2e6009afdefb86713",
+  "receipts_sha256": "73642c9488b46e0c7d73906fe405ca14a7c092858f9a91f68531d602695ccf30",
+  "receipts_bytes": 9690408,
+  "receipts_are_count": 200,
+  "ablation_count": 10,
+  "voice_line": 0.25,
+  "voice_line_fit": false,
+  "match_offset_saved": false,
+  "holdouts_opened": false,
+  "gold_edited": false,
+  "playback": "PLAY",
+  "clock": "recording seconds; a cover starts at available_at, which is the end of the 5-second query",
+  "holes": "Football incident total reproduced at 432.1 seconds and 72 incidents without subtracting read holes, so those holes do not sit inside the false program intervals.",
+  "top5_share": 0.5,
+  "missing_embedding_s": 273.0
+}

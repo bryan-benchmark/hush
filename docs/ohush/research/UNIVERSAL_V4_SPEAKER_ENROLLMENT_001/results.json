@@ -1,12 +1,77 @@
 {
   "system": "universal_v4_speaker_enrollment",
-  "verdict": "NOT_MEASURED",
+  "verdict": "EVIDENCE_ONLY",
   "mute_policy": false,
-  "verified_enrollments": 0,
+  "source": "docs/ohush/research/VOICE_ROSTER_001/names.jsonl",
+  "latest_clips": 45,
+  "named_person_spans": 29,
+  "named_people": [
+    {
+      "name": "Al Michaels",
+      "spans": 1
+    },
+    {
+      "name": "Andrew Whitworth",
+      "spans": 1
+    },
+    {
+      "name": "Bijan Robinson",
+      "spans": 1
+    },
+    {
+      "name": "Clarissa Thompson",
+      "spans": 3
+    },
+    {
+      "name": "Cris Collinsworth",
+      "spans": 2
+    },
+    {
+      "name": "Joe Buck",
+      "spans": 4
+    },
+    {
+      "name": "Maria Taylor",
+      "spans": 1
+    },
+    {
+      "name": "Mike Tirico",
+      "spans": 7
+    },
+    {
+      "name": "Mike Tomlin",
+      "spans": 2
+    },
+    {
+      "name": "Richard Shermann",
+      "spans": 1
+    },
+    {
+      "name": "Ryan Fitzpatrick",
+      "spans": 1
+    },
+    {
+      "name": "Scott Hanson",
+      "spans": 2
+    },
+    {
+      "name": "Steve Harvey",
+      "spans": 1
+    },
+    {
+      "name": "Troy Aikman",
+      "spans": 2
+    }
+  ],
+  "unidentified_spans": 14,
+  "not_person_spans": 50,
+  "append_log_rows": 274,
+  "append_log_note": "verified.jsonl keeps every save. It is not the enrollment count.",
   "refused_as_enrollment": [
     ".booth.json",
     "cluster ids",
     "booth_present"
   ],
-  "booth_files_read": false
+  "booth_files_read": false,
+  "measurement": "docs/ohush/research/VERIFIED_SPEAKER_001/REPORT.md"
 }

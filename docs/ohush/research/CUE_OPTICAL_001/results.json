@@ -1,0 +1,23 @@
+{
+  "system": "cue_optical_001",
+  "track": "enhanced",
+  "mute_authorization": false,
+  "playback": "PLAY",
+  "paired_capture": false,
+  "source_receipt": "docs/ohush/research/SIGNAL_ACCESS_001/dai_sample_receipt.json",
+  "acceptance_frozen_before_scoring": {
+    "false_program_seconds": 0,
+    "false_slate_seconds": 0,
+    "return_error_s_max": 1.0,
+    "start_latency_reported_separately": true,
+    "any_commercial_seconds_reported": true,
+    "meeting_the_bar_authorizes_a_mute": false
+  },
+  "questions": {
+    "1_same_manifest_as_the_player": "not_met",
+    "2_cue_lines_up_with_optical_audio": "not_measured",
+    "3_cue_available_before_the_audio": "playlist_clock_only",
+    "4_ads_distinguished_from_slates": "metadata_only",
+    "5_seconds_improved": "not_measured"
+  }
+}

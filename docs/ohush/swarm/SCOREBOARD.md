@@ -27,12 +27,15 @@ User-visible seconds are from `docs/ohush/research/ACCURACY_NORTH_STAR_001/` unl
 | handoff-full-stream | 2026-10-14 | Universal | Strong phrases on the full sports stream. Spoken time and recognizer time kept apart | Not a policy | 12 of 136 pods have the words in the 30 s before the start. The recognizer knew 3 of those before the start. Same phrases also occur in ads and on RedZone |
 | universal-v4-sequence | 2026-10-14 | Universal | Separate departure and return heads. Multiscale features. Thresholds on the two earlier games | FAIL | No feature set covered any commercial audio inside 10 program seconds on calibration. October: 0 new commercial seconds, 25.0 s of v1 coverage lost. Not a mute |
 | speaker-enrollment | 2026-10-14 | Universal | Human-verified program speakers | Not measured | 0 verified enrollments. Booth files, cluster ids, and booth_present were not read |
+| voice-identity-001 | 2026-10-15 | Broadcast identity | Named voices at the published ECAPA cosine of 0.25 | The two Hanson examples match each other, 15/15 held-out windows. The same line also matches other announcers, other RedZone booths, and a few ads | Not a mute. 14 people and 29 named spans are in the voice roster. The October 14 zero was the unread counter |
+| voice-guard-001 | 2026-10-15 | Broadcast identity | Count 10 covers, forced back to play when a named voice matches at 0.25 | 27.5 of 432.1 false program seconds given back; 88.9 of 3,903.2 commercial seconds also given back | Not a live rule. 273.0 of the false program seconds have no speaker embeddings |
 
 ## Enhanced
 
 | ID | Date | Status | Accuracy |
 | --- | --- | --- | --- |
 | enhanced-v1 | 2026-10-14 | Not measured. No feed, schedule, or device metadata was authorized or aligned | none |
+| cue-optical-001 | 2026-10-15 | Opened. Google DAI playlist cues exist for one session. No optical recording was paired with that session | none |
 
 ## How to read the champion
 

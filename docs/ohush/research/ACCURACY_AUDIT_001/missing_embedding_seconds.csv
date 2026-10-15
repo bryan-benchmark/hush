@@ -1,0 +1,11 @@
+session,network,in_football_432,false_program_s,embedding_parquet,recording_present,root_cause
+hush_20260909_213047,NBC,True,0,True,True,embeddings present
+hush_20260913_150934,FOX,False,10.0,True,True,embeddings present
+hush_20260913_210542,NBC,True,122.769,True,True,embeddings present
+hush_20260914_212529,ESPN,True,16.598,True,True,embeddings present
+hush_20260924_220624,Prime,True,19.737,True,True,embeddings present
+hush_20261008_205100,Prime Video,True,57.241,False,True,Exp002 speaker pass was not run; recording is a separate question
+hush_20261010_222400,Cable / antenna,True,57.641,False,True,Exp002 speaker pass was not run; recording is a separate question
+hush_20261011_135700,Cable / antenna,True,79.552,False,True,Exp002 speaker pass was not run; recording is a separate question
+hush_20261011_204300,Cable / antenna,True,20.0,False,True,Exp002 speaker pass was not run; recording is a separate question
+hush_20261012_204200,Cable / antenna,True,58.625,False,True,Exp002 speaker pass was not run; recording is a separate question

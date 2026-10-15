@@ -1,0 +1,27 @@
+{
+  "denominator": {
+    "scorable_football_commercial_s": 17555.7,
+    "football_program_seconds_published_18_73h": 67428,
+    "note": "18.73 hours times 3600 is 67428. The scorable program total used with read holes removed is 67560.4 in the v2 gate."
+  },
+  "universal_v1": {
+    "commercial_muted_s": 25.0,
+    "program_false_s": 0.0,
+    "incidents": 0,
+    "redzone_program_false_s": 0.0
+  },
+  "count_10": {
+    "commercial_muted_s": 3903.2,
+    "program_false_s": 432.1,
+    "incidents": 72,
+    "redzone_program_false_s": 10.0
+  },
+  "count_10_plus_voice_guard": {
+    "commercial_muted_s": 3814.306,
+    "program_false_s": 404.594,
+    "incidents": null,
+    "incidents_note": "The guard report did not republish the incident count. This audit does not invent one.",
+    "redzone_program_false_s": 0.0,
+    "redzone_note": "The 10.0 RedZone seconds were forced to play by a Mike Tirico match, not by Scott Hanson."
+  }
+}

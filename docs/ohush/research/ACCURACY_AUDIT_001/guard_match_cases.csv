@@ -1,0 +1,74 @@
+session,network,name,start,end,cosine,program_seconds,ad_seconds,enrolled_on,relation,gold
+hush_20260913_150934,FOX,Mike Tirico,1102.1,1318.4,0.342,10.0,0.0,"['hush_20260909_213047', 'hush_20260913_210542']",other_recording,program
+hush_20260913_210542,NBC,Cris Collinsworth,100.5,100.7,0.284,0.0,0.2,"['hush_20260909_213047', 'hush_20260913_210542']",same_recording,ad
+hush_20260913_210542,NBC,Cris Collinsworth,158.0,159.0,0.541,1.0,0.0,"['hush_20260909_213047', 'hush_20260913_210542']",same_recording,program
+hush_20260913_210542,NBC,Cris Collinsworth,159.0,160.0,0.514,1.0,0.0,"['hush_20260909_213047', 'hush_20260913_210542']",same_recording,program
+hush_20260913_210542,NBC,Mike Tirico,3722.3,3723.3,0.301,1.0,0.0,"['hush_20260909_213047', 'hush_20260913_210542']",same_recording,program
+hush_20260913_210542,NBC,Cris Collinsworth,3724.3,3725.0,0.307,0.7,0.0,"['hush_20260909_213047', 'hush_20260913_210542']",same_recording,program
+hush_20260913_210542,NBC,Mike Tirico,5428.8,5429.8,0.6,1.0,0.0,"['hush_20260909_213047', 'hush_20260913_210542']",same_recording,program
+hush_20260913_210542,NBC,Mike Tirico,5429.8,5430.8,0.573,0.2,0.0,"['hush_20260909_213047', 'hush_20260913_210542']",same_recording,program
+hush_20260913_210542,NBC,Mike Tirico,5562.4,5564.7,0.255,0.0,2.3,"['hush_20260909_213047', 'hush_20260913_210542']",same_recording,ad
+hush_20260913_210542,NBC,Scott Hanson,5573.2,5576.0,0.254,0.0,2.8,['hush_20260913_150934'],other_recording,ad
+hush_20260913_210542,NBC,Cris Collinsworth,5606.5,5607.5,0.255,0.0,1.0,"['hush_20260909_213047', 'hush_20260913_210542']",same_recording,ad
+hush_20260913_210542,NBC,Cris Collinsworth,5607.5,5608.3,0.269,0.0,0.8,"['hush_20260909_213047', 'hush_20260913_210542']",same_recording,ad
+hush_20260913_210542,NBC,Mike Tirico,6363.7,6364.4,0.254,0.0,0.7,"['hush_20260909_213047', 'hush_20260913_210542']",same_recording,ad
+hush_20260913_210542,NBC,Mike Tirico,6364.4,6367.1,0.254,0.0,2.7,"['hush_20260909_213047', 'hush_20260913_210542']",same_recording,ad
+hush_20260913_210542,NBC,Mike Tirico,6369.1,6370.1,0.285,0.0,1.0,"['hush_20260909_213047', 'hush_20260913_210542']",same_recording,ad
+hush_20260913_210542,NBC,Mike Tirico,6370.1,6370.6,0.258,0.0,0.5,"['hush_20260909_213047', 'hush_20260913_210542']",same_recording,ad
+hush_20260913_210542,NBC,Mike Tirico,6835.3,6846.1,0.504,0.0,1.1,"['hush_20260909_213047', 'hush_20260913_210542']",same_recording,ad
+hush_20260913_210542,NBC,Mike Tirico,6857.0,6858.0,0.281,0.0,1.0,"['hush_20260909_213047', 'hush_20260913_210542']",same_recording,ad
+hush_20260913_210542,NBC,Mike Tirico,6858.0,6858.5,0.264,0.0,0.5,"['hush_20260909_213047', 'hush_20260913_210542']",same_recording,ad
+hush_20260913_210542,NBC,Mike Tirico,6858.5,6862.3,0.266,0.0,3.8,"['hush_20260909_213047', 'hush_20260913_210542']",same_recording,ad
+hush_20260913_210542,NBC,Mike Tirico,7520.3,7529.6,0.325,4.6,0.0,"['hush_20260909_213047', 'hush_20260913_210542']",same_recording,program
+hush_20260913_210542,NBC,Mike Tirico,7529.6,7530.6,0.528,0.4,0.0,"['hush_20260909_213047', 'hush_20260913_210542']",same_recording,program
+hush_20260913_210542,NBC,Mike Tirico,8368.7,8370.9,0.285,0.0,2.2,"['hush_20260909_213047', 'hush_20260913_210542']",same_recording,ad
+hush_20260913_210542,NBC,Mike Tomlin,9199.4,9200.4,0.279,0.0,1.0,['hush_20260913_210542'],same_recording,ad
+hush_20260913_210542,NBC,Mike Tomlin,9200.4,9201.3,0.269,0.0,0.9,['hush_20260913_210542'],same_recording,ad
+hush_20260913_210542,NBC,Mike Tirico,9204.8,9205.8,0.262,0.0,1.0,"['hush_20260909_213047', 'hush_20260913_210542']",same_recording,ad
+hush_20260913_210542,NBC,Mike Tirico,9205.8,9206.8,0.335,0.0,1.0,"['hush_20260909_213047', 'hush_20260913_210542']",same_recording,ad
+hush_20260913_210542,NBC,Mike Tirico,9206.8,9207.3,0.261,0.0,0.5,"['hush_20260909_213047', 'hush_20260913_210542']",same_recording,ad
+hush_20260913_210542,NBC,Scott Hanson,9231.4,9232.4,0.255,0.0,1.0,['hush_20260913_150934'],other_recording,ad
+hush_20260913_210542,NBC,Scott Hanson,11835.8,11836.8,0.303,1.0,0.0,['hush_20260913_150934'],other_recording,program
+hush_20260913_210542,NBC,Scott Hanson,11836.8,11837.8,0.375,1.0,0.0,['hush_20260913_150934'],other_recording,program
+hush_20260914_212529,ESPN,Mike Tirico,1773.0,1773.8,0.255,0.8,0.0,"['hush_20260909_213047', 'hush_20260913_210542']",other_recording,program
+hush_20260914_212529,ESPN,Scott Hanson,2135.7,2136.7,0.254,0.0,1.0,['hush_20260913_150934'],other_recording,ad
+hush_20260914_212529,ESPN,Steve Harvey,2142.3,2143.3,0.323,0.0,1.0,['hush_20260913_210542'],other_recording,ad
+hush_20260914_212529,ESPN,Scott Hanson,2721.2,2721.6,0.276,0.0,0.4,['hush_20260913_150934'],other_recording,ad
+hush_20260914_212529,ESPN,Scott Hanson,2721.6,2730.7,0.281,0.0,9.1,['hush_20260913_150934'],other_recording,ad
+hush_20260914_212529,ESPN,Scott Hanson,2772.6,2773.6,0.263,0.0,1.0,['hush_20260913_150934'],other_recording,ad
+hush_20260914_212529,ESPN,Cris Collinsworth,3661.9,3664.2,0.258,0.0,2.3,"['hush_20260909_213047', 'hush_20260913_210542']",other_recording,ad
+hush_20260914_212529,ESPN,Mike Tirico,3672.9,3696.2,0.252,0.0,7.1,"['hush_20260909_213047', 'hush_20260913_210542']",other_recording,ad
+hush_20260914_212529,ESPN,Scott Hanson,3710.7,3711.7,0.323,0.0,1.0,['hush_20260913_150934'],other_recording,ad
+hush_20260914_212529,ESPN,Joe Buck,4240.2,4246.2,0.444,0.0,1.2,['hush_20260914_212529'],same_recording,ad
+hush_20260914_212529,ESPN,Mike Tomlin,4278.3,4278.8,0.262,0.0,0.5,['hush_20260913_210542'],other_recording,ad
+hush_20260914_212529,ESPN,Joe Buck,4539.5,4545.6,0.47,0.0,0.6,['hush_20260914_212529'],same_recording,ad
+hush_20260914_212529,ESPN,Mike Tomlin,4593.7,4594.7,0.258,0.0,1.0,['hush_20260913_210542'],other_recording,ad
+hush_20260914_212529,ESPN,Mike Tirico,4672.9,4679.3,0.278,3.995,0.305,"['hush_20260909_213047', 'hush_20260913_210542']",other_recording,both
+hush_20260914_212529,ESPN,Joe Buck,4679.3,4680.3,0.602,0.7,0.0,['hush_20260914_212529'],same_recording,program
+hush_20260914_212529,ESPN,Steve Harvey,6437.8,6453.8,0.366,0.0,8.8,['hush_20260913_210542'],other_recording,ad
+hush_20260914_212529,ESPN,Steve Harvey,6461.8,6464.0,0.301,0.0,2.2,['hush_20260913_210542'],other_recording,ad
+hush_20260914_212529,ESPN,Mike Tomlin,6465.0,6465.3,0.296,0.0,0.3,['hush_20260913_210542'],other_recording,ad
+hush_20260914_212529,ESPN,Mike Tomlin,6465.3,6467.5,0.292,0.0,2.2,['hush_20260913_210542'],other_recording,ad
+hush_20260924_220624,Prime,Scott Hanson,1033.4,1040.5,0.281,6.111,0.489,['hush_20260913_150934'],other_recording,both
+hush_20260924_220624,Prime,Scott Hanson,1524.0,1525.0,0.298,0.0,1.0,['hush_20260913_150934'],other_recording,ad
+hush_20260924_220624,Prime,Steve Harvey,1858.1,1860.7,0.283,0.0,2.6,['hush_20260913_210542'],other_recording,ad
+hush_20260924_220624,Prime,Steve Harvey,1863.0,1864.0,0.369,0.0,1.0,['hush_20260913_210542'],other_recording,ad
+hush_20260924_220624,Prime,Steve Harvey,1864.0,1865.0,0.348,0.0,1.0,['hush_20260913_210542'],other_recording,ad
+hush_20260924_220624,Prime,Mike Tomlin,2698.8,2701.4,0.286,1.4,0.0,['hush_20260913_210542'],other_recording,program
+hush_20260924_220624,Prime,Mike Tomlin,2702.4,2703.2,0.302,0.8,0.0,['hush_20260913_210542'],other_recording,program
+hush_20260924_220624,Prime,Mike Tomlin,2703.2,2706.4,0.3,1.8,0.0,['hush_20260913_210542'],other_recording,program
+hush_20260924_220624,Prime,Scott Hanson,3559.5,3560.5,0.26,0.0,0.5,['hush_20260913_150934'],other_recording,ad
+hush_20260924_220624,Prime,Scott Hanson,3572.3,3572.4,0.259,0.0,0.1,['hush_20260913_150934'],other_recording,ad
+hush_20260924_220624,Prime,Steve Harvey,3630.3,3631.3,0.452,0.0,1.0,['hush_20260913_210542'],other_recording,ad
+hush_20260924_220624,Prime,Steve Harvey,3631.3,3632.3,0.305,0.0,1.0,['hush_20260913_210542'],other_recording,ad
+hush_20260924_220624,Prime,Al Michaels,4474.6,4475.6,0.357,0.0,0.4,['hush_20260924_220624'],same_recording,ad
+hush_20260924_220624,Prime,Scott Hanson,6903.0,6904.0,0.282,0.0,1.0,['hush_20260913_150934'],other_recording,ad
+hush_20260924_220624,Prime,Scott Hanson,6904.0,6904.4,0.286,0.0,0.4,['hush_20260913_150934'],other_recording,ad
+hush_20260924_220624,Prime,Mike Tirico,6917.0,6918.0,0.263,0.0,1.0,"['hush_20260909_213047', 'hush_20260913_210542']",other_recording,ad
+hush_20260924_220624,Prime,Richard Shermann,7010.9,7011.2,0.286,0.0,0.3,['hush_20260924_220624'],same_recording,ad
+hush_20260924_220624,Prime,Steve Harvey,7013.3,7014.3,0.267,0.0,1.0,['hush_20260913_210542'],other_recording,ad
+hush_20260924_220624,Prime,Andrew Whitworth,7553.3,7554.3,0.253,0.0,1.0,['hush_20260924_220624'],same_recording,ad
+hush_20260924_220624,Prime,Al Michaels,7555.3,7556.3,0.306,0.0,1.0,['hush_20260924_220624'],same_recording,ad
+hush_20260924_220624,Prime,Steve Harvey,7557.3,7558.3,0.337,0.0,1.0,['hush_20260913_210542'],other_recording,ad
+hush_20260924_220624,Prime,Steve Harvey,7558.3,7559.3,0.318,0.0,1.0,['hush_20260913_210542'],other_recording,ad
+hush_20260924_220624,Prime,Steve Harvey,7560.9,7567.0,0.439,0.0,6.1,['hush_20260913_210542'],other_recording,ad

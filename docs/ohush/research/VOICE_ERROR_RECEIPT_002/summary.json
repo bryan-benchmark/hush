@@ -1,0 +1,117 @@
+{
+  "system": "voice_error_receipt_002",
+  "mute_policy": false,
+  "playback": "PLAY",
+  "match_line": 0.25,
+  "match_line_fit": false,
+  "embeddings_computed": false,
+  "gold_edited": false,
+  "holdouts_opened": false,
+  "speech_accounting": {
+    "note": "Summed overlap counts the same second once per embedding window. Union clips each window to the incident and merges overlaps.",
+    "football_embedded_speech_summed_s": 130.987,
+    "football_embedded_speech_union_s": 79.348,
+    "football_named_match_union_via_subtract_s": 27.506,
+    "published_named_match_s": 27.506,
+    "incidents_where_summed_speech_exceeded_duration": 8,
+    "football_named_match_inside_embedding_window_s": 27.329,
+    "football_named_match_held_until_next_window_s": 27.506
+  },
+  "program_query_hit_rates": {
+    "hush_20261011_135700": {
+      "block_queries_on_program": 42,
+      "block_hits": 13,
+      "other_queries_on_program": 748,
+      "other_hits": 3
+    },
+    "hush_20260913_210542": {
+      "block_queries_on_program": 104,
+      "block_hits": 1,
+      "other_queries_on_program": 1822,
+      "other_hits": 28
+    }
+  },
+  "ignore_block_start_queries_diagnostic": {
+    "totals": {
+      "program_seconds_no_longer_covered": 85.0,
+      "commercial_seconds_no_longer_covered": 190.0,
+      "note": "Diagnostic only. Queries that start on a 90-second fingerprint read are ignored. Count 10 is not changed."
+    },
+    "afternoon": {
+      "program_seconds_no_longer_covered": 65.0,
+      "commercial_seconds_no_longer_covered": 25.0
+    },
+    "sessions": {
+      "hush_20260909_213047": {
+        "program_seconds_no_longer_covered": 0.0,
+        "commercial_seconds_no_longer_covered": 0.0
+      },
+      "hush_20260913_210542": {
+        "program_seconds_no_longer_covered": 5.0,
+        "commercial_seconds_no_longer_covered": 35.0
+      },
+      "hush_20261008_205100": {
+        "program_seconds_no_longer_covered": 0.0,
+        "commercial_seconds_no_longer_covered": 20.0
+      },
+      "hush_20261011_204300": {
+        "program_seconds_no_longer_covered": 0.0,
+        "commercial_seconds_no_longer_covered": 5.0
+      },
+      "hush_20261012_204200": {
+        "program_seconds_no_longer_covered": 5.0,
+        "commercial_seconds_no_longer_covered": 65.0
+      },
+      "hush_20261010_222400": {
+        "program_seconds_no_longer_covered": 10.0,
+        "commercial_seconds_no_longer_covered": 5.0
+      },
+      "hush_20261011_135700": {
+        "program_seconds_no_longer_covered": 65.0,
+        "commercial_seconds_no_longer_covered": 25.0
+      },
+      "hush_20260914_212529": {
+        "program_seconds_no_longer_covered": 0.0,
+        "commercial_seconds_no_longer_covered": 20.0
+      },
+      "hush_20260924_220624": {
+        "program_seconds_no_longer_covered": 0.0,
+        "commercial_seconds_no_longer_covered": 15.0
+      }
+    }
+  },
+  "block_pattern": {
+    "block_s": 90.0,
+    "hop_s": 5.0,
+    "football_incidents": 72,
+    "football_incidents_whose_every_query_starts_on_a_90s_block": 16,
+    "football_seconds_in_those_incidents": 80.0,
+    "afternoon_incidents": 15,
+    "afternoon_incidents_on_block_start": 13,
+    "afternoon_seconds_on_block_start": 65.0
+  },
+  "redzone_guard_windows": [
+    {
+      "incident_start": 1175.0,
+      "incident_end": 1180.0,
+      "name": "Mike Tirico",
+      "cosine": 0.342,
+      "embedding_window_start": 1100.9,
+      "embedding_window_end": 1102.1,
+      "protection_end": 1318.4,
+      "embedding_overlaps_incident": false,
+      "protection_overlaps_incident_s": 5.0
+    },
+    {
+      "incident_start": 1265.0,
+      "incident_end": 1270.0,
+      "name": "Mike Tirico",
+      "cosine": 0.342,
+      "embedding_window_start": 1100.9,
+      "embedding_window_end": 1102.1,
+      "protection_end": 1318.4,
+      "embedding_overlaps_incident": false,
+      "protection_overlaps_incident_s": 5.0
+    }
+  ]
+}

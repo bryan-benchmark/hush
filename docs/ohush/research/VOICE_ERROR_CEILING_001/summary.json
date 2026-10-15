@@ -1,0 +1,33 @@
+{
+  "system": "voice_error_ceiling_001",
+  "label": "oracle diagnostic is not measured; named-match seconds are the existing causal ECAPA guard",
+  "mute_policy": false,
+  "match_line": 0.25,
+  "match_line_fit": false,
+  "published_football_program_s": 432.1,
+  "published_football_incidents": 72,
+  "gate_b_program_seconds": 86.4,
+  "populations": {
+    "scripted": {
+      "incidents": 11,
+      "seconds": 61.512,
+      "embedded_speech_s": 0.0,
+      "named_match_s": 0.0,
+      "no_embedding_s": 61.512
+    },
+    "redzone": {
+      "incidents": 2,
+      "seconds": 10.0,
+      "embedded_speech_s": 0.0,
+      "named_match_s": 10.0,
+      "no_embedding_s": 0.0
+    },
+    "football": {
+      "incidents": 72,
+      "seconds": 432.163,
+      "embedded_speech_s": 130.987,
+      "named_match_s": 27.506,
+      "no_embedding_s": 273.06
+    }
+  }
+}

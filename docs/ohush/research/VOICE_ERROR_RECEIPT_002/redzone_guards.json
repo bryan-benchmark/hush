@@ -1,0 +1,24 @@
+[
+  {
+    "incident_start": 1175.0,
+    "incident_end": 1180.0,
+    "name": "Mike Tirico",
+    "cosine": 0.342,
+    "embedding_window_start": 1100.9,
+    "embedding_window_end": 1102.1,
+    "protection_end": 1318.4,
+    "embedding_overlaps_incident": false,
+    "protection_overlaps_incident_s": 5.0
+  },
+  {
+    "incident_start": 1265.0,
+    "incident_end": 1270.0,
+    "name": "Mike Tirico",
+    "cosine": 0.342,
+    "embedding_window_start": 1100.9,
+    "embedding_window_end": 1102.1,
+    "protection_end": 1318.4,
+    "embedding_overlaps_incident": false,
+    "protection_overlaps_incident_s": 5.0
+  }
+]

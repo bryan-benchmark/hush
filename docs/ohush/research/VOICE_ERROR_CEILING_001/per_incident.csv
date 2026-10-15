@@ -1,0 +1,86 @@
+population,session,network,incident,start_s,end_s,seconds,embeddings_on_recording,embedded_speech_s,causal_named_match_s,oracle_known_announcer
+scripted,hush_20261007_220650,Hulu,1,63.024,70.0,6.976,False,0.0,0.0,not_labeled
+scripted,hush_20261007_220650,Hulu,2,1015.0,1020.0,5.0,False,0.0,0.0,not_labeled
+scripted,hush_20261007_220650,Hulu,3,1105.0,1110.0,5.0,False,0.0,0.0,not_labeled
+scripted,hush_20261007_220650,Hulu,4,1195.0,1200.0,5.0,False,0.0,0.0,not_labeled
+scripted,hush_20261007_220650,Hulu,5,1285.0,1290.0,5.0,False,0.0,0.0,not_labeled
+scripted,hush_20261007_220650,Hulu,6,1375.0,1380.0,5.0,False,0.0,0.0,not_labeled
+scripted,hush_20261007_220650,Hulu,7,1465.0,1470.0,5.0,False,0.0,0.0,not_labeled
+scripted,hush_20261007_220650,Hulu,8,1555.0,1560.0,5.0,False,0.0,0.0,not_labeled
+scripted,hush_20261007_220650,Hulu,9,2163.837,2170.0,6.163,False,0.0,0.0,not_labeled
+scripted,hush_20261007_220650,Hulu,10,6971.627,6980.0,8.373,False,0.0,0.0,not_labeled
+scripted,hush_20261007_220650,Hulu,11,7410.0,7415.0,5.0,False,0.0,0.0,not_labeled
+redzone,hush_20260913_150934,FOX,1,1175.0,1180.0,5.0,True,0.0,5.0,not_labeled
+redzone,hush_20260913_150934,FOX,2,1265.0,1270.0,5.0,True,0.0,5.0,not_labeled
+football,hush_20260913_210542,NBC,1,45.0,50.0,5.0,True,0.0,0.0,not_labeled
+football,hush_20260913_210542,NBC,2,55.0,60.0,5.0,True,0.0,0.0,not_labeled
+football,hush_20260913_210542,NBC,3,75.0,100.129,25.129,True,4.257,0.0,not_labeled
+football,hush_20260913_210542,NBC,4,154.609,160.0,5.391,True,7.0,2.0,not_labeled
+football,hush_20260913_210542,NBC,5,918.525,925.0,6.475,True,6.8,0.0,not_labeled
+football,hush_20260913_210542,NBC,6,1100.0,1120.0,20.0,True,23.5,0.0,not_labeled
+football,hush_20260913_210542,NBC,7,3715.836,3730.0,14.164,True,17.3,1.7,not_labeled
+football,hush_20260913_210542,NBC,8,5425.29,5430.0,4.71,True,5.4,1.2,not_labeled
+football,hush_20260913_210542,NBC,9,5608.81,5610.0,1.19,True,0.0,0.0,not_labeled
+football,hush_20260913_210542,NBC,10,7256.291,7260.0,3.709,True,2.609,0.0,not_labeled
+football,hush_20260913_210542,NBC,11,7525.0,7530.0,5.0,True,3.8,5.0,not_labeled
+football,hush_20260913_210542,NBC,12,9383.001,9385.0,1.999,True,0.4,0.0,not_labeled
+football,hush_20260913_210542,NBC,13,11835.0,11840.0,5.0,True,10.0,2.0,not_labeled
+football,hush_20260913_210542,NBC,14,12260.0,12280.0,20.0,True,28.8,0.0,not_labeled
+football,hush_20261008_205100,Prime Video,1,2225.0,2229.987,4.987,False,0.0,0.0,not_labeled
+football,hush_20261008_205100,Prime Video,2,2429.785,2435.0,5.215,False,0.0,0.0,not_labeled
+football,hush_20261008_205100,Prime Video,3,3415.0,3420.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261008_205100,Prime Video,4,3465.0,3470.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261008_205100,Prime Video,5,3730.0,3735.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261008_205100,Prime Video,6,3750.0,3755.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261008_205100,Prime Video,7,3770.0,3775.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261008_205100,Prime Video,8,4118.042,4120.0,1.958,False,0.0,0.0,not_labeled
+football,hush_20261008_205100,Prime Video,9,4760.0,4765.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261008_205100,Prime Video,10,4979.744,4985.0,5.256,False,0.0,0.0,not_labeled
+football,hush_20261008_205100,Prime Video,11,7797.831,7805.0,7.169,False,0.0,0.0,not_labeled
+football,hush_20261008_205100,Prime Video,12,9754.135,9756.791,2.656,False,0.0,0.0,not_labeled
+football,hush_20261011_204300,Cable / antenna,1,1550.0,1555.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261011_204300,Cable / antenna,2,1585.0,1590.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261011_204300,Cable / antenna,3,2520.0,2525.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261011_204300,Cable / antenna,4,7585.0,7590.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261012_204200,Cable / antenna,1,790.464,795.0,4.536,False,0.0,0.0,not_labeled
+football,hush_20261012_204200,Cable / antenna,2,815.0,820.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261012_204200,Cable / antenna,3,3305.0,3315.0,10.0,False,0.0,0.0,not_labeled
+football,hush_20261012_204200,Cable / antenna,4,3959.676,3960.0,0.324,False,0.0,0.0,not_labeled
+football,hush_20261012_204200,Cable / antenna,5,6418.34,6420.0,1.66,False,0.0,0.0,not_labeled
+football,hush_20261012_204200,Cable / antenna,6,6745.0,6750.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261012_204200,Cable / antenna,7,6980.0,6985.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261012_204200,Cable / antenna,8,7673.291,7680.0,6.709,False,0.0,0.0,not_labeled
+football,hush_20261012_204200,Cable / antenna,9,9239.301,9245.0,5.699,False,0.0,0.0,not_labeled
+football,hush_20261012_204200,Cable / antenna,10,9876.629,9885.0,8.371,False,0.0,0.0,not_labeled
+football,hush_20261012_204200,Cable / antenna,11,11123.673,11130.0,6.327,False,0.0,0.0,not_labeled
+football,hush_20261010_222400,Cable / antenna,1,3565.0,3567.641,2.641,False,0.0,0.0,not_labeled
+football,hush_20261010_222400,Cable / antenna,2,4385.0,4390.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261010_222400,Cable / antenna,3,5405.0,5410.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261010_222400,Cable / antenna,4,5495.0,5500.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261010_222400,Cable / antenna,5,5635.0,5655.0,20.0,False,0.0,0.0,not_labeled
+football,hush_20261010_222400,Cable / antenna,6,5760.0,5765.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261010_222400,Cable / antenna,7,5800.0,5805.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261010_222400,Cable / antenna,8,5815.0,5820.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261010_222400,Cable / antenna,9,5860.0,5865.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261011_135700,Cable / antenna,1,60.0,65.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261011_135700,Cable / antenna,2,830.448,840.0,9.552,False,0.0,0.0,not_labeled
+football,hush_20261011_135700,Cable / antenna,3,2705.0,2710.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261011_135700,Cable / antenna,4,2795.0,2800.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261011_135700,Cable / antenna,5,2885.0,2890.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261011_135700,Cable / antenna,6,3965.0,3970.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261011_135700,Cable / antenna,7,4055.0,4060.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261011_135700,Cable / antenna,8,4145.0,4150.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261011_135700,Cable / antenna,9,4235.0,4240.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261011_135700,Cable / antenna,10,4325.0,4330.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261011_135700,Cable / antenna,11,4505.0,4510.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261011_135700,Cable / antenna,12,4595.0,4600.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261011_135700,Cable / antenna,13,4685.0,4690.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261011_135700,Cable / antenna,14,4775.0,4780.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20261011_135700,Cable / antenna,15,4865.0,4870.0,5.0,False,0.0,0.0,not_labeled
+football,hush_20260914_212529,ESPN,1,1767.49,1775.0,7.51,True,5.92,0.8,not_labeled
+football,hush_20260914_212529,ESPN,2,4675.305,4680.0,4.695,True,4.4,4.695,not_labeled
+football,hush_20260914_212529,ESPN,3,6470.607,6475.0,4.393,True,3.0,0.0,not_labeled
+football,hush_20260924_220624,Prime,1,1033.889,1040.0,6.111,True,2.0,6.111,not_labeled
+football,hush_20260924_220624,Prime,2,2338.326,2345.0,6.674,True,0.0,0.0,not_labeled
+football,hush_20260924_220624,Prime,3,2700.0,2705.0,5.0,True,5.8,4.0,not_labeled
+football,hush_20260924_220624,Prime,4,3633.048,3635.0,1.952,True,0.0,0.0,not_labeled
