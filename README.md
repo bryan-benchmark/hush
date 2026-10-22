@@ -1,6 +1,8 @@
 # OHush
 
-Research mode: prove TV audio can detect ad transitions before building the product app.
+Start with [HANDOFF.md](HANDOFF.md). That file is the current plan, the goal, what is open source, and how to bring the code and the recordings up on another computer.
+
+The sports desk is the live path: engine on port 8770, monitor on port 3010. The notes below are the earlier recorder.
 
 ```text
 TV → optical → USB → Mac → Python WAV capture
