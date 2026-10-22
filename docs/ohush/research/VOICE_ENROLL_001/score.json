@@ -1,0 +1,87 @@
+{
+  "system": "voice_enroll_score_001",
+  "model": "speechbrain/spkrec-ecapa-voxceleb",
+  "mute_policy": false,
+  "clips_used": {
+    "Al Michaels": 16,
+    "Andrew Whitworth": 6,
+    "Clarissa Thompson": 13,
+    "Cris Collinsworth": 16,
+    "Joe Buck": 19,
+    "Kirk Herbstreit": 16,
+    "Maria Taylor": 8,
+    "Mike Tirico": 15,
+    "Mike Tomlin": 8,
+    "Ryan Fitzpatrick": 3,
+    "Tony Gonzalez": 5,
+    "Troy Aikman": 2
+  },
+  "checks": 11470,
+  "rule": "sound off when the best saved voice on that show stays under the line for 30 seconds",
+  "lines": {
+    "0.10": {
+      "ad_off": 288,
+      "game_off": 40,
+      "ad_on": 11100,
+      "game_on": 33936,
+      "no_sample_ad": 276,
+      "no_sample_game": 240
+    },
+    "0.15": {
+      "ad_off": 1036,
+      "game_off": 628,
+      "ad_on": 10352,
+      "game_on": 33348,
+      "no_sample_ad": 276,
+      "no_sample_game": 240
+    },
+    "0.20": {
+      "ad_off": 2612,
+      "game_off": 1808,
+      "ad_on": 8776,
+      "game_on": 32168,
+      "no_sample_ad": 276,
+      "no_sample_game": 240
+    },
+    "0.25": {
+      "ad_off": 4956,
+      "game_off": 2796,
+      "ad_on": 6432,
+      "game_on": 31180,
+      "no_sample_ad": 276,
+      "no_sample_game": 240
+    },
+    "0.30": {
+      "ad_off": 7092,
+      "game_off": 3784,
+      "ad_on": 4296,
+      "game_on": 30192,
+      "no_sample_ad": 276,
+      "no_sample_game": 240
+    },
+    "0.35": {
+      "ad_off": 8396,
+      "game_off": 4572,
+      "ad_on": 2992,
+      "game_on": 29404,
+      "no_sample_ad": 276,
+      "no_sample_game": 240
+    },
+    "0.40": {
+      "ad_off": 8948,
+      "game_off": 4888,
+      "ad_on": 2440,
+      "game_on": 29088,
+      "no_sample_ad": 276,
+      "no_sample_game": 240
+    },
+    "0.50": {
+      "ad_off": 9044,
+      "game_off": 5140,
+      "ad_on": 2344,
+      "game_on": 28836,
+      "no_sample_ad": 276,
+      "no_sample_game": 240
+    }
+  }
+}

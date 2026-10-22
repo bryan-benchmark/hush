@@ -1,0 +1,69 @@
+{
+  "what_79_percent_was": {
+    "program_seconds_heard": 67428.0,
+    "commercial_seconds_muted": 0.0,
+    "corpus_seconds": 85076.4,
+    "percent": 79.26,
+    "meaning": "Share of corpus seconds that are programming, under a policy that mutes nothing. Not a start rate. Not an unmute rate."
+  },
+  "pods": 136,
+  "start": {
+    "caught": 2,
+    "missed": 134,
+    "caught_within_3s": 0,
+    "delays_on_the_ones_caught_s": [
+      9.937,
+      10.126
+    ],
+    "commercial_seconds_covered": 25.0
+  },
+  "end": {
+    "unmuted_at_the_gold_end": 0,
+    "let_go_inside_the_ad": 2,
+    "no_mute_so_no_unmute": 134,
+    "program_seconds_still_muted_after_the_end": 0.0,
+    "ad_seconds_heard_after_let_go": 328.5
+  },
+  "dsp_alarm_not_a_mute": {
+    "within_3s": 86,
+    "within_30s": 131
+  },
+  "song_rise_before_the_start": 103,
+  "missed_starts_by_length": {
+    "under_60s": 19,
+    "60_to_180s": 101,
+    "over_180s": 14
+  },
+  "by_network": {
+    "Cable / antenna": {
+      "pods": 44,
+      "starts_caught": 1,
+      "let_go": 1,
+      "dsp_within_3s": 24
+    },
+    "ESPN": {
+      "pods": 15,
+      "starts_caught": 0,
+      "let_go": 0,
+      "dsp_within_3s": 6
+    },
+    "NBC": {
+      "pods": 41,
+      "starts_caught": 0,
+      "let_go": 0,
+      "dsp_within_3s": 29
+    },
+    "Prime": {
+      "pods": 13,
+      "starts_caught": 0,
+      "let_go": 0,
+      "dsp_within_3s": 8
+    },
+    "Prime Video": {
+      "pods": 23,
+      "starts_caught": 1,
+      "let_go": 1,
+      "dsp_within_3s": 19
+    }
+  }
+}

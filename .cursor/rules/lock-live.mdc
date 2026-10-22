@@ -1,0 +1,18 @@
+---
+description: When an OHush experiment is locked, put it in the live engine and restart so it can be heard immediately.
+alwaysApply: true
+---
+
+# Lock it into the live engine
+
+A locked result is the behavior the television plays. A report, a scoreboard row, or a module that only scores old tapes is not locked.
+
+When the owner locks a result:
+
+1. Wire it into `ohush_live`, the process that replaces or returns the television. The research copy in `src/hush` can stay. It is not the test.
+2. Restart the running sports daemon in the same session. A process that started before the change is still the old rule.
+3. Say that it is live, at http://127.0.0.1:3010/, and what they should hear.
+
+A locked return brings the game back and blocks a cover. It does not start a cover. A locked cover starts only the cover that was locked. Do not retune the number while wiring it. Holdouts stay sealed.
+
+The 0.10 enrolled-show floor is the example. It was logged as the return and left out of the engine, so the live booth line at 0.55 kept covering Tirico. Locking it means the live speaker path carries `enroll_rolling_max`, and a max at or over 0.10 returns the game and refuses a solo audio cover.

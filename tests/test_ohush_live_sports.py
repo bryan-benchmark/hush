@@ -120,6 +120,258 @@ class SportsTests(unittest.TestCase):
         self.assertTrue(latch.allow_auto_play(1))
         self.assertTrue(latch.allow_auto_play(0))
 
+    def test_cover_crossfades_and_show_returns_quickly(self):
+        rate = 48000
+        beds = {
+            "wednesday_night": np.full((rate, 2), 12000, dtype=np.int16),
+            "silence": np.zeros((rate, 2), dtype=np.int16),
+        }
+        gate = ListenerGate(beds, np.zeros((100, 2), dtype=np.int16), prime_frames=2048, rate=rate)
+        tone = np.full((480, 2), 5000, dtype=np.int16)
+        gate.push(np.tile(tone, (20, 1)))
+        gate.play_replacement()
+        early = np.zeros((480, 2), dtype=np.int16)
+        gate.render(early)
+        self.assertGreater(float(np.mean(early)), 2000)
+        block = np.zeros((480, 2), dtype=np.int16)
+        for _ in range(80):
+            gate.push(tone)
+            gate.render(block)
+        self.assertGreater(gate._fade_gain, 0.98)
+        self.assertEqual(gate.mode, "replacement")
+        gate.play_program(prompt=True)
+        frames = 0
+        while gate.mode != "program" and frames < rate:
+            gate.push(tone)
+            gate.render(block)
+            frames += 480
+        self.assertEqual(gate.mode, "program")
+        self.assertLess(frames, int(0.45 * rate))
+        self.assertGreater(frames, int(0.15 * rate))
+
+    def test_automatic_return_takes_the_longer_fade(self):
+        rate = 48000
+        beds = {
+            "wednesday_night": np.full((rate, 2), 12000, dtype=np.int16),
+            "silence": np.zeros((rate, 2), dtype=np.int16),
+        }
+        gate = ListenerGate(beds, np.zeros((100, 2), dtype=np.int16), prime_frames=2048, rate=rate)
+        tone = np.full((480, 2), 5000, dtype=np.int16)
+        gate.push(np.tile(tone, (20, 1)))
+        gate.play_replacement()
+        block = np.zeros((480, 2), dtype=np.int16)
+        for _ in range(80):
+            gate.push(tone)
+            gate.render(block)
+        gate.play_program()
+        frames = 0
+        while gate.mode != "program" and frames < rate * 3:
+            gate.push(tone)
+            gate.render(block)
+            frames += 480
+        self.assertEqual(gate.mode, "program")
+        self.assertGreater(frames, int(1.3 * rate))
+        self.assertLess(frames, int(1.7 * rate))
+
+    def test_repeated_play_commands_do_not_stretch_the_return(self):
+        rate = 48000
+        beds = {
+            "wednesday_night": np.full((rate, 2), 12000, dtype=np.int16),
+            "silence": np.zeros((rate, 2), dtype=np.int16),
+        }
+        gate = ListenerGate(beds, np.zeros((100, 2), dtype=np.int16), prime_frames=2048, rate=rate)
+        tone = np.full((480, 2), 8000, dtype=np.int16)
+        gate.push(np.tile(tone, (20, 1)))
+        gate.play_replacement()
+        block = np.zeros((480, 2), dtype=np.int16)
+        for _ in range(80):
+            gate.push(tone)
+            gate.render(block)
+        gate.play_program()
+        for _ in range(20):
+            gate.play_program()
+            gate.play_program(prompt=True)
+        frames = 0
+        while gate.mode != "program" and frames < rate * 3:
+            gate.push(tone)
+            gate.render(block)
+            frames += 480
+        self.assertEqual(gate.mode, "program")
+        self.assertLess(frames, int(1.7 * rate))
+        heard = np.zeros((480, 2), dtype=np.int16)
+        gate.push(np.tile(tone, (20, 1)))
+        gate.render(heard)
+        self.assertGreater(int(np.max(np.abs(heard))), 1000)
+
+    def test_output_clock_restores_television_if_the_controller_stops(self):
+        rate = 48000
+        beds = {
+            "wednesday_night": np.full((rate, 2), 16000, dtype=np.int16),
+            "silence": np.zeros((rate, 2), dtype=np.int16),
+        }
+        gate = ListenerGate(
+            beds,
+            np.zeros((100, 2), dtype=np.int16),
+            prime_frames=2048,
+            rate=rate,
+            return_s=0.05,
+        )
+        tone = np.full((480, 2), 9000, dtype=np.int16)
+        gate.push(np.tile(tone, (30, 1)))
+        gate.play_replacement(fail_open_s=0.2)
+        block = np.zeros((480, 2), dtype=np.int16)
+        covered = 0
+        restored = None
+        for step in range(80):
+            gate.push(tone)
+            gate.render(block)
+            covered += 480
+            if gate.mode == "program" and restored is None:
+                restored = covered
+                break
+        self.assertIsNotNone(restored)
+        self.assertGreater(restored, int(0.2 * rate))
+        self.assertLess(restored, int(0.45 * rate))
+        self.assertTrue(gate.consume_fail_open())
+        gate.push(np.tile(tone, (20, 1)))
+        gate.render(block)
+        self.assertGreater(int(np.max(np.abs(block))), 1000)
+
+    def test_auto_cover_arms_the_existing_deadline(self):
+        from ohush_live.sports_daemon import begin_auto_cover
+        from ohush_live.tnf_lab import DEFAULT_FAIL_OPEN_S
+
+        rate = 48000
+        beds = {
+            "wednesday_night": np.full((rate, 2), 16000, dtype=np.int16),
+            "silence": np.zeros((rate, 2), dtype=np.int16),
+        }
+        gate = ListenerGate(beds, np.zeros((100, 2), dtype=np.int16), prime_frames=2048, rate=rate)
+        begin_auto_cover(gate)
+        self.assertEqual(gate._fail_open_samples, int(DEFAULT_FAIL_OPEN_S * rate))
+        gate.play_replacement()
+        self.assertIsNone(gate._fail_open_samples)
+
+    def test_many_cover_cycles_return_the_television_each_time(self):
+        rate = 48000
+        beds = {
+            "wednesday_night": np.full((rate, 2), 14000, dtype=np.int16),
+            "silence": np.zeros((rate, 2), dtype=np.int16),
+        }
+        gate = ListenerGate(
+            beds,
+            np.zeros((100, 2), dtype=np.int16),
+            prime_frames=1024,
+            rate=rate,
+            cover_s=0.02,
+            return_s=0.02,
+        )
+        tone = np.full((480, 2), 7000, dtype=np.int16)
+        block = np.zeros((480, 2), dtype=np.int16)
+        gate.push(np.tile(tone, (20, 1)))
+        for _ in range(6):
+            gate.play_replacement()
+            for _ in range(8):
+                gate.push(tone)
+                gate.render(block)
+            self.assertEqual(gate.mode, "replacement")
+            self.assertGreater(float(np.mean(np.abs(block))), 1000)
+            gate.play_program(prompt=True)
+            frames = 0
+            while gate.mode != "program" and frames < rate:
+                gate.push(tone)
+                gate.render(block)
+                frames += 480
+            self.assertEqual(gate.mode, "program")
+            gate.push(np.tile(tone, (8, 1)))
+            gate.render(block)
+            self.assertGreater(int(np.max(np.abs(block))), 1000)
+
+    def test_output_restore_will_not_cover_the_same_departure(self):
+        from ohush_live.sports import AutoLatch
+
+        machine = Machine()
+        machine.state = "MUTED"
+        machine._muted_at = 0.0
+        event = machine.restore_from_output(180.0, {})
+        self.assertEqual(event["reason"], "output_fail_open")
+        self.assertEqual(event["state_after"], "PLAY")
+        self.assertEqual(machine.state, "PLAY")
+        latch = AutoLatch()
+        latch.human_play(was_replacement=True)
+        self.assertFalse(latch.allow_auto_mute(1))
+        self.assertTrue(latch.allow_auto_mute(0))
+        covered = Machine()
+        covered.state = "MUTED"
+        covered._human_cover = True
+        self.assertIsNone(covered.restore_from_output(180.0, {}))
+        self.assertEqual(covered.state, "MUTED")
+
+    def test_fail_open_tick_does_not_cover_again(self):
+        from ohush_live.sports_daemon import SportsSession
+
+        rate = 48000
+        beds = {
+            "wednesday_night": np.full((rate, 2), 16000, dtype=np.int16),
+            "silence": np.zeros((rate, 2), dtype=np.int16),
+        }
+        gate = ListenerGate(beds, np.zeros((100, 2), dtype=np.int16), prime_frames=2048, rate=rate)
+        gate.mode = "program"
+        gate._fail_open_tripped = True
+        hot = {"strong_departure": True, "departure": 1.0, "strong_return": False, "return": 0.0}
+        with TemporaryDirectory() as folder:
+            session = SportsSession(Path(folder))
+            try:
+                session.samples = rate * 200
+                session.machine.state = "MUTED"
+                session.machine._muted_at = 0.0
+                session.families = {"speaker": dict(hot), "audio": dict(hot), "semantic": None}
+                for _ in range(4):
+                    session.tick(gate)
+                self.assertEqual(session.machine.state, "PLAY")
+                self.assertEqual(gate.mode, "program")
+                self.assertFalse(session.latch.allow_auto_mute(1))
+            finally:
+                session.tnf.close()
+                for handle in (session.decisions, session.overrides, session.ratings, session.labels, session.track):
+                    handle.close()
+
+    def test_fail_open_releases_when_the_departure_goes_quiet(self):
+        from ohush_live.sports_daemon import SportsSession
+
+        rate = 48000
+        beds = {
+            "wednesday_night": np.full((rate, 2), 16000, dtype=np.int16),
+            "silence": np.zeros((rate, 2), dtype=np.int16),
+        }
+        gate = ListenerGate(beds, np.zeros((100, 2), dtype=np.int16), prime_frames=2048, rate=rate)
+        gate.mode = "program"
+        gate._fail_open_tripped = True
+        hot = {"strong_departure": True, "departure": 1.0, "strong_return": False, "return": 0.0}
+        quiet = {"strong_departure": False, "departure": 0.0, "strong_return": False, "return": 0.0}
+        with TemporaryDirectory() as folder:
+            session = SportsSession(Path(folder))
+            try:
+                session.samples = rate * 200
+                session.machine.state = "MUTED"
+                session.machine._muted_at = 0.0
+                session.families = {"speaker": dict(hot), "audio": dict(hot), "semantic": None}
+                session.tick(gate)
+                self.assertEqual(gate.mode, "program")
+                session.families = {"speaker": dict(quiet), "audio": dict(quiet), "semantic": None}
+                session.tick(gate)
+                self.assertFalse(session.latch.suppress_mute)
+                session.families = {"speaker": dict(hot), "audio": dict(hot), "semantic": None}
+                for _ in range(3):
+                    session.tick(gate)
+                self.assertEqual(session.machine.state, "MUTED")
+                self.assertEqual(gate.mode, "replacement")
+                self.assertIsNotNone(gate._fail_open_samples)
+            finally:
+                session.tnf.close()
+                for handle in (session.decisions, session.overrides, session.ratings, session.labels, session.track):
+                    handle.close()
+
     def test_hint_does_not_unmute(self):
         machine = Machine()
         machine.state = "MUTED"

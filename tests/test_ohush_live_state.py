@@ -33,6 +33,27 @@ class StateTests(unittest.TestCase):
         self.assertEqual(event["state_after"], "MUTED")
         self.assertEqual(event["reason"], "solo_audio_depart")
 
+    def test_enrolled_show_over_0_10_blocks_solo_audio_and_returns(self):
+        machine = Machine()
+        speaker = reading(0.0, False)
+        speaker["speech"] = True
+        speaker["enroll_rolling_max"] = 0.12
+        families = {"audio": reading(0.3, True), "speaker": speaker, "semantic": None}
+        for t in range(1, 6):
+            self.assertIsNone(machine.step(t, 1.0, families))
+        self.assertEqual(machine.state, "PLAY")
+        machine.state = "MUTED"
+        machine._muted_at = 0.0
+        event = machine.step(10, 1.0, families)
+        self.assertEqual(event["state_after"], "PLAY")
+        self.assertEqual(event["reason"], "show_floor")
+        speaker["enroll_rolling_max"] = 0.05
+        fresh = Machine()
+        event = None
+        for t in range(1, 5):
+            event = fresh.step(t, 1.0, families)
+        self.assertEqual(event["state_after"], "MUTED")
+
     def test_two_families_mute_after_persist(self):
         machine = Machine()
         families = {
@@ -76,6 +97,19 @@ class StateTests(unittest.TestCase):
         event = machine.step(4, 1.0, families)
         self.assertIsNotNone(event)
         self.assertEqual(event["state_after"], "MUTED")
+
+    def test_higher_cover_line_ignores_a_mild_score(self):
+        """A chosen 0.30 line must not cover just because the worker flag is on."""
+        machine = Machine()
+        machine.audio_strong = 0.30
+        families = {
+            "audio": reading(0.23, True),
+            "speaker": None,
+            "semantic": None,
+        }
+        for t in range(1, 8):
+            self.assertIsNone(machine.step(t, 1.0, families))
+        self.assertEqual(machine.state, "PLAY")
 
     def test_booth_talking_blocks_solo_audio_mute(self):
         """Verified announcer speaking — do not cover on audio alone."""
@@ -150,7 +184,45 @@ class StateTests(unittest.TestCase):
             self.assertIsNone(machine.step(t, 1.0, families))
         self.assertEqual(machine.state, "PLAY")
 
-    def test_return_waits_and_needs_two_families_when_both_alive(self):
+    def test_unrecognized_speaker_does_not_block_audio_return(self):
+        """A voice that is not the enrolled booth cannot veto a restore.
+
+        College football, 17 October, t=83–89: audio strong_return was already
+        true while Herbstreit (cluster c0005, similarity about 0) was still
+        talking. He counted as a second family and the unmute never fired.
+        """
+        machine = Machine()
+        mute = {
+            "audio": reading(0.35, True),
+            "speaker": None,
+            "semantic": None,
+        }
+        for t in range(1, 5):
+            machine.step(t, 1.0, mute)
+        self.assertEqual(machine.state, "MUTED")
+        herbstreit = {
+            "audio": reading(0.02, False, 0.02, True),
+            "speaker": {
+                "departure": 0.0,
+                "strong_departure": False,
+                "return": 0.0,
+                "strong_return": False,
+                "speech": True,
+                "booth_present": False,
+                "similarity_to_booth": -0.03,
+                "cluster_id": "c0005",
+            },
+            "semantic": None,
+        }
+        # muted_at=4, hold 6s → open at t=10; solo play persist 3s → t=12.
+        for t in range(5, 12):
+            self.assertIsNone(machine.step(t, 1.0, herbstreit))
+        event = machine.step(12, 1.0, herbstreit)
+        self.assertIsNotNone(event)
+        self.assertEqual(event["state_after"], "PLAY")
+        self.assertEqual(event["reason"], "solo_audio_return")
+
+    def test_speaker_return_still_lifts_cover(self):
         machine = Machine()
         mute = {
             "audio": reading(0.25, True),
@@ -161,20 +233,13 @@ class StateTests(unittest.TestCase):
         machine.step(2, 1.0, mute)
         machine.step(3, 1.0, mute)
         self.assertEqual(machine.state, "MUTED")
-        one = {
-            "audio": reading(0.05, False, 0.05, True),
-            "speaker": reading(0.2, False, 0.0, False),
-            "semantic": None,
-        }
-        for t in range(4, 20):
-            self.assertIsNone(machine.step(t, 1.0, one))
-        self.assertEqual(machine.state, "MUTED")
         both = {
             "audio": reading(0.05, False, 0.05, True),
             "speaker": reading(0.1, False, 0.4, True),
             "semantic": None,
         }
-        # muted_at=3, hold 6s → open at t=9; speaker persist 1s → PLAY at t=9.
+        for t in range(4, 9):
+            self.assertIsNone(machine.step(t, 1.0, both))
         event = machine.step(9, 1.0, both)
         self.assertIsNotNone(event)
         self.assertEqual(event["state_after"], "PLAY")

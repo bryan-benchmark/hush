@@ -1,0 +1,23 @@
+{
+  "system": "voice_return_001",
+  "mute_policy": false,
+  "floor": 0.1,
+  "quiet_music": 0.3,
+  "commercials": 92,
+  "no_game_after": 7,
+  "voice_back": 85,
+  "quiet_back": 82,
+  "song_still_at_60s": 9,
+  "voice_lag_median_s": 0.0,
+  "quiet_lag_median_s": 20.0,
+  "song_wait_median_s": 16.0,
+  "quiet_within_s": {
+    "0": 23,
+    "4": 31,
+    "12": 38,
+    "30": 66,
+    "60": 77
+  },
+  "installed": false,
+  "reading": "Do not install. The voice is usually back on the first game check. Waiting for the song to drop holds a median 16 extra seconds, and on the long ones it holds a touchdown."
+}

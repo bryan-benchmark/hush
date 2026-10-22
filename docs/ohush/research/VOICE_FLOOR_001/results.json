@@ -1,0 +1,20 @@
+{
+  "system": "voice_floor_001",
+  "module": "src/hush/voice_floor.py",
+  "mute_policy": false,
+  "role": "return",
+  "placeholder": true,
+  "starts_commercial": false,
+  "floor": 0.10,
+  "memory_s": 30,
+  "game_s": 67428,
+  "commercial_s": 17648.4,
+  "published_speechbrain_line": 0.25,
+  "reason": "Placeholder for the return. The labels bring the audio back when the show is back. The cut into a commercial is a different model. 0.10 leaves the show on. 0.15 turns off halftime and a sideline interview. 0.20 turns off a Joe Buck call.",
+  "lines": [
+    {"line": 0.10, "ad_off_s": 288, "game_off_s": 4},
+    {"line": 0.15, "ad_off_s": 1036, "game_off_s": 112},
+    {"line": 0.20, "ad_off_s": 2612, "game_off_s": 324},
+    {"line": 0.25, "ad_off_s": 4956, "game_off_s": 736}
+  ]
+}

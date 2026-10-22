@@ -1,0 +1,43 @@
+{
+  "system": "v1_known_001",
+  "mute_policy": false,
+  "installed": false,
+  "known_refs": [
+    {
+      "ref_session": "hush_20260924_220624",
+      "ref_start": 234,
+      "first_session": "hush_20261008_205100",
+      "first_at": 150.0,
+      "first_score": 272
+    },
+    {
+      "ref_session": "hush_20260914_212529",
+      "ref_start": 6853,
+      "first_session": "hush_20261012_204200",
+      "first_at": 5090.0,
+      "first_score": 208
+    }
+  ],
+  "later_queries": 56,
+  "later_ad_queries": 19,
+  "later_program_queries": 37,
+  "later_ad_s": 95.0,
+  "later_program_s": 185.0,
+  "program_max_score": 9,
+  "ad_scores": [
+    260,
+    242,
+    223,
+    197,
+    143,
+    118,
+    32,
+    30,
+    24,
+    10,
+    8,
+    4,
+    3
+  ],
+  "note": "Known means a query already scored at least 200 on that reference inside a commercial. No new count is chosen. The only later query outside the two held pods that scores above the program maximum of 9 is 5 seconds at 118."
+}

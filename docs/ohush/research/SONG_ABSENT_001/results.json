@@ -1,0 +1,122 @@
+{
+  "system": "song_absent_001",
+  "mute_policy": false,
+  "installed": false,
+  "music_high": 0.7,
+  "floor": 0.1,
+  "song_during_ads_s": 7868.0,
+  "lines": [
+    {
+      "voice": "30 second max",
+      "commercial_s": 248.0,
+      "game_s": 4.0,
+      "ad_steps": 62,
+      "broken": true,
+      "percentage": null,
+      "game_cuts": [
+        {
+          "session": "hush_20260914_212529",
+          "t": 5788.0,
+          "voice": 0.041,
+          "music": 0.727,
+          "words": "on Giants Rams at eight on ABC and ESPN. With"
+        }
+      ]
+    },
+    {
+      "voice": "current window",
+      "commercial_s": 1760.0,
+      "game_s": 140.0,
+      "ad_steps": 440,
+      "broken": true,
+      "percentage": null,
+      "game_cuts": [
+        {
+          "session": "hush_20260909_213047",
+          "t": 1292.0,
+          "voice": 0.099,
+          "music": 0.932,
+          "words": "Big time play right there. Progressive insurance for coverage. You can count"
+        },
+        {
+          "session": "hush_20260909_213047",
+          "t": 7188.0,
+          "voice": 0.042,
+          "music": 0.866,
+          "words": "postgame here. Now Maria Taylor. So the first game of the 2026"
+        },
+        {
+          "session": "hush_20260909_213047",
+          "t": 8208.0,
+          "voice": 0.095,
+          "music": 0.892,
+          "words": "They're getting bigger. Plus, the Voice of Riley Green, new Tonight Show."
+        },
+        {
+          "session": "hush_20260909_213047",
+          "t": 8596.0,
+          "voice": 0.082,
+          "music": 0.904,
+          "words": "Now at 11, a moving"
+        },
+        {
+          "session": "hush_20260909_213047",
+          "t": 8692.0,
+          "voice": 0.066,
+          "music": 0.96,
+          "words": "10 day coming up back to you Janice. Thanks, we will see you soon. We have breaking news to get to out of Manhattan tonight. Police say a"
+        },
+        {
+          "session": "hush_20260909_213047",
+          "t": 9200.0,
+          "voice": 0.051,
+          "music": 0.908,
+          "words": "happen immediately after the attacks. could light the way toward a better future."
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 6444.0,
+          "voice": 0.09,
+          "music": 0.91,
+          "words": "and Becky G. New Tonight Show this week. Talk about this weekend in"
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 7756.0,
+          "voice": 0.067,
+          "music": 0.757,
+          "words": "pain, hives and muscle aches. Ask about Namluvio today."
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 8992.0,
+          "voice": 0.079,
+          "music": 0.728,
+          "words": "beat your biggest rival? Yeah it was huge we were confident put in a lot of work coach"
+        },
+        {
+          "session": "hush_20261008_205100",
+          "t": 4120.0,
+          "voice": 0.093,
+          "music": 0.737,
+          "words": ""
+        },
+        {
+          "session": "hush_20261008_205100",
+          "t": 10388.0,
+          "voice": -0.001,
+          "music": 0.956,
+          "words": ""
+        },
+        {
+          "session": "hush_20260914_212529",
+          "t": 308.0,
+          "voice": 0.086,
+          "music": 0.947,
+          "words": "peak season chaos. Switch to ShipStation today. Start now at ShipStation .com where"
+        }
+      ]
+    }
+  ],
+  "note": "The floor does not start a commercial. These counts are what the two published lines do when both are required."
+}

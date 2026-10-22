@@ -1,0 +1,16 @@
+{
+  "system": "v1_scorecard_001",
+  "mute_policy": false,
+  "installed": false,
+  "pods": 136,
+  "pods_never_muted": 134,
+  "commercial_s": 17648.4,
+  "held_s": 116.0,
+  "heard_s": 17532.4,
+  "program_s": 0.0,
+  "broken": false,
+  "percentage": 0.657,
+  "return_lag_s": 0.0,
+  "median_start_lag_s": 132.544,
+  "note": "Start lag on a commercial that is never muted is its whole length. Return lag is zero because both let-gos are still inside the commercial."
+}

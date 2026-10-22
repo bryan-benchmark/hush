@@ -7,7 +7,13 @@ must not lift cover.
 
 from __future__ import annotations
 
-from ohush_live.policy import (
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+
+from hush.voice_floor import show_present  # noqa: E402
+from ohush_live.policy import (  # noqa: E402
     AUDIO_RETURN,
     AUDIO_STRONG,
     BOOTH_RETURN_PERSIST_S,
@@ -28,6 +34,7 @@ from ohush_live.policy import (
 class Machine:
     def __init__(self) -> None:
         self.state = "PLAY"
+        self.audio_strong = AUDIO_STRONG
         self._mute_streak = 0.0
         self._play_streak = 0.0
         self._muted_at: float | None = None
@@ -60,7 +67,7 @@ class Machine:
     def step(self, timestamp: float, dt: float, families: dict) -> dict | None:
         if self.state == "PLAY":
             self._play_streak = 0.0
-            yes, need, tag, persist = _quorum(families, depart=True)
+            yes, need, tag, persist = _quorum(families, depart=True, audio_strong=self.audio_strong)
             if yes >= need:
                 self._mute_streak += dt
             else:
@@ -72,8 +79,8 @@ class Machine:
                 return self._event(timestamp, "MUTED", families, tag, False)
             return None
 
-        # Verified booth in the clear: never sit on cover through a mute hold.
-        booth = _booth_heard(families.get("speaker"))
+        # Verified booth, or the enrolled show over 0.10: do not sit through the hold.
+        booth = _booth_heard(families.get("speaker")) or _show_floor(families.get("speaker"))
         held = (
             not booth
             and self._muted_at is not None
@@ -94,6 +101,17 @@ class Machine:
         self._human_cover = False
         return self._event(timestamp, "PLAY", families, tag, False)
 
+    def restore_from_output(self, timestamp: float, families: dict) -> dict | None:
+        """The speakers are already back. A hand on Cover is left covered."""
+        if self.state != "MUTED" or self._human_cover:
+            return None
+        event = self._event(timestamp, "PLAY", families, "output_fail_open", False)
+        self.state = "PLAY"
+        self._muted_at = None
+        self._mute_streak = 0.0
+        self._play_streak = 0.0
+        return event
+
     def _event(self, timestamp: float, after: str, families: dict, reason: str, manual: bool) -> dict:
         return {
             "product": PRODUCT,
@@ -111,13 +129,13 @@ class Machine:
         }
 
 
-def _family_yes(name: str, reading: dict, *, depart: bool) -> bool:
+def _family_yes(name: str, reading: dict, *, depart: bool, audio_strong: float = AUDIO_STRONG) -> bool:
     """Product vote. Audio uses the raw distance so thresholds stay in policy.py."""
     if depart:
         if name == "audio":
             value = reading.get("departure")
-            if value is not None and float(value) >= AUDIO_STRONG:
-                return True
+            if value is not None:
+                return float(value) >= audio_strong
             return bool(reading.get("strong_departure"))
         return bool(reading.get("strong_departure"))
     if name == "speaker" and _booth_heard(reading):
@@ -197,14 +215,41 @@ def _present_for(families: dict, *, depart: bool) -> dict:
                 out[name] = reading
             # else: speaker unavailable for commercial detection
             continue
+        # A person who is not a return vote must not hold the mute.
+        # Tonight: Herbstreit stayed on the air, audio had already returned,
+        # and his unrecognized voice kept the quorum at 2-of-2.
+        if not depart and name == "speaker" and not _family_yes(name, reading, depart=False):
+            continue
         out[name] = reading
     return out
 
 
-def _quorum(families: dict, *, depart: bool) -> tuple[int, int, str, float]:
+def _show_floor(speaker: dict | None) -> bool:
+    """True when the enrolled show is at or over 0.10 in the last 30 seconds."""
+    if not isinstance(speaker, dict):
+        return False
+    rolling = speaker.get("enroll_rolling_max")
+    if rolling is None:
+        return False
+    try:
+        return show_present(float(rolling))
+    except (TypeError, ValueError):
+        return False
+
+
+def _quorum(families: dict, *, depart: bool, audio_strong: float = AUDIO_STRONG) -> tuple[int, int, str, float]:
     """Return (yes_votes, needed, reason_tag, persist_s)."""
+    speaker_reading = families.get("speaker")
+    if _show_floor(speaker_reading if isinstance(speaker_reading, dict) else None):
+        if depart:
+            return 0, 10**9, "show_floor", 10**9
+        return 1, 1, "show_floor", BOOTH_RETURN_PERSIST_S
     present = _present_for(families, depart=depart)
-    yes = sum(1 for name, reading in present.items() if _family_yes(name, reading, depart=depart))
+    yes = sum(
+        1
+        for name, reading in present.items()
+        if _family_yes(name, reading, depart=depart, audio_strong=audio_strong)
+    )
     if not present:
         return 0, 10**9, "no_families", 10**9
     # Verified booth voice → leave cover immediately.

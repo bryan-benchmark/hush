@@ -1,0 +1,67 @@
+{
+  "product": "TNF_LAB_001",
+  "session": "hush_20261008_205100",
+  "offline_historical": {
+    "note": "90-second block alignment can read future audio. Not a live claim.",
+    "count_200": {
+      "session": "hush_20261008_205100",
+      "network": "Prime Video",
+      "ad_seconds_heard": 2563.4,
+      "program_seconds_covered": 0.0,
+      "false_cover_incidents": 0,
+      "worst_program_interruption_s": 0.0,
+      "ad_seconds": 2583.4,
+      "program_seconds": 7617.0,
+      "unscorable_s": 240.0
+    },
+    "count_10": {
+      "arm": "cold_query_cold_reference",
+      "count": "count_10",
+      "population": "football",
+      "session": "hush_20261008_205100",
+      "network": "Prime Video",
+      "program_seconds_covered": 57.2,
+      "commercial_seconds_covered": 558.1,
+      "false_cover_incidents": 12,
+      "worst_program_interruption_s": 7.2,
+      "ad_seconds_heard": 2025.3,
+      "unscorable_s": 240.0
+    }
+  },
+  "prior_causal_windows": {
+    "note": "FINGERPRINT_BOUNDED_QUERY_001. No audio after the query. Not re-fingerprinted tonight.",
+    "scores": {
+      "145": 33,
+      "150": 137,
+      "155": 92,
+      "160": 26
+    }
+  },
+  "new_causal_state_machine": {
+    "note": "Driven by those four windows only. A missing score is not a return. Gold is used after the run to count seconds.",
+    "gate_200_fail_open_180": {
+      "gate": 200,
+      "fail_open_s": 180,
+      "commercial_seconds_covered": 0,
+      "program_seconds_covered": 0,
+      "machine_covers": 0,
+      "clock": "causal windows only; a missing score does not uncover"
+    },
+    "gate_10_letgo_5s": {
+      "gate": 10,
+      "commercial_seconds_covered": 20,
+      "program_seconds_covered": 0,
+      "clock": "cover only while a causal score is at or above the gate"
+    },
+    "gate_10_stay_fail_open_180": {
+      "gate": 10,
+      "fail_open_s": 180,
+      "commercial_seconds_covered": 180,
+      "program_seconds_covered": 0,
+      "machine_covers": 1,
+      "clock": "causal windows only; a missing score does not uncover"
+    }
+  },
+  "fingerprint_full_file": "NOT RUN",
+  "retrieve_and_verify": "NOT RUN"
+}

@@ -152,22 +152,53 @@ def host_resampling(
     return False
 
 
+_refresh_lock = threading.Lock()
+_last_refresh = 0.0
+
+
 def refresh_audio_host() -> None:
-    """Force PortAudio/Core Audio to rescan devices (USB hotplug)."""
+    """Rescan Core Audio for a newly plugged device.
+
+    Terminating PortAudio on every request races the page's device poll and
+    takes the engine down. One rescan at a time, and not more than every few
+    seconds.
+    """
+    global _last_refresh
+    now = time.monotonic()
+    if now - _last_refresh < 8.0:
+        return
+    if not _refresh_lock.acquire(blocking=False):
+        return
     try:
-        if getattr(sd, "_initialized", False):
-            sd._terminate()
-        sd._initialize()
-    except Exception:
-        # Best-effort: a later query_devices() still returns the last known list.
-        pass
+        if time.monotonic() - _last_refresh < 8.0:
+            return
+        try:
+            if getattr(sd, "_initialized", False):
+                sd._terminate()
+            sd._initialize()
+        except Exception:
+            return
+        _last_refresh = time.monotonic()
+    finally:
+        _refresh_lock.release()
 
 
 def query_audio_devices(*, refresh: bool = False) -> list[dict[str, Any]]:
     if refresh:
         refresh_audio_host()
     found = []
-    for index, device in enumerate(sd.query_devices()):
+    try:
+        listed = list(enumerate(sd.query_devices()))
+    except Exception:
+        if not refresh:
+            refresh_audio_host()
+            try:
+                listed = list(enumerate(sd.query_devices()))
+            except Exception:
+                return []
+        else:
+            return []
+    for index, device in listed:
         found.append(
             {
                 "index": index,

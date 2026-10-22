@@ -41,6 +41,12 @@ The champion is **no authorized mute**. A candidate replaces it only when all of
 
 A higher classification score is not, by itself, an improvement. Standalone recall is not decision accuracy. A missing observation is not evidence against a commercial. Oracle analysis, which may use future games or the gold end, is labeled oracle and is not the champion.
 
+## When the owner locks a result
+
+A lock is the behavior on the television, not a report. Wiring it into `src/hush` or the scoreboard does not lock it.
+
+The same session wires the locked rule into `ohush_live` and restarts the running engine, so the process that is playing audio is the new one. A return brings the game back and blocks a cover. A cover starts only the cover that was locked. The number is not retuned while it is wired. Holdouts stay sealed.
+
 ## Clocks and tolerance
 
 All captures in the closed set are 48 kHz stereo PCM. A 10, 20, 40, or 100 ms window is a measurement window. It is not a requirement that a person label every boundary to that precision.

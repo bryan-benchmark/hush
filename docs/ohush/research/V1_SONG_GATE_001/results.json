@@ -1,0 +1,49 @@
+{
+  "system": "v1_song_gate_001",
+  "mute_policy": false,
+  "installed": false,
+  "song": 0.7,
+  "note": "Count 150 was read off this ledger. The song line was already published. A cover step counts only when both are true.",
+  "lines": [
+    {
+      "count": 200,
+      "require_song": false,
+      "commercial_s": 25.0,
+      "program_s": 0.0,
+      "incidents": 0,
+      "pods_hit": 2,
+      "broken": false,
+      "percentage": 0.142
+    },
+    {
+      "count": 150,
+      "require_song": false,
+      "commercial_s": 124.744,
+      "program_s": 5.256,
+      "incidents": 2,
+      "pods_hit": 13,
+      "broken": true,
+      "percentage": null
+    },
+    {
+      "count": 150,
+      "require_song": true,
+      "commercial_s": 80.0,
+      "program_s": 0.0,
+      "incidents": 0,
+      "pods_hit": 11,
+      "broken": false,
+      "percentage": 0.453
+    },
+    {
+      "count": 200,
+      "require_song": true,
+      "commercial_s": 20.0,
+      "program_s": 0.0,
+      "incidents": 0,
+      "pods_hit": 2,
+      "broken": false,
+      "percentage": 0.113
+    }
+  ]
+}

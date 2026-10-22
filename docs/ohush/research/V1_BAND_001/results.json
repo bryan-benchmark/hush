@@ -1,0 +1,38 @@
+{
+  "system": "v1_band_001",
+  "mute_policy": false,
+  "installed": false,
+  "note": "150 and 100 were read off this ledger. They were not a predeclared line. The 5.3 program seconds are Michaels returning at 4984 on hush_20261008_205100, cosine 0.61.",
+  "lines": [
+    {
+      "count": 200,
+      "published": true,
+      "commercial_s": 25.0,
+      "program_s": 0.0,
+      "incidents": 0,
+      "pods_hit": 2,
+      "broken": false,
+      "percentage": 0.142
+    },
+    {
+      "count": 150,
+      "published": false,
+      "commercial_s": 124.744,
+      "program_s": 5.256,
+      "incidents": 2,
+      "pods_hit": 13,
+      "broken": true,
+      "percentage": null
+    },
+    {
+      "count": 100,
+      "published": false,
+      "commercial_s": 492.553,
+      "program_s": 12.447,
+      "incidents": 5,
+      "pods_hit": 40,
+      "broken": true,
+      "percentage": null
+    }
+  ]
+}

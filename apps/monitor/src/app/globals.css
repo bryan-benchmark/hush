@@ -2426,6 +2426,45 @@ input {
   max-width: 6.25rem;
 }
 
+.sound-picks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sound-pick {
+  border: 1px solid #d9d0e4;
+  background: #fff;
+  color: #2a2140;
+  border-radius: 999px;
+  padding: 0.45rem 0.8rem;
+  font: inherit;
+  cursor: pointer;
+}
+
+.sound-pick.on {
+  background: #2a2140;
+  color: #fff;
+  border-color: #2a2140;
+}
+
+.cover-score {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  margin: 0 0 0.7rem;
+}
+
+.cover-score strong {
+  font-size: 1.8rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.cover-score span,
+.cover-line .setup-help {
+  margin: 0.7rem 0 0;
+}
+
 .desk.light .icon-tip {
   position: relative;
   display: inline-flex;
@@ -3132,4 +3171,81 @@ input {
   .tool-row.marks {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+.tnf-lab.on {
+  outline: 2px solid #b42318;
+}
+
+.tnf-kicker,
+.tnf-stats {
+  margin: 0 0 0.6rem;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+
+.tnf-modes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.7rem;
+}
+
+.tnf-modes button {
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  font: inherit;
+  cursor: pointer;
+}
+
+.tnf-modes button.on {
+  background: #1c1424;
+  color: #fff;
+}
+
+.tnf-call {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin: 0 0 0.7rem;
+  padding: 0.7rem 0.8rem;
+  border-radius: 12px;
+  background: #f4fbf7;
+}
+
+.tnf-call.ad {
+  background: #fff8f7;
+}
+
+.tnf-cap {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+  font-size: 0.9rem;
+}
+
+.tnf-cap input {
+  width: 4.5rem;
+}
+
+.tnf-log {
+  margin: 0 0 0.7rem;
+  padding-left: 1.1rem;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+.tnf-kill {
+  width: 100%;
+  border: 0;
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  background: #b42318;
+  color: #fff;
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
 }

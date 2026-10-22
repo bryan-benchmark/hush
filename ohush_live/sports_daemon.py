@@ -51,6 +51,7 @@ from ohush_live.sittings import (  # noqa: E402
     new_sitting_dir,
     should_continue,
 )
+from ohush_live.tnf_lab import DEFAULT_FAIL_OPEN_S, TnfLab  # noqa: E402
 from ohush_live.sports import (  # noqa: E402
     CHUNK_MINUTES,
     PRODUCT,
@@ -64,6 +65,19 @@ from ohush_live.sports import (  # noqa: E402
     votes,
 )
 from ohush_live.state import Machine  # noqa: E402
+
+
+def _audio_departure(families: dict) -> float | None:
+    reading = families.get("audio") if isinstance(families, dict) else None
+    if not isinstance(reading, dict):
+        return None
+    value = reading.get("departure")
+    if value is None:
+        return None
+    try:
+        return round(float(value), 4)
+    except (TypeError, ValueError):
+        return None
 
 
 def _listener_beds() -> dict:
@@ -174,6 +188,26 @@ def _next_chunk_number(folder: Path) -> int:
     return highest + 1
 
 
+def _spawn_speaker(python: Path, show: str) -> subprocess.Popen:
+    env = os.environ.copy()
+    env["OHUSH_SHOW"] = show
+    return subprocess.Popen(
+        [str(python), str(REPO / "ohush_live" / "speaker_worker.py")],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        env=env,
+    )
+
+
+def begin_auto_cover(gate: ListenerGate) -> None:
+    """An automatic cover. The output clock restores the television if nothing lets go.
+
+    A hand on Cover does not use this. The 180 seconds are the lab's existing deadline.
+    """
+    gate.play_replacement(fail_open_s=DEFAULT_FAIL_OPEN_S)
+
+
 class SportsSession:
     def __init__(self, folder: Path) -> None:
         self.folder = folder
@@ -191,6 +225,7 @@ class SportsSession:
         self.labels = (folder / "labels.jsonl").open("a", encoding="utf-8")
         # Vote / lag / near-miss trail so ad in-out flapping is diagnosable after the fact.
         self.track = (folder / "track.jsonl").open("a", encoding="utf-8")
+        self.tnf = TnfLab(folder / "tnf_lab.jsonl")
         self.events: list[dict] = []
         self.levels: list[dict] = []
         self._last_track_t = -1.0
@@ -304,6 +339,8 @@ class SportsSession:
             "continuity": message.get("continuity"),
             "cluster_id": message.get("cluster_id"),
             "similarity_to_booth": message.get("similarity_to_booth"),
+            "enroll_cosine": message.get("enroll_cosine"),
+            "enroll_rolling_max": message.get("enroll_rolling_max"),
         }
         now = float(message.get("t") or self.clock())
         with self._lock:
@@ -420,9 +457,41 @@ class SportsSession:
                     "product": PRODUCT,
                 },
             )
+        if gate.consume_fail_open():
+            self.tnf.release(timestamp, self.samples, "output_fail_open")
+            if self.machine.restore_from_output(timestamp, families):
+                # Same hold as a hand on Show: do not cover this departure again.
+                self.latch.human_play(was_replacement=True)
+            self._log_decision(
+                timestamp,
+                "REPLACEMENT_TO_PROGRAM",
+                "output_fail_open",
+                families,
+                gate.replacement,
+                False,
+                gate=gate,
+            )
+            print(f"{timestamp:8.1f}  output fail-open restored the television", flush=True)
+        try:
+            lab = self.tnf.tick(timestamp, self.samples, families, record_only=self.record_only())
+        except Exception as exc:
+            lab = {"audio": "play", "view": self.tnf.fail_open(str(exc), timestamp)}
+            print(f"{timestamp:8.1f}  tnf fail-open  {exc}", flush=True)
+        if self.tnf.mode == "auto" and not self.record_only():
+            if gate.auto:
+                gate.auto = False
+            action = lab.get("audio")
+            if action == "cover" and gate.mode != "replacement":
+                gate.play_replacement(fail_open_s=self.tnf.fail_open_s)
+                self._log_decision(timestamp, "PROGRAM_TO_REPLACEMENT", "tnf_lab", families, gate.replacement, False, gate=gate)
+            elif action == "play" and gate.mode == "replacement":
+                gate.play_program()
+                self.hint.reset()
+                self._log_decision(timestamp, "REPLACEMENT_TO_PROGRAM", "tnf_lab", families, gate.replacement, False, gate=gate)
+            return
         if self.record_only() or not auto:
             if self.record_only() and gate.mode != "program":
-                gate.play_program()
+                gate.play_program(prompt=True)
             return
         if gate.mode == "replacement" and self.hint.update(True, returning, 1.0):
             gate.cue_return()
@@ -436,7 +505,7 @@ class SportsSession:
         if not event:
             return
         if event["state_after"] == "MUTED":
-            gate.play_replacement()
+            begin_auto_cover(gate)
             self._log_decision(timestamp, "PROGRAM_TO_REPLACEMENT", "auto", families, gate.replacement, False, gate=gate)
         elif event["state_after"] == "PLAY":
             gate.play_program()
@@ -452,6 +521,8 @@ class SportsSession:
         ):
             print(f"{timestamp:8.1f}  record_only ignores {action}", flush=True)
             return
+        if action in ("mute", "play"):
+            self.tnf.note_human("mute" if action == "mute" else "play", timestamp, self.samples)
         if action == "mute":
             noop = prior == "replacement"
             self.latch.human_mute(was_program=prior == "program")
@@ -473,7 +544,7 @@ class SportsSession:
             noop = prior == "program"
             # Only hold auto-mute when leaving a covered break — not when already on Show.
             self.latch.human_play(was_replacement=prior == "replacement")
-            gate.play_program()
+            gate.play_program(prompt=True)
             self.hint.reset()
             if not noop:
                 self.machine.manual(timestamp, "play", self._families())
@@ -549,7 +620,36 @@ class SportsSession:
             "dataset_role": "live_dev",
         }
         self._append(self.labels, row)
+        self.tnf.label(verdict, row["t"], None if about is None else float(about), self.samples)
         print(f"{row['t']:8.1f}  label {verdict}", flush=True)
+
+    def tnf_command(self, gate: ListenerGate, body: dict) -> None:
+        op = str(body.get("op") or "set")
+        timestamp = self.clock()
+        if op == "kill":
+            self.tnf.kill(timestamp)
+            gate.auto = False
+            gate.play_program(prompt=True)
+            return
+        try:
+            fail_open = body.get("fail_open_s")
+            depart = body.get("audio_depart")
+            result = self.tnf.configure(
+                mode=None if body.get("mode") is None else str(body.get("mode")),
+                return_policy=None if body.get("return_policy") is None else str(body.get("return_policy")),
+                fail_open_s=None if fail_open is None else float(fail_open),
+                audio_depart=None if depart is None else float(depart),
+                t=timestamp,
+            )
+        except (TypeError, ValueError) as exc:
+            self.tnf.fail_open(str(exc), timestamp)
+            gate.auto = False
+            gate.play_program(prompt=True)
+            return
+        if self.tnf.mode == "auto":
+            gate.auto = False
+        if result.get("audio") == "play":
+            gate.play_program(prompt=True)
 
     def snapshot(self, gate: ListenerGate) -> dict:
         families = self._families()
@@ -589,6 +689,9 @@ class SportsSession:
             "service": self.meta.get("service") or "",
             "content": self.meta.get("content") or "sports",
             "record_only": self.record_only(),
+            "cover_bar": self.machine.audio_strong,
+            "audio_score": _audio_departure(families),
+            "tnf": self.tnf.view(self.clock()),
             "booth_ids": list(self._booth_ids),
             "resumable": bool(offer) and not bool(self.live["recording"]),
             "resume_show": offer.get("show") or "",
@@ -601,6 +704,7 @@ class SportsSession:
         }
 
     def close(self) -> None:
+        self.tnf.close()
         for handle in (self.decisions, self.overrides, self.ratings, self.labels, self.track):
             handle.close()
 
@@ -801,7 +905,7 @@ class Desk:
         audio_py = REPO / "experiments" / "exp003" / ".venv" / "bin" / "python"
         speaker_py = REPO / "experiments" / "exp002" / ".venv" / "bin" / "python"
         self._audio_proc = _spawn(audio_py, "audio_worker.py") if audio_py.is_file() else None
-        self._speaker_proc = _spawn(speaker_py, "speaker_worker.py") if speaker_py.is_file() else None
+        self._speaker_proc = _spawn_speaker(speaker_py, str(self.session.meta.get("show") or "")) if speaker_py.is_file() else None
         if self._audio_proc:
             threading.Thread(target=_pump, args=(self._audio_proc, self._hub), daemon=True).start()
         if self._speaker_proc:
@@ -875,6 +979,11 @@ class Desk:
                 _run_streams(self.gate, record_q, detect_q, source["index"], speakers["index"], stop)
             except Exception as exc:
                 self.session.live["error"] = str(exc)
+                self.gate.play_program(prompt=True)
+                try:
+                    self.session.tnf.fail_open(str(exc))
+                except Exception:
+                    pass
                 print(exc, flush=True)
             finally:
                 if self.session.live["recording"]:
@@ -914,6 +1023,19 @@ class Desk:
             _mark_active_stopped(self._active_payload(recording=False))
         print("recording paused", flush=True)
 
+    def set_cover_bar(self, value: float) -> None:
+        """How far the sound has to move from the game before Best model covers.
+
+        0.22 is the installed line. Higher waits for a stronger change.
+        Lower covers sooner and can cover a play. The return line stays put.
+        """
+        bar = round(float(value), 2)
+        if bar < 0.10 or bar > 0.45:
+            return
+        with self._lock:
+            self.session.machine.audio_strong = bar
+            self.session.tnf.configure(audio_depart=bar, t=self.session.clock())
+
     def set_record_only(self, record_only: bool) -> None:
         """Hear the TV, or cover ads again. The WAV keeps rolling either way."""
         with self._lock:
@@ -925,7 +1047,18 @@ class Desk:
             )
             self.gate.auto = not record_only
             if record_only:
-                self.gate.play_program()
+                self.gate.play_program(prompt=True)
+                released = self.session.tnf.release(self.session.clock(), self.session.samples, "record_only")
+                if released:
+                    self.session._log_decision(
+                        self.session.clock(),
+                        "REPLACEMENT_TO_PROGRAM",
+                        "record_only",
+                        self.session._families(),
+                        self.gate.replacement,
+                        False,
+                        gate=self.gate,
+                    )
             elif self.session.live["recording"] and self._detect_q is not None and self._stop is not None:
                 self._start_detect(self._detect_q, self._stop)
             if _read_active() or self.session.live["recording"]:
@@ -1016,7 +1149,12 @@ def _serve(desk: Desk) -> None:
                 return
             if path == "/devices":
                 # Rescan USB/Core Audio unless a live stream is open.
-                self._send(200, _devices(refresh=not bool(session.live.get("recording"))))
+                # A PortAudio failure must not take the request thread down.
+                try:
+                    payload = _devices(refresh=not bool(session.live.get("recording")))
+                except Exception as exc:
+                    payload = {"inputs": [], "outputs": [], "error": str(exc)}
+                self._send(200, payload)
                 return
             if path.startswith("/media/"):
                 name = Path(path).name
@@ -1071,7 +1209,10 @@ def _serve(desk: Desk) -> None:
                 self._send(code, {**session.snapshot(gate), "error": err or session.live["error"]})
                 return
             if path == "/mode":
-                desk.set_record_only(bool(body.get("record_only")))
+                if "record_only" in body:
+                    desk.set_record_only(bool(body.get("record_only")))
+                if body.get("cover_bar") is not None:
+                    desk.set_cover_bar(float(body.get("cover_bar")))
                 session = desk.session
                 self._send(200, session.snapshot(gate))
                 return
@@ -1088,6 +1229,10 @@ def _serve(desk: Desk) -> None:
                     str(body.get("note") or ""),
                     None if about is None else float(about),
                 )
+                self._send(200, session.snapshot(gate))
+                return
+            if path == "/tnf":
+                session.tnf_command(gate, body)
                 self._send(200, session.snapshot(gate))
                 return
             self._send(404, {"error": "not found"})

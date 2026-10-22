@@ -1,0 +1,307 @@
+{
+  "system": "outro_return_001",
+  "mute_policy": false,
+  "installed": false,
+  "window_s": 8.0,
+  "look_s": 120.0,
+  "floor": 0.1,
+  "booth_line": 0.25,
+  "counts": [
+    10,
+    20,
+    50,
+    200
+  ],
+  "skipped_under_8s": 3,
+  "missing_audio": 0,
+  "self_match": {
+    "n": 133,
+    "min": 468,
+    "median": 692
+  },
+  "kinds": {
+    "outro": {
+      "n": 133,
+      "with_library": 132,
+      "score_median": 2,
+      "score_p90": 7,
+      "score_max": 44,
+      "bands": {
+        "0": 21,
+        "1-9": 101,
+        "10-19": 4,
+        "20-49": 6
+      },
+      "hits": {
+        "10": 10,
+        "20": 6,
+        "50": 0,
+        "200": 0
+      }
+    },
+    "program": {
+      "n": 2050,
+      "with_library": 2036,
+      "score_median": 1,
+      "score_p90": 3,
+      "score_max": 13,
+      "bands": {
+        "0": 765,
+        "1-9": 1265,
+        "10-19": 6
+      },
+      "hits": {
+        "10": 6,
+        "20": 0,
+        "50": 0,
+        "200": 0
+      }
+    },
+    "ad": {
+      "n": 126,
+      "with_library": 126,
+      "score_median": 1,
+      "score_p90": 3,
+      "score_max": 10,
+      "bands": {
+        "0": 44,
+        "1-9": 81,
+        "10-19": 1
+      },
+      "hits": {
+        "10": 1,
+        "20": 0,
+        "50": 0,
+        "200": 0
+      }
+    },
+    "redzone": {
+      "n": 240,
+      "with_library": 240,
+      "score_median": 1,
+      "score_p90": 3,
+      "score_max": 9,
+      "bands": {
+        "0": 118,
+        "1-9": 122
+      },
+      "hits": {
+        "10": 0,
+        "20": 0,
+        "50": 0,
+        "200": 0
+      }
+    }
+  },
+  "counts_detail": {
+    "10": {
+      "by_network": {
+        "NBC": {
+          "library": 39,
+          "hits": 1,
+          "same_game": 0
+        },
+        "ESPN": {
+          "library": 15,
+          "hits": 1,
+          "same_game": 1
+        },
+        "Prime": {
+          "library": 12,
+          "hits": 1,
+          "same_game": 1
+        },
+        "Prime Video": {
+          "library": 23,
+          "hits": 2,
+          "same_game": 0
+        },
+        "Cable / antenna": {
+          "library": 43,
+          "hits": 5,
+          "same_game": 2
+        }
+      },
+      "program_hits": 6,
+      "program_per_hour": 0.351,
+      "enrolled_program_hits": 0,
+      "enrolled_program_per_hour": 0.0,
+      "cable_program_hits": 6,
+      "ad_hits": 1,
+      "redzone_hits": 0,
+      "redzone_per_hour": 0.0,
+      "path": {
+        "commercial_s": 638.68,
+        "program_s": 329.08,
+        "broken": true
+      }
+    },
+    "20": {
+      "by_network": {
+        "NBC": {
+          "library": 39,
+          "hits": 0,
+          "same_game": 0
+        },
+        "ESPN": {
+          "library": 15,
+          "hits": 0,
+          "same_game": 0
+        },
+        "Prime": {
+          "library": 12,
+          "hits": 1,
+          "same_game": 1
+        },
+        "Prime Video": {
+          "library": 23,
+          "hits": 2,
+          "same_game": 0
+        },
+        "Cable / antenna": {
+          "library": 43,
+          "hits": 3,
+          "same_game": 0
+        }
+      },
+      "program_hits": 0,
+      "program_per_hour": 0.0,
+      "enrolled_program_hits": 0,
+      "enrolled_program_per_hour": 0.0,
+      "cable_program_hits": 0,
+      "ad_hits": 0,
+      "redzone_hits": 0,
+      "redzone_per_hour": 0.0,
+      "path": {
+        "commercial_s": 328.812,
+        "program_s": 252.251,
+        "broken": true
+      }
+    },
+    "50": {
+      "by_network": {
+        "NBC": {
+          "library": 39,
+          "hits": 0,
+          "same_game": 0
+        },
+        "ESPN": {
+          "library": 15,
+          "hits": 0,
+          "same_game": 0
+        },
+        "Prime": {
+          "library": 12,
+          "hits": 0,
+          "same_game": 0
+        },
+        "Prime Video": {
+          "library": 23,
+          "hits": 0,
+          "same_game": 0
+        },
+        "Cable / antenna": {
+          "library": 43,
+          "hits": 0,
+          "same_game": 0
+        }
+      },
+      "program_hits": 0,
+      "program_per_hour": 0.0,
+      "enrolled_program_hits": 0,
+      "enrolled_program_per_hour": 0.0,
+      "cable_program_hits": 0,
+      "ad_hits": 0,
+      "redzone_hits": 0,
+      "redzone_per_hour": 0.0,
+      "path": {
+        "commercial_s": 0.0,
+        "program_s": 0.0,
+        "broken": false
+      }
+    },
+    "200": {
+      "by_network": {
+        "NBC": {
+          "library": 39,
+          "hits": 0,
+          "same_game": 0
+        },
+        "ESPN": {
+          "library": 15,
+          "hits": 0,
+          "same_game": 0
+        },
+        "Prime": {
+          "library": 12,
+          "hits": 0,
+          "same_game": 0
+        },
+        "Prime Video": {
+          "library": 23,
+          "hits": 0,
+          "same_game": 0
+        },
+        "Cable / antenna": {
+          "library": 43,
+          "hits": 0,
+          "same_game": 0
+        }
+      },
+      "program_hits": 0,
+      "program_per_hour": 0.0,
+      "enrolled_program_hits": 0,
+      "enrolled_program_per_hour": 0.0,
+      "cable_program_hits": 0,
+      "ad_hits": 0,
+      "redzone_hits": 0,
+      "redzone_per_hour": 0.0,
+      "path": {
+        "commercial_s": 0.0,
+        "program_s": 0.0,
+        "broken": false
+      }
+    }
+  },
+  "oracle_enrolled_outros": {
+    "n": 90,
+    "where_the_broadcaster_is_found": {
+      "ad": 59,
+      "game": 28,
+      "none": 3
+    },
+    "look_opens_after_the_game_returned": 17,
+    "look_opens_while_the_ad_is_still_on": 73,
+    "game_already_median_s": 72.257,
+    "ad_still_on_median_s": 16.375,
+    "fail_open": 3,
+    "program_seconds_by_reason": {
+      "broadcaster_found_inside_an_ad": {
+        "n": 59,
+        "program_s": 87.467
+      },
+      "look_opens_after_the_game_returned": {
+        "n": 12,
+        "program_s": 838.991
+      },
+      "broadcaster_found_after_the_ad": {
+        "n": 16,
+        "program_s": 334.345
+      },
+      "look_expires": {
+        "n": 3,
+        "program_s": 718.627
+      }
+    },
+    "path_if_every_outro_were_known": {
+      "commercial_s": 10121.982,
+      "program_s": 1979.43,
+      "broken": true
+    },
+    "path_at_the_published_0_25_line": {
+      "commercial_s": 11324.876,
+      "program_s": 3144.545,
+      "broken": true
+    }
+  }
+}

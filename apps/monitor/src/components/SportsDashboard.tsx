@@ -174,6 +174,27 @@ const KINDS = [
   { id: "other", tip: "Something else", label: "Other", icon: Icons.other },
 ];
 
+type TnfView = {
+  mode?: string;
+  return_policy?: string;
+  fail_open_s?: number;
+  phase?: number;
+  covering?: boolean;
+  cover_elapsed_s?: number | null;
+  suggestion?: string;
+  last_reason?: string;
+  last_score?: number | null;
+  audio_depart?: number;
+  suggested_starts?: number;
+  machine_covers?: number;
+  manual_rescues?: number;
+  transitions?: { t?: number; kind?: string; reason?: string }[];
+  fingerprint?: string;
+  error?: string;
+  start?: string;
+  return?: string;
+};
+
 type DeskState = {
   state: "PROGRAM" | "REPLACEMENT";
   auto: boolean;
@@ -192,10 +213,13 @@ type DeskState = {
   service?: string;
   content?: string;
   record_only?: boolean;
+  cover_bar?: number | null;
+  audio_score?: number | null;
   resume_show?: string;
   resume_service?: string;
   resume_content?: string;
   resume_within_min?: number;
+  tnf?: TnfView;
 };
 
 type Device = { index: number; name: string };
@@ -261,11 +285,40 @@ function asDeskState(value: unknown): DeskState | null {
     service: typeof row.service === "string" ? row.service : "",
     content: typeof row.content === "string" ? row.content : "sports",
     record_only: Boolean(row.record_only),
+    cover_bar: readCoverBar(value),
+    audio_score: readAudioScore(value),
     resume_show: typeof row.resume_show === "string" ? row.resume_show : "",
     resume_service: typeof row.resume_service === "string" ? row.resume_service : "",
     resume_content: typeof row.resume_content === "string" ? row.resume_content : "",
     resume_within_min: Number.isFinite(Number(row.resume_within_min)) ? Number(row.resume_within_min) : 30,
+    tnf: row.tnf && typeof row.tnf === "object" ? row.tnf : currentTnf(value),
   };
+}
+
+function readAudioScore(value: unknown): number | null {
+  if (!value || typeof value !== "object") return null;
+  const row = value as { audio_score?: number; families?: { audio?: { departure?: number } } };
+  if (typeof row.audio_score === "number" && Number.isFinite(row.audio_score)) return row.audio_score;
+  const departure = row.families?.audio?.departure;
+  return typeof departure === "number" && Number.isFinite(departure) ? departure : null;
+}
+
+function readCoverBar(value: unknown): number | null {
+  if (!value || typeof value !== "object") return null;
+  const bar = (value as { cover_bar?: number }).cover_bar;
+  return typeof bar === "number" && Number.isFinite(bar) ? bar : null;
+}
+
+const COVER_LINES = [
+  { value: 0.3, label: "Careful", hint: "Waits for a strong change" },
+  { value: 0.22, label: "Usual", hint: "The installed line" },
+  { value: 0.14, label: "Sooner", hint: "Covers more, can cover a play" },
+];
+
+function currentTnf(value: unknown): TnfView | undefined {
+  if (!value || typeof value !== "object") return undefined;
+  const tnf = (value as { tnf?: TnfView }).tnf;
+  return tnf && typeof tnf === "object" ? tnf : undefined;
 }
 
 function restoreForm(nextState: DeskState, setters: {
@@ -284,6 +337,51 @@ function restoreForm(nextState: DeskState, setters: {
   if (setters.setRecordOnly) setters.setRecordOnly(Boolean(nextState.record_only));
 }
 
+function CoverLine({
+  score,
+  bar,
+  fallback,
+  busy,
+  onPick,
+}: {
+  score: number | null | undefined;
+  bar: number | null | undefined;
+  fallback: number;
+  busy: boolean;
+  onPick: (value: number) => void;
+}) {
+  const chosen = typeof bar === "number";
+  const active = chosen ? bar : fallback;
+  const text = typeof score === "number" ? score.toFixed(2) : "—";
+  return (
+    <div className="cover-line">
+      <p className="cover-score">
+        <strong>{text}</strong>
+        <span>right now. The game usually stays under 0.10.</span>
+      </p>
+      <div className="sound-picks" role="group" aria-label="Cover line">
+        {COVER_LINES.map((line) => (
+          <button
+            key={line.value}
+            type="button"
+            className={Math.abs(active - line.value) < 0.011 ? "sound-pick on" : "sound-pick"}
+            disabled={busy || !chosen}
+            title={line.hint}
+            onClick={() => onPick(line.value)}
+          >
+            {line.label} {line.value.toFixed(2)}
+          </button>
+        ))}
+      </div>
+      <p className="setup-help">
+        {chosen
+          ? "Higher means it waits until the sound is further from the game. Show the game still comes back immediately."
+          : `This recording stays at ${active.toFixed(2)}. A different line starts with the next engine.`}
+      </p>
+    </div>
+  );
+}
+
 function dur(seconds: number) {
   const s = Math.max(0, Math.floor(seconds));
   const h = Math.floor(s / 3600);
@@ -291,6 +389,103 @@ function dur(seconds: number) {
   const r = s % 60;
   if (h > 0) return `${h}:${String(m).padStart(2, "0")}:${String(r).padStart(2, "0")}`;
   return `${m}:${String(r).padStart(2, "0")}`;
+}
+
+function TnfLabPanel({
+  tnf,
+  busy,
+  recordOnly,
+  onCommand,
+}: {
+  tnf?: TnfView;
+  busy: boolean;
+  recordOnly: boolean;
+  onCommand: (body: { op?: string; mode?: string; return_policy?: string; fail_open_s?: number }) => void;
+}) {
+  const mode = tnf?.mode || "observe";
+  const suggestion = tnf?.suggestion || "unsure";
+  const suggestionText =
+    suggestion === "probably_ad" ? "Probably ad" : suggestion === "probably_game" ? "Probably game" : "Unsure";
+  return (
+    <section className={mode === "auto" ? "app-group tnf-lab on" : "app-group tnf-lab"}>
+      <p className="app-group-label">TNF Lab</p>
+      <div className="app-group-body">
+        <p className="tnf-kicker">
+          {mode === "auto" ? "Experimental Auto is ON" : mode === "suggest" ? "Suggest only · TV stays on" : "Observe · TV stays on"}
+          {recordOnly ? " · Record only blocks cover" : ""}
+        </p>
+        <div className="tnf-modes" role="group" aria-label="TNF lab mode">
+          {(["observe", "suggest", "auto"] as const).map((name) => (
+            <button
+              key={name}
+              type="button"
+              className={mode === name ? "on" : ""}
+              disabled={busy || (name === "auto" && recordOnly)}
+              onClick={() => onCommand({ mode: name, op: "set" })}
+            >
+              {name === "auto" ? "Experimental Auto" : name === "suggest" ? "Suggest" : "Observe"}
+            </button>
+          ))}
+        </div>
+        <p className={suggestion === "probably_ad" ? "tnf-call ad" : "tnf-call"}>
+          <strong>{suggestionText}</strong>
+          <span>
+            {tnf?.last_reason || "waiting"}
+            {tnf?.last_score != null ? ` · ${Number(tnf.last_score).toFixed(2)}` : ""}
+          </span>
+        </p>
+        <div className="tnf-modes" role="group" aria-label="Return policy">
+          <button
+            type="button"
+            className={(tnf?.return_policy || "manual") === "manual" ? "on" : ""}
+            disabled={busy}
+            onClick={() => onCommand({ return_policy: "manual", op: "set" })}
+          >
+            Start: machine · Return: you
+          </button>
+          <button
+            type="button"
+            className={tnf?.return_policy === "machine" ? "on" : ""}
+            disabled={busy}
+            onClick={() => onCommand({ return_policy: "machine", op: "set" })}
+          >
+            Return: machine
+          </button>
+        </div>
+        <label className="tnf-cap">
+          Fail-open after
+          <input
+            type="number"
+            min={30}
+            max={600}
+            value={tnf?.fail_open_s || 180}
+            disabled={busy}
+            onChange={(event) => onCommand({ fail_open_s: Number(event.target.value), op: "set" })}
+          />
+          seconds
+        </label>
+        <p className="tnf-stats">
+          Cover {tnf?.cover_elapsed_s != null ? `${tnf.cover_elapsed_s}s` : "off"}
+          {" · "}starts {tnf?.suggested_starts ?? 0}
+          {" · "}machine covers {tnf?.machine_covers ?? 0}
+          {" · "}rescues {tnf?.manual_rescues ?? 0}
+          {" · "}fingerprint {tnf?.fingerprint || "not_run"}
+        </p>
+        <ul className="tnf-log">
+          {(tnf?.transitions || []).length === 0 ? <li>No lab transitions yet.</li> : null}
+          {(tnf?.transitions || []).map((row, index) => (
+            <li key={`${row.t}-${index}`}>
+              {row.t ?? "—"} · {row.kind} · {row.reason}
+            </li>
+          ))}
+        </ul>
+        <button type="button" className="tnf-kill" disabled={busy} onClick={() => onCommand({ op: "kill" })}>
+          STOP AUTO / PLAY TV
+        </button>
+        {!tnf ? <p className="tnf-kicker">Lab state appears after the engine restarts.</p> : null}
+      </div>
+    </section>
+  );
 }
 
 export function SportsDashboard() {
@@ -459,7 +654,7 @@ export function SportsDashboard() {
   useEffect(() => {
     if (!ready || desk.recording || testMode) return;
     void refreshDevices();
-    const timer = setInterval(() => void refreshDevices(), 1500);
+    const timer = setInterval(() => void refreshDevices(), 8000);
     return () => clearInterval(timer);
   }, [ready, desk.recording, refreshDevices, testMode]);
 
@@ -483,6 +678,22 @@ export function SportsDashboard() {
             if (action === "auto") next.auto = !current.auto;
             if (action.startsWith("sound_")) next.replacement = action.slice(6);
             return next;
+          });
+        }
+        if (path === "/tnf") {
+          const command = body as { op?: string; mode?: string; return_policy?: string; fail_open_s?: number };
+          setDesk((current) => {
+            const tnf = { ...(current.tnf || {}), mode: current.tnf?.mode || "observe" };
+            if (command.op === "kill") {
+              tnf.mode = "observe";
+              tnf.covering = false;
+              tnf.last_reason = "kill";
+            } else {
+              if (command.mode) tnf.mode = command.mode;
+              if (command.return_policy) tnf.return_policy = command.return_policy;
+              if (command.fail_open_s) tnf.fail_open_s = command.fail_open_s;
+            }
+            return { ...current, tnf, state: command.op === "kill" || tnf.mode !== "auto" ? current.state : current.state };
           });
         }
         if (path === "/stop") {
@@ -509,8 +720,9 @@ export function SportsDashboard() {
     [applyState, testMode, desk],
   );
 
-  const start = async (fresh = false) => {
+  const start = async (fresh = false, recordOnlyChoice = recordOnly) => {
     if (!setupReady || busy) return;
+    setRecordOnly(recordOnlyChoice);
     if (testMode) {
       setDesk({
         ...PREVIEW,
@@ -530,7 +742,7 @@ export function SportsDashboard() {
       content: content.trim(),
       input: inputName,
       output: outputName,
-      record_only: recordOnly,
+      record_only: recordOnlyChoice,
       fresh,
     });
     if (payload?.error) setBootError(payload.error);
@@ -710,17 +922,6 @@ export function SportsDashboard() {
               </label>
               {(bootError || desk.error) && <p className="desk-error">{bootError || desk.error}</p>}
               <div className="setup-start">
-                <label className="record-only-toggle">
-                  <input
-                    type="checkbox"
-                    checked={recordOnly}
-                    onChange={(event) => setRecordOnly(event.target.checked)}
-                  />
-                  <span>
-                    <strong>Record only</strong>
-                    <em>Capture TV audio. No ad cover, no vibe beds.</em>
-                  </span>
-                </label>
                 {sameSitting ? (
                   <p className="setup-hint">
                     This show is still open for {resumeMinutes} minutes. Keep that recording, or start a new one.
@@ -745,10 +946,18 @@ export function SportsDashboard() {
                   type="button"
                   className="start-ohush"
                   disabled={busy || !setupReady}
-                  onClick={() => void start(false)}
+                  onClick={() => void start(false, true)}
                 >
                   <span className="start-ohush-icon">{Icons.start}</span>
-                  {sameSitting ? "Keep recording" : recordOnly ? "Start recording" : "Start OHush"}
+                  {sameSitting ? "Keep recording" : "Record only"}
+                </button>
+                <button
+                  type="button"
+                  className="start-secondary"
+                  disabled={busy || !setupReady}
+                  onClick={() => void start(false, false)}
+                >
+                  Best model
                 </button>
                 {sameSitting ? (
                   <button
@@ -786,11 +995,10 @@ export function SportsDashboard() {
           <p className="meta-title">{title}</p>
           <p className="meta-sub">
             {where}
-            {recordingOnly ? <span> · Record only</span> : null}
+            {recordingOnly ? <span> · Record only</span> : <span> · Best model</span>}
             {timeNote ? <span className="mono"> · {timeNote}</span> : null}
           </p>
         </div>
-        <ModeToggle testMode={testMode} onChange={changeMode} />
       </header>
 
       {testMode ? <p className="preview-banner">Test mode · nothing is recorded</p> : null}
@@ -818,59 +1026,19 @@ export function SportsDashboard() {
           </section>
 
           <section className="app-group">
-            <p className="app-group-label">{recordingOnly ? "Session" : "Quick Fix"}</p>
+            <p className="app-group-label">Session</p>
             <div className="app-group-body">
-              <div className="icon-grid">
-                {recordingOnly ? null : (
-                  <>
-                    <IconTip
-                      tip="That was the show"
-                      disabled={busy}
-                      onClick={() =>
-                        void (async () => {
-                          await post("/label", { verdict: "program", about: desk.timestamp });
-                          await post("/override", { action: "play" });
-                        })()
-                      }
-                    >
-                      {Icons.fixShow}
-                    </IconTip>
-                    <IconTip
-                      tip="That was an ad"
-                      disabled={busy}
-                      onClick={() =>
-                        void (async () => {
-                          await post("/label", { verdict: "commercial", about: desk.timestamp });
-                          if (!commercial) await post("/override", { action: "mute" });
-                        })()
-                      }
-                    >
-                      {Icons.fixAd}
-                    </IconTip>
-                    <IconTip
-                      tip={desk.auto ? "Auto on — tap to pause" : "Auto off — tap to resume"}
-                      active={desk.auto}
-                      disabled={busy}
-                      onClick={() => void post("/override", { action: "auto" })}
-                    >
-                      {desk.auto ? Icons.autoOn : Icons.autoOff}
-                    </IconTip>
-                  </>
-                )}
-                <IconTip
-                  tip="End session"
-                  danger
-                  disabled={busy}
-                  onClick={() => {
-                    const message = testMode
-                      ? "End this test session?"
-                      : "End this recording? Audio already saved stays. The same name continues it for 30 minutes; after that it is a new recording.";
-                    if (window.confirm(message)) void post("/stop", {});
-                  }}
-                >
-                  {Icons.stop}
-                </IconTip>
-              </div>
+              {recordingOnly ? (
+                <p className="setup-help">The television stays on the speakers. The optical audio is being saved.</p>
+              ) : (
+                <CoverLine
+                  score={desk.audio_score}
+                  bar={desk.cover_bar}
+                  fallback={desk.tnf?.mode === "auto" ? 0.14 : 0.22}
+                  busy={busy}
+                  onPick={(value) => void post("/mode", { record_only: false, cover_bar: value })}
+                />
+              )}
             </div>
           </section>
         </div>
@@ -878,82 +1046,24 @@ export function SportsDashboard() {
         <div className="live-col">
           {recordingOnly ? null : (
           <section className="app-group">
-            <p className="app-group-label">Ad Sound</p>
-            <div className="app-group-body">
-              <div className="icon-grid sounds" role="group" aria-label="Ad sound">
-                {(desk.sounds.length ? desk.sounds : Object.keys(SOUND_LABEL)).map((name) => (
-                  <IconTip
-                    key={name}
-                    tip={SOUND_LABEL[name] ?? name}
-                    active={desk.replacement === name}
-                    disabled={busy}
-                    onClick={() => void post("/override", { action: `sound_${name}` })}
-                  >
-                    {SOUND_ICON[name] ?? Icons.more}
-                  </IconTip>
-                ))}
-              </div>
+            <p className="app-group-label">Cover sound</p>
+            <div className="app-group-body sound-picks">
+              {(desk.sounds.length ? desk.sounds : Object.keys(SOUND_LABEL)).map((name) => (
+                <button
+                  key={name}
+                  type="button"
+                  className={desk.replacement === name ? "sound-pick on" : "sound-pick"}
+                  disabled={busy}
+                  onClick={() => void post("/override", { action: `sound_${name}` })}
+                >
+                  {SOUND_LABEL[name] ?? name}
+                </button>
+              ))}
             </div>
           </section>
           )}
 
           <section className="app-group">
-            {recordingOnly ? null : (
-            <details className="live-more flat">
-              <summary>Rate this sound</summary>
-              <div className="app-group-body">
-                <div className="icon-grid">
-                  {[1, 2, 3, 4, 5].map((score) => (
-                    <IconTip
-                      key={score}
-                      tip={`Pleasantness ${score} of 5`}
-                      disabled={busy}
-                      onClick={() => void post("/override", { action: `rate${score}` })}
-                    >
-                      {Icons.star}
-                      <em className="icon-badge">{score}</em>
-                    </IconTip>
-                  ))}
-                  <IconTip tip="Keep every break" disabled={busy} onClick={() => void post("/override", { action: "want_yes" })}>
-                    {Icons.keep}
-                  </IconTip>
-                  <IconTip tip="Not every break" disabled={busy} onClick={() => void post("/override", { action: "want_no" })}>
-                    {Icons.skip}
-                  </IconTip>
-                </div>
-              </div>
-            </details>
-            )}
-            {recordingOnly ? null : (
-            <details className="live-more flat">
-              <summary>Breaks tonight ({breaks.length})</summary>
-              <div className="app-group-body">
-                <ol className="break-list">
-                  {breaks.length === 0 ? <li className="soft">No ads marked yet.</li> : null}
-                  {breaks.map((span) => (
-                    <li key={`${span.start}-${span.live}`}>
-                      <div>
-                        <strong>{dur((span.live ? desk.timestamp : span.end) - span.start)}</strong>
-                        <span>
-                          {span.live ? "now" : `${dur(desk.timestamp - span.end)} ago`}
-                          {" · "}
-                          {SOUND_LABEL[span.sound] ?? span.sound}
-                        </span>
-                      </div>
-                      <div className="icon-grid compact">
-                        <IconTip tip="Was the show" disabled={busy} onClick={() => void post("/label", { verdict: "program", about: span.start })}>
-                          {Icons.fixShow}
-                        </IconTip>
-                        <IconTip tip="Was an ad" disabled={busy} onClick={() => void post("/label", { verdict: "commercial", about: span.start })}>
-                          {Icons.fixAd}
-                        </IconTip>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </details>
-            )}
             {desk.chunks.length ? (
               <details className="live-more flat">
                 <summary>Replay</summary>
@@ -976,60 +1086,44 @@ export function SportsDashboard() {
         </div>
       </div>
 
-      {recordingOnly ? (
-        <footer className="app-dock">
-          <button
-            type="button"
-            className="live-action ad"
-            disabled={busy || testMode}
-            onClick={() => void post("/mode", { record_only: false })}
-          >
-            Cover ads again
-          </button>
-          <button
-            type="button"
-            className="live-action show"
-            disabled={busy}
-            onClick={() => {
-              if (window.confirm("End this recording? Audio already saved stays.")) void post("/stop", {});
-            }}
-          >
-            <span>{Icons.stop}</span>
-            End recording
-          </button>
-        </footer>
-      ) : (
-        <footer className="app-dock">
-          <button
-            type="button"
-            className="live-action pass"
-            disabled={busy || testMode}
-            onClick={() => void post("/mode", { record_only: true })}
-          >
-            Hear the TV
-          </button>
-          <div className="dock-row">
+      <footer className="app-dock">
+        <button
+          type="button"
+          className={recordingOnly ? "live-action show" : "live-action pass"}
+          disabled={busy || testMode}
+          onClick={() => void post("/mode", { record_only: true })}
+        >
+          Record only
+        </button>
+        <button
+          type="button"
+          className={recordingOnly ? "live-action pass" : "live-action ad"}
+          disabled={busy || testMode}
+          onClick={() => void post("/mode", { record_only: false })}
+        >
+          Best model
+        </button>
+        {recordingOnly ? null : (
           <button
             type="button"
             className="live-action show"
             disabled={busy}
             onClick={() => void post("/override", { action: "play" })}
           >
-            <span>{Icons.play}</span>
-            Show
+            Show the game
           </button>
-          <button
-            type="button"
-            className="live-action ad"
-            disabled={busy}
-            onClick={() => void post("/override", { action: "mute" })}
-          >
-            <span>{Icons.mute}</span>
-            Cover ad
-          </button>
-          </div>
-        </footer>
-      )}
+        )}
+        <button
+          type="button"
+          className="live-action pass"
+          disabled={busy}
+          onClick={() => {
+            if (window.confirm("End this recording? Audio already saved stays.")) void post("/stop", {});
+          }}
+        >
+          End recording
+        </button>
+      </footer>
     </main>
   );
 }

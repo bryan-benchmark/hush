@@ -360,7 +360,13 @@ function liveJobsFrom(rows: readonly SessionInfo[]): ListenJob[] {
     });
 }
 
-export function LabelApp({ task }: { task?: "replication" | "dataset" }) {
+export function LabelApp({
+  task,
+  initialSession,
+}: {
+  task?: "replication" | "dataset";
+  initialSession?: string;
+}) {
   const [mode, setMode] = useState<"debug" | "timeline">("timeline");
   const [extraJobs, setExtraJobs] = useState<ListenJob[]>([]);
   const jobs = useMemo(
@@ -539,7 +545,7 @@ export function LabelApp({ task }: { task?: "replication" | "dataset" }) {
       setSessions(list);
       setCoverageRanges(ranges);
       setTimelineSession((prev) => {
-        const next = pickOpenSession(list, ranges, prev);
+        const next = pickOpenSession(list, ranges, prev || initialSession || "");
         const job = merged.find((row) => row.session === next);
         if (replication && job) setTimelineStart(job.t0);
         return next;
@@ -558,7 +564,7 @@ export function LabelApp({ task }: { task?: "replication" | "dataset" }) {
         setError(e instanceof Error ? e.message : "Failed to load sessions");
       }
     }
-  }, [coverageManifest, jobs, replication]);
+  }, [coverageManifest, initialSession, jobs, replication]);
 
   const loadCandidates = useCallback(async (id: string) => {
     if (!id) {

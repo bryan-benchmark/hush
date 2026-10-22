@@ -1,0 +1,54 @@
+{
+  "denominator": {
+    "program_seconds": 67428.0,
+    "commercial_seconds": 17648.4,
+    "corpus_seconds": 85076.4,
+    "redzone_excluded": true,
+    "cells": {
+      "true_positive": "commercial seconds muted",
+      "false_positive": "program seconds cut",
+      "false_negative": "commercial seconds heard",
+      "true_negative": "program seconds left playing"
+    },
+    "accuracy": "(true_positive + true_negative) / 85076.4",
+    "weighted_harm": "100 * false_positive + false_negative"
+  },
+  "rows": [
+    {"experiment": "play", "true_positive": 0, "false_positive": 0, "false_negative": 17648.4, "true_negative": 67428.0, "accuracy": 0.7926, "weighted_harm": 17648.4, "direction": "champion"},
+    {"experiment": "universal_v1_count_200", "true_positive": 25.0, "false_positive": 0, "false_negative": 17623.4, "true_negative": 67428.0, "accuracy": 0.7929, "weighted_harm": 17623.4, "direction": "correct"},
+    {"experiment": "show_roster", "true_positive": 0, "false_positive": 0, "false_negative": 17648.4, "true_negative": 67428.0, "accuracy": 0.7926, "weighted_harm": 17648.4, "direction": "flat"},
+    {"experiment": "universal_v2_selected", "true_positive": 0, "false_positive": 0, "false_negative": 17648.4, "true_negative": 67428.0, "accuracy": 0.7926, "weighted_harm": 17648.4, "direction": "drops_the_25s"},
+    {"experiment": "universal_v3_embeddings", "true_positive": 0, "false_positive": 0, "false_negative": 17648.4, "true_negative": 67428.0, "accuracy": 0.7926, "weighted_harm": 17648.4, "direction": "drops_the_25s"},
+    {"experiment": "universal_v4_sequence", "true_positive": 0, "false_positive": 0, "false_negative": 17648.4, "true_negative": 67428.0, "accuracy": 0.7926, "weighted_harm": 17648.4, "direction": "drops_the_25s"},
+    {"experiment": "count_10", "true_positive": 3903.2, "false_positive": 432.1, "false_negative": 13745.2, "true_negative": 66995.9, "accuracy": 0.8334, "weighted_harm": 56955.2, "direction": "cuts_the_game"},
+    {"experiment": "count_10_voice_guard", "true_positive": 3814.3, "false_positive": 404.6, "false_negative": 13834.1, "true_negative": 67023.4, "accuracy": 0.8326, "weighted_harm": 54294.1, "direction": "cuts_the_game"},
+    {"experiment": "count_10_guard_october_backfill", "true_positive": 3438.6, "false_positive": 299.8, "false_negative": 14209.8, "true_negative": 67128.2, "accuracy": 0.8295, "weighted_harm": 44189.8, "direction": "cuts_the_game"},
+    {"experiment": "count_10_top5_removed", "true_positive": 3638.0, "false_positive": 337.3, "false_negative": 14010.4, "true_negative": 67090.7, "accuracy": 0.8314, "weighted_harm": 47740.4, "direction": "cuts_the_game"},
+    {"experiment": "removal_plus_voice_guard", "true_positive": 3195.7, "false_positive": 234.8, "false_negative": 14452.7, "true_negative": 67193.2, "accuracy": 0.8274, "weighted_harm": 37932.7, "direction": "cuts_the_game"},
+    {"experiment": "exact_audio_confirm", "true_positive": 1910.4, "false_positive": 95.1, "false_negative": 15738.0, "true_negative": 67332.9, "accuracy": 0.8139, "weighted_harm": 25248.0, "direction": "cuts_the_game"},
+    {"experiment": "warm_query", "true_positive": 3908.2, "false_positive": 372.1, "false_negative": 13740.2, "true_negative": 67055.9, "accuracy": 0.8341, "weighted_harm": 50950.2, "direction": "best_inside_count_10_still_cuts_the_game"},
+    {"experiment": "causal_stream_count_10", "true_positive": 5356.0, "false_positive": 5557.6, "false_negative": 12292.4, "true_negative": 61870.4, "accuracy": 0.7902, "weighted_harm": 568052.4, "direction": "cuts_the_game"},
+    {"experiment": "dsp_ceiling_3s_oracle_unmute", "true_positive": 11168.8, "false_positive": 0, "false_negative": 6479.6, "true_negative": 67428.0, "accuracy": 0.9238, "weighted_harm": 6479.6, "direction": "oracle"},
+    {"experiment": "dsp_ceiling_30s_oracle_unmute", "true_positive": 16531.5, "false_positive": 0, "false_negative": 1116.9, "true_negative": 67428.0, "accuracy": 0.9869, "weighted_harm": 1116.9, "direction": "oracle"}
+  ],
+  "starts_universal_v1": {
+    "true_positive_pods": 2,
+    "false_negative_pods": 134,
+    "unmutes_at_gold_end": 0,
+    "false_positive_incidents": 0,
+    "commercial_seconds_covered": 25.0,
+    "ad_seconds_heard_after_let_go": 328.5
+  },
+  "false_negative_atoms": [
+    {"reason": "song_already_high_no_speech_window", "breaks": 50, "commercial_seconds": 7130.7},
+    {"reason": "song_already_high_voice_under_the_line", "breaks": 41, "commercial_seconds": 5566.8},
+    {"reason": "booth_leaves", "breaks": 28, "commercial_seconds": 3379.8},
+    {"reason": "quiet_before_the_cut", "breaks": 9, "commercial_seconds": 780.2},
+    {"reason": "other", "breaks": 5, "commercial_seconds": 369.3},
+    {"reason": "unscored_read", "breaks": 1, "commercial_seconds": 48.0}
+  ],
+  "true_positives_to_keep": [
+    {"session": "hush_20261008_205100", "network": "Prime Video", "commercial_seconds": 20.0, "song_rise_lead_s": 11.874},
+    {"session": "hush_20261012_204200", "network": "Cable / antenna", "commercial_seconds": 5.0, "song_rise_lead_s": 4.063}
+  ]
+}

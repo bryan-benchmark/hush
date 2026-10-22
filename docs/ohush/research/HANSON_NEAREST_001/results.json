@@ -1,0 +1,110 @@
+{
+  "line": 0.25,
+  "line_fit": false,
+  "rule": "Hanson only when his cosine is at least 0.25 and strictly greater than every other enrolled person.",
+  "quiet_s": 300.0,
+  "second_redzone_with_commercials": false,
+  "redzone_catalog_hits": [
+    {
+      "session": "hush_20260913_150934",
+      "show": "Falcons at Steelers",
+      "notes": "Sunday Sept 13 2026, 1:00pm ET, FOX. Steelers and Atlanta heard. Afternoon game, not Sunday Night Football. The Western Michigan line is a coach biography. Chunks 9\u201314 were removed as flatline or digital silence, so the file is not one continuous span: 0\u20137200 s, then a 90 min hole, then 12600\u201316912 s."
+    }
+  ],
+  "hanson_held_out": {
+    "n": 15,
+    "called_hanson": 14,
+    "called_someone_else_or_nobody": 1
+  },
+  "tirico_not_hanson": {
+    "n": 16,
+    "called_hanson": 0,
+    "called_someone_else_or_nobody": 16
+  },
+  "buck_not_hanson": {
+    "n": 5,
+    "called_hanson": 1,
+    "called_someone_else_or_nobody": 4
+  },
+  "ads_not_hanson": {
+    "n": 124,
+    "called_hanson": 5,
+    "called_someone_else_or_nobody": 119
+  },
+  "rejection_failures": [
+    {
+      "clip_id": "v024",
+      "session": "hush_20260914_212529",
+      "who": "broadaster Joe Buck - excited, TD just scored",
+      "hanson": true,
+      "top": "Scott Hanson",
+      "top_cosine": 0.402,
+      "hanson_cosine": 0.402
+    },
+    {
+      "clip_id": "v036",
+      "session": "hush_20260914_212529",
+      "who": "vyper chair ad",
+      "hanson": true,
+      "top": "Scott Hanson",
+      "top_cosine": 0.317,
+      "hanson_cosine": 0.317
+    },
+    {
+      "clip_id": "v044",
+      "session": "hush_20260913_210542",
+      "who": "subway ad",
+      "hanson": true,
+      "top": "Scott Hanson",
+      "top_cosine": 0.264,
+      "hanson_cosine": 0.264
+    },
+    {
+      "clip_id": "v044",
+      "session": "hush_20260913_210542",
+      "who": "subway ad",
+      "hanson": true,
+      "top": "Scott Hanson",
+      "top_cosine": 0.272,
+      "hanson_cosine": 0.272
+    },
+    {
+      "clip_id": "v029",
+      "session": "hush_20260913_210542",
+      "who": "honda civic commercial",
+      "hanson": true,
+      "top": "Scott Hanson",
+      "top_cosine": 0.351,
+      "hanson_cosine": 0.351
+    },
+    {
+      "clip_id": "v029",
+      "session": "hush_20260913_210542",
+      "who": "honda civic commercial",
+      "hanson": true,
+      "top": "Scott Hanson",
+      "top_cosine": 0.291,
+      "hanson_cosine": 0.291
+    }
+  ],
+  "hanson_misses": [
+    {
+      "clip_id": "v007",
+      "session": "hush_20260913_150934",
+      "who": "broadcaster - scott hanson redzone",
+      "hanson": false,
+      "top": "Mike Tirico",
+      "top_cosine": 0.343,
+      "hanson_cosine": 0.337
+    }
+  ],
+  "redzone_hits": 1545,
+  "redzone_gaps": 1544,
+  "redzone_gaps_at_least_5_min": 0,
+  "redzone_longest_gap_s": 82.4,
+  "later_football_commercial_windows": 8722,
+  "later_football_commercial_windows_called_hanson": 392,
+  "later_football_commercial_seconds_inside_a_5_min_lock": 12318.3,
+  "later_football_pods_touched_by_the_lock": 106,
+  "later_football_pods": 116
+}

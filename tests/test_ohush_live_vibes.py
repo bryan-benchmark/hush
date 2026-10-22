@@ -87,10 +87,12 @@ class VibePlaybackTests(unittest.TestCase):
         for _ in range(20):
             gate.render(out)
         pos = gate._pos
-        gate.play_program()
-        for _ in range(30):
+        gate.play_program(prompt=True)
+        for _ in range(40):
             gate.render(out)
             gate.push(program[:512])
+            if gate.mode == "program":
+                break
         self.assertEqual(gate.mode, "program")
         gate.play_replacement()
         # Position may advance during fade-out, but Cover must not restart at 0.

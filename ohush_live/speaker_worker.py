@@ -45,6 +45,9 @@ from hush.speaker_memory import (  # noqa: E402
     _Cluster,
     _unit,
 )
+from ohush_live.enroll_floor import MEMORY_S  # noqa: E402
+from ohush_live.enroll_floor import cosine as enroll_cosine  # noqa: E402
+from ohush_live.enroll_floor import load_matrix, note  # noqa: E402
 from ohush_live.policy import (  # noqa: E402
     BOOTH_MIN_CUMULATIVE_S,
     BOOTH_MIN_OCCURRENCES,
@@ -76,6 +79,10 @@ def main() -> None:
     memory = OnlineSpeakerMemory()
     booth_protos = _load_booth()
     _seed_memory(memory, booth_protos)
+    enroll = load_matrix(os.environ.get("OHUSH_SHOW", ""))
+    enroll_hits: list[tuple[float, float]] = []
+    if enroll is not None:
+        print(json.dumps({"family": "speaker", "enroll_floor": True, "show": os.environ.get("OHUSH_SHOW", "")}), flush=True)
     history: list[dict] = []
     continuity_hist: list[tuple[float, float]] = []
     buf = np.zeros(0, dtype=np.float32)
@@ -107,6 +114,8 @@ def main() -> None:
         speech = _speech_seconds(vad, frame)
         if speech < 0.5:
             booth = _booth_ids(memory, booth_protos)
+            enroll_hits[:] = [(t, score) for t, score in enroll_hits if now - t <= MEMORY_S]
+            rolling = None if not enroll_hits else max(score for _, score in enroll_hits)
             print(
                 json.dumps(
                     {
@@ -121,6 +130,7 @@ def main() -> None:
                         "booth_present": False,
                         "booth_ids": sorted(booth),
                         "continuity": None,
+                        "enroll_rolling_max": None if rolling is None else round(rolling, 4),
                     }
                 ),
                 flush=True,
@@ -175,6 +185,11 @@ def main() -> None:
             booth = _booth_ids(memory, booth_protos)
         if booth_present:
             ret = max(ret, 1.0)
+        enrolled = None
+        rolling = None
+        if enroll is not None:
+            enrolled = enroll_cosine(enroll, emb)
+            rolling = note(enroll_hits, now, enrolled)
         print(
             json.dumps(
                 {
@@ -192,6 +207,8 @@ def main() -> None:
                     "cluster_id": cluster_id,
                     "similarity_to_booth": None if sim_booth is None else round(sim_booth, 4),
                     "continuity": None if cont is None else round(cont, 4),
+                    "enroll_cosine": None if enrolled is None else round(enrolled, 4),
+                    "enroll_rolling_max": None if rolling is None else round(rolling, 4),
                 }
             ),
             flush=True,

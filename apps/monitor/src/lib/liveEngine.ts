@@ -148,14 +148,22 @@ export async function ensureLive(): Promise<{ ok: boolean; error?: string }> {
 }
 
 export async function liveFetch(path: string, init?: RequestInit) {
-  const res = await fetch(`${LIVE_ORIGIN}${path}`, {
-    ...init,
-    cache: "no-store",
-    headers: {
-      "Content-Type": "application/json",
-      ...(init?.headers ?? {}),
-    },
-  });
+  let res: Response;
+  try {
+    res = await fetch(`${LIVE_ORIGIN}${path}`, {
+      ...init,
+      cache: "no-store",
+      headers: {
+        "Content-Type": "application/json",
+        ...(init?.headers ?? {}),
+      },
+    });
+  } catch {
+    return {
+      res: new Response(null, { status: 503 }),
+      json: { ok: false, error: "The audio engine is not running." },
+    };
+  }
   const text = await res.text();
   let json: unknown = null;
   try {

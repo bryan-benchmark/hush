@@ -1,0 +1,112 @@
+{
+  "system": "voice_enroll_split_001",
+  "model": "speechbrain/spkrec-ecapa-voxceleb",
+  "mute_policy": false,
+  "note": "Host-read seconds are a second pile. not_game left the four cells. Original commercial marks were not edited.",
+  "lines": {
+    "0.10": {
+      "ad_off": 288,
+      "game_off": 4,
+      "ad_on": 11100,
+      "game_on": 30788,
+      "not_game": 3184,
+      "no_sample": 516,
+      "ad_on_broadcaster": 140,
+      "ad_on_narrator": 692,
+      "ad_on_lookback": 2648,
+      "ad_on_other": 7620,
+      "ad_off_broadcaster": 8
+    },
+    "0.15": {
+      "ad_off": 1036,
+      "game_off": 112,
+      "ad_on": 10352,
+      "game_on": 30680,
+      "not_game": 3184,
+      "no_sample": 516,
+      "ad_on_broadcaster": 124,
+      "ad_on_narrator": 624,
+      "ad_on_lookback": 2584,
+      "ad_on_other": 7020,
+      "ad_off_broadcaster": 24
+    },
+    "0.20": {
+      "ad_off": 2612,
+      "game_off": 324,
+      "ad_on": 8776,
+      "game_on": 30468,
+      "not_game": 3184,
+      "no_sample": 516,
+      "ad_on_broadcaster": 116,
+      "ad_on_narrator": 512,
+      "ad_on_lookback": 2456,
+      "ad_on_other": 5692,
+      "ad_off_broadcaster": 36
+    },
+    "0.25": {
+      "ad_off": 4956,
+      "game_off": 736,
+      "ad_on": 6432,
+      "game_on": 30056,
+      "not_game": 3184,
+      "no_sample": 516,
+      "ad_on_broadcaster": 104,
+      "ad_on_narrator": 400,
+      "ad_on_lookback": 2280,
+      "ad_on_other": 3648,
+      "ad_off_broadcaster": 48
+    },
+    "0.30": {
+      "ad_off": 7092,
+      "game_off": 1500,
+      "ad_on": 4296,
+      "game_on": 29292,
+      "not_game": 3184,
+      "no_sample": 516,
+      "ad_on_broadcaster": 32,
+      "ad_on_narrator": 244,
+      "ad_on_lookback": 2192,
+      "ad_on_other": 1828,
+      "ad_off_broadcaster": 128
+    },
+    "0.35": {
+      "ad_off": 8396,
+      "game_off": 1948,
+      "ad_on": 2992,
+      "game_on": 28844,
+      "not_game": 3184,
+      "no_sample": 516,
+      "ad_on_broadcaster": 12,
+      "ad_on_narrator": 104,
+      "ad_on_lookback": 2148,
+      "ad_on_other": 728,
+      "ad_off_broadcaster": 148
+    },
+    "0.40": {
+      "ad_off": 8948,
+      "game_off": 2220,
+      "ad_on": 2440,
+      "game_on": 28572,
+      "not_game": 3184,
+      "no_sample": 516,
+      "ad_on_broadcaster": 12,
+      "ad_on_narrator": 8,
+      "ad_on_lookback": 2140,
+      "ad_on_other": 280,
+      "ad_off_broadcaster": 148
+    },
+    "0.50": {
+      "ad_off": 9044,
+      "game_off": 2416,
+      "ad_on": 2344,
+      "game_on": 28376,
+      "not_game": 3184,
+      "no_sample": 516,
+      "ad_on_broadcaster": 8,
+      "ad_on_narrator": 8,
+      "ad_on_lookback": 2116,
+      "ad_on_other": 212,
+      "ad_off_broadcaster": 152
+    }
+  }
+}

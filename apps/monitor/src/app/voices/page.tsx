@@ -321,6 +321,7 @@ export default function VoicesPage() {
       <header className="top">
         <p className="tag">{items.length === 0 ? "Loading" : `${index + 1} of ${items.length}`}</p>
         <h1 className="identity-ask">What is this?</h1>
+        <a href="/enroll">3-second voice set</a>
       </header>
       {item ? (
         <section className="identity-card" style={{ display: "flex", flexDirection: "column", gap: "0.85rem" }}>

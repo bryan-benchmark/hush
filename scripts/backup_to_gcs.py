@@ -147,6 +147,11 @@ def main() -> None:
         encoding="utf-8",
     )
     _upload(backup_dir / "GOLD_REPLICATION_V1.sha256", f"gs://{BUCKET}/gold/GOLD_REPLICATION_V1.sha256")
+    enroll_cache = REPO / "ohush_live" / "cache"
+    for name in ("enroll_snf.npy", "enroll_mnf.npy", "enroll_tnf.npy"):
+        path = enroll_cache / name
+        if path.is_file():
+            _upload(path, f"gs://{BUCKET}/enroll/{name}")
     if args.gold_only:
         (backup_dir / "backup_manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
         print("gold uploaded", flush=True)

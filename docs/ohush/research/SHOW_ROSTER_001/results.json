@@ -1,0 +1,136 @@
+{
+  "line": 0.25,
+  "line_fit": false,
+  "release_s": 300.0,
+  "hanson_scored_on": [
+    "redzone"
+  ],
+  "tirico_scored_on": [
+    "snf"
+  ],
+  "shows": {
+    "redzone": {
+      "roster": [
+        "Scott Hanson"
+      ],
+      "enrolled": [
+        "Scott Hanson"
+      ],
+      "not_enrolled": [],
+      "sessions": [
+        {
+          "session": "hush_20260913_150934",
+          "hits": 2437,
+          "longest_gap_s": 241.9,
+          "gaps_at_least_5_min": 0,
+          "commercial_seconds_while_show_still_owns_audio": 0.0,
+          "commercial_seconds": 0,
+          "five_minutes_after_a_hit": "off",
+          "after_five_quiet_minutes": "no_show"
+        }
+      ]
+    },
+    "snf": {
+      "roster": [
+        "Mike Tirico",
+        "Cris Collinsworth"
+      ],
+      "enrolled": [
+        "Cris Collinsworth",
+        "Mike Tirico"
+      ],
+      "not_enrolled": [],
+      "sessions": [
+        {
+          "session": "hush_20260909_213047",
+          "hits": 2740,
+          "longest_gap_s": 241.0,
+          "gaps_at_least_5_min": 0,
+          "commercial_seconds_while_show_still_owns_audio": 2849.9,
+          "commercial_seconds": 2849.9,
+          "five_minutes_after_a_hit": "on",
+          "after_five_quiet_minutes": "no_show"
+        },
+        {
+          "session": "hush_20260913_210542",
+          "hits": 3942,
+          "longest_gap_s": 1126.6,
+          "gaps_at_least_5_min": 4,
+          "commercial_seconds_while_show_still_owns_audio": 2980.3,
+          "commercial_seconds": 3052.5,
+          "five_minutes_after_a_hit": "on",
+          "after_five_quiet_minutes": "no_show"
+        }
+      ]
+    },
+    "mnf": {
+      "roster": [
+        "Joe Buck",
+        "Troy Aikman"
+      ],
+      "enrolled": [
+        "Joe Buck",
+        "Troy Aikman"
+      ],
+      "not_enrolled": [],
+      "sessions": [
+        {
+          "session": "hush_20260914_212529",
+          "hits": 2719,
+          "longest_gap_s": 304.2,
+          "gaps_at_least_5_min": 1,
+          "commercial_seconds_while_show_still_owns_audio": 1804.0,
+          "commercial_seconds": 1804.0,
+          "five_minutes_after_a_hit": "on",
+          "after_five_quiet_minutes": "no_show"
+        }
+      ]
+    },
+    "tnf": {
+      "roster": [
+        "Al Michaels",
+        "Kirk Herbstreit"
+      ],
+      "enrolled": [
+        "Al Michaels"
+      ],
+      "not_enrolled": [
+        "Kirk Herbstreit"
+      ],
+      "sessions": [
+        {
+          "session": "hush_20260924_220624",
+          "hits": 968,
+          "longest_gap_s": 1122.6,
+          "gaps_at_least_5_min": 4,
+          "commercial_seconds_while_show_still_owns_audio": 1263.3,
+          "commercial_seconds": 1664.4,
+          "five_minutes_after_a_hit": "on",
+          "after_five_quiet_minutes": "no_show"
+        },
+        {
+          "session": "hush_20261008_205100",
+          "hits": 1705,
+          "longest_gap_s": 708.1,
+          "gaps_at_least_5_min": 4,
+          "commercial_seconds_while_show_still_owns_audio": 2544.8,
+          "commercial_seconds": 2642.1,
+          "five_minutes_after_a_hit": "on",
+          "after_five_quiet_minutes": "no_show"
+        }
+      ]
+    },
+    "college_saturday": {
+      "roster": [
+        "Kirk Herbstreit",
+        "Chris Fowler"
+      ],
+      "enrolled": [],
+      "not_enrolled": [
+        "Kirk Herbstreit",
+        "Chris Fowler"
+      ],
+      "sessions": []
+    }
+  }
+}

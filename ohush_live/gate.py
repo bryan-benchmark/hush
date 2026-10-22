@@ -29,6 +29,8 @@ class ListenerGate:
         *,
         fade_ms: float = 250.0,
         rate: int = 48000,
+        cover_s: float = 0.75,
+        return_s: float = 1.5,
     ) -> None:
         self.mode = "program"
         self.replacement = _pick_default_bed(beds)
@@ -59,11 +61,18 @@ class ListenerGate:
         self._idx = np.arange(16384)
         self._lock = threading.Lock()
         self._rate = rate
-        self._fade_frames = max(1, int(fade_ms * 0.001 * rate))
+        self._show_s = max(0.02, fade_ms * 0.001)
+        self._cover_s = max(self._show_s, float(cover_s))
+        self._return_s = max(self._show_s, float(return_s))
+        self._fade_step = 1.0 / max(1, int(self._cover_s * rate))
         self._fade_gain = 1.0
         self._fade_target = 1.0
         self._user_volume = 1.0
         self._pending_program = False
+        # Output-clock backstop. The detector thread is not required for this.
+        self._fail_open_samples: int | None = None
+        self._covered_samples = 0
+        self._fail_open_tripped = False
 
     def push(self, frames: np.ndarray) -> None:
         audio = np.ascontiguousarray(frames, dtype=np.int16)
@@ -94,36 +103,75 @@ class ListenerGate:
                 else:
                     out[:] = taken
             else:
-                self._discard_down_to(self._prime)
-                self._fill_bed(out)
+                # While the bed is moving, keep the television in the mix.
+                # Once the bed is fully up, hold the ring at prime so the
+                # return fade still has live picture-audio waiting.
+                tv = self._take(count) if self._tv_in_mix() else None
+                if tv is None:
+                    self._discard_down_to(self._prime)
+                self._fill_bed(out, tv)
                 self._mix_earcon(out)
+                if (
+                    self._fail_open_samples is not None
+                    and not self._pending_program
+                ):
+                    self._covered_samples += count
+                    if self._covered_samples >= self._fail_open_samples:
+                        self._fail_open_samples = None
+                        self._fail_open_tripped = True
+                        self._pending_program = True
+                        self._set_fade(0.0, self._return_s)
                 if self._pending_program and self._fade_gain <= 1e-3:
                     self.mode = "program"
                     self._pending_program = False
                     self._fade_gain = 1.0
                     self._fade_target = 1.0
 
-    def play_program(self) -> str:
+    def play_program(self, *, prompt: bool = False) -> str:
         with self._lock:
             prior = self.mode
-            if prior == "replacement":
-                # Fade bed out, then restore program (position kept for next Cover).
+            self._fail_open_samples = None
+            if prior == "replacement" or self._pending_program:
+                # Already fading back: do not restart the ramp. A 1 Hz caller
+                # (Record only) used to reset it and could stretch the return.
+                if self._pending_program and self._fade_target <= 1e-9:
+                    if prompt:
+                        show_step = 1.0 / max(1, int(self._show_s * self._rate))
+                        if self._fade_step + 1e-12 < show_step:
+                            self._set_fade(0.0, self._show_s)
+                    return prior
+                # A hand on Show, or a kill, comes back quickly. An automatic
+                # return takes the longer fade.
                 self._pending_program = True
-                self._fade_target = 0.0
+                self.mode = "replacement"
+                self._set_fade(0.0, self._show_s if prompt else self._return_s)
             else:
                 self.mode = "program"
                 self._pending_program = False
             return prior
 
-    def play_replacement(self) -> str:
+    def play_replacement(self, *, fail_open_s: float | None = None) -> str:
         with self._lock:
             prior = self.mode
             self.mode = "replacement"
             self._pending_program = False
+            self._fail_open_tripped = False
+            self._covered_samples = 0
+            if fail_open_s is None:
+                self._fail_open_samples = None
+            else:
+                self._fail_open_samples = max(1, int(float(fail_open_s) * self._rate))
             # Resume bed position; fade in. Do not reset _pos.
             self._fade_gain = 0.0
-            self._fade_target = 1.0
+            self._set_fade(1.0, self._cover_s)
             return prior
+
+    def consume_fail_open(self) -> bool:
+        """True once, after the output clock starts a return without the detector."""
+        with self._lock:
+            tripped = self._fail_open_tripped
+            self._fail_open_tripped = False
+            return tripped
 
     def set_replacement(self, name: str) -> str:
         with self._lock:
@@ -209,26 +257,39 @@ class ListenerGate:
         self._count -= count
         return taken
 
-    def _fill_bed(self, out: np.ndarray) -> None:
+    def _set_fade(self, target: float, seconds: float) -> None:
+        frames = max(1, int(float(seconds) * self._rate))
+        self._fade_step = 1.0 / float(frames)
+        self._fade_target = target
+
+    def _tv_in_mix(self) -> bool:
+        if self._pending_program:
+            return True
+        return self._fade_target > 0.5 and self._fade_gain < 0.999
+
+    def _fill_bed(self, out: np.ndarray, tv: np.ndarray | None = None) -> None:
         bed = self._beds[self.replacement]
         count = out.shape[0]
         idx = (self._idx[:count] + self._pos) % len(bed)
         chunk = bed[idx]
         self._pos = (self._pos + count) % len(bed)
-        if self.replacement == "silence":
-            out.fill(0)
-            self._advance_fade(count)
-            return
-        # Match bed loudness to the recent program level so cover sounds track the TV.
-        bed_rms = self._bed_rms.get(self.replacement, 0.1)
-        target = max(0.05, min(0.28, self._match_rms))
-        gain = min(8.0, target / bed_rms) * self._user_volume
         env = self._fade_envelope(count)
-        scaled = np.rint(chunk.astype(np.float64) * gain * env[:, None])
-        out[:] = np.clip(scaled, -32768, 32767).astype(np.int16)
+        if self.replacement == "silence":
+            bed_scaled = np.zeros((count, 2), dtype=np.float64)
+        else:
+            # Match bed loudness to the recent program level so cover sounds track the TV.
+            bed_rms = self._bed_rms.get(self.replacement, 0.1)
+            target = max(0.05, min(0.28, self._match_rms))
+            gain = min(8.0, target / bed_rms) * self._user_volume
+            bed_scaled = chunk.astype(np.float64) * gain * env[:, None]
+        if tv is not None:
+            mixed = tv.astype(np.float64) * (1.0 - env)[:, None] + bed_scaled
+        else:
+            mixed = bed_scaled
+        out[:] = np.clip(np.rint(mixed), -32768, 32767).astype(np.int16)
 
     def _fade_envelope(self, count: int) -> np.ndarray:
-        step = 1.0 / float(self._fade_frames)
+        step = self._fade_step
         delta = self._fade_target - self._fade_gain
         if abs(delta) < 1e-9:
             return np.full(count, self._fade_gain, dtype=np.float64)
