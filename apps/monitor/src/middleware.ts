@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PHONE_COOKIE, localHost, phoneCode, sameCode } from "@/lib/phoneAccess";
-import { publicHost } from "@/lib/publicSite";
+import { isPublicSite } from "@/lib/publicSite";
 
 export function middleware(request: NextRequest) {
   const host = request.headers.get("host") || "";
-  if (publicHost(host)) {
+  const forwarded = request.headers.get("x-forwarded-host") || "";
+  if (isPublicSite(host, forwarded)) {
     const path = request.nextUrl.pathname;
     if (path.startsWith("/_next") || path === "/crowd" || path.startsWith("/api/crowd") || path === "/favicon.ico") {
       return NextResponse.next();
