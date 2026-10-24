@@ -33,8 +33,8 @@ export async function GET(req: NextRequest) {
   if (range) {
     const match = /^bytes=(\d*)-(\d*)$/.exec(range.trim());
     if (match) {
-      let start = match[1] === "" ? 0 : Number(match[1]);
-      let end = match[2] === "" ? total - 1 : Number(match[2]);
+      const start = match[1] === "" ? 0 : Number(match[1]);
+      const end = match[2] === "" ? total - 1 : Number(match[2]);
       if (start < 0 || end >= total || start > end) {
         return new NextResponse(null, { status: 416, headers: { ...headers, "Content-Range": `bytes */${total}` } });
       }

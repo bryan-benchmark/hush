@@ -42,7 +42,7 @@ function wavResponse(
   if (range) {
     const m = /^bytes=(\d*)-(\d*)$/.exec(range.trim());
     if (m) {
-      let start = m[1] === "" ? 0 : Number(m[1]);
+      const start = m[1] === "" ? 0 : Number(m[1]);
       let end = m[2] === "" ? total - 1 : Number(m[2]);
       if (!Number.isFinite(start) || !Number.isFinite(end) || start < 0 || end >= total || start > end) {
         serverLog("audio_range_416", { ...meta, range, total });

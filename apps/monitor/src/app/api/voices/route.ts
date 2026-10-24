@@ -76,7 +76,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "unknown voice" }, { status: 400 });
   }
   const what = String(body.what ?? "").trim().slice(0, 200);
-  let people: Person[] = [];
+  const people: Person[] = [];
   if (Array.isArray(body.people)) {
     for (const person of body.people) {
       const start = Number(person.start_s);

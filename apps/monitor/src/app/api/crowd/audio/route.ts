@@ -16,8 +16,8 @@ function ranged(buf: Buffer, range: string | null) {
   }
   const match = /^bytes=(\d*)-(\d*)$/.exec(range.trim());
   if (!match) return new NextResponse(new Uint8Array(buf), { status: 200, headers: { ...headers, "Content-Length": String(total) } });
-  let start = match[1] === "" ? 0 : Number(match[1]);
-  let end = match[2] === "" ? total - 1 : Number(match[2]);
+  const start = match[1] === "" ? 0 : Number(match[1]);
+  const end = match[2] === "" ? total - 1 : Number(match[2]);
   if (!Number.isFinite(start) || !Number.isFinite(end) || start < 0 || end >= total || start > end) {
     return new NextResponse(null, { status: 416, headers: { ...headers, "Content-Range": `bytes */${total}` } });
   }

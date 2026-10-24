@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
 } from "react";
+import Link from "next/link";
 import { BrandMark } from "@/components/BrandMark";
 
 type Evidence = {
@@ -2390,7 +2391,7 @@ export function LabelApp({
       ) : null}
 
       <p className="folder mono">
-        <a href="/">← live monitor</a>
+        <Link href="/">← live monitor</Link>
       </p>
     </main>
   );
