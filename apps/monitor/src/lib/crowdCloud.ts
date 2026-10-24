@@ -1,7 +1,7 @@
 import { randomBytes } from "crypto";
 import { GoogleAuth } from "google-auth-library";
 import { adminAuth, adminDb } from "@/lib/firebaseAdmin";
-import { clipStatus, mcuCount, readQueue, type Action, type Store, type Vote } from "@/lib/crowd";
+import { clipStatus, mcuCount, readQueue, type Action, type Kind, type Store, type Vote } from "@/lib/crowd";
 
 export const SESSION_COOKIE = "ohush_id";
 const SESSION_MS = 14 * 24 * 60 * 60 * 1000;
@@ -58,7 +58,8 @@ export async function cloudState(uid: string, name: string) {
   return { name, mcus: mcuCount(store, uid), done, total: queue.length, clip: visible(clip) };
 }
 
-export async function cloudVote(uid: string, name: string, id: string, action: Action, note: string) {
+export async function cloudVote(uid: string, name: string, id: string, action: Action, kind?: Kind) {
+  if (action === "on" && !kind) return { error: "Say what stayed on." as const };
   const queue = readQueue();
   if (!queue.some((item) => item.id === id)) return { error: "unknown clip" as const };
   const ref = adminDb().collection("crowd_clips").doc(id);
@@ -72,7 +73,8 @@ export async function cloudVote(uid: string, name: string, id: string, action: A
         who: uid,
         name,
         action,
-        note: note.trim().slice(0, 200),
+        ...(action === "on" && kind ? { kind } : {}),
+        note: "",
         at: new Date().toISOString(),
       });
       tx.set(ref, { votes: next });

@@ -3478,6 +3478,54 @@ input {
   color: #2a0c06;
 }
 
+.crowd-actions.follow {
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "back"
+    "game"
+    "promo"
+    "sponsor"
+    "unsure";
+}
+
+.crowd-back {
+  grid-area: back;
+  justify-self: start;
+}
+
+.crowd-choice.kind {
+  min-height: 3.15rem;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--paper);
+  border: 1px solid var(--line);
+}
+
+.crowd-main:has(.crowd-actions.follow) .wave-plain-stage {
+  height: 7.25rem;
+}
+
+.crowd-main:has(.crowd-actions.follow) .crowd-caption {
+  -webkit-line-clamp: 1;
+}
+
+.crowd-choice.kind.game {
+  grid-area: game;
+}
+
+.crowd-choice.kind.promo {
+  grid-area: promo;
+}
+
+.crowd-choice.kind.sponsor {
+  grid-area: sponsor;
+}
+
+.crowd-choice.kind.unsure {
+  grid-area: unsure;
+  color: var(--muted);
+  background: transparent;
+}
+
 .crowd-choice:disabled {
   opacity: 0.45;
   cursor: not-allowed;
@@ -3632,6 +3680,20 @@ input {
       "keep"
       "leave";
     align-content: end;
+  }
+
+  .crowd-actions.follow {
+    grid-template-areas:
+      "back"
+      "game"
+      "promo"
+      "sponsor"
+      "unsure";
+  }
+
+  .crowd-choice.kind {
+    min-height: 2.75rem;
+    padding: 0.45rem 0.7rem;
   }
 
   .crowd-choice {

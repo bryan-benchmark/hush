@@ -4,11 +4,13 @@ import queueFile from "@/data/crowdQueue.json";
 import { repoRoot } from "@/lib/labeling";
 
 export type Action = "on" | "off";
+export type Kind = "game" | "promo" | "sponsor" | "unsure";
 
 export type Vote = {
   who: string;
   name?: string;
   action: Action;
+  kind?: Kind;
   note: string;
   at: string;
 };
@@ -79,7 +81,8 @@ export function crowdState(who: string) {
   return { name: who, mcus: mcuCount(store, who), done, total: queue.length, clip: visibleClip(clip) };
 }
 
-export function castVote(who: string, id: string, action: Action, note: string) {
+export function castVote(who: string, id: string, action: Action, kind?: Kind) {
+  if (action === "on" && !kind) return { error: "Say what stayed on." as const };
   const queue = readQueue();
   if (!queue.some((item) => item.id === id)) return { error: "unknown clip" as const };
   const store = readStore();
@@ -88,7 +91,8 @@ export function castVote(who: string, id: string, action: Action, note: string) 
   const next = votes.concat({
     who,
     action,
-    note: note.trim().slice(0, 200),
+    ...(action === "on" && kind ? { kind } : {}),
+    note: "",
     at: new Date().toISOString(),
   });
   store.votes[id] = next;
