@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   description: "Take Down Big Audio",
 };
 
-export const viewport: Viewport = {
+export const viewport = {
   themeColor: "#ffffff",
   width: "device-width",
   initialScale: 1,
@@ -32,7 +32,7 @@ export const viewport: Viewport = {
     email: false,
     address: false,
   },
-};
+} as Viewport;
 
 export default function RootLayout({
   children,

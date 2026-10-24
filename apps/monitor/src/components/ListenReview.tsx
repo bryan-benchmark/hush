@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { WaveTransport } from "@/components/WaveTransport";
 import { clipHasSplice, coversClip, noteLine, splitNote } from "@/lib/listenNote";
 
-type Item = { id: string; session: string; play_start: number; duration: number };
+type Item = { id: string; session: string; play_start: number; duration: number; caption?: string; mark_s?: number };
 type Region = { start_s: number; end_s: number; what: string; who: string; tags?: string[] };
 type Saved = { id: string; regions: Region[] };
 type Draft = { start_s: number; end_s: number };
@@ -114,8 +114,8 @@ export function ListenReview({
     const canvas = canvasRef.current;
     const decoded = decodedRef.current;
     if (!canvas || !decoded) return;
-    draw(canvas, decoded, regions, draft, editing);
-  }, [regions, draft, editing]);
+    draw(canvas, decoded, regions, draft, editing, item?.mark_s ?? null);
+  }, [regions, draft, editing, item]);
 
   function clipDuration() {
     const decoded = decodedRef.current?.duration;
@@ -151,7 +151,9 @@ export function ListenReview({
       if (draft && editingRef.current === index) return;
       consider(region, index);
     });
-    return best ? { edge: best.edge, regionIndex: best.regionIndex } : null;
+    if (!best) return null;
+    const chosen: { edge: "start" | "end"; regionIndex: number | null } = best;
+    return { edge: chosen.edge, regionIndex: chosen.regionIndex };
   }
 
   function showEdgeCursor(canvas: HTMLCanvasElement, on: boolean) {
@@ -599,6 +601,7 @@ export function ListenReview({
           {items.length === 0 ? "" : ` · ${index + 1} of ${items.length}`}
         </p>
         <h1 className="identity-ask">What is this?</h1>
+        {item?.caption ? <p className="identity-note">{item.caption}</p> : null}
       </header>
       {item ? (
         <section className="identity-card" style={{ display: "flex", flexDirection: "column", gap: "0.85rem" }}>
@@ -611,7 +614,7 @@ export function ListenReview({
             onDecoded={(buffer) => {
               decodedRef.current = buffer;
               const canvas = canvasRef.current;
-              if (canvas) draw(canvas, buffer, regionsRef.current, draftRef.current, editingRef.current);
+              if (canvas) draw(canvas, buffer, regionsRef.current, draftRef.current, editingRef.current, item.mark_s ?? null);
             }}
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
@@ -836,6 +839,7 @@ function draw(
   regions: Region[],
   draft: Draft | null,
   editing: number | null,
+  mark: number | null,
 ) {
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
@@ -885,6 +889,16 @@ function draw(
     ctx.strokeStyle = "#ffffff";
     ctx.lineWidth = 2;
     ctx.strokeRect(left, 4, Math.max(2, right - left), height - 8);
+    ctx.lineWidth = 1;
+  }
+  if (mark != null && audio.duration > 0) {
+    const x = xAt(mark);
+    ctx.strokeStyle = "#7dffb3";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, height);
+    ctx.stroke();
     ctx.lineWidth = 1;
   }
 }

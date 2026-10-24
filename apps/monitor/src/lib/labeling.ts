@@ -593,6 +593,11 @@ export function listSessions() {
     audio_seconds: number | null;
     started_at: string | null;
     sample_rate_hz: number;
+    show: string;
+    service: string;
+    content: string;
+    label_queue: boolean;
+    gaps: number;
   }> = [];
   for (const day of fs.readdirSync(recordings)) {
     const dayPath = path.join(recordings, day);
