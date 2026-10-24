@@ -78,8 +78,8 @@ export function CrowdRoom() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [linkSent, setLinkSent] = useState(false);
-  const [linkPending, setLinkPending] = useState(false);
+  const [password, setPassword] = useState("");
+  const [creating, setCreating] = useState(false);
   const [named, setNamed] = useState(false);
   const [state, setState] = useState<State | null>(null);
   const [note, setNote] = useState("");
@@ -97,67 +97,39 @@ export function CrowdRoom() {
     setState((await res.json()) as State);
   }
 
+  async function openSession(user: { getIdToken: () => Promise<string> }) {
+    const idToken = await user.getIdToken();
+    const res = await fetch("/api/crowd/session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ idToken }),
+    });
+    if (!res.ok) throw new Error("session");
+  }
+
   useEffect(() => {
-    void (async () => {
-      if (PUBLIC && typeof window !== "undefined") {
-        try {
-          const { isSignInWithEmailLink, signInWithEmailLink } = await import("firebase/auth");
-          const auth = await firebaseAuth();
-          if (isSignInWithEmailLink(auth, window.location.href)) {
-            const saved = window.localStorage.getItem("ohush_email") || "";
-            if (!saved) {
-              setLinkPending(true);
-              setError("Enter the same email to finish signing in.");
-            } else {
-              const cred = await signInWithEmailLink(auth, saved, window.location.href);
-              const idToken = await cred.user.getIdToken();
-              await fetch("/api/crowd/session", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ idToken }),
-              });
-              window.history.replaceState({}, "", "/crowd");
-            }
-          }
-        } catch {
-          setError("That sign-in link did not work. Ask for a new one.");
-        }
-      }
-      await load();
-    })();
+    void load();
   }, []);
 
-  async function sendLink(event: React.FormEvent) {
+  async function signInAccount(event: React.FormEvent) {
     event.preventDefault();
-    const address = email.trim();
     setBusy(true);
     setError("");
     try {
-      if (linkPending) {
-        const { signInWithEmailLink } = await import("firebase/auth");
-        const cred = await signInWithEmailLink(await firebaseAuth(), address, window.location.href);
-        const idToken = await cred.user.getIdToken();
-        const res = await fetch("/api/crowd/session", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ idToken }),
-        });
-        if (!res.ok) throw new Error("session");
-        window.localStorage.setItem("ohush_email", address);
-        window.history.replaceState({}, "", "/crowd");
-        setLinkPending(false);
-        await load();
-      } else {
-        const { sendSignInLinkToEmail } = await import("firebase/auth");
-        await sendSignInLinkToEmail(await firebaseAuth(), address, {
-          url: "https://hush--hushdev.us-east4.hosted.app/crowd",
-          handleCodeInApp: true,
-        });
-        window.localStorage.setItem("ohush_email", address);
-        setLinkSent(true);
-      }
-    } catch {
-      setError(linkPending ? "That email does not match the link." : "That email did not send. Try again.");
+      const { createUserWithEmailAndPassword, signInWithEmailAndPassword } = await import("firebase/auth");
+      const auth = await firebaseAuth();
+      const cred = creating
+        ? await createUserWithEmailAndPassword(auth, email.trim(), password)
+        : await signInWithEmailAndPassword(auth, email.trim(), password);
+      await openSession(cred.user);
+      setPassword("");
+      await load();
+    } catch (err) {
+      const code = err && typeof err === "object" && "code" in err ? String((err as { code: string }).code) : "";
+      if (code === "auth/email-already-in-use") setError("That email already has an account. Sign in.");
+      else if (code === "auth/weak-password") setError("Use at least 6 characters.");
+      else if (code === "auth/invalid-email") setError("That email is not valid.");
+      else setError(creating ? "That account was not created." : "That email or password is wrong.");
     }
     setBusy(false);
   }
@@ -226,7 +198,7 @@ export function CrowdRoom() {
           <p className="identity-note">An MCU is paid only when another person, who never sees your answer, chooses the same thing.</p>
         </header>
         {PUBLIC ? (
-          <form className="identity-card" onSubmit={sendLink}>
+          <form className="identity-card" onSubmit={signInAccount}>
             <label className="identity-said" style={{ display: "flex", flexDirection: "column" }}>
               Email
               <input
@@ -239,10 +211,30 @@ export function CrowdRoom() {
                 style={{ fontSize: 16, minHeight: "3rem" }}
               />
             </label>
-            <button type="submit" className="arrow-btn finish" disabled={busy || email.trim().length === 0}>
-              {linkPending ? "Finish sign-in" : "Email me a link"}
+            <label className="identity-said" style={{ display: "flex", flexDirection: "column" }}>
+              Password
+              <input
+                className="phone-code"
+                type="password"
+                autoComplete={creating ? "new-password" : "current-password"}
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                style={{ fontSize: 16, minHeight: "3rem" }}
+              />
+            </label>
+            <button type="submit" className="arrow-btn finish" disabled={busy || email.trim().length === 0 || password.length < 6}>
+              {creating ? "Create account" : "Sign in"}
             </button>
-            {linkSent ? <p className="identity-note">Check your email and open the link on this device.</p> : null}
+            <button
+              type="button"
+              onClick={() => {
+                setCreating((value) => !value);
+                setError("");
+              }}
+              style={{ background: "none", border: 0, color: "inherit", cursor: "pointer", font: "inherit" }}
+            >
+              {creating ? "I already have an account" : "Create an account"}
+            </button>
             {error ? <p className="device">{error}</p> : null}
           </form>
         ) : null}
