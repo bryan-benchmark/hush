@@ -78,8 +78,7 @@ export function CrowdRoom() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [creating, setCreating] = useState(false);
+  const [linkSent, setLinkSent] = useState(false);
   const [named, setNamed] = useState(false);
   const [state, setState] = useState<State | null>(null);
   const [note, setNote] = useState("");
@@ -108,28 +107,44 @@ export function CrowdRoom() {
   }
 
   useEffect(() => {
-    void load();
+    void (async () => {
+      if (PUBLIC && typeof window !== "undefined") {
+        try {
+          const { isSignInWithEmailLink, signInWithEmailLink } = await import("firebase/auth");
+          const auth = await firebaseAuth();
+          if (isSignInWithEmailLink(auth, window.location.href)) {
+            const saved = window.localStorage.getItem("ohush_email") || "";
+            if (!saved) {
+              setError("Enter the same email, then sign in again.");
+            } else {
+              const cred = await signInWithEmailLink(auth, saved, window.location.href);
+              await openSession(cred.user);
+              window.history.replaceState({}, "", "/crowd");
+            }
+          }
+        } catch {
+          setError("That sign-in did not finish. Try again.");
+        }
+      }
+      await load();
+    })();
   }, []);
 
   async function signInAccount(event: React.FormEvent) {
     event.preventDefault();
+    const address = email.trim();
     setBusy(true);
     setError("");
     try {
-      const { createUserWithEmailAndPassword, signInWithEmailAndPassword } = await import("firebase/auth");
-      const auth = await firebaseAuth();
-      const cred = creating
-        ? await createUserWithEmailAndPassword(auth, email.trim(), password)
-        : await signInWithEmailAndPassword(auth, email.trim(), password);
-      await openSession(cred.user);
-      setPassword("");
-      await load();
-    } catch (err) {
-      const code = err && typeof err === "object" && "code" in err ? String((err as { code: string }).code) : "";
-      if (code === "auth/email-already-in-use") setError("That email already has an account. Sign in.");
-      else if (code === "auth/weak-password") setError("Use at least 6 characters.");
-      else if (code === "auth/invalid-email") setError("That email is not valid.");
-      else setError(creating ? "That account was not created." : "That email or password is wrong.");
+      const { sendSignInLinkToEmail } = await import("firebase/auth");
+      await sendSignInLinkToEmail(await firebaseAuth(), address, {
+        url: "https://hush--hushdev.us-east4.hosted.app/crowd",
+        handleCodeInApp: true,
+      });
+      window.localStorage.setItem("ohush_email", address);
+      setLinkSent(true);
+    } catch {
+      setError("That sign-in did not send. Try again.");
     }
     setBusy(false);
   }
@@ -211,30 +226,10 @@ export function CrowdRoom() {
                 style={{ fontSize: 16, minHeight: "3rem" }}
               />
             </label>
-            <label className="identity-said" style={{ display: "flex", flexDirection: "column" }}>
-              Password
-              <input
-                className="phone-code"
-                type="password"
-                autoComplete={creating ? "new-password" : "current-password"}
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-                style={{ fontSize: 16, minHeight: "3rem" }}
-              />
-            </label>
-            <button type="submit" className="arrow-btn finish" disabled={busy || email.trim().length === 0 || password.length < 6}>
-              {creating ? "Create account" : "Sign in"}
+            <button type="submit" className="arrow-btn finish" disabled={busy || email.trim().length === 0}>
+              Sign in
             </button>
-            <button
-              type="button"
-              onClick={() => {
-                setCreating((value) => !value);
-                setError("");
-              }}
-              style={{ background: "none", border: 0, color: "inherit", cursor: "pointer", font: "inherit" }}
-            >
-              {creating ? "I already have an account" : "Create an account"}
-            </button>
+            {linkSent ? <p className="identity-note">Check your email to finish signing in.</p> : null}
             {error ? <p className="device">{error}</p> : null}
           </form>
         ) : null}
