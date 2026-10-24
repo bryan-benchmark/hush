@@ -81,7 +81,6 @@ export function CrowdRoom() {
   const [linkSent, setLinkSent] = useState(false);
   const [named, setNamed] = useState(false);
   const [state, setState] = useState<State | null>(null);
-  const [kept, setKept] = useState(false);
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -179,12 +178,7 @@ export function CrowdRoom() {
 
   async function choose(action: "on" | "off", kind?: "game" | "promo" | "sponsor" | "unsure") {
     if (!state?.clip || busy) return;
-    if (action === "on" && !kind) {
-      setKept(true);
-      setError("");
-      setMessage("");
-      return;
-    }
+    if (action === "on" && !kind) return;
     setBusy(true);
     setError("");
     const res = await fetch("/api/crowd", {
@@ -198,13 +192,12 @@ export function CrowdRoom() {
       setError(body.error || "That one did not save.");
       return;
     }
-    setKept(false);
     setMessage(
       body.status === "matched"
-        ? `Matched. You have ${body.mcus} MCU${body.mcus === 1 ? "" : "s"}.`
+        ? `Matched. ${body.mcus} MCU${body.mcus === 1 ? "" : "s"}.`
         : body.status === "split"
-          ? "Saved. Someone heard it the other way, so this clip pays no MCU."
-          : "Saved. An MCU is paid when someone else hears it the same way.",
+          ? "Split. No MCU."
+          : "Saved.",
     );
     await load();
   }
@@ -274,7 +267,7 @@ export function CrowdRoom() {
       </header>
       {clip ? (
         <div className="crowd-main">
-          <h1 className="crowd-ask">{kept ? "What stayed on?" : "Would you leave this on?"}</h1>
+          <h1 className="crowd-ask">Would you leave this on?</h1>
           {clip.caption ? <p className="crowd-caption">{clip.caption}</p> : <p className="crowd-caption" />}
           <div className="crowd-wave">
             <WaveTransport
@@ -297,34 +290,23 @@ export function CrowdRoom() {
           <p className="crowd-status" aria-live="polite">
             {message || error}
           </p>
-          {kept ? (
-            <div className="crowd-actions follow">
-              <button type="button" className="crowd-quiet crowd-back" onClick={() => setKept(false)}>
-                Back
-              </button>
-              <button type="button" className="crowd-choice kind game" disabled={busy} onClick={() => void choose("on", "game")}>
-                The game
-              </button>
-              <button type="button" className="crowd-choice kind promo" disabled={busy} onClick={() => void choose("on", "promo")}>
-                A promo
-              </button>
-              <button type="button" className="crowd-choice kind sponsor" disabled={busy} onClick={() => void choose("on", "sponsor")}>
-                A sponsor read
-              </button>
-              <button type="button" className="crowd-choice kind unsure" disabled={busy} onClick={() => void choose("on", "unsure")}>
-                Not sure
-              </button>
-            </div>
-          ) : (
-            <div className="crowd-actions">
-              <button type="button" className="crowd-choice keep" disabled={busy} onClick={() => void choose("on")}>
-                Leave this on
-              </button>
-              <button type="button" className="crowd-choice leave" disabled={busy} onClick={() => void choose("off")}>
-                This left the show
-              </button>
-            </div>
-          )}
+          <div className="crowd-actions">
+            <button type="button" className="crowd-choice kind game" disabled={busy} onClick={() => void choose("on", "game")}>
+              The game
+            </button>
+            <button type="button" className="crowd-choice kind promo" disabled={busy} onClick={() => void choose("on", "promo")}>
+              A promo
+            </button>
+            <button type="button" className="crowd-choice kind sponsor" disabled={busy} onClick={() => void choose("on", "sponsor")}>
+              A sponsor read
+            </button>
+            <button type="button" className="crowd-choice kind unsure" disabled={busy} onClick={() => void choose("on", "unsure")}>
+              Not sure, leave it on
+            </button>
+            <button type="button" className="crowd-choice leave" disabled={busy} onClick={() => void choose("off")}>
+              This left the show
+            </button>
+          </div>
         </div>
       ) : (
         <p className="crowd-done">You have heard every clip in this pile. MCUs still change if a later person agrees or disagrees.</p>
