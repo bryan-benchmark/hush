@@ -82,6 +82,7 @@ export function CrowdRoom() {
   const [named, setNamed] = useState(false);
   const [state, setState] = useState<State | null>(null);
   const [note, setNote] = useState("");
+  const [noteOpen, setNoteOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -193,6 +194,7 @@ export function CrowdRoom() {
       return;
     }
     setNote("");
+    setNoteOpen(false);
     setMessage(
       body.status === "matched"
         ? `Matched. You have ${body.mcus} MCU${body.mcus === 1 ? "" : "s"}.`
@@ -205,104 +207,116 @@ export function CrowdRoom() {
 
   if (!named) {
     return (
-      <main className="shell identity-shell">
+      <main className="crowd">
         <div className="atmosphere" aria-hidden="true" />
-        <header className="top">
-          <p className="tag">Crowd</p>
-          <h1 className="identity-ask">{PUBLIC ? "Sign in" : "Your name"}</h1>
-          <p className="identity-note">An MCU is paid only when another person, who never sees your answer, chooses the same thing.</p>
-        </header>
-        {PUBLIC ? (
-          <form className="identity-card" onSubmit={signInAccount}>
-            <label className="identity-said" style={{ display: "flex", flexDirection: "column" }}>
-              Email
-              <input
-                className="phone-code"
-                type="email"
-                autoComplete="email"
-                inputMode="email"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                style={{ fontSize: 16, minHeight: "3rem" }}
-              />
-            </label>
-            <button type="submit" className="arrow-btn finish" disabled={busy || email.trim().length === 0}>
-              Sign in
-            </button>
-            {linkSent ? <p className="identity-note">Check your email to finish signing in.</p> : null}
-            {error ? <p className="device">{error}</p> : null}
-          </form>
-        ) : null}
-        {PUBLIC ? null : (
-        <form className="identity-card" onSubmit={signIn}>
-          <label className="identity-said" style={{ display: "flex", flexDirection: "column" }}>
-            Name
-            <input className="phone-code" value={name} onChange={(event) => setName(event.target.value)} />
-          </label>
-          <button type="submit" className="arrow-btn finish" disabled={busy || name.trim().length === 0}>
-            Start
+        <form className="crowd-gate" onSubmit={PUBLIC ? signInAccount : signIn}>
+          <h1 className="crowd-ask">{PUBLIC ? "Sign in" : "Your name"}</h1>
+          <p className="crowd-caption">{PUBLIC ? "We'll email you a link." : "This name is how this computer keeps your MCUs."}</p>
+          {PUBLIC ? (
+            <input
+              className="crowd-field"
+              type="email"
+              autoComplete="email"
+              inputMode="email"
+              enterKeyHint="go"
+              aria-label="Email"
+              placeholder="Email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+            />
+          ) : (
+            <input
+              className="crowd-field"
+              aria-label="Name"
+              placeholder="Name"
+              autoComplete="name"
+              value={name}
+              onChange={(event) => setName(event.target.value)}
+            />
+          )}
+          <button
+            type="submit"
+            className="crowd-choice keep"
+            disabled={busy || (PUBLIC ? email.trim().length === 0 : name.trim().length === 0)}
+          >
+            {PUBLIC ? "Sign in" : "Start"}
           </button>
-          {error ? <p className="device">{error}</p> : null}
+          {linkSent ? <p className="crowd-status">Check your email to finish signing in.</p> : null}
+          {error ? <p className="crowd-error">{error}</p> : null}
+          <p className="crowd-fine">An MCU is paid when another person, who never sees your answer, chooses the same thing.</p>
         </form>
-        )}
       </main>
     );
   }
 
   const clip = state?.clip;
   return (
-    <main className="shell identity-shell">
+    <main className="crowd">
       <div className="atmosphere" aria-hidden="true" />
-      <header className="top">
-        <p className="tag">
-          {state?.name} · {state?.mcus ?? 0} MCU{(state?.mcus ?? 0) === 1 ? "" : "s"} · {state?.done ?? 0} of {state?.total ?? 0}
-          {PUBLIC ? (
-            <>
-              {" "}
-              ·{" "}
-              <button type="button" onClick={() => void signOutHere()} style={{ background: "none", border: 0, color: "inherit", cursor: "pointer", font: "inherit" }}>
-                Sign out
-              </button>
-            </>
-          ) : null}
-        </p>
-        <h1 className="identity-ask">Would you leave this on?</h1>
-        {clip?.caption ? <p className="identity-note">{clip.caption}</p> : null}
+      <header className="crowd-top">
+        <span>
+          {state?.done ?? 0} of {state?.total ?? 0}
+        </span>
+        <span>
+          {state?.mcus ?? 0} MCU{(state?.mcus ?? 0) === 1 ? "" : "s"}
+        </span>
+        {PUBLIC ? (
+          <button type="button" className="crowd-quiet" onClick={() => void signOutHere()}>
+            Sign out
+          </button>
+        ) : (
+          <span>{state?.name}</span>
+        )}
       </header>
-      {message ? <p className="identity-note">{message}</p> : null}
       {clip ? (
-        <section className="identity-card">
-          <WaveTransport
-            src={
-              PUBLIC
-                ? `/api/crowd/audio?id=${encodeURIComponent(clip.id)}`
-                : `/api/audio?session=${encodeURIComponent(clip.session)}&mode=timeline&start=${clip.play_start}&duration=${clip.duration}`
-            }
-            audioRef={audioRef}
-            canvasRef={canvasRef}
-            loop={{ start_s: 0, end_s: clip.duration }}
-            loopByDefault
-            onDecoded={(buffer) => {
-              const canvas = canvasRef.current;
-              if (canvas) draw(canvas, buffer, clip.mark_s ?? null);
-            }}
-          />
-          <label className="identity-said" style={{ display: "flex", flexDirection: "column" }}>
-            What it is
-            <input className="phone-code" value={note} placeholder="Optional" onChange={(event) => setNote(event.target.value)} />
-          </label>
-          <div className="identity-choices">
-            <button type="button" disabled={busy} onClick={() => void choose("on")}>
+        <div className="crowd-main">
+          <h1 className="crowd-ask">Would you leave this on?</h1>
+          {clip.caption ? <p className="crowd-caption">{clip.caption}</p> : <p className="crowd-caption" />}
+          <div className="crowd-wave">
+            <WaveTransport
+              plain
+              src={
+                PUBLIC
+                  ? `/api/crowd/audio?id=${encodeURIComponent(clip.id)}`
+                  : `/api/audio?session=${encodeURIComponent(clip.session)}&mode=timeline&start=${clip.play_start}&duration=${clip.duration}`
+              }
+              audioRef={audioRef}
+              canvasRef={canvasRef}
+              loop={{ start_s: 0, end_s: clip.duration }}
+              loopByDefault
+              onDecoded={(buffer) => {
+                const canvas = canvasRef.current;
+                if (canvas) draw(canvas, buffer, clip.mark_s ?? null);
+              }}
+            />
+          </div>
+          <p className="crowd-status" aria-live="polite">
+            {message || error}
+          </p>
+          <div className="crowd-actions">
+            {noteOpen ? (
+              <input
+                className="crowd-field crowd-note-field"
+                aria-label="What it is"
+                placeholder="What it is"
+                value={note}
+                onChange={(event) => setNote(event.target.value)}
+              />
+            ) : (
+              <button type="button" className="crowd-note-toggle" onClick={() => setNoteOpen(true)}>
+                Add a note
+              </button>
+            )}
+            <button type="button" className="crowd-choice keep" disabled={busy} onClick={() => void choose("on")}>
               Leave this on
             </button>
-            <button type="button" disabled={busy} onClick={() => void choose("off")}>
+            <button type="button" className="crowd-choice leave" disabled={busy} onClick={() => void choose("off")}>
               This left the show
             </button>
           </div>
-          {error ? <p className="device">{error}</p> : null}
-        </section>
+        </div>
       ) : (
-        <p className="identity-note">You have heard every clip in this pile. MCUs still change if a later person agrees or disagrees.</p>
+        <p className="crowd-done">You have heard every clip in this pile. MCUs still change if a later person agrees or disagrees.</p>
       )}
     </main>
   );

@@ -18,6 +18,7 @@ export function WaveTransport({
   canvasRef,
   loop,
   loopByDefault,
+  plain,
   onDecoded,
   onPointerDown,
   onPointerMove,
@@ -30,6 +31,7 @@ export function WaveTransport({
   canvasRef: RefObject<HTMLCanvasElement | null>;
   loop: Loop | null;
   loopByDefault: boolean;
+  plain?: boolean;
   onDecoded?: (buffer: AudioBuffer) => void;
   onPointerDown?: (event: PointerEvent<HTMLCanvasElement>) => void;
   onPointerMove?: (event: PointerEvent<HTMLCanvasElement>) => void;
@@ -38,6 +40,7 @@ export function WaveTransport({
   onPointerLeave?: (event: PointerEvent<HTMLCanvasElement>) => void;
 }) {
   const playheadRef = useRef<HTMLDivElement | null>(null);
+  const gestureRef = useRef<{ x: number; y: number; moved: boolean } | null>(null);
   const timeRef = useRef<HTMLSpanElement | null>(null);
   const ofRef = useRef<HTMLSpanElement | null>(null);
   const onDecodedRef = useRef(onDecoded);
@@ -46,9 +49,14 @@ export function WaveTransport({
   const [playing, setPlaying] = useState(false);
   const [rate, setRate] = useState(1);
   const [loopOn, setLoopOn] = useState(loopByDefault);
+  const [coarse, setCoarse] = useState(false);
   onDecodedRef.current = onDecoded;
   loopRef.current = loop;
   loopOnRef.current = loopOn;
+
+  useEffect(() => {
+    setCoarse(window.matchMedia("(pointer: coarse)").matches);
+  }, []);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -69,11 +77,19 @@ export function WaveTransport({
         if (!cancelled) onDecodedRef.current?.(decoded);
       })
       .catch(() => undefined);
+    let startPlay: (() => void) | null = null;
+    if (plain) {
+      startPlay = () => {
+        void audio.play().catch(() => undefined);
+      };
+      audio.addEventListener("canplay", startPlay);
+    }
     return () => {
       cancelled = true;
+      if (startPlay) audio.removeEventListener("canplay", startPlay);
       void context?.close();
     };
-  }, [src, audioRef]);
+  }, [src, audioRef, plain]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -150,6 +166,24 @@ export function WaveTransport({
     else audio.pause();
   }
 
+  function plainDown(event: PointerEvent<HTMLDivElement>) {
+    event.currentTarget.setPointerCapture(event.pointerId);
+    gestureRef.current = { x: event.clientX, y: event.clientY, moved: false };
+  }
+
+  function plainMove(event: PointerEvent<HTMLDivElement>) {
+    const gesture = gestureRef.current;
+    if (!gesture || !event.currentTarget.hasPointerCapture(event.pointerId)) return;
+    if (Math.hypot(event.clientX - gesture.x, event.clientY - gesture.y) > 12) gesture.moved = true;
+    if (gesture.moved) seek(event.clientX, event.currentTarget);
+  }
+
+  function plainUp() {
+    const gesture = gestureRef.current;
+    gestureRef.current = null;
+    if (gesture && !gesture.moved) toggle();
+  }
+
   function seek(clientX: number, element: HTMLElement) {
     const audio = audioRef.current;
     if (!audio) return;
@@ -157,6 +191,34 @@ export function WaveTransport({
     const fraction = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
     const duration = Number.isFinite(audio.duration) && audio.duration > 0 ? audio.duration : 20;
     audio.currentTime = fraction * duration;
+  }
+
+  if (plain) {
+    return (
+      <div className="wave-plain">
+        <div
+          className="wave-plain-stage"
+          role="group"
+          aria-label={playing ? "Playing. Tap to pause, drag to move." : "Tap to hear. Drag to move."}
+          onPointerDown={plainDown}
+          onPointerMove={plainMove}
+          onPointerUp={plainUp}
+          onPointerCancel={plainUp}
+        >
+          <canvas ref={canvasRef} width={840} height={220} className="wave-canvas" />
+          <div ref={playheadRef} className="wave-plain-head" aria-hidden />
+          <span ref={timeRef} className="wave-plain-time">
+            0.00
+          </span>
+          {playing ? null : (
+            <div className="wave-plain-hint" aria-hidden>
+              Tap to hear
+            </div>
+          )}
+        </div>
+        <audio ref={audioRef} preload="auto" playsInline />
+      </div>
+    );
   }
 
   return (
@@ -192,6 +254,7 @@ export function WaveTransport({
             style={{ width: "100%", display: "block", touchAction: "none" }}
           />
           <div
+            className="wave-seek"
             onPointerDown={(event) => {
               event.currentTarget.setPointerCapture(event.pointerId);
               seek(event.clientX, event.currentTarget);
@@ -199,7 +262,6 @@ export function WaveTransport({
             onPointerMove={(event) => {
               if (event.currentTarget.hasPointerCapture(event.pointerId)) seek(event.clientX, event.currentTarget);
             }}
-            style={{ position: "absolute", top: 0, left: 0, right: 0, height: 22, cursor: "ew-resize", borderBottom: "1px solid rgba(255,255,255,0.28)" }}
           />
           <div
             ref={playheadRef}
@@ -244,7 +306,7 @@ export function WaveTransport({
           </span>
         </div>
       </div>
-      <audio ref={audioRef} preload="auto" />
+      <audio ref={audioRef} preload="auto" playsInline controls={coarse} />
     </div>
   );
 }
