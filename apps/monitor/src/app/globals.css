@@ -3347,6 +3347,13 @@ input {
   text-transform: uppercase;
 }
 
+.crowd-guide-copy {
+  margin: 0;
+  color: var(--paper);
+  font-size: 1.05rem;
+  line-height: 1.4;
+}
+
 .crowd-gate {
   flex: 1;
   display: flex;

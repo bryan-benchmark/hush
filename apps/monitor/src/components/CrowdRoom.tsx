@@ -230,7 +230,7 @@ export function CrowdRoom() {
         ? `Matched. ${body.mcus} MCU${body.mcus === 1 ? "" : "s"}.`
         : body.status === "split"
           ? "Split. No MCU."
-          : "Saved.",
+          : "Saved. An MCU lands when someone else hears it the same way.",
     );
     await load();
   }
@@ -314,8 +314,8 @@ export function CrowdRoom() {
         <section className="crowd-guide">
           <p className="crowd-kicker">1 of 3</p>
           <h1 className="crowd-ask">What you are listening for</h1>
-          <p className="crowd-caption">Leave the sound on when it is still the broadcast you sat down for. That includes the game, a promo, and an announcer reading a sponsor.</p>
-          <p className="crowd-caption">Choose “This left the show” only when a commercial has taken over.</p>
+          <p className="crowd-guide-copy">Leave the sound on when it is still the broadcast you sat down for. That includes the game, a promo, and an announcer reading a sponsor.</p>
+          <p className="crowd-guide-copy">Choose “This left the show” only when a commercial has taken over.</p>
           <button type="button" className="crowd-choice keep" onClick={() => setGuide(1)}>
             Next
           </button>
@@ -325,8 +325,8 @@ export function CrowdRoom() {
         <section className="crowd-guide">
           <p className="crowd-kicker">2 of 3</p>
           <h1 className="crowd-ask">The shade can be a little off</h1>
-          <p className="crowd-caption">The green shade is the spot we want you to judge. It is not a cut. If it sits a second early or late, judge what you hear in the clip.</p>
-          <p className="crowd-caption">The white line only follows the sound. Tap the picture to pause. Drag to move.</p>
+          <p className="crowd-guide-copy">The green shade is the spot we want you to judge. It is not a cut. If it sits a second early or late, judge what you hear in the clip.</p>
+          <p className="crowd-guide-copy">The white line only follows the sound. Tap the picture to pause. Drag to move.</p>
           <button type="button" className="crowd-choice keep" onClick={() => setGuide(2)}>
             Try one
           </button>
