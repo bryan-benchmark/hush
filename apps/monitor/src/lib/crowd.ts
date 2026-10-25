@@ -4,7 +4,7 @@ import queueFile from "@/data/crowdQueue.json";
 import { repoRoot } from "@/lib/labeling";
 
 export type Action = "on" | "off";
-export type Kind = "game" | "promo" | "sponsor" | "unsure";
+export type Kind = "game" | "inside" | "promo" | "sponsor" | "unsure";
 
 export type Vote = {
   who: string;

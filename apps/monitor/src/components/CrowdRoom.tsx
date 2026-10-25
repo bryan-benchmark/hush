@@ -79,12 +79,11 @@ function gameName(caption?: string) {
   return caption.split(". ")[0] || caption;
 }
 
-function practiceNote(kind: "game" | "promo" | "sponsor" | "unsure" | "off") {
-  if (kind === "off") return "That means a commercial has taken over. Use it only for that. This practice clip was not saved.";
-  if (kind === "promo") return "A promo during the game stays on. This practice clip was not saved.";
-  if (kind === "sponsor") return "An announcer reading a sponsor stays on. This practice clip was not saved.";
-  if (kind === "unsure") return "If you are not sure, leave it on. This practice clip was not saved.";
-  return "The game stays on. This practice clip was not saved.";
+function practiceNote(kind: "game" | "inside" | "unsure" | "off") {
+  if (kind === "off") return "A commercial replaced the broadcast. This practice clip was not saved.";
+  if (kind === "inside") return "An ad can stay when it is still inside the broadcast. This practice clip was not saved.";
+  if (kind === "unsure") return "If you are not sure, it is still the broadcast. This practice clip was not saved.";
+  return "This is part of the broadcast. This practice clip was not saved.";
 }
 
 export function CrowdRoom() {
@@ -205,7 +204,7 @@ export function CrowdRoom() {
     setGuide(null);
   }
 
-  async function choose(action: "on" | "off", kind?: "game" | "promo" | "sponsor" | "unsure") {
+  async function choose(action: "on" | "off", kind?: "game" | "inside" | "unsure") {
     if (guide === 2) {
       setPracticeNoteText(practiceNote(action === "off" ? "off" : kind || "unsure"));
       return;
@@ -314,8 +313,8 @@ export function CrowdRoom() {
         <section className="crowd-guide">
           <p className="crowd-kicker">1 of 3</p>
           <h1 className="crowd-ask">What you are listening for</h1>
-          <p className="crowd-guide-copy">Leave the sound on when it is still the broadcast you sat down for. That includes the game, a promo, and an announcer reading a sponsor.</p>
-          <p className="crowd-guide-copy">Choose “This left the show” only when a commercial has taken over.</p>
+          <p className="crowd-guide-copy">Listen to the shaded stretch. Say whether it is still part of the broadcast, an ad that is still inside the broadcast, or a commercial that has replaced the broadcast.</p>
+          <p className="crowd-guide-copy">An announcer reading a sponsor, or a promo during the game, is still inside the broadcast.</p>
           <button type="button" className="crowd-choice keep" onClick={() => setGuide(1)}>
             Next
           </button>
@@ -334,9 +333,9 @@ export function CrowdRoom() {
       ) : null}
       {clip && guideReady && (guide === null || guide === 2) ? (
         <div className="crowd-main">
-          <h1 className="crowd-ask">{guide === 2 ? "Practice. This is not saved." : "Would you leave this on?"}</h1>
+          <h1 className="crowd-ask">{guide === 2 ? "Practice. This is not saved." : "What is the shaded stretch?"}</h1>
           <p className="crowd-caption">{gameName(clip.caption)}</p>
-          <p className="crowd-fine">The green shade is where to listen. A little early or late is fine. The white line follows the sound.</p>
+          <p className="crowd-fine">Listen there. If the shade is a little early or late, judge what you hear. The white line only follows the sound.</p>
           <div className="crowd-wave">
             <WaveTransport
               plain
@@ -365,19 +364,16 @@ export function CrowdRoom() {
           ) : (
           <div className="crowd-actions">
             <button type="button" className="crowd-choice kind game" disabled={busy} onClick={() => void choose("on", "game")}>
-              The game
+              Part of the broadcast
             </button>
-            <button type="button" className="crowd-choice kind promo" disabled={busy} onClick={() => void choose("on", "promo")}>
-              A promo
-            </button>
-            <button type="button" className="crowd-choice kind sponsor" disabled={busy} onClick={() => void choose("on", "sponsor")}>
-              A sponsor read
+            <button type="button" className="crowd-choice kind inside" disabled={busy} onClick={() => void choose("on", "inside")}>
+              An ad inside the broadcast
             </button>
             <button type="button" className="crowd-choice kind unsure" disabled={busy} onClick={() => void choose("on", "unsure")}>
-              Not sure, leave it on
+              Not sure
             </button>
             <button type="button" className="crowd-choice leave" disabled={busy} onClick={() => void choose("off")}>
-              This left the show
+              A commercial replaced it
             </button>
           </div>
           )}
