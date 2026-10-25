@@ -80,10 +80,10 @@ function gameName(caption?: string) {
 }
 
 function practiceNote(kind: "game" | "inside" | "unsure" | "off") {
-  if (kind === "off") return "A commercial replaced the broadcast. This practice clip was not saved.";
-  if (kind === "inside") return "An ad can stay when it is still inside the broadcast. This practice clip was not saved.";
-  if (kind === "unsure") return "If you are not sure, it is still the broadcast. This practice clip was not saved.";
-  return "This is part of the broadcast. This practice clip was not saved.";
+  if (kind === "off") return "The whole stretch is a commercial. This practice clip was not saved.";
+  if (kind === "inside") return "An ad can be there while the broadcast is still going. This practice clip was not saved.";
+  if (kind === "unsure") return "Not sure keeps it with the broadcast. This practice clip was not saved.";
+  return "The broadcast is still here. This practice clip was not saved.";
 }
 
 export function CrowdRoom() {
@@ -313,8 +313,8 @@ export function CrowdRoom() {
         <section className="crowd-guide">
           <p className="crowd-kicker">1 of 3</p>
           <h1 className="crowd-ask">What you are listening for</h1>
-          <p className="crowd-guide-copy">Listen to the shaded stretch. Say whether it is still part of the broadcast, an ad that is still inside the broadcast, or a commercial that has replaced the broadcast.</p>
-          <p className="crowd-guide-copy">An announcer reading a sponsor, or a promo during the game, is still inside the broadcast.</p>
+          <p className="crowd-guide-copy">If the whole green stretch is a commercial, say that. If the game is still going, the broadcast is still here.</p>
+          <p className="crowd-guide-copy">A sponsor read or a promo during the game is an ad, and the broadcast is still here.</p>
           <button type="button" className="crowd-choice keep" onClick={() => setGuide(1)}>
             Next
           </button>
@@ -333,9 +333,9 @@ export function CrowdRoom() {
       ) : null}
       {clip && guideReady && (guide === null || guide === 2) ? (
         <div className="crowd-main">
-          <h1 className="crowd-ask">{guide === 2 ? "Practice. This is not saved." : "What is the shaded stretch?"}</h1>
+          <h1 className="crowd-ask">{guide === 2 ? "Practice. This is not saved." : "What is in the green?"}</h1>
           <p className="crowd-caption">{gameName(clip.caption)}</p>
-          <p className="crowd-fine">Listen there. If the shade is a little early or late, judge what you hear. The white line only follows the sound.</p>
+          <p className="crowd-fine">If the whole shade is a commercial, say so. A little early or late does not change that.</p>
           <div className="crowd-wave">
             <WaveTransport
               plain
@@ -363,17 +363,17 @@ export function CrowdRoom() {
             </button>
           ) : (
           <div className="crowd-actions">
+            <button type="button" className="crowd-choice leave" disabled={busy} onClick={() => void choose("off")}>
+              This whole stretch is a commercial
+            </button>
             <button type="button" className="crowd-choice kind game" disabled={busy} onClick={() => void choose("on", "game")}>
-              Part of the broadcast
+              The broadcast is still here
             </button>
             <button type="button" className="crowd-choice kind inside" disabled={busy} onClick={() => void choose("on", "inside")}>
-              An ad inside the broadcast
+              An ad, but the broadcast is still here
             </button>
             <button type="button" className="crowd-choice kind unsure" disabled={busy} onClick={() => void choose("on", "unsure")}>
               Not sure
-            </button>
-            <button type="button" className="crowd-choice leave" disabled={busy} onClick={() => void choose("off")}>
-              A commercial replaced it
             </button>
           </div>
           )}
