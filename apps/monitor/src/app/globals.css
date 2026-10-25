@@ -3328,6 +3328,25 @@ input {
   touch-action: manipulation;
 }
 
+.crowd-guide {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.85rem;
+  width: min(100%, 36rem);
+  margin: 0 auto;
+}
+
+.crowd-kicker {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .crowd-gate {
   flex: 1;
   display: flex;
@@ -3342,6 +3361,7 @@ input {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 0.75rem;
   min-height: 2.75rem;
   font-family: var(--font-mono), ui-monospace, monospace;
@@ -3543,8 +3563,8 @@ input {
   bottom: 0;
   left: 0;
   width: 2px;
-  background: #7dffb3;
-  box-shadow: 0 0 8px #7dffb3;
+  background: #f4eef8;
+  box-shadow: 0 0 8px rgba(244, 238, 248, 0.8);
   pointer-events: none;
 }
 

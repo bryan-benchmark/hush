@@ -63,14 +63,28 @@ function draw(canvas: HTMLCanvasElement, audio: AudioBuffer, mark: number | null
   }
   ctx.stroke();
   if (mark != null && audio.duration > 0) {
-    const x = Math.round((mark / audio.duration) * width);
-    ctx.strokeStyle = "#7dffb3";
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(x, 0);
-    ctx.lineTo(x, height);
-    ctx.stroke();
+    const left = Math.max(0, mark - 2);
+    const right = Math.min(audio.duration, mark + 2);
+    const x0 = Math.round((left / audio.duration) * width);
+    const x1 = Math.round((right / audio.duration) * width);
+    ctx.fillStyle = "rgba(125, 255, 179, 0.22)";
+    ctx.fillRect(x0, 0, Math.max(8, x1 - x0), height);
   }
+}
+
+const PRACTICE_KEY = "ohush_crowd_practiced";
+
+function gameName(caption?: string) {
+  if (!caption) return "";
+  return caption.split(". ")[0] || caption;
+}
+
+function practiceNote(kind: "game" | "promo" | "sponsor" | "unsure" | "off") {
+  if (kind === "off") return "That means a commercial has taken over. Use it only for that. This practice clip was not saved.";
+  if (kind === "promo") return "A promo during the game stays on. This practice clip was not saved.";
+  if (kind === "sponsor") return "An announcer reading a sponsor stays on. This practice clip was not saved.";
+  if (kind === "unsure") return "If you are not sure, leave it on. This practice clip was not saved.";
+  return "The game stays on. This practice clip was not saved.";
 }
 
 export function CrowdRoom() {
@@ -84,6 +98,9 @@ export function CrowdRoom() {
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [guide, setGuide] = useState<0 | 1 | 2 | null>(null);
+  const [guideReady, setGuideReady] = useState(false);
+  const [practiceNoteText, setPracticeNoteText] = useState("");
 
   async function load() {
     const res = await fetch("/api/crowd");
@@ -104,6 +121,12 @@ export function CrowdRoom() {
     });
     if (!res.ok) throw new Error("session");
   }
+
+  useEffect(() => {
+    const done = window.localStorage.getItem(PRACTICE_KEY) === "1";
+    setGuide(done ? null : 0);
+    setGuideReady(true);
+  }, []);
 
   useEffect(() => {
     void (async () => {
@@ -176,7 +199,17 @@ export function CrowdRoom() {
     await load();
   }
 
+  function finishPractice() {
+    window.localStorage.setItem(PRACTICE_KEY, "1");
+    setPracticeNoteText("");
+    setGuide(null);
+  }
+
   async function choose(action: "on" | "off", kind?: "game" | "promo" | "sponsor" | "unsure") {
+    if (guide === 2) {
+      setPracticeNoteText(practiceNote(action === "off" ? "off" : kind || "unsure"));
+      return;
+    }
     if (!state?.clip || busy) return;
     if (action === "on" && !kind) return;
     setBusy(true);
@@ -264,11 +297,46 @@ export function CrowdRoom() {
         ) : (
           <span>{state?.name}</span>
         )}
+        {guide === null && guideReady ? (
+          <button
+            type="button"
+            className="crowd-quiet"
+            onClick={() => {
+              setPracticeNoteText("");
+              setGuide(0);
+            }}
+          >
+            Practice
+          </button>
+        ) : null}
       </header>
-      {clip ? (
+      {named && guideReady && guide === 0 ? (
+        <section className="crowd-guide">
+          <p className="crowd-kicker">1 of 3</p>
+          <h1 className="crowd-ask">What you are listening for</h1>
+          <p className="crowd-caption">Leave the sound on when it is still the broadcast you sat down for. That includes the game, a promo, and an announcer reading a sponsor.</p>
+          <p className="crowd-caption">Choose “This left the show” only when a commercial has taken over.</p>
+          <button type="button" className="crowd-choice keep" onClick={() => setGuide(1)}>
+            Next
+          </button>
+        </section>
+      ) : null}
+      {named && guideReady && guide === 1 ? (
+        <section className="crowd-guide">
+          <p className="crowd-kicker">2 of 3</p>
+          <h1 className="crowd-ask">The shade can be a little off</h1>
+          <p className="crowd-caption">The green shade is the spot we want you to judge. It is not a cut. If it sits a second early or late, judge what you hear in the clip.</p>
+          <p className="crowd-caption">The white line only follows the sound. Tap the picture to pause. Drag to move.</p>
+          <button type="button" className="crowd-choice keep" onClick={() => setGuide(2)}>
+            Try one
+          </button>
+        </section>
+      ) : null}
+      {clip && guideReady && (guide === null || guide === 2) ? (
         <div className="crowd-main">
-          <h1 className="crowd-ask">Would you leave this on?</h1>
-          {clip.caption ? <p className="crowd-caption">{clip.caption}</p> : <p className="crowd-caption" />}
+          <h1 className="crowd-ask">{guide === 2 ? "Practice. This is not saved." : "Would you leave this on?"}</h1>
+          <p className="crowd-caption">{gameName(clip.caption)}</p>
+          <p className="crowd-fine">The green shade is where to listen. A little early or late is fine. The white line follows the sound.</p>
           <div className="crowd-wave">
             <WaveTransport
               plain
@@ -288,8 +356,13 @@ export function CrowdRoom() {
             />
           </div>
           <p className="crowd-status" aria-live="polite">
-            {message || error}
+            {guide === 2 ? practiceNoteText : message || error}
           </p>
+          {guide === 2 && practiceNoteText ? (
+            <button type="button" className="crowd-choice keep" onClick={finishPractice}>
+              Start the real clips
+            </button>
+          ) : (
           <div className="crowd-actions">
             <button type="button" className="crowd-choice kind game" disabled={busy} onClick={() => void choose("on", "game")}>
               The game
@@ -307,8 +380,9 @@ export function CrowdRoom() {
               This left the show
             </button>
           </div>
+          )}
         </div>
-      ) : (
+      ) : !guideReady || guide !== null ? null : (
         <p className="crowd-done">You have heard every clip in this pile. MCUs still change if a later person agrees or disagrees.</p>
       )}
     </main>
