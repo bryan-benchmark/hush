@@ -1,0 +1,1040 @@
+{
+  "experiment": "OHUSH_FAILURE_FORENSICS_001",
+  "verdict": "DIAGNOSED",
+  "deployable": false,
+  "thresholds_changed": false,
+  "gold_labels_changed": false,
+  "television_changed": false,
+  "candidate": {
+    "name": "NFL75_MEAN_001 unprotected, and the one-second SpeechBrain veto measured beside it",
+    "classifier": "logistic on AST embeddings, fit on the two NBC games, 10-second mean, line frozen at 0.1632588496059179",
+    "speaker": "speechbrain/spkrec-ecapa-voxceleb cosine 0.25 to the enrolled TNF cast",
+    "not_this_candidate": "ohush_live SPEAKER_BOOTH_MATCH 0.55, AUDIO_STRONG 0.22, and the live state machine. Those rules did not produce these episodes."
+  },
+  "missing_logs": [
+    "raw VAD region timestamps",
+    "a human name for the speaker in each window",
+    "live booth similarity on these two tapes",
+    "an acoustic class such as music, jingle, or crowd from the AST head",
+    "word-level times inside a listen that is longer than 20 seconds"
+  ],
+  "published_match_check": {
+    "recount_fresh_matches_on_unprotected_oracle": {
+      "hush_20261008_205100": 35,
+      "hush_20260924_220624": 10
+    },
+    "protect_results_current_would_protect": {
+      "hush_20261008_205100": 35,
+      "hush_20260924_220624": 10
+    }
+  },
+  "sessions": [
+    {
+      "session": "hush_20261008_205100",
+      "enrollment_names": [
+        "Al Michaels",
+        "Kirk Herbstreit",
+        "Clarissa Thompson",
+        "Andrew Whitworth",
+        "Tony Gonzalez"
+      ],
+      "enrollment_model": "speechbrain/spkrec-ecapa-voxceleb",
+      "song_clips": [
+        "e0101",
+        "e0112",
+        "e0116",
+        "e0124"
+      ],
+      "speaker_windows": 6845,
+      "vad_regions_saved": false,
+      "vad_region_count": 1960,
+      "gold_commercial_seconds_with_research_cosine_at_or_above_0.25": 203.028,
+      "gold_commercial_seconds_with_this_same_cosine_at_or_above_0.55": 6.028,
+      "cosine_0.55_note": "A cut of this ECAPA cosine. Not the live booth similarity.",
+      "oracle_false_mutes_with_fresh_match": 35,
+      "policies": {
+        "unprotected": {
+          "oracle": {
+            "stored_false_mute_episodes": 70,
+            "stored_false_mutes_per_hour": 32.315,
+            "stored_commercial_coverage": 0.986,
+            "stored_program_s": 7798.223,
+            "matrix": {
+              "false_mute_episodes": 70,
+              "false_mute_seconds": 617.582,
+              "false_mutes_per_hour": 32.315,
+              "groups": [
+                {
+                  "group": "Recognized announcer, but system still muted",
+                  "priority": 1,
+                  "episodes": 51,
+                  "seconds": 406.156,
+                  "share_of_false_mute_seconds": 0.6577
+                },
+                {
+                  "group": "Other genuine programming muted",
+                  "priority": 3,
+                  "episodes": 14,
+                  "seconds": 74.221,
+                  "share_of_false_mute_seconds": 0.1202
+                },
+                {
+                  "group": "Announcer-voiced or in-broadcast promotional material",
+                  "priority": 6,
+                  "episodes": 5,
+                  "seconds": 137.205,
+                  "share_of_false_mute_seconds": 0.2222
+                }
+              ],
+              "genuine_seconds_despite_a_research_match": 406.156,
+              "genuine_seconds_without_a_research_match": 0.0
+            },
+            "missed_breaks": 0,
+            "late_starts": 9,
+            "late_returns": 0,
+            "late_return_s": 0.0
+          },
+          "actual": {
+            "stored_false_mute_episodes": 77,
+            "stored_false_mutes_per_hour": 35.547,
+            "stored_commercial_coverage": 0.9506,
+            "stored_program_s": 7798.223,
+            "matrix": {
+              "false_mute_episodes": 77,
+              "false_mute_seconds": 821.471,
+              "false_mutes_per_hour": 35.547,
+              "groups": [
+                {
+                  "group": "Recognized announcer, but system still muted",
+                  "priority": 1,
+                  "episodes": 56,
+                  "seconds": 577.299,
+                  "share_of_false_mute_seconds": 0.7028
+                },
+                {
+                  "group": "Other genuine programming muted",
+                  "priority": 3,
+                  "episodes": 16,
+                  "seconds": 98.711,
+                  "share_of_false_mute_seconds": 0.1202
+                },
+                {
+                  "group": "Announcer-voiced or in-broadcast promotional material",
+                  "priority": 6,
+                  "episodes": 5,
+                  "seconds": 145.461,
+                  "share_of_false_mute_seconds": 0.1771
+                }
+              ],
+              "genuine_seconds_despite_a_research_match": 577.299,
+              "genuine_seconds_without_a_research_match": 0.0
+            },
+            "missed_breaks": 0,
+            "late_starts": 9,
+            "late_returns": 18,
+            "late_return_s": 224.538
+          }
+        },
+        "hold_1": {
+          "oracle": {
+            "stored_false_mute_episodes": 87,
+            "stored_false_mutes_per_hour": 40.163,
+            "stored_commercial_coverage": 0.986,
+            "stored_program_s": 7798.223,
+            "matrix": {
+              "false_mute_episodes": 87,
+              "false_mute_seconds": 402.582,
+              "false_mutes_per_hour": 40.163,
+              "groups": [
+                {
+                  "group": "Recognized announcer, but system still muted",
+                  "priority": 1,
+                  "episodes": 61,
+                  "seconds": 233.156,
+                  "share_of_false_mute_seconds": 0.5792
+                },
+                {
+                  "group": "Announcer speaking but speaker detector missed them",
+                  "priority": 2,
+                  "episodes": 1,
+                  "seconds": 9.0,
+                  "share_of_false_mute_seconds": 0.0224
+                },
+                {
+                  "group": "Other genuine programming muted",
+                  "priority": 3,
+                  "episodes": 15,
+                  "seconds": 71.221,
+                  "share_of_false_mute_seconds": 0.1769
+                },
+                {
+                  "group": "Announcer-voiced or in-broadcast promotional material",
+                  "priority": 6,
+                  "episodes": 10,
+                  "seconds": 89.205,
+                  "share_of_false_mute_seconds": 0.2216
+                }
+              ],
+              "genuine_seconds_despite_a_research_match": 233.156,
+              "genuine_seconds_without_a_research_match": 9.0
+            },
+            "missed_breaks": 0,
+            "late_starts": 9,
+            "late_returns": 0,
+            "late_return_s": 0.0
+          },
+          "actual": {
+            "stored_false_mute_episodes": 99,
+            "stored_false_mutes_per_hour": 45.703,
+            "stored_commercial_coverage": 0.9003,
+            "stored_program_s": 7798.223,
+            "matrix": {
+              "false_mute_episodes": 99,
+              "false_mute_seconds": 473.41,
+              "false_mutes_per_hour": 45.703,
+              "groups": [
+                {
+                  "group": "Recognized announcer, but system still muted",
+                  "priority": 1,
+                  "episodes": 71,
+                  "seconds": 296.113,
+                  "share_of_false_mute_seconds": 0.6255
+                },
+                {
+                  "group": "Announcer speaking but speaker detector missed them",
+                  "priority": 2,
+                  "episodes": 1,
+                  "seconds": 9.0,
+                  "share_of_false_mute_seconds": 0.019
+                },
+                {
+                  "group": "Other genuine programming muted",
+                  "priority": 3,
+                  "episodes": 17,
+                  "seconds": 79.092,
+                  "share_of_false_mute_seconds": 0.1671
+                },
+                {
+                  "group": "Announcer-voiced or in-broadcast promotional material",
+                  "priority": 6,
+                  "episodes": 10,
+                  "seconds": 89.205,
+                  "share_of_false_mute_seconds": 0.1884
+                }
+              ],
+              "genuine_seconds_despite_a_research_match": 296.113,
+              "genuine_seconds_without_a_research_match": 9.0
+            },
+            "missed_breaks": 0,
+            "late_starts": 9,
+            "late_returns": 17,
+            "late_return_s": 87.037
+          }
+        }
+      }
+    },
+    {
+      "session": "hush_20260924_220624",
+      "enrollment_names": [
+        "Al Michaels",
+        "Kirk Herbstreit",
+        "Clarissa Thompson",
+        "Andrew Whitworth",
+        "Tony Gonzalez"
+      ],
+      "enrollment_model": "speechbrain/spkrec-ecapa-voxceleb",
+      "song_clips": [
+        "e0101",
+        "e0112",
+        "e0116",
+        "e0124"
+      ],
+      "speaker_windows": 5399,
+      "vad_regions_saved": false,
+      "vad_region_count": 1325,
+      "gold_commercial_seconds_with_research_cosine_at_or_above_0.25": 44.0,
+      "gold_commercial_seconds_with_this_same_cosine_at_or_above_0.55": 3.0,
+      "cosine_0.55_note": "A cut of this ECAPA cosine. Not the live booth similarity.",
+      "oracle_false_mutes_with_fresh_match": 10,
+      "policies": {
+        "unprotected": {
+          "oracle": {
+            "stored_false_mute_episodes": 37,
+            "stored_false_mutes_per_hour": 22.441,
+            "stored_commercial_coverage": 0.9845,
+            "stored_program_s": 5935.645,
+            "matrix": {
+              "false_mute_episodes": 37,
+              "false_mute_seconds": 473.12,
+              "false_mutes_per_hour": 22.441,
+              "groups": [
+                {
+                  "group": "Recognized announcer, but system still muted",
+                  "priority": 1,
+                  "episodes": 20,
+                  "seconds": 270.542,
+                  "share_of_false_mute_seconds": 0.5718
+                },
+                {
+                  "group": "Announcer speaking but speaker detector missed them",
+                  "priority": 2,
+                  "episodes": 7,
+                  "seconds": 82.0,
+                  "share_of_false_mute_seconds": 0.1733
+                },
+                {
+                  "group": "Other genuine programming muted",
+                  "priority": 3,
+                  "episodes": 8,
+                  "seconds": 72.738,
+                  "share_of_false_mute_seconds": 0.1537
+                },
+                {
+                  "group": "Announcer-voiced or in-broadcast promotional material",
+                  "priority": 6,
+                  "episodes": 2,
+                  "seconds": 47.84,
+                  "share_of_false_mute_seconds": 0.1011
+                }
+              ],
+              "genuine_seconds_despite_a_research_match": 270.542,
+              "genuine_seconds_without_a_research_match": 82.0
+            },
+            "missed_breaks": 0,
+            "late_starts": 4,
+            "late_returns": 0,
+            "late_return_s": 0.0
+          },
+          "actual": {
+            "stored_false_mute_episodes": 45,
+            "stored_false_mutes_per_hour": 27.293,
+            "stored_commercial_coverage": 0.9515,
+            "stored_program_s": 5935.645,
+            "matrix": {
+              "false_mute_episodes": 45,
+              "false_mute_seconds": 709.311,
+              "false_mutes_per_hour": 27.293,
+              "groups": [
+                {
+                  "group": "Recognized announcer, but system still muted",
+                  "priority": 1,
+                  "episodes": 24,
+                  "seconds": 437.676,
+                  "share_of_false_mute_seconds": 0.617
+                },
+                {
+                  "group": "Announcer speaking but speaker detector missed them",
+                  "priority": 2,
+                  "episodes": 7,
+                  "seconds": 82.0,
+                  "share_of_false_mute_seconds": 0.1156
+                },
+                {
+                  "group": "Other genuine programming muted",
+                  "priority": 3,
+                  "episodes": 12,
+                  "seconds": 141.795,
+                  "share_of_false_mute_seconds": 0.1999
+                },
+                {
+                  "group": "Announcer-voiced or in-broadcast promotional material",
+                  "priority": 6,
+                  "episodes": 2,
+                  "seconds": 47.84,
+                  "share_of_false_mute_seconds": 0.0674
+                }
+              ],
+              "genuine_seconds_despite_a_research_match": 437.676,
+              "genuine_seconds_without_a_research_match": 82.0
+            },
+            "missed_breaks": 0,
+            "late_starts": 4,
+            "late_returns": 11,
+            "late_return_s": 236.191
+          }
+        },
+        "hold_1": {
+          "oracle": {
+            "stored_false_mute_episodes": 57,
+            "stored_false_mutes_per_hour": 34.571,
+            "stored_commercial_coverage": 0.9845,
+            "stored_program_s": 5935.645,
+            "matrix": {
+              "false_mute_episodes": 57,
+              "false_mute_seconds": 377.12,
+              "false_mutes_per_hour": 34.571,
+              "groups": [
+                {
+                  "group": "Recognized announcer, but system still muted",
+                  "priority": 1,
+                  "episodes": 32,
+                  "seconds": 191.154,
+                  "share_of_false_mute_seconds": 0.5069
+                },
+                {
+                  "group": "Announcer speaking but speaker detector missed them",
+                  "priority": 2,
+                  "episodes": 7,
+                  "seconds": 82.0,
+                  "share_of_false_mute_seconds": 0.2174
+                },
+                {
+                  "group": "Other genuine programming muted",
+                  "priority": 3,
+                  "episodes": 16,
+                  "seconds": 59.126,
+                  "share_of_false_mute_seconds": 0.1568
+                },
+                {
+                  "group": "Announcer-voiced or in-broadcast promotional material",
+                  "priority": 6,
+                  "episodes": 2,
+                  "seconds": 44.84,
+                  "share_of_false_mute_seconds": 0.1189
+                }
+              ],
+              "genuine_seconds_despite_a_research_match": 191.154,
+              "genuine_seconds_without_a_research_match": 82.0
+            },
+            "missed_breaks": 0,
+            "late_starts": 4,
+            "late_returns": 0,
+            "late_return_s": 0.0
+          },
+          "actual": {
+            "stored_false_mute_episodes": 66,
+            "stored_false_mutes_per_hour": 40.029,
+            "stored_commercial_coverage": 0.9335,
+            "stored_program_s": 5935.645,
+            "matrix": {
+              "false_mute_episodes": 66,
+              "false_mute_seconds": 468.311,
+              "false_mutes_per_hour": 40.029,
+              "groups": [
+                {
+                  "group": "Recognized announcer, but system still muted",
+                  "priority": 1,
+                  "episodes": 39,
+                  "seconds": 257.672,
+                  "share_of_false_mute_seconds": 0.5502
+                },
+                {
+                  "group": "Announcer speaking but speaker detector missed them",
+                  "priority": 2,
+                  "episodes": 7,
+                  "seconds": 82.0,
+                  "share_of_false_mute_seconds": 0.1751
+                },
+                {
+                  "group": "Other genuine programming muted",
+                  "priority": 3,
+                  "episodes": 18,
+                  "seconds": 83.799,
+                  "share_of_false_mute_seconds": 0.1789
+                },
+                {
+                  "group": "Announcer-voiced or in-broadcast promotional material",
+                  "priority": 6,
+                  "episodes": 2,
+                  "seconds": 44.84,
+                  "share_of_false_mute_seconds": 0.0957
+                }
+              ],
+              "genuine_seconds_despite_a_research_match": 257.672,
+              "genuine_seconds_without_a_research_match": 82.0
+            },
+            "missed_breaks": 0,
+            "late_starts": 4,
+            "late_returns": 11,
+            "late_return_s": 91.191
+          }
+        }
+      }
+    }
+  ],
+  "review": {
+    "highest_harm_programming": [
+      {
+        "session": "hush_20260924_220624",
+        "policy": "unprotected",
+        "clock": "oracle",
+        "kind": "false_mute",
+        "start_s": 3874.0,
+        "end_s": 3907.0,
+        "duration_s": 31.0,
+        "role": "in_program",
+        "listen_category": "other_commentary",
+        "overlay": null,
+        "clip": "docs\\ohush\\research\\NFL75_PROTECT_001\\clips\\hush_20260924_220624\\015.wav",
+        "fresh_cosine": null,
+        "fresh_name": null,
+        "mean_at_boundary": 0.4004,
+        "primary": "recognition_not_fresh_at_open",
+        "group": "Recognized announcer, but system still muted",
+        "priority": 1,
+        "confidence": "high",
+        "observation": "A cosine at or above 0.25 exists in the episode or the five seconds before it. No such window ended in the second the mute began.",
+        "hypothesis": "A short pause, or a window that ended just too early, left the open unprotected. Absence of a fresh match is not evidence that the broadcast had gone to a commercial.",
+        "transcript": "Joe Burrowski and healthy second straight year. Bengals playing defense. Yeah, how golden's got a bunch of new pieces. They're playing well. They go to Pittsburgh this week. The home's, of course, together the night. He can go so much time."
+      },
+      {
+        "session": "hush_20260924_220624",
+        "policy": "unprotected",
+        "clock": "oracle",
+        "kind": "false_mute",
+        "start_s": 7489.0,
+        "end_s": 7515.388,
+        "duration_s": 26.388,
+        "role": "pre_break",
+        "listen_category": "promo_sponsor",
+        "overlay": "mixed_mention",
+        "clip": "docs\\ohush\\research\\NFL75_PROTECT_001\\clips\\hush_20260924_220624\\037.wav",
+        "fresh_cosine": 0.6679,
+        "fresh_name": "Clarissa Thompson",
+        "mean_at_boundary": 0.3988,
+        "primary": "recognized_enrolled_voice_still_muted",
+        "group": "Recognized announcer, but system still muted",
+        "priority": 1,
+        "confidence": "high",
+        "observation": "A research cosine of 0.668 named Clarissa Thompson in the second the mute began. This policy does not read that cosine.",
+        "hypothesis": "The decision code, not a missing embedding, authorized the rest of the mute.",
+        "transcript": "on the great divide world tour incredible artists right there stick around for that but we also got more music before that Mariachi and that's right Mariachi Mariachi Monu and they Mexico perform the national anthem tonight and there's stil"
+      },
+      {
+        "session": "hush_20260924_220624",
+        "policy": "unprotected",
+        "clock": "oracle",
+        "kind": "false_mute",
+        "start_s": 5031.0,
+        "end_s": 5059.0,
+        "duration_s": 26.0,
+        "role": "in_program",
+        "listen_category": "announcer_commentary",
+        "overlay": null,
+        "clip": "docs\\ohush\\research\\NFL75_PROTECT_001\\clips\\hush_20260924_220624\\022.wav",
+        "fresh_cosine": 0.529,
+        "fresh_name": "Clarissa Thompson",
+        "mean_at_boundary": 0.658,
+        "primary": "recognized_enrolled_voice_still_muted",
+        "group": "Recognized announcer, but system still muted",
+        "priority": 1,
+        "confidence": "high",
+        "observation": "A research cosine of 0.529 named Clarissa Thompson in the second the mute began. This policy does not read that cosine.",
+        "hypothesis": "The decision code, not a missing embedding, authorized the rest of the mute.",
+        "transcript": "junior to Austin, Cooper. And for Dye, they just know you're going to have some sense. They always count on him, right? Falconsley 17, seven at halftime. But here we go, fourth quarter. Falcons up 27, 14 at this point, Pennix. He's a proble"
+      },
+      {
+        "session": "hush_20261008_205100",
+        "policy": "unprotected",
+        "clock": "oracle",
+        "kind": "false_mute",
+        "start_s": 9453.0,
+        "end_s": 9480.0,
+        "duration_s": 25.0,
+        "role": "in_program",
+        "listen_category": "other_commentary",
+        "overlay": null,
+        "clip": "docs\\ohush\\research\\NFL75_PROTECT_001\\clips\\hush_20261008_205100\\066.wav",
+        "fresh_cosine": null,
+        "fresh_name": null,
+        "mean_at_boundary": 0.9207,
+        "primary": "recognition_not_fresh_at_open",
+        "group": "Recognized announcer, but system still muted",
+        "priority": 1,
+        "confidence": "high",
+        "observation": "A cosine at or above 0.25 exists in the episode or the five seconds before it. No such window ended in the second the mute began.",
+        "hypothesis": "A short pause, or a window that ended just too early, left the open unprotected. Absence of a fresh match is not evidence that the broadcast had gone to a commercial.",
+        "transcript": "thinking about it before the game, you're going to start a Khalil Max. Someone like that that they could go trade for. You already went on Got Porter. Get somebody else in here who could help finish the job up front now to go with this elit"
+      },
+      {
+        "session": "hush_20260924_220624",
+        "policy": "unprotected",
+        "clock": "oracle",
+        "kind": "false_mute",
+        "start_s": 6266.0,
+        "end_s": 6292.0,
+        "duration_s": 25.0,
+        "role": "in_program",
+        "listen_category": "other_commentary",
+        "overlay": "program",
+        "clip": "docs\\ohush\\research\\NFL75_PROTECT_001\\clips\\hush_20260924_220624\\026.wav",
+        "fresh_cosine": 0.0764,
+        "fresh_name": "Tony Gonzalez",
+        "mean_at_boundary": 0.254,
+        "primary": "enrolled_voice_not_matched",
+        "group": "Announcer speaking but speaker detector missed them",
+        "priority": 2,
+        "confidence": "medium",
+        "observation": "Speech windows exist. The highest cosine inside the span stays below 0.25. The peak is 0.180.",
+        "hypothesis": "The enrolled prototypes do not sit close to this voice, or this cosine's 0.25 line is above the match.",
+        "transcript": "who was traveling to see specialists, who was getting multiple opinions, a lot of consultations on this elbow, remembering ginger that three times, now we'll be flew back from LA to the facility, tomorrow he'll be there, and they'll meet an"
+      },
+      {
+        "session": "hush_20260924_220624",
+        "policy": "unprotected",
+        "clock": "oracle",
+        "kind": "false_mute",
+        "start_s": 6723.0,
+        "end_s": 6747.0,
+        "duration_s": 23.0,
+        "role": "in_program",
+        "listen_category": "other_commentary",
+        "overlay": null,
+        "clip": "docs\\ohush\\research\\NFL75_PROTECT_001\\clips\\hush_20260924_220624\\031.wav",
+        "fresh_cosine": 0.0884,
+        "fresh_name": "Andrew Whitworth",
+        "mean_at_boundary": 0.4481,
+        "primary": "recognition_not_fresh_at_open",
+        "group": "Recognized announcer, but system still muted",
+        "priority": 1,
+        "confidence": "high",
+        "observation": "A cosine at or above 0.25 exists in the episode or the five seconds before it. No such window ended in the second the mute began.",
+        "hypothesis": "A short pause, or a window that ended just too early, left the open unprotected. Absence of a fresh match is not evidence that the broadcast had gone to a commercial.",
+        "transcript": "But Carson Wentz came in and balled out and had a nice little comeback for them. And last week this defense, Brian Flores. How about him guys? I mean, the way he is calling this defense, he's heating the opposing quarterbacks up and the way"
+      },
+      {
+        "session": "hush_20260924_220624",
+        "policy": "unprotected",
+        "clock": "oracle",
+        "kind": "false_mute",
+        "start_s": 6832.0,
+        "end_s": 6854.004,
+        "duration_s": 22.004,
+        "role": "pre_break",
+        "listen_category": "transition_bumper",
+        "overlay": null,
+        "clip": "docs\\ohush\\research\\NFL75_PROTECT_001\\clips\\hush_20260924_220624\\034.wav",
+        "fresh_cosine": 0.1055,
+        "fresh_name": "Clarissa Thompson",
+        "mean_at_boundary": 0.6541,
+        "primary": "other_programming_muted",
+        "group": "Other genuine programming muted",
+        "priority": 3,
+        "confidence": "medium",
+        "observation": "The listen category is transition_bumper. The mean covered the span. A person-level speaker label was not recorded.",
+        "hypothesis": "This is programming the cast list was not built to hold.",
+        "transcript": "What a great man. Kind of like jealous with. Like, hey, look at that Ryan's got a new tradition, remember he told us he ran 80s last week they lost. So he did the stands. So I guess now we're going to see him every week. Yeah. Super stint. "
+      },
+      {
+        "session": "hush_20260924_220624",
+        "policy": "unprotected",
+        "clock": "oracle",
+        "kind": "false_mute",
+        "start_s": 6318.0,
+        "end_s": 6341.0,
+        "duration_s": 22.0,
+        "role": "in_program",
+        "listen_category": "other_commentary",
+        "overlay": null,
+        "clip": "docs\\ohush\\research\\NFL75_PROTECT_001\\clips\\hush_20260924_220624\\027.wav",
+        "fresh_cosine": 0.152,
+        "fresh_name": "Andrew Whitworth",
+        "mean_at_boundary": 0.3552,
+        "primary": "recognition_not_fresh_at_open",
+        "group": "Recognized announcer, but system still muted",
+        "priority": 1,
+        "confidence": "high",
+        "observation": "A cosine at or above 0.25 exists in the episode or the five seconds before it. No such window ended in the second the mute began.",
+        "hypothesis": "A short pause, or a window that ended just too early, left the open unprotected. Absence of a fresh match is not evidence that the broadcast had gone to a commercial.",
+        "transcript": "Anderson Jr. and said, I don't want any of the staff in here. I'm going to address the team myself. What I was told went on is he told them too many miscues in all three phases. We're 0 and 2. We've been there before, no panic. But we're al"
+      },
+      {
+        "session": "hush_20261008_205100",
+        "policy": "unprotected",
+        "clock": "oracle",
+        "kind": "false_mute",
+        "start_s": 1744.0,
+        "end_s": 1764.0,
+        "duration_s": 19.0,
+        "role": "in_program",
+        "listen_category": "other_commentary",
+        "overlay": null,
+        "clip": "docs\\ohush\\research\\NFL75_PROTECT_001\\clips\\hush_20261008_205100\\008.wav",
+        "fresh_cosine": null,
+        "fresh_name": null,
+        "mean_at_boundary": 1.4786,
+        "primary": "recognition_not_fresh_at_open",
+        "group": "Recognized announcer, but system still muted",
+        "priority": 1,
+        "confidence": "high",
+        "observation": "A cosine at or above 0.25 exists in the episode or the five seconds before it. No such window ended in the second the mute began.",
+        "hypothesis": "A short pause, or a window that ended just too early, left the open unprotected. Absence of a fresh match is not evidence that the broadcast had gone to a commercial.",
+        "transcript": "quality art you've got 99 works of art by 66 artists 20 of which are site specific commissions. Jean Jones, Jerry's wife, very much behind and there she is the Joneses have been married 63 years and Jean wants to meet. She'll"
+      },
+      {
+        "session": "hush_20261008_205100",
+        "policy": "unprotected",
+        "clock": "oracle",
+        "kind": "false_mute",
+        "start_s": 9803.0,
+        "end_s": 9822.0,
+        "duration_s": 19.0,
+        "role": "in_program",
+        "listen_category": "other_commentary",
+        "overlay": "program",
+        "clip": "docs\\ohush\\research\\NFL75_PROTECT_001\\clips\\hush_20261008_205100\\069.wav",
+        "fresh_cosine": null,
+        "fresh_name": null,
+        "mean_at_boundary": 0.3191,
+        "primary": "recognition_not_fresh_at_open",
+        "group": "Recognized announcer, but system still muted",
+        "priority": 1,
+        "confidence": "high",
+        "observation": "A cosine at or above 0.25 exists in the episode or the five seconds before it. No such window ended in the second the mute began.",
+        "hypothesis": "A short pause, or a window that ended just too early, left the open unprotected. Absence of a fresh match is not evidence that the broadcast had gone to a commercial.",
+        "transcript": "Welcome to Tina Maycap, presenting by Allstate, and a lot of excited Tampa Bay Buccaneers fans getting their first win up the season on the road in a difficult place to play."
+      }
+    ],
+    "commercial_failures": [
+      {
+        "session": "hush_20260924_220624",
+        "policy": "unprotected",
+        "clock": "actual",
+        "kind": "late_return",
+        "start_s": 6854.004,
+        "end_s": 7020.42,
+        "duration_s": 83.58,
+        "role": null,
+        "listen_category": null,
+        "overlay": null,
+        "clip": null,
+        "fresh_cosine": null,
+        "fresh_name": null,
+        "mean_at_boundary": 1.6636,
+        "primary": "late_return",
+        "group": "Commercial ended but OHush stayed muted",
+        "priority": 5,
+        "confidence": "medium",
+        "observation": "The cover was still on after the gold commercial ended. The return rule needs the raw score at or below zero for three seconds.",
+        "hypothesis": "The score stayed hot across the boundary, so the cover walked into the game.",
+        "transcript": null
+      },
+      {
+        "session": "hush_20261008_205100",
+        "policy": "unprotected",
+        "clock": "actual",
+        "kind": "late_start",
+        "start_s": 7169.476,
+        "end_s": 7293.367,
+        "duration_s": 2.524,
+        "role": null,
+        "listen_category": null,
+        "overlay": null,
+        "clip": null,
+        "fresh_cosine": null,
+        "fresh_name": null,
+        "mean_at_boundary": -0.6837,
+        "primary": "commercial_not_started",
+        "group": "Commercial began but OHush didn't recognize departure",
+        "priority": 4,
+        "confidence": "high",
+        "observation": "A gold commercial was open. The rolling mean had not crossed the frozen line at the boundary.",
+        "hypothesis": "Football still inside the 10-second window kept the mean cold.",
+        "transcript": null
+      },
+      {
+        "session": "hush_20261008_205100",
+        "policy": "unprotected",
+        "clock": "actual",
+        "kind": "late_return",
+        "start_s": 7169.476,
+        "end_s": 7293.367,
+        "duration_s": 37.633,
+        "role": null,
+        "listen_category": null,
+        "overlay": null,
+        "clip": null,
+        "fresh_cosine": null,
+        "fresh_name": null,
+        "mean_at_boundary": -0.6837,
+        "primary": "late_return",
+        "group": "Commercial ended but OHush stayed muted",
+        "priority": 5,
+        "confidence": "medium",
+        "observation": "The cover was still on after the gold commercial ended. The return rule needs the raw score at or below zero for three seconds.",
+        "hypothesis": "The score stayed hot across the boundary, so the cover walked into the game.",
+        "transcript": null
+      },
+      {
+        "session": "hush_20260924_220624",
+        "policy": "unprotected",
+        "clock": "actual",
+        "kind": "late_return",
+        "start_s": 6028.84,
+        "end_s": 6180.703,
+        "duration_s": 28.297,
+        "role": null,
+        "listen_category": null,
+        "overlay": null,
+        "clip": null,
+        "fresh_cosine": null,
+        "fresh_name": null,
+        "mean_at_boundary": 3.0796,
+        "primary": "late_return",
+        "group": "Commercial ended but OHush stayed muted",
+        "priority": 5,
+        "confidence": "medium",
+        "observation": "The cover was still on after the gold commercial ended. The return rule needs the raw score at or below zero for three seconds.",
+        "hypothesis": "The score stayed hot across the boundary, so the cover walked into the game.",
+        "transcript": null
+      },
+      {
+        "session": "hush_20261008_205100",
+        "policy": "unprotected",
+        "clock": "actual",
+        "kind": "late_return",
+        "start_s": 139.874,
+        "end_s": 376.9,
+        "duration_s": 28.1,
+        "role": null,
+        "listen_category": null,
+        "overlay": null,
+        "clip": null,
+        "fresh_cosine": null,
+        "fresh_name": null,
+        "mean_at_boundary": 5.2806,
+        "primary": "late_return",
+        "group": "Commercial ended but OHush stayed muted",
+        "priority": 5,
+        "confidence": "medium",
+        "observation": "The cover was still on after the gold commercial ended. The return rule needs the raw score at or below zero for three seconds.",
+        "hypothesis": "The score stayed hot across the boundary, so the cover walked into the game.",
+        "transcript": null
+      },
+      {
+        "session": "hush_20260924_220624",
+        "policy": "unprotected",
+        "clock": "actual",
+        "kind": "late_start",
+        "start_s": 5354.826,
+        "end_s": 5518.664,
+        "duration_s": 7.174,
+        "role": null,
+        "listen_category": null,
+        "overlay": null,
+        "clip": null,
+        "fresh_cosine": null,
+        "fresh_name": null,
+        "mean_at_boundary": -3.56,
+        "primary": "commercial_not_started",
+        "group": "Commercial began but OHush didn't recognize departure",
+        "priority": 4,
+        "confidence": "high",
+        "observation": "A gold commercial was open. The rolling mean had not crossed the frozen line at the boundary.",
+        "hypothesis": "Football still inside the 10-second window kept the mean cold.",
+        "transcript": null
+      },
+      {
+        "session": "hush_20260924_220624",
+        "policy": "unprotected",
+        "clock": "actual",
+        "kind": "late_return",
+        "start_s": 5354.826,
+        "end_s": 5518.664,
+        "duration_s": 17.336,
+        "role": null,
+        "listen_category": null,
+        "overlay": null,
+        "clip": null,
+        "fresh_cosine": null,
+        "fresh_name": null,
+        "mean_at_boundary": -3.56,
+        "primary": "late_return",
+        "group": "Commercial ended but OHush stayed muted",
+        "priority": 5,
+        "confidence": "medium",
+        "observation": "The cover was still on after the gold commercial ended. The return rule needs the raw score at or below zero for three seconds.",
+        "hypothesis": "The score stayed hot across the boundary, so the cover walked into the game.",
+        "transcript": null
+      },
+      {
+        "session": "hush_20261008_205100",
+        "policy": "unprotected",
+        "clock": "actual",
+        "kind": "late_return",
+        "start_s": 9604.933,
+        "end_s": 9754.135,
+        "duration_s": 23.865,
+        "role": null,
+        "listen_category": null,
+        "overlay": null,
+        "clip": null,
+        "fresh_cosine": null,
+        "fresh_name": null,
+        "mean_at_boundary": 1.2526,
+        "primary": "late_return",
+        "group": "Commercial ended but OHush stayed muted",
+        "priority": 5,
+        "confidence": "medium",
+        "observation": "The cover was still on after the gold commercial ended. The return rule needs the raw score at or below zero for three seconds.",
+        "hypothesis": "The score stayed hot across the boundary, so the cover walked into the game.",
+        "transcript": null
+      },
+      {
+        "session": "hush_20260924_220624",
+        "policy": "unprotected",
+        "clock": "actual",
+        "kind": "late_return",
+        "start_s": 2217.88,
+        "end_s": 2338.326,
+        "duration_s": 23.674,
+        "role": null,
+        "listen_category": null,
+        "overlay": null,
+        "clip": null,
+        "fresh_cosine": null,
+        "fresh_name": null,
+        "mean_at_boundary": 0.7851,
+        "primary": "late_return",
+        "group": "Commercial ended but OHush stayed muted",
+        "priority": 5,
+        "confidence": "medium",
+        "observation": "The cover was still on after the gold commercial ended. The return rule needs the raw score at or below zero for three seconds.",
+        "hypothesis": "The score stayed hot across the boundary, so the cover walked into the game.",
+        "transcript": null
+      },
+      {
+        "session": "hush_20261008_205100",
+        "policy": "unprotected",
+        "clock": "actual",
+        "kind": "late_start",
+        "start_s": 5331.899,
+        "end_s": 5453.477,
+        "duration_s": 1.101,
+        "role": null,
+        "listen_category": null,
+        "overlay": null,
+        "clip": null,
+        "fresh_cosine": null,
+        "fresh_name": null,
+        "mean_at_boundary": -0.4661,
+        "primary": "commercial_not_started",
+        "group": "Commercial began but OHush didn't recognize departure",
+        "priority": 4,
+        "confidence": "high",
+        "observation": "A gold commercial was open. The rolling mean had not crossed the frozen line at the boundary.",
+        "hypothesis": "Football still inside the 10-second window kept the mean cold.",
+        "transcript": null
+      }
+    ],
+    "protected_programming": [
+      {
+        "session": "hush_20260924_220624",
+        "start_s": 3692.0,
+        "end_s": 3704.0,
+        "duration_s": 11.0,
+        "fate": "cleared",
+        "category": "other_commentary",
+        "fresh_cosine": 0.448,
+        "nearest_name": "Kirk Herbstreit",
+        "transcript": "The last two home games, the Packers have allowed 551 rushing yards from back to league 17 against Baltimore last year. That's the most in Lambo.",
+        "clip": "docs\\ohush\\research\\NFL75_PROTECT_001\\clips\\hush_20260924_220624\\014.wav",
+        "candidate": "one-second 0.25 veto on the frozen mean"
+      },
+      {
+        "session": "hush_20261008_205100",
+        "start_s": 8352.0,
+        "end_s": 8361.0,
+        "duration_s": 8.0,
+        "fate": "cleared",
+        "category": "announcer_commentary",
+        "fresh_cosine": 0.4245,
+        "nearest_name": "Kirk Herbstreit",
+        "transcript": "You don't want to give Atlanta too much time, but you need to give yourself enough time if you don't make the two point conversion and you do an Onside kick and you want to try to get",
+        "clip": "docs\\ohush\\research\\NFL75_PROTECT_001\\clips\\hush_20261008_205100\\056.wav",
+        "candidate": "one-second 0.25 veto on the frozen mean"
+      },
+      {
+        "session": "hush_20261008_205100",
+        "start_s": 4769.0,
+        "end_s": 4777.0,
+        "duration_s": 7.0,
+        "fate": "cleared",
+        "category": "announcer_commentary",
+        "fresh_cosine": 0.7593,
+        "nearest_name": "Kirk Herbstreit",
+        "transcript": "about it. It's just like, you know, it's a matter of time until it clicks. You expect Zach Robinson with his background with Sean McVeigh to be an",
+        "clip": "docs\\ohush\\research\\NFL75_PROTECT_001\\clips\\hush_20261008_205100\\032.wav",
+        "candidate": "one-second 0.25 veto on the frozen mean"
+      },
+      {
+        "session": "hush_20261008_205100",
+        "start_s": 3304.0,
+        "end_s": 3311.0,
+        "duration_s": 6.0,
+        "fate": "cleared",
+        "category": "announcer_commentary",
+        "fresh_cosine": 0.4749,
+        "nearest_name": "Andrew Whitworth",
+        "transcript": "So let's get our guy back, get him excited and then this game and get involved and here he is on V2V, getting up to the backer, biggest run of the game.",
+        "clip": "docs\\ohush\\research\\NFL75_PROTECT_001\\clips\\hush_20261008_205100\\019.wav",
+        "candidate": "one-second 0.25 veto on the frozen mean"
+      },
+      {
+        "session": "hush_20261008_205100",
+        "start_s": 8179.0,
+        "end_s": 8185.0,
+        "duration_s": 6.0,
+        "fate": "cleared",
+        "category": "announcer_commentary",
+        "fresh_cosine": 0.7048,
+        "nearest_name": "Al Michaels",
+        "transcript": "You have a second and four, you have to pass through the outsides, spinning around, picking up the first and a lock.",
+        "clip": "docs\\ohush\\research\\NFL75_PROTECT_001\\clips\\hush_20261008_205100\\054.wav",
+        "candidate": "one-second 0.25 veto on the frozen mean"
+      }
+    ]
+  },
+  "correct_commercials": [
+    {
+      "session": "hush_20261008_205100",
+      "break": 1,
+      "start_s": 139.874,
+      "end_s": 376.9,
+      "length_s": 237.026,
+      "start_delay_s": 0.0,
+      "covered_s": 237.026,
+      "candidate": "NFL75_MEAN_001 unprotected oracle"
+    },
+    {
+      "session": "hush_20260924_220624",
+      "break": 12,
+      "start_s": 6854.004,
+      "end_s": 7020.42,
+      "length_s": 166.416,
+      "start_delay_s": 0.0,
+      "covered_s": 166.416,
+      "candidate": "NFL75_MEAN_001 unprotected oracle"
+    },
+    {
+      "session": "hush_20260924_220624",
+      "break": 9,
+      "start_s": 4337.154,
+      "end_s": 4492.742,
+      "length_s": 155.588,
+      "start_delay_s": 0.0,
+      "covered_s": 155.587,
+      "candidate": "NFL75_MEAN_001 unprotected oracle"
+    },
+    {
+      "session": "hush_20261008_205100",
+      "break": 8,
+      "start_s": 3025.205,
+      "end_s": 3178.438,
+      "length_s": 153.233,
+      "start_delay_s": 0.0,
+      "covered_s": 153.234,
+      "candidate": "NFL75_MEAN_001 unprotected oracle"
+    },
+    {
+      "session": "hush_20260924_220624",
+      "break": 11,
+      "start_s": 6028.84,
+      "end_s": 6180.703,
+      "length_s": 151.863,
+      "start_delay_s": 0.0,
+      "covered_s": 151.862,
+      "candidate": "NFL75_MEAN_001 unprotected oracle"
+    }
+  ]
+}

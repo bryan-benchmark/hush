@@ -1,0 +1,103 @@
+{
+  "applied": false,
+  "model": "qwen2.5:3b",
+  "gold_read": false,
+  "gpu_samples": [
+    "0 MiB, 0 %",
+    "2288 MiB, 89 %",
+    "2288 MiB, 84 %",
+    "2288 MiB, 63 %",
+    "2288 MiB, 82 %",
+    "2288 MiB, 83 %",
+    "2288 MiB, 31 %",
+    "2288 MiB, 88 %",
+    "2288 MiB, 85 %",
+    "2288 MiB, 70 %",
+    "2288 MiB, 95 %",
+    "2288 MiB, 95 %",
+    "2288 MiB, 70 %",
+    "2288 MiB, 95 %",
+    "2288 MiB, 86 %"
+  ],
+  "ollama_ps": "NAME          ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL            \nqwen2.5:3b    357c53fb659c    2.2 GB    100% GPU     4096       llamacpp    2 hours from now",
+  "sessions": [
+    {
+      "session": "hush_20261008_205100",
+      "chunks": 1921,
+      "live": 278,
+      "uncertain": 377,
+      "duplicates_suppressed": 27,
+      "model_errors": 0,
+      "live_by_kind": {
+        "QUARTER_END": 5,
+        "TOUCHDOWN": 94,
+        "BROADCAST_SIGNOFF": 17,
+        "TWO_MINUTE_WARNING": 10,
+        "INJURY": 20,
+        "KICKOFF": 3,
+        "TIMEOUT": 20,
+        "PUNT": 8,
+        "BREAK_DURATION_ANNOUNCED": 3,
+        "FIELD_GOAL_GOOD": 11,
+        "INTERCEPTION": 7,
+        "SCORE_UPDATE": 10,
+        "HALFTIME": 34,
+        "CHALLENGE": 2,
+        "FIELD_GOAL_MISSED": 15,
+        "FUMBLE_RECOVERY": 12,
+        "TWO_POINT_CONVERSION": 4,
+        "EXTRA_POINT": 2,
+        "OVERTIME": 1
+      },
+      "uncertain_by_kind": {
+        "TOUCHDOWN": 369,
+        "FUMBLE_RECOVERY": 5,
+        "FIELD_GOAL_MISSED": 2,
+        "PUNT": 1
+      },
+      "infer_s": {
+        "n": 1871,
+        "median": 0.259,
+        "p90": 0.321,
+        "max": 3.403
+      },
+      "slower_than_chunk": 0
+    },
+    {
+      "session": "hush_20260924_220624",
+      "chunks": 1071,
+      "live": 137,
+      "uncertain": 160,
+      "duplicates_suppressed": 28,
+      "model_errors": 0,
+      "live_by_kind": {
+        "TOUCHDOWN": 48,
+        "SCORE_UPDATE": 18,
+        "BROADCAST_SIGNOFF": 12,
+        "OVERTIME": 1,
+        "FIELD_GOAL_MISSED": 3,
+        "EXTRA_POINT": 1,
+        "FUMBLE_RECOVERY": 3,
+        "INTERCEPTION": 6,
+        "TWO_MINUTE_WARNING": 7,
+        "INJURY": 5,
+        "HALFTIME": 27,
+        "PUNT": 2,
+        "TIMEOUT": 2,
+        "TWO_POINT_CONVERSION": 1,
+        "PROGRAM_RETURN": 1
+      },
+      "uncertain_by_kind": {
+        "TOUCHDOWN": 156,
+        "FUMBLE_RECOVERY": 4
+      },
+      "infer_s": {
+        "n": 1055,
+        "median": 0.114,
+        "p90": 0.32,
+        "max": 0.488
+      },
+      "slower_than_chunk": 0
+    }
+  ]
+}

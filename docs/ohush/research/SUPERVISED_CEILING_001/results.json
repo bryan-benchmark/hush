@@ -1,0 +1,506 @@
+{
+  "id": "SUPERVISED_CEILING_001",
+  "follows": "SUPERVISED_HELDOUT_001",
+  "fit": {
+    "sessions": [
+      "hush_20260909_213047",
+      "hush_20260913_210542"
+    ],
+    "rows": 21400,
+    "commercial_rows": 5863,
+    "program_rows": 15537,
+    "train_accuracy": 0.9273
+  },
+  "threshold": 12.155325889587404,
+  "threshold_moved": false,
+  "games_scored": [
+    "hush_20260909_213047",
+    "hush_20260913_210542"
+  ],
+  "held_out_games_read": false,
+  "percentiles": {
+    "commercial_p50": 4.103,
+    "commercial_p95": 10.403,
+    "commercial_p99": 13.221,
+    "commercial_max": 17.383,
+    "program_p50": -6.155,
+    "program_p95": 0.796,
+    "program_p99": 3.296,
+    "program_max": 12.155
+  },
+  "program_seconds": 15617,
+  "program_seconds_above_commercial_p50": 89,
+  "program_seconds_above_commercial_p95": 1,
+  "program_seconds_above_commercial_p99": 0,
+  "above_median_split": {
+    "above_commercial_median": 89,
+    "mixed_label": 17,
+    "entire_program_label": 72,
+    "lookback_entirely_commercial": 16,
+    "entire_program_and_clear_lookback": 58,
+    "highest_clear_program_second": {
+      "session": "hush_20260913_210542",
+      "name": "Sept 13 NBC",
+      "t": 11412.0,
+      "score": 8.285,
+      "nearest_break": {
+        "seconds": 1591.143,
+        "side": "after the previous labeled commercial"
+      }
+    }
+  },
+  "program_seconds_at_ceiling": 1,
+  "ceiling_setters": [
+    {
+      "session": "hush_20260913_210542",
+      "name": "Sept 13 NBC",
+      "t": 154.0,
+      "score": 12.155326,
+      "label": -1,
+      "decision_program_s": 0.391,
+      "window_commercial_s": 5.0,
+      "nearest_break": {
+        "seconds": 0.0,
+        "side": "decision second overlaps a labeled commercial"
+      }
+    }
+  ],
+  "program_p99_line": 3.296,
+  "commercial_p99_above_every_program_second": true,
+  "program_runs_at_or_above_program_p99": 104,
+  "highest_program_runs": [
+    {
+      "session": "hush_20260913_210542",
+      "name": "Sept 13 NBC",
+      "t0": 154.0,
+      "t1": 156.0,
+      "seconds": 2,
+      "peak_score": 12.155,
+      "peak": {
+        "session": "hush_20260913_210542",
+        "name": "Sept 13 NBC",
+        "t": 154.0,
+        "score": 12.155325889587402,
+        "label": -1,
+        "decision_program_s": 0.391,
+        "window_commercial_s": 5.0,
+        "nearest_break": {
+          "seconds": 0.0,
+          "side": "decision second overlaps a labeled commercial"
+        }
+      },
+      "audioset_top3": [
+        {
+          "class": "Music",
+          "probability": 0.2405
+        },
+        {
+          "class": "Speech",
+          "probability": 0.1987
+        },
+        {
+          "class": "Grunt",
+          "probability": 0.0331
+        }
+      ],
+      "note": "t0 and t1 are on the session clock. The clip is not copied. The score at the peak uses audio from t-5 to t."
+    },
+    {
+      "session": "hush_20260913_210542",
+      "name": "Sept 13 NBC",
+      "t0": 7754.0,
+      "t1": 7757.0,
+      "seconds": 3,
+      "peak_score": 10.269,
+      "peak": {
+        "session": "hush_20260913_210542",
+        "name": "Sept 13 NBC",
+        "t": 7754.0,
+        "score": 10.26934814453125,
+        "label": -1,
+        "decision_program_s": 0.686,
+        "window_commercial_s": 5.0,
+        "nearest_break": {
+          "seconds": 0.0,
+          "side": "decision second overlaps a labeled commercial"
+        }
+      },
+      "audioset_top3": [
+        {
+          "class": "Music",
+          "probability": 0.2686
+        },
+        {
+          "class": "Speech",
+          "probability": 0.2504
+        },
+        {
+          "class": "Jingle (music)",
+          "probability": 0.0449
+        }
+      ],
+      "note": "t0 and t1 are on the session clock. The clip is not copied. The score at the peak uses audio from t-5 to t."
+    },
+    {
+      "session": "hush_20260913_210542",
+      "name": "Sept 13 NBC",
+      "t0": 1890.0,
+      "t1": 1891.0,
+      "seconds": 1,
+      "peak_score": 9.541,
+      "peak": {
+        "session": "hush_20260913_210542",
+        "name": "Sept 13 NBC",
+        "t": 1890.0,
+        "score": 9.540502548217773,
+        "label": -1,
+        "decision_program_s": 0.143,
+        "window_commercial_s": 5.0,
+        "nearest_break": {
+          "seconds": 0.0,
+          "side": "decision second overlaps a labeled commercial"
+        }
+      },
+      "audioset_top3": [
+        {
+          "class": "Speech",
+          "probability": 0.3287
+        },
+        {
+          "class": "Music",
+          "probability": 0.3142
+        },
+        {
+          "class": "Single-lens reflex camera",
+          "probability": 0.0863
+        }
+      ],
+      "note": "t0 and t1 are on the session clock. The clip is not copied. The score at the peak uses audio from t-5 to t."
+    },
+    {
+      "session": "hush_20260913_210542",
+      "name": "Sept 13 NBC",
+      "t0": 11411.0,
+      "t1": 11415.0,
+      "seconds": 4,
+      "peak_score": 8.285,
+      "peak": {
+        "session": "hush_20260913_210542",
+        "name": "Sept 13 NBC",
+        "t": 11412.0,
+        "score": 8.284611701965332,
+        "label": 0,
+        "decision_program_s": 1.0,
+        "window_commercial_s": 0.0,
+        "nearest_break": {
+          "seconds": 1591.143,
+          "side": "after the previous labeled commercial"
+        }
+      },
+      "audioset_top3": [
+        {
+          "class": "Music",
+          "probability": 0.2917
+        },
+        {
+          "class": "Speech",
+          "probability": 0.2153
+        },
+        {
+          "class": "Musical instrument",
+          "probability": 0.0304
+        }
+      ],
+      "note": "t0 and t1 are on the session clock. The clip is not copied. The score at the peak uses audio from t-5 to t."
+    },
+    {
+      "session": "hush_20260913_210542",
+      "name": "Sept 13 NBC",
+      "t0": 5997.0,
+      "t1": 6001.0,
+      "seconds": 4,
+      "peak_score": 8.242,
+      "peak": {
+        "session": "hush_20260913_210542",
+        "name": "Sept 13 NBC",
+        "t": 5997.0,
+        "score": 8.242218017578125,
+        "label": -1,
+        "decision_program_s": 0.336,
+        "window_commercial_s": 5.0,
+        "nearest_break": {
+          "seconds": 0.0,
+          "side": "decision second overlaps a labeled commercial"
+        }
+      },
+      "audioset_top3": [
+        {
+          "class": "Music",
+          "probability": 0.5882
+        },
+        {
+          "class": "Speech",
+          "probability": 0.1481
+        },
+        {
+          "class": "Bang",
+          "probability": 0.021
+        }
+      ],
+      "note": "t0 and t1 are on the session clock. The clip is not copied. The score at the peak uses audio from t-5 to t."
+    },
+    {
+      "session": "hush_20260909_213047",
+      "name": "Sept 9 NBC",
+      "t0": 8207.0,
+      "t1": 8210.0,
+      "seconds": 3,
+      "peak_score": 8.157,
+      "peak": {
+        "session": "hush_20260909_213047",
+        "name": "Sept 9 NBC",
+        "t": 8207.0,
+        "score": 8.157301902770996,
+        "label": -1,
+        "decision_program_s": 0.644,
+        "window_commercial_s": 5.0,
+        "nearest_break": {
+          "seconds": 0.0,
+          "side": "decision second overlaps a labeled commercial"
+        }
+      },
+      "audioset_top3": [
+        {
+          "class": "Speech",
+          "probability": 0.1935
+        },
+        {
+          "class": "Music",
+          "probability": 0.169
+        },
+        {
+          "class": "Bow-wow",
+          "probability": 0.1469
+        }
+      ],
+      "note": "t0 and t1 are on the session clock. The clip is not copied. The score at the peak uses audio from t-5 to t."
+    },
+    {
+      "session": "hush_20260913_210542",
+      "name": "Sept 13 NBC",
+      "t0": 8406.0,
+      "t1": 8408.0,
+      "seconds": 2,
+      "peak_score": 8.006,
+      "peak": {
+        "session": "hush_20260913_210542",
+        "name": "Sept 13 NBC",
+        "t": 8406.0,
+        "score": 8.005523681640625,
+        "label": -1,
+        "decision_program_s": 0.62,
+        "window_commercial_s": 5.0,
+        "nearest_break": {
+          "seconds": 0.0,
+          "side": "decision second overlaps a labeled commercial"
+        }
+      },
+      "audioset_top3": [
+        {
+          "class": "Speech",
+          "probability": 0.2209
+        },
+        {
+          "class": "Music",
+          "probability": 0.1664
+        },
+        {
+          "class": "Clang",
+          "probability": 0.0783
+        }
+      ],
+      "note": "t0 and t1 are on the session clock. The clip is not copied. The score at the peak uses audio from t-5 to t."
+    },
+    {
+      "session": "hush_20260909_213047",
+      "name": "Sept 9 NBC",
+      "t0": 1263.0,
+      "t1": 1265.0,
+      "seconds": 2,
+      "peak_score": 7.92,
+      "peak": {
+        "session": "hush_20260909_213047",
+        "name": "Sept 9 NBC",
+        "t": 1263.0,
+        "score": 7.919809818267822,
+        "label": 0,
+        "decision_program_s": 1.0,
+        "window_commercial_s": 0.0,
+        "nearest_break": {
+          "seconds": 7.763,
+          "side": "after the previous labeled commercial"
+        }
+      },
+      "audioset_top3": [
+        {
+          "class": "Music",
+          "probability": 0.3213
+        },
+        {
+          "class": "Speech",
+          "probability": 0.2693
+        },
+        {
+          "class": "Bicycle",
+          "probability": 0.0178
+        }
+      ],
+      "note": "t0 and t1 are on the session clock. The clip is not copied. The score at the peak uses audio from t-5 to t."
+    },
+    {
+      "session": "hush_20260909_213047",
+      "name": "Sept 9 NBC",
+      "t0": 7849.0,
+      "t1": 7854.0,
+      "seconds": 5,
+      "peak_score": 7.608,
+      "peak": {
+        "session": "hush_20260909_213047",
+        "name": "Sept 9 NBC",
+        "t": 7851.0,
+        "score": 7.607685565948486,
+        "label": 0,
+        "decision_program_s": 1.0,
+        "window_commercial_s": 3.427,
+        "nearest_break": {
+          "seconds": 1.573,
+          "side": "after the previous labeled commercial"
+        }
+      },
+      "audioset_top3": [
+        {
+          "class": "Speech",
+          "probability": 0.2938
+        },
+        {
+          "class": "Music",
+          "probability": 0.1813
+        },
+        {
+          "class": "Speech synthesizer",
+          "probability": 0.0885
+        }
+      ],
+      "note": "t0 and t1 are on the session clock. The clip is not copied. The score at the peak uses audio from t-5 to t."
+    },
+    {
+      "session": "hush_20260913_210542",
+      "name": "Sept 13 NBC",
+      "t0": 3737.0,
+      "t1": 3741.0,
+      "seconds": 4,
+      "peak_score": 7.342,
+      "peak": {
+        "session": "hush_20260913_210542",
+        "name": "Sept 13 NBC",
+        "t": 3738.0,
+        "score": 7.3415350914001465,
+        "label": 0,
+        "decision_program_s": 1.0,
+        "window_commercial_s": 0.0,
+        "nearest_break": {
+          "seconds": 22.164,
+          "side": "after the previous labeled commercial"
+        }
+      },
+      "audioset_top3": [
+        {
+          "class": "Music",
+          "probability": 0.4399
+        },
+        {
+          "class": "Speech",
+          "probability": 0.2079
+        },
+        {
+          "class": "Slosh",
+          "probability": 0.0226
+        }
+      ],
+      "note": "t0 and t1 are on the session clock. The clip is not copied. The score at the peak uses audio from t-5 to t."
+    },
+    {
+      "session": "hush_20260913_210542",
+      "name": "Sept 13 NBC",
+      "t0": 7256.0,
+      "t1": 7257.0,
+      "seconds": 1,
+      "peak_score": 7.123,
+      "peak": {
+        "session": "hush_20260913_210542",
+        "name": "Sept 13 NBC",
+        "t": 7256.0,
+        "score": 7.12265682220459,
+        "label": -1,
+        "decision_program_s": 0.709,
+        "window_commercial_s": 5.0,
+        "nearest_break": {
+          "seconds": 0.0,
+          "side": "decision second overlaps a labeled commercial"
+        }
+      },
+      "audioset_top3": [
+        {
+          "class": "Quack",
+          "probability": 0.2241
+        },
+        {
+          "class": "Speech",
+          "probability": 0.2049
+        },
+        {
+          "class": "Music",
+          "probability": 0.1748
+        }
+      ],
+      "note": "t0 and t1 are on the session clock. The clip is not copied. The score at the peak uses audio from t-5 to t."
+    },
+    {
+      "session": "hush_20260909_213047",
+      "name": "Sept 9 NBC",
+      "t0": 3594.0,
+      "t1": 3596.0,
+      "seconds": 2,
+      "peak_score": 7.017,
+      "peak": {
+        "session": "hush_20260909_213047",
+        "name": "Sept 9 NBC",
+        "t": 3594.0,
+        "score": 7.016805648803711,
+        "label": 0,
+        "decision_program_s": 1.0,
+        "window_commercial_s": 0.0,
+        "nearest_break": {
+          "seconds": 17.92,
+          "side": "after the previous labeled commercial"
+        }
+      },
+      "audioset_top3": [
+        {
+          "class": "Music",
+          "probability": 0.3033
+        },
+        {
+          "class": "Speech",
+          "probability": 0.1868
+        },
+        {
+          "class": "Sound effect",
+          "probability": 0.0289
+        }
+      ],
+      "note": "t0 and t1 are on the session clock. The clip is not copied. The score at the peak uses audio from t-5 to t."
+    }
+  ],
+  "live_mute_changed": false
+}

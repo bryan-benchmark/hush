@@ -1,0 +1,778 @@
+{
+  "experiment": "NFL75_PROMO_CLASS_001",
+  "verdict": "MEASURED",
+  "deployable": false,
+  "automatic_mute": false,
+  "gold_labels_changed": false,
+  "television_changed": false,
+  "detector": "NFL75_BOOTH_HOLD_001 unprotected and hold_5. The 10-second mean and the 0.163 line stay frozen.",
+  "views": {
+    "research": "Gold program. A muted promotional read counts as a false mute.",
+    "consumer": "A promotional read is wanted suppression. A mixed mention and editorial or football programming still count as false mutes.",
+    "sponsored_read": "Only the Amex and Chili's reads are wanted suppression.",
+    "audited_bucket": "Every second the earlier listen called a sponsor read, including mixed mentions, is wanted suppression."
+  },
+  "overlay": "docs/ohush/research/NFL75_PROMO_CLASS_001/overlay.json",
+  "sessions": [
+    {
+      "session": "hush_20261008_205100",
+      "development_inspection": true,
+      "audited_promo_bucket_s": 137.205,
+      "promotional_read_s": 137.205,
+      "policies": {
+        "unprotected": {
+          "oracle": {
+            "views": {
+              "research": {
+                "commercial_coverage": 0.986,
+                "commercial_s": 2642.141,
+                "breaks_missed": 0,
+                "program_s": 7798.223,
+                "program_removed_s": 0.0,
+                "program_covered_s": 617.583,
+                "false_mute_episodes": 70,
+                "false_mutes_per_hour": 32.315,
+                "longest_false_mute_s": 54.0,
+                "longest": {
+                  "start_s": 3391.0,
+                  "end_s": 3447.0,
+                  "duration_s": 54.0
+                },
+                "program_hidden_per_hour": 285.103,
+                "class_clock_s": 0.0,
+                "class_muted_s": 0.0,
+                "class_playing_s": 0.0
+              },
+              "consumer": {
+                "commercial_coverage": 0.986,
+                "commercial_s": 2642.141,
+                "breaks_missed": 0,
+                "program_s": 7657.018,
+                "program_removed_s": 141.205,
+                "program_covered_s": 480.378,
+                "false_mute_episodes": 65,
+                "false_mutes_per_hour": 30.56,
+                "longest_false_mute_s": 25.0,
+                "longest": {
+                  "start_s": 9453.0,
+                  "end_s": 9480.0,
+                  "duration_s": 25.0
+                },
+                "program_hidden_per_hour": 225.853,
+                "class_clock_s": 141.205,
+                "class_muted_s": 137.205,
+                "class_playing_s": 4.0
+              },
+              "sponsored_read": {
+                "commercial_coverage": 0.986,
+                "commercial_s": 2642.141,
+                "breaks_missed": 0,
+                "program_s": 7742.223,
+                "program_removed_s": 56.0,
+                "program_covered_s": 563.583,
+                "false_mute_episodes": 69,
+                "false_mutes_per_hour": 32.084,
+                "longest_false_mute_s": 41.0,
+                "longest": {
+                  "start_s": 4120.0,
+                  "end_s": 4162.0,
+                  "duration_s": 41.0
+                },
+                "program_hidden_per_hour": 262.056,
+                "class_clock_s": 56.0,
+                "class_muted_s": 54.0,
+                "class_playing_s": 2.0
+              },
+              "audited_bucket": {
+                "commercial_coverage": 0.986,
+                "commercial_s": 2642.141,
+                "breaks_missed": 0,
+                "program_s": 7657.018,
+                "program_removed_s": 141.205,
+                "program_covered_s": 480.378,
+                "false_mute_episodes": 65,
+                "false_mutes_per_hour": 30.56,
+                "longest_false_mute_s": 25.0,
+                "longest": {
+                  "start_s": 9453.0,
+                  "end_s": 9480.0,
+                  "duration_s": 25.0
+                },
+                "program_hidden_per_hour": 225.853,
+                "class_clock_s": 141.205,
+                "class_muted_s": 137.205,
+                "class_playing_s": 4.0
+              }
+            },
+            "program_examples_muted_s": [
+              {
+                "id": "oct_dropped_pass",
+                "muted_s": 12.0
+              },
+              {
+                "id": "oct_nightcap",
+                "muted_s": 19.0
+              }
+            ]
+          },
+          "actual": {
+            "views": {
+              "research": {
+                "commercial_coverage": 0.9506,
+                "commercial_s": 2642.141,
+                "breaks_missed": 0,
+                "program_s": 7798.223,
+                "program_removed_s": 0.0,
+                "program_covered_s": 821.473,
+                "false_mute_episodes": 77,
+                "false_mutes_per_hour": 35.547,
+                "longest_false_mute_s": 54.0,
+                "longest": {
+                  "start_s": 3391.0,
+                  "end_s": 3447.0,
+                  "duration_s": 54.0
+                },
+                "program_hidden_per_hour": 379.228,
+                "class_clock_s": 0.0,
+                "class_muted_s": 0.0,
+                "class_playing_s": 0.0
+              },
+              "consumer": {
+                "commercial_coverage": 0.9506,
+                "commercial_s": 2642.141,
+                "breaks_missed": 0,
+                "program_s": 7657.018,
+                "program_removed_s": 141.205,
+                "program_covered_s": 684.268,
+                "false_mute_episodes": 73,
+                "false_mutes_per_hour": 34.321,
+                "longest_false_mute_s": 37.633,
+                "longest": {
+                  "start_s": 7293.367,
+                  "end_s": 7331.0,
+                  "duration_s": 37.633
+                },
+                "program_hidden_per_hour": 321.713,
+                "class_clock_s": 141.205,
+                "class_muted_s": 137.205,
+                "class_playing_s": 4.0
+              },
+              "sponsored_read": {
+                "commercial_coverage": 0.9506,
+                "commercial_s": 2642.141,
+                "breaks_missed": 0,
+                "program_s": 7742.223,
+                "program_removed_s": 56.0,
+                "program_covered_s": 767.473,
+                "false_mute_episodes": 76,
+                "false_mutes_per_hour": 35.339,
+                "longest_false_mute_s": 41.0,
+                "longest": {
+                  "start_s": 4120.0,
+                  "end_s": 4162.0,
+                  "duration_s": 41.0
+                },
+                "program_hidden_per_hour": 356.862,
+                "class_clock_s": 56.0,
+                "class_muted_s": 54.0,
+                "class_playing_s": 2.0
+              },
+              "audited_bucket": {
+                "commercial_coverage": 0.9506,
+                "commercial_s": 2642.141,
+                "breaks_missed": 0,
+                "program_s": 7657.018,
+                "program_removed_s": 141.205,
+                "program_covered_s": 684.268,
+                "false_mute_episodes": 73,
+                "false_mutes_per_hour": 34.321,
+                "longest_false_mute_s": 37.633,
+                "longest": {
+                  "start_s": 7293.367,
+                  "end_s": 7331.0,
+                  "duration_s": 37.633
+                },
+                "program_hidden_per_hour": 321.713,
+                "class_clock_s": 141.205,
+                "class_muted_s": 137.205,
+                "class_playing_s": 4.0
+              }
+            },
+            "program_examples_muted_s": [
+              {
+                "id": "oct_dropped_pass",
+                "muted_s": 12.0
+              },
+              {
+                "id": "oct_nightcap",
+                "muted_s": 19.0
+              }
+            ]
+          }
+        },
+        "hold_5": {
+          "oracle": {
+            "views": {
+              "research": {
+                "commercial_coverage": 0.9779,
+                "commercial_s": 2642.141,
+                "breaks_missed": 0,
+                "program_s": 7798.223,
+                "program_removed_s": 0.0,
+                "program_covered_s": 165.096,
+                "false_mute_episodes": 32,
+                "false_mutes_per_hour": 14.773,
+                "longest_false_mute_s": 20.0,
+                "longest": {
+                  "start_s": 3420.0,
+                  "end_s": 3440.0,
+                  "duration_s": 20.0
+                },
+                "program_hidden_per_hour": 76.215,
+                "class_clock_s": 0.0,
+                "class_muted_s": 0.0,
+                "class_playing_s": 0.0
+              },
+              "consumer": {
+                "commercial_coverage": 0.9779,
+                "commercial_s": 2642.141,
+                "breaks_missed": 0,
+                "program_s": 7657.018,
+                "program_removed_s": 141.205,
+                "program_covered_s": 120.096,
+                "false_mute_episodes": 26,
+                "false_mutes_per_hour": 12.224,
+                "longest_false_mute_s": 17.0,
+                "longest": {
+                  "start_s": 9805.0,
+                  "end_s": 9822.0,
+                  "duration_s": 17.0
+                },
+                "program_hidden_per_hour": 56.464,
+                "class_clock_s": 141.205,
+                "class_muted_s": 45.0,
+                "class_playing_s": 96.205
+              },
+              "sponsored_read": {
+                "commercial_coverage": 0.9779,
+                "commercial_s": 2642.141,
+                "breaks_missed": 0,
+                "program_s": 7742.223,
+                "program_removed_s": 56.0,
+                "program_covered_s": 129.096,
+                "false_mute_episodes": 29,
+                "false_mutes_per_hour": 13.484,
+                "longest_false_mute_s": 17.0,
+                "longest": {
+                  "start_s": 9805.0,
+                  "end_s": 9822.0,
+                  "duration_s": 17.0
+                },
+                "program_hidden_per_hour": 60.027,
+                "class_clock_s": 56.0,
+                "class_muted_s": 36.0,
+                "class_playing_s": 20.0
+              },
+              "audited_bucket": {
+                "commercial_coverage": 0.9779,
+                "commercial_s": 2642.141,
+                "breaks_missed": 0,
+                "program_s": 7657.018,
+                "program_removed_s": 141.205,
+                "program_covered_s": 120.096,
+                "false_mute_episodes": 26,
+                "false_mutes_per_hour": 12.224,
+                "longest_false_mute_s": 17.0,
+                "longest": {
+                  "start_s": 9805.0,
+                  "end_s": 9822.0,
+                  "duration_s": 17.0
+                },
+                "program_hidden_per_hour": 56.464,
+                "class_clock_s": 141.205,
+                "class_muted_s": 45.0,
+                "class_playing_s": 96.205
+              }
+            },
+            "program_examples_muted_s": [
+              {
+                "id": "oct_dropped_pass",
+                "muted_s": 9.0
+              },
+              {
+                "id": "oct_nightcap",
+                "muted_s": 17.0
+              }
+            ]
+          },
+          "actual": {
+            "views": {
+              "research": {
+                "commercial_coverage": 0.7996,
+                "commercial_s": 2642.141,
+                "breaks_missed": 0,
+                "program_s": 7798.223,
+                "program_removed_s": 0.0,
+                "program_covered_s": 225.372,
+                "false_mute_episodes": 46,
+                "false_mutes_per_hour": 21.236,
+                "longest_false_mute_s": 20.0,
+                "longest": {
+                  "start_s": 3420.0,
+                  "end_s": 3440.0,
+                  "duration_s": 20.0
+                },
+                "program_hidden_per_hour": 104.042,
+                "class_clock_s": 0.0,
+                "class_muted_s": 0.0,
+                "class_playing_s": 0.0
+              },
+              "consumer": {
+                "commercial_coverage": 0.7996,
+                "commercial_s": 2642.141,
+                "breaks_missed": 0,
+                "program_s": 7657.018,
+                "program_removed_s": 141.205,
+                "program_covered_s": 180.372,
+                "false_mute_episodes": 40,
+                "false_mutes_per_hour": 18.806,
+                "longest_false_mute_s": 17.0,
+                "longest": {
+                  "start_s": 9805.0,
+                  "end_s": 9822.0,
+                  "duration_s": 17.0
+                },
+                "program_hidden_per_hour": 84.803,
+                "class_clock_s": 141.205,
+                "class_muted_s": 45.0,
+                "class_playing_s": 96.205
+              },
+              "sponsored_read": {
+                "commercial_coverage": 0.7996,
+                "commercial_s": 2642.141,
+                "breaks_missed": 0,
+                "program_s": 7742.223,
+                "program_removed_s": 56.0,
+                "program_covered_s": 189.372,
+                "false_mute_episodes": 43,
+                "false_mutes_per_hour": 19.994,
+                "longest_false_mute_s": 17.0,
+                "longest": {
+                  "start_s": 9805.0,
+                  "end_s": 9822.0,
+                  "duration_s": 17.0
+                },
+                "program_hidden_per_hour": 88.055,
+                "class_clock_s": 56.0,
+                "class_muted_s": 36.0,
+                "class_playing_s": 20.0
+              },
+              "audited_bucket": {
+                "commercial_coverage": 0.7996,
+                "commercial_s": 2642.141,
+                "breaks_missed": 0,
+                "program_s": 7657.018,
+                "program_removed_s": 141.205,
+                "program_covered_s": 180.372,
+                "false_mute_episodes": 40,
+                "false_mutes_per_hour": 18.806,
+                "longest_false_mute_s": 17.0,
+                "longest": {
+                  "start_s": 9805.0,
+                  "end_s": 9822.0,
+                  "duration_s": 17.0
+                },
+                "program_hidden_per_hour": 84.803,
+                "class_clock_s": 141.205,
+                "class_muted_s": 45.0,
+                "class_playing_s": 96.205
+              }
+            },
+            "program_examples_muted_s": [
+              {
+                "id": "oct_dropped_pass",
+                "muted_s": 9.0
+              },
+              {
+                "id": "oct_nightcap",
+                "muted_s": 17.0
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "session": "hush_20260924_220624",
+      "development_inspection": true,
+      "audited_promo_bucket_s": 107.228,
+      "promotional_read_s": 47.84,
+      "policies": {
+        "unprotected": {
+          "oracle": {
+            "views": {
+              "research": {
+                "commercial_coverage": 0.9845,
+                "commercial_s": 1664.355,
+                "breaks_missed": 0,
+                "program_s": 5935.645,
+                "program_removed_s": 0.0,
+                "program_covered_s": 473.121,
+                "false_mute_episodes": 37,
+                "false_mutes_per_hour": 22.441,
+                "longest_false_mute_s": 34.0,
+                "longest": {
+                  "start_s": 2978.0,
+                  "end_s": 3014.0,
+                  "duration_s": 34.0
+                },
+                "program_hidden_per_hour": 286.951,
+                "class_clock_s": 0.0,
+                "class_muted_s": 0.0,
+                "class_playing_s": 0.0
+              },
+              "consumer": {
+                "commercial_coverage": 0.9845,
+                "commercial_s": 1664.355,
+                "breaks_missed": 0,
+                "program_s": 5884.805,
+                "program_removed_s": 50.84,
+                "program_covered_s": 425.281,
+                "false_mute_episodes": 36,
+                "false_mutes_per_hour": 22.023,
+                "longest_false_mute_s": 31.0,
+                "longest": {
+                  "start_s": 3874.0,
+                  "end_s": 3907.0,
+                  "duration_s": 31.0
+                },
+                "program_hidden_per_hour": 260.164,
+                "class_clock_s": 50.84,
+                "class_muted_s": 47.84,
+                "class_playing_s": 3.0
+              },
+              "sponsored_read": {
+                "commercial_coverage": 0.9845,
+                "commercial_s": 1664.355,
+                "breaks_missed": 0,
+                "program_s": 5899.645,
+                "program_removed_s": 36.0,
+                "program_covered_s": 439.121,
+                "false_mute_episodes": 36,
+                "false_mutes_per_hour": 21.967,
+                "longest_false_mute_s": 31.0,
+                "longest": {
+                  "start_s": 3874.0,
+                  "end_s": 3907.0,
+                  "duration_s": 31.0
+                },
+                "program_hidden_per_hour": 267.955,
+                "class_clock_s": 36.0,
+                "class_muted_s": 34.0,
+                "class_playing_s": 2.0
+              },
+              "audited_bucket": {
+                "commercial_coverage": 0.9845,
+                "commercial_s": 1664.355,
+                "breaks_missed": 0,
+                "program_s": 5824.417,
+                "program_removed_s": 111.228,
+                "program_covered_s": 365.893,
+                "false_mute_episodes": 33,
+                "false_mutes_per_hour": 20.397,
+                "longest_false_mute_s": 31.0,
+                "longest": {
+                  "start_s": 3874.0,
+                  "end_s": 3907.0,
+                  "duration_s": 31.0
+                },
+                "program_hidden_per_hour": 226.154,
+                "class_clock_s": 111.228,
+                "class_muted_s": 107.228,
+                "class_playing_s": 4.0
+              }
+            },
+            "program_examples_muted_s": [
+              {
+                "id": "sept_injury_desk",
+                "muted_s": 25.0
+              }
+            ]
+          },
+          "actual": {
+            "views": {
+              "research": {
+                "commercial_coverage": 0.9515,
+                "commercial_s": 1664.355,
+                "breaks_missed": 0,
+                "program_s": 5935.645,
+                "program_removed_s": 0.0,
+                "program_covered_s": 709.313,
+                "false_mute_episodes": 45,
+                "false_mutes_per_hour": 27.293,
+                "longest_false_mute_s": 83.58,
+                "longest": {
+                  "start_s": 7020.42,
+                  "end_s": 7104.0,
+                  "duration_s": 83.58
+                },
+                "program_hidden_per_hour": 430.202,
+                "class_clock_s": 0.0,
+                "class_muted_s": 0.0,
+                "class_playing_s": 0.0
+              },
+              "consumer": {
+                "commercial_coverage": 0.9515,
+                "commercial_s": 1664.355,
+                "breaks_missed": 0,
+                "program_s": 5884.805,
+                "program_removed_s": 50.84,
+                "program_covered_s": 661.473,
+                "false_mute_episodes": 44,
+                "false_mutes_per_hour": 26.917,
+                "longest_false_mute_s": 83.58,
+                "longest": {
+                  "start_s": 7020.42,
+                  "end_s": 7104.0,
+                  "duration_s": 83.58
+                },
+                "program_hidden_per_hour": 404.653,
+                "class_clock_s": 50.84,
+                "class_muted_s": 47.84,
+                "class_playing_s": 3.0
+              },
+              "sponsored_read": {
+                "commercial_coverage": 0.9515,
+                "commercial_s": 1664.355,
+                "breaks_missed": 0,
+                "program_s": 5899.645,
+                "program_removed_s": 36.0,
+                "program_covered_s": 675.313,
+                "false_mute_episodes": 44,
+                "false_mutes_per_hour": 26.849,
+                "longest_false_mute_s": 83.58,
+                "longest": {
+                  "start_s": 7020.42,
+                  "end_s": 7104.0,
+                  "duration_s": 83.58
+                },
+                "program_hidden_per_hour": 412.08,
+                "class_clock_s": 36.0,
+                "class_muted_s": 34.0,
+                "class_playing_s": 2.0
+              },
+              "audited_bucket": {
+                "commercial_coverage": 0.9515,
+                "commercial_s": 1664.355,
+                "breaks_missed": 0,
+                "program_s": 5824.417,
+                "program_removed_s": 111.228,
+                "program_covered_s": 602.085,
+                "false_mute_episodes": 42,
+                "false_mutes_per_hour": 25.96,
+                "longest_false_mute_s": 83.58,
+                "longest": {
+                  "start_s": 7020.42,
+                  "end_s": 7104.0,
+                  "duration_s": 83.58
+                },
+                "program_hidden_per_hour": 372.141,
+                "class_clock_s": 111.228,
+                "class_muted_s": 107.228,
+                "class_playing_s": 4.0
+              }
+            },
+            "program_examples_muted_s": [
+              {
+                "id": "sept_injury_desk",
+                "muted_s": 25.0
+              }
+            ]
+          }
+        },
+        "hold_5": {
+          "oracle": {
+            "views": {
+              "research": {
+                "commercial_coverage": 0.983,
+                "commercial_s": 1664.355,
+                "breaks_missed": 0,
+                "program_s": 5935.645,
+                "program_removed_s": 0.0,
+                "program_covered_s": 253.733,
+                "false_mute_episodes": 32,
+                "false_mutes_per_hour": 19.408,
+                "longest_false_mute_s": 30.0,
+                "longest": {
+                  "start_s": 2978.0,
+                  "end_s": 3009.0,
+                  "duration_s": 30.0
+                },
+                "program_hidden_per_hour": 153.89,
+                "class_clock_s": 0.0,
+                "class_muted_s": 0.0,
+                "class_playing_s": 0.0
+              },
+              "consumer": {
+                "commercial_coverage": 0.983,
+                "commercial_s": 1664.355,
+                "breaks_missed": 0,
+                "program_s": 5884.805,
+                "program_removed_s": 50.84,
+                "program_covered_s": 209.893,
+                "false_mute_episodes": 31,
+                "false_mutes_per_hour": 18.964,
+                "longest_false_mute_s": 25.0,
+                "longest": {
+                  "start_s": 6266.0,
+                  "end_s": 6292.0,
+                  "duration_s": 25.0
+                },
+                "program_hidden_per_hour": 128.401,
+                "class_clock_s": 50.84,
+                "class_muted_s": 43.84,
+                "class_playing_s": 7.0
+              },
+              "sponsored_read": {
+                "commercial_coverage": 0.983,
+                "commercial_s": 1664.355,
+                "breaks_missed": 0,
+                "program_s": 5899.645,
+                "program_removed_s": 36.0,
+                "program_covered_s": 223.733,
+                "false_mute_episodes": 31,
+                "false_mutes_per_hour": 18.916,
+                "longest_false_mute_s": 25.0,
+                "longest": {
+                  "start_s": 6266.0,
+                  "end_s": 6292.0,
+                  "duration_s": 25.0
+                },
+                "program_hidden_per_hour": 136.523,
+                "class_clock_s": 36.0,
+                "class_muted_s": 30.0,
+                "class_playing_s": 6.0
+              },
+              "audited_bucket": {
+                "commercial_coverage": 0.983,
+                "commercial_s": 1664.355,
+                "breaks_missed": 0,
+                "program_s": 5824.417,
+                "program_removed_s": 111.228,
+                "program_covered_s": 207.893,
+                "false_mute_episodes": 30,
+                "false_mutes_per_hour": 18.543,
+                "longest_false_mute_s": 25.0,
+                "longest": {
+                  "start_s": 6266.0,
+                  "end_s": 6292.0,
+                  "duration_s": 25.0
+                },
+                "program_hidden_per_hour": 128.496,
+                "class_clock_s": 111.228,
+                "class_muted_s": 45.84,
+                "class_playing_s": 65.388
+              }
+            },
+            "program_examples_muted_s": [
+              {
+                "id": "sept_injury_desk",
+                "muted_s": 25.0
+              }
+            ]
+          },
+          "actual": {
+            "views": {
+              "research": {
+                "commercial_coverage": 0.8917,
+                "commercial_s": 1664.355,
+                "breaks_missed": 0,
+                "program_s": 5935.645,
+                "program_removed_s": 0.0,
+                "program_covered_s": 344.925,
+                "false_mute_episodes": 43,
+                "false_mutes_per_hour": 26.08,
+                "longest_false_mute_s": 30.0,
+                "longest": {
+                  "start_s": 2978.0,
+                  "end_s": 3009.0,
+                  "duration_s": 30.0
+                },
+                "program_hidden_per_hour": 209.199,
+                "class_clock_s": 0.0,
+                "class_muted_s": 0.0,
+                "class_playing_s": 0.0
+              },
+              "consumer": {
+                "commercial_coverage": 0.8917,
+                "commercial_s": 1664.355,
+                "breaks_missed": 0,
+                "program_s": 5884.805,
+                "program_removed_s": 50.84,
+                "program_covered_s": 301.085,
+                "false_mute_episodes": 42,
+                "false_mutes_per_hour": 25.693,
+                "longest_false_mute_s": 25.0,
+                "longest": {
+                  "start_s": 6266.0,
+                  "end_s": 6292.0,
+                  "duration_s": 25.0
+                },
+                "program_hidden_per_hour": 184.187,
+                "class_clock_s": 50.84,
+                "class_muted_s": 43.84,
+                "class_playing_s": 7.0
+              },
+              "sponsored_read": {
+                "commercial_coverage": 0.8917,
+                "commercial_s": 1664.355,
+                "breaks_missed": 0,
+                "program_s": 5899.645,
+                "program_removed_s": 36.0,
+                "program_covered_s": 314.925,
+                "false_mute_episodes": 42,
+                "false_mutes_per_hour": 25.629,
+                "longest_false_mute_s": 25.0,
+                "longest": {
+                  "start_s": 6266.0,
+                  "end_s": 6292.0,
+                  "duration_s": 25.0
+                },
+                "program_hidden_per_hour": 192.169,
+                "class_clock_s": 36.0,
+                "class_muted_s": 30.0,
+                "class_playing_s": 6.0
+              },
+              "audited_bucket": {
+                "commercial_coverage": 0.8917,
+                "commercial_s": 1664.355,
+                "breaks_missed": 0,
+                "program_s": 5824.417,
+                "program_removed_s": 111.228,
+                "program_covered_s": 299.085,
+                "false_mute_episodes": 41,
+                "false_mutes_per_hour": 25.342,
+                "longest_false_mute_s": 25.0,
+                "longest": {
+                  "start_s": 6266.0,
+                  "end_s": 6292.0,
+                  "duration_s": 25.0
+                },
+                "program_hidden_per_hour": 184.86,
+                "class_clock_s": 111.228,
+                "class_muted_s": 45.84,
+                "class_playing_s": 65.388
+              }
+            },
+            "program_examples_muted_s": [
+              {
+                "id": "sept_injury_desk",
+                "muted_s": 25.0
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

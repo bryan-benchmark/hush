@@ -1,0 +1,35 @@
+{
+  "chunks": 546,
+  "wall_s": 230.3,
+  "process_s": {
+    "median": 0.291,
+    "p90": 0.578,
+    "max": 5.609
+  },
+  "by_role": {
+    "lead": {
+      "chunks": 336,
+      "signoff": 1,
+      "stoppage": 9
+    },
+    "after": {
+      "chunks": 58,
+      "signoff": 0,
+      "stoppage": 0
+    },
+    "control": {
+      "chunks": 144,
+      "signoff": 0,
+      "stoppage": 0
+    },
+    "false_arm": {
+      "chunks": 8,
+      "signoff": 0,
+      "stoppage": 0
+    }
+  },
+  "signoff_events": 1,
+  "stoppage_events": 9,
+  "lead_signoffs_available_before_boundary": 1,
+  "lead_signoffs": 1
+}

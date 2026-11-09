@@ -1,0 +1,250 @@
+{
+  "gallery": [
+    "Al Michaels",
+    "Kirk Herbstreit",
+    "Clarissa Thompson",
+    "Ryan Fitzpatrick",
+    "Andrew Whitworth",
+    "Tony Gonzalez"
+  ],
+  "model": "C:\\Users\\faceo\\Projects\\ohush\\experiments\\exp002\\models\\spkrec-ecapa-voxceleb",
+  "frozen_line": 0.25,
+  "realtime": false,
+  "n_probes": 25,
+  "n_positive": 13,
+  "n_negative": 12,
+  "frozen_0_25": {
+    "line": 0.25,
+    "positives": 13,
+    "negatives": 12,
+    "false_reject": 8,
+    "false_reject_rate": 0.6154,
+    "wrong_id": 0,
+    "true_accept": 5,
+    "id_accuracy_when_accepted": 1.0,
+    "false_accept": 4,
+    "false_accept_rate": 0.3333,
+    "true_reject": 8
+  },
+  "curve": [
+    {
+      "line": 0.15,
+      "positives": 13,
+      "negatives": 12,
+      "false_reject": 8,
+      "false_reject_rate": 0.6154,
+      "wrong_id": 0,
+      "true_accept": 5,
+      "id_accuracy_when_accepted": 1.0,
+      "false_accept": 10,
+      "false_accept_rate": 0.8333,
+      "true_reject": 2
+    },
+    {
+      "line": 0.2,
+      "positives": 13,
+      "negatives": 12,
+      "false_reject": 8,
+      "false_reject_rate": 0.6154,
+      "wrong_id": 0,
+      "true_accept": 5,
+      "id_accuracy_when_accepted": 1.0,
+      "false_accept": 7,
+      "false_accept_rate": 0.5833,
+      "true_reject": 5
+    },
+    {
+      "line": 0.25,
+      "positives": 13,
+      "negatives": 12,
+      "false_reject": 8,
+      "false_reject_rate": 0.6154,
+      "wrong_id": 0,
+      "true_accept": 5,
+      "id_accuracy_when_accepted": 1.0,
+      "false_accept": 4,
+      "false_accept_rate": 0.3333,
+      "true_reject": 8
+    },
+    {
+      "line": 0.3,
+      "positives": 13,
+      "negatives": 12,
+      "false_reject": 8,
+      "false_reject_rate": 0.6154,
+      "wrong_id": 0,
+      "true_accept": 5,
+      "id_accuracy_when_accepted": 1.0,
+      "false_accept": 2,
+      "false_accept_rate": 0.1667,
+      "true_reject": 10
+    },
+    {
+      "line": 0.35,
+      "positives": 13,
+      "negatives": 12,
+      "false_reject": 8,
+      "false_reject_rate": 0.6154,
+      "wrong_id": 0,
+      "true_accept": 5,
+      "id_accuracy_when_accepted": 1.0,
+      "false_accept": 1,
+      "false_accept_rate": 0.0833,
+      "true_reject": 11
+    },
+    {
+      "line": 0.4,
+      "positives": 13,
+      "negatives": 12,
+      "false_reject": 8,
+      "false_reject_rate": 0.6154,
+      "wrong_id": 0,
+      "true_accept": 5,
+      "id_accuracy_when_accepted": 1.0,
+      "false_accept": 0,
+      "false_accept_rate": 0.0,
+      "true_reject": 12
+    },
+    {
+      "line": 0.45,
+      "positives": 13,
+      "negatives": 12,
+      "false_reject": 8,
+      "false_reject_rate": 0.6154,
+      "wrong_id": 0,
+      "true_accept": 5,
+      "id_accuracy_when_accepted": 1.0,
+      "false_accept": 0,
+      "false_accept_rate": 0.0,
+      "true_reject": 12
+    },
+    {
+      "line": 0.5,
+      "positives": 13,
+      "negatives": 12,
+      "false_reject": 10,
+      "false_reject_rate": 0.7692,
+      "wrong_id": 0,
+      "true_accept": 3,
+      "id_accuracy_when_accepted": 1.0,
+      "false_accept": 0,
+      "false_accept_rate": 0.0,
+      "true_reject": 12
+    }
+  ],
+  "false_accepts_at_0_25": [
+    {
+      "id": "fn0110",
+      "truth_name": "unknown",
+      "decision_name": "Kirk Herbstreit",
+      "cosine": 0.3214,
+      "gap": 0.2157,
+      "owner_text": "Fanduel in game broadcast - unknown male"
+    },
+    {
+      "id": "fn0113",
+      "truth_name": "unknown",
+      "decision_name": "Andrew Whitworth",
+      "cosine": 0.2817,
+      "gap": 0.016,
+      "owner_text": "fanduel ad - probably in-broadcast -  unknown male"
+    },
+    {
+      "id": "fn0118",
+      "truth_name": "unknown",
+      "decision_name": "Clarissa Thompson",
+      "cosine": 0.3725,
+      "gap": 0.2772,
+      "owner_text": "unknown female"
+    },
+    {
+      "id": "fn0119",
+      "truth_name": "unknown",
+      "decision_name": "Tony Gonzalez",
+      "cosine": 0.2528,
+      "gap": 0.0212,
+      "owner_text": "male football player speaking  - not a booth guy - active player"
+    }
+  ],
+  "false_rejects_at_0_25": [
+    {
+      "id": "fn0001",
+      "truth_name": "Al Michaels",
+      "cosine": null,
+      "top_name": null,
+      "owner_text": "al michaels",
+      "same_voice_ad": false
+    },
+    {
+      "id": "fn0001",
+      "truth_name": "Al Michaels",
+      "cosine": null,
+      "top_name": null,
+      "owner_text": "al michaels",
+      "same_voice_ad": false
+    },
+    {
+      "id": "fn0001",
+      "truth_name": "Al Michaels",
+      "cosine": null,
+      "top_name": null,
+      "owner_text": "al michaels",
+      "same_voice_ad": false
+    },
+    {
+      "id": "fn0001",
+      "truth_name": "Al Michaels",
+      "cosine": null,
+      "top_name": null,
+      "owner_text": "al michaels",
+      "same_voice_ad": false
+    },
+    {
+      "id": "fn0001",
+      "truth_name": "Al Michaels",
+      "cosine": null,
+      "top_name": null,
+      "owner_text": "al michaels + whistle",
+      "same_voice_ad": false
+    },
+    {
+      "id": "fn0006",
+      "truth_name": "Clarissa Thompson",
+      "cosine": 0.1296,
+      "top_name": "Kirk Herbstreit",
+      "owner_text": "clarissa thompson",
+      "same_voice_ad": false
+    },
+    {
+      "id": "fn0006",
+      "truth_name": "Clarissa Thompson",
+      "cosine": 0.0643,
+      "top_name": "Kirk Herbstreit",
+      "owner_text": "clarissa thompson",
+      "same_voice_ad": false
+    },
+    {
+      "id": "fn0009",
+      "truth_name": "Ryan Fitzpatrick",
+      "cosine": 0.0903,
+      "top_name": "Andrew Whitworth",
+      "owner_text": "ryan fits",
+      "same_voice_ad": false
+    }
+  ],
+  "same_voice_ads_at_0_25": [
+    {
+      "id": "fn0109",
+      "truth_name": "Clarissa Thompson",
+      "decision": {
+        "decision": "accept",
+        "name": "Clarissa Thompson",
+        "line": 0.25
+      },
+      "cosine": 0.493,
+      "correct": true,
+      "owner_text": "draft kings in-broadcast ad - clarrisa thompson doing the ad"
+    }
+  ],
+  "mute_unchanged": true
+}

@@ -1,0 +1,135 @@
+[
+  {
+    "session": "hush_20261008_205100",
+    "available_t": 2220.285,
+    "kind": "stoppage",
+    "role": "lead",
+    "t0": 2214.987,
+    "t1": 2219.987,
+    "boundary": 2229.987,
+    "phrases": [
+      "two-minute warning",
+      "two minute warning"
+    ],
+    "process_s": 0.298
+  },
+  {
+    "session": "hush_20261008_205100",
+    "available_t": 2386.481,
+    "kind": "stoppage",
+    "role": "lead",
+    "t0": 2381.185,
+    "t1": 2386.185,
+    "boundary": 2396.185,
+    "phrases": [
+      "halftime"
+    ],
+    "process_s": 0.296
+  },
+  {
+    "session": "hush_20261008_205100",
+    "available_t": 2391.932,
+    "kind": "stoppage",
+    "role": "lead",
+    "t0": 2386.185,
+    "t1": 2391.185,
+    "boundary": 2396.185,
+    "phrases": [
+      "two-minute warning",
+      "two minute warning"
+    ],
+    "process_s": 0.747
+  },
+  {
+    "session": "hush_20261008_205100",
+    "available_t": 3020.529,
+    "kind": "stoppage",
+    "role": "lead",
+    "t0": 3015.205,
+    "t1": 3020.205,
+    "boundary": 3025.205,
+    "phrases": [
+      "halftime"
+    ],
+    "process_s": 0.324
+  },
+  {
+    "session": "hush_20261008_205100",
+    "available_t": 3524.172,
+    "kind": "stoppage",
+    "role": "lead",
+    "t0": 3518.839,
+    "t1": 3523.839,
+    "boundary": 3548.839,
+    "phrases": [
+      "halftime"
+    ],
+    "process_s": 0.333
+  },
+  {
+    "session": "hush_20261008_205100",
+    "available_t": 3539.135,
+    "kind": "stoppage",
+    "role": "lead",
+    "t0": 3533.839,
+    "t1": 3538.839,
+    "boundary": 3548.839,
+    "phrases": [
+      "halftime"
+    ],
+    "process_s": 0.296
+  },
+  {
+    "session": "hush_20261008_205100",
+    "available_t": 6354.065,
+    "kind": "stoppage",
+    "role": "lead",
+    "t0": 6348.797,
+    "t1": 6353.797,
+    "boundary": 6363.797,
+    "phrases": [
+      "end of the quarter"
+    ],
+    "process_s": 0.268
+  },
+  {
+    "session": "hush_20261008_205100",
+    "available_t": 8131.882,
+    "kind": "stoppage",
+    "role": "lead",
+    "t0": 8126.596,
+    "t1": 8131.596,
+    "boundary": 8136.596,
+    "phrases": [
+      "two-minute warning",
+      "two minute warning"
+    ],
+    "process_s": 0.286
+  },
+  {
+    "session": "hush_20261008_205100",
+    "available_t": 8787.896,
+    "kind": "signoff",
+    "role": "lead",
+    "t0": 8782.615,
+    "t1": 8787.615,
+    "boundary": 8802.615,
+    "phrases": [
+      "these messages"
+    ],
+    "process_s": 0.281
+  },
+  {
+    "session": "hush_20260924_220624",
+    "available_t": 2178.177,
+    "kind": "stoppage",
+    "role": "lead",
+    "t0": 2172.88,
+    "t1": 2177.88,
+    "boundary": 2217.88,
+    "phrases": [
+      "injury"
+    ],
+    "process_s": 0.297
+  }
+]

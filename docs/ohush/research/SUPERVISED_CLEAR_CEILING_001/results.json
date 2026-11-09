@@ -1,0 +1,390 @@
+{
+  "id": "SUPERVISED_CLEAR_CEILING_001",
+  "follows": "SUPERVISED_PROGRAM_CEILING_001",
+  "published_mixed_cutoff_unchanged": 12.155325889587404,
+  "published_program_cutoff_unchanged": 9.892548561096193,
+  "window_s": 5.0,
+  "fit": {
+    "sessions": [
+      "hush_20260909_213047",
+      "hush_20260913_210542"
+    ],
+    "rows": 21400,
+    "commercial_rows": 5863,
+    "program_rows": 15537,
+    "train_accuracy": 0.9273
+  },
+  "threshold": 8.284611701965334,
+  "threshold_rule": "one step above the highest score whose covered second is entirely program and whose five-second lookback contains no labeled commercial, on the two NBC fit games",
+  "setter": {
+    "session": "hush_20260913_210542",
+    "t": 11412.0,
+    "score": 8.284612,
+    "window_commercial_s": 0.0,
+    "nearest_break": {
+      "seconds": 1591.143,
+      "side": "after the previous labeled commercial"
+    },
+    "audioset_top3": [
+      {
+        "class": "Music",
+        "probability": 0.2917
+      },
+      {
+        "class": "Speech",
+        "probability": 0.2153
+      },
+      {
+        "class": "Musical instrument",
+        "probability": 0.0304
+      }
+    ]
+  },
+  "clear_program_seconds": 15337,
+  "program_seconds_with_commercial_in_lookback": 200,
+  "max_score_among_contaminated_lookbacks": 9.893,
+  "october_may_choose_cutoff": false,
+  "live_mute_changed": false,
+  "sessions": [
+    {
+      "session": "hush_20260909_213047",
+      "name": "Sept 9 NBC",
+      "commercial_recognized_s": 431.0,
+      "commercial_missed_s": 2418.911,
+      "commercial_s": 2849.911,
+      "program_mistaken_s": 0.0,
+      "program_interruptions": 0,
+      "start_delay_median_s": 13.243,
+      "starts": 20,
+      "starts_missed": 0,
+      "return_delay": {
+        "median_s": 0.0,
+        "returned": 20,
+        "still_covered": 0
+      },
+      "late_start_s": 439.388,
+      "early_unmute_s": 1979.523,
+      "class_medians": {
+        "commercial_median": 4.572,
+        "program_median": -6.338
+      },
+      "worst_program_interruption": null,
+      "longest_missed_break": null,
+      "broken": false,
+      "role": "fit"
+    },
+    {
+      "session": "hush_20260913_210542",
+      "name": "Sept 13 NBC",
+      "commercial_recognized_s": 321.779,
+      "commercial_missed_s": 2730.678,
+      "commercial_s": 3052.457,
+      "program_mistaken_s": 2.221,
+      "program_interruptions": 3,
+      "start_delay_median_s": 18.798,
+      "starts": 21,
+      "starts_missed": 2,
+      "return_delay": {
+        "median_s": 0.0,
+        "returned": 21,
+        "still_covered": 0
+      },
+      "late_start_s": 403.826,
+      "early_unmute_s": 2155.084,
+      "class_medians": {
+        "commercial_median": 3.654,
+        "program_median": -6.081
+      },
+      "worst_program_interruption": {
+        "t0": 7754.0,
+        "t1": 7756.0,
+        "program_s": 1.686,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "longest_missed_break": {
+        "t0": 9680.14,
+        "t1": 9820.857,
+        "seconds": 140.717,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "broken": true,
+      "role": "fit"
+    },
+    {
+      "session": "hush_20260914_212529",
+      "name": "Sept 14 ESPN",
+      "commercial_recognized_s": 186.28,
+      "commercial_missed_s": 1617.767,
+      "commercial_s": 1804.047,
+      "program_mistaken_s": 1.72,
+      "program_interruptions": 3,
+      "start_delay_median_s": 11.008,
+      "starts": 15,
+      "starts_missed": 1,
+      "return_delay": {
+        "median_s": 0.0,
+        "returned": 15,
+        "still_covered": 0
+      },
+      "late_start_s": 244.527,
+      "early_unmute_s": 1323.779,
+      "class_medians": {
+        "commercial_median": 3.464,
+        "program_median": -6.37
+      },
+      "worst_program_interruption": {
+        "t0": 3797.0,
+        "t1": 3798.0,
+        "program_s": 1.0,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "longest_missed_break": {
+        "t0": 1029.664,
+        "t1": 1079.128,
+        "seconds": 49.464,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "broken": true,
+      "role": "held_out"
+    },
+    {
+      "session": "hush_20260924_220624",
+      "name": "Sept 24 Prime",
+      "commercial_recognized_s": 237.664,
+      "commercial_missed_s": 1426.691,
+      "commercial_s": 1664.355,
+      "program_mistaken_s": 20.336,
+      "program_interruptions": 16,
+      "start_delay_median_s": 18.756,
+      "starts": 13,
+      "starts_missed": 0,
+      "return_delay": {
+        "median_s": 0.0,
+        "returned": 12,
+        "still_covered": 1
+      },
+      "late_start_s": 296.603,
+      "early_unmute_s": 1130.09,
+      "class_medians": {
+        "commercial_median": 4.376,
+        "program_median": -4.491
+      },
+      "worst_program_interruption": {
+        "t0": 6331.0,
+        "t1": 6334.0,
+        "program_s": 3.0,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "longest_missed_break": null,
+      "broken": true,
+      "role": "held_out"
+    },
+    {
+      "session": "hush_20260913_150934",
+      "name": "Sept 13 RedZone",
+      "commercial_recognized_s": 0.0,
+      "commercial_missed_s": 0.0,
+      "commercial_s": 0,
+      "program_mistaken_s": 4.0,
+      "program_interruptions": 3,
+      "start_delay_median_s": null,
+      "starts": 0,
+      "starts_missed": 0,
+      "return_delay": {
+        "median_s": null,
+        "returned": 0,
+        "still_covered": 0
+      },
+      "late_start_s": 0,
+      "early_unmute_s": 0,
+      "class_medians": {
+        "commercial_median": null,
+        "program_median": -4.173
+      },
+      "worst_program_interruption": {
+        "t0": 1477.0,
+        "t1": 1479.0,
+        "program_s": 2.0,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "longest_missed_break": null,
+      "broken": true,
+      "role": "held_out"
+    },
+    {
+      "session": "hush_20261008_205100",
+      "name": "Oct 8 Prime Video",
+      "commercial_recognized_s": 391.774,
+      "commercial_missed_s": 2250.368,
+      "commercial_s": 2642.141,
+      "program_mistaken_s": 26.226,
+      "program_interruptions": 12,
+      "start_delay_median_s": 8.983,
+      "starts": 23,
+      "starts_missed": 2,
+      "return_delay": {
+        "median_s": 0.0,
+        "returned": 22,
+        "still_covered": 1
+      },
+      "late_start_s": 286.541,
+      "early_unmute_s": 1917.212,
+      "class_medians": {
+        "commercial_median": 4.41,
+        "program_median": -4.344
+      },
+      "worst_program_interruption": {
+        "t0": 3420.0,
+        "t1": 3425.0,
+        "program_s": 5.0,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "longest_missed_break": {
+        "t0": 2396.185,
+        "t1": 2429.785,
+        "seconds": 33.6,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "broken": true,
+      "role": "october_already_inspected"
+    },
+    {
+      "session": "hush_20261010_222400",
+      "name": "Oct 10 cable",
+      "commercial_recognized_s": 117.0,
+      "commercial_missed_s": 964.817,
+      "commercial_s": 1081.817,
+      "program_mistaken_s": 88.0,
+      "program_interruptions": 32,
+      "start_delay_median_s": 16.025,
+      "starts": 6,
+      "starts_missed": 0,
+      "return_delay": {
+        "median_s": 0.0,
+        "returned": 6,
+        "still_covered": 0
+      },
+      "late_start_s": 129.851,
+      "early_unmute_s": 834.966,
+      "class_medians": {
+        "commercial_median": 2.835,
+        "program_median": -2.92
+      },
+      "worst_program_interruption": {
+        "t0": 1477.0,
+        "t1": 1485.0,
+        "program_s": 8.0,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "longest_missed_break": null,
+      "broken": true,
+      "role": "october_already_inspected"
+    },
+    {
+      "session": "hush_20261011_135700",
+      "name": "Oct 11 afternoon",
+      "commercial_recognized_s": 57.847,
+      "commercial_missed_s": 925.107,
+      "commercial_s": 982.955,
+      "program_mistaken_s": 4.153,
+      "program_interruptions": 3,
+      "start_delay_median_s": 25.567,
+      "starts": 8,
+      "starts_missed": 0,
+      "return_delay": {
+        "median_s": 0.0,
+        "returned": 8,
+        "still_covered": 0
+      },
+      "late_start_s": 237.602,
+      "early_unmute_s": 687.505,
+      "class_medians": {
+        "commercial_median": 1.995,
+        "program_median": -2.575
+      },
+      "worst_program_interruption": {
+        "t0": 832.0,
+        "t1": 834.0,
+        "program_s": 2.0,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "longest_missed_break": null,
+      "broken": true,
+      "role": "october_already_inspected"
+    },
+    {
+      "session": "hush_20261011_204300",
+      "name": "Oct 11 night",
+      "commercial_recognized_s": 65.766,
+      "commercial_missed_s": 560.623,
+      "commercial_s": 626.389,
+      "program_mistaken_s": 304.234,
+      "program_interruptions": 139,
+      "start_delay_median_s": 3.945,
+      "starts": 6,
+      "starts_missed": 1,
+      "return_delay": {
+        "median_s": 0.0,
+        "returned": 6,
+        "still_covered": 0
+      },
+      "late_start_s": 65.369,
+      "early_unmute_s": 472.652,
+      "class_medians": {
+        "commercial_median": 3.662,
+        "program_median": -0.026
+      },
+      "worst_program_interruption": {
+        "t0": 12143.0,
+        "t1": 12153.0,
+        "program_s": 10.0,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "longest_missed_break": {
+        "t0": 2598.831,
+        "t1": 2621.433,
+        "seconds": 22.602,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "broken": true,
+      "role": "october_already_inspected"
+    },
+    {
+      "session": "hush_20261012_204200",
+      "name": "Oct 12 MNF",
+      "commercial_recognized_s": 314.844,
+      "commercial_missed_s": 2629.484,
+      "commercial_s": 2944.327,
+      "program_mistaken_s": 14.156,
+      "program_interruptions": 9,
+      "start_delay_median_s": 12.591,
+      "starts": 24,
+      "starts_missed": 2,
+      "return_delay": {
+        "median_s": 0.0,
+        "returned": 24,
+        "still_covered": 0
+      },
+      "late_start_s": 413.807,
+      "early_unmute_s": 2172.317,
+      "class_medians": {
+        "commercial_median": 3.126,
+        "program_median": -5.403
+      },
+      "worst_program_interruption": {
+        "t0": 791.0,
+        "t1": 794.0,
+        "program_s": 3.0,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "longest_missed_break": {
+        "t0": 103.529,
+        "t1": 132.407,
+        "seconds": 28.878,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "broken": true,
+      "role": "october_already_inspected"
+    }
+  ]
+}

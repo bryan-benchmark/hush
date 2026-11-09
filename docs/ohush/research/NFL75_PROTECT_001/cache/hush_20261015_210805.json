@@ -1,0 +1,473 @@
+{
+  "session": "hush_20261015_210805",
+  "model": "speechbrain/spkrec-ecapa-voxceleb",
+  "coverage": [
+    0.0,
+    12753.749
+  ],
+  "vad": {
+    "n_raw_regions": 2867,
+    "n_regions": 2385
+  },
+  "windows": 7943,
+  "names": [
+    "Al Michaels",
+    "Kirk Herbstreit",
+    "Clarissa Thompson",
+    "Andrew Whitworth",
+    "Tony Gonzalez"
+  ],
+  "enrollment_clips": [
+    {
+      "id": "e0098",
+      "session": "hush_20260924_220624",
+      "who": "Kirk Herbstreit",
+      "condition": "clear",
+      "play_start": 608.4,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0099",
+      "session": "hush_20260924_220624",
+      "who": "Kirk Herbstreit",
+      "condition": "clear",
+      "play_start": 1625.6,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0100",
+      "session": "hush_20260924_220624",
+      "who": "Kirk Herbstreit",
+      "condition": "clear",
+      "play_start": 3034.8,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0101",
+      "session": "hush_20260924_220624",
+      "who": "Kirk Herbstreit",
+      "condition": "song",
+      "play_start": 3892.9,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0102",
+      "session": "hush_20260924_220624",
+      "who": "Kirk Herbstreit",
+      "condition": "crowd",
+      "play_start": 1131.6,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0103",
+      "session": "hush_20260924_220624",
+      "who": "Kirk Herbstreit",
+      "condition": "crowd",
+      "play_start": 2419.4,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0104",
+      "session": "hush_20260924_220624",
+      "who": "Kirk Herbstreit",
+      "condition": "clear",
+      "play_start": 3403.7,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0105",
+      "session": "hush_20260924_220624",
+      "who": "Kirk Herbstreit",
+      "condition": "loud",
+      "play_start": 198.6,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0106",
+      "session": "hush_20260924_220624",
+      "who": "Al Michaels",
+      "condition": "crowd",
+      "play_start": 799.7,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0107",
+      "session": "hush_20260924_220624",
+      "who": "Al Michaels",
+      "condition": "clear",
+      "play_start": 2074.2,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0108",
+      "session": "hush_20260924_220624",
+      "who": "Al Michaels",
+      "condition": "clear",
+      "play_start": 3023.5,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0109",
+      "session": "hush_20260924_220624",
+      "who": "Al Michaels",
+      "condition": "crowd",
+      "play_start": 3997.8,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0110",
+      "session": "hush_20260924_220624",
+      "who": "Al Michaels",
+      "condition": "crowd",
+      "play_start": 1417.1,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0111",
+      "session": "hush_20260924_220624",
+      "who": "Al Michaels",
+      "condition": "crowd",
+      "play_start": 2508.7,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0112",
+      "session": "hush_20260924_220624",
+      "who": "Al Michaels",
+      "condition": "song",
+      "play_start": 3479.3,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0113",
+      "session": "hush_20260924_220624",
+      "who": "Al Michaels",
+      "condition": "crowd",
+      "play_start": 180.4,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0114",
+      "session": "hush_20260924_220624",
+      "who": "Clarissa Thompson",
+      "condition": "crowd",
+      "play_start": 4869.4,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0115",
+      "session": "hush_20260924_220624",
+      "who": "Clarissa Thompson",
+      "condition": "crowd",
+      "play_start": 5252.4,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0116",
+      "session": "hush_20260924_220624",
+      "who": "Clarissa Thompson",
+      "condition": "song",
+      "play_start": 6196.2,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0117",
+      "session": "hush_20260924_220624",
+      "who": "Clarissa Thompson",
+      "condition": "clear",
+      "play_start": 7164.2,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0120",
+      "session": "hush_20260924_220624",
+      "who": "Clarissa Thompson",
+      "condition": "clear",
+      "play_start": 6366.1,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0121",
+      "session": "hush_20260924_220624",
+      "who": "Clarissa Thompson",
+      "condition": "crowd",
+      "play_start": 4597.3,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0123",
+      "session": "hush_20260924_220624",
+      "who": "Tony Gonzalez",
+      "condition": "clear",
+      "play_start": 5777.2,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0124",
+      "session": "hush_20260924_220624",
+      "who": "Andrew Whitworth",
+      "condition": "song",
+      "play_start": 6840.2,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0125",
+      "session": "hush_20260924_220624",
+      "who": "Andrew Whitworth",
+      "condition": "clear",
+      "play_start": 7262.6,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0126",
+      "session": "hush_20260924_220624",
+      "who": "Andrew Whitworth",
+      "condition": "clear",
+      "play_start": 5299.2,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0127",
+      "session": "hush_20260924_220624",
+      "who": "Andrew Whitworth",
+      "condition": "clear",
+      "play_start": 6397.1,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0128",
+      "session": "hush_20260924_220624",
+      "who": "Andrew Whitworth",
+      "condition": "clear",
+      "play_start": 7206,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0129",
+      "session": "hush_20260924_220624",
+      "who": "Andrew Whitworth",
+      "condition": "clear",
+      "play_start": 4746.8,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0134",
+      "session": "hush_20261008_205100",
+      "who": "Kirk Herbstreit",
+      "condition": "clear",
+      "play_start": 1316.4,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0135",
+      "session": "hush_20261008_205100",
+      "who": "Kirk Herbstreit",
+      "condition": "clear",
+      "play_start": 3886.1,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0136",
+      "session": "hush_20261008_205100",
+      "who": "Kirk Herbstreit",
+      "condition": "crowd",
+      "play_start": 5998.4,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0137",
+      "session": "hush_20261008_205100",
+      "who": "Kirk Herbstreit",
+      "condition": "crowd",
+      "play_start": 7983.1,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0138",
+      "session": "hush_20261008_205100",
+      "who": "Kirk Herbstreit",
+      "condition": "clear",
+      "play_start": 2107.8,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0139",
+      "session": "hush_20261008_205100",
+      "who": "Kirk Herbstreit",
+      "condition": "clear",
+      "play_start": 4812.8,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0140",
+      "session": "hush_20261008_205100",
+      "who": "Kirk Herbstreit",
+      "condition": "clear",
+      "play_start": 7071.3,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0141",
+      "session": "hush_20261008_205100",
+      "who": "Kirk Herbstreit",
+      "condition": "crowd",
+      "play_start": 477.1,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0142",
+      "session": "hush_20261008_205100",
+      "who": "Al Michaels",
+      "condition": "crowd",
+      "play_start": 1344.4,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0143",
+      "session": "hush_20261008_205100",
+      "who": "Al Michaels",
+      "condition": "song",
+      "play_start": 3735.4,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0144",
+      "session": "hush_20261008_205100",
+      "who": "Al Michaels",
+      "condition": "crowd",
+      "play_start": 5939.7,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0145",
+      "session": "hush_20261008_205100",
+      "who": "Al Michaels",
+      "condition": "crowd",
+      "play_start": 8211.5,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0146",
+      "session": "hush_20261008_205100",
+      "who": "Al Michaels",
+      "condition": "song",
+      "play_start": 2375.6,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0147",
+      "session": "hush_20261008_205100",
+      "who": "Al Michaels",
+      "condition": "clear",
+      "play_start": 4831.1,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0148",
+      "session": "hush_20261008_205100",
+      "who": "Al Michaels",
+      "condition": "clear",
+      "play_start": 7084.2,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0149",
+      "session": "hush_20261008_205100",
+      "who": "Al Michaels",
+      "condition": "crowd",
+      "play_start": 501.4,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0150",
+      "session": "hush_20261008_205100",
+      "who": "Tony Gonzalez",
+      "condition": "song",
+      "play_start": 3349.7,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0154",
+      "session": "hush_20261008_205100",
+      "who": "Tony Gonzalez",
+      "condition": "song",
+      "play_start": 9030.3,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0155",
+      "session": "hush_20261008_205100",
+      "who": "Tony Gonzalez",
+      "condition": "song",
+      "play_start": 9346.4,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0156",
+      "session": "hush_20261008_205100",
+      "who": "Tony Gonzalez",
+      "condition": "clear",
+      "play_start": 9514.3,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0157",
+      "session": "hush_20261008_205100",
+      "who": "Clarissa Thompson",
+      "condition": "song",
+      "play_start": 3363.7,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0158",
+      "session": "hush_20261008_205100",
+      "who": "Clarissa Thompson",
+      "condition": "song",
+      "play_start": 8972,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0159",
+      "session": "hush_20261008_205100",
+      "who": "Clarissa Thompson",
+      "condition": "song",
+      "play_start": 9585.1,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0160",
+      "session": "hush_20261008_205100",
+      "who": "Clarissa Thompson",
+      "condition": "crowd",
+      "play_start": 10326.5,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0161",
+      "session": "hush_20261008_205100",
+      "who": "Clarissa Thompson",
+      "condition": "song",
+      "play_start": 3459.2,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0163",
+      "session": "hush_20261008_205100",
+      "who": "Clarissa Thompson",
+      "condition": "crowd",
+      "play_start": 9883.4,
+      "available_at": 0.0
+    },
+    {
+      "id": "e0164",
+      "session": "hush_20261008_205100",
+      "who": "Clarissa Thompson",
+      "condition": "crowd",
+      "play_start": 3201.1,
+      "available_at": 0.0
+    }
+  ],
+  "enrollment": "prior games available at kickoff; same-tape clips at their own end",
+  "blind": true,
+  "sealed_holdouts_read": false
+}

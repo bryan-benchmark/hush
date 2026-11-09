@@ -1,0 +1,245 @@
+{
+  "hush_20260924_220624_5026p8_5046p5": {
+    "bucket": "broadcast",
+    "kind": "highlights",
+    "phase": "",
+    "setting": "package",
+    "speaker": "clarissa, then fitzpatrick, then sherman, then clarissa - looks like - sounds like halftime highlights",
+    "note": "ASR mentions Falcons at halftime / fourth quarter.",
+    "saved_at": "2026-11-09T14:57:33.285Z"
+  },
+  "hush_20260924_220624_6267p8_6287p2": {
+    "bucket": "broadcast",
+    "kind": "injury_desk",
+    "phase": "",
+    "setting": "studio_or_remote",
+    "speaker": "james palmer injury update, sounds like halftime - not a main broadcaster, looks like offsite 'insider'",
+    "note": "Elbow injury consult. ECAPA cold — needs speaker ID.",
+    "saved_at": "2026-11-09T14:57:35.603Z"
+  },
+  "hush_20260924_220624_6315p2_6336p5": {
+    "bucket": "broadcast",
+    "kind": "sideline_report",
+    "phase": "",
+    "setting": "sideline_or_remote",
+    "speaker": "james palmer halftime - 'insider' - inside the lockerroom story =, likely during halftime broadcast",
+    "note": "Will Anderson / team meeting. Top contiguous FP. Needs speaker + phase.",
+    "saved_at": "2026-11-09T14:57:36.908Z"
+  },
+  "hush_20261008_205100_1749p8_1760p8": {
+    "bucket": "broadcast",
+    "kind": "feature_package",
+    "phase": "",
+    "setting": "package",
+    "speaker": "al michaels - talking about jerry jones and family and venue",
+    "note": "Jerry/Gene Jones feature. Needs narrator + phase.",
+    "saved_at": "2026-11-09T14:57:37.587Z"
+  },
+  "hush_20260924_220624_6180p7_6207p8": {
+    "bucket": "broadcast",
+    "kind": "postgame_desk",
+    "phase": "",
+    "setting": "sideline_or_remote",
+    "speaker": "clarissa and whit, giving postgame highlights - introducing james palmer",
+    "note": "Insider James Palmer after break; ASR names Palmer.",
+    "saved_at": "2026-11-09T14:57:38.179Z"
+  },
+  "hush_20260924_220624_7035p0_7095p2": {
+    "bucket": "broadcast",
+    "kind": "studio_desk",
+    "phase": "postgame",
+    "setting": "studio_desk",
+    "speaker": "Andrew Whitworth, fitzpatrick / Clarissa Thompson (mixed), cuts to coach interview at end",
+    "note": "Odell catch desk; mid-span Fits&Whit podcast promo (in-show).",
+    "saved_at": "2026-11-09T14:58:46.532Z"
+  },
+  "hush_20260924_220624_7406p8_7436p2": {
+    "bucket": "broadcast",
+    "kind": "studio_desk",
+    "phase": "postgame",
+    "setting": "studio_desk",
+    "speaker": "Andrew Whitworth & Clarissa & Fitz",
+    "note": "Whitworth desk focus.",
+    "saved_at": "2026-11-09T14:59:05.799Z"
+  },
+  "hush_20261008_205100_3974p0_3980p9": {
+    "bucket": "broadcast",
+    "kind": "music_bed_ad",
+    "phase": "unknown",
+    "setting": "unknown",
+    "speaker": "outro broadcast music to go to commerical",
+    "note": "Unlabeled champion FP. ASR: no speech.",
+    "saved_at": "2026-11-09T14:59:44.629Z"
+  },
+  "hush_20260924_220624_3647p0_3652p5": {
+    "bucket": "broadcast",
+    "kind": "booth",
+    "phase": "",
+    "setting": "",
+    "speaker": "al michaels commenting on weather during broadcast",
+    "note": "",
+    "saved_at": "2026-11-09T15:00:15.507Z"
+  },
+  "hush_20260924_220624_5518p7_5526p3": {
+    "bucket": "broadcast",
+    "kind": "feature_package",
+    "phase": "pregame",
+    "setting": "package",
+    "speaker": "al michaels giving pre-recorded intro to the game, part of broadcast",
+    "note": "al michaels giving pre-recorded intro to the game, part of broadcast",
+    "saved_at": "2026-11-09T15:01:23.220Z"
+  },
+  "hush_20260924_220624_6599p5_6605p7": {
+    "bucket": "broadcast",
+    "kind": "studio_desk",
+    "phase": "postgame",
+    "setting": "studio_desk",
+    "speaker": "fitz postgame",
+    "note": "",
+    "saved_at": "2026-11-09T15:01:40.054Z"
+  },
+  "hush_20260924_220624_6614p0_6629p2": {
+    "bucket": "broadcast",
+    "kind": "studio_desk",
+    "phase": "postgame",
+    "setting": "studio_desk",
+    "speaker": "clarissa and sherman post game",
+    "note": "",
+    "saved_at": "2026-11-09T15:02:00.901Z"
+  },
+  "hush_20260924_220624_6734p0_6739p8": {
+    "bucket": "broadcast",
+    "kind": "postgame_desk",
+    "phase": "postgame",
+    "setting": "",
+    "speaker": "tony gonzalez post game talking about a game",
+    "note": "",
+    "saved_at": "2026-11-09T15:04:49.781Z"
+  },
+  "hush_20260924_220624_6836p2_6844p5": {
+    "bucket": "broadcast",
+    "kind": "postgame_desk",
+    "phase": "postgame",
+    "setting": "",
+    "speaker": "whit and clarissa postgame",
+    "note": "",
+    "saved_at": "2026-11-09T15:05:06.789Z"
+  },
+  "hush_20260924_220624_7370p2_7379p8": {
+    "bucket": "broadcast",
+    "kind": "postgame_desk",
+    "phase": "postgame",
+    "setting": "studio_desk",
+    "speaker": "whit, clarissa - postgame",
+    "note": "",
+    "saved_at": "2026-11-09T15:05:32.443Z"
+  },
+  "hush_20260924_220624_7491p8_7515p4": {
+    "bucket": "broadcast",
+    "kind": "postgame_desk",
+    "phase": "postgame",
+    "setting": "studio_desk",
+    "speaker": "clarissa postgame",
+    "note": "",
+    "saved_at": "2026-11-09T15:05:49.566Z"
+  },
+  "hush_20261008_205100_376p9_386p2": {
+    "bucket": "broadcast",
+    "kind": "booth",
+    "phase": "unknown",
+    "setting": "booth_only",
+    "speaker": "starts with commercial, then al michaels introducing a player giving background",
+    "note": "",
+    "saved_at": "2026-11-09T15:06:23.809Z"
+  },
+  "hush_20261008_205100_3434p0_3443p0": {
+    "bucket": "broadcast",
+    "kind": "halftime_desk",
+    "phase": "halftime",
+    "setting": "studio_desk",
+    "speaker": "commercial back into half time broadcasts with clarissa",
+    "note": "",
+    "saved_at": "2026-11-09T15:06:55.696Z"
+  },
+  "hush_20260924_220624_63p2_66p8": {
+    "bucket": "broadcast",
+    "kind": "booth",
+    "phase": "unknown",
+    "setting": "booth_only",
+    "speaker": "al michaels giving commentary on past venues and history of the city",
+    "note": "",
+    "saved_at": "2026-11-09T15:07:29.802Z"
+  },
+  "hush_20260924_220624_910p2_913p4": {
+    "bucket": "broadcast",
+    "kind": "music_bed_ad",
+    "phase": "",
+    "setting": "",
+    "speaker": "broadcast outro music rock and roll all night, then starts commercial",
+    "note": "",
+    "saved_at": "2026-11-09T15:08:17.489Z"
+  },
+  "hush_20260924_220624_6723p8_6726p8": {
+    "bucket": "broadcast",
+    "kind": "halftime_desk",
+    "phase": "",
+    "setting": "studio_desk",
+    "speaker": "tony gonzalez",
+    "note": "",
+    "saved_at": "2026-11-09T15:09:07.819Z"
+  },
+  "hush_20260924_220624_7398p8_7400p8": {
+    "bucket": "broadcast",
+    "kind": "postgame_desk",
+    "phase": "postgame",
+    "setting": "studio_desk",
+    "speaker": "whit clarissa talking about nothing",
+    "note": "",
+    "saved_at": "2026-11-09T15:09:24.217Z"
+  },
+  "hush_20261008_205100_3545p2_3548p8": {
+    "bucket": "broadcast",
+    "kind": "music_bed_ad",
+    "phase": "unknown",
+    "setting": "unknown",
+    "speaker": "broadcast outro music into start of commercials",
+    "note": "",
+    "saved_at": "2026-11-09T15:10:03.482Z"
+  },
+  "hush_20261008_205100_4594p8_4597p5": {
+    "bucket": "broadcast",
+    "kind": "booth",
+    "phase": "unknown",
+    "setting": "booth_only",
+    "speaker": "al michaels talking in broadcast about a player walking with some crowd horns in background, herbstreit talking at the end",
+    "note": "",
+    "saved_at": "2026-11-09T15:10:53.532Z"
+  },
+  "hush_20261008_205100_10308p5_10312p2": {
+    "bucket": "broadcast",
+    "kind": "postgame_desk",
+    "phase": "postgame",
+    "setting": "studio_desk",
+    "speaker": "player brought into broadcast for interview during postgame talking about the game",
+    "note": "",
+    "saved_at": "2026-11-09T15:11:25.960Z"
+  },
+  "hush_20260924_220624_2969p8_3006p5": {
+    "bucket": "non_broadcast",
+    "kind": "dry_vo",
+    "phase": "n/a",
+    "setting": "spot",
+    "speaker": "this sounds like a 30 second commercial as a result of a 30 second timeout or something - so they kept it in broadcast but played the ad for 30 seconds - you can hear outro broadcast noise then 30 sec",
+    "note": "Chili's dry VO contrast anchor.",
+    "saved_at": "2026-11-09T15:12:47.955Z"
+  },
+  "hush_20261008_205100_3384p3_3437p1": {
+    "bucket": "non_broadcast",
+    "kind": "dry_vo",
+    "phase": "n/a",
+    "setting": "spot",
+    "speaker": "tirico doing AMEX ad 0-30 seconds, then quick 10 second ad for tv show, then 10 seconds for dog food, then back to game broadcast with clarissa",
+    "note": "Amex Platinum dry VO contrast anchor.",
+    "saved_at": "2026-11-09T15:14:27.763Z"
+  }
+}

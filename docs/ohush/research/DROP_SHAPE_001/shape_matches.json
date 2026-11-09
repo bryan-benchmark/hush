@@ -1,0 +1,307 @@
+{
+  "template_s": [
+    102.0,
+    104.0
+  ],
+  "show_n": 275,
+  "show_median": 0.655,
+  "show_p95": 0.766,
+  "other_starts": 20,
+  "other_starts_at_or_above_show_p95": 0,
+  "breaks": [
+    {
+      "kind": "start",
+      "edge_s": 100.129,
+      "at_s": 96.175,
+      "correlation": 0.574,
+      "offset_s": -3.954
+    },
+    {
+      "kind": "end",
+      "edge_s": 154.609,
+      "at_s": 142.625,
+      "correlation": 0.586,
+      "offset_s": -11.984
+    },
+    {
+      "kind": "start",
+      "edge_s": 780.228,
+      "at_s": 790.475,
+      "correlation": 0.737,
+      "offset_s": 10.247
+    },
+    {
+      "kind": "end",
+      "edge_s": 918.525,
+      "at_s": 928.275,
+      "correlation": 0.688,
+      "offset_s": 9.75
+    },
+    {
+      "kind": "start",
+      "edge_s": 1547.184,
+      "at_s": 1549.725,
+      "correlation": 0.62,
+      "offset_s": 2.541
+    },
+    {
+      "kind": "end",
+      "edge_s": 1683.169,
+      "at_s": 1677.975,
+      "correlation": 0.65,
+      "offset_s": -5.194
+    },
+    {
+      "kind": "start",
+      "edge_s": 1754.381,
+      "at_s": 1757.775,
+      "correlation": 0.708,
+      "offset_s": 3.394
+    },
+    {
+      "kind": "end",
+      "edge_s": 1890.857,
+      "at_s": 1884.125,
+      "correlation": 0.746,
+      "offset_s": -6.732
+    },
+    {
+      "kind": "start",
+      "edge_s": 2089.268,
+      "at_s": 2087.725,
+      "correlation": 0.642,
+      "offset_s": -1.543
+    },
+    {
+      "kind": "end",
+      "edge_s": 2120.322,
+      "at_s": 2121.275,
+      "correlation": 0.668,
+      "offset_s": 0.953
+    },
+    {
+      "kind": "start",
+      "edge_s": 2178.96,
+      "at_s": 2189.925,
+      "correlation": 0.7,
+      "offset_s": 10.965
+    },
+    {
+      "kind": "end",
+      "edge_s": 2315.274,
+      "at_s": 2315.425,
+      "correlation": 0.599,
+      "offset_s": 0.151
+    },
+    {
+      "kind": "start",
+      "edge_s": 2689.595,
+      "at_s": 2688.675,
+      "correlation": 0.703,
+      "offset_s": -0.92
+    },
+    {
+      "kind": "end",
+      "edge_s": 2721.038,
+      "at_s": 2712.725,
+      "correlation": 0.696,
+      "offset_s": -8.313
+    },
+    {
+      "kind": "start",
+      "edge_s": 3072.966,
+      "at_s": 3062.375,
+      "correlation": 0.627,
+      "offset_s": -10.591
+    },
+    {
+      "kind": "end",
+      "edge_s": 3260.07,
+      "at_s": 3255.225,
+      "correlation": 0.642,
+      "offset_s": -4.845
+    },
+    {
+      "kind": "start",
+      "edge_s": 3470.982,
+      "at_s": 3477.575,
+      "correlation": 0.673,
+      "offset_s": 6.593
+    },
+    {
+      "kind": "end",
+      "edge_s": 3715.836,
+      "at_s": 3714.725,
+      "correlation": 0.777,
+      "offset_s": -1.111
+    },
+    {
+      "kind": "start",
+      "edge_s": 4479.459,
+      "at_s": 4467.625,
+      "correlation": 0.672,
+      "offset_s": -11.834
+    },
+    {
+      "kind": "end",
+      "edge_s": 4596.966,
+      "at_s": 4608.875,
+      "correlation": 0.663,
+      "offset_s": 11.909
+    },
+    {
+      "kind": "start",
+      "edge_s": 5289.058,
+      "at_s": 5290.825,
+      "correlation": 0.682,
+      "offset_s": 1.767
+    },
+    {
+      "kind": "end",
+      "edge_s": 5425.29,
+      "at_s": 5437.025,
+      "correlation": 0.631,
+      "offset_s": 11.735
+    },
+    {
+      "kind": "start",
+      "edge_s": 5482.567,
+      "at_s": 5494.525,
+      "correlation": 0.67,
+      "offset_s": 11.958
+    },
+    {
+      "kind": "end",
+      "edge_s": 5608.81,
+      "at_s": 5613.575,
+      "correlation": 0.598,
+      "offset_s": 4.765
+    },
+    {
+      "kind": "start",
+      "edge_s": 5669.362,
+      "at_s": 5663.575,
+      "correlation": 0.673,
+      "offset_s": -5.787
+    },
+    {
+      "kind": "end",
+      "edge_s": 5805.737,
+      "at_s": 5814.875,
+      "correlation": 0.649,
+      "offset_s": 9.138
+    },
+    {
+      "kind": "start",
+      "edge_s": 5870.284,
+      "at_s": 5880.075,
+      "correlation": 0.678,
+      "offset_s": 9.791
+    },
+    {
+      "kind": "end",
+      "edge_s": 5997.664,
+      "at_s": 6005.725,
+      "correlation": 0.606,
+      "offset_s": 8.061
+    },
+    {
+      "kind": "start",
+      "edge_s": 6305.059,
+      "at_s": 6313.125,
+      "correlation": 0.747,
+      "offset_s": 8.066
+    },
+    {
+      "kind": "end",
+      "edge_s": 6441.417,
+      "at_s": 6441.775,
+      "correlation": 0.577,
+      "offset_s": 0.358
+    },
+    {
+      "kind": "start",
+      "edge_s": 6838.403,
+      "at_s": 6839.575,
+      "correlation": 0.676,
+      "offset_s": 1.172
+    },
+    {
+      "kind": "end",
+      "edge_s": 7256.291,
+      "at_s": 7248.025,
+      "correlation": 0.671,
+      "offset_s": -8.266
+    },
+    {
+      "kind": "start",
+      "edge_s": 7634.17,
+      "at_s": 7642.625,
+      "correlation": 0.608,
+      "offset_s": 8.455
+    },
+    {
+      "kind": "end",
+      "edge_s": 7754.314,
+      "at_s": 7750.575,
+      "correlation": 0.664,
+      "offset_s": -3.739
+    },
+    {
+      "kind": "start",
+      "edge_s": 8268.202,
+      "at_s": 8279.075,
+      "correlation": 0.721,
+      "offset_s": 10.873
+    },
+    {
+      "kind": "end",
+      "edge_s": 8406.38,
+      "at_s": 8413.175,
+      "correlation": 0.688,
+      "offset_s": 6.795
+    },
+    {
+      "kind": "start",
+      "edge_s": 8671.037,
+      "at_s": 8674.025,
+      "correlation": 0.64,
+      "offset_s": 2.988
+    },
+    {
+      "kind": "end",
+      "edge_s": 8834.616,
+      "at_s": 8835.375,
+      "correlation": 0.694,
+      "offset_s": 0.759
+    },
+    {
+      "kind": "start",
+      "edge_s": 9187.148,
+      "at_s": 9179.825,
+      "correlation": 0.621,
+      "offset_s": -7.323
+    },
+    {
+      "kind": "end",
+      "edge_s": 9383.001,
+      "at_s": 9372.725,
+      "correlation": 0.646,
+      "offset_s": -10.276
+    },
+    {
+      "kind": "start",
+      "edge_s": 9680.14,
+      "at_s": 9688.375,
+      "correlation": 0.677,
+      "offset_s": 8.235
+    },
+    {
+      "kind": "end",
+      "edge_s": 9820.857,
+      "at_s": 9808.875,
+      "correlation": -1.0,
+      "offset_s": -11.982
+    }
+  ]
+}

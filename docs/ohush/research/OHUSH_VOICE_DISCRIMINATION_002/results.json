@@ -1,0 +1,19 @@
+{
+  "experiment": "OHUSH_VOICE_DISCRIMINATION_002",
+  "television_changed": false,
+  "pause_rule_built": false,
+  "gold_changed": false,
+  "line": 0.25,
+  "margin": 0.15,
+  "margin_was": "declared before the count, not searched",
+  "snorm": "symmetric cohort z-score against the other enrolled speakers' reference clips; no accept line was fit to it",
+  "titanet": "present",
+  "ground": {
+    "other_broadcaster": 70,
+    "commercial_speech": 8,
+    "enrolled_broadcaster": 30,
+    "unlabeled": 1
+  },
+  "queue": 56,
+  "untouched_eval": "the next recorded game. Not September 24, not October 8, and not the sealed holdouts."
+}

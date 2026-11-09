@@ -1,0 +1,81 @@
+{
+  "source": "nflverse play_by_play_2026",
+  "trained": false,
+  "sessions": [
+    {
+      "session": "hush_20261008_205100",
+      "game_id": "2026_05_TB_DAL",
+      "label": "Buccaneers at Cowboys",
+      "pbp_touchdowns": 5,
+      "touchdowns_with_an_audio_time": 2,
+      "high_confidence": 2,
+      "medium_confidence": 0,
+      "ungrounded_live_touchdown_predictions": 94,
+      "predictions_within_90s_of_a_placed_touchdown": 6,
+      "placed_touchdowns_with_at_least_one_prediction": 2,
+      "grounded_live_touchdown_predictions": 12,
+      "grounded_within_90s": 3,
+      "match": [
+        {
+          "play_key": "Q1-653-TOUCHDOWN",
+          "audio_t": 105.0,
+          "predictions": 5
+        },
+        {
+          "play_key": "Q3-455-TOUCHDOWN",
+          "audio_t": 4790.0,
+          "predictions": 1
+        }
+      ],
+      "commercial_lead_diagnostic": [
+        {
+          "play_key": "Q1-653-TOUCHDOWN",
+          "kind": "TOUCHDOWN",
+          "audio_t": 105.0,
+          "next_break_s": 34.9
+        },
+        {
+          "play_key": "Q2-26-FIELD_GOAL_GOOD",
+          "kind": "FIELD_GOAL_GOOD",
+          "audio_t": 2655.0,
+          "next_break_s": null
+        },
+        {
+          "play_key": "Q3-455-TOUCHDOWN",
+          "kind": "TOUCHDOWN",
+          "audio_t": 4790.0,
+          "next_break_s": 68.5
+        }
+      ]
+    },
+    {
+      "session": "hush_20260924_220624",
+      "game_id": "2026_03_ATL_GB",
+      "label": "Falcons at Packers",
+      "pbp_touchdowns": 6,
+      "touchdowns_with_an_audio_time": 1,
+      "high_confidence": 0,
+      "medium_confidence": 1,
+      "ungrounded_live_touchdown_predictions": 48,
+      "predictions_within_90s_of_a_placed_touchdown": 2,
+      "placed_touchdowns_with_at_least_one_prediction": 1,
+      "grounded_live_touchdown_predictions": 6,
+      "grounded_within_90s": 1,
+      "match": [
+        {
+          "play_key": "Q3-221-TOUCHDOWN",
+          "audio_t": 3390.0,
+          "predictions": 2
+        }
+      ],
+      "commercial_lead_diagnostic": [
+        {
+          "play_key": "Q3-221-TOUCHDOWN",
+          "kind": "TOUCHDOWN",
+          "audio_t": 3390.0,
+          "next_break_s": 106.4
+        }
+      ]
+    }
+  ]
+}

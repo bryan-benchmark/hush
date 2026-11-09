@@ -1,0 +1,364 @@
+{
+  "id": "SUPERVISED_HELDOUT_001",
+  "model": "MIT/ast-finetuned-audioset-10-10-0.4593",
+  "window_s": 5.0,
+  "head": "logistic regression, class_weight balanced",
+  "fit": {
+    "sessions": [
+      "hush_20260909_213047",
+      "hush_20260913_210542"
+    ],
+    "rows": 21400,
+    "commercial_rows": 5863,
+    "program_rows": 15537,
+    "train_accuracy": 0.9273
+  },
+  "threshold": 12.155325889587404,
+  "threshold_rule": "one step above the highest score that touches program audio on the two NBC fit games",
+  "october_may_choose_cutoff": false,
+  "live_mute_changed": false,
+  "continuity_baseline": {
+    "source": "docs/ohush/research/FROZEN_RETURN_REPLICATION_001 and experiments/exp002/EXP002_RESULT.md",
+    "espn_starts_within_15s": "12 of 13 evaluable",
+    "espn_program_collapses_per_hour": 4.2,
+    "redzone_collapses": 17,
+    "redzone_per_hour": 8.5
+  },
+  "sessions": [
+    {
+      "session": "hush_20260909_213047",
+      "name": "Sept 9 NBC",
+      "commercial_recognized_s": 63.0,
+      "commercial_missed_s": 2786.911,
+      "commercial_s": 2849.911,
+      "program_mistaken_s": 0.0,
+      "program_interruptions": 0,
+      "start_delay_median_s": 47.477,
+      "starts": 20,
+      "starts_missed": 5,
+      "return_delay": {
+        "median_s": 0.0,
+        "returned": 20,
+        "still_covered": 0
+      },
+      "late_start_s": 842.606,
+      "early_unmute_s": 1421.196,
+      "class_medians": {
+        "commercial_median": 4.572,
+        "program_median": -6.338
+      },
+      "worst_program_interruption": null,
+      "longest_missed_break": {
+        "t0": 1074.332,
+        "t1": 1255.237,
+        "seconds": 180.905,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "broken": false,
+      "role": "fit"
+    },
+    {
+      "session": "hush_20260913_210542",
+      "name": "Sept 13 NBC",
+      "commercial_recognized_s": 57.0,
+      "commercial_missed_s": 2995.457,
+      "commercial_s": 3052.457,
+      "program_mistaken_s": 0.0,
+      "program_interruptions": 0,
+      "start_delay_median_s": 30.83,
+      "starts": 21,
+      "starts_missed": 8,
+      "return_delay": {
+        "median_s": 0.0,
+        "returned": 21,
+        "still_covered": 0
+      },
+      "late_start_s": 736.011,
+      "early_unmute_s": 1245.768,
+      "class_medians": {
+        "commercial_median": 3.654,
+        "program_median": -6.081
+      },
+      "worst_program_interruption": null,
+      "longest_missed_break": {
+        "t0": 3470.982,
+        "t1": 3715.836,
+        "seconds": 244.855,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "broken": false,
+      "role": "fit"
+    },
+    {
+      "session": "hush_20260914_212529",
+      "name": "Sept 14 ESPN",
+      "commercial_recognized_s": 28.0,
+      "commercial_missed_s": 1776.047,
+      "commercial_s": 1804.047,
+      "program_mistaken_s": 0.0,
+      "program_interruptions": 0,
+      "start_delay_median_s": 30.831,
+      "starts": 15,
+      "starts_missed": 6,
+      "return_delay": {
+        "median_s": 0.0,
+        "returned": 15,
+        "still_covered": 0
+      },
+      "late_start_s": 435.929,
+      "early_unmute_s": 754.274,
+      "class_medians": {
+        "commercial_median": 3.464,
+        "program_median": -6.37
+      },
+      "worst_program_interruption": null,
+      "longest_missed_break": {
+        "t0": 5019.615,
+        "t1": 5157.32,
+        "seconds": 137.705,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "broken": false,
+      "role": "held_out"
+    },
+    {
+      "session": "hush_20260924_220624",
+      "name": "Sept 24 Prime",
+      "commercial_recognized_s": 39.0,
+      "commercial_missed_s": 1625.355,
+      "commercial_s": 1664.355,
+      "program_mistaken_s": 0.0,
+      "program_interruptions": 0,
+      "start_delay_median_s": 38.188,
+      "starts": 13,
+      "starts_missed": 4,
+      "return_delay": {
+        "median_s": 0.0,
+        "returned": 12,
+        "still_covered": 1
+      },
+      "late_start_s": 424.517,
+      "early_unmute_s": 705.461,
+      "class_medians": {
+        "commercial_median": 4.376,
+        "program_median": -4.491
+      },
+      "worst_program_interruption": null,
+      "longest_missed_break": {
+        "t0": 6028.84,
+        "t1": 6180.703,
+        "seconds": 151.862,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "broken": false,
+      "role": "held_out"
+    },
+    {
+      "session": "hush_20260913_150934",
+      "name": "Sept 13 RedZone",
+      "commercial_recognized_s": 0.0,
+      "commercial_missed_s": 0.0,
+      "commercial_s": 0,
+      "program_mistaken_s": 0.0,
+      "program_interruptions": 0,
+      "start_delay_median_s": null,
+      "starts": 0,
+      "starts_missed": 0,
+      "return_delay": {
+        "median_s": null,
+        "returned": 0,
+        "still_covered": 0
+      },
+      "late_start_s": 0,
+      "early_unmute_s": 0,
+      "class_medians": {
+        "commercial_median": null,
+        "program_median": -4.173
+      },
+      "worst_program_interruption": null,
+      "longest_missed_break": null,
+      "broken": false,
+      "role": "held_out"
+    },
+    {
+      "session": "hush_20261008_205100",
+      "name": "Oct 8 Prime Video",
+      "commercial_recognized_s": 64.0,
+      "commercial_missed_s": 2578.141,
+      "commercial_s": 2642.141,
+      "program_mistaken_s": 5.0,
+      "program_interruptions": 5,
+      "start_delay_median_s": 21.101,
+      "starts": 23,
+      "starts_missed": 8,
+      "return_delay": {
+        "median_s": 0.0,
+        "returned": 22,
+        "still_covered": 1
+      },
+      "late_start_s": 566.462,
+      "early_unmute_s": 1390.019,
+      "class_medians": {
+        "commercial_median": 4.41,
+        "program_median": -4.344
+      },
+      "worst_program_interruption": {
+        "t0": 377.0,
+        "t1": 378.0,
+        "program_s": 1.0,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "longest_missed_break": {
+        "t0": 8802.615,
+        "t1": 8950.162,
+        "seconds": 147.547,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "broken": true,
+      "role": "october_already_inspected"
+    },
+    {
+      "session": "hush_20261010_222400",
+      "name": "Oct 10 cable",
+      "commercial_recognized_s": 13.0,
+      "commercial_missed_s": 1068.817,
+      "commercial_s": 1081.817,
+      "program_mistaken_s": 12.0,
+      "program_interruptions": 8,
+      "start_delay_median_s": 141.576,
+      "starts": 6,
+      "starts_missed": 4,
+      "return_delay": {
+        "median_s": 0.0,
+        "returned": 6,
+        "still_covered": 0
+      },
+      "late_start_s": 283.152,
+      "early_unmute_s": 285.83,
+      "class_medians": {
+        "commercial_median": 2.835,
+        "program_median": -2.92
+      },
+      "worst_program_interruption": {
+        "t0": 33.0,
+        "t1": 36.0,
+        "program_s": 3.0,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "longest_missed_break": {
+        "t0": 3009.899,
+        "t1": 3205.375,
+        "seconds": 195.476,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "broken": true,
+      "role": "october_already_inspected"
+    },
+    {
+      "session": "hush_20261011_135700",
+      "name": "Oct 11 afternoon",
+      "commercial_recognized_s": 5.0,
+      "commercial_missed_s": 977.955,
+      "commercial_s": 982.955,
+      "program_mistaken_s": 1.0,
+      "program_interruptions": 1,
+      "start_delay_median_s": 80.145,
+      "starts": 8,
+      "starts_missed": 6,
+      "return_delay": {
+        "median_s": 0.0,
+        "returned": 8,
+        "still_covered": 0
+      },
+      "late_start_s": 160.291,
+      "early_unmute_s": 89.551,
+      "class_medians": {
+        "commercial_median": 1.995,
+        "program_median": -2.575
+      },
+      "worst_program_interruption": {
+        "t0": 832.0,
+        "t1": 833.0,
+        "program_s": 1.0,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "longest_missed_break": {
+        "t0": 3735.542,
+        "t1": 3914.561,
+        "seconds": 179.019,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "broken": true,
+      "role": "october_already_inspected"
+    },
+    {
+      "session": "hush_20261011_204300",
+      "name": "Oct 11 night",
+      "commercial_recognized_s": 7.0,
+      "commercial_missed_s": 619.389,
+      "commercial_s": 626.389,
+      "program_mistaken_s": 31.0,
+      "program_interruptions": 19,
+      "start_delay_median_s": 65.929,
+      "starts": 6,
+      "starts_missed": 2,
+      "return_delay": {
+        "median_s": 0.0,
+        "returned": 6,
+        "still_covered": 0
+      },
+      "late_start_s": 271.952,
+      "early_unmute_s": 192.668,
+      "class_medians": {
+        "commercial_median": 3.662,
+        "program_median": -0.026
+      },
+      "worst_program_interruption": {
+        "t0": 3008.0,
+        "t1": 3012.0,
+        "program_s": 4.0,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "longest_missed_break": {
+        "t0": 1400.583,
+        "t1": 1532.75,
+        "seconds": 132.167,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "broken": true,
+      "role": "october_already_inspected"
+    },
+    {
+      "session": "hush_20261012_204200",
+      "name": "Oct 12 MNF",
+      "commercial_recognized_s": 40.0,
+      "commercial_missed_s": 2904.327,
+      "commercial_s": 2944.327,
+      "program_mistaken_s": 0.0,
+      "program_interruptions": 0,
+      "start_delay_median_s": 29.022,
+      "starts": 24,
+      "starts_missed": 12,
+      "return_delay": {
+        "median_s": 0.0,
+        "returned": 24,
+        "still_covered": 0
+      },
+      "late_start_s": 394.646,
+      "early_unmute_s": 1228.643,
+      "class_medians": {
+        "commercial_median": 3.126,
+        "program_median": -5.403
+      },
+      "worst_program_interruption": null,
+      "longest_missed_break": {
+        "t0": 12194.922,
+        "t1": 12393.124,
+        "seconds": 198.202,
+        "note": "Times are on the session clock. The clip is not copied."
+      },
+      "broken": false,
+      "role": "october_already_inspected"
+    }
+  ]
+}

@@ -1,0 +1,404 @@
+{
+  "experiment": "NFL75_PERSIST_001",
+  "session": "hush_20261008_205100",
+  "role": "development_prime",
+  "deployable": false,
+  "speakers_moved": false,
+  "start_line": 12.155325889587404,
+  "return_line": 8.284611701965332,
+  "return_setter": {
+    "session": "hush_20260913_210542",
+    "t": 11412.0,
+    "score": 8.284612
+  },
+  "fit": {
+    "sessions": [
+      "hush_20260909_213047",
+      "hush_20260913_210542"
+    ],
+    "rows": 21400,
+    "commercial_rows": 5863,
+    "program_rows": 15537,
+    "train_accuracy": 0.9273
+  },
+  "window_s": 5.0,
+  "cache_sha256": "795ceabab9d8d760226a72b0c2ed5b49131d965c58a3ecba1c3219d1a1f0a9cb",
+  "score_rows": 10435,
+  "runs_at_or_above_start_line": 40,
+  "longest_run_s": 6,
+  "runs_of_at_least_10s": 0,
+  "runs_of_at_least_20s": 0,
+  "settings": [
+    {
+      "persist_s": 10.0,
+      "return_persist_s": 3.0,
+      "covers": [],
+      "commercial_s": 2642.141,
+      "commercial_covered_s": 0.0,
+      "commercial_coverage": 0.0,
+      "program_s": 7798.223,
+      "program_covered_s": 0.0,
+      "false_mute_episodes": 0,
+      "false_mutes_per_hour": 0.0,
+      "longest_false_mute_s": 0.0,
+      "program_hidden_per_hour": 0.0,
+      "acceptance": {
+        "pass": false,
+        "reasons": [
+          "commercial coverage 0.0000 is below 0.75"
+        ]
+      },
+      "pods_total": 23,
+      "pods_that_never_hold": 23,
+      "pods": [
+        {
+          "break": 1,
+          "start_s": 139.874,
+          "end_s": 376.9,
+          "longest_run_s": 1,
+          "never_holds": true
+        },
+        {
+          "break": 2,
+          "start_s": 571.674,
+          "end_s": 683.353,
+          "longest_run_s": 0,
+          "never_holds": true
+        },
+        {
+          "break": 3,
+          "start_s": 1003.282,
+          "end_s": 1125.233,
+          "longest_run_s": 3,
+          "never_holds": true
+        },
+        {
+          "break": 4,
+          "start_s": 1615.71,
+          "end_s": 1737.066,
+          "longest_run_s": 0,
+          "never_holds": true
+        },
+        {
+          "break": 5,
+          "start_s": 1972.985,
+          "end_s": 2006.44,
+          "longest_run_s": 0,
+          "never_holds": true
+        },
+        {
+          "break": 6,
+          "start_s": 2229.987,
+          "end_s": 2365.654,
+          "longest_run_s": 5,
+          "never_holds": true
+        },
+        {
+          "break": 7,
+          "start_s": 2396.185,
+          "end_s": 2429.785,
+          "longest_run_s": 0,
+          "never_holds": true
+        },
+        {
+          "break": 8,
+          "start_s": 3025.205,
+          "end_s": 3178.438,
+          "longest_run_s": 6,
+          "never_holds": true
+        },
+        {
+          "break": 9,
+          "start_s": 3548.839,
+          "end_s": 3702.01,
+          "longest_run_s": 2,
+          "never_holds": true
+        },
+        {
+          "break": 10,
+          "start_s": 3980.898,
+          "end_s": 4118.042,
+          "longest_run_s": 4,
+          "never_holds": true
+        },
+        {
+          "break": 11,
+          "start_s": 4419.341,
+          "end_s": 4540.777,
+          "longest_run_s": 0,
+          "never_holds": true
+        },
+        {
+          "break": 12,
+          "start_s": 4858.471,
+          "end_s": 4979.744,
+          "longest_run_s": 1,
+          "never_holds": true
+        },
+        {
+          "break": 13,
+          "start_s": 5331.899,
+          "end_s": 5453.477,
+          "longest_run_s": 1,
+          "never_holds": true
+        },
+        {
+          "break": 14,
+          "start_s": 5670.506,
+          "end_s": 5792.739,
+          "longest_run_s": 3,
+          "never_holds": true
+        },
+        {
+          "break": 15,
+          "start_s": 6055.395,
+          "end_s": 6176.704,
+          "longest_run_s": 3,
+          "never_holds": true
+        },
+        {
+          "break": 16,
+          "start_s": 6363.797,
+          "end_s": 6515.381,
+          "longest_run_s": 4,
+          "never_holds": true
+        },
+        {
+          "break": 17,
+          "start_s": 7169.476,
+          "end_s": 7293.367,
+          "longest_run_s": 1,
+          "never_holds": true
+        },
+        {
+          "break": 18,
+          "start_s": 7677.017,
+          "end_s": 7797.831,
+          "longest_run_s": 1,
+          "never_holds": true
+        },
+        {
+          "break": 19,
+          "start_s": 8136.596,
+          "end_s": 8176.169,
+          "longest_run_s": 0,
+          "never_holds": true
+        },
+        {
+          "break": 20,
+          "start_s": 8802.615,
+          "end_s": 8950.162,
+          "longest_run_s": 0,
+          "never_holds": true
+        },
+        {
+          "break": 21,
+          "start_s": 9604.933,
+          "end_s": 9754.135,
+          "longest_run_s": 1,
+          "never_holds": true
+        },
+        {
+          "break": 22,
+          "start_s": 9756.791,
+          "end_s": 9769.806,
+          "longest_run_s": 0,
+          "never_holds": true
+        },
+        {
+          "break": 23,
+          "start_s": 10389.959,
+          "end_s": 10440.364,
+          "longest_run_s": 3,
+          "never_holds": true
+        }
+      ]
+    },
+    {
+      "persist_s": 20.0,
+      "return_persist_s": 3.0,
+      "covers": [],
+      "commercial_s": 2642.141,
+      "commercial_covered_s": 0.0,
+      "commercial_coverage": 0.0,
+      "program_s": 7798.223,
+      "program_covered_s": 0.0,
+      "false_mute_episodes": 0,
+      "false_mutes_per_hour": 0.0,
+      "longest_false_mute_s": 0.0,
+      "program_hidden_per_hour": 0.0,
+      "acceptance": {
+        "pass": false,
+        "reasons": [
+          "commercial coverage 0.0000 is below 0.75"
+        ]
+      },
+      "pods_total": 23,
+      "pods_that_never_hold": 23,
+      "pods": [
+        {
+          "break": 1,
+          "start_s": 139.874,
+          "end_s": 376.9,
+          "longest_run_s": 1,
+          "never_holds": true
+        },
+        {
+          "break": 2,
+          "start_s": 571.674,
+          "end_s": 683.353,
+          "longest_run_s": 0,
+          "never_holds": true
+        },
+        {
+          "break": 3,
+          "start_s": 1003.282,
+          "end_s": 1125.233,
+          "longest_run_s": 3,
+          "never_holds": true
+        },
+        {
+          "break": 4,
+          "start_s": 1615.71,
+          "end_s": 1737.066,
+          "longest_run_s": 0,
+          "never_holds": true
+        },
+        {
+          "break": 5,
+          "start_s": 1972.985,
+          "end_s": 2006.44,
+          "longest_run_s": 0,
+          "never_holds": true
+        },
+        {
+          "break": 6,
+          "start_s": 2229.987,
+          "end_s": 2365.654,
+          "longest_run_s": 5,
+          "never_holds": true
+        },
+        {
+          "break": 7,
+          "start_s": 2396.185,
+          "end_s": 2429.785,
+          "longest_run_s": 0,
+          "never_holds": true
+        },
+        {
+          "break": 8,
+          "start_s": 3025.205,
+          "end_s": 3178.438,
+          "longest_run_s": 6,
+          "never_holds": true
+        },
+        {
+          "break": 9,
+          "start_s": 3548.839,
+          "end_s": 3702.01,
+          "longest_run_s": 2,
+          "never_holds": true
+        },
+        {
+          "break": 10,
+          "start_s": 3980.898,
+          "end_s": 4118.042,
+          "longest_run_s": 4,
+          "never_holds": true
+        },
+        {
+          "break": 11,
+          "start_s": 4419.341,
+          "end_s": 4540.777,
+          "longest_run_s": 0,
+          "never_holds": true
+        },
+        {
+          "break": 12,
+          "start_s": 4858.471,
+          "end_s": 4979.744,
+          "longest_run_s": 1,
+          "never_holds": true
+        },
+        {
+          "break": 13,
+          "start_s": 5331.899,
+          "end_s": 5453.477,
+          "longest_run_s": 1,
+          "never_holds": true
+        },
+        {
+          "break": 14,
+          "start_s": 5670.506,
+          "end_s": 5792.739,
+          "longest_run_s": 3,
+          "never_holds": true
+        },
+        {
+          "break": 15,
+          "start_s": 6055.395,
+          "end_s": 6176.704,
+          "longest_run_s": 3,
+          "never_holds": true
+        },
+        {
+          "break": 16,
+          "start_s": 6363.797,
+          "end_s": 6515.381,
+          "longest_run_s": 4,
+          "never_holds": true
+        },
+        {
+          "break": 17,
+          "start_s": 7169.476,
+          "end_s": 7293.367,
+          "longest_run_s": 1,
+          "never_holds": true
+        },
+        {
+          "break": 18,
+          "start_s": 7677.017,
+          "end_s": 7797.831,
+          "longest_run_s": 1,
+          "never_holds": true
+        },
+        {
+          "break": 19,
+          "start_s": 8136.596,
+          "end_s": 8176.169,
+          "longest_run_s": 0,
+          "never_holds": true
+        },
+        {
+          "break": 20,
+          "start_s": 8802.615,
+          "end_s": 8950.162,
+          "longest_run_s": 0,
+          "never_holds": true
+        },
+        {
+          "break": 21,
+          "start_s": 9604.933,
+          "end_s": 9754.135,
+          "longest_run_s": 1,
+          "never_holds": true
+        },
+        {
+          "break": 22,
+          "start_s": 9756.791,
+          "end_s": 9769.806,
+          "longest_run_s": 0,
+          "never_holds": true
+        },
+        {
+          "break": 23,
+          "start_s": 10389.959,
+          "end_s": 10440.364,
+          "longest_run_s": 3,
+          "never_holds": true
+        }
+      ]
+    }
+  ],
+  "note": "Command intervals. The 1.5-second return fade is not charged. October was already inspected and did not set either line."
+}

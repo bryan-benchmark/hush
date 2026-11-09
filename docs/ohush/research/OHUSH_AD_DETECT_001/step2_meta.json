@@ -1,0 +1,597 @@
+{
+  "step": 2,
+  "question": "Is this second advertising or programming?",
+  "speaker_used": false,
+  "model": "MIT/ast-finetuned-audioset-10-10-0.4593",
+  "fit_sessions": [
+    "hush_20260909_213047",
+    "hush_20260913_210542"
+  ],
+  "fit_receipt": {
+    "sessions": [
+      "hush_20260909_213047",
+      "hush_20260913_210542"
+    ],
+    "rows": 21400,
+    "commercial_rows": 5863,
+    "program_rows": 15537,
+    "train_accuracy": 0.9273
+  },
+  "mean_window": 10,
+  "hard_weight": 5.0,
+  "nbc_program_hot_count": 1081,
+  "placements": {
+    "frozen_cls": {
+      "commercial_p10": null,
+      "program_p90": null,
+      "gap": null,
+      "line": 0.1632588496059179,
+      "source": "published"
+    },
+    "class527": {
+      "commercial_p10": -0.0509,
+      "program_p90": 0.831736,
+      "gap": -0.882635,
+      "line": 0.3904179610798109
+    },
+    "watch_seq": {
+      "commercial_p10": -0.393933,
+      "program_p90": 1.154699,
+      "gap": -1.548632,
+      "line": 0.3803828862460507
+    },
+    "class527_hard": {
+      "commercial_p10": -0.326293,
+      "program_p90": 0.537696,
+      "gap": -0.863989,
+      "line": 0.10570167632676422
+    }
+  },
+  "hard_boxes": [
+    {
+      "id": "ad_draftkings",
+      "session": "hush_20261008_205100",
+      "start_s": 140.78,
+      "end_s": 146.0,
+      "expect": "commercial",
+      "note": "DraftKings; owner: Clarissa Thompson reading the ad",
+      "heads": {
+        "frozen_cls": {
+          "line": 0.1632588496059179,
+          "median_mean10": 5.428592,
+          "hot_fraction": 1.0,
+          "verdict": "ok_commercial_hot"
+        },
+        "class527": {
+          "line": 0.3904179610798109,
+          "median_mean10": 1.736057,
+          "hot_fraction": 1.0,
+          "verdict": "ok_commercial_hot"
+        },
+        "watch_seq": {
+          "line": 0.3803828862460507,
+          "median_mean10": 2.067039,
+          "hot_fraction": 1.0,
+          "verdict": "ok_commercial_hot"
+        },
+        "class527_hard": {
+          "line": 0.10570167632676422,
+          "median_mean10": 1.201977,
+          "hot_fraction": 1.0,
+          "verdict": "ok_commercial_hot"
+        }
+      }
+    },
+    {
+      "id": "ad_fanduel",
+      "session": "hush_20261008_205100",
+      "start_s": 572.06,
+      "end_s": 577.3,
+      "expect": "commercial",
+      "note": "FanDuel; owner: unknown male",
+      "heads": {
+        "frozen_cls": {
+          "line": 0.1632588496059179,
+          "median_mean10": 2.383594,
+          "hot_fraction": 1.0,
+          "verdict": "ok_commercial_hot"
+        },
+        "class527": {
+          "line": 0.3904179610798109,
+          "median_mean10": 0.882427,
+          "hot_fraction": 1.0,
+          "verdict": "ok_commercial_hot"
+        },
+        "watch_seq": {
+          "line": 0.3803828862460507,
+          "median_mean10": 0.607187,
+          "hot_fraction": 0.8,
+          "verdict": "ok_commercial_hot"
+        },
+        "class527_hard": {
+          "line": 0.10570167632676422,
+          "median_mean10": 0.548116,
+          "hot_fraction": 1.0,
+          "verdict": "ok_commercial_hot"
+        }
+      }
+    },
+    {
+      "id": "ad_wendys",
+      "session": "hush_20261008_205100",
+      "start_s": 4450.36,
+      "end_s": 4455.9,
+      "expect": "commercial",
+      "note": "Wendy's; owner: unknown female",
+      "heads": {
+        "frozen_cls": {
+          "line": 0.1632588496059179,
+          "median_mean10": 3.418489,
+          "hot_fraction": 1.0,
+          "verdict": "ok_commercial_hot"
+        },
+        "class527": {
+          "line": 0.3904179610798109,
+          "median_mean10": 0.426832,
+          "hot_fraction": 0.6,
+          "verdict": "ok_commercial_hot"
+        },
+        "watch_seq": {
+          "line": 0.3803828862460507,
+          "median_mean10": 0.10666,
+          "hot_fraction": 0.0,
+          "verdict": "MISS_commercial_cold"
+        },
+        "class527_hard": {
+          "line": 0.10570167632676422,
+          "median_mean10": 0.19795,
+          "hot_fraction": 0.6,
+          "verdict": "ok_commercial_hot"
+        }
+      }
+    },
+    {
+      "id": "prog_fitzpatrick",
+      "session": "hush_20260924_220624",
+      "start_s": 6589.0,
+      "end_s": 6609.0,
+      "expect": "program",
+      "note": "Ryan Fitzpatrick pregame desk",
+      "heads": {
+        "frozen_cls": {
+          "line": 0.1632588496059179,
+          "median_mean10": 2.569543,
+          "hot_fraction": 0.75,
+          "verdict": "MISS_program_hot"
+        },
+        "class527": {
+          "line": 0.3904179610798109,
+          "median_mean10": 1.08553,
+          "hot_fraction": 0.85,
+          "verdict": "MISS_program_hot"
+        },
+        "watch_seq": {
+          "line": 0.3803828862460507,
+          "median_mean10": 0.258281,
+          "hot_fraction": 0.4,
+          "verdict": "ok_program_cold"
+        },
+        "class527_hard": {
+          "line": 0.10570167632676422,
+          "median_mean10": 0.797652,
+          "hot_fraction": 0.95,
+          "verdict": "MISS_program_hot"
+        }
+      }
+    },
+    {
+      "id": "prog_thompson_postgame",
+      "session": "hush_20260924_220624",
+      "start_s": 5571.0,
+      "end_s": 5581.0,
+      "expect": "program",
+      "note": "Clarissa Thompson postgame",
+      "heads": {
+        "frozen_cls": {
+          "line": 0.1632588496059179,
+          "median_mean10": 0.034237,
+          "hot_fraction": 0.4,
+          "verdict": "ok_program_cold"
+        },
+        "class527": {
+          "line": 0.3904179610798109,
+          "median_mean10": 0.512574,
+          "hot_fraction": 0.6,
+          "verdict": "MISS_program_hot"
+        },
+        "watch_seq": {
+          "line": 0.3803828862460507,
+          "median_mean10": 1.205205,
+          "hot_fraction": 1.0,
+          "verdict": "MISS_program_hot"
+        },
+        "class527_hard": {
+          "line": 0.10570167632676422,
+          "median_mean10": 0.301134,
+          "hot_fraction": 0.8,
+          "verdict": "MISS_program_hot"
+        }
+      }
+    },
+    {
+      "id": "prog_whitworth",
+      "session": "hush_20261008_205100",
+      "start_s": 9163.76,
+      "end_s": 9171.77,
+      "expect": "program",
+      "note": "Andrew Whitworth after dropped pass",
+      "heads": {
+        "frozen_cls": {
+          "line": 0.1632588496059179,
+          "median_mean10": -1.013228,
+          "hot_fraction": 0.375,
+          "verdict": "ok_program_cold"
+        },
+        "class527": {
+          "line": 0.3904179610798109,
+          "median_mean10": -0.217455,
+          "hot_fraction": 0.125,
+          "verdict": "ok_program_cold"
+        },
+        "watch_seq": {
+          "line": 0.3803828862460507,
+          "median_mean10": 0.253962,
+          "hot_fraction": 0.375,
+          "verdict": "ok_program_cold"
+        },
+        "class527_hard": {
+          "line": 0.10570167632676422,
+          "median_mean10": -0.176783,
+          "hot_fraction": 0.25,
+          "verdict": "ok_program_cold"
+        }
+      }
+    },
+    {
+      "id": "prog_sherman",
+      "session": "hush_20261008_205100",
+      "start_s": 9153.0,
+      "end_s": 9163.51,
+      "expect": "program",
+      "note": "Richard Sherman; gold program, desk-like",
+      "heads": {
+        "frozen_cls": {
+          "line": 0.1632588496059179,
+          "median_mean10": 1.993095,
+          "hot_fraction": 0.8,
+          "verdict": "MISS_program_hot"
+        },
+        "class527": {
+          "line": 0.3904179610798109,
+          "median_mean10": 0.52013,
+          "hot_fraction": 0.8,
+          "verdict": "MISS_program_hot"
+        },
+        "watch_seq": {
+          "line": 0.3803828862460507,
+          "median_mean10": 0.349918,
+          "hot_fraction": 0.5,
+          "verdict": "MISS_program_hot"
+        },
+        "class527_hard": {
+          "line": 0.10570167632676422,
+          "median_mean10": 0.438925,
+          "hot_fraction": 0.8,
+          "verdict": "MISS_program_hot"
+        }
+      }
+    }
+  ],
+  "compare_to_frozen": [
+    {
+      "board_id": "ad_draftkings",
+      "expect": "commercial",
+      "frozen": "ok_commercial_hot",
+      "candidate": "class527",
+      "candidate_verdict": "ok_commercial_hot",
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "board_id": "ad_draftkings",
+      "expect": "commercial",
+      "frozen": "ok_commercial_hot",
+      "candidate": "watch_seq",
+      "candidate_verdict": "ok_commercial_hot",
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "board_id": "ad_draftkings",
+      "expect": "commercial",
+      "frozen": "ok_commercial_hot",
+      "candidate": "class527_hard",
+      "candidate_verdict": "ok_commercial_hot",
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "board_id": "ad_fanduel",
+      "expect": "commercial",
+      "frozen": "ok_commercial_hot",
+      "candidate": "class527",
+      "candidate_verdict": "ok_commercial_hot",
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "board_id": "ad_fanduel",
+      "expect": "commercial",
+      "frozen": "ok_commercial_hot",
+      "candidate": "watch_seq",
+      "candidate_verdict": "ok_commercial_hot",
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "board_id": "ad_fanduel",
+      "expect": "commercial",
+      "frozen": "ok_commercial_hot",
+      "candidate": "class527_hard",
+      "candidate_verdict": "ok_commercial_hot",
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "board_id": "ad_wendys",
+      "expect": "commercial",
+      "frozen": "ok_commercial_hot",
+      "candidate": "class527",
+      "candidate_verdict": "ok_commercial_hot",
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "board_id": "ad_wendys",
+      "expect": "commercial",
+      "frozen": "ok_commercial_hot",
+      "candidate": "watch_seq",
+      "candidate_verdict": "MISS_commercial_cold",
+      "improved": false,
+      "regressed": true
+    },
+    {
+      "board_id": "ad_wendys",
+      "expect": "commercial",
+      "frozen": "ok_commercial_hot",
+      "candidate": "class527_hard",
+      "candidate_verdict": "ok_commercial_hot",
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "board_id": "prog_fitzpatrick",
+      "expect": "program",
+      "frozen": "MISS_program_hot",
+      "candidate": "class527",
+      "candidate_verdict": "MISS_program_hot",
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "board_id": "prog_fitzpatrick",
+      "expect": "program",
+      "frozen": "MISS_program_hot",
+      "candidate": "watch_seq",
+      "candidate_verdict": "ok_program_cold",
+      "improved": true,
+      "regressed": false
+    },
+    {
+      "board_id": "prog_fitzpatrick",
+      "expect": "program",
+      "frozen": "MISS_program_hot",
+      "candidate": "class527_hard",
+      "candidate_verdict": "MISS_program_hot",
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "board_id": "prog_thompson_postgame",
+      "expect": "program",
+      "frozen": "ok_program_cold",
+      "candidate": "class527",
+      "candidate_verdict": "MISS_program_hot",
+      "improved": false,
+      "regressed": true
+    },
+    {
+      "board_id": "prog_thompson_postgame",
+      "expect": "program",
+      "frozen": "ok_program_cold",
+      "candidate": "watch_seq",
+      "candidate_verdict": "MISS_program_hot",
+      "improved": false,
+      "regressed": true
+    },
+    {
+      "board_id": "prog_thompson_postgame",
+      "expect": "program",
+      "frozen": "ok_program_cold",
+      "candidate": "class527_hard",
+      "candidate_verdict": "MISS_program_hot",
+      "improved": false,
+      "regressed": true
+    },
+    {
+      "board_id": "prog_whitworth",
+      "expect": "program",
+      "frozen": "ok_program_cold",
+      "candidate": "class527",
+      "candidate_verdict": "ok_program_cold",
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "board_id": "prog_whitworth",
+      "expect": "program",
+      "frozen": "ok_program_cold",
+      "candidate": "watch_seq",
+      "candidate_verdict": "ok_program_cold",
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "board_id": "prog_whitworth",
+      "expect": "program",
+      "frozen": "ok_program_cold",
+      "candidate": "class527_hard",
+      "candidate_verdict": "ok_program_cold",
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "board_id": "prog_sherman",
+      "expect": "program",
+      "frozen": "MISS_program_hot",
+      "candidate": "class527",
+      "candidate_verdict": "MISS_program_hot",
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "board_id": "prog_sherman",
+      "expect": "program",
+      "frozen": "MISS_program_hot",
+      "candidate": "watch_seq",
+      "candidate_verdict": "MISS_program_hot",
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "board_id": "prog_sherman",
+      "expect": "program",
+      "frozen": "MISS_program_hot",
+      "candidate": "class527_hard",
+      "candidate_verdict": "MISS_program_hot",
+      "improved": false,
+      "regressed": false
+    }
+  ],
+  "control_summary": [
+    {
+      "session": "hush_20260924_220624",
+      "gold": "commercial",
+      "head": "frozen_cls",
+      "n": 20,
+      "agree_fraction": 0.85
+    },
+    {
+      "session": "hush_20260924_220624",
+      "gold": "commercial",
+      "head": "class527",
+      "n": 20,
+      "agree_fraction": 0.85
+    },
+    {
+      "session": "hush_20260924_220624",
+      "gold": "commercial",
+      "head": "watch_seq",
+      "n": 20,
+      "agree_fraction": 0.65
+    },
+    {
+      "session": "hush_20260924_220624",
+      "gold": "commercial",
+      "head": "class527_hard",
+      "n": 20,
+      "agree_fraction": 0.95
+    },
+    {
+      "session": "hush_20260924_220624",
+      "gold": "program",
+      "head": "frozen_cls",
+      "n": 20,
+      "agree_fraction": 0.9
+    },
+    {
+      "session": "hush_20260924_220624",
+      "gold": "program",
+      "head": "class527",
+      "n": 20,
+      "agree_fraction": 0.9
+    },
+    {
+      "session": "hush_20260924_220624",
+      "gold": "program",
+      "head": "watch_seq",
+      "n": 20,
+      "agree_fraction": 0.9
+    },
+    {
+      "session": "hush_20260924_220624",
+      "gold": "program",
+      "head": "class527_hard",
+      "n": 20,
+      "agree_fraction": 0.9
+    },
+    {
+      "session": "hush_20261008_205100",
+      "gold": "commercial",
+      "head": "frozen_cls",
+      "n": 20,
+      "agree_fraction": 1.0
+    },
+    {
+      "session": "hush_20261008_205100",
+      "gold": "commercial",
+      "head": "class527",
+      "n": 20,
+      "agree_fraction": 0.7
+    },
+    {
+      "session": "hush_20261008_205100",
+      "gold": "commercial",
+      "head": "watch_seq",
+      "n": 20,
+      "agree_fraction": 0.65
+    },
+    {
+      "session": "hush_20261008_205100",
+      "gold": "commercial",
+      "head": "class527_hard",
+      "n": 20,
+      "agree_fraction": 0.8
+    },
+    {
+      "session": "hush_20261008_205100",
+      "gold": "program",
+      "head": "frozen_cls",
+      "n": 20,
+      "agree_fraction": 0.85
+    },
+    {
+      "session": "hush_20261008_205100",
+      "gold": "program",
+      "head": "class527",
+      "n": 20,
+      "agree_fraction": 0.85
+    },
+    {
+      "session": "hush_20261008_205100",
+      "gold": "program",
+      "head": "watch_seq",
+      "n": 20,
+      "agree_fraction": 0.9
+    },
+    {
+      "session": "hush_20261008_205100",
+      "gold": "program",
+      "head": "class527_hard",
+      "n": 20,
+      "agree_fraction": 0.85
+    }
+  ],
+  "mute_unchanged": true,
+  "realtime": false
+}

@@ -1,0 +1,1315 @@
+{
+  "id": "WALKFORWARD_FINGERPRINT_001",
+  "source": "docs/ohush/research/KNOWN_AD_FINGERPRINT_001/pod_queries.csv",
+  "rule": {
+    "library": "earlier recordings only; this game and later games excluded",
+    "query": "opening of a gold commercial, landmarks inside that opening",
+    "accept": 200,
+    "counts_below_200": "reported, not selected",
+    "holdouts": "not opened",
+    "live_mute": false
+  },
+  "steps": [
+    {
+      "session": "hush_20260909_213047",
+      "name": "Sept 9 NBC",
+      "library_sessions": [],
+      "open_5s": {
+        "pods": 20,
+        "max_score": 3,
+        "median_score": 2,
+        "at_200": 0,
+        "at_50": 0,
+        "at_20": 0,
+        "at_10": 0,
+        "winner_is_earlier_football": 0,
+        "top": [
+          {
+            "score": 3,
+            "pod_start": 6.069733,
+            "ref_session": "hush_20260827_135935",
+            "ref_name": "Hulu",
+            "ref_start": 2075.982901
+          },
+          {
+            "score": 3,
+            "pod_start": 1000.415842,
+            "ref_session": "hush_20260827_135935",
+            "ref_name": "Hulu",
+            "ref_start": 2075.982901
+          },
+          {
+            "score": 3,
+            "pod_start": 7000.980657,
+            "ref_session": "hush_20260827_135935",
+            "ref_name": "Hulu",
+            "ref_start": 2711.449267
+          },
+          {
+            "score": 2,
+            "pod_start": 623.347274,
+            "ref_session": "hush_20260827_135935",
+            "ref_name": "Hulu",
+            "ref_start": 5425.497032
+          },
+          {
+            "score": 2,
+            "pod_start": 1074.332477,
+            "ref_session": "hush_20260827_135935",
+            "ref_name": "Hulu",
+            "ref_start": 2075.982901
+          }
+        ],
+        "sports_ref_rows": 0
+      },
+      "within_5s_at_200": 0,
+      "within_5s_max": 74,
+      "open_10s": {
+        "pods": 20,
+        "max_score": 4,
+        "median_score": 3,
+        "at_200": 0,
+        "at_50": 0,
+        "at_20": 0,
+        "at_10": 0,
+        "winner_is_earlier_football": 0,
+        "top": [
+          {
+            "score": 4,
+            "pod_start": 3942.561515,
+            "ref_session": "hush_20260827_135935",
+            "ref_name": "Hulu",
+            "ref_start": 7028.483164
+          },
+          {
+            "score": 3,
+            "pod_start": 6.069733,
+            "ref_session": "hush_20260827_135935",
+            "ref_name": "Hulu",
+            "ref_start": 1448.8837950000002
+          },
+          {
+            "score": 3,
+            "pod_start": 1000.415842,
+            "ref_session": "hush_20260827_135935",
+            "ref_name": "Hulu",
+            "ref_start": 2075.982901
+          },
+          {
+            "score": 3,
+            "pod_start": 3104.995311,
+            "ref_session": "hush_20260827_135935",
+            "ref_name": "Hulu",
+            "ref_start": 2711.449267
+          },
+          {
+            "score": 3,
+            "pod_start": 5428.523325,
+            "ref_session": "hush_20260827_135935",
+            "ref_name": "Hulu",
+            "ref_start": 2075.982901
+          }
+        ],
+        "sports_ref_rows": 0
+      },
+      "within_10s_at_200": 0,
+      "within_10s_max": 82
+    },
+    {
+      "session": "hush_20260913_210542",
+      "name": "Sept 13 NBC",
+      "library_sessions": [
+        "hush_20260909_213047"
+      ],
+      "open_5s": {
+        "pods": 21,
+        "max_score": 84,
+        "median_score": 4,
+        "at_200": 0,
+        "at_50": 4,
+        "at_20": 8,
+        "at_10": 8,
+        "winner_is_earlier_football": 0,
+        "top": [
+          {
+            "score": 84,
+            "pod_start": 8671.036946999999,
+            "ref_session": "hush_20260909_213047",
+            "ref_name": "Sept 9 NBC",
+            "ref_start": 8413.747285
+          },
+          {
+            "score": 83,
+            "pod_start": 1754.38073,
+            "ref_session": "hush_20260909_213047",
+            "ref_name": "Sept 9 NBC",
+            "ref_start": 5428.523325
+          },
+          {
+            "score": 76,
+            "pod_start": 5289.058324,
+            "ref_session": "hush_20260909_213047",
+            "ref_name": "Sept 9 NBC",
+            "ref_start": 6356.969761
+          },
+          {
+            "score": 74,
+            "pod_start": 9187.148441,
+            "ref_session": "hush_20260909_213047",
+            "ref_name": "Sept 9 NBC",
+            "ref_start": 7641.664393
+          },
+          {
+            "score": 48,
+            "pod_start": 6838.40341,
+            "ref_session": "hush_20260909_213047",
+            "ref_name": "Sept 9 NBC",
+            "ref_start": 7641.664393
+          }
+        ],
+        "sports_ref_rows": 13
+      },
+      "within_5s_at_200": 0,
+      "within_5s_max": 84,
+      "open_10s": {
+        "pods": 21,
+        "max_score": 206,
+        "median_score": 5,
+        "at_200": 1,
+        "at_50": 7,
+        "at_20": 9,
+        "at_10": 9,
+        "winner_is_earlier_football": 1,
+        "top": [
+          {
+            "score": 206,
+            "pod_start": 1754.38073,
+            "ref_session": "hush_20260909_213047",
+            "ref_name": "Sept 9 NBC",
+            "ref_start": 5428.523325
+          },
+          {
+            "score": 175,
+            "pod_start": 9187.148441,
+            "ref_session": "hush_20260909_213047",
+            "ref_name": "Sept 9 NBC",
+            "ref_start": 7641.664393
+          },
+          {
+            "score": 134,
+            "pod_start": 5289.058324,
+            "ref_session": "hush_20260909_213047",
+            "ref_name": "Sept 9 NBC",
+            "ref_start": 6356.969761
+          },
+          {
+            "score": 112,
+            "pod_start": 6838.40341,
+            "ref_session": "hush_20260909_213047",
+            "ref_name": "Sept 9 NBC",
+            "ref_start": 7641.664393
+          },
+          {
+            "score": 108,
+            "pod_start": 3470.98188,
+            "ref_session": "hush_20260909_213047",
+            "ref_name": "Sept 9 NBC",
+            "ref_start": 2066.723178
+          }
+        ],
+        "sports_ref_rows": 15
+      },
+      "within_10s_at_200": 0,
+      "within_10s_max": 182
+    },
+    {
+      "session": "hush_20260914_212529",
+      "name": "Sept 14 ESPN",
+      "library_sessions": [
+        "hush_20260909_213047",
+        "hush_20260913_210542"
+      ],
+      "open_5s": {
+        "pods": 15,
+        "max_score": 165,
+        "median_score": 5,
+        "at_200": 0,
+        "at_50": 3,
+        "at_20": 6,
+        "at_10": 7,
+        "winner_is_earlier_football": 0,
+        "top": [
+          {
+            "score": 165,
+            "pod_start": 4244.241231,
+            "ref_session": "hush_20260909_213047",
+            "ref_name": "Sept 9 NBC",
+            "ref_start": 2894.998688
+          },
+          {
+            "score": 65,
+            "pod_start": 4543.794045,
+            "ref_session": "hush_20260909_213047",
+            "ref_name": "Sept 9 NBC",
+            "ref_start": 2514.3919100000003
+          },
+          {
+            "score": 53,
+            "pod_start": 3180.107485,
+            "ref_session": "hush_20260913_210542",
+            "ref_name": "Sept 13 NBC",
+            "ref_start": 100.128736
+          },
+          {
+            "score": 29,
+            "pod_start": 3649.090433,
+            "ref_session": "hush_20260909_213047",
+            "ref_name": "Sept 9 NBC",
+            "ref_start": 2066.723178
+          },
+          {
+            "score": 26,
+            "pod_start": 5665.36827,
+            "ref_session": "hush_20260913_210542",
+            "ref_name": "Sept 13 NBC",
+            "ref_start": 5289.058324
+          }
+        ],
+        "sports_ref_rows": 13
+      },
+      "within_5s_at_200": 0,
+      "within_5s_max": 4,
+      "open_10s": {
+        "pods": 15,
+        "max_score": 284,
+        "median_score": 17,
+        "at_200": 1,
+        "at_50": 7,
+        "at_20": 7,
+        "at_10": 8,
+        "winner_is_earlier_football": 1,
+        "top": [
+          {
+            "score": 284,
+            "pod_start": 4244.241231,
+            "ref_session": "hush_20260909_213047",
+            "ref_name": "Sept 9 NBC",
+            "ref_start": 2894.998688
+          },
+          {
+            "score": 132,
+            "pod_start": 4543.794045,
+            "ref_session": "hush_20260909_213047",
+            "ref_name": "Sept 9 NBC",
+            "ref_start": 2514.3919100000003
+          },
+          {
+            "score": 103,
+            "pod_start": 6344.634084,
+            "ref_session": "hush_20260913_210542",
+            "ref_name": "Sept 13 NBC",
+            "ref_start": 5289.058324
+          },
+          {
+            "score": 94,
+            "pod_start": 166.63993768328444,
+            "ref_session": "hush_20260913_210542",
+            "ref_name": "Sept 13 NBC",
+            "ref_start": 2178.9600410000003
+          },
+          {
+            "score": 91,
+            "pod_start": 3180.107485,
+            "ref_session": "hush_20260913_210542",
+            "ref_name": "Sept 13 NBC",
+            "ref_start": 100.128736
+          }
+        ],
+        "sports_ref_rows": 14
+      },
+      "within_10s_at_200": 0,
+      "within_10s_max": 4
+    },
+    {
+      "session": "hush_20260924_220624",
+      "name": "Sept 24 Prime",
+      "library_sessions": [
+        "hush_20260909_213047",
+        "hush_20260913_210542",
+        "hush_20260914_212529"
+      ],
+      "open_5s": {
+        "pods": 13,
+        "max_score": 127,
+        "median_score": 3,
+        "at_200": 0,
+        "at_50": 1,
+        "at_20": 1,
+        "at_10": 1,
+        "winner_is_earlier_football": 0,
+        "top": [
+          {
+            "score": 127,
+            "pod_start": 6028.8403339999995,
+            "ref_session": "hush_20260909_213047",
+            "ref_name": "Sept 9 NBC",
+            "ref_start": 3445.40527
+          },
+          {
+            "score": 6,
+            "pod_start": 2796.812336,
+            "ref_session": "hush_20260913_210542",
+            "ref_name": "Sept 13 NBC",
+            "ref_start": 9680.139945
+          },
+          {
+            "score": 3,
+            "pod_start": 1.618065,
+            "ref_session": "hush_20260827_135935",
+            "ref_name": "Hulu",
+            "ref_start": 1111.549208
+          },
+          {
+            "score": 3,
+            "pod_start": 234.244438,
+            "ref_session": "hush_20260909_213047",
+            "ref_name": "Sept 9 NBC",
+            "ref_start": 623.347274
+          },
+          {
+            "score": 3,
+            "pod_start": 913.442347,
+            "ref_session": "hush_20260827_135935",
+            "ref_name": "Hulu",
+            "ref_start": 3343.772703
+          }
+        ],
+        "sports_ref_rows": 9
+      },
+      "within_5s_at_200": 0,
+      "within_5s_max": 15,
+      "open_10s": {
+        "pods": 13,
+        "max_score": 331,
+        "median_score": 3,
+        "at_200": 1,
+        "at_50": 1,
+        "at_20": 1,
+        "at_10": 3,
+        "winner_is_earlier_football": 1,
+        "top": [
+          {
+            "score": 331,
+            "pod_start": 6028.8403339999995,
+            "ref_session": "hush_20260909_213047",
+            "ref_name": "Sept 9 NBC",
+            "ref_start": 3445.40527
+          },
+          {
+            "score": 14,
+            "pod_start": 5354.8257,
+            "ref_session": "hush_20260913_210542",
+            "ref_name": "Sept 13 NBC",
+            "ref_start": 9680.139945
+          },
+          {
+            "score": 11,
+            "pod_start": 2217.880253,
+            "ref_session": "hush_20260827_135935",
+            "ref_name": "Hulu",
+            "ref_start": 2075.982901
+          },
+          {
+            "score": 8,
+            "pod_start": 234.244438,
+            "ref_session": "hush_20260909_213047",
+            "ref_name": "Sept 9 NBC",
+            "ref_start": 5428.523325
+          },
+          {
+            "score": 6,
+            "pod_start": 2796.812336,
+            "ref_session": "hush_20260913_210542",
+            "ref_name": "Sept 13 NBC",
+            "ref_start": 9680.139945
+          }
+        ],
+        "sports_ref_rows": 8
+      },
+      "within_10s_at_200": 0,
+      "within_10s_max": 34
+    },
+    {
+      "session": "hush_20261008_205100",
+      "name": "Oct 8 Prime Video",
+      "library_sessions": [
+        "hush_20260909_213047",
+        "hush_20260913_210542",
+        "hush_20260914_212529",
+        "hush_20260924_220624"
+      ],
+      "open_5s": {
+        "pods": 23,
+        "max_score": 169,
+        "median_score": 4,
+        "at_200": 0,
+        "at_50": 4,
+        "at_20": 4,
+        "at_10": 5,
+        "winner_is_earlier_football": 0,
+        "top": [
+          {
+            "score": 169,
+            "pod_start": 139.87447600000002,
+            "ref_session": "hush_20260924_220624",
+            "ref_name": "Sept 24 Prime",
+            "ref_start": 234.244438
+          },
+          {
+            "score": 127,
+            "pod_start": 4858.4710700000005,
+            "ref_session": "hush_20260924_220624",
+            "ref_name": "Sept 24 Prime",
+            "ref_start": 1.618065
+          },
+          {
+            "score": 66,
+            "pod_start": 9604.933309,
+            "ref_session": "hush_20260924_220624",
+            "ref_name": "Sept 24 Prime",
+            "ref_start": 5354.8257
+          },
+          {
+            "score": 60,
+            "pod_start": 10389.958924,
+            "ref_session": "hush_20260914_212529",
+            "ref_name": "Sept 14 ESPN",
+            "ref_start": 1243.16933
+          },
+          {
+            "score": 10,
+            "pod_start": 4419.341289999999,
+            "ref_session": "hush_20260924_220624",
+            "ref_name": "Sept 24 Prime",
+            "ref_start": 2217.880253
+          }
+        ],
+        "sports_ref_rows": 20
+      },
+      "within_5s_at_200": 0,
+      "within_5s_max": 45,
+      "open_10s": {
+        "pods": 23,
+        "max_score": 471,
+        "median_score": 5,
+        "at_200": 2,
+        "at_50": 4,
+        "at_20": 5,
+        "at_10": 6,
+        "winner_is_earlier_football": 2,
+        "top": [
+          {
+            "score": 471,
+            "pod_start": 139.87447600000002,
+            "ref_session": "hush_20260924_220624",
+            "ref_name": "Sept 24 Prime",
+            "ref_start": 234.244438
+          },
+          {
+            "score": 234,
+            "pod_start": 4858.4710700000005,
+            "ref_session": "hush_20260924_220624",
+            "ref_name": "Sept 24 Prime",
+            "ref_start": 1.618065
+          },
+          {
+            "score": 191,
+            "pod_start": 10389.958924,
+            "ref_session": "hush_20260914_212529",
+            "ref_name": "Sept 14 ESPN",
+            "ref_start": 1243.16933
+          },
+          {
+            "score": 99,
+            "pod_start": 9604.933309,
+            "ref_session": "hush_20260924_220624",
+            "ref_name": "Sept 24 Prime",
+            "ref_start": 5354.8257
+          },
+          {
+            "score": 40,
+            "pod_start": 2396.184611,
+            "ref_session": "hush_20260924_220624",
+            "ref_name": "Sept 24 Prime",
+            "ref_start": 6028.8403339999995
+          }
+        ],
+        "sports_ref_rows": 21
+      },
+      "within_10s_at_200": 0,
+      "within_10s_max": 166
+    },
+    {
+      "session": "hush_20261010_222400",
+      "name": "Oct 10 cable",
+      "library_sessions": [
+        "hush_20260909_213047",
+        "hush_20260913_210542",
+        "hush_20260914_212529",
+        "hush_20260924_220624",
+        "hush_20261008_205100"
+      ],
+      "open_5s": {
+        "pods": 6,
+        "max_score": 23,
+        "median_score": 3,
+        "at_200": 0,
+        "at_50": 0,
+        "at_20": 1,
+        "at_10": 2,
+        "winner_is_earlier_football": 0,
+        "top": [
+          {
+            "score": 23,
+            "pod_start": 3009.8989709999996,
+            "ref_session": "hush_20260914_212529",
+            "ref_name": "Sept 14 ESPN",
+            "ref_start": 5665.36827
+          },
+          {
+            "score": 10,
+            "pod_start": 403.709578,
+            "ref_session": "hush_20260924_220624",
+            "ref_name": "Sept 24 Prime",
+            "ref_start": 234.244438
+          },
+          {
+            "score": 3,
+            "pod_start": 38.382142,
+            "ref_session": "hush_20260909_213047",
+            "ref_name": "Sept 9 NBC",
+            "ref_start": 6074.159173
+          },
+          {
+            "score": 3,
+            "pod_start": 1257.309861,
+            "ref_session": "hush_20260913_210542",
+            "ref_name": "Sept 13 NBC",
+            "ref_start": 3072.9656
+          },
+          {
+            "score": 3,
+            "pod_start": 2369.206569,
+            "ref_session": "hush_20260914_212529",
+            "ref_name": "Sept 14 ESPN",
+            "ref_start": 3649.090433
+          }
+        ],
+        "sports_ref_rows": 6
+      },
+      "within_5s_at_200": 0,
+      "within_5s_max": 3,
+      "open_10s": {
+        "pods": 6,
+        "max_score": 75,
+        "median_score": 10,
+        "at_200": 0,
+        "at_50": 1,
+        "at_20": 1,
+        "at_10": 3,
+        "winner_is_earlier_football": 0,
+        "top": [
+          {
+            "score": 75,
+            "pod_start": 3009.8989709999996,
+            "ref_session": "hush_20260914_212529",
+            "ref_name": "Sept 14 ESPN",
+            "ref_start": 5665.36827
+          },
+          {
+            "score": 12,
+            "pod_start": 3567.641036,
+            "ref_session": "hush_20260913_210542",
+            "ref_name": "Sept 13 NBC",
+            "ref_start": 6305.059408
+          },
+          {
+            "score": 10,
+            "pod_start": 403.709578,
+            "ref_session": "hush_20260924_220624",
+            "ref_name": "Sept 24 Prime",
+            "ref_start": 234.244438
+          },
+          {
+            "score": 3,
+            "pod_start": 38.382142,
+            "ref_session": "hush_20260909_213047",
+            "ref_name": "Sept 9 NBC",
+            "ref_start": 6074.159173
+          },
+          {
+            "score": 3,
+            "pod_start": 1257.309861,
+            "ref_session": "hush_20260913_210542",
+            "ref_name": "Sept 13 NBC",
+            "ref_start": 3072.9656
+          }
+        ],
+        "sports_ref_rows": 6
+      },
+      "within_10s_at_200": 0,
+      "within_10s_max": 3
+    },
+    {
+      "session": "hush_20261011_135700",
+      "name": "Oct 11 afternoon",
+      "library_sessions": [
+        "hush_20260909_213047",
+        "hush_20260913_210542",
+        "hush_20260914_212529",
+        "hush_20260924_220624",
+        "hush_20261008_205100",
+        "hush_20261010_222400"
+      ],
+      "open_5s": {
+        "pods": 8,
+        "max_score": 29,
+        "median_score": 10,
+        "at_200": 0,
+        "at_50": 0,
+        "at_20": 2,
+        "at_10": 4,
+        "winner_is_earlier_football": 0,
+        "top": [
+          {
+            "score": 29,
+            "pod_start": 486.403371,
+            "ref_session": "hush_20261008_205100",
+            "ref_name": "Oct 8 Prime Video",
+            "ref_start": 4419.341289999999
+          },
+          {
+            "score": 24,
+            "pod_start": 1298.306029,
+            "ref_session": "hush_20261008_205100",
+            "ref_name": "Oct 8 Prime Video",
+            "ref_start": 2229.9867090000002
+          },
+          {
+            "score": 11,
+            "pod_start": 3735.541602,
+            "ref_session": "hush_20261008_205100",
+            "ref_name": "Oct 8 Prime Video",
+            "ref_start": 7169.4759
+          },
+          {
+            "score": 10,
+            "pod_start": 145.168552,
+            "ref_session": "hush_20260924_220624",
+            "ref_name": "Sept 24 Prime",
+            "ref_start": 3496.442224
+          },
+          {
+            "score": 5,
+            "pod_start": 796.142869,
+            "ref_session": "hush_20260909_213047",
+            "ref_name": "Sept 9 NBC",
+            "ref_start": 1074.332477
+          }
+        ],
+        "sports_ref_rows": 8
+      },
+      "within_5s_at_200": 0,
+      "within_5s_max": 6,
+      "open_10s": {
+        "pods": 8,
+        "max_score": 134,
+        "median_score": 12,
+        "at_200": 0,
+        "at_50": 1,
+        "at_20": 3,
+        "at_10": 5,
+        "winner_is_earlier_football": 0,
+        "top": [
+          {
+            "score": 134,
+            "pod_start": 486.403371,
+            "ref_session": "hush_20261008_205100",
+            "ref_name": "Oct 8 Prime Video",
+            "ref_start": 4419.341289999999
+          },
+          {
+            "score": 42,
+            "pod_start": 1298.306029,
+            "ref_session": "hush_20261008_205100",
+            "ref_name": "Oct 8 Prime Video",
+            "ref_start": 2229.9867090000002
+          },
+          {
+            "score": 41,
+            "pod_start": 1937.876636,
+            "ref_session": "hush_20260924_220624",
+            "ref_name": "Sept 24 Prime",
+            "ref_start": 7515.38847
+          },
+          {
+            "score": 12,
+            "pod_start": 145.168552,
+            "ref_session": "hush_20260924_220624",
+            "ref_name": "Sept 24 Prime",
+            "ref_start": 3496.442224
+          },
+          {
+            "score": 11,
+            "pod_start": 3735.541602,
+            "ref_session": "hush_20261008_205100",
+            "ref_name": "Oct 8 Prime Video",
+            "ref_start": 7169.4759
+          }
+        ],
+        "sports_ref_rows": 8
+      },
+      "within_10s_at_200": 0,
+      "within_10s_max": 6
+    },
+    {
+      "session": "hush_20261011_204300",
+      "name": "Oct 11 night",
+      "library_sessions": [
+        "hush_20260909_213047",
+        "hush_20260913_210542",
+        "hush_20260914_212529",
+        "hush_20260924_220624",
+        "hush_20261008_205100",
+        "hush_20261010_222400",
+        "hush_20261011_135700"
+      ],
+      "open_5s": {
+        "pods": 6,
+        "max_score": 88,
+        "median_score": 23,
+        "at_200": 0,
+        "at_50": 2,
+        "at_20": 3,
+        "at_10": 4,
+        "winner_is_earlier_football": 0,
+        "top": [
+          {
+            "score": 88,
+            "pod_start": 803.075994,
+            "ref_session": "hush_20261008_205100",
+            "ref_name": "Oct 8 Prime Video",
+            "ref_start": 2229.9867090000002
+          },
+          {
+            "score": 84,
+            "pod_start": 1671.830223,
+            "ref_session": "hush_20260913_210542",
+            "ref_name": "Sept 13 NBC",
+            "ref_start": 9187.148441
+          },
+          {
+            "score": 23,
+            "pod_start": 300.055269,
+            "ref_session": "hush_20261008_205100",
+            "ref_name": "Oct 8 Prime Video",
+            "ref_start": 1003.282085
+          },
+          {
+            "score": 17,
+            "pod_start": 1400.582936,
+            "ref_session": "hush_20261008_205100",
+            "ref_name": "Oct 8 Prime Video",
+            "ref_start": 5331.899224
+          },
+          {
+            "score": 3,
+            "pod_start": 6.086873,
+            "ref_session": "hush_20260913_210542",
+            "ref_name": "Sept 13 NBC",
+            "ref_start": 2178.9600410000003
+          }
+        ],
+        "sports_ref_rows": 5
+      },
+      "within_5s_at_200": 0,
+      "within_5s_max": 3,
+      "open_10s": {
+        "pods": 6,
+        "max_score": 236,
+        "median_score": 83,
+        "at_200": 1,
+        "at_50": 3,
+        "at_20": 4,
+        "at_10": 4,
+        "winner_is_earlier_football": 1,
+        "top": [
+          {
+            "score": 236,
+            "pod_start": 803.075994,
+            "ref_session": "hush_20261008_205100",
+            "ref_name": "Oct 8 Prime Video",
+            "ref_start": 2229.9867090000002
+          },
+          {
+            "score": 84,
+            "pod_start": 1671.830223,
+            "ref_session": "hush_20260913_210542",
+            "ref_name": "Sept 13 NBC",
+            "ref_start": 9187.148441
+          },
+          {
+            "score": 83,
+            "pod_start": 300.055269,
+            "ref_session": "hush_20261008_205100",
+            "ref_name": "Oct 8 Prime Video",
+            "ref_start": 1003.282085
+          },
+          {
+            "score": 47,
+            "pod_start": 1400.582936,
+            "ref_session": "hush_20261008_205100",
+            "ref_name": "Oct 8 Prime Video",
+            "ref_start": 5331.899224
+          },
+          {
+            "score": 5,
+            "pod_start": 2598.830584,
+            "ref_session": "hush_20260827_135935",
+            "ref_name": "Hulu",
+            "ref_start": 1111.549208
+          }
+        ],
+        "sports_ref_rows": 4
+      },
+      "within_10s_at_200": 0,
+      "within_10s_max": 3
+    },
+    {
+      "session": "hush_20261012_204200",
+      "name": "Oct 12 MNF",
+      "library_sessions": [
+        "hush_20260909_213047",
+        "hush_20260913_210542",
+        "hush_20260914_212529",
+        "hush_20260924_220624",
+        "hush_20261008_205100",
+        "hush_20261010_222400",
+        "hush_20261011_135700",
+        "hush_20261011_204300"
+      ],
+      "open_5s": {
+        "pods": 24,
+        "max_score": 137,
+        "median_score": 4,
+        "at_200": 0,
+        "at_50": 3,
+        "at_20": 8,
+        "at_10": 9,
+        "winner_is_earlier_football": 0,
+        "top": [
+          {
+            "score": 137,
+            "pod_start": 5080.063106,
+            "ref_session": "hush_20260914_212529",
+            "ref_name": "Sept 14 ESPN",
+            "ref_start": 6852.563786
+          },
+          {
+            "score": 80,
+            "pod_start": 8272.23859,
+            "ref_session": "hush_20260914_212529",
+            "ref_name": "Sept 14 ESPN",
+            "ref_start": 2072.112009
+          },
+          {
+            "score": 53,
+            "pod_start": 4586.78507,
+            "ref_session": "hush_20261008_205100",
+            "ref_name": "Oct 8 Prime Video",
+            "ref_start": 2229.9867090000002
+          },
+          {
+            "score": 46,
+            "pod_start": 9224.822771,
+            "ref_session": "hush_20261008_205100",
+            "ref_name": "Oct 8 Prime Video",
+            "ref_start": 1615.709526
+          },
+          {
+            "score": 35,
+            "pod_start": 1504.506852,
+            "ref_session": "hush_20261008_205100",
+            "ref_name": "Oct 8 Prime Video",
+            "ref_start": 4858.4710700000005
+          }
+        ],
+        "sports_ref_rows": 19
+      },
+      "within_5s_at_200": 0,
+      "within_5s_max": 3,
+      "open_10s": {
+        "pods": 24,
+        "max_score": 355,
+        "median_score": 5,
+        "at_200": 1,
+        "at_50": 7,
+        "at_20": 10,
+        "at_10": 10,
+        "winner_is_earlier_football": 1,
+        "top": [
+          {
+            "score": 355,
+            "pod_start": 5080.063106,
+            "ref_session": "hush_20260914_212529",
+            "ref_name": "Sept 14 ESPN",
+            "ref_start": 6852.563786
+          },
+          {
+            "score": 123,
+            "pod_start": 8272.23859,
+            "ref_session": "hush_20260914_212529",
+            "ref_name": "Sept 14 ESPN",
+            "ref_start": 2072.112009
+          },
+          {
+            "score": 103,
+            "pod_start": 4586.78507,
+            "ref_session": "hush_20261008_205100",
+            "ref_name": "Oct 8 Prime Video",
+            "ref_start": 2229.9867090000002
+          },
+          {
+            "score": 80,
+            "pod_start": 6636.525785,
+            "ref_session": "hush_20261008_205100",
+            "ref_name": "Oct 8 Prime Video",
+            "ref_start": 3980.89821
+          },
+          {
+            "score": 79,
+            "pod_start": 1504.506852,
+            "ref_session": "hush_20261008_205100",
+            "ref_name": "Oct 8 Prime Video",
+            "ref_start": 4858.4710700000005
+          }
+        ],
+        "sports_ref_rows": 21
+      },
+      "within_10s_at_200": 0,
+      "within_10s_max": 75
+    }
+  ],
+  "pairs_at_or_above_50": [
+    {
+      "score": 471,
+      "from": "Sept 24 Prime",
+      "to": "Oct 8 Prime Video",
+      "from_session": "hush_20260924_220624",
+      "to_session": "hush_20261008_205100",
+      "pod_start": 139.874,
+      "ref_start": 234.244,
+      "clears_200": true
+    },
+    {
+      "score": 355,
+      "from": "Sept 14 ESPN",
+      "to": "Oct 12 MNF",
+      "from_session": "hush_20260914_212529",
+      "to_session": "hush_20261012_204200",
+      "pod_start": 5080.063,
+      "ref_start": 6852.564,
+      "clears_200": true
+    },
+    {
+      "score": 331,
+      "from": "Sept 9 NBC",
+      "to": "Sept 24 Prime",
+      "from_session": "hush_20260909_213047",
+      "to_session": "hush_20260924_220624",
+      "pod_start": 6028.84,
+      "ref_start": 3445.405,
+      "clears_200": true
+    },
+    {
+      "score": 284,
+      "from": "Sept 9 NBC",
+      "to": "Sept 14 ESPN",
+      "from_session": "hush_20260909_213047",
+      "to_session": "hush_20260914_212529",
+      "pod_start": 4244.241,
+      "ref_start": 2894.999,
+      "clears_200": true
+    },
+    {
+      "score": 236,
+      "from": "Oct 8 Prime Video",
+      "to": "Oct 11 night",
+      "from_session": "hush_20261008_205100",
+      "to_session": "hush_20261011_204300",
+      "pod_start": 803.076,
+      "ref_start": 2229.987,
+      "clears_200": true
+    },
+    {
+      "score": 234,
+      "from": "Sept 24 Prime",
+      "to": "Oct 8 Prime Video",
+      "from_session": "hush_20260924_220624",
+      "to_session": "hush_20261008_205100",
+      "pod_start": 4858.471,
+      "ref_start": 1.618,
+      "clears_200": true
+    },
+    {
+      "score": 206,
+      "from": "Sept 9 NBC",
+      "to": "Sept 13 NBC",
+      "from_session": "hush_20260909_213047",
+      "to_session": "hush_20260913_210542",
+      "pod_start": 1754.381,
+      "ref_start": 5428.523,
+      "clears_200": true
+    },
+    {
+      "score": 191,
+      "from": "Sept 14 ESPN",
+      "to": "Oct 8 Prime Video",
+      "from_session": "hush_20260914_212529",
+      "to_session": "hush_20261008_205100",
+      "pod_start": 10389.959,
+      "ref_start": 1243.169,
+      "clears_200": false
+    },
+    {
+      "score": 175,
+      "from": "Sept 9 NBC",
+      "to": "Sept 13 NBC",
+      "from_session": "hush_20260909_213047",
+      "to_session": "hush_20260913_210542",
+      "pod_start": 9187.148,
+      "ref_start": 7641.664,
+      "clears_200": false
+    },
+    {
+      "score": 134,
+      "from": "Sept 9 NBC",
+      "to": "Sept 13 NBC",
+      "from_session": "hush_20260909_213047",
+      "to_session": "hush_20260913_210542",
+      "pod_start": 5289.058,
+      "ref_start": 6356.97,
+      "clears_200": false
+    },
+    {
+      "score": 134,
+      "from": "Oct 8 Prime Video",
+      "to": "Oct 11 afternoon",
+      "from_session": "hush_20261008_205100",
+      "to_session": "hush_20261011_135700",
+      "pod_start": 486.403,
+      "ref_start": 4419.341,
+      "clears_200": false
+    },
+    {
+      "score": 132,
+      "from": "Sept 9 NBC",
+      "to": "Sept 14 ESPN",
+      "from_session": "hush_20260909_213047",
+      "to_session": "hush_20260914_212529",
+      "pod_start": 4543.794,
+      "ref_start": 2514.392,
+      "clears_200": false
+    },
+    {
+      "score": 123,
+      "from": "Sept 14 ESPN",
+      "to": "Oct 12 MNF",
+      "from_session": "hush_20260914_212529",
+      "to_session": "hush_20261012_204200",
+      "pod_start": 8272.239,
+      "ref_start": 2072.112,
+      "clears_200": false
+    },
+    {
+      "score": 112,
+      "from": "Sept 9 NBC",
+      "to": "Sept 13 NBC",
+      "from_session": "hush_20260909_213047",
+      "to_session": "hush_20260913_210542",
+      "pod_start": 6838.403,
+      "ref_start": 7641.664,
+      "clears_200": false
+    },
+    {
+      "score": 108,
+      "from": "Sept 9 NBC",
+      "to": "Sept 13 NBC",
+      "from_session": "hush_20260909_213047",
+      "to_session": "hush_20260913_210542",
+      "pod_start": 3470.982,
+      "ref_start": 2066.723,
+      "clears_200": false
+    },
+    {
+      "score": 103,
+      "from": "Sept 13 NBC",
+      "to": "Sept 14 ESPN",
+      "from_session": "hush_20260913_210542",
+      "to_session": "hush_20260914_212529",
+      "pod_start": 6344.634,
+      "ref_start": 5289.058,
+      "clears_200": false
+    },
+    {
+      "score": 103,
+      "from": "Oct 8 Prime Video",
+      "to": "Oct 12 MNF",
+      "from_session": "hush_20261008_205100",
+      "to_session": "hush_20261012_204200",
+      "pod_start": 4586.785,
+      "ref_start": 2229.987,
+      "clears_200": false
+    },
+    {
+      "score": 99,
+      "from": "Sept 24 Prime",
+      "to": "Oct 8 Prime Video",
+      "from_session": "hush_20260924_220624",
+      "to_session": "hush_20261008_205100",
+      "pod_start": 9604.933,
+      "ref_start": 5354.826,
+      "clears_200": false
+    },
+    {
+      "score": 94,
+      "from": "Sept 13 NBC",
+      "to": "Sept 14 ESPN",
+      "from_session": "hush_20260913_210542",
+      "to_session": "hush_20260914_212529",
+      "pod_start": 166.64,
+      "ref_start": 2178.96,
+      "clears_200": false
+    },
+    {
+      "score": 91,
+      "from": "Sept 13 NBC",
+      "to": "Sept 14 ESPN",
+      "from_session": "hush_20260913_210542",
+      "to_session": "hush_20260914_212529",
+      "pod_start": 3180.107,
+      "ref_start": 100.129,
+      "clears_200": false
+    },
+    {
+      "score": 86,
+      "from": "Sept 9 NBC",
+      "to": "Sept 13 NBC",
+      "from_session": "hush_20260909_213047",
+      "to_session": "hush_20260913_210542",
+      "pod_start": 8671.037,
+      "ref_start": 8413.747,
+      "clears_200": false
+    },
+    {
+      "score": 84,
+      "from": "Sept 13 NBC",
+      "to": "Oct 11 night",
+      "from_session": "hush_20260913_210542",
+      "to_session": "hush_20261011_204300",
+      "pod_start": 1671.83,
+      "ref_start": 9187.148,
+      "clears_200": false
+    },
+    {
+      "score": 83,
+      "from": "Oct 8 Prime Video",
+      "to": "Oct 11 night",
+      "from_session": "hush_20261008_205100",
+      "to_session": "hush_20261011_204300",
+      "pod_start": 300.055,
+      "ref_start": 1003.282,
+      "clears_200": false
+    },
+    {
+      "score": 80,
+      "from": "Oct 8 Prime Video",
+      "to": "Oct 12 MNF",
+      "from_session": "hush_20261008_205100",
+      "to_session": "hush_20261012_204200",
+      "pod_start": 6636.526,
+      "ref_start": 3980.898,
+      "clears_200": false
+    },
+    {
+      "score": 79,
+      "from": "Oct 8 Prime Video",
+      "to": "Oct 12 MNF",
+      "from_session": "hush_20261008_205100",
+      "to_session": "hush_20261012_204200",
+      "pod_start": 1504.507,
+      "ref_start": 4858.471,
+      "clears_200": false
+    },
+    {
+      "score": 75,
+      "from": "Sept 14 ESPN",
+      "to": "Oct 10 cable",
+      "from_session": "hush_20260914_212529",
+      "to_session": "hush_20261010_222400",
+      "pod_start": 3009.899,
+      "ref_start": 5665.368,
+      "clears_200": false
+    },
+    {
+      "score": 67,
+      "from": "Sept 9 NBC",
+      "to": "Sept 13 NBC",
+      "from_session": "hush_20260909_213047",
+      "to_session": "hush_20260913_210542",
+      "pod_start": 1547.184,
+      "ref_start": 2066.723,
+      "clears_200": false
+    },
+    {
+      "score": 64,
+      "from": "Oct 8 Prime Video",
+      "to": "Oct 12 MNF",
+      "from_session": "hush_20261008_205100",
+      "to_session": "hush_20261012_204200",
+      "pod_start": 9224.823,
+      "ref_start": 1615.71,
+      "clears_200": false
+    },
+    {
+      "score": 55,
+      "from": "Sept 13 NBC",
+      "to": "Sept 14 ESPN",
+      "from_session": "hush_20260913_210542",
+      "to_session": "hush_20260914_212529",
+      "pod_start": 3649.09,
+      "ref_start": 1547.184,
+      "clears_200": false
+    },
+    {
+      "score": 54,
+      "from": "Sept 13 NBC",
+      "to": "Sept 14 ESPN",
+      "from_session": "hush_20260913_210542",
+      "to_session": "hush_20260914_212529",
+      "pod_start": 5665.368,
+      "ref_start": 5289.058,
+      "clears_200": false
+    },
+    {
+      "score": 52,
+      "from": "Oct 8 Prime Video",
+      "to": "Oct 12 MNF",
+      "from_session": "hush_20261008_205100",
+      "to_session": "hush_20261012_204200",
+      "pod_start": 241.024,
+      "ref_start": 1615.71,
+      "clears_200": false
+    }
+  ]
+}

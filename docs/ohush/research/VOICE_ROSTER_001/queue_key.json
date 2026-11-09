@@ -1,6 +1,256 @@
 [
   {
     "session": "hush_20260924_220624",
+    "cluster_id": null,
+    "heard_seconds": 0,
+    "play_start": 61.0,
+    "ad_voice": false,
+    "ad_share": 0,
+    "id": "fn0001",
+    "rank": 0
+  },
+  {
+    "session": "hush_20260924_220624",
+    "cluster_id": null,
+    "heard_seconds": 0,
+    "play_start": 4529.0,
+    "ad_voice": false,
+    "ad_share": 0,
+    "id": "fn0006",
+    "rank": 0
+  },
+  {
+    "session": "hush_20260924_220624",
+    "cluster_id": null,
+    "heard_seconds": 0,
+    "play_start": 6263.0,
+    "ad_voice": false,
+    "ad_share": 0,
+    "id": "fn0008",
+    "rank": 0
+  },
+  {
+    "session": "hush_20260924_220624",
+    "cluster_id": null,
+    "heard_seconds": 0,
+    "play_start": 6589.0,
+    "ad_voice": false,
+    "ad_share": 0,
+    "id": "fn0009",
+    "rank": 0
+  },
+  {
+    "session": "hush_20260924_220624",
+    "cluster_id": null,
+    "heard_seconds": 0,
+    "play_start": 6793.0,
+    "ad_voice": false,
+    "ad_share": 0,
+    "id": "fn0010",
+    "rank": 0
+  },
+  {
+    "session": "hush_20260924_220624",
+    "cluster_id": null,
+    "heard_seconds": 0,
+    "play_start": 6815.0,
+    "ad_voice": false,
+    "ad_share": 0,
+    "id": "fn0011",
+    "rank": 0
+  },
+  {
+    "session": "hush_20260924_220624",
+    "cluster_id": null,
+    "heard_seconds": 0,
+    "play_start": 5571.0,
+    "ad_voice": false,
+    "ad_share": 0,
+    "id": "fn0025",
+    "rank": 0
+  },
+  {
+    "session": "hush_20261008_205100",
+    "cluster_id": null,
+    "heard_seconds": 0,
+    "play_start": 9153.0,
+    "ad_voice": false,
+    "ad_share": 0,
+    "id": "fn0054",
+    "rank": 0
+  },
+  {
+    "session": "hush_20260924_220624",
+    "cluster_id": null,
+    "heard_seconds": 0,
+    "play_start": 5551.0,
+    "ad_voice": false,
+    "ad_share": 0,
+    "id": "fn0007",
+    "rank": 0
+  },
+  {
+    "session": "hush_20261008_205100",
+    "cluster_id": null,
+    "heard_seconds": 0,
+    "play_start": 9800.0,
+    "ad_voice": false,
+    "ad_share": 0,
+    "id": "fn0023",
+    "rank": 0
+  },
+  {
+    "session": "hush_20260924_220624",
+    "cluster_id": null,
+    "heard_seconds": 0,
+    "play_start": 297.5,
+    "ad_voice": false,
+    "ad_share": 0,
+    "id": "fn0101",
+    "rank": 0
+  },
+  {
+    "session": "hush_20260924_220624",
+    "cluster_id": null,
+    "heard_seconds": 0,
+    "play_start": 1526.7,
+    "ad_voice": false,
+    "ad_share": 0,
+    "id": "fn0102",
+    "rank": 0
+  },
+  {
+    "session": "hush_20260924_220624",
+    "cluster_id": null,
+    "heard_seconds": 0,
+    "play_start": 1805.7,
+    "ad_voice": false,
+    "ad_share": 0,
+    "id": "fn0103",
+    "rank": 0
+  },
+  {
+    "session": "hush_20260924_220624",
+    "cluster_id": null,
+    "heard_seconds": 0,
+    "play_start": 5432.4,
+    "ad_voice": false,
+    "ad_share": 0,
+    "id": "fn0105",
+    "rank": 0
+  },
+  {
+    "session": "hush_20260924_220624",
+    "cluster_id": null,
+    "heard_seconds": 0,
+    "play_start": 6064.0,
+    "ad_voice": false,
+    "ad_share": 0,
+    "id": "fn0106",
+    "rank": 0
+  },
+  {
+    "session": "hush_20260924_220624",
+    "cluster_id": null,
+    "heard_seconds": 0,
+    "play_start": 6909.3,
+    "ad_voice": false,
+    "ad_share": 0,
+    "id": "fn0107",
+    "rank": 0
+  },
+  {
+    "session": "hush_20261008_205100",
+    "cluster_id": null,
+    "heard_seconds": 0,
+    "play_start": 138.0,
+    "ad_voice": false,
+    "ad_share": 0,
+    "id": "fn0109",
+    "rank": 0
+  },
+  {
+    "session": "hush_20261008_205100",
+    "cluster_id": null,
+    "heard_seconds": 0,
+    "play_start": 569.8,
+    "ad_voice": false,
+    "ad_share": 0,
+    "id": "fn0110",
+    "rank": 0
+  },
+  {
+    "session": "hush_20261008_205100",
+    "cluster_id": null,
+    "heard_seconds": 0,
+    "play_start": 1027.7,
+    "ad_voice": false,
+    "ad_share": 0,
+    "id": "fn0111",
+    "rank": 0
+  },
+  {
+    "session": "hush_20261008_205100",
+    "cluster_id": null,
+    "heard_seconds": 0,
+    "play_start": 2229.6,
+    "ad_voice": false,
+    "ad_share": 0,
+    "id": "fn0113",
+    "rank": 0
+  },
+  {
+    "session": "hush_20261008_205100",
+    "cluster_id": null,
+    "heard_seconds": 0,
+    "play_start": 2416.4,
+    "ad_voice": false,
+    "ad_share": 0,
+    "id": "fn0114",
+    "rank": 0
+  },
+  {
+    "session": "hush_20261008_205100",
+    "cluster_id": null,
+    "heard_seconds": 0,
+    "play_start": 3094.5,
+    "ad_voice": false,
+    "ad_share": 0,
+    "id": "fn0115",
+    "rank": 0
+  },
+  {
+    "session": "hush_20261008_205100",
+    "cluster_id": null,
+    "heard_seconds": 0,
+    "play_start": 4033.8,
+    "ad_voice": false,
+    "ad_share": 0,
+    "id": "fn0117",
+    "rank": 0
+  },
+  {
+    "session": "hush_20261008_205100",
+    "cluster_id": null,
+    "heard_seconds": 0,
+    "play_start": 4447.9,
+    "ad_voice": false,
+    "ad_share": 0,
+    "id": "fn0118",
+    "rank": 0
+  },
+  {
+    "session": "hush_20261008_205100",
+    "cluster_id": null,
+    "heard_seconds": 0,
+    "play_start": 4909.9,
+    "ad_voice": false,
+    "ad_share": 0,
+    "id": "fn0119",
+    "rank": 0
+  },
+  {
+    "session": "hush_20260924_220624",
     "cluster_id": "c0008",
     "heard_seconds": 1283.8,
     "play_start": 3173.7,

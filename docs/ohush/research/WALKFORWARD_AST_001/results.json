@@ -1,0 +1,231 @@
+{
+  "id": "WALKFORWARD_AST_001",
+  "model": "MIT/ast-finetuned-audioset-10-10-0.4593",
+  "window_s": 10.0,
+  "head": "logistic regression, class_weight balanced, earlier games only",
+  "threshold": "one step above the highest program-overlapping logit in the fit games",
+  "october_may_choose_cutoff": false,
+  "live_mute_changed": false,
+  "steps": [
+    {
+      "test": "hush_20260913_210542",
+      "test_name": "Sept 13 NBC",
+      "fit": [
+        "hush_20260909_213047"
+      ],
+      "october_in_fit": false,
+      "threshold": 12.52204990386963,
+      "test_score": {
+        "session": "hush_20260913_210542",
+        "commercial_held_s": 1091.484,
+        "program_cut_s": 834.516,
+        "false_cover_incidents": 204,
+        "broken": true,
+        "accuracy": null
+      },
+      "redzone": {
+        "session": "hush_20260913_150934",
+        "commercial_held_s": 0.0,
+        "program_cut_s": 50.0,
+        "false_cover_incidents": 13,
+        "broken": true,
+        "accuracy": null
+      }
+    },
+    {
+      "test": "hush_20260914_212529",
+      "test_name": "Sept 14 ESPN",
+      "fit": [
+        "hush_20260909_213047",
+        "hush_20260913_210542"
+      ],
+      "october_in_fit": false,
+      "threshold": 21.56487083435059,
+      "test_score": {
+        "session": "hush_20260914_212529",
+        "commercial_held_s": 20.0,
+        "program_cut_s": 0.0,
+        "false_cover_incidents": 0,
+        "broken": false,
+        "accuracy": 0.011086
+      },
+      "redzone": {
+        "session": "hush_20260913_150934",
+        "commercial_held_s": 0.0,
+        "program_cut_s": 0.0,
+        "false_cover_incidents": 0,
+        "broken": false,
+        "accuracy": null
+      }
+    },
+    {
+      "test": "hush_20260924_220624",
+      "test_name": "Sept 24 Prime",
+      "fit": [
+        "hush_20260909_213047",
+        "hush_20260913_210542",
+        "hush_20260914_212529"
+      ],
+      "october_in_fit": false,
+      "threshold": 15.343985557556154,
+      "test_score": {
+        "session": "hush_20260924_220624",
+        "commercial_held_s": 113.889,
+        "program_cut_s": 10.111,
+        "false_cover_incidents": 5,
+        "broken": true,
+        "accuracy": null
+      },
+      "redzone": {
+        "session": "hush_20260913_150934",
+        "commercial_held_s": 0.0,
+        "program_cut_s": 0.0,
+        "false_cover_incidents": 0,
+        "broken": false,
+        "accuracy": null
+      }
+    },
+    {
+      "test": "hush_20261008_205100",
+      "test_name": "Oct 8 Prime Video",
+      "fit": [
+        "hush_20260909_213047",
+        "hush_20260913_210542",
+        "hush_20260914_212529",
+        "hush_20260924_220624"
+      ],
+      "october_in_fit": false,
+      "threshold": 11.994435310363771,
+      "test_score": {
+        "session": "hush_20261008_205100",
+        "commercial_held_s": 169.744,
+        "program_cut_s": 8.256,
+        "false_cover_incidents": 5,
+        "broken": true,
+        "accuracy": null
+      },
+      "redzone": {
+        "session": "hush_20260913_150934",
+        "commercial_held_s": 0.0,
+        "program_cut_s": 0.0,
+        "false_cover_incidents": 0,
+        "broken": false,
+        "accuracy": null
+      }
+    },
+    {
+      "test": "hush_20261010_222400",
+      "test_name": "Oct 10 cable",
+      "fit": [
+        "hush_20260909_213047",
+        "hush_20260913_210542",
+        "hush_20260914_212529",
+        "hush_20260924_220624"
+      ],
+      "october_in_fit": false,
+      "threshold": 11.994435310363771,
+      "test_score": {
+        "session": "hush_20261010_222400",
+        "commercial_held_s": 54.0,
+        "program_cut_s": 32.0,
+        "false_cover_incidents": 17,
+        "broken": true,
+        "accuracy": null
+      },
+      "redzone": {
+        "session": "hush_20260913_150934",
+        "commercial_held_s": 0.0,
+        "program_cut_s": 0.0,
+        "false_cover_incidents": 0,
+        "broken": false,
+        "accuracy": null
+      }
+    },
+    {
+      "test": "hush_20261011_135700",
+      "test_name": "Oct 11 afternoon",
+      "fit": [
+        "hush_20260909_213047",
+        "hush_20260913_210542",
+        "hush_20260914_212529",
+        "hush_20260924_220624"
+      ],
+      "october_in_fit": false,
+      "threshold": 11.994435310363771,
+      "test_score": {
+        "session": "hush_20261011_135700",
+        "commercial_held_s": 21.0,
+        "program_cut_s": 0.0,
+        "false_cover_incidents": 0,
+        "broken": false,
+        "accuracy": 0.021364
+      },
+      "redzone": {
+        "session": "hush_20260913_150934",
+        "commercial_held_s": 0.0,
+        "program_cut_s": 0.0,
+        "false_cover_incidents": 0,
+        "broken": false,
+        "accuracy": null
+      }
+    },
+    {
+      "test": "hush_20261011_204300",
+      "test_name": "Oct 11 night",
+      "fit": [
+        "hush_20260909_213047",
+        "hush_20260913_210542",
+        "hush_20260914_212529",
+        "hush_20260924_220624"
+      ],
+      "october_in_fit": false,
+      "threshold": 11.994435310363771,
+      "test_score": {
+        "session": "hush_20261011_204300",
+        "commercial_held_s": 51.0,
+        "program_cut_s": 224.0,
+        "false_cover_incidents": 80,
+        "broken": true,
+        "accuracy": null
+      },
+      "redzone": {
+        "session": "hush_20260913_150934",
+        "commercial_held_s": 0.0,
+        "program_cut_s": 0.0,
+        "false_cover_incidents": 0,
+        "broken": false,
+        "accuracy": null
+      }
+    },
+    {
+      "test": "hush_20261012_204200",
+      "test_name": "Oct 12 MNF",
+      "fit": [
+        "hush_20260909_213047",
+        "hush_20260913_210542",
+        "hush_20260914_212529",
+        "hush_20260924_220624"
+      ],
+      "october_in_fit": false,
+      "threshold": 11.994435310363771,
+      "test_score": {
+        "session": "hush_20261012_204200",
+        "commercial_held_s": 154.0,
+        "program_cut_s": 3.0,
+        "false_cover_incidents": 3,
+        "broken": true,
+        "accuracy": null
+      },
+      "redzone": {
+        "session": "hush_20260913_150934",
+        "commercial_held_s": 0.0,
+        "program_cut_s": 0.0,
+        "false_cover_incidents": 0,
+        "broken": false,
+        "accuracy": null
+      }
+    }
+  ],
+  "steps_with_zero_program_on_the_test_and_redzone": 2,
+  "v1_baseline_commercial_held_s": 25.0
+}

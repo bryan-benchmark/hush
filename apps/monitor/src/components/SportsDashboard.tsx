@@ -195,9 +195,22 @@ type TnfView = {
   return?: string;
 };
 
+type ShadowView = {
+  state?: string;
+  pending?: string | null;
+  last?: { would?: string; reason?: string; applied?: boolean } | null;
+};
+
 type DeskState = {
   state: "PROGRAM" | "REPLACEMENT";
   auto: boolean;
+  broadcast?: string;
+  decision_mode?: string;
+  speaker_ready?: boolean;
+  audio_ready?: boolean;
+  last_correction?: { kind?: string; t?: number; ground_truth?: boolean } | null;
+  last_label?: { verdict?: string; t?: number; note?: string; scientific_authority?: boolean } | null;
+  shadow?: ShadowView;
   replacement: string;
   sounds: string[];
   timestamp: number;
@@ -292,6 +305,14 @@ function asDeskState(value: unknown): DeskState | null {
     resume_content: typeof row.resume_content === "string" ? row.resume_content : "",
     resume_within_min: Number.isFinite(Number(row.resume_within_min)) ? Number(row.resume_within_min) : 30,
     tnf: row.tnf && typeof row.tnf === "object" ? row.tnf : currentTnf(value),
+    shadow: row.shadow && typeof row.shadow === "object" ? row.shadow : undefined,
+    decision_mode: typeof row.decision_mode === "string" ? row.decision_mode : undefined,
+    speaker_ready: typeof row.speaker_ready === "boolean" ? row.speaker_ready : undefined,
+    audio_ready: typeof row.audio_ready === "boolean" ? row.audio_ready : undefined,
+    broadcast: typeof row.broadcast === "string" ? row.broadcast : undefined,
+    last_correction:
+      row.last_correction && typeof row.last_correction === "object" ? row.last_correction : undefined,
+    last_label: row.last_label && typeof row.last_label === "object" ? row.last_label : undefined,
   };
 }
 
@@ -488,6 +509,89 @@ function TnfLabPanel({
   );
 }
 
+function ShadowPrompt({
+  desk,
+  busy,
+  testMode,
+  onConfirm,
+  onReject,
+  onPreview,
+  onMissed,
+  onMuted,
+  onLeft,
+  onBack,
+}: {
+  desk: DeskState;
+  busy: boolean;
+  testMode: boolean;
+  onConfirm: () => void;
+  onReject: () => void;
+  onPreview: () => void;
+  onMissed: () => void;
+  onMuted: () => void;
+  onLeft: () => void;
+  onBack: () => void;
+}) {
+  if (!desk.recording) return null;
+  const pending = desk.shadow?.pending;
+  const hearing = desk.state;
+  const askCover = pending === "cover" && hearing === "PROGRAM" && !desk.auto;
+  const askReturn = pending === "return" && hearing === "REPLACEMENT" && !desk.auto;
+  const mode =
+    desk.speaker_ready === false
+      ? "Speaker model is out. Automatic cover stays off."
+      : desk.audio_ready === false
+        ? "Audio detector is still warming. The show stays on."
+        : desk.decision_mode === "two_family"
+          ? "Automatic cover waits for the speaker and the audio."
+          : "";
+  const saved = desk.last_correction?.kind
+    ? desk.last_correction.kind === "missed_ad"
+      ? "Missed ad saved. It is not a label."
+      : "Muted my show saved. It is not a label."
+    : "";
+  const mark = desk.last_label;
+  const marked = mark?.verdict === "commercial"
+    ? `Left the game at ${dur(Number(mark.t) || 0)}. Saved on this recording.`
+    : mark?.verdict === "program"
+      ? `Show is back at ${dur(Number(mark.t) || 0)}. Saved on this recording.`
+      : "";
+  return (
+    <div className="shadow-banner">
+      {mode ? <span>{mode}</span> : null}
+      {saved ? <span>{saved}</span> : null}
+      {marked ? <span>{marked}</span> : null}
+      <button type="button" disabled={busy} onClick={onLeft}>
+        Left the game
+      </button>
+      <button type="button" disabled={busy} onClick={onBack}>
+        Show is back
+      </button>
+      <button type="button" disabled={busy} onClick={onMissed}>
+        Missed ad
+      </button>
+      <button type="button" disabled={busy} onClick={onMuted}>
+        Muted my show
+      </button>
+      {askCover || askReturn ? (
+        <>
+          <span>{askCover ? "The rule would cover. The television is still on." : "The rule would bring the show back."}</span>
+          <button type="button" disabled={busy} onClick={onConfirm}>
+            {askCover ? "Cover" : "Bring the show back"}
+          </button>
+          <button type="button" disabled={busy} onClick={onReject}>
+            {askCover ? "Leave it on" : "Keep the cover"}
+          </button>
+        </>
+      ) : testMode ? (
+        <button type="button" disabled={busy} onClick={onPreview}>
+          Preview a would-cover
+        </button>
+      ) : null}
+    </div>
+  );
+}
+
 export function SportsDashboard() {
   const [testMode, setTestMode] = useState(false);
   const [desk, setDesk] = useState<DeskState>(EMPTY);
@@ -501,6 +605,7 @@ export function SportsDashboard() {
   const [inputName, setInputName] = useState("");
   const [outputName, setOutputName] = useState("");
   const [recordOnly, setRecordOnly] = useState(false);
+  const [replay, setReplay] = useState(false);
   const [busy, setBusy] = useState(false);
   const [playing, setPlaying] = useState<string | null>(null);
   const setupReady =
@@ -676,9 +781,30 @@ export function SportsDashboard() {
             if (action === "play") next.state = "PROGRAM";
             if (action === "mute") next.state = "REPLACEMENT";
             if (action === "auto") next.auto = !current.auto;
+            if (action === "shadow_confirm" && current.shadow?.pending === "return") {
+              next.state = "PROGRAM";
+              next.shadow = { ...current.shadow, pending: null };
+            } else if (action === "shadow_confirm") {
+              next.state = "REPLACEMENT";
+              next.shadow = { ...(current.shadow || {}), pending: null };
+            }
+            if (action === "shadow_reject") {
+              next.shadow = { ...(current.shadow || {}), pending: null };
+            }
+            if (action === "missed_ad" || action === "muted_show") {
+              next.last_correction = { kind: action, t: current.timestamp, ground_truth: false };
+            }
             if (action.startsWith("sound_")) next.replacement = action.slice(6);
             return next;
           });
+        }
+        if (path === "/label") {
+          const verdict = String((body as { verdict?: string }).verdict || "");
+          const note = String((body as { note?: string }).note || "");
+          setDesk((current) => ({
+            ...current,
+            last_label: { verdict, t: current.timestamp, note, scientific_authority: false },
+          }));
         }
         if (path === "/tnf") {
           const command = body as { op?: string; mode?: string; return_policy?: string; fail_open_s?: number };
@@ -744,6 +870,7 @@ export function SportsDashboard() {
       output: outputName,
       record_only: recordOnlyChoice,
       fresh,
+      replay,
     });
     if (payload?.error) setBootError(payload.error);
     else setBootError("");
@@ -872,6 +999,10 @@ export function SportsDashboard() {
                     placeholder="e.g. Buccaneers at Cowboys"
                     autoFocus
                   />
+                </label>
+                <label className="field tight">
+                  <input type="checkbox" checked={replay} onChange={(event) => setReplay(event.target.checked)} />
+                  <span>This is a replay, not a live broadcast</span>
                 </label>
               </div>
             </div>
@@ -1005,6 +1136,25 @@ export function SportsDashboard() {
       {recordingOnly ? (
         <p className="preview-banner">Record only · TV audio passes through · no ad cover</p>
       ) : null}
+      <ShadowPrompt
+        desk={desk}
+        busy={busy}
+        testMode={testMode}
+        onConfirm={() => void post("/override", { action: "shadow_confirm" })}
+        onReject={() => void post("/override", { action: "shadow_reject" })}
+        onPreview={() =>
+          setDesk((current) => ({
+            ...current,
+            state: "PROGRAM",
+            auto: false,
+            shadow: { state: "MUTED", pending: "cover", last: { would: "cover", reason: "preview", applied: false } },
+          }))
+        }
+        onMissed={() => void post("/override", { action: "missed_ad" })}
+        onMuted={() => void post("/override", { action: "muted_show" })}
+        onLeft={() => void post("/label", { verdict: "commercial", note: "left the game" })}
+        onBack={() => void post("/label", { verdict: "program", note: "show is back" })}
+      />
 
       <div className="app-scroll live-layout">
         <div className="live-col">

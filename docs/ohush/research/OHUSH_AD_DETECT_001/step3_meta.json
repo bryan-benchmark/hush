@@ -1,0 +1,400 @@
+{
+  "step": 3,
+  "question": "When stage A is hot, is this a commercial pod or false-hot program?",
+  "stage_a": {
+    "line": 0.1632588496059179,
+    "window": 10,
+    "unchanged": true
+  },
+  "stage_b": {
+    "features": [
+      "mean10",
+      "raw",
+      "hot_run_s",
+      "onset_rise",
+      "hot_stability",
+      "speech",
+      "music",
+      "crowd",
+      "jingle",
+      "speech_roll10",
+      "music_roll10",
+      "crowd_roll10",
+      "jingle_roll10"
+    ],
+    "fit": "NBC seconds with stage A already hot",
+    "placement": {
+      "commercial_p10": 0.359509,
+      "program_p90": 0.534262,
+      "gap": -0.174754,
+      "line": 0.4468855241846956,
+      "line_half": 0.5
+    },
+    "nbc_hot_accuracy": {
+      "n": 6742,
+      "accuracy_at_midpoint": 0.8592,
+      "accuracy_at_half": 0.848,
+      "commercial_recall_midpoint": 0.8606,
+      "program_reject_midpoint": 0.852,
+      "commercial_recall_half": 0.841,
+      "program_reject_half": 0.8844
+    },
+    "coef": {
+      "mean10": -0.646529,
+      "raw": 0.475911,
+      "hot_run_s": -0.007719,
+      "onset_rise": 1.06949,
+      "hot_stability": 1.681848,
+      "speech": -0.365622,
+      "music": -2.545838,
+      "crowd": 0.143417,
+      "jingle": 0.024029,
+      "speech_roll10": -2.17365,
+      "music_roll10": 0.000575,
+      "crowd_roll10": 0.038043,
+      "jingle_roll10": 0.021799
+    }
+  },
+  "fit_receipt": {
+    "sessions": [
+      "hush_20260909_213047",
+      "hush_20260913_210542"
+    ],
+    "rows": 21400,
+    "commercial_rows": 5863,
+    "program_rows": 15537,
+    "train_accuracy": 0.9273
+  },
+  "model": "MIT/ast-finetuned-audioset-10-10-0.4593",
+  "hard_boxes": [
+    {
+      "id": "ad_draftkings",
+      "session": "hush_20261008_205100",
+      "start_s": 140.78,
+      "end_s": 146.0,
+      "expect": "commercial",
+      "note": "DraftKings; owner: Clarissa Thompson reading the ad",
+      "heads": {
+        "midpoint": {
+          "line": 0.4468855241846956,
+          "median_stage_b_prob": 0.959435,
+          "hot_fraction": 1.0,
+          "verdict": "ok_commercial_hot"
+        },
+        "half": {
+          "line": 0.5,
+          "median_stage_b_prob": 0.959435,
+          "hot_fraction": 1.0,
+          "verdict": "ok_commercial_hot"
+        },
+        "stage_a_only": {
+          "line": null,
+          "median_stage_b_prob": null,
+          "hot_fraction": 1.0,
+          "verdict": "ok_commercial_hot"
+        }
+      }
+    },
+    {
+      "id": "ad_fanduel",
+      "session": "hush_20261008_205100",
+      "start_s": 572.06,
+      "end_s": 577.3,
+      "expect": "commercial",
+      "note": "FanDuel; owner: unknown male",
+      "heads": {
+        "midpoint": {
+          "line": 0.4468855241846956,
+          "median_stage_b_prob": 0.349286,
+          "hot_fraction": 0.2,
+          "verdict": "MISS_commercial_cold"
+        },
+        "half": {
+          "line": 0.5,
+          "median_stage_b_prob": 0.349286,
+          "hot_fraction": 0.2,
+          "verdict": "MISS_commercial_cold"
+        },
+        "stage_a_only": {
+          "line": null,
+          "median_stage_b_prob": null,
+          "hot_fraction": 1.0,
+          "verdict": "ok_commercial_hot"
+        }
+      }
+    },
+    {
+      "id": "ad_wendys",
+      "session": "hush_20261008_205100",
+      "start_s": 4450.36,
+      "end_s": 4455.9,
+      "expect": "commercial",
+      "note": "Wendy's; owner: unknown female",
+      "heads": {
+        "midpoint": {
+          "line": 0.4468855241846956,
+          "median_stage_b_prob": 0.298871,
+          "hot_fraction": 0.4,
+          "verdict": "MISS_commercial_cold"
+        },
+        "half": {
+          "line": 0.5,
+          "median_stage_b_prob": 0.298871,
+          "hot_fraction": 0.4,
+          "verdict": "MISS_commercial_cold"
+        },
+        "stage_a_only": {
+          "line": null,
+          "median_stage_b_prob": null,
+          "hot_fraction": 1.0,
+          "verdict": "ok_commercial_hot"
+        }
+      }
+    },
+    {
+      "id": "prog_fitzpatrick",
+      "session": "hush_20260924_220624",
+      "start_s": 6589.0,
+      "end_s": 6609.0,
+      "expect": "program",
+      "note": "Ryan Fitzpatrick pregame desk",
+      "heads": {
+        "midpoint": {
+          "line": 0.4468855241846956,
+          "median_stage_b_prob": 0.451599,
+          "hot_fraction": 0.5,
+          "verdict": "MISS_program_hot"
+        },
+        "half": {
+          "line": 0.5,
+          "median_stage_b_prob": 0.451599,
+          "hot_fraction": 0.45,
+          "verdict": "ok_program_cold"
+        },
+        "stage_a_only": {
+          "line": null,
+          "median_stage_b_prob": null,
+          "hot_fraction": 0.75,
+          "verdict": "MISS_program_hot"
+        }
+      }
+    },
+    {
+      "id": "prog_thompson_postgame",
+      "session": "hush_20260924_220624",
+      "start_s": 5571.0,
+      "end_s": 5581.0,
+      "expect": "program",
+      "note": "Clarissa Thompson postgame",
+      "heads": {
+        "midpoint": {
+          "line": 0.4468855241846956,
+          "median_stage_b_prob": 0.016564,
+          "hot_fraction": 0.0,
+          "verdict": "ok_program_cold"
+        },
+        "half": {
+          "line": 0.5,
+          "median_stage_b_prob": 0.016564,
+          "hot_fraction": 0.0,
+          "verdict": "ok_program_cold"
+        },
+        "stage_a_only": {
+          "line": null,
+          "median_stage_b_prob": null,
+          "hot_fraction": 0.4,
+          "verdict": "ok_program_cold"
+        }
+      }
+    },
+    {
+      "id": "prog_whitworth",
+      "session": "hush_20261008_205100",
+      "start_s": 9163.76,
+      "end_s": 9171.77,
+      "expect": "program",
+      "note": "Andrew Whitworth after dropped pass",
+      "heads": {
+        "midpoint": {
+          "line": 0.4468855241846956,
+          "median_stage_b_prob": 0.011471,
+          "hot_fraction": 0.0,
+          "verdict": "ok_program_cold"
+        },
+        "half": {
+          "line": 0.5,
+          "median_stage_b_prob": 0.011471,
+          "hot_fraction": 0.0,
+          "verdict": "ok_program_cold"
+        },
+        "stage_a_only": {
+          "line": null,
+          "median_stage_b_prob": null,
+          "hot_fraction": 0.375,
+          "verdict": "ok_program_cold"
+        }
+      }
+    },
+    {
+      "id": "prog_sherman",
+      "session": "hush_20261008_205100",
+      "start_s": 9153.0,
+      "end_s": 9163.51,
+      "expect": "program",
+      "note": "Richard Sherman; gold program, desk-like",
+      "heads": {
+        "midpoint": {
+          "line": 0.4468855241846956,
+          "median_stage_b_prob": 0.237932,
+          "hot_fraction": 0.3,
+          "verdict": "ok_program_cold"
+        },
+        "half": {
+          "line": 0.5,
+          "median_stage_b_prob": 0.237932,
+          "hot_fraction": 0.3,
+          "verdict": "ok_program_cold"
+        },
+        "stage_a_only": {
+          "line": null,
+          "median_stage_b_prob": null,
+          "hot_fraction": 0.8,
+          "verdict": "MISS_program_hot"
+        }
+      }
+    }
+  ],
+  "compare_to_stage_a": [
+    {
+      "board_id": "ad_draftkings",
+      "expect": "commercial",
+      "stage_a": "ok_commercial_hot",
+      "candidate": "midpoint",
+      "candidate_verdict": "ok_commercial_hot",
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "board_id": "ad_draftkings",
+      "expect": "commercial",
+      "stage_a": "ok_commercial_hot",
+      "candidate": "half",
+      "candidate_verdict": "ok_commercial_hot",
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "board_id": "ad_fanduel",
+      "expect": "commercial",
+      "stage_a": "ok_commercial_hot",
+      "candidate": "midpoint",
+      "candidate_verdict": "MISS_commercial_cold",
+      "improved": false,
+      "regressed": true
+    },
+    {
+      "board_id": "ad_fanduel",
+      "expect": "commercial",
+      "stage_a": "ok_commercial_hot",
+      "candidate": "half",
+      "candidate_verdict": "MISS_commercial_cold",
+      "improved": false,
+      "regressed": true
+    },
+    {
+      "board_id": "ad_wendys",
+      "expect": "commercial",
+      "stage_a": "ok_commercial_hot",
+      "candidate": "midpoint",
+      "candidate_verdict": "MISS_commercial_cold",
+      "improved": false,
+      "regressed": true
+    },
+    {
+      "board_id": "ad_wendys",
+      "expect": "commercial",
+      "stage_a": "ok_commercial_hot",
+      "candidate": "half",
+      "candidate_verdict": "MISS_commercial_cold",
+      "improved": false,
+      "regressed": true
+    },
+    {
+      "board_id": "prog_fitzpatrick",
+      "expect": "program",
+      "stage_a": "MISS_program_hot",
+      "candidate": "midpoint",
+      "candidate_verdict": "MISS_program_hot",
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "board_id": "prog_fitzpatrick",
+      "expect": "program",
+      "stage_a": "MISS_program_hot",
+      "candidate": "half",
+      "candidate_verdict": "ok_program_cold",
+      "improved": true,
+      "regressed": false
+    },
+    {
+      "board_id": "prog_thompson_postgame",
+      "expect": "program",
+      "stage_a": "ok_program_cold",
+      "candidate": "midpoint",
+      "candidate_verdict": "ok_program_cold",
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "board_id": "prog_thompson_postgame",
+      "expect": "program",
+      "stage_a": "ok_program_cold",
+      "candidate": "half",
+      "candidate_verdict": "ok_program_cold",
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "board_id": "prog_whitworth",
+      "expect": "program",
+      "stage_a": "ok_program_cold",
+      "candidate": "midpoint",
+      "candidate_verdict": "ok_program_cold",
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "board_id": "prog_whitworth",
+      "expect": "program",
+      "stage_a": "ok_program_cold",
+      "candidate": "half",
+      "candidate_verdict": "ok_program_cold",
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "board_id": "prog_sherman",
+      "expect": "program",
+      "stage_a": "MISS_program_hot",
+      "candidate": "midpoint",
+      "candidate_verdict": "ok_program_cold",
+      "improved": true,
+      "regressed": false
+    },
+    {
+      "board_id": "prog_sherman",
+      "expect": "program",
+      "stage_a": "MISS_program_hot",
+      "candidate": "half",
+      "candidate_verdict": "ok_program_cold",
+      "improved": true,
+      "regressed": false
+    }
+  ],
+  "improved": 3,
+  "regressed": 4,
+  "mute_unchanged": true,
+  "realtime": false,
+  "speaker_used": false
+}

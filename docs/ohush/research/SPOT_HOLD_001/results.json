@@ -1,0 +1,58 @@
+{
+  "id": "SPOT_HOLD_001",
+  "follows": "SPOT_FINGERPRINT_001",
+  "quiet_music": 0.3,
+  "count_unchanged": 200,
+  "new_cover_searched": false,
+  "installed": false,
+  "broken": false,
+  "fingerprint_commercial_s": 30.0,
+  "commercial_s": 76.0,
+  "program_s": 0.0,
+  "percentage": 0.431,
+  "holds": [
+    {
+      "session": "hush_20260914_212529",
+      "name": "Sept 14 ESPN",
+      "pod_t0": 2658.534,
+      "pod_t1": 2780.388,
+      "cover_t0": 2770.0,
+      "fingerprint_s": 5.0,
+      "unmute_t": 2780.0,
+      "music": 0.036,
+      "broken": false,
+      "commercial_s": 10.0,
+      "program_s": 0.0,
+      "ad_still_heard_s": 0.388
+    },
+    {
+      "session": "hush_20261008_205100",
+      "name": "Oct 8 Prime Video",
+      "pod_t0": 139.874,
+      "pod_t1": 376.9,
+      "cover_t0": 145.0,
+      "fingerprint_s": 5.0,
+      "unmute_t": 196.0,
+      "music": 0.079,
+      "broken": false,
+      "commercial_s": 51.0,
+      "program_s": 0.0,
+      "ad_still_heard_s": 180.9
+    },
+    {
+      "session": "hush_20261008_205100",
+      "name": "Oct 8 Prime Video",
+      "pod_t0": 6363.797,
+      "pod_t1": 6515.381,
+      "cover_t0": 6385.0,
+      "fingerprint_s": 5.0,
+      "unmute_t": 6400.0,
+      "music": 0.032,
+      "broken": false,
+      "commercial_s": 15.0,
+      "program_s": 0.0,
+      "ad_still_heard_s": 115.381
+    }
+  ],
+  "live_mute_changed": false
+}

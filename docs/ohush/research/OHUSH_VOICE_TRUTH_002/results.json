@@ -1,0 +1,357 @@
+{
+  "experiment": "OHUSH_VOICE_TRUTH_002",
+  "deployable": false,
+  "television_changed": false,
+  "guard_recommended": false,
+  "reason": "speaker labels are empty, so a wide gap is not a confirmed person",
+  "identity_verified": false,
+  "path_b": "not run; speech boundaries are empty",
+  "labeled_rows": 0,
+  "eval_rows_opened": 0,
+  "accounting": {
+    "by_name": [
+      {
+        "name": "Al Michaels",
+        "episodes": 11,
+        "seconds": 101.874
+      },
+      {
+        "name": "Kirk Herbstreit",
+        "episodes": 16,
+        "seconds": 88.0
+      },
+      {
+        "name": "Clarissa Thompson",
+        "episodes": 4,
+        "seconds": 65.388
+      }
+    ],
+    "episodes": 31,
+    "seconds": 255.262,
+    "by_session": {
+      "hush_20260924_220624": 91.388,
+      "hush_20261008_205100": 163.874
+    },
+    "wide_other": [
+      {
+        "name": "Andrew Whitworth",
+        "seconds": 7.0
+      }
+    ],
+    "thin": [
+      {
+        "name": "Andrew Whitworth",
+        "seconds": 16.0
+      }
+    ],
+    "identity_verified": false
+  },
+  "commercial_sample": {
+    "n": 15,
+    "pass_guard": 7,
+    "rows": [
+      {
+        "id": "fn0101",
+        "session": "hush_20260924_220624",
+        "focus_start_s": 300.5,
+        "focus_end_s": 301.5,
+        "cited_name": "Al Michaels",
+        "cited_cosine": 0.2502,
+        "second_name": "Kirk Herbstreit",
+        "second_cosine": -0.0275,
+        "gap": 0.2777,
+        "passes_guard": true,
+        "speaker_verified": false
+      },
+      {
+        "id": "fn0102",
+        "session": "hush_20260924_220624",
+        "focus_start_s": 1529.7,
+        "focus_end_s": 1531.7,
+        "cited_name": "Kirk Herbstreit",
+        "cited_cosine": 0.2546,
+        "second_name": "Al Michaels",
+        "second_cosine": 0.0608,
+        "gap": 0.1938,
+        "passes_guard": true,
+        "speaker_verified": false
+      },
+      {
+        "id": "fn0103",
+        "session": "hush_20260924_220624",
+        "focus_start_s": 1808.7,
+        "focus_end_s": 1810.4,
+        "cited_name": "Al Michaels",
+        "cited_cosine": 0.3254,
+        "second_name": "Kirk Herbstreit",
+        "second_cosine": -0.0785,
+        "gap": 0.4039,
+        "passes_guard": true,
+        "speaker_verified": false
+      },
+      {
+        "id": "fn0105",
+        "session": "hush_20260924_220624",
+        "focus_start_s": 5435.4,
+        "focus_end_s": 5437.4,
+        "cited_name": "Andrew Whitworth",
+        "cited_cosine": 0.2527,
+        "second_name": "Kirk Herbstreit",
+        "second_cosine": 0.06,
+        "gap": 0.1927,
+        "passes_guard": false,
+        "speaker_verified": false
+      },
+      {
+        "id": "fn0106",
+        "session": "hush_20260924_220624",
+        "focus_start_s": 6067.0,
+        "focus_end_s": 6069.0,
+        "cited_name": "Kirk Herbstreit",
+        "cited_cosine": 0.2525,
+        "second_name": "Al Michaels",
+        "second_cosine": 0.1782,
+        "gap": 0.0743,
+        "passes_guard": false,
+        "speaker_verified": false
+      },
+      {
+        "id": "fn0107",
+        "session": "hush_20260924_220624",
+        "focus_start_s": 6912.3,
+        "focus_end_s": 6914.3,
+        "cited_name": "Al Michaels",
+        "cited_cosine": 0.3308,
+        "second_name": "Andrew Whitworth",
+        "second_cosine": 0.1917,
+        "gap": 0.1391,
+        "passes_guard": false,
+        "speaker_verified": false
+      },
+      {
+        "id": "fn0109",
+        "session": "hush_20261008_205100",
+        "focus_start_s": 141.0,
+        "focus_end_s": 143.0,
+        "cited_name": "Clarissa Thompson",
+        "cited_cosine": 0.4439,
+        "second_name": "Andrew Whitworth",
+        "second_cosine": 0.1331,
+        "gap": 0.3108,
+        "passes_guard": true,
+        "speaker_verified": false
+      },
+      {
+        "id": "fn0110",
+        "session": "hush_20261008_205100",
+        "focus_start_s": 572.8,
+        "focus_end_s": 574.3,
+        "cited_name": "Kirk Herbstreit",
+        "cited_cosine": 0.3126,
+        "second_name": "Andrew Whitworth",
+        "second_cosine": 0.1108,
+        "gap": 0.2018,
+        "passes_guard": true,
+        "speaker_verified": false
+      },
+      {
+        "id": "fn0111",
+        "session": "hush_20261008_205100",
+        "focus_start_s": 1030.7,
+        "focus_end_s": 1032.7,
+        "cited_name": "Andrew Whitworth",
+        "cited_cosine": 0.2522,
+        "second_name": "Tony Gonzalez",
+        "second_cosine": 0.2049,
+        "gap": 0.0473,
+        "passes_guard": false,
+        "speaker_verified": false
+      },
+      {
+        "id": "fn0113",
+        "session": "hush_20261008_205100",
+        "focus_start_s": 2232.6,
+        "focus_end_s": 2234.6,
+        "cited_name": "Andrew Whitworth",
+        "cited_cosine": 0.3101,
+        "second_name": "Tony Gonzalez",
+        "second_cosine": 0.1491,
+        "gap": 0.161,
+        "passes_guard": false,
+        "speaker_verified": false
+      },
+      {
+        "id": "fn0114",
+        "session": "hush_20261008_205100",
+        "focus_start_s": 2419.4,
+        "focus_end_s": 2421.4,
+        "cited_name": "Al Michaels",
+        "cited_cosine": 0.3096,
+        "second_name": "Kirk Herbstreit",
+        "second_cosine": 0.1622,
+        "gap": 0.1474,
+        "passes_guard": false,
+        "speaker_verified": false
+      },
+      {
+        "id": "fn0115",
+        "session": "hush_20261008_205100",
+        "focus_start_s": 3097.5,
+        "focus_end_s": 3099.5,
+        "cited_name": "Andrew Whitworth",
+        "cited_cosine": 0.3163,
+        "second_name": "Tony Gonzalez",
+        "second_cosine": 0.1364,
+        "gap": 0.1799,
+        "passes_guard": false,
+        "speaker_verified": false
+      },
+      {
+        "id": "fn0117",
+        "session": "hush_20261008_205100",
+        "focus_start_s": 4036.8,
+        "focus_end_s": 4038.8,
+        "cited_name": "Kirk Herbstreit",
+        "cited_cosine": 0.3038,
+        "second_name": "Andrew Whitworth",
+        "second_cosine": -0.0088,
+        "gap": 0.3126,
+        "passes_guard": true,
+        "speaker_verified": false
+      },
+      {
+        "id": "fn0118",
+        "session": "hush_20261008_205100",
+        "focus_start_s": 4450.9,
+        "focus_end_s": 4452.9,
+        "cited_name": "Clarissa Thompson",
+        "cited_cosine": 0.2655,
+        "second_name": "Andrew Whitworth",
+        "second_cosine": 0.1072,
+        "gap": 0.1583,
+        "passes_guard": true,
+        "speaker_verified": false
+      },
+      {
+        "id": "fn0119",
+        "session": "hush_20261008_205100",
+        "focus_start_s": 4912.9,
+        "focus_end_s": 4914.9,
+        "cited_name": "Andrew Whitworth",
+        "cited_cosine": 0.3222,
+        "second_name": "Tony Gonzalez",
+        "second_cosine": 0.2323,
+        "gap": 0.0899,
+        "passes_guard": false,
+        "speaker_verified": false
+      }
+    ],
+    "note": "selected windows, not a rate for whole breaks, and not a verified speaker"
+  },
+  "fresh_s": 1.0,
+  "fresh_s_is": "the second after a finished 2-second window, not a pause hold",
+  "sessions": [
+    {
+      "session": "hush_20261008_205100",
+      "qualifying_windows": 3996,
+      "names_read": [
+        "Al Michaels",
+        "Kirk Herbstreit",
+        "Clarissa Thompson"
+      ],
+      "commercial_given_back": [
+        {
+          "start_s": 304.0,
+          "end_s": 307.0,
+          "seconds": 3.0
+        },
+        {
+          "start_s": 4456.0,
+          "end_s": 4457.0,
+          "seconds": 1.0
+        }
+      ],
+      "unprotected": {
+        "commercial_coverage": 0.9506,
+        "commercial_covered_s": 2511.527,
+        "commercial_heard_s": 130.614,
+        "commercial_s": 2642.141,
+        "genuine_program_muted_s": 684.268,
+        "promotional_read_muted_s": 137.205,
+        "program_covered_s": 821.473,
+        "false_mute_episodes": 77,
+        "missed_breaks": 0,
+        "late_start_s": 36.119,
+        "late_return_s": 224.54,
+        "commercial_given_back_s": 0.0,
+        "commercial_newly_muted_s": 0.0
+      },
+      "entry_guard": {
+        "commercial_coverage": 0.9491,
+        "commercial_covered_s": 2507.527,
+        "commercial_heard_s": 134.614,
+        "commercial_s": 2642.141,
+        "genuine_program_muted_s": 586.268,
+        "promotional_read_muted_s": 130.205,
+        "program_covered_s": 716.473,
+        "false_mute_episodes": 73,
+        "missed_breaks": 0,
+        "late_start_s": 36.119,
+        "late_return_s": 224.54,
+        "commercial_given_back_s": 4.0,
+        "commercial_newly_muted_s": 0.0
+      },
+      "programming_recovered_s": 98.0,
+      "commercial_given_back_s": 4.0,
+      "commercial_newly_muted_s": 0.0,
+      "coverage_drop": 0.0015,
+      "identity_verified": false
+    },
+    {
+      "session": "hush_20260924_220624",
+      "qualifying_windows": 2426,
+      "names_read": [
+        "Al Michaels",
+        "Kirk Herbstreit",
+        "Clarissa Thompson"
+      ],
+      "commercial_given_back": [],
+      "unprotected": {
+        "commercial_coverage": 0.9515,
+        "commercial_covered_s": 1583.687,
+        "commercial_heard_s": 80.668,
+        "commercial_s": 1664.355,
+        "genuine_program_muted_s": 661.473,
+        "promotional_read_muted_s": 47.84,
+        "program_covered_s": 709.313,
+        "false_mute_episodes": 45,
+        "missed_breaks": 0,
+        "late_start_s": 25.603,
+        "late_return_s": 236.192,
+        "commercial_given_back_s": 0.0,
+        "commercial_newly_muted_s": 0.0
+      },
+      "entry_guard": {
+        "commercial_coverage": 0.9515,
+        "commercial_covered_s": 1583.687,
+        "commercial_heard_s": 80.668,
+        "commercial_s": 1664.355,
+        "genuine_program_muted_s": 626.473,
+        "promotional_read_muted_s": 44.84,
+        "program_covered_s": 671.313,
+        "false_mute_episodes": 43,
+        "missed_breaks": 0,
+        "late_start_s": 25.603,
+        "late_return_s": 236.192,
+        "commercial_given_back_s": 0.0,
+        "commercial_newly_muted_s": 0.0
+      },
+      "programming_recovered_s": 35.0,
+      "commercial_given_back_s": 0.0,
+      "commercial_newly_muted_s": 0.0,
+      "coverage_drop": 0.0,
+      "identity_verified": false
+    }
+  ],
+  "blind_clips": 25
+}

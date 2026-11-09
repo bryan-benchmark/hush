@@ -1,0 +1,366 @@
+[
+  {
+    "t0": 20.0,
+    "session": "205100",
+    "text": "And you got the Cowboys jumping off.",
+    "infer_s": 0.613,
+    "raw": {
+      "quarter": null,
+      "clock_seconds": null,
+      "events": [
+        {
+          "kind": "TOUCHDOWN",
+          "status": "uncertain",
+          "score": null,
+          "team": null,
+          "detail": ""
+        }
+      ]
+    }
+  },
+  {
+    "t0": 60.0,
+    "session": "205100",
+    "text": "This drive to tie this game up.  Quarterback back at 0-7 who led that drive.",
+    "infer_s": 0.332,
+    "raw": {
+      "quarter": null,
+      "clock_seconds": null,
+      "events": [
+        {
+          "kind": "TOUCHDOWN",
+          "status": "live",
+          "score": null,
+          "team": null,
+          "detail": "Quarterback back at 0-7 who led that drive."
+        }
+      ]
+    }
+  },
+  {
+    "t0": 75.0,
+    "session": "205100",
+    "text": "A little floater that's taken there and to the end zone.  Yes, Urban.",
+    "infer_s": 0.261,
+    "raw": {
+      "quarter": null,
+      "clock_seconds": null,
+      "events": [
+        {
+          "kind": "TOUCHDOWN",
+          "status": "live",
+          "score": null,
+          "team": null,
+          "detail": ""
+        }
+      ]
+    }
+  },
+  {
+    "t0": 580.0,
+    "session": "205100",
+    "text": "I got one.",
+    "infer_s": 0.26,
+    "raw": {
+      "quarter": null,
+      "clock_seconds": null,
+      "events": [
+        {
+          "kind": "TOUCHDOWN",
+          "status": "live",
+          "score": null,
+          "team": null,
+          "detail": ""
+        }
+      ]
+    }
+  },
+  {
+    "t0": 690.0,
+    "session": "205100",
+    "text": "I'm throwing in the end so I'm standing,  I'm falling, falling, falling, falling.  I'm falling, falling, falling, falling, falling.",
+    "infer_s": 0.261,
+    "raw": {
+      "quarter": null,
+      "clock_seconds": null,
+      "events": [
+        {
+          "kind": "TOUCHDOWN",
+          "status": "live",
+          "score": null,
+          "team": null,
+          "detail": ""
+        }
+      ]
+    }
+  },
+  {
+    "t0": 745.0,
+    "session": "205100",
+    "text": "of course. I think he's handled it so well. The ups it down.",
+    "infer_s": 0.261,
+    "raw": {
+      "quarter": null,
+      "clock_seconds": null,
+      "events": [
+        {
+          "kind": "TOUCHDOWN",
+          "status": "live",
+          "score": null,
+          "team": null,
+          "detail": ""
+        }
+      ]
+    }
+  },
+  {
+    "t0": 950.0,
+    "session": "205100",
+    "text": "You have to run a line if you didn't hit the ground and complete.  Tykee Smith was there.",
+    "infer_s": 0.261,
+    "raw": {
+      "quarter": null,
+      "clock_seconds": null,
+      "events": [
+        {
+          "kind": "TOUCHDOWN",
+          "status": "live",
+          "score": null,
+          "team": null,
+          "detail": ""
+        }
+      ]
+    }
+  },
+  {
+    "t0": 985.0,
+    "session": "205100",
+    "text": "was beautiful bounced inside the five and then skidded out of bounds.",
+    "infer_s": 0.337,
+    "raw": {
+      "quarter": null,
+      "clock_seconds": null,
+      "events": [
+        {
+          "kind": "TOUCHDOWN",
+          "status": "uncertain",
+          "score": null,
+          "team": null,
+          "detail": "bounced inside the five and then skidded out of bounds"
+        }
+      ]
+    }
+  },
+  {
+    "t0": 1195.0,
+    "session": "205100",
+    "text": "go there's his hand loose hits Barton first and then gets a hold of a bucket",
+    "infer_s": 0.272,
+    "raw": {
+      "quarter": null,
+      "clock_seconds": null,
+      "events": [
+        {
+          "kind": "FUMBLE_RECOVERY",
+          "status": "live",
+          "score": null,
+          "team": null,
+          "detail": ""
+        }
+      ]
+    }
+  },
+  {
+    "t0": 1315.0,
+    "session": "205100",
+    "text": "Like you said, he's kind of that short yardage goal line guy.  He gets in behind at the middle.",
+    "infer_s": 0.266,
+    "raw": {
+      "quarter": null,
+      "clock_seconds": null,
+      "events": [
+        {
+          "kind": "TOUCHDOWN",
+          "status": "uncertain",
+          "score": null,
+          "team": null,
+          "detail": ""
+        }
+      ]
+    }
+  },
+  {
+    "t0": 1340.0,
+    "session": "205100",
+    "text": "Irving back in it running back.  Lucky.",
+    "infer_s": 0.321,
+    "raw": {
+      "quarter": null,
+      "clock_seconds": null,
+      "events": [
+        {
+          "kind": "TOUCHDOWN",
+          "status": "uncertain",
+          "score": null,
+          "team": null,
+          "detail": "Irving back in it running back. Lucky."
+        }
+      ]
+    }
+  },
+  {
+    "t0": 1495.0,
+    "session": "205100",
+    "text": "after again a one-game winner is that a nice night  called his name alone number 53 makes.",
+    "infer_s": 0.326,
+    "raw": {
+      "quarter": null,
+      "clock_seconds": null,
+      "events": [
+        {
+          "kind": "TOUCHDOWN",
+          "status": "live",
+          "score": null,
+          "team": "53",
+          "detail": "called his name alone number 53 makes."
+        }
+      ]
+    }
+  },
+  {
+    "t0": 1755.0,
+    "session": "205100",
+    "text": "Jerry's wife, very much behind.  And there she is.  The Jones.",
+    "infer_s": 0.108,
+    "raw": {
+      "quarter": null,
+      "clock_seconds": null,
+      "events": []
+    }
+  },
+  {
+    "t0": 1805.0,
+    "session": "205100",
+    "text": "the right guy Tyler Booker, his hands got up there as well, but it goes on 9.",
+    "infer_s": 0.26,
+    "raw": {
+      "quarter": null,
+      "clock_seconds": null,
+      "events": [
+        {
+          "kind": "TOUCHDOWN",
+          "status": "live",
+          "score": null,
+          "team": null,
+          "detail": ""
+        }
+      ]
+    }
+  },
+  {
+    "t0": 2005.0,
+    "session": "205100",
+    "text": "Orman sure does it all.",
+    "infer_s": 0.266,
+    "raw": {
+      "quarter": null,
+      "clock_seconds": null,
+      "events": [
+        {
+          "kind": "TOUCHDOWN",
+          "status": "uncertain",
+          "score": null,
+          "team": null,
+          "detail": ""
+        }
+      ]
+    }
+  },
+  {
+    "t0": 2055.0,
+    "session": "205100",
+    "text": "hard. This is the one thing about  Quinn and Williams. He still has",
+    "infer_s": 0.107,
+    "raw": {
+      "quarter": null,
+      "clock_seconds": null,
+      "events": []
+    }
+  },
+  {
+    "t0": 2320.0,
+    "session": "205100",
+    "text": "got now.  Boy.  I've got to.  I've got to.  I've got to.",
+    "infer_s": 0.26,
+    "raw": {
+      "quarter": null,
+      "clock_seconds": null,
+      "events": [
+        {
+          "kind": "TOUCHDOWN",
+          "status": "live",
+          "score": null,
+          "team": null,
+          "detail": ""
+        }
+      ]
+    }
+  },
+  {
+    "t0": 2350.0,
+    "session": "205100",
+    "text": "Quarterback Kylo Murray lost a 41-yard pass to receiver Jordan Addison who cut",
+    "infer_s": 0.304,
+    "raw": {
+      "quarter": null,
+      "clock_seconds": null,
+      "events": [
+        {
+          "kind": "FUMBLE_RECOVERY",
+          "status": "live",
+          "score": null,
+          "team": null,
+          "detail": "41 yards and a touchdown"
+        }
+      ]
+    }
+  },
+  {
+    "t0": 2505.0,
+    "session": "205100",
+    "text": "eyes back to the football.  And they blow that down because",
+    "infer_s": 0.266,
+    "raw": {
+      "quarter": null,
+      "clock_seconds": null,
+      "events": [
+        {
+          "kind": "TOUCHDOWN",
+          "status": "uncertain",
+          "score": null,
+          "team": null,
+          "detail": ""
+        }
+      ]
+    }
+  },
+  {
+    "t0": 2815.0,
+    "session": "205100",
+    "text": "65.  Yeah.  Career long.  Sure.  Sure.",
+    "infer_s": 0.266,
+    "raw": {
+      "quarter": null,
+      "clock_seconds": null,
+      "events": [
+        {
+          "kind": "TOUCHDOWN",
+          "status": "uncertain",
+          "score": null,
+          "team": null,
+          "detail": ""
+        }
+      ]
+    }
+  }
+]

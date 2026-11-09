@@ -1,0 +1,394 @@
+{
+  "id": "SUPERVISED_NAME_SCORES_001",
+  "follows": "SUPERVISED_CLEAR_CEILING_001",
+  "model": "MIT/ast-finetuned-audioset-10-10-0.4593",
+  "window_s": 5.0,
+  "fit": {
+    "sessions": [
+      "hush_20260909_213047",
+      "hush_20260913_210542"
+    ],
+    "rows": 21400,
+    "commercial_rows": 5863,
+    "program_rows": 15537,
+    "train_accuracy": 0.9273
+  },
+  "games_read": [
+    "hush_20260909_213047",
+    "hush_20260913_210542"
+  ],
+  "held_out_games_read": false,
+  "cutoff_moved": false,
+  "published_clear_cutoff_unchanged": 8.284611701965334,
+  "name_rule": "top class of the frozen AudioSet head on the cached AST vector",
+  "clear_show_rule": "covered second entirely program, and no labeled commercial in the five-second lookback",
+  "clear_show_seconds": 15337,
+  "commercial_seconds": 5863,
+  "names": {
+    "Music": {
+      "clear_show": {
+        "n": 1853,
+        "median": -2.425,
+        "p95": 2.608,
+        "p99": 4.937,
+        "max": 8.285,
+        "min": -12.994,
+        "top_name_probability_median": 0.2692
+      },
+      "commercial": {
+        "n": 2661,
+        "median": 4.594,
+        "p95": 10.84,
+        "p99": 13.742,
+        "max": 16.65,
+        "min": -4.375,
+        "top_name_probability_median": 0.2861
+      },
+      "overlap": {
+        "show_max": 8.285,
+        "commercial_seconds_above_show_max": 404,
+        "commercial_seconds_at_or_below_show_max": 2257,
+        "show_seconds_above_commercial_median": 23,
+        "show_seconds_above_commercial_p95": 0
+      },
+      "show_seconds_at_or_above_commercial_median": [
+        {
+          "session": "hush_20260913_210542",
+          "t": 11412.0,
+          "score": 8.285,
+          "top_name_probability": 0.2917
+        },
+        {
+          "session": "hush_20260909_213047",
+          "t": 1263.0,
+          "score": 7.92,
+          "top_name_probability": 0.3213
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 3738.0,
+          "score": 7.342,
+          "top_name_probability": 0.4399
+        },
+        {
+          "session": "hush_20260909_213047",
+          "t": 3594.0,
+          "score": 7.017,
+          "top_name_probability": 0.3033
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 3737.0,
+          "score": 6.861,
+          "top_name_probability": 0.3782
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 1124.0,
+          "score": 6.586,
+          "top_name_probability": 0.4926
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 1076.0,
+          "score": 6.559,
+          "top_name_probability": 0.2073
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 10151.0,
+          "score": 6.289,
+          "top_name_probability": 0.2948
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 10444.0,
+          "score": 5.771,
+          "top_name_probability": 0.2374
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 1020.0,
+          "score": 5.764,
+          "top_name_probability": 0.2598
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 1011.0,
+          "score": 5.51,
+          "top_name_probability": 0.3955
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 10214.0,
+          "score": 5.464,
+          "top_name_probability": 0.2359
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 11055.0,
+          "score": 5.441,
+          "top_name_probability": 0.1912
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 11343.0,
+          "score": 5.387,
+          "top_name_probability": 0.2942
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 10461.0,
+          "score": 5.364,
+          "top_name_probability": 0.2865
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 11344.0,
+          "score": 5.301,
+          "top_name_probability": 0.2918
+        },
+        {
+          "session": "hush_20260909_213047",
+          "t": 3595.0,
+          "score": 5.121,
+          "top_name_probability": 0.2846
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 10265.0,
+          "score": 5.054,
+          "top_name_probability": 0.2689
+        },
+        {
+          "session": "hush_20260909_213047",
+          "t": 1264.0,
+          "score": 4.984,
+          "top_name_probability": 0.2815
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 3765.0,
+          "score": 4.893,
+          "top_name_probability": 0.3207
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 3739.0,
+          "score": 4.879,
+          "top_name_probability": 0.3677
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 1060.0,
+          "score": 4.825,
+          "top_name_probability": 0.2465
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 1075.0,
+          "score": 4.776,
+          "top_name_probability": 0.2123
+        }
+      ]
+    },
+    "Speech": {
+      "clear_show": {
+        "n": 12515,
+        "median": -6.843,
+        "p95": -0.563,
+        "p99": 1.964,
+        "max": 6.958,
+        "min": -19.519,
+        "top_name_probability_median": 0.3551
+      },
+      "commercial": {
+        "n": 2604,
+        "median": 4.036,
+        "p95": 10.222,
+        "p99": 12.622,
+        "max": 16.256,
+        "min": -6.617,
+        "top_name_probability_median": 0.2924
+      },
+      "overlap": {
+        "show_max": 6.958,
+        "commercial_seconds_above_show_max": 488,
+        "commercial_seconds_at_or_below_show_max": 2116,
+        "show_seconds_above_commercial_median": 28,
+        "show_seconds_above_commercial_p95": 0
+      },
+      "show_seconds_at_or_above_commercial_median": [
+        {
+          "session": "hush_20260913_210542",
+          "t": 10445.0,
+          "score": 6.958,
+          "top_name_probability": 0.2111
+        },
+        {
+          "session": "hush_20260909_213047",
+          "t": 919.0,
+          "score": 6.629,
+          "top_name_probability": 0.3109
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 11050.0,
+          "score": 6.206,
+          "top_name_probability": 0.284
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 10263.0,
+          "score": 6.08,
+          "top_name_probability": 0.2625
+        },
+        {
+          "session": "hush_20260909_213047",
+          "t": 8315.0,
+          "score": 5.655,
+          "top_name_probability": 0.3538
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 11419.0,
+          "score": 5.09,
+          "top_name_probability": 0.2688
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 10264.0,
+          "score": 5.063,
+          "top_name_probability": 0.2597
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 11049.0,
+          "score": 4.916,
+          "top_name_probability": 0.2318
+        },
+        {
+          "session": "hush_20260909_213047",
+          "t": 8314.0,
+          "score": 4.866,
+          "top_name_probability": 0.3703
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 10262.0,
+          "score": 4.831,
+          "top_name_probability": 0.2371
+        },
+        {
+          "session": "hush_20260909_213047",
+          "t": 3821.0,
+          "score": 4.812,
+          "top_name_probability": 0.5654
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 1032.0,
+          "score": 4.773,
+          "top_name_probability": 0.2325
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 11133.0,
+          "score": 4.763,
+          "top_name_probability": 0.3121
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 10240.0,
+          "score": 4.662,
+          "top_name_probability": 0.2373
+        },
+        {
+          "session": "hush_20260909_213047",
+          "t": 8934.0,
+          "score": 4.595,
+          "top_name_probability": 0.6922
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 46.0,
+          "score": 4.518,
+          "top_name_probability": 0.3099
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 10454.0,
+          "score": 4.446,
+          "top_name_probability": 0.2854
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 11322.0,
+          "score": 4.322,
+          "top_name_probability": 0.4799
+        },
+        {
+          "session": "hush_20260909_213047",
+          "t": 8312.0,
+          "score": 4.312,
+          "top_name_probability": 0.361
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 11981.0,
+          "score": 4.308,
+          "top_name_probability": 0.4768
+        },
+        {
+          "session": "hush_20260909_213047",
+          "t": 909.0,
+          "score": 4.271,
+          "top_name_probability": 0.2584
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 11244.0,
+          "score": 4.268,
+          "top_name_probability": 0.3191
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 10266.0,
+          "score": 4.213,
+          "top_name_probability": 0.2592
+        },
+        {
+          "session": "hush_20260909_213047",
+          "t": 908.0,
+          "score": 4.174,
+          "top_name_probability": 0.2841
+        },
+        {
+          "session": "hush_20260909_213047",
+          "t": 8377.0,
+          "score": 4.12,
+          "top_name_probability": 0.2554
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 11088.0,
+          "score": 4.076,
+          "top_name_probability": 0.2854
+        },
+        {
+          "session": "hush_20260909_213047",
+          "t": 921.0,
+          "score": 4.073,
+          "top_name_probability": 0.2648
+        },
+        {
+          "session": "hush_20260913_210542",
+          "t": 12274.0,
+          "score": 4.066,
+          "top_name_probability": 0.2648
+        }
+      ]
+    }
+  },
+  "live_mute_changed": false
+}

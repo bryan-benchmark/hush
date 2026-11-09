@@ -17,14 +17,38 @@ function colorFor(what: string) {
   return COLORS[hash % COLORS.length];
 }
 
+function gameName(caption?: string) {
+  if (!caption) return "";
+  return caption.split(". ")[0] || caption;
+}
+
+type SpeechRec = {
+  continuous: boolean;
+  interimResults: boolean;
+  lang: string;
+  onresult: ((event: { results: ArrayLike<{ 0: { transcript: string }; isFinal: boolean }> }) => void) | null;
+  onerror: (() => void) | null;
+  onend: (() => void) | null;
+  start: () => void;
+  stop: () => void;
+};
+
 export function ListenReview({
   endpoint,
   kicker,
+  ask = "What is this?",
+  hint,
+  hideResearchMark = false,
+  dictation = false,
   otherHref,
   otherLabel,
 }: {
   endpoint: string;
   kicker: string;
+  ask?: string;
+  hint?: string;
+  hideResearchMark?: boolean;
+  dictation?: boolean;
   otherHref: string;
   otherLabel: string;
 }) {
@@ -38,7 +62,9 @@ export function ListenReview({
   const [markIn, setMarkIn] = useState<number | null>(null);
   const [editing, setEditing] = useState<number | null>(null);
   const [said, setSaid] = useState("");
+  const [listening, setListening] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const speechRef = useRef<SpeechRec | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const decodedRef = useRef<AudioBuffer | null>(null);
   const regionsRef = useRef(regions);
@@ -81,6 +107,7 @@ export function ListenReview({
 
   useEffect(() => {
     if (!item) return;
+    stopDictation();
     const last = savedRef.current.find((row) => row.id === item.id);
     setRegions(last?.regions ?? []);
     setSaid("");
@@ -92,6 +119,8 @@ export function ListenReview({
     dragRef.current = null;
     decodedRef.current = null;
   }, [item]);
+
+  useEffect(() => () => stopDictation(), []);
 
   useEffect(() => {
     if (markIn == null) return;
@@ -114,8 +143,8 @@ export function ListenReview({
     const canvas = canvasRef.current;
     const decoded = decodedRef.current;
     if (!canvas || !decoded) return;
-    draw(canvas, decoded, regions, draft, editing, item?.mark_s ?? null);
-  }, [regions, draft, editing, item]);
+    draw(canvas, decoded, regions, draft, editing, hideResearchMark ? null : item?.mark_s ?? null);
+  }, [regions, draft, editing, item, hideResearchMark]);
 
   function clipDuration() {
     const decoded = decodedRef.current?.duration;
@@ -507,6 +536,121 @@ export function ListenReview({
     setError("");
   }
 
+  function markCut() {
+    const at = playhead();
+    const open = markInRef.current;
+    if (open != null) {
+      if (at - open < 0.15) {
+        setError("Keep listening, then cut when the spot changes.");
+        return;
+      }
+      if (!saidRef.current.trim()) {
+        saidRef.current = "commercial";
+        setSaid("commercial");
+      }
+      if (!closeOpenMark()) return;
+      const result = commitNote(false);
+      if (result === "blocked") return;
+      editGen.current += 1;
+    } else if (draftRef.current && draftRef.current.end_s - draftRef.current.start_s >= 0.2) {
+      if (!saidRef.current.trim()) {
+        saidRef.current = "commercial";
+        setSaid("commercial");
+      }
+      const result = commitNote(false);
+      if (result === "blocked" || result === "empty") {
+        if (result === "empty") setError("Say what this stretch is, then cut.");
+        return;
+      }
+      editGen.current += 1;
+    } else if (leaveBox(false) === "blocked") {
+      return;
+    }
+    markInRef.current = at;
+    setMarkIn(at);
+    setEditing(null);
+    editingRef.current = null;
+    const nextDraft = { start_s: at, end_s: at };
+    draftRef.current = nextDraft;
+    setDraft(nextDraft);
+    setSaid("");
+    saidRef.current = "";
+    setError("");
+    const audio = audioRef.current;
+    if (audio?.paused) void audio.play();
+  }
+
+  function stopDictation() {
+    const rec = speechRef.current;
+    speechRef.current = null;
+    if (rec) {
+      rec.onresult = null;
+      rec.onerror = null;
+      rec.onend = null;
+      try {
+        rec.stop();
+      } catch {
+        /* already stopped */
+      }
+    }
+    setListening(false);
+  }
+
+  function toggleDictation() {
+    if (!dictation) return;
+    if (listening) {
+      stopDictation();
+      return;
+    }
+    const Speech =
+      typeof window !== "undefined"
+        ? (
+            window as unknown as {
+              SpeechRecognition?: new () => SpeechRec;
+              webkitSpeechRecognition?: new () => SpeechRec;
+            }
+          ).SpeechRecognition ||
+          (window as unknown as { webkitSpeechRecognition?: new () => SpeechRec }).webkitSpeechRecognition
+        : undefined;
+    if (!Speech) {
+      setError("This browser has no dictation. Type instead, or use Chrome.");
+      return;
+    }
+    const rec = new Speech();
+    rec.continuous = true;
+    rec.interimResults = true;
+    rec.lang = "en-US";
+    rec.onresult = (event) => {
+      let finalText = "";
+      let interim = "";
+      for (let i = 0; i < event.results.length; i += 1) {
+        const piece = event.results[i];
+        if (piece.isFinal) finalText += piece[0].transcript;
+        else interim += piece[0].transcript;
+      }
+      const next = `${finalText}${interim}`.replace(/\s+/g, " ").trim();
+      if (!next) return;
+      saidRef.current = next;
+      setSaid(next);
+    };
+    rec.onerror = () => stopDictation();
+    rec.onend = () => {
+      if (speechRef.current === rec) {
+        speechRef.current = null;
+        setListening(false);
+      }
+    };
+    speechRef.current = rec;
+    setListening(true);
+    setError("");
+    try {
+      rec.start();
+    } catch {
+      stopDictation();
+      setError("Dictation did not start. Check the mic permission.");
+    }
+  }
+
   function nudge(edge: "start" | "end", direction: -1 | 1, step: number) {
     const clip = itemRef.current;
     const current = draftRef.current;
@@ -600,8 +744,9 @@ export function ListenReview({
           {kicker}
           {items.length === 0 ? "" : ` · ${index + 1} of ${items.length}`}
         </p>
-        <h1 className="identity-ask">What is this?</h1>
-        {item?.caption ? <p className="identity-note">{item.caption}</p> : null}
+        <h1 className="identity-ask">{ask}</h1>
+        {item?.caption ? <p className="identity-note">{gameName(item.caption)}</p> : null}
+        {hint ? <p className="identity-note">{hint}</p> : null}
       </header>
       {item ? (
         <section className="identity-card" style={{ display: "flex", flexDirection: "column", gap: "0.85rem" }}>
@@ -614,7 +759,16 @@ export function ListenReview({
             onDecoded={(buffer) => {
               decodedRef.current = buffer;
               const canvas = canvasRef.current;
-              if (canvas) draw(canvas, buffer, regionsRef.current, draftRef.current, editingRef.current, item.mark_s ?? null);
+              if (canvas) {
+                draw(
+                  canvas,
+                  buffer,
+                  regionsRef.current,
+                  draftRef.current,
+                  editingRef.current,
+                  hideResearchMark ? null : item.mark_s ?? null,
+                );
+              }
             }}
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
@@ -623,6 +777,18 @@ export function ListenReview({
             onPointerLeave={onPointerLeave}
           />
           <div className="tool-row marks">
+            <button
+              type="button"
+              className="tool-card action"
+              data-skip-save="1"
+              onClick={(event) => {
+                if (event.detail > 1) return;
+                markCut();
+              }}
+            >
+              <span className="tool-value">Cut</span>
+              <span className="tool-kicker">Spot changes here</span>
+            </button>
             {markIn == null ? (
               <button
                 type="button"
@@ -661,12 +827,12 @@ export function ListenReview({
               }}
             >
               <span className="tool-value">Whole</span>
-              <span className="tool-kicker">{spliced ? "Closed · splice in" : "The entire clip"}</span>
+              <span className="tool-kicker">{spliced ? "Closed · cuts in" : "One thing only"}</span>
             </button>
             {boxLabel ? (
               <div className="tool-card read">
                 <span className="tool-value">{markIn != null ? markIn.toFixed(2) : `${draft?.start_s.toFixed(2)}–${draft?.end_s.toFixed(2)}`}</span>
-                <span className="tool-kicker">{markIn != null ? "Started" : "Marked"}</span>
+                <span className="tool-kicker">{markIn != null ? "Open" : "Marked"}</span>
               </div>
             ) : (
               <div className="tool-card read">
@@ -682,23 +848,42 @@ export function ListenReview({
             </div>
           ) : null}
           <div onBlur={onFieldsBlur}>
-            <label className="identity-said" style={{ display: "flex", flexDirection: "column" }}>
-              What it is
-              <input
-                value={said}
-                placeholder="A commercial, the booth, a return"
-                onChange={(event) => {
-                  saidRef.current = event.target.value;
-                  setSaid(event.target.value);
-                }}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter") {
-                    event.preventDefault();
-                    commitNote();
-                  }
-                }}
-              />
-            </label>
+            <div className="identity-said" style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
+              <span>What it is</span>
+              <div style={{ display: "flex", gap: "0.5rem", alignItems: "stretch" }}>
+                <input
+                  value={said}
+                  placeholder="Progressive, same spot, booth, return…"
+                  style={{ flex: 1 }}
+                  onChange={(event) => {
+                    saidRef.current = event.target.value;
+                    setSaid(event.target.value);
+                  }}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter") {
+                      event.preventDefault();
+                      commitNote();
+                    }
+                  }}
+                />
+                {dictation ? (
+                  <button
+                    type="button"
+                    data-skip-save="1"
+                    className={listening ? "on" : undefined}
+                    aria-pressed={listening}
+                    aria-label={listening ? "Stop dictation" : "Dictate"}
+                    onClick={(event) => {
+                      if (event.detail > 1) return;
+                      toggleDictation();
+                    }}
+                    style={{ minWidth: "5.5rem" }}
+                  >
+                    {listening ? "Listening…" : "Mic"}
+                  </button>
+                ) : null}
+              </div>
+            </div>
           </div>
           {regions.length ? (
             <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "0.35rem" }}>

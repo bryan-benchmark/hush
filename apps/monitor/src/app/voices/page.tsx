@@ -23,6 +23,14 @@ type Item = {
 type Person = { start_s: number; end_s: number; what: string; who: string };
 type Named = { id: string; who: string; what: string; people: Person[]; session?: string; play_start?: number | null };
 
+const WAVE_MIN = 160;
+const WAVE_MAX = 900;
+const WAVE_KEY = "ohush-voice-wave-height";
+
+function clampWave(height: number) {
+  return Math.round(Math.min(WAVE_MAX, Math.max(WAVE_MIN, height)));
+}
+
 function labelFor(item: Item, rows: Named[]) {
   const byClip = rows.find(
     (row) => row.session === item.session && row.play_start != null && Math.abs(row.play_start - item.play_start) < 0.05,
@@ -42,10 +50,13 @@ export default function VoicesPage() {
   const [markIn, setMarkIn] = useState<number | null>(null);
   const [editing, setEditing] = useState<number | null>(null);
   const [error, setError] = useState("");
+  const [waveHeight, setWaveHeight] = useState(440);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const decodedRef = useRef<AudioBuffer | null>(null);
   const dragRef = useRef<{ start: number } | null>(null);
+  const waveHeightRef = useRef(440);
+  const resizeRef = useRef<{ y: number; h: number } | null>(null);
   const namedRef = useRef(named);
   const peopleRef = useRef(people);
   const draftRef = useRef(draft);
@@ -64,6 +75,14 @@ export default function VoicesPage() {
   whoRef.current = who;
   editingRef.current = editing;
   itemRef.current = items[index];
+
+  useEffect(() => {
+    const saved = Number(localStorage.getItem(WAVE_KEY));
+    if (Number.isFinite(saved) && saved >= WAVE_MIN && saved <= WAVE_MAX) {
+      waveHeightRef.current = saved;
+      setWaveHeight(saved);
+    }
+  }, []);
 
   useEffect(() => {
     fetch("/api/voices")
@@ -119,7 +138,7 @@ export default function VoicesPage() {
     const decoded = decodedRef.current;
     if (!canvas || !decoded) return;
     drawVoice(canvas, decoded, people, draft);
-  }, [people, draft]);
+  }, [people, draft, waveHeight]);
 
   function timeAt(clientX: number, canvas: HTMLCanvasElement) {
     const rect = canvas.getBoundingClientRect();
@@ -330,6 +349,8 @@ export default function VoicesPage() {
             {item.network} · {item.program}
           </p>
           <WaveTransport
+            waveHeight={waveHeight}
+            volumeControl
             src={`/api/audio?session=${encodeURIComponent(item.session)}&mode=timeline&start=${item.play_start}&duration=${item.duration}`}
             audioRef={audioRef}
             canvasRef={canvasRef}
@@ -344,6 +365,54 @@ export default function VoicesPage() {
             onPointerMove={onPointerMove}
             onPointerUp={onPointerUp}
           />
+          <div
+            role="separator"
+            aria-orientation="horizontal"
+            aria-label="Drag to make the wave taller or shorter"
+            aria-valuemin={WAVE_MIN}
+            aria-valuemax={WAVE_MAX}
+            aria-valuenow={waveHeight}
+            tabIndex={0}
+            onPointerDown={(event) => {
+              resizeRef.current = { y: event.clientY, h: waveHeightRef.current };
+              event.currentTarget.setPointerCapture(event.pointerId);
+            }}
+            onPointerMove={(event) => {
+              const drag = resizeRef.current;
+              if (!drag) return;
+              const next = clampWave(drag.h + event.clientY - drag.y);
+              waveHeightRef.current = next;
+              setWaveHeight(next);
+            }}
+            onPointerUp={() => {
+              if (!resizeRef.current) return;
+              resizeRef.current = null;
+              localStorage.setItem(WAVE_KEY, String(waveHeightRef.current));
+            }}
+            onPointerCancel={() => {
+              resizeRef.current = null;
+            }}
+            onKeyDown={(event) => {
+              if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
+              event.preventDefault();
+              const next = clampWave(waveHeightRef.current + (event.key === "ArrowDown" ? 40 : -40));
+              waveHeightRef.current = next;
+              setWaveHeight(next);
+              localStorage.setItem(WAVE_KEY, String(next));
+            }}
+            style={{
+              height: 22,
+              cursor: "ns-resize",
+              touchAction: "none",
+              borderRadius: 8,
+              background: "#1a1024",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <span aria-hidden style={{ width: 56, height: 4, borderRadius: 4, background: "rgba(255,255,255,0.5)" }} />
+          </div>
           <div className="tool-row marks">
             {markIn == null ? (
               <button type="button" className="tool-card action" onClick={markStart}>
@@ -491,6 +560,12 @@ function drawVoice(
   const data = audio.getChannelData(0);
   const width = canvas.width;
   const height = canvas.height;
+  let peak = 0;
+  for (let i = 0; i < data.length; i += 8) {
+    const sample = Math.abs(data[i]);
+    if (sample > peak) peak = sample;
+  }
+  const gain = peak > 0.001 ? 0.92 / peak : 1;
   ctx.clearRect(0, 0, width, height);
   ctx.fillStyle = "#1a1024";
   ctx.fillRect(0, 0, width, height);
@@ -502,7 +577,7 @@ function drawVoice(
     let max = -1;
     const start = x * step;
     for (let i = 0; i < step; i += 1) {
-      const sample = data[start + i] ?? 0;
+      const sample = Math.max(-1, Math.min(1, (data[start + i] ?? 0) * gain));
       if (sample < min) min = sample;
       if (sample > max) max = sample;
     }

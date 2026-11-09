@@ -1,0 +1,121 @@
+{
+  "note": "Frozen head. Reviewed boundaries only. Not a new model.",
+  "score": {
+    "commercial_coverage": 0.8594141733308736,
+    "commercial_covered_s": 3789.497548000002,
+    "program_covered_s": 407.8664519999972,
+    "false_mute_episodes": 52,
+    "false_mutes_per_hour": 13.733434197318092,
+    "longest_false_mute_s": 60.25,
+    "program_hidden_per_hour": 107.7193669199146,
+    "desk_span_covered_s": 287.7999999999984,
+    "games": [
+      {
+        "session": "hush_20261008_205100",
+        "commercial_coverage": 0.8688736828162453,
+        "commercial_covered_s": 2353.2065370000014,
+        "program_covered_s": 101.15746299999802,
+        "false_mute_episodes": 25,
+        "false_mutes_per_hour": 11.639903846665332,
+        "longest_false_mute_s": 11.0,
+        "recovery": 0.9998981358867272,
+        "desk_span_covered_s": 29.250000000000057,
+        "longest_episodes": [
+          {
+            "start_s": 1749.8,
+            "end_s": 1760.8,
+            "program_s": 11.0
+          },
+          {
+            "start_s": 376.9,
+            "end_s": 386.2,
+            "program_s": 9.3
+          },
+          {
+            "start_s": 3702.0,
+            "end_s": 3709.2,
+            "program_s": 7.2
+          },
+          {
+            "start_s": 3974.0,
+            "end_s": 3980.9,
+            "program_s": 6.9
+          },
+          {
+            "start_s": 3178.4,
+            "end_s": 3185.0,
+            "program_s": 6.6
+          },
+          {
+            "start_s": 1737.1,
+            "end_s": 1743.0,
+            "program_s": 5.9
+          },
+          {
+            "start_s": 3437.1,
+            "end_s": 3443.0,
+            "program_s": 5.9
+          },
+          {
+            "start_s": 683.4,
+            "end_s": 687.5,
+            "program_s": 4.1
+          }
+        ]
+      },
+      {
+        "session": "hush_20260924_220624",
+        "commercial_coverage": 0.8443531764322336,
+        "commercial_covered_s": 1436.2910110000007,
+        "program_covered_s": 306.7089889999992,
+        "false_mute_episodes": 27,
+        "false_mutes_per_hour": 16.477522075105423,
+        "longest_false_mute_s": 60.25,
+        "recovery": 0.9998565691336776,
+        "desk_span_covered_s": 258.54999999999836,
+        "longest_episodes": [
+          {
+            "start_s": 7035.0,
+            "end_s": 7095.2,
+            "program_s": 60.2
+          },
+          {
+            "start_s": 7406.8,
+            "end_s": 7436.2,
+            "program_s": 29.5
+          },
+          {
+            "start_s": 6180.7,
+            "end_s": 6207.8,
+            "program_s": 27.0
+          },
+          {
+            "start_s": 7491.8,
+            "end_s": 7515.4,
+            "program_s": 23.6
+          },
+          {
+            "start_s": 6315.2,
+            "end_s": 6336.5,
+            "program_s": 21.2
+          },
+          {
+            "start_s": 5026.8,
+            "end_s": 5046.5,
+            "program_s": 19.8
+          },
+          {
+            "start_s": 6267.8,
+            "end_s": 6287.2,
+            "program_s": 19.5
+          },
+          {
+            "start_s": 6614.0,
+            "end_s": 6629.2,
+            "program_s": 15.2
+          }
+        ]
+      }
+    ]
+  }
+}

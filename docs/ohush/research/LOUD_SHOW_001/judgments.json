@@ -1,0 +1,622 @@
+{
+  "hush_20260913_210542:11412": {
+    "note": "traitors commercial\nnew commercial, sounds like a car commercial",
+    "regions": [
+      {
+        "start_s": 0,
+        "end_s": 21.54,
+        "what": "traitors commercial",
+        "who": "",
+        "tags": [
+          "commercial",
+          "splice"
+        ],
+        "kind": "splice"
+      },
+      {
+        "start_s": 21.67,
+        "end_s": 22.96,
+        "what": "new commercial, sounds like a car commercial",
+        "who": "",
+        "tags": [
+          "commercial",
+          "splice"
+        ],
+        "kind": "splice"
+      }
+    ]
+  },
+  "hush_20260909_213047:1263": {
+    "note": "intro music and highlights montage welcoming the crowd back",
+    "regions": [
+      {
+        "start_s": 1.78,
+        "end_s": 17,
+        "what": "intro music and highlights montage welcoming the crowd back",
+        "who": "",
+        "tags": [
+          "crowd",
+          "music",
+          "splice"
+        ],
+        "kind": "splice"
+      }
+    ]
+  },
+  "hush_20260913_210542:3738": {
+    "note": "welcome back to the show during halftime music and sounds and broadcaster highlights",
+    "regions": [
+      {
+        "start_s": 0,
+        "end_s": 18,
+        "what": "welcome back to the show during halftime music and sounds and broadcaster highlights",
+        "who": "",
+        "tags": [
+          "announcer",
+          "music",
+          "whole"
+        ],
+        "kind": "whole"
+      }
+    ]
+  },
+  "hush_20260909_213047:3594": {
+    "note": "mike tirico not sure if add or intro talking\nshort commercial for the voice\nmike tirico starting the game broadcast back after break",
+    "regions": [
+      {
+        "start_s": 0,
+        "end_s": 1.21,
+        "what": "mike tirico not sure if add or intro talking",
+        "who": "",
+        "tags": [
+          "uncertain",
+          "splice"
+        ],
+        "kind": "splice"
+      },
+      {
+        "start_s": 2.32,
+        "end_s": 6.34,
+        "what": "short commercial for the voice",
+        "who": "",
+        "tags": [
+          "commercial",
+          "splice"
+        ],
+        "kind": "splice"
+      },
+      {
+        "start_s": 7.2,
+        "end_s": 17,
+        "what": "mike tirico starting the game broadcast back after break",
+        "who": "",
+        "tags": [
+          "splice"
+        ],
+        "kind": "splice"
+      }
+    ]
+  },
+  "hush_20260913_210542:10445": {
+    "note": "whole thing is a commercial for a crime show",
+    "regions": [
+      {
+        "start_s": 0.03,
+        "end_s": 17,
+        "what": "whole thing is a commercial for a crime show",
+        "who": "",
+        "tags": [
+          "commercial",
+          "whole"
+        ],
+        "kind": "whole"
+      }
+    ]
+  },
+  "hush_20260909_213047:919": {
+    "note": "during game they played a pre-recorded interview of mike tomlin and jim harbaugh talking\ntransition from pre-recording interview back to live broadcast",
+    "regions": [
+      {
+        "start_s": 0,
+        "end_s": 6.65,
+        "what": "during game they played a pre-recorded interview of mike tomlin and jim harbaugh talking",
+        "who": "",
+        "tags": [
+          "splice"
+        ],
+        "kind": "splice"
+      },
+      {
+        "start_s": 7.02,
+        "end_s": 18,
+        "what": "transition from pre-recording interview back to live broadcast",
+        "who": "",
+        "tags": [
+          "splice"
+        ],
+        "kind": "splice"
+      }
+    ]
+  },
+  "hush_20260913_210542:1076": {
+    "note": "commercial for a rx",
+    "regions": [
+      {
+        "start_s": 0,
+        "end_s": 17,
+        "what": "commercial for a rx",
+        "who": "",
+        "tags": [
+          "commercial",
+          "whole"
+        ],
+        "kind": "whole"
+      }
+    ]
+  },
+  "hush_20260913_210542:10151": {
+    "note": "commercial\nlocal commercial",
+    "regions": [
+      {
+        "start_s": 0,
+        "end_s": 9.76,
+        "what": "commercial",
+        "who": "",
+        "tags": [
+          "commercial",
+          "splice"
+        ],
+        "kind": "splice"
+      },
+      {
+        "start_s": 12.63,
+        "end_s": 16,
+        "what": "local commercial",
+        "who": "",
+        "tags": [
+          "commercial",
+          "splice"
+        ],
+        "kind": "splice"
+      }
+    ]
+  },
+  "hush_20260913_210542:11050": {
+    "note": "rx glp1 commercial",
+    "regions": [
+      {
+        "start_s": 0,
+        "end_s": 22,
+        "what": "rx glp1 commercial",
+        "who": "",
+        "tags": [
+          "commercial",
+          "whole"
+        ],
+        "kind": "whole"
+      }
+    ]
+  },
+  "hush_20260913_210542:10263": {
+    "note": "insurance commercial\nlawyer commercial",
+    "regions": [
+      {
+        "start_s": 0,
+        "end_s": 2.43,
+        "what": "insurance commercial",
+        "who": "",
+        "tags": [
+          "commercial",
+          "splice"
+        ],
+        "kind": "splice"
+      },
+      {
+        "start_s": 2.57,
+        "end_s": 20,
+        "what": "lawyer commercial",
+        "who": "",
+        "tags": [
+          "commercial",
+          "splice"
+        ],
+        "kind": "splice"
+      }
+    ]
+  },
+  "hush_20260909_213047:8315": {
+    "note": "mike tomlin and john harbaugh interview - pre recorded to be played during the game or pregame or halftime during broadcast, not a commercial",
+    "regions": [
+      {
+        "start_s": 0,
+        "end_s": 19,
+        "what": "mike tomlin and john harbaugh interview - pre recorded to be played during the game or pregame or halftime during broadcast, not a commercial",
+        "who": "",
+        "tags": [
+          "commercial",
+          "whole"
+        ],
+        "kind": "whole"
+      }
+    ]
+  },
+  "hush_20260913_210542:1011": {
+    "note": "mike tirico broadcast\nmike tirico narrating an american express commercial",
+    "regions": [
+      {
+        "start_s": 0,
+        "end_s": 7.01,
+        "what": "mike tirico broadcast",
+        "who": "",
+        "tags": [
+          "splice"
+        ],
+        "kind": "splice"
+      },
+      {
+        "start_s": 7.49,
+        "end_s": 16,
+        "what": "mike tirico narrating an american express commercial",
+        "who": "",
+        "tags": [
+          "commercial",
+          "splice"
+        ],
+        "kind": "splice"
+      }
+    ]
+  },
+  "hush_20260913_210542:10214": {
+    "note": "local commercial\nshort family feud plug commerical\ncommercial",
+    "regions": [
+      {
+        "start_s": 0,
+        "end_s": 10.33,
+        "what": "local commercial",
+        "who": "",
+        "tags": [
+          "commercial",
+          "splice"
+        ],
+        "kind": "splice"
+      },
+      {
+        "start_s": 10.42,
+        "end_s": 14.9,
+        "what": "short family feud plug commerical",
+        "who": "",
+        "tags": [
+          "splice"
+        ],
+        "kind": "splice"
+      },
+      {
+        "start_s": 15.55,
+        "end_s": 16,
+        "what": "commercial",
+        "who": "",
+        "tags": [
+          "commercial",
+          "splice"
+        ],
+        "kind": "splice"
+      }
+    ]
+  },
+  "hush_20260913_210542:11343": {
+    "note": "commercial\nrx commercial",
+    "regions": [
+      {
+        "start_s": 0,
+        "end_s": 0.44,
+        "what": "commercial",
+        "who": "",
+        "tags": [
+          "commercial",
+          "splice"
+        ],
+        "kind": "splice"
+      },
+      {
+        "start_s": 0.54,
+        "end_s": 17,
+        "what": "rx commercial",
+        "who": "",
+        "tags": [
+          "commercial",
+          "splice"
+        ],
+        "kind": "splice"
+      }
+    ]
+  },
+  "hush_20260913_210542:10461": {
+    "note": "line of fire commercial\nthe view commercial",
+    "regions": [
+      {
+        "start_s": 0,
+        "end_s": 13.77,
+        "what": "line of fire commercial",
+        "who": "",
+        "tags": [
+          "commercial",
+          "splice"
+        ],
+        "kind": "splice"
+      },
+      {
+        "start_s": 13.77,
+        "end_s": 22.96,
+        "what": "the view commercial",
+        "who": "",
+        "tags": [
+          "commercial",
+          "splice"
+        ],
+        "kind": "splice"
+      }
+    ]
+  },
+  "hush_20260913_210542:3765": {
+    "note": "SNF intro song, short progressive spot thats in the broadcast (dont cut) then mike tirico starting the broadcast",
+    "regions": [
+      {
+        "start_s": 0,
+        "end_s": 16,
+        "what": "SNF intro song, short progressive spot thats in the broadcast (dont cut) then mike tirico starting the broadcast",
+        "who": "",
+        "tags": [
+          "commercial",
+          "music",
+          "whole"
+        ],
+        "kind": "whole"
+      }
+    ]
+  },
+  "hush_20260913_210542:1060": {
+    "note": "rx commercial - pretending to be gladiator scene",
+    "regions": [
+      {
+        "start_s": 0,
+        "end_s": 16,
+        "what": "rx commercial - pretending to be gladiator scene",
+        "who": "",
+        "tags": [
+          "commercial",
+          "whole"
+        ],
+        "kind": "whole"
+      }
+    ]
+  },
+  "hush_20260909_213047:3821": {
+    "note": "ref addressing crowd- in game broadcast\ncollingsworth and tirico broadcast commentary",
+    "regions": [
+      {
+        "start_s": 0,
+        "end_s": 3.43,
+        "what": "ref addressing crowd- in game broadcast",
+        "who": "",
+        "tags": [
+          "program",
+          "crowd",
+          "splice"
+        ],
+        "kind": "splice"
+      },
+      {
+        "start_s": 4.63,
+        "end_s": 16,
+        "what": "collingsworth and tirico broadcast commentary",
+        "who": "",
+        "tags": [
+          "splice"
+        ],
+        "kind": "splice"
+      }
+    ]
+  },
+  "hush_20260913_210542:1032": {
+    "note": "mike tirico american express commerical, not part of broadcast\nbackground noise, unclear if part of broadcast intro or start of another commerical",
+    "regions": [
+      {
+        "start_s": 0.03,
+        "end_s": 13.37,
+        "what": "mike tirico american express commerical, not part of broadcast",
+        "who": "",
+        "tags": [
+          "splice"
+        ],
+        "kind": "splice"
+      },
+      {
+        "start_s": 13.49,
+        "end_s": 15.97,
+        "what": "background noise, unclear if part of broadcast intro or start of another commerical",
+        "who": "",
+        "tags": [
+          "splice"
+        ],
+        "kind": "splice"
+      }
+    ]
+  },
+  "hush_20260913_210542:10240": {
+    "note": "insurance commercial",
+    "regions": [
+      {
+        "start_s": 0,
+        "end_s": 16,
+        "what": "insurance commercial",
+        "who": "",
+        "tags": [
+          "commercial",
+          "whole"
+        ],
+        "kind": "whole"
+      }
+    ]
+  },
+  "hush_20260909_213047:8934": {
+    "note": "news program, news anchor setting up story\nnews story starting with music",
+    "regions": [
+      {
+        "start_s": 0,
+        "end_s": 6.27,
+        "what": "news program, news anchor setting up story",
+        "who": "",
+        "tags": [
+          "program",
+          "splice"
+        ],
+        "kind": "splice"
+      },
+      {
+        "start_s": 6.72,
+        "end_s": 16,
+        "what": "news story starting with music",
+        "who": "",
+        "tags": [
+          "music",
+          "splice"
+        ],
+        "kind": "splice"
+      }
+    ]
+  },
+  "hush_20260913_210542:46": {
+    "note": "commercial HPE - tons of lag so its sparce",
+    "regions": [
+      {
+        "start_s": 0,
+        "end_s": 16,
+        "what": "commercial HPE - tons of lag so its sparce",
+        "who": "",
+        "tags": [
+          "commercial",
+          "whole"
+        ],
+        "kind": "whole"
+      }
+    ]
+  },
+  "hush_20260913_210542:11322": {
+    "note": "USAA insurance commerical\noxy clean commercial",
+    "regions": [
+      {
+        "start_s": 0,
+        "end_s": 6.39,
+        "what": "USAA insurance commerical",
+        "who": "",
+        "tags": [
+          "splice"
+        ],
+        "kind": "splice"
+      },
+      {
+        "start_s": 6.45,
+        "end_s": 15.97,
+        "what": "oxy clean commercial",
+        "who": "",
+        "tags": [
+          "commercial",
+          "splice"
+        ],
+        "kind": "splice"
+      }
+    ]
+  },
+  "hush_20260913_210542:11981": {
+    "note": "family feud show",
+    "regions": [
+      {
+        "start_s": 0,
+        "end_s": 16,
+        "what": "family feud show",
+        "who": "",
+        "tags": [
+          "whole"
+        ],
+        "kind": "whole"
+      }
+    ]
+  },
+  "hush_20260909_213047:909": {
+    "note": "mike tomlin and jim harbaugh interview - pre-recorded, played mid game during broadcast",
+    "regions": [
+      {
+        "start_s": 0,
+        "end_s": 17,
+        "what": "mike tomlin and jim harbaugh interview - pre-recorded, played mid game during broadcast",
+        "who": "",
+        "tags": [
+          "whole"
+        ],
+        "kind": "whole"
+      }
+    ]
+  },
+  "hush_20260913_210542:11244": {
+    "note": "family feud game",
+    "regions": [
+      {
+        "start_s": 0,
+        "end_s": 16,
+        "what": "family feud game",
+        "who": "",
+        "tags": [
+          "whole"
+        ],
+        "kind": "whole"
+      }
+    ]
+  },
+  "hush_20260909_213047:8377": {
+    "note": "mike tirico doing the final sign off of game broadcast, keep in not a commerical",
+    "regions": [
+      {
+        "start_s": 0,
+        "end_s": 16,
+        "what": "mike tirico doing the final sign off of game broadcast, keep in not a commerical",
+        "who": "",
+        "tags": [
+          "whole"
+        ],
+        "kind": "whole"
+      }
+    ]
+  },
+  "hush_20260913_210542:11088": {
+    "note": "insurance commercial",
+    "regions": [
+      {
+        "start_s": 0,
+        "end_s": 16,
+        "what": "insurance commercial",
+        "who": "",
+        "tags": [
+          "commercial",
+          "whole"
+        ],
+        "kind": "whole"
+      }
+    ]
+  },
+  "hush_20260913_210542:12274": {
+    "note": "NBC traitors show commercial",
+    "regions": [
+      {
+        "start_s": 0,
+        "end_s": 16,
+        "what": "NBC traitors show commercial",
+        "who": "",
+        "tags": [
+          "commercial",
+          "whole"
+        ],
+        "kind": "whole"
+      }
+    ]
+  }
+}

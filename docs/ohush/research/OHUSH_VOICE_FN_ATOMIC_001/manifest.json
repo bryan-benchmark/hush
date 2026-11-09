@@ -1,0 +1,70 @@
+{
+  "experiment": "OHUSH_VOICE_FN_ATOMIC_001",
+  "pipeline": {
+    "sample_rate_hz": 16000,
+    "source": "stereo recording, mean of the two channels, one resample from 48 kHz to 16 kHz",
+    "embed_window_s": 2.0,
+    "embed_hop_s": 1.0,
+    "min_speech_s": 1.0,
+    "vad_threshold": 0.5,
+    "vad_min_speech_ms": 250,
+    "vad_min_silence_ms": 100,
+    "vad_speech_pad_ms": 30,
+    "cosine_line": 0.25,
+    "fresh_s": 1.0,
+    "enrollment": "Thursday cast, SpeechBrain ECAPA, clips from an earlier game or from earlier in the same game"
+  },
+  "identity_verified": false,
+  "threshold_changed": false,
+  "television_changed": false,
+  "ideal_speech_cut": "not run; speech_start_s and speech_end_s are empty on every queue row",
+  "labeled_rows": 0,
+  "queue": 144,
+  "eval_rows": 16,
+  "dev_counts": {
+    "missing_reference": {
+      "n": 1,
+      "seconds": 9.0
+    },
+    "no_speech_detected": {
+      "n": 14,
+      "seconds": 86.996
+    },
+    "below_line": {
+      "n": 9,
+      "seconds": 94.959
+    },
+    "speech_without_embedding_window": {
+      "n": 1,
+      "seconds": 4.0
+    },
+    "delayed_recognition": {
+      "n": 31,
+      "seconds": 390.158
+    },
+    "decision_ignored_match": {
+      "n": 33,
+      "seconds": 278.262
+    },
+    "commercial_match": {
+      "n": 15,
+      "seconds": 28.2
+    },
+    "promotional_sample": {
+      "n": 7,
+      "seconds": 192.045
+    },
+    "enrollment_audit": {
+      "n": 17,
+      "seconds": 51.0
+    }
+  },
+  "fields": {
+    "speaker": "who is speaking, or other/unknown",
+    "background": "clean, music, crowd, or other mixed",
+    "overlap": "yes or no",
+    "certainty": "certain or uncertain",
+    "speech_start_s": "session seconds where that person's speech starts",
+    "speech_end_s": "session seconds where it ends"
+  }
+}

@@ -4,6 +4,23 @@ import { useEffect, useRef, useState, type PointerEvent, type RefObject } from "
 
 type Loop = { start_s: number; end_s: number };
 
+const VOLUME_KEY = "ohush-voice-volume";
+
+const playback = new WeakMap<HTMLAudioElement, { ctx: AudioContext; gain: GainNode }>();
+
+function playbackFor(audio: HTMLAudioElement) {
+  const existing = playback.get(audio);
+  if (existing) return existing;
+  const ctx = new AudioContext();
+  const source = ctx.createMediaElementSource(audio);
+  const gain = ctx.createGain();
+  source.connect(gain);
+  gain.connect(ctx.destination);
+  const created = { ctx, gain };
+  playback.set(audio, created);
+  return created;
+}
+
 function loopHint(loop: Loop | null, loopOn: boolean, duration: number | undefined) {
   if (!loop) return "No range";
   if (!loopOn) return "Off";
@@ -19,6 +36,8 @@ export function WaveTransport({
   loop,
   loopByDefault,
   plain,
+  waveHeight = 160,
+  volumeControl = false,
   onDecoded,
   onPointerDown,
   onPointerMove,
@@ -32,6 +51,8 @@ export function WaveTransport({
   loop: Loop | null;
   loopByDefault: boolean;
   plain?: boolean;
+  waveHeight?: number;
+  volumeControl?: boolean;
   onDecoded?: (buffer: AudioBuffer) => void;
   onPointerDown?: (event: PointerEvent<HTMLCanvasElement>) => void;
   onPointerMove?: (event: PointerEvent<HTMLCanvasElement>) => void;
@@ -50,12 +71,20 @@ export function WaveTransport({
   const [rate, setRate] = useState(1);
   const [loopOn, setLoopOn] = useState(loopByDefault);
   const [coarse, setCoarse] = useState(false);
+  const [volume, setVolume] = useState(3);
+  const volumeRef = useRef(3);
+  const gainRef = useRef<GainNode | null>(null);
   onDecodedRef.current = onDecoded;
   loopRef.current = loop;
   loopOnRef.current = loopOn;
 
   useEffect(() => {
     setCoarse(window.matchMedia("(pointer: coarse)").matches);
+    const saved = Number(localStorage.getItem(VOLUME_KEY));
+    if (Number.isFinite(saved) && saved >= 0.25 && saved <= 6) {
+      volumeRef.current = saved;
+      setVolume(saved);
+    }
   }, []);
 
   useEffect(() => {
@@ -95,6 +124,28 @@ export function WaveTransport({
     const audio = audioRef.current;
     if (audio) audio.playbackRate = rate;
   }, [rate, audioRef, src]);
+
+  useEffect(() => {
+    if (!volumeControl) return;
+    const audio = audioRef.current;
+    if (!audio) return;
+    const graph = playbackFor(audio);
+    graph.gain.gain.value = volumeRef.current;
+    gainRef.current = graph.gain;
+    const resume = () => void graph.ctx.resume();
+    audio.addEventListener("play", resume);
+    return () => {
+      audio.removeEventListener("play", resume);
+      gainRef.current = null;
+    };
+  }, [volumeControl, audioRef]);
+
+  useEffect(() => {
+    volumeRef.current = volume;
+    if (gainRef.current) gainRef.current.gain.value = volume;
+    const audio = audioRef.current;
+    if (audio) audio.dataset.volume = volume.toFixed(2);
+  }, [volume, audioRef]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -244,14 +295,14 @@ export function WaveTransport({
           <canvas
             ref={canvasRef}
             width={840}
-            height={160}
+            height={waveHeight}
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
             onPointerUp={onPointerUp}
             onPointerCancel={onPointerCancel}
             onPointerLeave={onPointerLeave}
             className="wave-canvas"
-            style={{ width: "100%", display: "block", touchAction: "none" }}
+            style={{ width: "100%", height: waveHeight, display: "block", touchAction: "none" }}
           />
           <div
             className="wave-seek"
@@ -306,6 +357,26 @@ export function WaveTransport({
           </span>
         </div>
       </div>
+      {volumeControl ? (
+        <label style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+          <span style={{ minWidth: "6.5rem" }}>Volume {volume.toFixed(1)}×</span>
+          <input
+            type="range"
+            min={0.25}
+            max={6}
+            step={0.05}
+            value={volume}
+            aria-label="Volume"
+            onChange={(event) => {
+              const next = Number(event.target.value);
+              volumeRef.current = next;
+              setVolume(next);
+              localStorage.setItem(VOLUME_KEY, String(next));
+            }}
+            style={{ flex: 1, accentColor: "#7dffb3" }}
+          />
+        </label>
+      ) : null}
       <audio ref={audioRef} preload="auto" playsInline controls={coarse} />
     </div>
   );

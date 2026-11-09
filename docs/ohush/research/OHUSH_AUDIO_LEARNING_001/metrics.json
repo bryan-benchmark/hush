@@ -1,0 +1,756 @@
+{
+  "frozen": {
+    "controller": {
+      "on": 0.9,
+      "off": 0.5,
+      "on_streak": 8,
+      "off_streak": 2,
+      "commercial_coverage": 0.9181107437991722,
+      "false_mutes_per_hour": 12.011888218905472,
+      "longest_false_mute_s": 134.75,
+      "program_hidden_per_hour": 170.41662544564875,
+      "false_mute_episodes": 17,
+      "recovery": 0.9998682476943347,
+      "assignment_pass": false,
+      "nfl75_pass": false
+    },
+    "calibration_auroc": 0.9785176357181774,
+    "prime_auroc": 0.9722438637189382,
+    "games": {
+      "hush_20261008_205100": {
+        "session": "hush_20261008_205100",
+        "evaluable": true,
+        "commercial_s": 2642.1413660000017,
+        "commercial_covered_s": 2297.4065370000017,
+        "commercial_coverage": 0.8695244571557873,
+        "program_s": 7798.222633999998,
+        "program_covered_s": 156.95746299999774,
+        "false_mute_episodes": 25,
+        "false_mutes_per_hour": 11.541091377361159,
+        "longest_false_mute_s": 55.0,
+        "program_hidden_per_hour": 72.45841691367028,
+        "recovery": 0.9998981358867272,
+        "assignment_pass": false,
+        "nfl75_pass": false,
+        "nfl75_reasons": [
+          "false mutes per hour 11.5411 are not below 1.0",
+          "longest false mute 55.000s is not below 10.0",
+          "hidden program 72.4584s/hour is not below 5.0"
+        ],
+        "lags": {
+          "breaks": 23,
+          "breaks_never_covered": 0,
+          "median_start_delay_s": 3.028929999999491,
+          "median_late_return_s": 0.02305900000010297
+        }
+      },
+      "hush_20260924_220624": {
+        "session": "hush_20260924_220624",
+        "evaluable": true,
+        "commercial_s": 1664.3547850000007,
+        "commercial_covered_s": 1405.0410110000007,
+        "commercial_coverage": 0.8441956148189883,
+        "program_s": 5935.645215,
+        "program_covered_s": 337.9589889999992,
+        "false_mute_episodes": 27,
+        "false_mutes_per_hour": 16.375641818073184,
+        "longest_false_mute_s": 60.25,
+        "program_hidden_per_hour": 204.9739019652638,
+        "recovery": 0.9998565691336776,
+        "assignment_pass": false,
+        "nfl75_pass": false,
+        "nfl75_reasons": [
+          "false mutes per hour 16.3756 are not below 1.0",
+          "longest false mute 60.250s is not below 10.0",
+          "hidden program 204.9739s/hour is not below 5.0"
+        ],
+        "lags": {
+          "breaks": 13,
+          "breaks_never_covered": 0,
+          "median_start_delay_s": 0.9096660000004704,
+          "median_late_return_s": 0.0
+        }
+      }
+    },
+    "aggregate": {
+      "session": "aggregate",
+      "evaluable": true,
+      "commercial_s": 4306.496151000002,
+      "commercial_covered_s": 3702.4475480000024,
+      "commercial_coverage": 0.8597354829030244,
+      "program_s": 13733.867848999998,
+      "program_covered_s": 494.9164519999969,
+      "false_mute_episodes": 52,
+      "false_mutes_per_hour": 13.63053744642159,
+      "longest_false_mute_s": 60.25,
+      "program_hidden_per_hour": 129.73033138146292,
+      "recovery": 0.9998565691336776,
+      "assignment_pass": false,
+      "nfl75_pass": false,
+      "nfl75_reasons": [
+        "false mutes per hour 13.6305 are not below 1.0",
+        "longest false mute 60.250s is not below 10.0",
+        "hidden program 129.7303s/hour is not below 5.0"
+      ],
+      "lags": {
+        "breaks": 0,
+        "breaks_never_covered": 0,
+        "median_start_delay_s": null,
+        "median_late_return_s": null
+      }
+    },
+    "aggregate_assignment_pass": false,
+    "clips": [
+      {
+        "kind": "false_mute",
+        "session": "hush_20261008_205100",
+        "start_s": 3388.0,
+        "end_s": 3443.0,
+        "size_s": 55.0,
+        "clip_start_s": 3386.0,
+        "clip_end_s": 3445.0,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\frozen\\hush_20261008_205100\\false_mute_3388.0_3443.0.wav",
+        "sha256": "76427e4452971e2921dc06a9929db8154071864f251bc17e232f8b475d994370"
+      },
+      {
+        "kind": "false_mute",
+        "session": "hush_20261008_205100",
+        "start_s": 1749.75,
+        "end_s": 1760.75,
+        "size_s": 11.0,
+        "clip_start_s": 1747.75,
+        "clip_end_s": 1762.75,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\frozen\\hush_20261008_205100\\false_mute_1749.8_1760.8.wav",
+        "sha256": "1f87690979b1289d936b25971416015b034c633966b7e5e79e5207fb4bfda836"
+      },
+      {
+        "kind": "false_mute",
+        "session": "hush_20261008_205100",
+        "start_s": 376.90009899999995,
+        "end_s": 386.25,
+        "size_s": 9.349901000000045,
+        "clip_start_s": 374.90009899999995,
+        "clip_end_s": 388.25,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\frozen\\hush_20261008_205100\\false_mute_376.9_386.2.wav",
+        "sha256": "bb234b241d7aac14e900644cf241318e5d6cad8c96de34272d425a2179f5e4c1"
+      },
+      {
+        "kind": "false_mute",
+        "session": "hush_20261008_205100",
+        "start_s": 3702.009755,
+        "end_s": 3709.25,
+        "size_s": 7.240244999999959,
+        "clip_start_s": 3700.009755,
+        "clip_end_s": 3711.25,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\frozen\\hush_20261008_205100\\false_mute_3702.0_3709.2.wav",
+        "sha256": "447ce916c696228a3eeff84f6ff2741aa9fba38509ade88cc4ed2f4f5e51ba69"
+      },
+      {
+        "kind": "missed_commercial",
+        "session": "hush_20261008_205100",
+        "start_s": 139.87447600000002,
+        "end_s": 151.87447600000002,
+        "size_s": 62.75,
+        "clip_start_s": 137.87447600000002,
+        "clip_end_s": 153.87447600000002,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\frozen\\hush_20261008_205100\\missed_commercial_139.9_151.9.wav",
+        "sha256": "ed12df49c613c3e113f429c4317a077b96ec5d04692e654565a89ca84c64a2d5"
+      },
+      {
+        "kind": "missed_commercial",
+        "session": "hush_20261008_205100",
+        "start_s": 2229.9867090000002,
+        "end_s": 2241.9867090000002,
+        "size_s": 48.417223999999806,
+        "clip_start_s": 2227.9867090000002,
+        "clip_end_s": 2243.9867090000002,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\frozen\\hush_20261008_205100\\missed_commercial_2230.0_2242.0.wav",
+        "sha256": "86eadc3167c42d5fc3ca57e8971b70e775db8c00f6c74cd9b9a94d9219379bc0"
+      },
+      {
+        "kind": "missed_commercial",
+        "session": "hush_20261008_205100",
+        "start_s": 8802.614656,
+        "end_s": 8814.614656,
+        "size_s": 32.29706100000112,
+        "clip_start_s": 8800.614656,
+        "clip_end_s": 8816.614656,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\frozen\\hush_20261008_205100\\missed_commercial_8802.6_8814.6.wav",
+        "sha256": "15e4d0d2c3be238e5793f243c574a9e7ef14a339dfefa8550ff1aa9ecc680c39"
+      },
+      {
+        "kind": "missed_commercial",
+        "session": "hush_20261008_205100",
+        "start_s": 3548.8394279999998,
+        "end_s": 3560.8394279999998,
+        "size_s": 21.75,
+        "clip_start_s": 3546.8394279999998,
+        "clip_end_s": 3562.8394279999998,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\frozen\\hush_20261008_205100\\missed_commercial_3548.8_3560.8.wav",
+        "sha256": "6c7fce30b94e08fa866f787f40228c8d19ae2f0ac8181c31b149a9d91b05b15e"
+      },
+      {
+        "kind": "false_mute",
+        "session": "hush_20260924_220624",
+        "start_s": 7035.0,
+        "end_s": 7095.25,
+        "size_s": 60.25,
+        "clip_start_s": 7033.0,
+        "clip_end_s": 7097.25,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\frozen\\hush_20260924_220624\\false_mute_7035.0_7095.2.wav",
+        "sha256": "aa6de2960dc2f874c21f0985b33552ec8fe8754976d22a0d06ed6a78554f5ba0"
+      },
+      {
+        "kind": "false_mute",
+        "session": "hush_20260924_220624",
+        "start_s": 2975.25,
+        "end_s": 3007.25,
+        "size_s": 32.0,
+        "clip_start_s": 2973.25,
+        "clip_end_s": 3009.25,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\frozen\\hush_20260924_220624\\false_mute_2975.2_3007.2.wav",
+        "sha256": "5127e3622a81a7c7f6818cee4be92e0fac96ea2f000a339916643903423ded14"
+      },
+      {
+        "kind": "false_mute",
+        "session": "hush_20260924_220624",
+        "start_s": 7406.75,
+        "end_s": 7436.25,
+        "size_s": 29.5,
+        "clip_start_s": 7404.75,
+        "clip_end_s": 7438.25,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\frozen\\hush_20260924_220624\\false_mute_7406.8_7436.2.wav",
+        "sha256": "16786f408e9f066ae1ea7119cb7b0f7951c76b6f2fca957a028a53960b2d0457"
+      },
+      {
+        "kind": "false_mute",
+        "session": "hush_20260924_220624",
+        "start_s": 6180.702513,
+        "end_s": 6207.75,
+        "size_s": 27.04748699999982,
+        "clip_start_s": 6178.702513,
+        "clip_end_s": 6209.75,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\frozen\\hush_20260924_220624\\false_mute_6180.7_6207.8.wav",
+        "sha256": "c9baafdceb06b4cc68230c27478065ce01832ccec8f9c5e13038b73ab9099a42"
+      },
+      {
+        "kind": "missed_commercial",
+        "session": "hush_20260924_220624",
+        "start_s": 4337.154382,
+        "end_s": 4349.154382,
+        "size_s": 55.087311999999656,
+        "clip_start_s": 4335.154382,
+        "clip_end_s": 4351.154382,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\frozen\\hush_20260924_220624\\missed_commercial_4337.2_4349.2.wav",
+        "sha256": "e479ce49ad293d39b9ae33a648ed97d3f0ed46195f5ec63b7ee865f2698632ff"
+      },
+      {
+        "kind": "missed_commercial",
+        "session": "hush_20260924_220624",
+        "start_s": 6028.8403339999995,
+        "end_s": 6040.8403339999995,
+        "size_s": 44.65966600000047,
+        "clip_start_s": 6026.8403339999995,
+        "clip_end_s": 6042.8403339999995,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\frozen\\hush_20260924_220624\\missed_commercial_6028.8_6040.8.wav",
+        "sha256": "22cfb8460aa8a0dcd7e4a04414899bbf8b7e0662190609d70eef07823d5b8be3"
+      },
+      {
+        "kind": "missed_commercial",
+        "session": "hush_20260924_220624",
+        "start_s": 5354.8257,
+        "end_s": 5366.8257,
+        "size_s": 33.424299999999675,
+        "clip_start_s": 5352.8257,
+        "clip_end_s": 5368.8257,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\frozen\\hush_20260924_220624\\missed_commercial_5354.8_5366.8.wav",
+        "sha256": "b6a2a3475e055893998ab61d629a0f07399c1702d946ccd08887d270f34b2455"
+      },
+      {
+        "kind": "missed_commercial",
+        "session": "hush_20260924_220624",
+        "start_s": 6854.003667,
+        "end_s": 6866.003667,
+        "size_s": 27.166299000000436,
+        "clip_start_s": 6852.003667,
+        "clip_end_s": 6868.003667,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\frozen\\hush_20260924_220624\\missed_commercial_6854.0_6866.0.wav",
+        "sha256": "50d435efb7bb59662e06b133001537f25940c08ce1857508364bc5f7bd8d05eb"
+      }
+    ],
+    "plots": [
+      "C:\\Users\\faceo\\Projects\\ohush\\docs\\ohush\\research\\OHUSH_AUDIO_LEARNING_001\\frozen_hush_20261008_205100.png",
+      "C:\\Users\\faceo\\Projects\\ohush\\docs\\ohush\\research\\OHUSH_AUDIO_LEARNING_001\\frozen_hush_20260924_220624.png"
+    ]
+  },
+  "finetuned": {
+    "controller": {
+      "on": 0.9,
+      "off": 0.35,
+      "on_streak": 8,
+      "off_streak": 2,
+      "commercial_coverage": 0.9528280837019701,
+      "false_mutes_per_hour": 12.011888218905472,
+      "longest_false_mute_s": 152.5,
+      "program_hidden_per_hour": 202.1197221406881,
+      "false_mute_episodes": 17,
+      "recovery": 0.9998753117206982,
+      "assignment_pass": false,
+      "nfl75_pass": false
+    },
+    "calibration_auroc": 0.982859446386701,
+    "prime_auroc": 0.9746620653282675,
+    "games": {
+      "hush_20261008_205100": {
+        "session": "hush_20261008_205100",
+        "evaluable": true,
+        "commercial_s": 2642.1413660000017,
+        "commercial_covered_s": 2479.065660000002,
+        "commercial_coverage": 0.9382789626253483,
+        "program_s": 7798.222633999998,
+        "program_covered_s": 230.7983399999976,
+        "false_mute_episodes": 31,
+        "false_mutes_per_hour": 14.310953307927837,
+        "longest_false_mute_s": 59.25,
+        "program_hidden_per_hour": 106.54658926732965,
+        "recovery": 0.9999077405664729,
+        "assignment_pass": false,
+        "nfl75_pass": false,
+        "nfl75_reasons": [
+          "false mutes per hour 14.3110 are not below 1.0",
+          "longest false mute 59.250s is not below 10.0",
+          "hidden program 106.5466s/hour is not below 5.0"
+        ],
+        "lags": {
+          "breaks": 23,
+          "breaks_never_covered": 0,
+          "median_start_delay_s": 2.232771999999386,
+          "median_late_return_s": 0.08067299999947863
+        }
+      },
+      "hush_20260924_220624": {
+        "session": "hush_20260924_220624",
+        "evaluable": true,
+        "commercial_s": 1664.3547850000007,
+        "commercial_covered_s": 1479.5933080000013,
+        "commercial_coverage": 0.8889891273993007,
+        "program_s": 5935.645215,
+        "program_covered_s": 451.6566919999986,
+        "false_mute_episodes": 31,
+        "false_mutes_per_hour": 18.8016628281581,
+        "longest_false_mute_s": 74.5,
+        "program_hidden_per_hour": 273.93215603436215,
+        "recovery": 0.9998705501618123,
+        "assignment_pass": false,
+        "nfl75_pass": false,
+        "nfl75_reasons": [
+          "false mutes per hour 18.8017 are not below 1.0",
+          "longest false mute 74.500s is not below 10.0",
+          "hidden program 273.9322s/hour is not below 5.0"
+        ],
+        "lags": {
+          "breaks": 13,
+          "breaks_never_covered": 0,
+          "median_start_delay_s": 1.5055619999999976,
+          "median_late_return_s": 0.03921300000001793
+        }
+      }
+    },
+    "aggregate": {
+      "session": "aggregate",
+      "evaluable": true,
+      "commercial_s": 4306.496151000002,
+      "commercial_covered_s": 3958.6589680000034,
+      "commercial_coverage": 0.9192296542702754,
+      "program_s": 13733.867848999998,
+      "program_covered_s": 682.4550319999962,
+      "false_mute_episodes": 62,
+      "false_mutes_per_hour": 16.25179464765651,
+      "longest_false_mute_s": 74.5,
+      "program_hidden_per_hour": 178.88901671489987,
+      "recovery": 0.9998705501618123,
+      "assignment_pass": false,
+      "nfl75_pass": false,
+      "nfl75_reasons": [
+        "false mutes per hour 16.2518 are not below 1.0",
+        "longest false mute 74.500s is not below 10.0",
+        "hidden program 178.8890s/hour is not below 5.0"
+      ],
+      "lags": {
+        "breaks": 0,
+        "breaks_never_covered": 0,
+        "median_start_delay_s": null,
+        "median_late_return_s": null
+      }
+    },
+    "aggregate_assignment_pass": false,
+    "clips": [
+      {
+        "kind": "false_mute",
+        "session": "hush_20261008_205100",
+        "start_s": 3385.0,
+        "end_s": 3444.25,
+        "size_s": 59.25,
+        "clip_start_s": 3383.0,
+        "clip_end_s": 3446.25,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\finetuned\\hush_20261008_205100\\false_mute_3385.0_3444.2.wav",
+        "sha256": "7cd4ee9b9ef7efd46ed28f803e0a0005aaf2b5f22a51ab802798ed9f83bf6a29"
+      },
+      {
+        "kind": "false_mute",
+        "session": "hush_20261008_205100",
+        "start_s": 3178.438438,
+        "end_s": 3195.75,
+        "size_s": 17.311561999999867,
+        "clip_start_s": 3176.438438,
+        "clip_end_s": 3197.75,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\finetuned\\hush_20261008_205100\\false_mute_3178.4_3195.8.wav",
+        "sha256": "c883e6dc008f609496b9ceb08627fc39018a6b890fc8a9bf9816fc40620fc5f6"
+      },
+      {
+        "kind": "false_mute",
+        "session": "hush_20261008_205100",
+        "start_s": 9769.805822,
+        "end_s": 9786.75,
+        "size_s": 16.944177999999738,
+        "clip_start_s": 9767.805822,
+        "clip_end_s": 9788.75,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\finetuned\\hush_20261008_205100\\false_mute_9769.8_9786.8.wav",
+        "sha256": "877c3609602e9da21e840c825e4db0a3727e28a7e1210e287dfa05d3f9156302"
+      },
+      {
+        "kind": "false_mute",
+        "session": "hush_20261008_205100",
+        "start_s": 3267.5,
+        "end_s": 3284.25,
+        "size_s": 16.75,
+        "clip_start_s": 3265.5,
+        "clip_end_s": 3286.25,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\finetuned\\hush_20261008_205100\\false_mute_3267.5_3284.2.wav",
+        "sha256": "0b2fdcdcaef5b932276039ecce22e525e70b4896ef8d5b9cfe84f86740222a6e"
+      },
+      {
+        "kind": "missed_commercial",
+        "session": "hush_20261008_205100",
+        "start_s": 8802.614656,
+        "end_s": 8814.614656,
+        "size_s": 19.797061000001122,
+        "clip_start_s": 8800.614656,
+        "clip_end_s": 8816.614656,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\finetuned\\hush_20261008_205100\\missed_commercial_8802.6_8814.6.wav",
+        "sha256": "15e4d0d2c3be238e5793f243c574a9e7ef14a339dfefa8550ff1aa9ecc680c39"
+      },
+      {
+        "kind": "missed_commercial",
+        "session": "hush_20261008_205100",
+        "start_s": 139.87447600000002,
+        "end_s": 151.87447600000002,
+        "size_s": 19.25,
+        "clip_start_s": 137.87447600000002,
+        "clip_end_s": 153.87447600000002,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\finetuned\\hush_20261008_205100\\missed_commercial_139.9_151.9.wav",
+        "sha256": "ed12df49c613c3e113f429c4317a077b96ec5d04692e654565a89ca84c64a2d5"
+      },
+      {
+        "kind": "missed_commercial",
+        "session": "hush_20261008_205100",
+        "start_s": 3548.8394279999998,
+        "end_s": 3560.8394279999998,
+        "size_s": 17.0,
+        "clip_start_s": 3546.8394279999998,
+        "clip_end_s": 3562.8394279999998,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\finetuned\\hush_20261008_205100\\missed_commercial_3548.8_3560.8.wav",
+        "sha256": "6c7fce30b94e08fa866f787f40228c8d19ae2f0ac8181c31b149a9d91b05b15e"
+      },
+      {
+        "kind": "missed_commercial",
+        "session": "hush_20261008_205100",
+        "start_s": 1972.984835,
+        "end_s": 1984.984835,
+        "size_s": 16.205306999999948,
+        "clip_start_s": 1970.984835,
+        "clip_end_s": 1986.984835,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\finetuned\\hush_20261008_205100\\missed_commercial_1973.0_1985.0.wav",
+        "sha256": "9c5d7c822d4acd0ef4bc580f944a94a1bb286f3af973f8b13fd35f7d676c42ee"
+      },
+      {
+        "kind": "false_mute",
+        "session": "hush_20260924_220624",
+        "start_s": 7021.75,
+        "end_s": 7096.25,
+        "size_s": 74.5,
+        "clip_start_s": 7019.75,
+        "clip_end_s": 7098.25,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\finetuned\\hush_20260924_220624\\false_mute_7021.8_7096.2.wav",
+        "sha256": "e432ebe7a3ce883cbb03a08782c58d2d1ef46734e9b682301b14d8245ddf6e95"
+      },
+      {
+        "kind": "false_mute",
+        "session": "hush_20260924_220624",
+        "start_s": 7133.25,
+        "end_s": 7171.75,
+        "size_s": 38.5,
+        "clip_start_s": 7131.25,
+        "clip_end_s": 7173.75,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\finetuned\\hush_20260924_220624\\false_mute_7133.2_7171.8.wav",
+        "sha256": "24af296da3c6793bdb9a6f5080059f8f85c331936223c44cfe5b13f40dd7e9af"
+      },
+      {
+        "kind": "false_mute",
+        "session": "hush_20260924_220624",
+        "start_s": 2976.5,
+        "end_s": 3006.75,
+        "size_s": 30.25,
+        "clip_start_s": 2974.5,
+        "clip_end_s": 3008.75,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\finetuned\\hush_20260924_220624\\false_mute_2976.5_3006.8.wav",
+        "sha256": "0ec07159d25267d5100798eabfe67ca368e60dc1e7403c92186073dd145d2c53"
+      },
+      {
+        "kind": "false_mute",
+        "session": "hush_20260924_220624",
+        "start_s": 6180.702513,
+        "end_s": 6207.75,
+        "size_s": 27.04748699999982,
+        "clip_start_s": 6178.702513,
+        "clip_end_s": 6209.75,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\finetuned\\hush_20260924_220624\\false_mute_6180.7_6207.8.wav",
+        "sha256": "c9baafdceb06b4cc68230c27478065ce01832ccec8f9c5e13038b73ab9099a42"
+      },
+      {
+        "kind": "missed_commercial",
+        "session": "hush_20260924_220624",
+        "start_s": 6028.8403339999995,
+        "end_s": 6040.8403339999995,
+        "size_s": 34.0,
+        "clip_start_s": 6026.8403339999995,
+        "clip_end_s": 6042.8403339999995,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\finetuned\\hush_20260924_220624\\missed_commercial_6028.8_6040.8.wav",
+        "sha256": "22cfb8460aa8a0dcd7e4a04414899bbf8b7e0662190609d70eef07823d5b8be3"
+      },
+      {
+        "kind": "missed_commercial",
+        "session": "hush_20260924_220624",
+        "start_s": 4337.154382,
+        "end_s": 4349.154382,
+        "size_s": 30.587311999999656,
+        "clip_start_s": 4335.154382,
+        "clip_end_s": 4351.154382,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\finetuned\\hush_20260924_220624\\missed_commercial_4337.2_4349.2.wav",
+        "sha256": "e479ce49ad293d39b9ae33a648ed97d3f0ed46195f5ec63b7ee865f2698632ff"
+      },
+      {
+        "kind": "missed_commercial",
+        "session": "hush_20260924_220624",
+        "start_s": 3496.442224,
+        "end_s": 3508.442224,
+        "size_s": 25.798004999999648,
+        "clip_start_s": 3494.442224,
+        "clip_end_s": 3510.442224,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\finetuned\\hush_20260924_220624\\missed_commercial_3496.4_3508.4.wav",
+        "sha256": "0dcf322d18638b7c5d554d4faec9875c1787f1d3c81640c699fb5750549f08be"
+      },
+      {
+        "kind": "missed_commercial",
+        "session": "hush_20260924_220624",
+        "start_s": 5354.8257,
+        "end_s": 5366.8257,
+        "size_s": 25.174299999999675,
+        "clip_start_s": 5352.8257,
+        "clip_end_s": 5368.8257,
+        "path": "C:\\OHushData\\gpu_lab\\audio_learn\\clips\\finetuned\\hush_20260924_220624\\missed_commercial_5354.8_5366.8.wav",
+        "sha256": "b6a2a3475e055893998ab61d629a0f07399c1702d946ccd08887d270f34b2455"
+      }
+    ],
+    "plots": [
+      "C:\\Users\\faceo\\Projects\\ohush\\docs\\ohush\\research\\OHUSH_AUDIO_LEARNING_001\\finetuned_hush_20261008_205100.png",
+      "C:\\Users\\faceo\\Projects\\ohush\\docs\\ohush\\research\\OHUSH_AUDIO_LEARNING_001\\finetuned_hush_20260924_220624.png"
+    ]
+  },
+  "baseline": {
+    "name": "locked_nbc_logistic_persist_10s",
+    "games": {
+      "hush_20261008_205100": {
+        "session": "hush_20261008_205100",
+        "evaluable": true,
+        "commercial_s": 2642.1413660000017,
+        "commercial_covered_s": 0.0,
+        "commercial_coverage": 0.0,
+        "program_s": 7798.222633999998,
+        "program_covered_s": 0,
+        "false_mute_episodes": 0,
+        "false_mutes_per_hour": 0.0,
+        "longest_false_mute_s": 0.0,
+        "program_hidden_per_hour": 0.0,
+        "recovery": 1.0,
+        "assignment_pass": false,
+        "nfl75_pass": false,
+        "nfl75_reasons": [
+          "commercial coverage 0.0000 is below 0.75"
+        ],
+        "lags": {
+          "breaks": 23,
+          "breaks_never_covered": 23,
+          "median_start_delay_s": null,
+          "median_late_return_s": null
+        }
+      },
+      "hush_20260924_220624": {
+        "session": "hush_20260924_220624",
+        "evaluable": true,
+        "commercial_s": 1664.3547850000007,
+        "commercial_covered_s": 0.0,
+        "commercial_coverage": 0.0,
+        "program_s": 5935.645215,
+        "program_covered_s": 0,
+        "false_mute_episodes": 0,
+        "false_mutes_per_hour": 0.0,
+        "longest_false_mute_s": 0.0,
+        "program_hidden_per_hour": 0.0,
+        "recovery": 1.0,
+        "assignment_pass": false,
+        "nfl75_pass": false,
+        "nfl75_reasons": [
+          "commercial coverage 0.0000 is below 0.75"
+        ],
+        "lags": {
+          "breaks": 13,
+          "breaks_never_covered": 13,
+          "median_start_delay_s": null,
+          "median_late_return_s": null
+        }
+      }
+    },
+    "aggregate": {
+      "session": "aggregate",
+      "evaluable": true,
+      "commercial_s": 4306.496151000002,
+      "commercial_covered_s": 0.0,
+      "commercial_coverage": 0.0,
+      "program_s": 13733.867848999998,
+      "program_covered_s": 0,
+      "false_mute_episodes": 0,
+      "false_mutes_per_hour": 0.0,
+      "longest_false_mute_s": 0.0,
+      "program_hidden_per_hour": 0.0,
+      "recovery": 1.0,
+      "assignment_pass": false,
+      "nfl75_pass": false,
+      "nfl75_reasons": [
+        "commercial coverage 0.0000 is below 0.75"
+      ],
+      "lags": {
+        "breaks": 0,
+        "breaks_never_covered": 0,
+        "median_start_delay_s": null,
+        "median_late_return_s": null
+      }
+    }
+  },
+  "always_play": {
+    "games": {
+      "hush_20261008_205100": {
+        "session": "hush_20261008_205100",
+        "evaluable": true,
+        "commercial_s": 2642.1413660000017,
+        "commercial_covered_s": 0.0,
+        "commercial_coverage": 0.0,
+        "program_s": 7798.222633999998,
+        "program_covered_s": 0,
+        "false_mute_episodes": 0,
+        "false_mutes_per_hour": 0.0,
+        "longest_false_mute_s": 0.0,
+        "program_hidden_per_hour": 0.0,
+        "recovery": 1.0,
+        "assignment_pass": false,
+        "nfl75_pass": false,
+        "nfl75_reasons": [
+          "commercial coverage 0.0000 is below 0.75"
+        ],
+        "lags": {
+          "breaks": 23,
+          "breaks_never_covered": 23,
+          "median_start_delay_s": null,
+          "median_late_return_s": null
+        }
+      },
+      "hush_20260924_220624": {
+        "session": "hush_20260924_220624",
+        "evaluable": true,
+        "commercial_s": 1664.3547850000007,
+        "commercial_covered_s": 0.0,
+        "commercial_coverage": 0.0,
+        "program_s": 5935.645215,
+        "program_covered_s": 0,
+        "false_mute_episodes": 0,
+        "false_mutes_per_hour": 0.0,
+        "longest_false_mute_s": 0.0,
+        "program_hidden_per_hour": 0.0,
+        "recovery": 1.0,
+        "assignment_pass": false,
+        "nfl75_pass": false,
+        "nfl75_reasons": [
+          "commercial coverage 0.0000 is below 0.75"
+        ],
+        "lags": {
+          "breaks": 13,
+          "breaks_never_covered": 13,
+          "median_start_delay_s": null,
+          "median_late_return_s": null
+        }
+      }
+    },
+    "aggregate": {
+      "session": "aggregate",
+      "evaluable": true,
+      "commercial_s": 4306.496151000002,
+      "commercial_covered_s": 0.0,
+      "commercial_coverage": 0.0,
+      "program_s": 13733.867848999998,
+      "program_covered_s": 0,
+      "false_mute_episodes": 0,
+      "false_mutes_per_hour": 0.0,
+      "longest_false_mute_s": 0.0,
+      "program_hidden_per_hour": 0.0,
+      "recovery": 1.0,
+      "assignment_pass": false,
+      "nfl75_pass": false,
+      "nfl75_reasons": [
+        "commercial coverage 0.0000 is below 0.75"
+      ],
+      "lags": {
+        "breaks": 0,
+        "breaks_never_covered": 0,
+        "median_start_delay_s": null,
+        "median_late_return_s": null
+      }
+    }
+  },
+  "bootstrap": {
+    "frozen_vs_baseline": {
+      "breaks": 36,
+      "coverage": 0.8597354829030245,
+      "coverage_ci95": [
+        0.8240140398050926,
+        0.8949059721021259
+      ],
+      "coverage_minus_baseline_ci95": [
+        0.8240140398050926,
+        0.8949059721021259
+      ]
+    },
+    "finetuned_vs_baseline": {
+      "breaks": 36,
+      "coverage": 0.9192296542702754,
+      "coverage_ci95": [
+        0.8959458398048097,
+        0.9421423167634516
+      ],
+      "coverage_minus_baseline_ci95": [
+        0.8959458398048097,
+        0.9421423167634516
+      ]
+    }
+  },
+  "recommendation": "The probabilities separate Prime ads from Prime programming. Frozen coverage is 86.0% against the locked logistic at 0%. Fine-tuning reaches 91.9% and increases false mutes. Neither operating point passes the experimental gate, because program stretches score above 0.90. The next fit can add hard program examples from the training games. The two Prime games stay untouched."
+}

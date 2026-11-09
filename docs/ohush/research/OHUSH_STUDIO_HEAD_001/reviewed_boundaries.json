@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "status": "reviewed boundaries for later scoring. This file does not replace experiments/annotations/truth_events.jsonl and it does not change the published frozen-model score.",
+  "rule": "Only a standalone spot with a heard return to the show is marked commercial. A host talking through a sponsor mention stays program.",
+  "commercials": [
+    {
+      "session": "hush_20261008_205100",
+      "start_s": 3384.3,
+      "end_s": 3437.1,
+      "kind": "standalone_spot",
+      "note": "Amex Platinum and a food spot. The desk is still talking at 3375 ('we will take a quick break'). 'Welcome back' and Dirk Nowitzki begin at 3437.1. Of the 55.0s false mute from 3388.0 to 3443.0, 49.1s is this spot and 5.9s is the show returning."
+    },
+    {
+      "session": "hush_20260924_220624",
+      "start_s": 2969.8,
+      "end_s": 3006.5,
+      "kind": "standalone_spot",
+      "note": "Chili's sandwich spot. Hosts are still in the show at 2966. The return line is at 3006.5 and the game talk is back by 3008.5. Of the 32.0s false mute from 2975.2 to 3007.2, 31.3s is this spot and 0.7s is the return."
+    },
+    {
+      "session": "hush_20261008_205100",
+      "start_s": 4979.8,
+      "end_s": 4993.2,
+      "kind": "standalone_spot",
+      "note": "Carrie promo. The labeled break already ends at 4979.7, in the middle of a pod that also holds Tide, USAA, Quest, and NFL+. The museum feature, which is the show, starts at 4993.2. The 6.8s false mute from 4979.7 to 4986.5 is entirely this spot."
+    }
+  ],
+  "kept_as_program": [
+    {
+      "session": "hush_20261008_205100",
+      "start_s": 3461.8,
+      "end_s": 3479.7,
+      "kind": "in_show_sponsorship",
+      "note": "Hosts run 'our personal game plan presented by State Farm' and keep talking about the Cowboys. First version preserves this."
+    }
+  ]
+}

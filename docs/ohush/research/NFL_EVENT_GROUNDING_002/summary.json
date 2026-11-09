@@ -1,0 +1,65 @@
+{
+  "applied": false,
+  "model": "qwen2.5:3b",
+  "gold_read": false,
+  "gpu_samples": [
+    "2288 MiB, 0 %",
+    "2288 MiB, 82 %",
+    "2288 MiB, 86 %",
+    "2288 MiB, 74 %",
+    "2288 MiB, 73 %",
+    "2288 MiB, 73 %",
+    "2288 MiB, 84 %",
+    "2288 MiB, 57 %",
+    "2288 MiB, 78 %",
+    "2288 MiB, 75 %",
+    "2288 MiB, 82 %",
+    "2288 MiB, 72 %",
+    "2288 MiB, 72 %",
+    "2288 MiB, 95 %",
+    "2288 MiB, 84 %"
+  ],
+  "ollama_ps": "NAME          ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL            \nqwen2.5:3b    357c53fb659c    2.2 GB    100% GPU     4096       llamacpp    2 hours from now",
+  "sessions": [
+    {
+      "session": "hush_20261008_205100",
+      "chunks": 1921,
+      "live": 11,
+      "uncertain": 0,
+      "duplicates_suppressed": 1,
+      "model_errors": 0,
+      "live_by_kind": {
+        "TOUCHDOWN": 10,
+        "TIMEOUT": 1
+      },
+      "uncertain_by_kind": {},
+      "infer_s": {
+        "n": 1871,
+        "median": 0.121,
+        "p90": 0.123,
+        "max": 0.46
+      },
+      "slower_than_chunk": 0
+    },
+    {
+      "session": "hush_20260924_220624",
+      "chunks": 1071,
+      "live": 6,
+      "uncertain": 0,
+      "duplicates_suppressed": 0,
+      "model_errors": 0,
+      "live_by_kind": {
+        "TOUCHDOWN": 5,
+        "TWO_POINT_CONVERSION": 1
+      },
+      "uncertain_by_kind": {},
+      "infer_s": {
+        "n": 1055,
+        "median": 0.122,
+        "p90": 0.124,
+        "max": 0.392
+      },
+      "slower_than_chunk": 0
+    }
+  ]
+}

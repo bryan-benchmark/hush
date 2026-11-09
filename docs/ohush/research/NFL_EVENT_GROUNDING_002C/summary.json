@@ -1,0 +1,93 @@
+{
+  "applied": false,
+  "model": "qwen2.5:3b",
+  "gold_read": false,
+  "gpu_samples": [
+    "2288 MiB, 0 %",
+    "2288 MiB, 95 %",
+    "2288 MiB, 95 %",
+    "2288 MiB, 82 %",
+    "2288 MiB, 84 %",
+    "2288 MiB, 62 %",
+    "2288 MiB, 95 %",
+    "2288 MiB, 95 %",
+    "2288 MiB, 54 %",
+    "2288 MiB, 23 %",
+    "2288 MiB, 75 %",
+    "2288 MiB, 82 %",
+    "2288 MiB, 66 %",
+    "2288 MiB, 83 %",
+    "2288 MiB, 95 %"
+  ],
+  "ollama_ps": "NAME          ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL            \nqwen2.5:3b    357c53fb659c    2.2 GB    100% GPU     4096       llamacpp    2 hours from now",
+  "sessions": [
+    {
+      "session": "hush_20261008_205100",
+      "chunks": 1921,
+      "live": 62,
+      "uncertain": 11,
+      "duplicates_suppressed": 3,
+      "model_errors": 3,
+      "live_by_kind": {
+        "TOUCHDOWN": 14,
+        "TIMEOUT": 6,
+        "KICKOFF": 1,
+        "PUNT": 1,
+        "BREAK_DURATION_ANNOUNCED": 2,
+        "INTERCEPTION": 4,
+        "TWO_POINT_CONVERSION": 3,
+        "TWO_MINUTE_WARNING": 5,
+        "HALFTIME": 6,
+        "SCORE_UPDATE": 3,
+        "PROGRAM_RETURN": 1,
+        "CHALLENGE": 4,
+        "FIELD_GOAL_MISSED": 2,
+        "QUARTER_END": 6,
+        "INJURY": 2,
+        "OVERTIME": 1,
+        "BROADCAST_SIGNOFF": 1
+      },
+      "uncertain_by_kind": {
+        "TOUCHDOWN": 8,
+        "INTERCEPTION": 1,
+        "EXTRA_POINT": 1,
+        "FIELD_GOAL_GOOD": 1
+      },
+      "infer_s": {
+        "n": 1868,
+        "median": 0.127,
+        "p90": 0.406,
+        "max": 0.931
+      },
+      "slower_than_chunk": 0
+    },
+    {
+      "session": "hush_20260924_220624",
+      "chunks": 1071,
+      "live": 14,
+      "uncertain": 2,
+      "duplicates_suppressed": 0,
+      "model_errors": 4,
+      "live_by_kind": {
+        "TOUCHDOWN": 6,
+        "FIELD_GOAL_MISSED": 1,
+        "HALFTIME": 1,
+        "TWO_POINT_CONVERSION": 1,
+        "FIELD_GOAL_GOOD": 1,
+        "INTERCEPTION": 2,
+        "SCORE_UPDATE": 2
+      },
+      "uncertain_by_kind": {
+        "INTERCEPTION": 1,
+        "TOUCHDOWN": 1
+      },
+      "infer_s": {
+        "n": 1054,
+        "median": 0.124,
+        "p90": 0.409,
+        "max": 0.736
+      },
+      "slower_than_chunk": 0
+    }
+  ]
+}

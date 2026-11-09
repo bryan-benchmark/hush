@@ -1,0 +1,54 @@
+{
+  "applied": false,
+  "gold_used_for_decisions": false,
+  "sessions": [
+    {
+      "session": "hush_20261008_205100",
+      "live": 52,
+      "uncertain": 13,
+      "duplicates_suppressed": 2,
+      "live_by_kind": {
+        "TOUCHDOWN": 12,
+        "TIMEOUT": 6,
+        "KICKOFF": 1,
+        "PUNT": 1,
+        "BREAK_DURATION_ANNOUNCED": 2,
+        "INTERCEPTION": 4,
+        "TWO_MINUTE_WARNING": 5,
+        "HALFTIME": 6,
+        "SCORE_UPDATE": 3,
+        "PROGRAM_RETURN": 1,
+        "CHALLENGE": 1,
+        "FIELD_GOAL_MISSED": 2,
+        "QUARTER_END": 2,
+        "INJURY": 2,
+        "TWO_POINT_CONVERSION": 2,
+        "OVERTIME": 1,
+        "BROADCAST_SIGNOFF": 1
+      },
+      "breaks": 20,
+      "breaks_with_live_event_in_prior_90s": 17,
+      "live_events_without_a_break_in_the_next_90s": 28,
+      "diagnostic_only": true
+    },
+    {
+      "session": "hush_20260924_220624",
+      "live": 14,
+      "uncertain": 2,
+      "duplicates_suppressed": 0,
+      "live_by_kind": {
+        "TOUCHDOWN": 6,
+        "FIELD_GOAL_MISSED": 1,
+        "HALFTIME": 1,
+        "TWO_POINT_CONVERSION": 1,
+        "FIELD_GOAL_GOOD": 1,
+        "INTERCEPTION": 2,
+        "SCORE_UPDATE": 2
+      },
+      "breaks": 9,
+      "breaks_with_live_event_in_prior_90s": 4,
+      "live_events_without_a_break_in_the_next_90s": 9,
+      "diagnostic_only": true
+    }
+  ]
+}

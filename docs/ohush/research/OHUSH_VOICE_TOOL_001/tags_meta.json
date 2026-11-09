@@ -1,0 +1,61 @@
+{
+  "model": "MIT/ast-finetuned-audioset-10-10-0.4593",
+  "classifier_extract": "C:\\OHushData\\gpu_lab\\models\\ast_audioset_classifier.npz",
+  "window_s": 5.0,
+  "commercial_line": 0.1632588496059179,
+  "stamp_contract": "stamp t uses audio [t-window_s, t)",
+  "box_stamp_rule": "include stamps with start < t <= end",
+  "fit_receipt": {
+    "sessions": [
+      "hush_20260909_213047",
+      "hush_20260913_210542"
+    ],
+    "rows": 21400,
+    "commercial_rows": 5863,
+    "program_rows": 15537,
+    "train_accuracy": 0.9273
+  },
+  "watch_classes": [
+    "Speech",
+    "Male speech, man speaking",
+    "Female speech, woman speaking",
+    "Narration, monologue",
+    "Music",
+    "Background music",
+    "Theme music",
+    "Jingle (music)",
+    "Crowd",
+    "Applause",
+    "Cheering",
+    "Hubbub, speech noise, speech babble",
+    "Radio",
+    "Television"
+  ],
+  "n_boxes": 39,
+  "n_seconds": 281,
+  "sessions": {
+    "hush_20260924_220624": {
+      "model": "MIT/ast-finetuned-audioset-10-10-0.4593",
+      "window_s": 5.0,
+      "n": 7595,
+      "path": "C:\\OHushData\\gpu_lab\\embeddings\\hush_20260924_220624\\w5.npz"
+    },
+    "hush_20261008_205100": {
+      "model": "MIT/ast-finetuned-audioset-10-10-0.4593",
+      "window_s": 5.0,
+      "n": 10435,
+      "path": "C:\\OHushData\\gpu_lab\\embeddings\\hush_20261008_205100\\w5.npz"
+    }
+  },
+  "focus": [
+    {
+      "id": "fn0110",
+      "owner_text": "Fanduel in game broadcast"
+    },
+    {
+      "id": "fn0009",
+      "owner_text": "ryan fits"
+    }
+  ],
+  "realtime": false
+}

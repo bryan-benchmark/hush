@@ -1,0 +1,99 @@
+{
+  "q001": {
+    "note": "tv commercial until start of second 4 then  goes into steve harvey on family feud show (back from commercial, network tv)"
+  },
+  "q002": {
+    "note": "mike tirico calling a game, crowd noise and whistles in background, all part of game"
+  },
+  "q003": {
+    "note": "mike tirico - in a commercial (not a broadcast commercial) just a regular commercial - not broadcast, this is a hard one"
+  },
+  "q004": {
+    "note": "mike tirico calling a game (field goal made), 14 seconds switches to peyton manning nationwide commercial (could be in broadcast, unsure.)"
+  },
+  "q005": {
+    "note": "chris collingsworth giving a recap mid game, not a commercial"
+  },
+  "q006": {
+    "note": "mike tirico calling the game, not a commercial normal broadcast"
+  },
+  "q007": {
+    "note": "commercial break ending at second 3, then mike tirico broadcast starts back up and he does a 'brought to you by' which is fine to keep in as not a commerical"
+  },
+  "q008": {
+    "note": "mike tirico calling game, ref announcement at second 5/6"
+  },
+  "q009": {
+    "note": "mike tirico calling the game,normal game noises"
+  },
+  "q010": {
+    "note": "commercial"
+  },
+  "q011": {
+    "note": "2 commercials, first is political ends at second 2, then bdubs commerical"
+  },
+  "q012": {
+    "note": "americas got talent NBC commercial for seconds 0-15, then mike tirico comes back with SNF music as intro"
+  },
+  "q013": {
+    "note": "political ad seconds 0-1, then nfl commercials until second 18, then youtube tv until second 27\n\nsecond 27 is when the program comes back"
+  },
+  "q014": {
+    "note": "outro music for football progrmam - ends in a fanduel call out\nprogressive commercial",
+    "regions": [
+      {
+        "start_s": 2.09,
+        "end_s": 32.78,
+        "what": "outro music for football progrmam - ends in a fanduel call out",
+        "who": "",
+        "tags": [
+          "music",
+          "splice"
+        ],
+        "kind": "splice"
+      },
+      {
+        "start_s": 32.91,
+        "end_s": 34.9,
+        "what": "progressive commercial",
+        "who": "",
+        "tags": [
+          "commercial",
+          "splice"
+        ],
+        "kind": "splice"
+      }
+    ]
+  },
+  "q015": {
+    "note": "budlight commercial",
+    "regions": [
+      {
+        "start_s": 0.04,
+        "end_s": 8,
+        "what": "budlight commercial",
+        "who": "",
+        "tags": [
+          "commercial",
+          "whole"
+        ],
+        "kind": "whole"
+      }
+    ]
+  },
+  "q016": {
+    "note": "verizon commerical",
+    "regions": [
+      {
+        "start_s": 0.02,
+        "end_s": 8,
+        "what": "verizon commerical",
+        "who": "",
+        "tags": [
+          "whole"
+        ],
+        "kind": "whole"
+      }
+    ]
+  }
+}

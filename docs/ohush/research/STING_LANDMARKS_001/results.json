@@ -1,0 +1,544 @@
+{
+  "id": "STING_LANDMARKS_001",
+  "accept_count": 200,
+  "windows": {
+    "before_start": "2 seconds ending at the labeled start",
+    "after_start": "2 seconds beginning at the labeled start",
+    "before_end": "2 seconds ending at the labeled end"
+  },
+  "library": "earlier football boundary windows of the same kind only",
+  "october_may_choose_cutoff": false,
+  "live_mute_changed": false,
+  "self_match": {
+    "score": 299,
+    "n_hashes": 299
+  },
+  "steps": [
+    {
+      "session": "hush_20260909_213047",
+      "name": "Sept 9 NBC",
+      "enrolled": true,
+      "kinds": {
+        "before_start": {
+          "library": 0,
+          "boundaries": null,
+          "program": null
+        },
+        "after_start": {
+          "library": 0,
+          "boundaries": null,
+          "program": null
+        },
+        "before_end": {
+          "library": 0,
+          "boundaries": null,
+          "program": null
+        }
+      }
+    },
+    {
+      "session": "hush_20260913_150934",
+      "name": "Sept 13 RedZone",
+      "enrolled": false,
+      "kinds": {
+        "before_start": {
+          "library": 20,
+          "boundaries": null,
+          "program": {
+            "n": 119,
+            "max_score": 0,
+            "median_score": 0,
+            "median_hashes": 152,
+            "at_200": 0
+          }
+        },
+        "after_start": {
+          "library": 20,
+          "boundaries": null,
+          "program": {
+            "n": 119,
+            "max_score": 3,
+            "median_score": 0,
+            "median_hashes": 152,
+            "at_200": 0
+          }
+        },
+        "before_end": {
+          "library": 20,
+          "boundaries": null,
+          "program": {
+            "n": 119,
+            "max_score": 10,
+            "median_score": 0,
+            "median_hashes": 152,
+            "at_200": 0
+          }
+        }
+      }
+    },
+    {
+      "session": "hush_20260913_210542",
+      "name": "Sept 13 NBC",
+      "enrolled": true,
+      "kinds": {
+        "before_start": {
+          "library": 20,
+          "boundaries": {
+            "n": 21,
+            "max_score": 5,
+            "median_score": 0,
+            "median_hashes": 164,
+            "at_200": 0
+          },
+          "program": {
+            "n": 138,
+            "max_score": 2,
+            "median_score": 0,
+            "median_hashes": 150,
+            "at_200": 0
+          }
+        },
+        "after_start": {
+          "library": 20,
+          "boundaries": {
+            "n": 21,
+            "max_score": 36,
+            "median_score": 0,
+            "median_hashes": 190,
+            "at_200": 0
+          },
+          "program": {
+            "n": 138,
+            "max_score": 2,
+            "median_score": 0,
+            "median_hashes": 150,
+            "at_200": 0
+          }
+        },
+        "before_end": {
+          "library": 20,
+          "boundaries": {
+            "n": 21,
+            "max_score": 26,
+            "median_score": 0,
+            "median_hashes": 146,
+            "at_200": 0
+          },
+          "program": {
+            "n": 138,
+            "max_score": 14,
+            "median_score": 0,
+            "median_hashes": 150,
+            "at_200": 0
+          }
+        }
+      }
+    },
+    {
+      "session": "hush_20260914_212529",
+      "name": "Sept 14 ESPN",
+      "enrolled": true,
+      "kinds": {
+        "before_start": {
+          "library": 41,
+          "boundaries": {
+            "n": 15,
+            "max_score": 4,
+            "median_score": 0,
+            "median_hashes": 162,
+            "at_200": 0
+          },
+          "program": {
+            "n": 72,
+            "max_score": 4,
+            "median_score": 0,
+            "median_hashes": 140,
+            "at_200": 0
+          }
+        },
+        "after_start": {
+          "library": 41,
+          "boundaries": {
+            "n": 15,
+            "max_score": 15,
+            "median_score": 0,
+            "median_hashes": 146,
+            "at_200": 0
+          },
+          "program": {
+            "n": 72,
+            "max_score": 4,
+            "median_score": 0,
+            "median_hashes": 140,
+            "at_200": 0
+          }
+        },
+        "before_end": {
+          "library": 41,
+          "boundaries": {
+            "n": 15,
+            "max_score": 0,
+            "median_score": 0,
+            "median_hashes": 120,
+            "at_200": 0
+          },
+          "program": {
+            "n": 72,
+            "max_score": 10,
+            "median_score": 0,
+            "median_hashes": 140,
+            "at_200": 0
+          }
+        }
+      }
+    },
+    {
+      "session": "hush_20260924_220624",
+      "name": "Sept 24 Prime",
+      "enrolled": true,
+      "kinds": {
+        "before_start": {
+          "library": 56,
+          "boundaries": {
+            "n": 12,
+            "max_score": 3,
+            "median_score": 0,
+            "median_hashes": 143,
+            "at_200": 0
+          },
+          "program": {
+            "n": 84,
+            "max_score": 0,
+            "median_score": 0,
+            "median_hashes": 148,
+            "at_200": 0
+          }
+        },
+        "after_start": {
+          "library": 56,
+          "boundaries": {
+            "n": 13,
+            "max_score": 6,
+            "median_score": 0,
+            "median_hashes": 166,
+            "at_200": 0
+          },
+          "program": {
+            "n": 84,
+            "max_score": 0,
+            "median_score": 0,
+            "median_hashes": 148,
+            "at_200": 0
+          }
+        },
+        "before_end": {
+          "library": 56,
+          "boundaries": {
+            "n": 13,
+            "max_score": 5,
+            "median_score": 0,
+            "median_hashes": 110,
+            "at_200": 0
+          },
+          "program": {
+            "n": 84,
+            "max_score": 5,
+            "median_score": 0,
+            "median_hashes": 148,
+            "at_200": 0
+          }
+        }
+      }
+    },
+    {
+      "session": "hush_20261008_205100",
+      "name": "Oct 8 Prime Video",
+      "enrolled": true,
+      "kinds": {
+        "before_start": {
+          "library": 68,
+          "boundaries": {
+            "n": 23,
+            "max_score": 3,
+            "median_score": 0,
+            "median_hashes": 159,
+            "at_200": 0
+          },
+          "program": {
+            "n": 108,
+            "max_score": 4,
+            "median_score": 0,
+            "median_hashes": 142,
+            "at_200": 0
+          }
+        },
+        "after_start": {
+          "library": 69,
+          "boundaries": {
+            "n": 23,
+            "max_score": 33,
+            "median_score": 0,
+            "median_hashes": 185,
+            "at_200": 0
+          },
+          "program": {
+            "n": 108,
+            "max_score": 0,
+            "median_score": 0,
+            "median_hashes": 142,
+            "at_200": 0
+          }
+        },
+        "before_end": {
+          "library": 69,
+          "boundaries": {
+            "n": 23,
+            "max_score": 19,
+            "median_score": 0,
+            "median_hashes": 143,
+            "at_200": 0
+          },
+          "program": {
+            "n": 108,
+            "max_score": 3,
+            "median_score": 0,
+            "median_hashes": 142,
+            "at_200": 0
+          }
+        }
+      }
+    },
+    {
+      "session": "hush_20261010_222400",
+      "name": "Oct 10 cable",
+      "enrolled": true,
+      "kinds": {
+        "before_start": {
+          "library": 91,
+          "boundaries": {
+            "n": 6,
+            "max_score": 3,
+            "median_score": 0,
+            "median_hashes": 174,
+            "at_200": 0
+          },
+          "program": {
+            "n": 76,
+            "max_score": 3,
+            "median_score": 0,
+            "median_hashes": 153,
+            "at_200": 0
+          }
+        },
+        "after_start": {
+          "library": 92,
+          "boundaries": {
+            "n": 6,
+            "max_score": 4,
+            "median_score": 0,
+            "median_hashes": 211,
+            "at_200": 0
+          },
+          "program": {
+            "n": 76,
+            "max_score": 6,
+            "median_score": 0,
+            "median_hashes": 153,
+            "at_200": 0
+          }
+        },
+        "before_end": {
+          "library": 92,
+          "boundaries": {
+            "n": 6,
+            "max_score": 2,
+            "median_score": 0,
+            "median_hashes": 150,
+            "at_200": 0
+          },
+          "program": {
+            "n": 76,
+            "max_score": 11,
+            "median_score": 0,
+            "median_hashes": 153,
+            "at_200": 0
+          }
+        }
+      }
+    },
+    {
+      "session": "hush_20261011_135700",
+      "name": "Oct 11 afternoon",
+      "enrolled": true,
+      "kinds": {
+        "before_start": {
+          "library": 97,
+          "boundaries": {
+            "n": 8,
+            "max_score": 0,
+            "median_score": 0,
+            "median_hashes": 135,
+            "at_200": 0
+          },
+          "program": {
+            "n": 56,
+            "max_score": 21,
+            "median_score": 0,
+            "median_hashes": 186,
+            "at_200": 0
+          }
+        },
+        "after_start": {
+          "library": 98,
+          "boundaries": {
+            "n": 8,
+            "max_score": 14,
+            "median_score": 0,
+            "median_hashes": 153,
+            "at_200": 0
+          },
+          "program": {
+            "n": 56,
+            "max_score": 16,
+            "median_score": 0,
+            "median_hashes": 186,
+            "at_200": 0
+          }
+        },
+        "before_end": {
+          "library": 98,
+          "boundaries": {
+            "n": 8,
+            "max_score": 8,
+            "median_score": 0,
+            "median_hashes": 140,
+            "at_200": 0
+          },
+          "program": {
+            "n": 56,
+            "max_score": 15,
+            "median_score": 0,
+            "median_hashes": 186,
+            "at_200": 0
+          }
+        }
+      }
+    },
+    {
+      "session": "hush_20261011_204300",
+      "name": "Oct 11 night",
+      "enrolled": true,
+      "kinds": {
+        "before_start": {
+          "library": 105,
+          "boundaries": {
+            "n": 6,
+            "max_score": 5,
+            "median_score": 0,
+            "median_hashes": 179,
+            "at_200": 0
+          },
+          "program": {
+            "n": 223,
+            "max_score": 10,
+            "median_score": 0,
+            "median_hashes": 115,
+            "at_200": 0
+          }
+        },
+        "after_start": {
+          "library": 106,
+          "boundaries": {
+            "n": 6,
+            "max_score": 73,
+            "median_score": 1,
+            "median_hashes": 210,
+            "at_200": 0
+          },
+          "program": {
+            "n": 223,
+            "max_score": 4,
+            "median_score": 0,
+            "median_hashes": 115,
+            "at_200": 0
+          }
+        },
+        "before_end": {
+          "library": 106,
+          "boundaries": {
+            "n": 6,
+            "max_score": 11,
+            "median_score": 0,
+            "median_hashes": 131,
+            "at_200": 0
+          },
+          "program": {
+            "n": 223,
+            "max_score": 7,
+            "median_score": 0,
+            "median_hashes": 115,
+            "at_200": 0
+          }
+        }
+      }
+    },
+    {
+      "session": "hush_20261012_204200",
+      "name": "Oct 12 MNF",
+      "enrolled": true,
+      "kinds": {
+        "before_start": {
+          "library": 111,
+          "boundaries": {
+            "n": 24,
+            "max_score": 12,
+            "median_score": 0,
+            "median_hashes": 187,
+            "at_200": 0
+          },
+          "program": {
+            "n": 145,
+            "max_score": 4,
+            "median_score": 0,
+            "median_hashes": 151,
+            "at_200": 0
+          }
+        },
+        "after_start": {
+          "library": 112,
+          "boundaries": {
+            "n": 24,
+            "max_score": 24,
+            "median_score": 0,
+            "median_hashes": 167,
+            "at_200": 0
+          },
+          "program": {
+            "n": 145,
+            "max_score": 5,
+            "median_score": 0,
+            "median_hashes": 151,
+            "at_200": 0
+          }
+        },
+        "before_end": {
+          "library": 112,
+          "boundaries": {
+            "n": 24,
+            "max_score": 3,
+            "median_score": 0,
+            "median_hashes": 153,
+            "at_200": 0
+          },
+          "program": {
+            "n": 145,
+            "max_score": 4,
+            "median_score": 0,
+            "median_hashes": 151,
+            "at_200": 0
+          }
+        }
+      }
+    }
+  ]
+}

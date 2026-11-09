@@ -1,0 +1,116 @@
+{
+  "model": "frame_mn10",
+  "checkpoint_sha256": "4a0fe320d5369987b772394c51881fb20a602967e6842f72f3e5c8181065ece7",
+  "frozen_head": "C:\\OHushData\\gpu_lab\\audio_learn\\checkpoints\\frozen_head.pt",
+  "frozen_head_sha256": "58b8ad09f2da60b519b05558935d25c9b79a20ef288b15838c337748abc20bf2",
+  "finetuned_encoder": "C:\\OHushData\\gpu_lab\\audio_learn\\checkpoints\\finetuned_encoder.pt",
+  "finetuned_encoder_sha256": "9492f4c2148b1975fa05792572efb9deb03751330c358b15ec8ea9cc5502f410",
+  "finetuned_head": "C:\\OHushData\\gpu_lab\\audio_learn\\checkpoints\\finetuned_head.pt",
+  "finetuned_head_sha256": "614ae8335e5197eac6dffe7190917e16cec1853d2096c008965a9eee9baeb078",
+  "caches": [
+    {
+      "session": "hush_20260909_213047",
+      "commercial_rows": 11383,
+      "program_rows": 24127,
+      "excluded_rows": 1966,
+      "n": 37476
+    },
+    {
+      "session": "hush_20260913_210542",
+      "commercial_rows": 12192,
+      "program_rows": 38150,
+      "excluded_rows": 42,
+      "n": 50384
+    },
+    {
+      "session": "hush_20260913_150934",
+      "commercial_rows": 0,
+      "program_rows": 28784,
+      "excluded_rows": 0,
+      "n": 28784
+    },
+    {
+      "session": "hush_20261011_135700",
+      "commercial_rows": 3924,
+      "program_rows": 15631,
+      "excluded_rows": 16,
+      "n": 19571
+    },
+    {
+      "session": "hush_20261012_204200",
+      "commercial_rows": 11748,
+      "program_rows": 40635,
+      "excluded_rows": 48,
+      "n": 52431
+    },
+    {
+      "session": "hush_20260914_212529",
+      "commercial_rows": 7199,
+      "program_rows": 20351,
+      "excluded_rows": 30,
+      "n": 27580
+    },
+    {
+      "session": "hush_20261008_205100",
+      "commercial_rows": 10546,
+      "program_rows": 31154,
+      "excluded_rows": 45,
+      "n": 41745
+    },
+    {
+      "session": "hush_20260924_220624",
+      "commercial_rows": 6635,
+      "program_rows": 23725,
+      "excluded_rows": 24,
+      "n": 30384
+    }
+  ],
+  "frozen_train": {
+    "epochs": 8,
+    "per_class": 4000,
+    "sequence": 16,
+    "hidden": 64,
+    "commercial_sequences": 39241,
+    "program_sequences": 147259,
+    "loss": [
+      0.3047871002771107,
+      0.2465474714494778,
+      0.22483137604142106,
+      0.21270310726575534,
+      0.21130967577471368,
+      0.19907337320800672,
+      0.19108838501805597,
+      0.18931032806651452
+    ],
+    "checkpoint": "C:\\OHushData\\gpu_lab\\audio_learn\\checkpoints\\frozen_head.pt"
+  },
+  "finetune": {
+    "steps": 640,
+    "steps_per_game": 160,
+    "sequence": 4,
+    "encoder_lr": 3e-05,
+    "tail_parameters": 55,
+    "loss_first": 0.7031846642494202,
+    "loss_last": 0.033319421112537384,
+    "checkpoint": "C:\\OHushData\\gpu_lab\\audio_learn\\checkpoints\\finetuned_encoder.pt"
+  },
+  "tuned_train": {
+    "epochs": 8,
+    "per_class": 4000,
+    "sequence": 16,
+    "hidden": 64,
+    "commercial_sequences": 39241,
+    "program_sequences": 147259,
+    "loss": [
+      0.2859020667916985,
+      0.23835637400276496,
+      0.21763686911931654,
+      0.20695926833207126,
+      0.20360556515547787,
+      0.19498473108773026,
+      0.18740418124021363,
+      0.17978621514042528
+    ],
+    "checkpoint": "C:\\OHushData\\gpu_lab\\audio_learn\\checkpoints\\finetuned_head.pt"
+  }
+}

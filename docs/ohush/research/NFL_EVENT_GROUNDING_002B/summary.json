@@ -1,0 +1,97 @@
+{
+  "applied": false,
+  "model": "qwen2.5:3b",
+  "gold_read": false,
+  "gpu_samples": [
+    "2288 MiB, 0 %",
+    "2288 MiB, 95 %",
+    "2288 MiB, 59 %",
+    "2288 MiB, 75 %",
+    "2288 MiB, 60 %",
+    "2288 MiB, 65 %",
+    "2288 MiB, 73 %",
+    "2288 MiB, 0 %",
+    "2288 MiB, 84 %",
+    "2288 MiB, 95 %",
+    "2288 MiB, 61 %",
+    "2288 MiB, 95 %",
+    "2288 MiB, 95 %",
+    "2288 MiB, 95 %",
+    "2288 MiB, 95 %"
+  ],
+  "ollama_ps": "NAME          ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL            \nqwen2.5:3b    357c53fb659c    2.2 GB    100% GPU     4096       llamacpp    2 hours from now",
+  "sessions": [
+    {
+      "session": "hush_20261008_205100",
+      "chunks": 1921,
+      "live": 349,
+      "uncertain": 9,
+      "duplicates_suppressed": 139,
+      "model_errors": 1,
+      "live_by_kind": {
+        "TOUCHDOWN": 13,
+        "QUARTER_END": 10,
+        "TIMEOUT": 196,
+        "BREAK_DURATION_ANNOUNCED": 9,
+        "KICKOFF": 1,
+        "HALFTIME": 64,
+        "PROGRAM_RETURN": 11,
+        "BROADCAST_SIGNOFF": 13,
+        "PUNT": 1,
+        "INTERCEPTION": 6,
+        "TWO_POINT_CONVERSION": 1,
+        "TWO_MINUTE_WARNING": 17,
+        "SCORE_UPDATE": 3,
+        "INJURY": 2,
+        "FIELD_GOAL_MISSED": 2
+      },
+      "uncertain_by_kind": {
+        "TOUCHDOWN": 6,
+        "INTERCEPTION": 1,
+        "EXTRA_POINT": 1,
+        "FIELD_GOAL_GOOD": 1
+      },
+      "infer_s": {
+        "n": 1870,
+        "median": 0.125,
+        "p90": 0.396,
+        "max": 0.948
+      },
+      "slower_than_chunk": 0
+    },
+    {
+      "session": "hush_20260924_220624",
+      "chunks": 1071,
+      "live": 228,
+      "uncertain": 3,
+      "duplicates_suppressed": 199,
+      "model_errors": 2,
+      "live_by_kind": {
+        "PROGRAM_RETURN": 5,
+        "TOUCHDOWN": 3,
+        "TIMEOUT": 174,
+        "BREAK_DURATION_ANNOUNCED": 2,
+        "FUMBLE_RECOVERY": 1,
+        "BROADCAST_SIGNOFF": 12,
+        "INTERCEPTION": 3,
+        "PUNT": 1,
+        "HALFTIME": 24,
+        "TWO_POINT_CONVERSION": 1,
+        "FIELD_GOAL_GOOD": 1,
+        "SCORE_UPDATE": 1
+      },
+      "uncertain_by_kind": {
+        "PUNT": 1,
+        "INTERCEPTION": 1,
+        "TOUCHDOWN": 1
+      },
+      "infer_s": {
+        "n": 1054,
+        "median": 0.296,
+        "p90": 0.407,
+        "max": 0.841
+      },
+      "slower_than_chunk": 0
+    }
+  ]
+}

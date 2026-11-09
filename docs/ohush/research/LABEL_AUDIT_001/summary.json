@@ -1,0 +1,10 @@
+{
+  "clips": 104,
+  "train_accuracy": 0.9273,
+  "train_rows": 21400,
+  "annotation_counts": {
+    "commercial|mute|certain": 166,
+    "program|play|certain": 11
+  },
+  "always_program_accuracy": 0.726
+}

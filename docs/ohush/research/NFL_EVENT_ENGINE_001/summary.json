@@ -1,0 +1,283 @@
+{
+  "applied": false,
+  "sessions": [
+    {
+      "session": "hush_20261008_205100",
+      "schema": "ohush_football_brain_v1",
+      "chunks": 1921,
+      "live": 70,
+      "uncertain": 13,
+      "duplicates_suppressed": 3,
+      "live_by_kind": {
+        "TOUCHDOWN": 14,
+        "TIMEOUT": 13,
+        "INTERCEPTION": 5,
+        "PUNT": 1,
+        "HALFTIME": 7,
+        "BREAK_DURATION_ANNOUNCED": 2,
+        "TWO_MINUTE_WARNING": 5,
+        "KICKOFF": 2,
+        "PROGRAM_RETURN": 4,
+        "CHALLENGE": 2,
+        "QUARTER_END": 4,
+        "EXTRA_POINT": 2,
+        "TWO_POINT_CONVERSION": 4,
+        "FUMBLE_RECOVERY": 2,
+        "INJURY": 1,
+        "OVERTIME": 1,
+        "BROADCAST_SIGNOFF": 1
+      },
+      "uncertain_by_kind": {
+        "TOUCHDOWN": 10,
+        "TWO_POINT_CONVERSION": 1,
+        "FUMBLE_RECOVERY": 1,
+        "INTERCEPTION": 1
+      },
+      "latency_s": {
+        "median": 0.383,
+        "p90": 0.55,
+        "max": 6.337
+      },
+      "breaks": 20,
+      "breaks_with_a_live_event_in_the_prior_90s": 17,
+      "leads": [
+        {
+          "start_s": 139.874,
+          "end_s": 376.9,
+          "duration_s": 237.026,
+          "event_before": "TOUCHDOWN",
+          "lead_s": 25.391
+        },
+        {
+          "start_s": 571.674,
+          "end_s": 683.353,
+          "duration_s": 111.679,
+          "event_before": "TIMEOUT",
+          "lead_s": 11.246
+        },
+        {
+          "start_s": 1003.282,
+          "end_s": 1125.233,
+          "duration_s": 121.951,
+          "event_before": "INTERCEPTION",
+          "lead_s": 17.879
+        },
+        {
+          "start_s": 1615.71,
+          "end_s": 1737.066,
+          "duration_s": 121.356,
+          "event_before": "PUNT",
+          "lead_s": 35.293
+        },
+        {
+          "start_s": 1972.985,
+          "end_s": 2006.44,
+          "duration_s": 33.455,
+          "event_before": "HALFTIME",
+          "lead_s": 2.572
+        },
+        {
+          "start_s": 2229.987,
+          "end_s": 2365.654,
+          "duration_s": 135.667,
+          "event_before": "TWO_MINUTE_WARNING",
+          "lead_s": 9.614
+        },
+        {
+          "start_s": 2396.185,
+          "end_s": 2429.785,
+          "duration_s": 33.6,
+          "event_before": "BREAK_DURATION_ANNOUNCED",
+          "lead_s": 0.797
+        },
+        {
+          "start_s": 3025.205,
+          "end_s": 3178.438,
+          "duration_s": 153.234,
+          "event_before": "HALFTIME",
+          "lead_s": 4.913
+        },
+        {
+          "start_s": 3548.839,
+          "end_s": 3702.01,
+          "duration_s": 153.17,
+          "event_before": "HALFTIME",
+          "lead_s": 23.397
+        },
+        {
+          "start_s": 3980.898,
+          "end_s": 4118.042,
+          "duration_s": 137.144,
+          "event_before": "EXTRA_POINT",
+          "lead_s": 25.517
+        },
+        {
+          "start_s": 4419.341,
+          "end_s": 4540.777,
+          "duration_s": 121.436,
+          "event_before": null,
+          "lead_s": null
+        },
+        {
+          "start_s": 4858.471,
+          "end_s": 4979.744,
+          "duration_s": 121.273,
+          "event_before": "TOUCHDOWN",
+          "lead_s": 63.068
+        },
+        {
+          "start_s": 5331.899,
+          "end_s": 5453.477,
+          "duration_s": 121.578,
+          "event_before": "TOUCHDOWN",
+          "lead_s": 31.621
+        },
+        {
+          "start_s": 5670.506,
+          "end_s": 5792.739,
+          "duration_s": 122.233,
+          "event_before": null,
+          "lead_s": null
+        },
+        {
+          "start_s": 6055.395,
+          "end_s": 6176.704,
+          "duration_s": 121.309,
+          "event_before": "TOUCHDOWN",
+          "lead_s": 5.13
+        },
+        {
+          "start_s": 6363.797,
+          "end_s": 6515.381,
+          "duration_s": 151.584,
+          "event_before": "QUARTER_END",
+          "lead_s": 8.497
+        },
+        {
+          "start_s": 7169.476,
+          "end_s": 7293.367,
+          "duration_s": 123.891,
+          "event_before": null,
+          "lead_s": null
+        },
+        {
+          "start_s": 7677.017,
+          "end_s": 7797.831,
+          "duration_s": 120.813,
+          "event_before": "TOUCHDOWN",
+          "lead_s": 11.721
+        },
+        {
+          "start_s": 8136.596,
+          "end_s": 8176.169,
+          "duration_s": 39.573,
+          "event_before": "TWO_MINUTE_WARNING",
+          "lead_s": 6.325
+        },
+        {
+          "start_s": 8802.615,
+          "end_s": 8950.162,
+          "duration_s": 147.547,
+          "event_before": "BROADCAST_SIGNOFF",
+          "lead_s": 17.337
+        }
+      ],
+      "applied": false
+    },
+    {
+      "session": "hush_20260924_220624",
+      "schema": "ohush_football_brain_v1",
+      "chunks": 1071,
+      "live": 20,
+      "uncertain": 3,
+      "duplicates_suppressed": 0,
+      "live_by_kind": {
+        "TOUCHDOWN": 7,
+        "EXTRA_POINT": 1,
+        "BREAK_DURATION_ANNOUNCED": 1,
+        "INTERCEPTION": 4,
+        "PROGRAM_RETURN": 3,
+        "HALFTIME": 2,
+        "TWO_POINT_CONVERSION": 1,
+        "CHALLENGE": 1
+      },
+      "uncertain_by_kind": {
+        "FUMBLE_RECOVERY": 1,
+        "INJURY": 2
+      },
+      "latency_s": {
+        "median": 0.279,
+        "p90": 0.462,
+        "max": 4.466
+      },
+      "breaks": 9,
+      "breaks_with_a_live_event_in_the_prior_90s": 4,
+      "leads": [
+        {
+          "start_s": 1.618,
+          "end_s": 49.585,
+          "duration_s": 47.967,
+          "event_before": null,
+          "lead_s": null
+        },
+        {
+          "start_s": 234.244,
+          "end_s": 356.542,
+          "duration_s": 122.298,
+          "event_before": null,
+          "lead_s": null
+        },
+        {
+          "start_s": 913.442,
+          "end_s": 1033.889,
+          "duration_s": 120.447,
+          "event_before": "EXTRA_POINT",
+          "lead_s": 18.161
+        },
+        {
+          "start_s": 1490.038,
+          "end_s": 1611.211,
+          "duration_s": 121.173,
+          "event_before": null,
+          "lead_s": null
+        },
+        {
+          "start_s": 1742.709,
+          "end_s": 1894.679,
+          "duration_s": 151.97,
+          "event_before": null,
+          "lead_s": null
+        },
+        {
+          "start_s": 2217.88,
+          "end_s": 2338.326,
+          "duration_s": 120.446,
+          "event_before": "TOUCHDOWN",
+          "lead_s": 22.617
+        },
+        {
+          "start_s": 2796.812,
+          "end_s": 2917.945,
+          "duration_s": 121.133,
+          "event_before": null,
+          "lead_s": null
+        },
+        {
+          "start_s": 3496.442,
+          "end_s": 3633.048,
+          "duration_s": 136.606,
+          "event_before": "TWO_POINT_CONVERSION",
+          "lead_s": 21.173
+        },
+        {
+          "start_s": 4337.154,
+          "end_s": 4492.742,
+          "duration_s": 155.587,
+          "event_before": "TOUCHDOWN",
+          "lead_s": 51.887
+        }
+      ],
+      "applied": false
+    }
+  ]
+}

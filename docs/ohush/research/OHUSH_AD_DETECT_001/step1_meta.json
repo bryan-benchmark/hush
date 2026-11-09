@@ -1,0 +1,157 @@
+{
+  "step": 1,
+  "question": "Is this second advertising or programming?",
+  "not_the_question": "Who is speaking?",
+  "model": "MIT/ast-finetuned-audioset-10-10-0.4593",
+  "window_s": 5.0,
+  "commercial_line": 0.1632588496059179,
+  "fit_receipt": {
+    "sessions": [
+      "hush_20260909_213047",
+      "hush_20260913_210542"
+    ],
+    "rows": 21400,
+    "commercial_rows": 5863,
+    "program_rows": 15537,
+    "train_accuracy": 0.9273
+  },
+  "fit_sessions": [
+    "hush_20260909_213047",
+    "hush_20260913_210542"
+  ],
+  "logic": {
+    "hot": "10-second mean of the NBC logistic on AST CLS >= 0.1632588496059179",
+    "desired_on_commercial": "hot",
+    "desired_on_program": "cold",
+    "speaker_score": "not used"
+  },
+  "hard_boxes": [
+    {
+      "id": "ad_draftkings",
+      "session": "hush_20261008_205100",
+      "start_s": 140.78,
+      "end_s": 146.0,
+      "expect": "commercial",
+      "note": "DraftKings; owner: Clarissa Thompson reading the ad",
+      "n_stamps": 6,
+      "median_mean10": 5.428592,
+      "hot_fraction": 1.0,
+      "mean_agrees_gold_fraction": 1.0,
+      "verdict": "ok_commercial_hot"
+    },
+    {
+      "id": "ad_fanduel",
+      "session": "hush_20261008_205100",
+      "start_s": 572.06,
+      "end_s": 577.3,
+      "expect": "commercial",
+      "note": "FanDuel; owner: unknown male",
+      "n_stamps": 5,
+      "median_mean10": 2.383594,
+      "hot_fraction": 1.0,
+      "mean_agrees_gold_fraction": 1.0,
+      "verdict": "ok_commercial_hot"
+    },
+    {
+      "id": "ad_wendys",
+      "session": "hush_20261008_205100",
+      "start_s": 4450.36,
+      "end_s": 4455.9,
+      "expect": "commercial",
+      "note": "Wendy's; owner: unknown female",
+      "n_stamps": 5,
+      "median_mean10": 3.418489,
+      "hot_fraction": 1.0,
+      "mean_agrees_gold_fraction": 1.0,
+      "verdict": "ok_commercial_hot"
+    },
+    {
+      "id": "prog_fitzpatrick",
+      "session": "hush_20260924_220624",
+      "start_s": 6589.0,
+      "end_s": 6609.0,
+      "expect": "program",
+      "note": "Ryan Fitzpatrick pregame desk",
+      "n_stamps": 20,
+      "median_mean10": 2.569542,
+      "hot_fraction": 0.75,
+      "mean_agrees_gold_fraction": 0.25,
+      "verdict": "MISS_program_hot"
+    },
+    {
+      "id": "prog_thompson_postgame",
+      "session": "hush_20260924_220624",
+      "start_s": 5571.0,
+      "end_s": 5581.0,
+      "expect": "program",
+      "note": "Clarissa Thompson postgame",
+      "n_stamps": 10,
+      "median_mean10": 0.034237,
+      "hot_fraction": 0.4,
+      "mean_agrees_gold_fraction": 0.6,
+      "verdict": "ok_program_cold"
+    },
+    {
+      "id": "prog_whitworth",
+      "session": "hush_20261008_205100",
+      "start_s": 9163.76,
+      "end_s": 9171.77,
+      "expect": "program",
+      "note": "Andrew Whitworth after dropped pass",
+      "n_stamps": 8,
+      "median_mean10": -1.013228,
+      "hot_fraction": 0.375,
+      "mean_agrees_gold_fraction": 0.625,
+      "verdict": "ok_program_cold"
+    },
+    {
+      "id": "prog_sherman",
+      "session": "hush_20261008_205100",
+      "start_s": 9153.0,
+      "end_s": 9163.51,
+      "expect": "program",
+      "note": "Richard Sherman; gold program, desk-like",
+      "n_stamps": 10,
+      "median_mean10": 1.993094,
+      "hot_fraction": 0.8,
+      "mean_agrees_gold_fraction": 0.2,
+      "verdict": "MISS_program_hot"
+    }
+  ],
+  "control_summary": [
+    {
+      "session": "hush_20261008_205100",
+      "gold": "commercial",
+      "n": 20,
+      "hot_fraction": 1.0,
+      "agree_fraction": 1.0,
+      "median_mean10": 4.693746
+    },
+    {
+      "session": "hush_20261008_205100",
+      "gold": "program",
+      "n": 20,
+      "hot_fraction": 0.0,
+      "agree_fraction": 1.0,
+      "median_mean10": -6.140901
+    },
+    {
+      "session": "hush_20260924_220624",
+      "gold": "commercial",
+      "n": 20,
+      "hot_fraction": 0.95,
+      "agree_fraction": 0.95,
+      "median_mean10": 3.982164
+    },
+    {
+      "session": "hush_20260924_220624",
+      "gold": "program",
+      "n": 20,
+      "hot_fraction": 0.1,
+      "agree_fraction": 0.9,
+      "median_mean10": -3.842714
+    }
+  ],
+  "n_hard_seconds": 64,
+  "n_control_seconds": 80
+}

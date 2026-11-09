@@ -23,7 +23,10 @@ tools/windows_lab/.cache/
 .numba_cache/
 *.parquet
 *.npy
+*.npz
 *.zip
+# Local listen clips regenerated from recordings
+docs/ohush/research/**/clips/
 experiments/tonight_001/media/
 experiments/tonight_001/cache/
 
