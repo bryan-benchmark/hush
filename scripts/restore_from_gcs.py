@@ -8,6 +8,8 @@ with the cloud copy of the code.
 
 from __future__ import annotations
 
+import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -18,6 +20,14 @@ BUCKET = "hushdev-748439071367-research"
 ENROLL = ("enroll_snf.npy", "enroll_mnf.npy", "enroll_tnf.npy")
 
 
+def _gcloud() -> str:
+    name = "gcloud.cmd" if os.name == "nt" else "gcloud"
+    found = shutil.which(name)
+    if found is None:
+        raise SystemExit(f"{name} is not on PATH. Open a new terminal after installing the Cloud SDK.")
+    return found
+
+
 def _run(args: list[str]) -> None:
     print("+", " ".join(args), flush=True)
     subprocess.run(args, check=True)
@@ -25,7 +35,7 @@ def _run(args: list[str]) -> None:
 
 def main() -> None:
     project = subprocess.run(
-        ["gcloud", "config", "get-value", "project"],
+        [_gcloud(), "config", "get-value", "project"],
         check=True,
         text=True,
         capture_output=True,
@@ -36,9 +46,10 @@ def main() -> None:
     recordings.mkdir(parents=True, exist_ok=True)
     cache = REPO / "ohush_live" / "cache"
     cache.mkdir(parents=True, exist_ok=True)
-    _run(["gcloud", "storage", "rsync", f"gs://{BUCKET}/raw", str(recordings), "--recursive"])
+    gcloud = _gcloud()
+    _run([gcloud, "storage", "rsync", f"gs://{BUCKET}/raw", str(recordings), "--recursive"])
     for name in ENROLL:
-        _run(["gcloud", "storage", "cp", f"gs://{BUCKET}/enroll/{name}", str(cache / name)])
+        _run([gcloud, "storage", "cp", f"gs://{BUCKET}/enroll/{name}", str(cache / name)])
     print(f"recordings are in {recordings}", flush=True)
     print("speaker model downloads on the first live launch", flush=True)
 

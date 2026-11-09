@@ -333,7 +333,7 @@ class SportsTests(unittest.TestCase):
                 self.assertFalse(session.latch.allow_auto_mute(1))
             finally:
                 session.tnf.close()
-                for handle in (session.decisions, session.overrides, session.ratings, session.labels, session.track):
+                for handle in (session.decisions, session.overrides, session.ratings, session.labels, session.track, session.shadow_log, session.bridge_log, session.corrections):
                     handle.close()
 
     def test_fail_open_releases_when_the_departure_goes_quiet(self):
@@ -369,7 +369,7 @@ class SportsTests(unittest.TestCase):
                 self.assertIsNotNone(gate._fail_open_samples)
             finally:
                 session.tnf.close()
-                for handle in (session.decisions, session.overrides, session.ratings, session.labels, session.track):
+                for handle in (session.decisions, session.overrides, session.ratings, session.labels, session.track, session.shadow_log, session.bridge_log, session.corrections):
                     handle.close()
 
     def test_hint_does_not_unmute(self):

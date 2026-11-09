@@ -16,6 +16,9 @@ from scipy.signal import resample_poly
 
 RAW_SR = 48000
 N_CHANNELS = 2
+# The recorder writes 16-frame blocks. session.json stores seconds to the
+# millisecond, so a chunk can be 16 frames shorter than its declared end.
+MAX_END_PAD_FRAMES = 32
 
 
 def find_session(recordings_root: Path, session_id: str) -> Path:
@@ -53,9 +56,13 @@ def analysis_pieces(session_dir: Path, meta: dict, t0: float, t1: float) -> list
         take1 = min(t1, c1)
         frame0 = int(round((take0 - c0) * RAW_SR))
         frame1 = int(round((take1 - c0) * RAW_SR))
-        if frame0 < 0 or frame1 > info.frames or frame1 <= frame0:
+        pad = 0
+        if frame1 > info.frames:
+            pad = frame1 - info.frames
+            frame1 = info.frames
+        if frame0 < 0 or frame1 <= frame0 or pad > MAX_END_PAD_FRAMES:
             raise RuntimeError(
-                f"slice {frame0}:{frame1} outside {path} ({info.frames} frames) "
+                f"slice {frame0}:{frame1 + pad} outside {path} ({info.frames} frames) "
                 f"for session {take0:.3f}..{take1:.3f}"
             )
         pieces.append(
@@ -67,9 +74,10 @@ def analysis_pieces(session_dir: Path, meta: dict, t0: float, t1: float) -> list
                 "file_frames": int(info.frames),
                 "read_start_frame": frame0,
                 "read_stop_frame": frame1,
+                "pad_frames": pad,
                 "session_start_seconds": take0,
                 "session_end_seconds": take1,
-                "n_samples": frame1 - frame0,
+                "n_samples": frame1 - frame0 + pad,
             }
         )
     if not pieces:
@@ -96,6 +104,9 @@ def read_stereo(piece: dict) -> np.ndarray:
         dtype="float32",
         always_2d=True,
     )
+    pad = int(piece.get("pad_frames", 0))
+    if pad:
+        audio = np.pad(audio, ((0, pad), (0, 0)))
     if sr != RAW_SR or audio.shape[1] != N_CHANNELS or audio.shape[0] != piece["n_samples"]:
         raise RuntimeError(f"read mismatch for {piece['file']}: {audio.shape} @ {sr}")
     return audio

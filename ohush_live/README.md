@@ -1,6 +1,8 @@
 # OHUSH_LIVE_V0_SPORTS
 
-Tonight's Buccaneers–Cowboys game on Prime. This is a product session. It does not change Exp001–005, and its logs stay out of the replication set.
+**MacBook MNF tonight:** follow [`docs/ohush/MACBOOK_MNF_TONIGHT.md`](../docs/ohush/MACBOOK_MNF_TONIGHT.md) (assets, KPIs, desk commands). Show key `mnf` loads Buck/Aikman enroll for the return floor.
+
+Tonight's desk is a live game or a replay of one. Mark a replay in the setup. Buccaneers–Cowboys on 8 October is a recording. The next Prime Thursday game after 23 October 2026 is Panthers–Packers on 29 October. This session does not change Exp001–005, and its logs stay out of the replication set.
 
 The optical capture is recorded untouched, in 15-minute chunks. The same audio feeds the existing live helper. Only the Mac speakers change: the game, or Silence / Stadium / Rain. Commercial audio is still recorded and still analyzed.
 
@@ -31,6 +33,6 @@ Use the output name this Mac actually has. For four seconds you should hear the 
 
 Replacement beds are RMS-matched to each other, then gain-followed to the recent program level so cover audio sits near the TV loudness instead of dropping to a quiet bed. Default cover is hush (light shush). Soft options include pad, ocean, stream, birds, breeze, night, chimes, piano, harp, and meadow; the older crowd/rain/fire/noise set stays available. Sources are listed in `ohush_live/beds/SOURCES.txt`.
 
-Automatic mute needs two live families to agree, or audio alone when speaker/semantic are unavailable. A disagreeing live speaker still blocks. Manual Show only holds auto-mute when leaving a covered break; pressing Show while already on program does not block the next ad. Live audio warm-up is 25s (product-only). If return looks possible but not strong, you get a short cue and the replacement keeps playing until F9. F10 off means the helper only watches.
+Automatic cover uses the speaker and the audio together. A missing speaker keeps the show on. Audio-only cover is not the default. Manual Show only holds auto-mute when leaving a covered break; pressing Show while already on program does not block the next ad, and pressing it during a cover does not let that same break cover again until the departure goes quiet. Live audio warm-up is the worker's own reference, 15 seconds in code. If return looks possible but not strong, you get a short cue and the replacement keeps playing until F9. F9 returns immediately. F10 off means the helper only watches. Missed ad and Muted my show write a report. They are not labels. Left the game and Show is back stamp this recording's clock when the broadcast leaves and when it returns. They do not change the speakers, and they do not become gold. If this program stops, turn the television speakers up.
 
 The first launch can download the speaker model into `ohush_live/cache`. Closed chunks upload on their own to `gs://hushdev-748439071367-research/live/`. The open chunk is not uploaded. If that uploader stops, recording continues.

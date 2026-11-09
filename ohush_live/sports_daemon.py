@@ -7,7 +7,6 @@ receives closed chunks only. Neither is allowed to stop the recording.
 from __future__ import annotations
 
 import argparse
-import fcntl
 import json
 import os
 import queue
@@ -15,12 +14,21 @@ import re
 import select
 import subprocess
 import sys
-import termios
 import threading
 import time
-import tty
 import wave
 from datetime import datetime
+
+try:
+    import fcntl
+except ImportError:  # Windows lab node. The Mac lock stays fcntl.
+    fcntl = None
+try:
+    import termios
+    import tty
+except ImportError:
+    termios = None
+    tty = None
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
@@ -60,10 +68,12 @@ from ohush_live.sports import (  # noqa: E402
     active_default_replacement,
     active_replacements,
     decision_row,
+    family_ready,
     override_row,
     vibes_experiment_enabled,
     votes,
 )
+from ohush_live.shadow import Shadow  # noqa: E402
 from ohush_live.state import Machine  # noqa: E402
 
 
@@ -212,6 +222,11 @@ class SportsSession:
     def __init__(self, folder: Path) -> None:
         self.folder = folder
         self.machine = Machine()
+        self.shadow = Shadow()
+        self.decision_mode = "two_family"
+        self.last_correction: dict | None = None
+        self.last_label: dict | None = None
+        self._reported = False
         self.latch = AutoLatch()
         self.hint = ReturnHint()
         self.families: dict[str, dict | None] = {"speaker": None, "audio": None, "semantic": None}
@@ -225,6 +240,9 @@ class SportsSession:
         self.labels = (folder / "labels.jsonl").open("a", encoding="utf-8")
         # Vote / lag / near-miss trail so ad in-out flapping is diagnosable after the fact.
         self.track = (folder / "track.jsonl").open("a", encoding="utf-8")
+        self.shadow_log = (folder / "shadow.jsonl").open("a", encoding="utf-8")
+        self.bridge_log = (folder / "bridge.jsonl").open("a", encoding="utf-8")
+        self.corrections = (folder / "corrections.jsonl").open("a", encoding="utf-8")
         self.tnf = TnfLab(folder / "tnf_lab.jsonl")
         self.events: list[dict] = []
         self.levels: list[dict] = []
@@ -272,6 +290,12 @@ class SportsSession:
         self.meta["session"] = str(self.meta.get("session") or folder.name)
         self.meta.setdefault("chunks", [])
         self.meta.setdefault("gaps", [])
+        self.meta.setdefault("decision_mode", "two_family")
+        self.meta.setdefault("broadcast", "unspecified")
+        self.decision_mode = str(self.meta.get("decision_mode") or "two_family")
+        if self.decision_mode not in ("two_family", "audio_only"):
+            self.decision_mode = "two_family"
+        self.meta["decision_mode"] = self.decision_mode
         self.meta["label_queue"] = bool(self.meta.get("label_queue"))
         self._write_meta()
 
@@ -279,7 +303,7 @@ class SportsSession:
         with self._lock:
             (self.folder / "session.json").write_text(json.dumps(self.meta, indent=2) + "\n", encoding="utf-8")
 
-    def configure(self, show: str, service: str, content: str, *, record_only: bool | None = None) -> None:
+    def configure(self, show: str, service: str, content: str, *, record_only: bool | None = None, replay: bool | None = None) -> None:
         with self._lock:
             if show.strip():
                 self.meta["show"] = show.strip()[:160]
@@ -289,6 +313,8 @@ class SportsSession:
                 self.meta["content"] = content.strip()[:40]
             if record_only is not None:
                 self.meta["record_only"] = bool(record_only)
+            if replay is not None:
+                self.meta["broadcast"] = "replay" if replay else "live"
             self._write_meta()
 
     def note_chunk(self, path: Path, opened_at: datetime | None) -> None:
@@ -343,6 +369,10 @@ class SportsSession:
             "enroll_rolling_max": message.get("enroll_rolling_max"),
         }
         now = float(message.get("t") or self.clock())
+        reading["audio_end_s"] = float(message["audio_end_s"]) if message.get("audio_end_s") is not None else now
+        reading["available_at_s"] = (
+            float(message["available_at_s"]) if message.get("available_at_s") is not None else now
+        )
         with self._lock:
             if family == "speaker":
                 ids = message.get("booth_ids")
@@ -375,6 +405,8 @@ class SportsSession:
                         "cluster_id": prior.get("cluster_id"),
                         "similarity_to_booth": prior.get("similarity_to_booth"),
                         "booth_ids": list(self._booth_ids),
+                        "audio_end_s": prior.get("audio_end_s", now),
+                        "available_at_s": prior.get("available_at_s", now),
                     }
                     return
                 if now <= self._speaker_hold_until and prior:
@@ -423,6 +455,13 @@ class SportsSession:
         ):
             families["speaker"] = None
             self.families["speaker"] = None
+        shadow_event = self.shadow.observe(timestamp, families)
+        if shadow_event is not None:
+            self.shadow_log.write(json.dumps(shadow_event) + "\n")
+            self.shadow_log.flush()
+        if self.shadow.last_decision is not None:
+            self.bridge_log.write(json.dumps(self.shadow.last_decision) + "\n")
+            self.bridge_log.flush()
         departure = votes(families, "strong_departure")
         # Verified booth speech counts as a return vote for hints even when
         # Exp002 return_score is still 0 (needs 30s absence).
@@ -501,6 +540,12 @@ class SportsSession:
             return
         if self.machine.state == "MUTED" and not self.latch.allow_auto_play(returning):
             return
+        if (
+            self.decision_mode != "audio_only"
+            and self.machine.state == "PLAY"
+            and not family_ready(families.get("speaker") if isinstance(families.get("speaker"), dict) else None)
+        ):
+            return
         event = self.machine.step(timestamp, 1.0, families)
         if not event:
             return
@@ -521,6 +566,38 @@ class SportsSession:
         ):
             print(f"{timestamp:8.1f}  record_only ignores {action}", flush=True)
             return
+        if action in ("missed_ad", "muted_show"):
+            families = self._families()
+            hearing = "REPLACEMENT" if gate.mode == "replacement" else "PROGRAM"
+            from ohush_live.session_report import correction_row
+
+            row = correction_row(
+                timestamp,
+                action,
+                hearing=hearing,
+                auto=gate.auto,
+                decision_mode=self.decision_mode,
+                families=families,
+                shadow=self.shadow.last,
+                lag_ms=gate.lag_ms(RATE),
+                chunk=str(self.live.get("open_chunk") or ""),
+                machine=self.machine.state,
+                speaker_ready=family_ready(families.get("speaker") if isinstance(families.get("speaker"), dict) else None),
+                departure_votes=votes(families, "strong_departure"),
+            )
+            self.corrections.write(json.dumps(row) + "\n")
+            self.corrections.flush()
+            self.last_correction = row
+            print(f"{timestamp:8.1f}  {action}  not a label", flush=True)
+            return
+        if action in ("shadow_confirm", "shadow_reject"):
+            row = self.shadow.answer(timestamp, "confirm" if action == "shadow_confirm" else "reject")
+            self.shadow_log.write(json.dumps(row) + "\n")
+            self.shadow_log.flush()
+            if action == "shadow_reject" or self.record_only() or row.get("would") not in ("cover", "return"):
+                print(f"{timestamp:8.1f}  shadow {row['verdict']} {row.get('would')}", flush=True)
+                return
+            action = "play" if row["would"] == "return" else "mute"
         if action in ("mute", "play"):
             self.tnf.note_human("mute" if action == "mute" else "play", timestamp, self.samples)
         if action == "mute":
@@ -620,6 +697,7 @@ class SportsSession:
             "dataset_role": "live_dev",
         }
         self._append(self.labels, row)
+        self.last_label = row
         self.tnf.label(verdict, row["t"], None if about is None else float(about), self.samples)
         print(f"{row['t']:8.1f}  label {verdict}", flush=True)
 
@@ -692,6 +770,13 @@ class SportsSession:
             "cover_bar": self.machine.audio_strong,
             "audio_score": _audio_departure(families),
             "tnf": self.tnf.view(self.clock()),
+            "shadow": self.shadow.view(),
+            "decision_mode": self.decision_mode,
+            "speaker_ready": family_ready(families.get("speaker") if isinstance(families.get("speaker"), dict) else None),
+            "audio_ready": family_ready(families.get("audio") if isinstance(families.get("audio"), dict) else None),
+            "broadcast": self.meta.get("broadcast") or "unspecified",
+            "last_correction": self.last_correction,
+            "last_label": self.last_label,
             "booth_ids": list(self._booth_ids),
             "resumable": bool(offer) and not bool(self.live["recording"]),
             "resume_show": offer.get("show") or "",
@@ -704,9 +789,41 @@ class SportsSession:
         }
 
     def close(self) -> None:
+        self.finish_report()
         self.tnf.close()
-        for handle in (self.decisions, self.overrides, self.ratings, self.labels, self.track):
+        for handle in (
+            self.decisions,
+            self.overrides,
+            self.ratings,
+            self.labels,
+            self.track,
+            self.shadow_log,
+            self.bridge_log,
+            self.corrections,
+        ):
             handle.close()
+
+    def finish_report(self) -> None:
+        if self._reported:
+            return
+        self._reported = True
+        for handle in (
+            self.decisions,
+            self.overrides,
+            self.ratings,
+            self.labels,
+            self.track,
+            self.shadow_log,
+            self.bridge_log,
+            self.corrections,
+        ):
+            try:
+                handle.flush()
+            except (OSError, ValueError):
+                pass
+        from ohush_live.session_report import write_report
+
+        write_report(self.folder)
 
     def _families(self) -> dict:
         with self._lock:
@@ -855,6 +972,7 @@ class Desk:
         content: str,
         record_only: bool | None,
         fresh: bool,
+        replay: bool | None = None,
     ) -> None:
         now = datetime.now().astimezone()
         active = _read_active()
@@ -863,7 +981,7 @@ class Desk:
         else:
             target = new_sitting_dir(RECORDINGS, now)
         self._rebind(target)
-        self.session.configure(show, service, content, record_only=record_only)
+        self.session.configure(show, service, content, record_only=record_only, replay=replay)
 
     def _catalog(self, path: Path) -> None:
         opened = self._writer.opened_at.get(path.name) if self._writer is not None else None
@@ -923,6 +1041,7 @@ class Desk:
         content: str = "sports",
         record_only: bool | None = None,
         fresh: bool = False,
+        replay: bool | None = None,
     ) -> str:
         with self._lock:
             if self.session.live["recording"]:
@@ -937,7 +1056,7 @@ class Desk:
                 self.session.live["error"] = str(exc)
                 return str(exc)
             if choose:
-                self._open_sitting_locked(show, service, content, record_only, fresh)
+                self._open_sitting_locked(show, service, content, record_only, fresh, replay)
             self._detect_started = False
             hearing_only = self.session.record_only()
             if not hearing_only:
@@ -1021,6 +1140,7 @@ class Desk:
                 _send_upload(self._uploader, last)
         if clear_active:
             _mark_active_stopped(self._active_payload(recording=False))
+        self.session.finish_report()
         print("recording paused", flush=True)
 
     def set_cover_bar(self, value: float) -> None:
@@ -1203,6 +1323,7 @@ def _serve(desk: Desk) -> None:
                     content=str(body.get("content") or "sports"),
                     record_only=bool(body.get("record_only")),
                     fresh=bool(body.get("fresh")),
+                    replay=bool(body.get("replay")) if "replay" in body else None,
                 )
                 session = desk.session
                 code = 400 if err else 200
@@ -1244,7 +1365,7 @@ def _serve(desk: Desk) -> None:
 
 
 def _keys(desk: Desk, stop: threading.Event) -> None:
-    if not sys.stdin.isatty():
+    if termios is None or tty is None or not sys.stdin.isatty():
         return
     fd = sys.stdin.fileno()
     old = termios.tcgetattr(fd)
@@ -1387,6 +1508,15 @@ def _acquire_singleton():
     folder.mkdir(parents=True, exist_ok=True)
     lock_path = folder / ".desk.lock"
     pid_path = folder / ".desk.pid"
+    if fcntl is None:
+        try:
+            handle = open(lock_path, "x", encoding="utf-8")
+        except FileExistsError:
+            return None
+        handle.write(str(os.getpid()))
+        handle.flush()
+        pid_path.write_text(str(os.getpid()), encoding="utf-8")
+        return handle
     handle = open(lock_path, "a+", encoding="utf-8")
     try:
         fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -1478,6 +1608,10 @@ def main() -> None:
     print("Turn the TV speakers down. Leave optical audio running. Listen on this Mac.", flush=True)
     print("Dashboard  http://127.0.0.1:3010/", flush=True)
     print(f"Engine     http://{HOST}:{PORT}/   F8 mute  F9 play  F10 auto  S sound  1-5 pleasant  y/n every break", flush=True)
+    from ohush_live.session_report import RECOVERY
+
+    for line in RECOVERY:
+        print(line, flush=True)
     print(f"project {PROJECT}  logs {folder}", flush=True)
     try:
         while not process_stop.is_set():
@@ -1489,8 +1623,11 @@ def main() -> None:
         desk.shutdown()
         print("recording closed", flush=True)
         try:
-            fcntl.flock(lock.fileno(), fcntl.LOCK_UN)
+            if fcntl is not None:
+                fcntl.flock(lock.fileno(), fcntl.LOCK_UN)
             lock.close()
+            if fcntl is None:
+                (REPO / "ohush_live" / "sessions" / ".desk.lock").unlink(missing_ok=True)
         except Exception:
             pass
 

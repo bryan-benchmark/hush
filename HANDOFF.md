@@ -55,11 +55,15 @@ The private bucket is not an open dataset. `gcloud` access is required.
 
 GitHub: https://github.com/bryan-benchmark/hush
 
+**MNF tonight on a MacBook Air:** start at [`docs/ohush/MACBOOK_MNF_TONIGHT.md`](docs/ohush/MACBOOK_MNF_TONIGHT.md) — expected KPIs, what to download (GCS enroll + Zenodo Cnn14 + HF ECAPA), and the live desk commands. That path is the live booth (`mnf` / Buck+Aikman return floor), not the TNF research mute stack.
+
 The bucket is `gs://hushdev-748439071367-research` in Google Cloud project `hushdev`. Public access is blocked. Log in as the account that can read that project.
 
 ```bash
 git clone --recurse-submodules git@github.com:bryan-benchmark/hush.git
 cd hush
+# for tonight's Mac desk, prefer the branch that has MACBOOK_MNF_TONIGHT.md
+# git checkout research/windows-lab-node-01
 python3.13 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
@@ -99,6 +103,9 @@ Open http://127.0.0.1:3010/. The engine stays up if the page reloads. A new reco
 | What may be claimed | `docs/ohush/swarm/RESEARCH_CONTRACT.md` |
 | What has been scored | `docs/ohush/swarm/SCOREBOARD.md` |
 | How a run is scored | `docs/ohush/research/ACCURACY_LADDER_001/KPI.md` |
+| MacBook MNF live tonight | `docs/ohush/MACBOOK_MNF_TONIGHT.md` |
+| How a new label is categorized | `docs/ohush/research/CATEGORY_POLICY_001/POLICY.md` |
+| Bridge 0 AST head | `docs/ohush/research/BRIDGE0_AST_001/REPORT.md` |
 | What was decided through the locked return | `docs/ohush/research/ACCURACY_LADDER_001/NEXT_DECISION.md` |
 | Latest measurement, the outro path | `docs/ohush/research/OUTRO_RETURN_001/REPORT.md` |
 | Which sessions are labeled | `docs/ohush/dataset_handoff/STATUS.md` |

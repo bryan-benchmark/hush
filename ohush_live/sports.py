@@ -134,6 +134,15 @@ def family_score(families: dict, name: str, kind: str) -> float | None:
     return round(float(value), 4)
 
 
+def family_ready(reading: dict | None) -> bool:
+    """A detector that published a score. A missing worker is not a vote."""
+    if not isinstance(reading, dict):
+        return False
+    if reading.get("departure") is not None or reading.get("return") is not None:
+        return True
+    return bool(reading.get("strong_departure") or reading.get("strong_return") or reading.get("speech"))
+
+
 def votes(families: dict, key: str) -> int:
     count = 0
     for reading in families.values():

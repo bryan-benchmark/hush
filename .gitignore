@@ -15,7 +15,10 @@ apps/monitor/.git/
 .env
 .env.local
 .env.*
+!.env.example
 *.log
+# Windows lab local scratch (data lives outside Git under OHUSH_DATA_ROOT)
+tools/windows_lab/.cache/
 .mplconfig/
 .numba_cache/
 *.parquet
@@ -46,3 +49,6 @@ experiments/reports/labeler_audio_debug.jsonl
 
 # Nested junk
 /package-lock.json
+
+# Vendored research code, cloned locally. Checkpoints stay under OHUSH data.
+third_party/
