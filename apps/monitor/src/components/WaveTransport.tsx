@@ -38,6 +38,10 @@ export function WaveTransport({
   plain,
   waveHeight = 160,
   volumeControl = false,
+  compact = false,
+  /** Farm mode: always 1×, loop always on, no speed/loop chips. */
+  simple = false,
+  knownDuration,
   onDecoded,
   onPointerDown,
   onPointerMove,
@@ -53,6 +57,11 @@ export function WaveTransport({
   plain?: boolean;
   waveHeight?: number;
   volumeControl?: boolean;
+  /** Tighter controls for single-screen labelers. */
+  compact?: boolean;
+  simple?: boolean;
+  /** Authoritative length when <audio>.duration is NaN/Infinity (common on WAV). */
+  knownDuration?: number;
   onDecoded?: (buffer: AudioBuffer) => void;
   onPointerDown?: (event: PointerEvent<HTMLCanvasElement>) => void;
   onPointerMove?: (event: PointerEvent<HTMLCanvasElement>) => void;
@@ -64,19 +73,40 @@ export function WaveTransport({
   const gestureRef = useRef<{ x: number; y: number; moved: boolean } | null>(null);
   const timeRef = useRef<HTMLSpanElement | null>(null);
   const ofRef = useRef<HTMLSpanElement | null>(null);
+  const lastTickTimeRef = useRef(0);
   const onDecodedRef = useRef(onDecoded);
   const loopRef = useRef(loop);
   const loopOnRef = useRef(loopByDefault);
+  const knownDurRef = useRef(knownDuration);
   const [playing, setPlaying] = useState(false);
   const [rate, setRate] = useState(1);
-  const [loopOn, setLoopOn] = useState(loopByDefault);
+  const [loopOn, setLoopOn] = useState(simple ? true : loopByDefault);
   const [coarse, setCoarse] = useState(false);
   const [volume, setVolume] = useState(3);
   const volumeRef = useRef(3);
   const gainRef = useRef<GainNode | null>(null);
   onDecodedRef.current = onDecoded;
   loopRef.current = loop;
-  loopOnRef.current = loopOn;
+  loopOnRef.current = simple ? true : loopOn;
+  knownDurRef.current = knownDuration;
+
+  useEffect(() => {
+    if (!simple) return;
+    setRate(1);
+    setLoopOn(true);
+  }, [simple, src]);
+
+  useEffect(() => {
+    lastTickTimeRef.current = 0;
+  }, [src]);
+
+  function heardSeconds(audio: HTMLAudioElement | null) {
+    const known = knownDurRef.current;
+    if (known != null && Number.isFinite(known) && known > 0) return known;
+    const d = audio?.duration;
+    if (d != null && Number.isFinite(d) && d > 0) return d;
+    return 0;
+  }
 
   useEffect(() => {
     setCoarse(window.matchMedia("(pointer: coarse)").matches);
@@ -179,20 +209,30 @@ export function WaveTransport({
       const label = timeRef.current;
       const range = loopRef.current;
       if (audio && line) {
-        if (loopOnRef.current && range && audio.currentTime >= range.end_s && audio.currentTime > range.start_s) {
+        // Only wrap when playback crosses the end — not when the user seeks past a short range.
+        if (
+          loopOnRef.current &&
+          range &&
+          audio.currentTime >= range.end_s - 0.02 &&
+          lastTickTimeRef.current < range.end_s - 0.02 &&
+          lastTickTimeRef.current >= range.start_s - 0.05
+        ) {
           audio.currentTime = range.start_s;
         }
-        const duration = Number.isFinite(audio.duration) && audio.duration > 0 ? audio.duration : 20;
+        lastTickTimeRef.current = audio.currentTime;
+        const duration = heardSeconds(audio);
         const at = audio.currentTime || 0;
-        line.style.left = `${Math.min(100, Math.max(0, (at / duration) * 100))}%`;
+        if (duration > 0) {
+          line.style.left = `${Math.min(100, Math.max(0, (at / duration) * 100))}%`;
+          if (ofRef.current) ofRef.current.textContent = `of ${duration.toFixed(0)}s`;
+        }
         if (label) label.textContent = at.toFixed(2);
-        if (ofRef.current) ofRef.current.textContent = `of ${duration.toFixed(0)}s`;
       }
       frame = requestAnimationFrame(tick);
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [src, audioRef]);
+  }, [src, audioRef, knownDuration]);
 
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
@@ -240,9 +280,12 @@ export function WaveTransport({
     if (!audio) return;
     const rect = element.getBoundingClientRect();
     const fraction = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
-    const duration = Number.isFinite(audio.duration) && audio.duration > 0 ? audio.duration : 20;
+    const duration = heardSeconds(audio);
+    if (duration <= 0) return;
     audio.currentTime = fraction * duration;
   }
+
+  const ownsWavePointers = Boolean(onPointerDown);
 
   if (plain) {
     return (
@@ -272,48 +315,75 @@ export function WaveTransport({
     );
   }
 
+  const h = compact || simple ? Math.min(waveHeight, simple ? 110 : 72) : waveHeight;
+  const hideTransportChips = simple || compact;
+
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "0.55rem" }}>
-      <div style={{ display: "flex", background: "#1a1024", borderRadius: 8, overflow: "hidden" }}>
+    <div
+      className={simple ? "farm-wave-transport" : undefined}
+      style={{ display: "flex", flexDirection: "column", gap: simple ? 0 : hideTransportChips ? "0.3rem" : "0.55rem" }}
+    >
+      <div
+        className={simple ? "farm-wave-stage" : undefined}
+        style={
+          simple
+            ? undefined
+            : {
+                display: "flex",
+                background: "#1a1024",
+                borderRadius: 8,
+                overflow: "hidden",
+              }
+        }
+      >
         <button
           type="button"
+          className={simple ? "farm-side-col farm-play-col" : undefined}
           onClick={toggle}
           aria-label={playing ? "Pause" : "Play"}
-          style={{
-            width: 56,
-            border: 0,
-            borderRight: "1px solid rgba(255,255,255,0.12)",
-            background: "transparent",
-            color: "#7dffb3",
-            fontSize: "1.4rem",
-            cursor: "pointer",
-          }}
+          style={
+            simple
+              ? undefined
+              : {
+                  width: hideTransportChips ? 44 : 56,
+                  border: 0,
+                  borderRight: "1px solid rgba(255,255,255,0.12)",
+                  background: "transparent",
+                  color: "#7dffb3",
+                  fontSize: hideTransportChips ? "1.15rem" : "1.4rem",
+                  cursor: "pointer",
+                }
+          }
         >
           {playing ? "❚❚" : "▶"}
         </button>
-        <div style={{ position: "relative", flex: 1 }}>
+        <div className={simple ? "farm-wave-pane" : undefined} style={{ position: "relative", flex: 1, minWidth: 0 }}>
           <canvas
             ref={canvasRef}
             width={840}
-            height={waveHeight}
+            height={h}
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
             onPointerUp={onPointerUp}
             onPointerCancel={onPointerCancel}
             onPointerLeave={onPointerLeave}
             className="wave-canvas"
-            style={{ width: "100%", height: waveHeight, display: "block", touchAction: "none" }}
+            style={{ width: "100%", height: h, display: "block", touchAction: "none" }}
           />
-          <div
-            className="wave-seek"
-            onPointerDown={(event) => {
-              event.currentTarget.setPointerCapture(event.pointerId);
-              seek(event.clientX, event.currentTarget);
-            }}
-            onPointerMove={(event) => {
-              if (event.currentTarget.hasPointerCapture(event.pointerId)) seek(event.clientX, event.currentTarget);
-            }}
-          />
+          {/* Only use the seek overlay when the parent does not own wave pointers —
+              otherwise it fights grab-drags and seeks with a wrong duration. */}
+          {ownsWavePointers ? null : (
+            <div
+              className="wave-seek"
+              onPointerDown={(event) => {
+                event.currentTarget.setPointerCapture(event.pointerId);
+                seek(event.clientX, event.currentTarget);
+              }}
+              onPointerMove={(event) => {
+                if (event.currentTarget.hasPointerCapture(event.pointerId)) seek(event.clientX, event.currentTarget);
+              }}
+            />
+          )}
           <div
             ref={playheadRef}
             aria-hidden
@@ -330,53 +400,92 @@ export function WaveTransport({
           />
         </div>
       </div>
-      <div className="tool-row">
-        <button type="button" className={rate === 1 ? "tool-card on" : "tool-card"} onClick={() => setRate(1)}>
-          <span className="tool-value">1×</span>
-          <span className="tool-kicker">Full</span>
-        </button>
-        <button type="button" className={rate === 0.5 ? "tool-card on" : "tool-card"} onClick={() => setRate(0.5)}>
-          <span className="tool-value">½×</span>
-          <span className="tool-kicker">Slower</span>
-        </button>
-        <button
-          type="button"
-          className={loopOn && loop ? "tool-card on" : "tool-card"}
-          disabled={!loop}
-          onClick={() => setLoopOn((value) => !value)}
-        >
-          <span className="tool-value">Loop</span>
-          <span className="tool-kicker">{loopHint(loop, loopOn, audioRef.current?.duration)}</span>
-        </button>
-        <div className="tool-card read" aria-live="polite">
-          <span className="tool-value" ref={timeRef}>
-            0.00
-          </span>
-          <span className="tool-kicker" ref={ofRef}>
-            of 20s
+      {simple ? (
+        <div className="farm-simple-meta">
+          {volumeControl ? (
+            <label className="farm-vol">
+              <span className="farm-vol-icon" aria-hidden>
+                {volume <= 0.3 ? "🔇" : volume < 1.5 ? "🔈" : volume < 3.5 ? "🔉" : "🔊"}
+              </span>
+              <input
+                type="range"
+                min={0.25}
+                max={6}
+                step={0.05}
+                value={volume}
+                aria-label={`Volume ${volume.toFixed(1)}×`}
+                onChange={(event) => {
+                  const next = Number(event.target.value);
+                  volumeRef.current = next;
+                  setVolume(next);
+                  localStorage.setItem(VOLUME_KEY, String(next));
+                }}
+              />
+            </label>
+          ) : (
+            <span />
+          )}
+          <span className="farm-simple-time" aria-live="polite">
+            <span ref={timeRef}>0.00</span>
+            <span ref={ofRef}>
+              {" "}
+              of {knownDuration && knownDuration > 0 ? `${knownDuration.toFixed(0)}s` : "…"}
+            </span>
           </span>
         </div>
-      </div>
-      {volumeControl ? (
-        <label style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-          <span style={{ minWidth: "6.5rem" }}>Volume {volume.toFixed(1)}×</span>
-          <input
-            type="range"
-            min={0.25}
-            max={6}
-            step={0.05}
-            value={volume}
-            aria-label="Volume"
-            onChange={(event) => {
-              const next = Number(event.target.value);
-              volumeRef.current = next;
-              setVolume(next);
-              localStorage.setItem(VOLUME_KEY, String(next));
-            }}
-            style={{ flex: 1, accentColor: "#7dffb3" }}
-          />
-        </label>
-      ) : null}
+      ) : (
+        <>
+          <div className="tool-row">
+            <button type="button" className={rate === 1 ? "tool-card on" : "tool-card"} onClick={() => setRate(1)}>
+              <span className="tool-value">1×</span>
+              <span className="tool-kicker">Full</span>
+            </button>
+            <button type="button" className={rate === 0.5 ? "tool-card on" : "tool-card"} onClick={() => setRate(0.5)}>
+              <span className="tool-value">½×</span>
+              <span className="tool-kicker">Slower</span>
+            </button>
+            <button
+              type="button"
+              className={loopOn && loop ? "tool-card on" : "tool-card"}
+              disabled={!loop}
+              onClick={() => setLoopOn((value) => !value)}
+            >
+              <span className="tool-value">Loop</span>
+              <span className="tool-kicker">
+                {loopHint(loop, loopOn, knownDuration ?? audioRef.current?.duration)}
+              </span>
+            </button>
+            <div className="tool-card read" aria-live="polite">
+              <span className="tool-value" ref={timeRef}>
+                0.00
+              </span>
+              <span className="tool-kicker" ref={ofRef}>
+                of {knownDuration && knownDuration > 0 ? `${knownDuration.toFixed(0)}s` : "…"}
+              </span>
+            </div>
+            {volumeControl ? (
+              <label style={{ display: "flex", alignItems: "center", gap: "0.4rem", minWidth: "6.5rem", flex: 1 }}>
+                <span style={{ minWidth: "6.5rem" }}>Volume {volume.toFixed(1)}×</span>
+                <input
+                  type="range"
+                  min={0.25}
+                  max={6}
+                  step={0.05}
+                  value={volume}
+                  aria-label={`Volume ${volume.toFixed(1)}×`}
+                  onChange={(event) => {
+                    const next = Number(event.target.value);
+                    volumeRef.current = next;
+                    setVolume(next);
+                    localStorage.setItem(VOLUME_KEY, String(next));
+                  }}
+                  style={{ flex: 1, accentColor: "#7dffb3" }}
+                />
+              </label>
+            ) : null}
+          </div>
+        </>
+      )}
       <audio ref={audioRef} preload="auto" playsInline controls={coarse} />
     </div>
   );

@@ -11,6 +11,17 @@ env:
     value: hushdev-748439071367-crowd
     availability:
       - RUNTIME
+  - variable: FARM_BUCKET
+    value: hushdev-748439071367-crowd
+    availability:
+      - RUNTIME
+  # Solo /farm password — set with:
+  #   firebase apphosting:secrets:set OHUSH_FARM_CODE --project hushdev
+  # then grant to the hush backend. Falls back unused if missing (enter fails closed).
+  - variable: OHUSH_FARM_CODE
+    secret: OHUSH_FARM_CODE
+    availability:
+      - RUNTIME
   - variable: NEXT_PUBLIC_OHUSH_PUBLIC_SITE
     value: "1"
     availability:

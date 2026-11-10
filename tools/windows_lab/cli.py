@@ -11,7 +11,8 @@ def main(argv: list[str] | None = None) -> int:
         print(
             "usage: python -m tools.windows_lab "
             "{inventory|ingest|analyze|health|capture|instances|channel|"
-            "session|schedule|catalog|ota|multi-instance} ..."
+            "session|schedule|catalog|archive|ota|multi-instance|salvation|"
+            "farm} ..."
         )
         return 0
     cmd, rest = argv[0], argv[1:]
@@ -43,10 +44,52 @@ def main(argv: list[str] | None = None) -> int:
         from .scheduler import main as m
     elif cmd == "catalog":
         from .catalog import main as m
+    elif cmd == "archive":
+        from .visual_archive import main as m
+
+        return m(rest)
     elif cmd == "ota":
         from .ota import main as m
     elif cmd in ("multi-instance", "multi_instance"):
         from .multi_instance import main as m
+    elif cmd == "salvation":
+        from .salvation import main as m
+    elif cmd == "farm":
+        # Three ops + worker helpers:
+        #   record | label | human | status | orchestrate → farm_orchestrate
+        #   loop → farm_loop (scheduled autonomy)
+        #   tick | backlog → farm_worker
+        #   cloud-sync → farm_cloud_sync (push help clips to ohush.co GCS)
+        #   import → farm_import (authorized_sources → farm takes)
+        #   plan | board | prepare | … → coverage_farm
+        if not rest:
+            from .farm_orchestrate import main as m
+
+            return m(["status"])
+        head = rest[0]
+        if head in {"tick", "backlog"}:
+            from .farm_worker import main as m
+
+            return m(rest)
+        if head in {"cloud-sync", "sync-cloud"}:
+            from .farm_cloud_sync import main as m
+
+            return m(rest[1:])
+        if head == "import":
+            from .farm_import import main as m
+
+            return m(rest[1:])
+        if head == "loop":
+            from .farm_loop import main as m
+
+            return m(rest[1:])
+        if head in {"record", "label", "human", "status", "orchestrate"}:
+            from .farm_orchestrate import main as m
+
+            return m(rest)
+        from .coverage_farm import main as m
+
+        return m(rest)
     else:
         print(f"unknown command: {cmd}", file=sys.stderr)
         return 2
