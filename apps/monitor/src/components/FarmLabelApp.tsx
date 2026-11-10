@@ -183,6 +183,8 @@ export function FarmLabelApp() {
   const [heardDur, setHeardDur] = useState(0);
 
   const [helpN, setHelpN] = useState(0);
+  /** Clips left via Done — Prev restores the last one (Done used to leave index stuck at 0). */
+  const [history, setHistory] = useState<Take[]>([]);
 
   useEffect(() => {
     fetch("/api/farm-takes")
@@ -192,9 +194,10 @@ export function FarmLabelApp() {
         const prior = (data.saved ?? []) as Saved[];
         setItems(next);
         setSaved(prior);
+        setHistory([]);
         setHelpN(Number(data.help_n || next.filter((row) => row.help).length || 0));
         const judged = new Set(prior.filter((row) => row.regions.length > 0).map((row) => row.id));
-        const first = next.findIndex((item) => !judged.has(item.id));
+        const first = next.findIndex((row) => !judged.has(row.id));
         setIndex(first >= 0 ? first : 0);
       })
       .catch(() => setError("Could not load farm takes."));
@@ -410,9 +413,11 @@ export function FarmLabelApp() {
         return [...others, nextSaved];
       });
       const wasHelp = Boolean(item.help);
+      const leaving = item;
+      setHistory((prev) => [...prev, leaving]);
       setItems((prev) => {
-        const next = prev.filter((row) => row.id !== item.id);
-        setIndex((i) => Math.min(i, Math.max(0, next.length - 1)));
+        const next = prev.filter((row) => row.id !== leaving.id);
+        setIndex(0);
         return next;
       });
       if (wasHelp) setHelpN((n) => Math.max(0, n - 1));
@@ -637,8 +642,18 @@ export function FarmLabelApp() {
           <button
             type="button"
             className="farm-dock-btn"
-            disabled={index === 0}
-            onClick={() => setIndex((n) => n - 1)}
+            disabled={history.length === 0 && index === 0}
+            onClick={() => {
+              if (history.length > 0) {
+                const prevClip = history[history.length - 1];
+                setHistory((h) => h.slice(0, -1));
+                setItems((list) => [prevClip, ...list.filter((row) => row.id !== prevClip.id)]);
+                setIndex(0);
+                if (prevClip.help) setHelpN((n) => n + 1);
+                return;
+              }
+              setIndex((n) => Math.max(0, n - 1));
+            }}
           >
             Prev
           </button>
