@@ -54,7 +54,8 @@ test -f ohush_live/cache/enroll_tnf.npy && echo enroll_tnf_ok
 
 ## What “live muter” actually means right now
 
-- **Champion:** no authorized automatic mute that starts a cover.
-- **Locked live:** enrolled-show return at **0.10** (`enroll_rolling_max`) — returns the game; does not start a cover.
-- Engine: `ohush_live.sports_daemon` → http://127.0.0.1:8770/  
-- UI: `apps/monitor` → http://127.0.0.1:3010/
+**Policy (owner, until changed):** home testing **is** prod. Kept accuracy wins ship into `ohush_live` on commit/push — not research-only shelves. See `.cursor/rules/live-muter-prod.mdc`.
+
+- **Prod path:** `ohush_live.sports_daemon` → http://127.0.0.1:8770/ · UI http://127.0.0.1:3010/
+- **Locked live today:** enrolled-show return at **0.10** (`enroll_rolling_max`) — returns the game; does not start a cover.
+- **Next ship target:** the kept ~85% research stack (`frame_mn10` / frozen head / Clarissa–Whit–Palmer–Fitz latch) must be **ported into `ohush_live`**, not left as GPU replay. Until that wiring lands, Mac cannot “run the 85% model” live — that is a missing port, not a “no mute allowed” rule.

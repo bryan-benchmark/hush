@@ -14,9 +14,13 @@ The research target is 99.99% correct treatment of audible programming versus ad
 
 A muted second of the game breaks the run. That run has no accuracy. On a run that stays off the game, accuracy is commercial seconds actually held, divided by 17,648.4. The rules are in `docs/ohush/research/ACCURACY_LADDER_001/KPI.md`. The contract is `docs/ohush/swarm/RESEARCH_CONTRACT.md`. The ledger is `docs/ohush/swarm/SCOREBOARD.md`.
 
+## Home prod = live muter
+
+Until the owner changes it: we test only at home, and **prod is the live muter** (`ohush_live`). When a version is kept as more accurate, wire it into `ohush_live`, update `LATEST_MUTER.md` / `ohush_live/MODEL_MANIFEST.json`, commit, and push. Do not park kept wins as “research-only / GPU-only.” Cursor rule: `.cursor/rules/live-muter-prod.mdc`.
+
 ## Where the plan is
 
-The champion is no authorized mute. Nothing automatic is allowed to hide the game. Universal v1, the published count-200 fingerprint, is the research baseline: 25.0 commercial seconds covered, 0 program seconds, 2 of 136 football pods. That is 0.14%.
+Universal v1, the published count-200 fingerprint, is the research baseline: 25.0 commercial seconds covered, 0 program seconds, 2 of 136 football pods. That is 0.14%. Older “no authorized mute” champion language is superseded for home prod by the live-muter policy above — kept stacks still have to be **wired** before they play on the Mac.
 
 The published lines, scored and not installed, hold 116.0 of 17,648.4 commercial seconds and 0 game seconds. That is 0.66%. 134 of 136 commercials are never muted. The median start lag on that ceiling is 132.5 seconds. `docs/ohush/research/V1_SCORECARD_001/`.
 

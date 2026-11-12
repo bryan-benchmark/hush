@@ -14,8 +14,9 @@
   "monitor": "http://127.0.0.1:3010/",
   "engine_api": "http://127.0.0.1:8770/",
   "authorization": {
-    "champion": "no authorized mute that starts a cover",
-    "locked_live": "enrolled-show return floor 0.10 — returns game, does not start cover"
+    "policy": "home prod is the live muter; kept accuracy wins wire into ohush_live and push (live-muter-prod.mdc)",
+    "locked_live": "enrolled-show return floor 0.10 — returns game, does not start cover",
+    "next_ship": "port kept ~85% research stack (frame_mn10 / frozen head / Clarissa-Whit-Palmer-Fitz) into ohush_live"
   },
   "assets": [
     {

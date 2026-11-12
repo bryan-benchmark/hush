@@ -1,0 +1,22 @@
+---
+description: Home prod is the live muter. Better measured versions ship into ohush_live, not research-only shelves.
+alwaysApply: true
+---
+
+# Live muter is prod
+
+Until the owner changes this: **we are building a live muter for home use.** There is no separate “wait for authorization” gate and no other audience. A better measured muter belongs in the television path.
+
+## What “prod” means
+
+1. **Prod = `ohush_live`** (sports daemon + monitor at http://127.0.0.1:3010/). That is what plays on the speakers.
+2. A scoreboard row, GPU replay, or `KEEP_RESEARCH_STACK` note is **not** shipped. If it wins on accuracy and the owner keeps it, **wire it into `ohush_live` in the same effort**, then restart the desk.
+3. When committing a better muter version: **commit the live wiring**, update [`LATEST_MUTER.md`](../../LATEST_MUTER.md) / [`ohush_live/MODEL_MANIFEST.json`](../../ohush_live/MODEL_MANIFEST.json) with exact filenames and fetch paths, and **push** so the Mac can pull. Do not leave the win only under `docs/ohush/research/` or `C:\OHushData\gpu_lab\`.
+4. Holdouts stay sealed. Do not retune numbers while wiring. Prefer the locked measured recipe over a fresh threshold search on game night.
+
+## Do not say
+
+- “That model is research-only / offline-only / GPU-only, so the Mac cannot mute.”
+- “Champion is no authorized mute” as a reason to refuse wiring a kept accuracy win into the live desk.
+
+Those lines are obsolete under this policy. If a stack truly cannot run on the Mac yet, say what is missing and **port or replace it for live**, do not park the win forever.

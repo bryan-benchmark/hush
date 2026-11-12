@@ -1,15 +1,15 @@
 # MacBook Air — MNF tonight
 
-Two different systems. Do not mix them.
+Two systems today — **policy is to merge them.** Home prod is the live muter: kept accuracy wins get wired into `ohush_live` and pushed (see `LATEST_MUTER.md`, `.cursor/rules/live-muter-prod.mdc`).
 
-| | **Live booth (tonight)** | **Research stack (lab)** |
+| | **Live booth (what Mac runs now)** | **Research stack (must be ported to live)** |
 |---|---|---|
 | Code | `ohush_live.sports_daemon` | `frame_mn10` + frozen GRU + Clarissa/Whit/Palmer/Fitz |
-| Device | MacBook Air CPU/MPS | Windows CUDA lab |
-| Show cast | `mnf` → Buck + Aikman (`enroll_mnf.npy`) | TNF desk panel |
-| Voice role | **Return floor 0.10 only** — does not start covers | Cover latch (research, not locked live) |
+| Device | MacBook Air CPU/MPS | Measured on Windows CUDA lab; **not allowed to stay lab-only** once kept |
+| Show cast | `mnf` / `tnf` enroll matrices | TNF desk panel in the latch |
+| Voice role | **Return floor 0.10** locked live | Cover latch — **ship target** for live mute, not a forever shelf |
 
-Tonight: run the **live booth** with show **Monday Night Football / mnf**. Do not expect TNF research-stack desk KPIs.
+Tonight until the port lands: run the **live booth** (show key for the game you are watching). Do not expect the ~85% research-stack KPIs from the Mac until that stack is wired into `ohush_live`.
 
 ## Expected KPIs (from prior MNF tape)
 

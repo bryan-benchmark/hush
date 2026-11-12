@@ -7,11 +7,14 @@ alwaysApply: true
 
 A locked result is the behavior the television plays. A report, a scoreboard row, or a module that only scores old tapes is not locked.
 
-When the owner locks a result:
+Home prod **is** the live muter. Also follow [`live-muter-prod.mdc`](live-muter-prod.mdc): kept accuracy wins ship into `ohush_live`, not a research shelf.
+
+When the owner locks a result (or keeps a better measured muter version):
 
 1. Wire it into `ohush_live`, the process that replaces or returns the television. The research copy in `src/hush` can stay. It is not the test.
 2. Restart the running sports daemon in the same session. A process that started before the change is still the old rule.
 3. Say that it is live, at http://127.0.0.1:3010/, and what they should hear.
+4. Update `LATEST_MUTER.md` / `ohush_live/MODEL_MANIFEST.json` and push so the Mac pulls the same recipe.
 
 A locked return brings the game back and blocks a cover. It does not start a cover. A locked cover starts only the cover that was locked. Do not retune the number while wiring it. Holdouts stay sealed.
 
