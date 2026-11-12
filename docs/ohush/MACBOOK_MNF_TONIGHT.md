@@ -29,6 +29,8 @@ Session `hush_20261012_204200` — full MNF, **TRAIN** for the frozen head (in-s
 
 ## Assets (GitHub alone is not enough)
 
+**Stop:** there is no muter `.pt` / `.pth` on GitHub. Exact look-up table: [`LATEST_MUTER.md`](../../LATEST_MUTER.md) and [`ohush_live/MODEL_MANIFEST.json`](../../ohush_live/MODEL_MANIFEST.json).
+
 GitHub has code + labels. **Not** in git:
 
 | asset | where | size / note |

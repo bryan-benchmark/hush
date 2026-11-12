@@ -1,5 +1,7 @@
 # OHUSH_LIVE_V0_SPORTS
 
+**Latest muter assets (not on GitHub):** [`../LATEST_MUTER.md`](../LATEST_MUTER.md) · [`MODEL_MANIFEST.json`](MODEL_MANIFEST.json)
+
 **MacBook MNF tonight:** follow [`docs/ohush/MACBOOK_MNF_TONIGHT.md`](../docs/ohush/MACBOOK_MNF_TONIGHT.md) (assets, KPIs, desk commands). Show key `mnf` loads Buck/Aikman enroll for the return floor.
 
 Tonight's desk is a live game or a replay of one. Mark a replay in the setup. Buccaneers–Cowboys on 8 October is a recording. The next Prime Thursday game after 23 October 2026 is Panthers–Packers on 29 October. This session does not change Exp001–005, and its logs stay out of the replication set.

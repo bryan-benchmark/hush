@@ -55,6 +55,8 @@ The private bucket is not an open dataset. `gcloud` access is required.
 
 GitHub: https://github.com/bryan-benchmark/hush
 
+**Looking for the “latest muter model”?** Read [`LATEST_MUTER.md`](LATEST_MUTER.md) first. It is **not on GitHub**. Exact filenames, paths, Zenodo/GCS URLs, and the SHA-256 for CNN14 are there and in [`ohush_live/MODEL_MANIFEST.json`](ohush_live/MODEL_MANIFEST.json).
+
 **MNF tonight on a MacBook Air:** start at [`docs/ohush/MACBOOK_MNF_TONIGHT.md`](docs/ohush/MACBOOK_MNF_TONIGHT.md) — expected KPIs, what to download (GCS enroll + Zenodo Cnn14 + HF ECAPA), and the live desk commands. That path is the live booth (`mnf` / Buck+Aikman return floor), not the TNF research mute stack.
 
 The bucket is `gs://hushdev-748439071367-research` in Google Cloud project `hushdev`. Public access is blocked. Log in as the account that can read that project.

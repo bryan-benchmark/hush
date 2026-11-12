@@ -1,0 +1,99 @@
+{
+  "title": "OHush live desk assets — not on GitHub",
+  "updated": "2026-11-12",
+  "warning": "GitHub has code and labels only. There is no live muter .pt/.pth release asset in this repo.",
+  "do_not_search_github_for": [
+    "muter model",
+    "latest muter",
+    "mute.pt",
+    "muter.pth",
+    "frame_mn10_strong_1.pt",
+    "frozen_head.pt"
+  ],
+  "live_engine": "ohush_live.sports_daemon",
+  "monitor": "http://127.0.0.1:3010/",
+  "engine_api": "http://127.0.0.1:8770/",
+  "authorization": {
+    "champion": "no authorized mute that starts a cover",
+    "locked_live": "enrolled-show return floor 0.10 — returns game, does not start cover"
+  },
+  "assets": [
+    {
+      "id": "cnn14",
+      "role": "audio_family",
+      "filename": "Cnn14_mAP=0.431.pth",
+      "install_path": "experiments/exp003/models/Cnn14_mAP=0.431.pth",
+      "source": "zenodo",
+      "url": "https://zenodo.org/record/3987831/files/Cnn14_mAP%3D0.431.pth?download=1",
+      "sha256": "0dc499e40e9761ef5ea061ffc77697697f277f6a960894903df3ada000e34b31",
+      "required": true,
+      "loaded_by": "ohush_live/audio_worker.py",
+      "fetch": "curl -L -o experiments/exp003/models/Cnn14_mAP=0.431.pth 'https://zenodo.org/record/3987831/files/Cnn14_mAP%3D0.431.pth?download=1'"
+    },
+    {
+      "id": "enroll_mnf",
+      "role": "return_floor",
+      "filename": "enroll_mnf.npy",
+      "install_path": "ohush_live/cache/enroll_mnf.npy",
+      "source": "gcs",
+      "url": "gs://hushdev-748439071367-research/enroll/enroll_mnf.npy",
+      "gcloud_project": "hushdev",
+      "required": true,
+      "show_key": "mnf",
+      "loaded_by": "ohush_live/enroll_floor.py",
+      "fetch": "gcloud storage cp gs://hushdev-748439071367-research/enroll/enroll_mnf.npy ohush_live/cache/"
+    },
+    {
+      "id": "enroll_snf",
+      "role": "return_floor",
+      "filename": "enroll_snf.npy",
+      "install_path": "ohush_live/cache/enroll_snf.npy",
+      "source": "gcs",
+      "url": "gs://hushdev-748439071367-research/enroll/enroll_snf.npy",
+      "gcloud_project": "hushdev",
+      "required": true,
+      "show_key": "snf",
+      "loaded_by": "ohush_live/enroll_floor.py",
+      "fetch": "gcloud storage cp gs://hushdev-748439071367-research/enroll/enroll_snf.npy ohush_live/cache/"
+    },
+    {
+      "id": "enroll_tnf",
+      "role": "return_floor",
+      "filename": "enroll_tnf.npy",
+      "install_path": "ohush_live/cache/enroll_tnf.npy",
+      "source": "gcs",
+      "url": "gs://hushdev-748439071367-research/enroll/enroll_tnf.npy",
+      "gcloud_project": "hushdev",
+      "required": true,
+      "show_key": "tnf",
+      "loaded_by": "ohush_live/enroll_floor.py",
+      "fetch": "gcloud storage cp gs://hushdev-748439071367-research/enroll/enroll_tnf.npy ohush_live/cache/"
+    },
+    {
+      "id": "ecapa",
+      "role": "speaker_family",
+      "model_id": "speechbrain/spkrec-ecapa-voxceleb",
+      "install_path": "ohush_live/cache/spkrec-ecapa-voxceleb",
+      "source": "huggingface",
+      "required": true,
+      "loaded_by": "ohush_live/speaker_worker.py",
+      "fetch": "downloads automatically on first live speaker launch into ohush_live/cache/"
+    }
+  ],
+  "research_only_not_live": [
+    {
+      "filename": "frame_mn10_strong_1.pt",
+      "note": "research audio_learn stack — do not install as the live muter"
+    },
+    {
+      "filename": "frozen_head.pt",
+      "note": "research GPU lab head — do not install as the live muter"
+    }
+  ],
+  "docs": [
+    "LATEST_MUTER.md",
+    "docs/ohush/MACBOOK_MNF_TONIGHT.md",
+    "HANDOFF.md",
+    "ohush_live/README.md"
+  ]
+}
