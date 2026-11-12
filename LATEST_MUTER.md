@@ -1,61 +1,70 @@
-# Latest muter — stop looking on GitHub
+# Latest muter — what to install
 
-**There is no muter model file in this GitHub repo.**  
-Clone/pull will never give you a `.pt` / `.pth` / “latest muter” release asset for the live desk.
+**Home prod = live desk.** Kept accuracy wins ship into `ohush_live`. See `.cursor/rules/live-muter-prod.mdc`.
 
-The live system is **code in git** + **three outside assets**. Exact names and places:
+The **cover-starting** muter is now the kept research stack (acoustic path):
 
-| What people call it | Exact filename | Local path after install | Where it actually is |
+| Asset | Exact filename | Local path | Where to get it |
 | --- | --- | --- | --- |
-| Audio family (CNN14) | `Cnn14_mAP=0.431.pth` | `experiments/exp003/models/Cnn14_mAP=0.431.pth` | Zenodo (not GitHub) |
-| Enrolled-show return | `enroll_mnf.npy` / `enroll_snf.npy` / `enroll_tnf.npy` | `ohush_live/cache/enroll_*.npy` | GCS bucket (not GitHub) |
-| Speaker ECAPA | `speechbrain/spkrec-ecapa-voxceleb` | `ohush_live/cache/spkrec-ecapa-voxceleb/` | Hugging Face on first launch |
+| Frame encoder | `frame_mn10_strong_1.pt` | `ohush_live/cache/research_muter/frame_mn10_strong_1.pt` | **GitHub release** (PretrainedSED) |
+| Frozen GRU head | `frozen_head.pt` | `ohush_live/models/frozen_head.pt` | **In this git repo** |
+| PretrainedSED code | `Frame_MN_wrapper.py` | `third_party/PretrainedSED/` | Clone / submodule with the repo |
+| Enrolled-show return | `enroll_*.npy` | `ohush_live/cache/enroll_*.npy` | GCS `hushdev` |
+| Speaker ECAPA | `spkrec-ecapa-voxceleb` | `ohush_live/cache/spkrec-ecapa-voxceleb/` | Hugging Face on first launch |
+| CNN14 (fallback only) | `Cnn14_mAP=0.431.pth` | `experiments/exp003/models/` | Zenodo — used only if research assets missing |
 
-Machine-readable copy of the same map: [`ohush_live/MODEL_MANIFEST.json`](ohush_live/MODEL_MANIFEST.json)  
-Mac game-night steps: [`docs/ohush/MACBOOK_MNF_TONIGHT.md`](docs/ohush/MACBOOK_MNF_TONIGHT.md)
+Machine-readable: [`ohush_live/MODEL_MANIFEST.json`](ohush_live/MODEL_MANIFEST.json)
 
-## Do not search GitHub for these strings
+## Look for these exact names (Mac Cursor)
 
-- `muter model`, `latest model`, `best model`, `mute.pt`, `muter.pth`
-- `frame_mn10_strong_1.pt` — research stack only, **not** the live desk
-- `frozen_head.pt` — research stack only, **not** the live desk
+```
+frame_mn10_strong_1.pt
+frozen_head.pt
+ohush_live/research_audio_worker.py
+ohush_live/research_muter.py
+third_party/PretrainedSED
+```
 
-## Install the live assets (Mac)
+Do **not** search for `mute.pt` / `muter.pth` / “latest muter model” as a single mystery file.
+
+## Install (Mac)
 
 ```bash
 cd "$(git rev-parse --show-toplevel)"
-mkdir -p ohush_live/cache experiments/exp003/models
+git checkout research/windows-lab-node-01
+git pull
+git submodule update --init --recursive   # if PretrainedSED is a submodule
+# or ensure third_party/PretrainedSED exists with models/frame_mn/
 
-# 1) enroll matrices (private GCS — requires gcloud on project hushdev)
+mkdir -p ohush_live/cache/research_muter ohush_live/cache experiments/exp003/models
+
+# 1) cover-start weights (THIS is the live muter encoder)
+curl -L -o "ohush_live/cache/research_muter/frame_mn10_strong_1.pt" \
+  "https://github.com/fschmid56/PretrainedSED/releases/download/v0.0.1/frame_mn10_strong_1.pt"
+shasum -a 256 ohush_live/cache/research_muter/frame_mn10_strong_1.pt
+# expect: 4a0fe320d5369987b772394c51881fb20a602967e6842f72f3e5c8181065ece7
+
+# 2) frozen head is in git
+test -f ohush_live/models/frozen_head.pt && echo head_ok
+shasum -a 256 ohush_live/models/frozen_head.pt
+# expect: 58b8ad09f2da60b519b05558935d25c9b79a20ef288b15838c337748abc20bf2
+
+# 3) enroll matrices (return floor)
 gcloud config set project hushdev
 gcloud storage cp gs://hushdev-748439071367-research/enroll/enroll_mnf.npy ohush_live/cache/
 gcloud storage cp gs://hushdev-748439071367-research/enroll/enroll_snf.npy ohush_live/cache/
 gcloud storage cp gs://hushdev-748439071367-research/enroll/enroll_tnf.npy ohush_live/cache/
-# or: python scripts/restore_from_gcs.py
 
-# 2) CNN14 (Zenodo)
-curl -L -o "experiments/exp003/models/Cnn14_mAP=0.431.pth" \
-  "https://zenodo.org/record/3987831/files/Cnn14_mAP%3D0.431.pth?download=1"
-
-# 3) ECAPA downloads itself on first speaker launch into ohush_live/cache/
+# 4) torch + deps in the root venv
+source .venv/bin/activate
+python -m pip install -U torch torchaudio speechbrain silero-vad
 ```
 
-## Prove you have the right files
+## What plays live
 
-```bash
-test -f experiments/exp003/models/Cnn14_mAP=0.431.pth && echo cnn14_ok
-shasum -a 256 experiments/exp003/models/Cnn14_mAP=0.431.pth
-# expect: 0dc499e40e9761ef5ea061ffc77697697f277f6a960894903df3ada000e34b31
+- **Starts covers:** `research_audio_worker` — frame_mn10 + frozen head + 0.90/0.50 × 8/2 controller + 8s causal post-return play hold.
+- **Returns game:** enrolled-show floor **0.10** + booth speech + controller return.
+- **Not wired yet:** Clarissa/Whit/Palmer/Fitz cover-only voice vetoes (need portable prototypes + live Clarissa ad gate).
 
-test -f ohush_live/cache/enroll_mnf.npy && echo enroll_mnf_ok
-test -f ohush_live/cache/enroll_snf.npy && echo enroll_snf_ok
-test -f ohush_live/cache/enroll_tnf.npy && echo enroll_tnf_ok
-```
-
-## What “live muter” actually means right now
-
-**Policy (owner, until changed):** home testing **is** prod. Kept accuracy wins ship into `ohush_live` on commit/push — not research-only shelves. See `.cursor/rules/live-muter-prod.mdc`.
-
-- **Prod path:** `ohush_live.sports_daemon` → http://127.0.0.1:8770/ · UI http://127.0.0.1:3010/
-- **Locked live today:** enrolled-show return at **0.10** (`enroll_rolling_max`) — returns the game; does not start a cover.
-- **Next ship target:** the kept ~85% research stack (`frame_mn10` / frozen head / Clarissa–Whit–Palmer–Fitz latch) must be **ported into `ohush_live`**, not left as GPU replay. Until that wiring lands, Mac cannot “run the 85% model” live — that is a missing port, not a “no mute allowed” rule.
+Engine: http://127.0.0.1:8770/ · UI: http://127.0.0.1:3010/  
+`decision_mode` should read `research_stack` when assets are present.

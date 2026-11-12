@@ -60,6 +60,7 @@ from ohush_live.sittings import (  # noqa: E402
     should_continue,
 )
 from ohush_live.tnf_lab import DEFAULT_FAIL_OPEN_S, TnfLab  # noqa: E402
+from ohush_live.research_muter import assets_ready as research_assets_ready  # noqa: E402
 from ohush_live.sports import (  # noqa: E402
     CHUNK_MINUTES,
     PRODUCT,
@@ -74,7 +75,7 @@ from ohush_live.sports import (  # noqa: E402
     votes,
 )
 from ohush_live.shadow import Shadow  # noqa: E402
-from ohush_live.state import Machine  # noqa: E402
+from ohush_live.state import Machine, _show_floor  # noqa: E402
 
 
 def _audio_departure(families: dict) -> float | None:
@@ -198,6 +199,19 @@ def _next_chunk_number(folder: Path) -> int:
     return highest + 1
 
 
+def _worker_python(*preferred: Path) -> Path | None:
+    """Exp002/003 Mac venvs first, then the repo .venv (Windows Scripts or Unix bin)."""
+    for path in preferred:
+        if path.is_file():
+            return path
+    root = REPO / ".venv"
+    for path in (root / "Scripts" / "python.exe", root / "bin" / "python"):
+        if path.is_file():
+            return path
+    exe = Path(sys.executable)
+    return exe if exe.is_file() else None
+
+
 def _spawn_speaker(python: Path, show: str) -> subprocess.Popen:
     env = os.environ.copy()
     env["OHUSH_SHOW"] = show
@@ -229,7 +243,12 @@ class SportsSession:
         self._reported = False
         self.latch = AutoLatch()
         self.hint = ReturnHint()
-        self.families: dict[str, dict | None] = {"speaker": None, "audio": None, "semantic": None}
+        self.families: dict[str, dict | None] = {
+            "speaker": None,
+            "audio": None,
+            "semantic": None,
+            "research": None,
+        }
         self.samples = 0
         self._speaker_hold_until = 0.0
         self._lock = threading.RLock()
@@ -352,7 +371,12 @@ class SportsSession:
                 self.families[family] = None
             return
         # Handshake-only {"available": true} must not count as a live vote.
-        if "departure" not in message and "return" not in message and "strong_departure" not in message:
+        if (
+            "departure" not in message
+            and "return" not in message
+            and "strong_departure" not in message
+            and "action" not in message
+        ):
             return
         reading = {
             "departure": message.get("departure"),
@@ -367,6 +391,10 @@ class SportsSession:
             "similarity_to_booth": message.get("similarity_to_booth"),
             "enroll_cosine": message.get("enroll_cosine"),
             "enroll_rolling_max": message.get("enroll_rolling_max"),
+            "action": message.get("action"),
+            "probability": message.get("probability"),
+            "force_play": bool(message.get("force_play")),
+            "latency_ms": message.get("latency_ms"),
         }
         now = float(message.get("t") or self.clock())
         reading["audio_end_s"] = float(message["audio_end_s"]) if message.get("audio_end_s") is not None else now
@@ -531,6 +559,42 @@ class SportsSession:
         if self.record_only() or not auto:
             if self.record_only() and gate.mode != "program":
                 gate.play_program(prompt=True)
+            return
+        research = families.get("research") if isinstance(families.get("research"), dict) else None
+        if research and research.get("action") in ("cover", "play"):
+            action = str(research.get("action"))
+            speaker = families.get("speaker") if isinstance(families.get("speaker"), dict) else None
+            if speaker and speaker.get("speech") and speaker.get("booth_present"):
+                action = "play"
+            if _show_floor(speaker):
+                action = "play"
+            if action == "cover" and gate.mode != "replacement":
+                if self.latch.allow_auto_mute(1):
+                    begin_auto_cover(gate)
+                    self.machine.manual(timestamp, "mute", families)
+                    self._log_decision(
+                        timestamp,
+                        "PROGRAM_TO_REPLACEMENT",
+                        "research_stack",
+                        families,
+                        gate.replacement,
+                        False,
+                        gate=gate,
+                    )
+            elif action == "play" and gate.mode == "replacement":
+                if self.latch.allow_auto_play(1):
+                    gate.play_program()
+                    self.hint.reset()
+                    self.machine.manual(timestamp, "play", families)
+                    self._log_decision(
+                        timestamp,
+                        "REPLACEMENT_TO_PROGRAM",
+                        "research_stack",
+                        families,
+                        gate.replacement,
+                        False,
+                        gate=gate,
+                    )
             return
         if gate.mode == "replacement" and self.hint.update(True, returning, 1.0):
             gate.cue_return()
@@ -772,6 +836,14 @@ class SportsSession:
             "tnf": self.tnf.view(self.clock()),
             "shadow": self.shadow.view(),
             "decision_mode": self.decision_mode,
+            "research_ready": bool(
+                isinstance(families.get("research"), dict)
+                and (
+                    families["research"].get("action") in ("cover", "play")
+                    or family_ready(families.get("research"))
+                )
+            ),
+            "research_assets_ok": research_assets_ready()[0],
             "speaker_ready": family_ready(families.get("speaker") if isinstance(families.get("speaker"), dict) else None),
             "audio_ready": family_ready(families.get("audio") if isinstance(families.get("audio"), dict) else None),
             "broadcast": self.meta.get("broadcast") or "unspecified",
@@ -916,6 +988,7 @@ class Desk:
         # ML workers are heavy (Torch). Spawn only when a session actually starts.
         self._audio_proc = None
         self._speaker_proc = None
+        self._research_proc = None
         self._workers_started = False
         self._detect_started = False
         self._detect_q: queue.Queue | None = None
@@ -1006,7 +1079,15 @@ class Desk:
         self._ensure_workers()
         threading.Thread(
             target=_detect,
-            args=(detect_q, self.session, self.gate, self._audio_proc, self._speaker_proc, stop),
+            args=(
+                detect_q,
+                self.session,
+                self.gate,
+                self._audio_proc,
+                self._speaker_proc,
+                self._research_proc,
+                stop,
+            ),
             daemon=True,
         ).start()
 
@@ -1020,15 +1101,31 @@ class Desk:
                 cwd=str(REPO),
                 stdin=subprocess.PIPE,
             )
-        audio_py = REPO / "experiments" / "exp003" / ".venv" / "bin" / "python"
-        speaker_py = REPO / "experiments" / "exp002" / ".venv" / "bin" / "python"
-        self._audio_proc = _spawn(audio_py, "audio_worker.py") if audio_py.is_file() else None
-        self._speaker_proc = _spawn_speaker(speaker_py, str(self.session.meta.get("show") or "")) if speaker_py.is_file() else None
+        audio_py = _worker_python(REPO / "experiments" / "exp003" / ".venv" / "bin" / "python")
+        speaker_py = _worker_python(REPO / "experiments" / "exp002" / ".venv" / "bin" / "python")
+        research_py = _worker_python()
+        research_ok, research_detail = research_assets_ready()
+        # Prefer the kept research stack for home-prod mute; keep CNN14 only as fallback.
+        if research_ok and research_py is not None:
+            self._research_proc = _spawn(research_py, "research_audio_worker.py")
+            self.session.decision_mode = "research_stack"
+            self._audio_proc = None
+            print(f"research muter warming ({research_detail})", flush=True)
+        else:
+            self._research_proc = None
+            if not research_ok:
+                print(f"research muter unavailable: {research_detail}", flush=True)
+            self._audio_proc = _spawn(audio_py, "audio_worker.py") if audio_py is not None else None
+        self._speaker_proc = (
+            _spawn_speaker(speaker_py, str(self.session.meta.get("show") or "")) if speaker_py is not None else None
+        )
+        if self._research_proc:
+            threading.Thread(target=_pump, args=(self._research_proc, self._hub), daemon=True).start()
         if self._audio_proc:
             threading.Thread(target=_pump, args=(self._audio_proc, self._hub), daemon=True).start()
         if self._speaker_proc:
             threading.Thread(target=_pump, args=(self._speaker_proc, self._hub), daemon=True).start()
-        print("detectors warming (audio + speaker)", flush=True)
+        print("detectors warming", flush=True)
 
     def start(
         self,
@@ -1197,7 +1294,7 @@ class Desk:
         ):
             _send_upload(self._uploader, self.folder / name)
         self.session.close()
-        for proc in (self._audio_proc, self._speaker_proc, self._uploader):
+        for proc in (self._audio_proc, self._speaker_proc, self._research_proc, self._uploader):
             if proc is None:
                 continue
             try:
@@ -1211,6 +1308,7 @@ class Desk:
                 pass
         self._audio_proc = None
         self._speaker_proc = None
+        self._research_proc = None
         self._uploader = None
 
 
@@ -1426,7 +1524,15 @@ def _send_upload(uploader: subprocess.Popen | None, path: Path) -> None:
         print(f"uploader down, kept local {path.name}", flush=True)
 
 
-def _detect(detect_q: queue.Queue, session: SportsSession, gate: ListenerGate, audio_proc, speaker_proc, stop: threading.Event) -> None:
+def _detect(
+    detect_q: queue.Queue,
+    session: SportsSession,
+    gate: ListenerGate,
+    audio_proc,
+    speaker_proc,
+    research_proc,
+    stop: threading.Event,
+) -> None:
     next_tick = RATE
     seen = 0
     while not (stop.is_set() and detect_q.empty()):
@@ -1440,8 +1546,10 @@ def _detect(detect_q: queue.Queue, session: SportsSession, gate: ListenerGate, a
         session.add_samples(len(pcm))
         seen += len(pcm)
         mono = pcm.astype(np.float32).mean(axis=1) / 32768.0
+        mono_16k = resample_poly(mono, 1, 3).astype(np.float32)
         _write_pcm(audio_proc, resample_poly(mono, 2, 3).astype(np.float32))
-        _write_pcm(speaker_proc, resample_poly(mono, 1, 3).astype(np.float32))
+        _write_pcm(speaker_proc, mono_16k)
+        _write_pcm(research_proc, mono_16k)
         while seen >= next_tick:
             session.tick(gate)
             next_tick += RATE

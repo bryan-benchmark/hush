@@ -9,7 +9,7 @@ Two systems today — **policy is to merge them.** Home prod is the live muter: 
 | Show cast | `mnf` / `tnf` enroll matrices | TNF desk panel in the latch |
 | Voice role | **Return floor 0.10** locked live | Cover latch — **ship target** for live mute, not a forever shelf |
 
-Tonight until the port lands: run the **live booth** (show key for the game you are watching). Do not expect the ~85% research-stack KPIs from the Mac until that stack is wired into `ohush_live`.
+Acoustic research stack is **wired** into `ohush_live` (`decision_mode=research_stack` when `frame_mn10` + `frozen_head` + PretrainedSED are present). Follow [`LATEST_MUTER.md`](../../LATEST_MUTER.md). Voice-panel vetoes (Clarissa/Whit/Palmer/Fitz) are still pending.
 
 ## Expected KPIs (from prior MNF tape)
 

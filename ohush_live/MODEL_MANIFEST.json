@@ -1,61 +1,48 @@
 {
-  "title": "OHush live desk assets — not on GitHub",
+  "title": "OHush live muter assets",
   "updated": "2026-11-12",
-  "warning": "GitHub has code and labels only. There is no live muter .pt/.pth release asset in this repo.",
-  "do_not_search_github_for": [
-    "muter model",
-    "latest muter",
-    "mute.pt",
-    "muter.pth",
-    "frame_mn10_strong_1.pt",
-    "frozen_head.pt"
-  ],
+  "policy": "home prod is ohush_live; kept accuracy wins ship here (live-muter-prod.mdc)",
   "live_engine": "ohush_live.sports_daemon",
+  "cover_starter": "ohush_live/research_audio_worker.py",
+  "decision_mode_when_ready": "research_stack",
   "monitor": "http://127.0.0.1:3010/",
   "engine_api": "http://127.0.0.1:8770/",
-  "authorization": {
-    "policy": "home prod is the live muter; kept accuracy wins wire into ohush_live and push (live-muter-prod.mdc)",
-    "locked_live": "enrolled-show return floor 0.10 — returns game, does not start cover",
-    "next_ship": "port kept ~85% research stack (frame_mn10 / frozen head / Clarissa-Whit-Palmer-Fitz) into ohush_live"
-  },
+  "look_for": [
+    "frame_mn10_strong_1.pt",
+    "frozen_head.pt",
+    "ohush_live/research_audio_worker.py",
+    "ohush_live/research_muter.py",
+    "third_party/PretrainedSED"
+  ],
   "assets": [
     {
-      "id": "cnn14",
-      "role": "audio_family",
-      "filename": "Cnn14_mAP=0.431.pth",
-      "install_path": "experiments/exp003/models/Cnn14_mAP=0.431.pth",
-      "source": "zenodo",
-      "url": "https://zenodo.org/record/3987831/files/Cnn14_mAP%3D0.431.pth?download=1",
-      "sha256": "0dc499e40e9761ef5ea061ffc77697697f277f6a960894903df3ada000e34b31",
+      "id": "frame_mn10",
+      "role": "cover_start_encoder",
+      "filename": "frame_mn10_strong_1.pt",
+      "install_path": "ohush_live/cache/research_muter/frame_mn10_strong_1.pt",
+      "source": "github_release",
+      "url": "https://github.com/fschmid56/PretrainedSED/releases/download/v0.0.1/frame_mn10_strong_1.pt",
+      "sha256": "4a0fe320d5369987b772394c51881fb20a602967e6842f72f3e5c8181065ece7",
       "required": true,
-      "loaded_by": "ohush_live/audio_worker.py",
-      "fetch": "curl -L -o experiments/exp003/models/Cnn14_mAP=0.431.pth 'https://zenodo.org/record/3987831/files/Cnn14_mAP%3D0.431.pth?download=1'"
+      "in_this_git_repo": false,
+      "fetch": "curl -L -o ohush_live/cache/research_muter/frame_mn10_strong_1.pt https://github.com/fschmid56/PretrainedSED/releases/download/v0.0.1/frame_mn10_strong_1.pt"
     },
     {
-      "id": "enroll_mnf",
-      "role": "return_floor",
-      "filename": "enroll_mnf.npy",
-      "install_path": "ohush_live/cache/enroll_mnf.npy",
-      "source": "gcs",
-      "url": "gs://hushdev-748439071367-research/enroll/enroll_mnf.npy",
-      "gcloud_project": "hushdev",
+      "id": "frozen_head",
+      "role": "cover_start_head",
+      "filename": "frozen_head.pt",
+      "install_path": "ohush_live/models/frozen_head.pt",
+      "source": "git",
+      "sha256": "58b8ad09f2da60b519b05558935d25c9b79a20ef288b15838c337748abc20bf2",
       "required": true,
-      "show_key": "mnf",
-      "loaded_by": "ohush_live/enroll_floor.py",
-      "fetch": "gcloud storage cp gs://hushdev-748439071367-research/enroll/enroll_mnf.npy ohush_live/cache/"
+      "in_this_git_repo": true
     },
     {
-      "id": "enroll_snf",
-      "role": "return_floor",
-      "filename": "enroll_snf.npy",
-      "install_path": "ohush_live/cache/enroll_snf.npy",
-      "source": "gcs",
-      "url": "gs://hushdev-748439071367-research/enroll/enroll_snf.npy",
-      "gcloud_project": "hushdev",
+      "id": "pretrained_sed",
+      "role": "encoder_code",
+      "install_path": "third_party/PretrainedSED",
       "required": true,
-      "show_key": "snf",
-      "loaded_by": "ohush_live/enroll_floor.py",
-      "fetch": "gcloud storage cp gs://hushdev-748439071367-research/enroll/enroll_snf.npy ohush_live/cache/"
+      "in_this_git_repo": true
     },
     {
       "id": "enroll_tnf",
@@ -64,11 +51,28 @@
       "install_path": "ohush_live/cache/enroll_tnf.npy",
       "source": "gcs",
       "url": "gs://hushdev-748439071367-research/enroll/enroll_tnf.npy",
-      "gcloud_project": "hushdev",
       "required": true,
-      "show_key": "tnf",
-      "loaded_by": "ohush_live/enroll_floor.py",
-      "fetch": "gcloud storage cp gs://hushdev-748439071367-research/enroll/enroll_tnf.npy ohush_live/cache/"
+      "show_key": "tnf"
+    },
+    {
+      "id": "enroll_mnf",
+      "role": "return_floor",
+      "filename": "enroll_mnf.npy",
+      "install_path": "ohush_live/cache/enroll_mnf.npy",
+      "source": "gcs",
+      "url": "gs://hushdev-748439071367-research/enroll/enroll_mnf.npy",
+      "required": false,
+      "show_key": "mnf"
+    },
+    {
+      "id": "enroll_snf",
+      "role": "return_floor",
+      "filename": "enroll_snf.npy",
+      "install_path": "ohush_live/cache/enroll_snf.npy",
+      "source": "gcs",
+      "url": "gs://hushdev-748439071367-research/enroll/enroll_snf.npy",
+      "required": false,
+      "show_key": "snf"
     },
     {
       "id": "ecapa",
@@ -77,24 +81,32 @@
       "install_path": "ohush_live/cache/spkrec-ecapa-voxceleb",
       "source": "huggingface",
       "required": true,
-      "loaded_by": "ohush_live/speaker_worker.py",
-      "fetch": "downloads automatically on first live speaker launch into ohush_live/cache/"
-    }
-  ],
-  "research_only_not_live": [
-    {
-      "filename": "frame_mn10_strong_1.pt",
-      "note": "research audio_learn stack — do not install as the live muter"
+      "fetch": "downloads on first speaker launch"
     },
     {
-      "filename": "frozen_head.pt",
-      "note": "research GPU lab head — do not install as the live muter"
+      "id": "cnn14",
+      "role": "fallback_audio_family",
+      "filename": "Cnn14_mAP=0.431.pth",
+      "install_path": "experiments/exp003/models/Cnn14_mAP=0.431.pth",
+      "source": "zenodo",
+      "url": "https://zenodo.org/record/3987831/files/Cnn14_mAP%3D0.431.pth?download=1",
+      "sha256": "0dc499e40e9761ef5ea061ffc77697697f277f6a960894903df3ada000e34b31",
+      "required": false,
+      "note": "Used only when research assets are missing"
     }
   ],
+  "controller": {
+    "on": 0.9,
+    "off": 0.5,
+    "on_streak": 8,
+    "off_streak": 2,
+    "hop_s": 0.25,
+    "cooldown_s_live_approx": 8.0,
+    "note": "Voice panel Clarissa/Whit/Palmer/Fitz not wired live yet"
+  },
   "docs": [
     "LATEST_MUTER.md",
     "docs/ohush/MACBOOK_MNF_TONIGHT.md",
-    "HANDOFF.md",
-    "ohush_live/README.md"
+    "HANDOFF.md"
   ]
 }
