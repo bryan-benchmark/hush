@@ -1,6 +1,8 @@
 # Latest muter — what to install
 
-**Home prod = live desk.** Kept accuracy wins ship into `ohush_live`. See `.cursor/rules/live-muter-prod.mdc`.
+**Home prod = live desk.** Windows lab builds better models; kept wins ship into `ohush_live`; **Mac tests them in realtime.** See `.cursor/rules/live-muter-prod.mdc` and [`docs/ohush/LAB_TO_MAC_LIVE.md`](docs/ohush/LAB_TO_MAC_LIVE.md).
+
+Lab ship helper (Windows): `python scripts/ship_live_muter.py`
 
 The **cover-starting** muter is now the kept research stack (acoustic path):
 

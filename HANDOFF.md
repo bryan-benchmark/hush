@@ -16,7 +16,7 @@ A muted second of the game breaks the run. That run has no accuracy. On a run th
 
 ## Home prod = live muter
 
-Until the owner changes it: we test only at home, and **prod is the live muter** (`ohush_live`). When a version is kept as more accurate, wire it into `ohush_live`, update `LATEST_MUTER.md` / `ohush_live/MODEL_MANIFEST.json`, commit, and push. Do not park kept wins as “research-only / GPU-only.” Cursor rule: `.cursor/rules/live-muter-prod.mdc`.
+Until the owner changes it: we test only at home, and **prod is the live muter** (`ohush_live`). **Windows lab builds; Mac realtime-tests.** When a version is kept as more accurate, run `scripts/ship_live_muter.py`, wire it into `ohush_live`, update `LATEST_MUTER.md` / `MODEL_MANIFEST.json`, commit, and push. Do not park kept wins as “research-only / GPU-only.” Cursor rule: `.cursor/rules/live-muter-prod.mdc`. Loop: [`docs/ohush/LAB_TO_MAC_LIVE.md`](docs/ohush/LAB_TO_MAC_LIVE.md).
 
 ## Where the plan is
 

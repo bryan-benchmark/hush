@@ -1,22 +1,29 @@
 ---
-description: Home prod is the live muter. Better measured versions ship into ohush_live, not research-only shelves.
+description: Windows lab builds better muters; ship into ohush_live; Mac tests them realtime.
 alwaysApply: true
 ---
 
-# Live muter is prod
+# Live muter is prod (lab → Mac)
 
-Until the owner changes this: **we are building a live muter for home use.** There is no separate “wait for authorization” gate and no other audience. A better measured muter belongs in the television path.
+Until the owner changes this: **we are building a live muter for home use.** Windows lab improves models; the Mac tests them on the TV in realtime. There is no separate audience and no “park it as research-only.”
+
+## Loop
+
+1. **Lab (Windows):** measure / KEEP under `C:\OHushData\gpu_lab\` and `experiments/`.
+2. **Ship live same effort:** stage weights with `python scripts/ship_live_muter.py`, wire code into `ohush_live`, update `LATEST_MUTER.md` + `MODEL_MANIFEST.json`, commit, **push**.
+3. **Mac realtime:** `git pull`, fetch any named weights from `LATEST_MUTER.md`, restart the desk (`./scripts/desk restart-engine`), test on optical audio at http://127.0.0.1:3010/.
+
+Runbook: [`docs/ohush/LAB_TO_MAC_LIVE.md`](../../docs/ohush/LAB_TO_MAC_LIVE.md).
 
 ## What “prod” means
 
-1. **Prod = `ohush_live`** (sports daemon + monitor at http://127.0.0.1:3010/). That is what plays on the speakers.
-2. A scoreboard row, GPU replay, or `KEEP_RESEARCH_STACK` note is **not** shipped. If it wins on accuracy and the owner keeps it, **wire it into `ohush_live` in the same effort**, then restart the desk.
-3. When committing a better muter version: **commit the live wiring**, update [`LATEST_MUTER.md`](../../LATEST_MUTER.md) / [`ohush_live/MODEL_MANIFEST.json`](../../ohush_live/MODEL_MANIFEST.json) with exact filenames and fetch paths, and **push** so the Mac can pull. Do not leave the win only under `docs/ohush/research/` or `C:\OHushData\gpu_lab\`.
-4. Holdouts stay sealed. Do not retune numbers while wiring. Prefer the locked measured recipe over a fresh threshold search on game night.
+1. **Prod = `ohush_live`** (sports daemon + monitor). A scoreboard row is not shipped.
+2. Prefer Mac-runnable (CPU/MPS). If CUDA-only, port or shrink before calling it done.
+3. Holdouts stay sealed. Do not retune on game night. Prefer the locked measured recipe.
 
 ## Do not say
 
-- “That model is research-only / offline-only / GPU-only, so the Mac cannot mute.”
-- “Champion is no authorized mute” as a reason to refuse wiring a kept accuracy win into the live desk.
+- “Research-only / offline-only / GPU-only, so the Mac cannot mute.”
+- “Champion is no authorized mute” as a reason to refuse wiring a kept win.
 
-Those lines are obsolete under this policy. If a stack truly cannot run on the Mac yet, say what is missing and **port or replace it for live**, do not park the win forever.
+If something cannot run on the Mac yet, say what is missing and **finish the port** — do not leave the win on a shelf.
