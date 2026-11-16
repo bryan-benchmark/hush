@@ -44,6 +44,10 @@ PLUTO = (
     "20261110T1339Z_pluto_cbs_sports_hq",
     "20261110T1401Z_pluto_cbs_sports_hq",
 )
+# KEEP gate scores every session that carries a You-keep hard-negative (not Pluto alone).
+DEFAULT_EVAL_EXTRA = (
+    "20261110T1636Z_abc_local_flagship",
+)
 
 
 def _now() -> str:
@@ -272,26 +276,39 @@ def decide_keep(baseline: dict[str, Any], shadow: dict[str, Any]) -> dict[str, A
     }
 
 
+def _eval_sessions(hard_negs: list[dict[str, Any]]) -> list[str]:
+    found = list(PLUTO)
+    for h in hard_negs:
+        s = str(h.get("session") or "")
+        if s and s not in found:
+            found.append(s)
+    for s in DEFAULT_EVAL_EXTRA:
+        if s not in found:
+            found.append(s)
+    return found
+
+
 def run() -> dict[str, Any]:
     accepted = _load_accepted()
     hard_negs = _load_hard_negs()
-    # Train on all farm embeds we have; evaluate KEEP on Pluto You sessions.
+    # Train on all farm embeds we have; evaluate KEEP on You hard-neg sessions.
     train_sessions = sorted({p.stem for p in EMBED_ROOT.glob("*.npz")})
     caches = _load_caches(train_sessions, accepted)
     train_meta = train_shadow(caches, hard_negs)
 
+    eval_sessions = _eval_sessions(hard_negs)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     clips = load_gold_clips(clean_only=True)
     clips_by = defaultdict(list)
     for c in clips:
-        if c["session"] in PLUTO:
+        if c["session"] in eval_sessions:
             clips_by[c["session"]].append(c)
-    pluto_caches = [c for c in caches if c["session"] in PLUTO]
+    eval_caches = [c for c in caches if c["session"] in eval_sessions]
 
     base_head = load_head(LIVE_HEAD, device)
     shadow_head = load_head(SHADOW_HEAD, device)
-    baseline = _score_with_head(base_head, device, pluto_caches, clips_by)
-    shadow = _score_with_head(shadow_head, device, pluto_caches, clips_by)
+    baseline = _score_with_head(base_head, device, eval_caches, clips_by)
+    shadow = _score_with_head(shadow_head, device, eval_caches, clips_by)
     verdict = decide_keep(baseline, shadow)
 
     out = {
@@ -299,7 +316,10 @@ def run() -> dict[str, Any]:
         "train": train_meta,
         "hard_negatives_n": len(hard_negs),
         "train_sessions": [c["session"] for c in caches],
-        "eval_sessions": list(PLUTO),
+        "eval_sessions": eval_sessions,
+        "baseline_eval": baseline,
+        "shadow_eval": shadow,
+        # keep old keys for earlier readers
         "baseline_pluto": baseline,
         "shadow_pluto": shadow,
         "verdict": verdict,
@@ -321,6 +341,7 @@ def run() -> dict[str, Any]:
         "",
         f"**Verdict: {'KEEP' if verdict['keep'] else 'NO KEEP'}** — {verdict['reason']}",
         "",
+        f"- eval sessions: `{', '.join(eval_sessions)}`",
         f"- baseline program_muted_s: **{baseline['aggregate']['program_muted_s']}**",
         f"- shadow program_muted_s: **{shadow['aggregate']['program_muted_s']}**",
         f"- drop: **{verdict['program_muted_drop_s']}s**",

@@ -33,7 +33,7 @@
       "filename": "frozen_head.pt",
       "install_path": "ohush_live/models/frozen_head.pt",
       "source": "git",
-      "sha256": "18577885e3794b329cfc2a1cc47b980fe6aa7e3aacebbed2a5bb9867881b7f8c",
+      "sha256": "47acd80a9cb507cbf5efa012a2f2a6807f3591de9d8715537ed793a5b6ac5d7d",
       "required": true,
       "in_this_git_repo": true
     },
