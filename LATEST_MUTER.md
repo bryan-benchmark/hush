@@ -46,10 +46,10 @@ curl -L -o "ohush_live/cache/research_muter/frame_mn10_strong_1.pt" \
 shasum -a 256 ohush_live/cache/research_muter/frame_mn10_strong_1.pt
 # expect: 4a0fe320d5369987b772394c51881fb20a602967e6842f72f3e5c8181065ece7
 
-# 2) frozen head is in git
+# 2) frozen head is in git (farm You hard-neg KEEP — Pluto 1339/1401)
 test -f ohush_live/models/frozen_head.pt && echo head_ok
 shasum -a 256 ohush_live/models/frozen_head.pt
-# expect: 58b8ad09f2da60b519b05558935d25c9b79a20ef288b15838c337748abc20bf2
+# expect: 18577885e3794b329cfc2a1cc47b980fe6aa7e3aacebbed2a5bb9867881b7f8c
 
 # 3) enroll matrices (return floor)
 gcloud config set project hushdev
@@ -65,6 +65,7 @@ python -m pip install -U torch torchaudio speechbrain silero-vad
 ## What plays live
 
 - **Starts covers:** `research_audio_worker` — frame_mn10 + frozen head + 0.90/0.50 × 8/2 controller + 8s causal post-return play hold.
+- **Head recipe (2026-11-16):** `farm_you_shadow_head` — fine-tuned from prior frozen head on farm embeds with human **You=keep** hard-negatives overweighted (Pluto CBS Sports HQ 1339/1401). Lab Pluto program_muted **122.25s → 1.25s**; commercial coverage **0.897 → 0.858**. Receipt: `C:\OHushData\indexes\farm_labels\audit\EPISODE_YOU_SHADOW_REFIT.json`.
 - **Returns game:** enrolled-show floor **0.10** + booth speech + controller return.
 - **Not wired yet:** Clarissa/Whit/Palmer/Fitz cover-only voice vetoes (need portable prototypes + live Clarissa ad gate).
 

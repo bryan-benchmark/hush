@@ -1,6 +1,6 @@
 {
   "title": "OHush live muter assets",
-  "updated": "2026-11-12",
+  "updated": "2026-11-16",
   "policy": "home prod is ohush_live; kept accuracy wins ship here (live-muter-prod.mdc)",
   "live_engine": "ohush_live.sports_daemon",
   "cover_starter": "ohush_live/research_audio_worker.py",
@@ -33,7 +33,7 @@
       "filename": "frozen_head.pt",
       "install_path": "ohush_live/models/frozen_head.pt",
       "source": "git",
-      "sha256": "58b8ad09f2da60b519b05558935d25c9b79a20ef288b15838c337748abc20bf2",
+      "sha256": "18577885e3794b329cfc2a1cc47b980fe6aa7e3aacebbed2a5bb9867881b7f8c",
       "required": true,
       "in_this_git_repo": true
     },
