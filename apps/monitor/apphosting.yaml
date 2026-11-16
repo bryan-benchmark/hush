@@ -22,6 +22,12 @@ env:
     secret: OHUSH_FARM_CODE
     availability:
       - RUNTIME
+  # After creating the secret (https tunnel from scripts/verdict.ps1):
+  #   firebase apphosting:secrets:set OHUSH_VERDICT_ORIGIN --project hushdev
+  # then add:
+  # - variable: OHUSH_VERDICT_ORIGIN
+  #   secret: OHUSH_VERDICT_ORIGIN
+  #   availability: [RUNTIME]
   - variable: NEXT_PUBLIC_OHUSH_PUBLIC_SITE
     value: "1"
     availability:

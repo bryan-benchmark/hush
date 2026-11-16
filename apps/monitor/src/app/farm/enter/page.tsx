@@ -31,7 +31,7 @@ export default function FarmEnterPage() {
       <header className="top">
         <p className="tag">Farm</p>
         <h1 className="identity-ask">Enter the farm password.</h1>
-        <p className="identity-note">Solo labeling for ohush.co/farm. Same code as your lab, or OHUSH_FARM_CODE.</p>
+        <p className="identity-note">Solo gate for ohush.co/farm and /verdict. Same code as your lab, or OHUSH_FARM_CODE.</p>
       </header>
       <form className="identity-card" onSubmit={submit}>
         <label className="identity-said" style={{ display: "flex", flexDirection: "column" }}>

@@ -18,11 +18,13 @@ export function middleware(request: NextRequest) {
       return NextResponse.next();
     }
 
-    // Solo /farm on ohush.co — password gate (OHUSH_FARM_CODE or OHUSH_PHONE_CODE).
+    // Solo /farm and /verdict on ohush.co — same password gate.
     const farmPath =
       path === "/farm" ||
       path.startsWith("/farm/") ||
-      path.startsWith("/api/farm");
+      path.startsWith("/api/farm") ||
+      path === "/verdict" ||
+      path.startsWith("/verdict/");
     if (farmPath) {
       if (path === "/farm/enter" || path === "/api/farm/enter") {
         return NextResponse.next();
@@ -33,7 +35,9 @@ export function middleware(request: NextRequest) {
       const enter = request.nextUrl.clone();
       enter.pathname = "/farm/enter";
       enter.search = "";
-      enter.searchParams.set("next", path.startsWith("/api/farm") ? "/farm" : path);
+      const next =
+        path.startsWith("/api/farm") ? "/farm" : path.startsWith("/verdict") ? "/verdict" : path;
+      enter.searchParams.set("next", next);
       return NextResponse.redirect(enter);
     }
 
@@ -61,9 +65,13 @@ export function middleware(request: NextRequest) {
     path.startsWith("/breaks") ||
     path.startsWith("/crowd") ||
     path.startsWith("/farm") ||
-    path.startsWith("/api/farm")
+    path.startsWith("/api/farm") ||
+    path.startsWith("/verdict")
   ) {
-    enter.searchParams.set("next", path.startsWith("/api/farm") ? "/farm" : path);
+    enter.searchParams.set(
+      "next",
+      path.startsWith("/api/farm") ? "/farm" : path.startsWith("/verdict") ? "/verdict" : path,
+    );
   }
   return NextResponse.redirect(enter);
 }
