@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
     try {
       const buf = await farmCloudFrame(id, file || "0");
       if (!buf) return NextResponse.json({ error: "missing" }, { status: 404 });
-      return new NextResponse(buf, {
+      return new NextResponse(new Uint8Array(buf), {
         status: 200,
         headers: { "Content-Type": "image/jpeg", "Cache-Control": "no-store" },
       });
@@ -50,7 +50,7 @@ export async function GET(req: NextRequest) {
   }
   const buf = fs.readFileSync(full);
   const type = file.toLowerCase().endsWith(".png") ? "image/png" : "image/jpeg";
-  return new NextResponse(buf, {
+  return new NextResponse(new Uint8Array(buf), {
     status: 200,
     headers: { "Content-Type": type, "Cache-Control": "no-store" },
   });

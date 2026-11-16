@@ -89,7 +89,7 @@ export async function GET(req: NextRequest) {
     try {
       const buf = await farmCloudAudio(id);
       if (!buf) return NextResponse.json({ error: "wav not found" }, { status: 404 });
-      return new NextResponse(buf, {
+      return new NextResponse(new Uint8Array(buf), {
         status: 200,
         headers: { "Content-Type": "audio/wav", "Cache-Control": "no-store" },
       });
@@ -114,7 +114,7 @@ export async function GET(req: NextRequest) {
   }
   try {
     const buf = extractWavSlice(wavPath, start, duration);
-    return new NextResponse(buf, {
+    return new NextResponse(new Uint8Array(buf), {
       status: 200,
       headers: {
         "Content-Type": "audio/wav",
