@@ -146,6 +146,17 @@ def apply_recipe(
     recipe = load_recipe(channel_id, root)
     if str(recipe.get("source_kind") or "streamers") not in ("streamers", "shared"):
         raise ValueError(f"recipe {channel_id} is not a streamers recipe")
+    if channel_id.upper() == "EXAMPLE" or str(recipe.get("channel_id") or "").upper() == "EXAMPLE":
+        raise RuntimeError("refusing to apply EXAMPLE recipe")
+    if recipe.get("apply_allowed") is False:
+        raise RuntimeError(
+            f"recipe {channel_id} is not apply-safe (apply_allowed=false). "
+            "Use session --no-channel-apply for on-air, or set apply_allowed=true after verified steps."
+        )
+    if recipe.get("verified") is False:
+        raise RuntimeError(
+            f"recipe {channel_id} is unverified. Dump-prove taps, set verified=true, then apply."
+        )
 
     instance = get_instance(instance_id, root)
     launch_info = None

@@ -1,12 +1,14 @@
-"""Autonomous farm loop: label → human gate → plan → on-air record.
+"""Autonomous farm loop: multichannel/verdict → human gate → plan → on-air record.
 
 Designed for Task Scheduler every ~15 minutes.
 
 Rules:
-- If a capture lock is held: do not label (GPU/lag) and do not start another take.
+- If a capture lock is held: do not label (GPU/lag) and do not start another take
+  (unless capture_pause is on — then label/verdict backfill may run).
+- Overnight 02:00–06:00 ET: vision+ASR+acoustic consensus auto-locks; disagrees → /verdict.
 - If Streamers shows home + loopback is live + BlueStacks window exists: record
   what is already on air (--no-channel-apply). Never retune from this loop.
-- Human gate writes a flag file; owner opens /farm only then.
+- Human gate prefers /verdict; legacy /farm pile drains via consensus.
 """
 
 from __future__ import annotations
@@ -21,11 +23,11 @@ from typing import Any
 from zoneinfo import ZoneInfo
 
 from .config import ensure_data_layout
-from .coverage_farm import indexes_dir
+from .coverage_farm import farm_label_dir, indexes_dir
 from .farm_orchestrate import op1_record, op2_label, op3_human
 from .farm_resources import memory_snapshot
 from .instances import find_window_title, get_instance, list_instances
-from .locks import get_lock
+from .locks import get_lock, reclaim_dead_locks, release
 from .streamers_lag import CLEAN_CONCURRENT, scan_recent_lag
 
 ET = ZoneInfo("America/New_York")
@@ -39,10 +41,15 @@ LIVE_PEAK = 0.02
 LABEL_EVERY_N_IDLE = 2
 # Measured ~7s/clip (Whisper window negligible; qwen dominates). Overnight burns backlog.
 SEC_PER_CLIP_EST = 7.0
-OVERNIGHT_LABEL_START_HOUR = 0  # 00:00 ET inclusive
+OVERNIGHT_LABEL_START_HOUR = 2  # 02:00 ET inclusive — multichannel + verdict
 OVERNIGHT_LABEL_END_HOUR = 6  # 06:00 ET exclusive
-OVERNIGHT_DRAFT_LIMIT = 80
+OVERNIGHT_DRAFT_LIMIT = 80  # legacy Ollama; overnight prefers verdict path
 DAY_DRAFT_LIMIT = 20
+# Sessions processed per overnight / pause-day multichannel tick.
+OVERNIGHT_VERDICT_SESSION_LIMIT = 2
+VERDICT_URL = "http://127.0.0.1:3020/"
+# Match locks.py mid-chunk grace: audio heartbeat quiet this long ⇒ not capturing.
+AUDIO_HEARTBEAT_STALE_S = 1200.0
 
 
 def _now() -> str:
@@ -54,35 +61,44 @@ def schedule_window(now: datetime | None = None) -> dict[str, Any]:
 
     Label cost (measured on this box): ~7 s/clip with qwen2.5:14b after Whisper.
     A 20‑minute take @ 60 s clips ≈ 20 clips ≈ 2.3 minutes to draft.
-    Overnight 00:00–06:00 ET can clear large backlogs while Streamers sleeps.
+    Overnight 02:00–06:00 ET clears backlogs via multichannel while Streamers sleeps.
     """
     local = (now or datetime.now(ET)).astimezone(ET)
     hour = local.hour
     overnight = OVERNIGHT_LABEL_START_HOUR <= hour < OVERNIGHT_LABEL_END_HOUR
     if overnight:
         return {
-            "mode": "overnight_label",
+            "mode": "overnight_verdict",
             "local_et": local.isoformat(),
             "do_record": False,
-            # Draft for review only — auto paid_ad gated by farm_labels/trust_gate.json.
             "do_label": True,
+            "label_path": "verdict",
             "label_every_n": 1,
             "draft_limit": OVERNIGHT_DRAFT_LIMIT,
+            "verdict_session_limit": OVERNIGHT_VERDICT_SESSION_LIMIT,
             "sec_per_clip_est": SEC_PER_CLIP_EST,
             "auto_paid_ad": False,
-            "why": "00:00–06:00 ET — draft backlog for review; auto-accept off until gold trust gate",
+            "why": (
+                "02:00–06:00 ET — multichannel (vision+ASR+acoustic) consensus auto-locks; "
+                "disagreements → /verdict; no new TV record"
+            ),
         }
     return {
         "mode": "day_capture",
         "local_et": local.isoformat(),
         "do_record": True,
-        # Labeling stays overnight until the draft process is trusted.
+        # Daytime: capture-first. When capture_pause is on, loop still runs verdict backfill.
         "do_label": False,
+        "label_path": "verdict",
         "label_every_n": LABEL_EVERY_N_IDLE,
         "draft_limit": DAY_DRAFT_LIMIT,
+        "verdict_session_limit": OVERNIGHT_VERDICT_SESSION_LIMIT,
         "sec_per_clip_est": SEC_PER_CLIP_EST,
         "auto_paid_ad": False,
-        "why": "Daytime — capture only; labeling deferred to 00:00–06:00 ET overnight window",
+        "why": (
+            "Daytime — capture unless capture_pause; owner clears /verdict disagrees; "
+            "multichannel overnight 02:00–06:00 ET"
+        ),
     }
 
 
@@ -97,6 +113,93 @@ def _python() -> Path:
 
 def capture_busy(instance_id: str = DEFAULT_INSTANCE, root: Path | None = None) -> dict[str, Any] | None:
     return get_lock("streamers", instance_id, root=root)
+
+
+def lock_audio_still_capturing(lock: dict[str, Any] | None, root: Path | None = None) -> dict[str, Any]:
+    """True only when the locked session still looks like a live audio take.
+
+    Picture heartbeat alone does not count — frame_watch can refresh while WAV
+    writing is long dead (Bug 6 / MNF overnight).
+    """
+    import time
+
+    if not lock:
+        return {"capturing": False, "why": "no_lock"}
+    sid = str(lock.get("session_id") or "")
+    if not sid or sid.startswith("starting_"):
+        return {"capturing": False, "why": "starting_or_empty"}
+    session_dir = ensure_data_layout(root) / "authorized_sources" / sid
+    if not session_dir.is_dir():
+        return {"capturing": False, "why": "missing_session_dir"}
+    hb = session_dir / "_audio_heartbeat.json"
+    if not hb.is_file():
+        return {"capturing": False, "why": "no_audio_heartbeat"}
+    try:
+        data = json.loads(hb.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return {"capturing": False, "why": "bad_audio_heartbeat"}
+    state = str(data.get("state") or "")
+    if state in {"done", "stopped", "error"}:
+        return {"capturing": False, "why": f"audio_state:{state}"}
+    age = time.time() - hb.stat().st_mtime
+    if age >= AUDIO_HEARTBEAT_STALE_S:
+        return {"capturing": False, "why": f"audio_heartbeat_stale:{int(age)}s"}
+    return {"capturing": True, "why": f"audio_live:{state or 'ok'}", "age_s": round(age, 1)}
+
+
+def prepare_label_gate(
+    instance_id: str,
+    root: Path | None = None,
+    *,
+    overnight: bool = False,
+    pause_active: bool = False,
+) -> dict[str, Any]:
+    """Reclaim dead/stale capture locks so overnight/pause labeling is not starved.
+
+    Policy:
+    - Always drop locks whose holder PID is dead (reclaim_dead_locks).
+    - Overnight or capture_pause: if lock remains but audio is not capturing,
+      release it and allow label (Bug 6 — MNF lock outlived the WAV).
+    - Overnight with live audio still writing: keep skip (protect Streamers).
+    """
+    root = ensure_data_layout(root)
+    dropped = reclaim_dead_locks(root)
+    busy = capture_busy(instance_id, root)
+    out: dict[str, Any] = {
+        "busy": busy,
+        "reclaimed_dead": dropped,
+        "released_stale": None,
+        "allow_label": busy is None or pause_active or overnight,
+        "skip_for_live_capture": False,
+    }
+    if busy is None:
+        out["allow_label"] = True
+        return out
+    audio = lock_audio_still_capturing(busy, root)
+    out["audio"] = audio
+    if pause_active:
+        # Owner pause: label even if WAV still somehow writing; record stays off.
+        out["allow_label"] = True
+        out["skip_for_live_capture"] = False
+        return out
+    if overnight and not audio.get("capturing"):
+        try:
+            release("streamers", instance_id, root=root)
+            out["released_stale"] = {"lock": busy, "why": audio.get("why")}
+            out["busy"] = None
+            out["allow_label"] = True
+        except Exception as exc:  # noqa: BLE001
+            out["released_stale"] = {"error": str(exc), "lock": busy}
+            out["allow_label"] = False
+        return out
+    if overnight and audio.get("capturing"):
+        out["allow_label"] = False
+        out["skip_for_live_capture"] = True
+        return out
+    # Daytime + live lock: protect capture (historic skip_while_capturing).
+    out["allow_label"] = False
+    out["skip_for_live_capture"] = True
+    return out
 
 
 def ready_instance_id(root: Path | None = None) -> str | None:
@@ -151,6 +254,7 @@ def probe_loopback_peak(device_substr: str, *, seconds: float = PROBE_SECONDS) -
 def on_air_health(instance_id: str = DEFAULT_INSTANCE, root: Path | None = None) -> dict[str, Any]:
     """Picture/audio healthy enough to record without retuning."""
     from .salvation import status as salvation_status
+    from .streamers_alive import probe_streamers_down
 
     root = ensure_data_layout(root)
     inst = get_instance(instance_id, root)
@@ -160,38 +264,171 @@ def on_air_health(instance_id: str = DEFAULT_INSTANCE, root: Path | None = None)
         sal = salvation_status(instance_id, root=root)
     except Exception as exc:  # noqa: BLE001
         sal = {"ok": False, "error": str(exc), "screen": "unknown"}
-    audio = probe_loopback_peak(str(inst.get("loopback_device") or "MZ-631M"))
-    healthy = bool(title) and bool(sal.get("ok")) and bool(audio.get("ok"))
+    try:
+        alive = probe_streamers_down(instance_id, root=root, save_shot=False)
+    except Exception as exc:  # noqa: BLE001
+        alive = {"ok": False, "down": True, "error": str(exc), "reason": f"alive_probe_failed:{exc}"}
+    # Process-PID loopback is the farm default — do not require a VB-Cable device peak.
+    audio_mode = str(inst.get("audio_capture") or "process").lower()
+    if audio_mode in ("process", "process_loopback", "pid", "auto"):
+        try:
+            from .process_loopback import resolve_hd_player_pid
+
+            hit = resolve_hd_player_pid(window_title=window_pat, instance_id=instance_id)
+            audio = {
+                "ok": True,
+                "mode": "process",
+                "pid": int(hit["pid"]),
+                "title": hit.get("title") or hit.get("matched_title"),
+            }
+        except Exception as exc:  # noqa: BLE001
+            audio = {"ok": False, "mode": "process", "error": str(exc)}
+    else:
+        audio = probe_loopback_peak(str(inst.get("loopback_device") or "MZ-631M"))
+    if alive.get("down"):
+        healthy = False
+        reason = f"streamers down — {alive.get('reason') or 'error screen'}"
+    else:
+        healthy = bool(title) and bool(sal.get("ok")) and bool(audio.get("ok"))
+        reason = (
+            "on-air healthy — record without retune"
+            if healthy
+            else "not healthy for on-air record (need home + live loopback + visible window)"
+        )
     return {
         "ok": healthy,
         "instance_id": instance_id,
         "window_title": title,
         "salvation": sal,
         "audio": audio,
-        "reason": (
-            "on-air healthy — record without retune"
-            if healthy
-            else "not healthy for on-air record (need home + live loopback + visible window)"
-        ),
+        "streamers_alive": alive,
+        "reason": reason,
+    }
+
+
+def identity_on_air_health(
+    instance_id: str = DEFAULT_INSTANCE,
+    *,
+    root: Path | None = None,
+    session_id: str | None = None,
+    save_shot: bool = False,
+) -> dict[str, Any]:
+    """Atomic health gate: window/audio **and** heartbeat identity (no dup / lag / wrong).
+
+    Desk must not start ``ON_AIR_CONTINUE`` on a fullscreen player that is the
+    same game as another stream or a Pluto/pack filler.
+    """
+    root = ensure_data_layout(root)
+    base = on_air_health(instance_id, root)
+    try:
+        from .heartbeat_fix import probe_heartbeat
+
+        probe = probe_heartbeat(
+            instance_id,
+            session_id=session_id,
+            root=root,
+            save_shot=save_shot,
+        )
+    except Exception as exc:  # noqa: BLE001
+        probe = {"ok": False, "failing": True, "reason": f"probe_error:{exc}", "identity": {}}
+
+    probe_ok = bool(probe.get("ok"))
+    base_ok = bool(base.get("ok"))
+    ok = base_ok and probe_ok
+    if not probe_ok:
+        reason = str(probe.get("reason") or "identity_fail")
+    elif not base_ok:
+        reason = str(base.get("reason") or "not_healthy")
+    else:
+        reason = "identity_on_air_healthy"
+
+    # Stamp STREAM_STATUS + farm_run receipt every gate check.
+    try:
+        from .stream_status import classify_root_cause, record
+
+        ident = probe.get("identity") or {}
+        record(
+            instance_id,
+            event="identity_on_air_health",
+            ok=ok,
+            detail=reason,
+            session_id=session_id,
+            selected_title=ident.get("selected_title"),
+            network=ident.get("network"),
+            calls=ident.get("calls"),
+            market=ident.get("market") or ident.get("city"),
+            channel_number=ident.get("channel_number"),
+            program_key=ident.get("program_key"),
+            program_title=ident.get("program_title"),
+            root_cause=classify_root_cause(ok=ok, reason=reason),
+            extra={
+                "base_ok": base_ok,
+                "probe_ok": probe_ok,
+                "duplicate": (probe.get("duplicate") or {}).get("duplicate"),
+            },
+            root=root,
+        )
+    except Exception:
+        pass
+
+    return {
+        "ok": ok,
+        "instance_id": instance_id,
+        "reason": reason,
+        "base": base,
+        "probe": probe,
+        "identity": probe.get("identity") or {},
+        "duplicate": probe.get("duplicate"),
+        "receipt": {
+            "checked_utc": _now(),
+            "base_ok": base_ok,
+            "probe_ok": probe_ok,
+            "reason": reason,
+        },
     }
 
 
 def write_human_flag(human: dict[str, Any], root: Path | None = None) -> dict[str, Any]:
     root = ensure_data_layout(root)
     idx = indexes_dir(root)
+    digest: dict[str, Any] | None = None
+    try:
+        from .farm_draft import promote_help_queue
+        from .farm_label_audit import write_daily_digest
+
+        promote_help_queue(root)
+        digest = write_daily_digest(root)
+    except Exception as exc:  # noqa: BLE001
+        digest = {"ok": False, "error": str(exc)}
+    verdict_pending = None
+    try:
+        triage_path = farm_label_dir(root) / "audit" / "EPISODE_TRIAGE.json"
+        if triage_path.is_file():
+            blob = json.loads(triage_path.read_text(encoding="utf-8"))
+            verdict_pending = sum(len(s.get("episodes") or []) for s in (blob.get("sessions") or []))
+    except Exception:
+        verdict_pending = None
     flag = idx / "farm_human_needed.flag"
+    required = bool(human.get("required")) or bool(verdict_pending and verdict_pending > 0)
     gate = {
         "updated_utc": _now(),
-        "required": bool(human.get("required")),
+        "required": required,
         "reason": human.get("reason"),
-        "review_url": REVIEW_URL,
+        "review_url": VERDICT_URL,
+        "farm_url": REVIEW_URL,
         "help_asks": human.get("help_asks"),
+        "verdict_pending": verdict_pending,
         "backlog_level": human.get("backlog_level"),
+        "morning_batch": (digest or {}).get("morning_batch") if isinstance(digest, dict) else None,
+        "daily_path": str(idx / "farm_labels" / "DAILY_LABEL.md"),
     }
     (idx / "farm_human_gate.json").write_text(json.dumps(gate, indent=2), encoding="utf-8")
     if gate["required"]:
         flag.write_text(
-            f"HUMAN NEEDED\n{gate['updated_utc']}\n{REVIEW_URL}\n{gate.get('reason')}\n",
+            f"HUMAN NEEDED\n{gate['updated_utc']}\n{VERDICT_URL}\n"
+            f"Clear /verdict disagreements (pending≈{verdict_pending}). "
+            f"Legacy farm pile={gate.get('help_asks')} — overnight consensus drains it.\n"
+            f"{gate.get('reason')}\n",
             encoding="utf-8",
         )
     elif flag.is_file():
@@ -421,12 +658,57 @@ def run_loop(
         "steps": [],
     }
 
-    if busy:
+    # Owner pause + overnight stale-lock reclaim (Bug 6).
+    pause_active = False
+    try:
+        from .capture_pause import is_paused
+
+        pause_active = bool(is_paused(root).get("active"))
+    except Exception:
+        pause_active = False
+    overnight = str(sched.get("mode") or "").startswith("overnight")
+    gate = prepare_label_gate(
+        instance_id,
+        root,
+        overnight=overnight,
+        pause_active=pause_active,
+    )
+    out["capture_pause"] = {"active": pause_active}
+    out["label_gate"] = {
+        "reclaimed_dead": len(gate.get("reclaimed_dead") or []),
+        "released_stale": gate.get("released_stale"),
+        "audio": gate.get("audio"),
+        "allow_label": gate.get("allow_label"),
+    }
+    if gate.get("reclaimed_dead"):
+        out["steps"].append(
+            {
+                "step": "reclaimed_dead_locks",
+                "n": len(gate["reclaimed_dead"]),
+                "keys": [r.get("key") for r in gate["reclaimed_dead"][:5]],
+            }
+        )
+    if gate.get("released_stale"):
+        out["steps"].append(
+            {
+                "step": "overnight_released_stale_lock",
+                "detail": "Audio capture idle — released lock so multichannel/verdict can run",
+                "released": gate["released_stale"],
+            }
+        )
+    busy = gate.get("busy")
+    out["busy"] = busy
+
+    if busy and gate.get("skip_for_live_capture") and not pause_active:
         out["steps"].append(
             {
                 "step": "skip_while_capturing",
-                "detail": "Capture lock held — no label tick, no new record (protect Streamers from lag).",
+                "detail": (
+                    "Capture lock held with live audio — no label tick, no new record "
+                    "(protect Streamers from lag)."
+                ),
                 "lock": busy,
+                "audio": gate.get("audio"),
             }
         )
         out["human"] = write_human_flag(op3_human(root), root)
@@ -434,8 +716,46 @@ def run_loop(
             "daypart": (op1_record(root).get("hierarchy") or {}).get("daypart"),
             "skipped_full_plan": True,
         }
+        if overnight:
+            try:
+                from .farm_verdict_audit import append_verdict_tick
+
+                append_verdict_tick(
+                    {
+                        "mode": sched.get("mode"),
+                        "ok": True,
+                        "trigger": "overnight",
+                        "skip_reason": "live_audio_lock",
+                        "label_gate": out.get("label_gate"),
+                        "memory_avail_gb": mem.get("avail_gb"),
+                        "why": "lock held with live audio heartbeat",
+                    },
+                    root=root,
+                )
+            except Exception:
+                pass
         _write_loop_state(out, root)
         return out
+    if busy and pause_active:
+        out["steps"].append(
+            {
+                "step": "stale_lock_ignored",
+                "detail": "capture_pause active — labeling despite capture lock; record stays off",
+                "lock": busy,
+            }
+        )
+
+    # During capture pause, force verdict backfill even in daytime.
+    label_path = str(sched.get("label_path") or "verdict")
+    if pause_active and not do_label:
+        do_label = True
+        label_path = "verdict"
+        out["steps"].append(
+            {
+                "step": "label_forced_by_pause",
+                "detail": "TV paused — run multichannel consensus / verdict backlog",
+            }
+        )
 
     pass_state = _idle_pass_state(root)
     idle_pass = int(pass_state.get("idle_pass") or 0) + 1
@@ -443,17 +763,95 @@ def run_loop(
     _save_idle_pass_state(root, pass_state)
     label_due = (idle_pass % max(1, label_every_n)) == 0
 
-    # 1) Label pass (offset + RAM gate)
+    # 1) Label pass — verdict/multichannel (preferred) or legacy Ollama draft
     if do_label and label_due and mem.get("allow_label", True):
-        label = op2_label(root, run_tick=True, model=model, draft_limit=draft_limit)
-        out["label"] = {
-            "behind": label.get("behind"),
-            "tick_ok": (label.get("tick") or {}).get("ok"),
-            "imported": (label.get("tick") or {}).get("imported"),
-            "drafted": ((label.get("tick") or {}).get("draft") or {}).get("drafted"),
-            "ollama_unloaded": ((label.get("tick") or {}).get("draft") or {}).get("ollama_unloaded"),
-        }
-        out["steps"].append({"step": "label_tick", "behind": label.get("behind"), "idle_pass": idle_pass})
+        if label_path == "verdict":
+            try:
+                from .farm_label_lock import status as label_lock_status
+                from .farm_verdict_audit import append_verdict_tick
+
+                lock_st = label_lock_status(root)
+                # Overnight: one detached worker runs until 06:00 ET (continuous drain).
+                # Pause-day / loop: same worker with --require-pause, or skip if busy.
+                if lock_st.get("held") and lock_st.get("alive") and not lock_st.get("stale"):
+                    out["label"] = {
+                        "path": "verdict",
+                        "ok": True,
+                        "skipped": True,
+                        "reason": "label_pass_busy",
+                        "lock": lock_st,
+                    }
+                    out["steps"].append({"step": "verdict_pass_busy", "lock": lock_st})
+                    append_verdict_tick(
+                        {
+                            "mode": sched.get("mode"),
+                            "ok": True,
+                            "trigger": "overnight" if overnight else ("capture_pause" if pause_active else "loop"),
+                            "skip_reason": "label_pass_busy",
+                            "label_gate": out.get("label_gate"),
+                            "memory_avail_gb": mem.get("avail_gb"),
+                            "why": "single-flight multichannel already running",
+                        },
+                        root=root,
+                    )
+                else:
+                    worker = _spawn_verdict_worker(
+                        root,
+                        overnight=overnight,
+                        pause_active=pause_active,
+                    )
+                    out["label"] = {"path": "verdict", "spawned": worker}
+                    out["steps"].append({"step": "verdict_worker_spawn", **worker})
+                    append_verdict_tick(
+                        {
+                            "mode": sched.get("mode"),
+                            "ok": bool(worker.get("ok")),
+                            "trigger": "overnight" if overnight else ("capture_pause" if pause_active else "loop"),
+                            "skip_reason": None if worker.get("ok") else "spawn_failed",
+                            "error": worker.get("error"),
+                            "label_gate": out.get("label_gate"),
+                            "memory_avail_gb": mem.get("avail_gb"),
+                            "why": worker.get("detail") or "spawned continuous verdict backfill",
+                        },
+                        root=root,
+                    )
+            except Exception as exc:  # noqa: BLE001
+                out["label"] = {"path": "verdict", "ok": False, "error": str(exc)}
+                out["steps"].append({"step": "verdict_multichannel_failed", "error": str(exc)})
+                try:
+                    from .farm_verdict_audit import append_verdict_tick
+
+                    append_verdict_tick(
+                        {
+                            "mode": sched.get("mode"),
+                            "ok": False,
+                            "trigger": "capture_pause" if pause_active else ("overnight" if overnight else "loop"),
+                            "error": str(exc),
+                            "label_gate": out.get("label_gate"),
+                            "memory_avail_gb": mem.get("avail_gb"),
+                            "skip_reason": "error",
+                        },
+                        root=root,
+                    )
+                except Exception:
+                    pass
+        else:
+            label = op2_label(root, run_tick=True, model=model, draft_limit=draft_limit)
+            try:
+                from .export_farm_acoustic_gold import export as export_farm_gold
+
+                out["acoustic_gold_export"] = export_farm_gold(rebuild=True, clean_only=True)
+            except Exception as exc:  # noqa: BLE001
+                out["acoustic_gold_export"] = {"ok": False, "error": str(exc)}
+            out["label"] = {
+                "path": "ollama_draft",
+                "behind": label.get("behind"),
+                "tick_ok": (label.get("tick") or {}).get("ok"),
+                "imported": (label.get("tick") or {}).get("imported"),
+                "drafted": ((label.get("tick") or {}).get("draft") or {}).get("drafted"),
+                "ollama_unloaded": ((label.get("tick") or {}).get("draft") or {}).get("ollama_unloaded"),
+            }
+            out["steps"].append({"step": "label_tick", "behind": label.get("behind"), "idle_pass": idle_pass})
     else:
         reason = (
             "odd_idle_pass"
@@ -461,11 +859,89 @@ def run_loop(
             else ("ram_pressure" if do_label and not mem.get("allow_label") else "disabled")
         )
         out["steps"].append({"step": "label_skipped", "reason": reason, "idle_pass": idle_pass})
+        if label_path == "verdict" and (overnight or pause_active):
+            try:
+                from .farm_verdict_audit import append_verdict_tick
+
+                append_verdict_tick(
+                    {
+                        "mode": sched.get("mode"),
+                        "ok": True,
+                        "trigger": "capture_pause" if pause_active else "overnight",
+                        "skip_reason": reason,
+                        "label_gate": out.get("label_gate"),
+                        "memory_avail_gb": mem.get("avail_gb"),
+                        "why": sched.get("why"),
+                    },
+                    root=root,
+                )
+            except Exception:
+                pass
 
     # 2) Human gate
     human = op3_human(root)
     out["human"] = write_human_flag(human, root)
     out["steps"].append({"step": "human_gate", "required": human.get("required")})
+
+    # 2b) Streamers down + stuck-state recover (522, empty guide, decode error…)
+    try:
+        from .streamers_alive import ensure_streamers_alive
+        from .streamers_recover import ensure_ready_for_open
+
+        alive = ensure_streamers_alive(instance_id, root=root, recover=True)
+        stuck = ensure_ready_for_open(instance_id, root=root)
+        try:
+            from .frame_watch import watch_and_recover
+
+            frames = watch_and_recover(instance_id, root=root)
+            out["frame_watch"] = {
+                "latest_verdict": (frames.get("watch") or {}).get("latest_verdict"),
+                "needs_recover": (frames.get("watch") or {}).get("needs_recover"),
+                "recovered": bool(frames.get("recovery")),
+            }
+            out["steps"].append(
+                {
+                    "step": "frame_watch",
+                    "verdict": out["frame_watch"]["latest_verdict"],
+                    "needs_recover": out["frame_watch"]["needs_recover"],
+                }
+            )
+        except Exception as fw_exc:  # noqa: BLE001
+            out["frame_watch"] = {"ok": False, "error": str(fw_exc)}
+        out["streamers_alive"] = {
+            "ok": alive.get("ok"),
+            "recovered": alive.get("recovered"),
+            "reason": ((alive.get("probe") or {}).get("reason") or (alive.get("recovery") or {}).get("after") or {}).get(
+                "reason"
+            )
+            if isinstance(alive.get("probe"), dict)
+            else None,
+            "probe": alive.get("probe"),
+            "recovery": alive.get("recovery") if alive.get("recovered") else None,
+        }
+        out["streamers_recover"] = {
+            "ok": stuck.get("ok"),
+            "final_kind": stuck.get("final_kind"),
+            "steps": stuck.get("steps"),
+        }
+        out["steps"].append(
+            {
+                "step": "streamers_alive",
+                "ok": bool(alive.get("ok")),
+                "recovered": bool(alive.get("recovered")),
+                "down_reason": (alive.get("probe") or {}).get("reason"),
+            }
+        )
+        out["steps"].append(
+            {
+                "step": "streamers_recover",
+                "ok": bool(stuck.get("ok")),
+                "final_kind": stuck.get("final_kind"),
+            }
+        )
+    except Exception as exc:  # noqa: BLE001
+        out["streamers_alive"] = {"ok": False, "error": str(exc)}
+        out["steps"].append({"step": "streamers_alive_failed", "error": str(exc)})
 
     # 3) Record plan refresh
     plan = op1_record(root)
@@ -493,6 +969,41 @@ def run_loop(
         out["steps"].append({"step": "package_index_failed", "error": str(exc)})
 
     # 4) On-air record (no retune) — RAM + lag kill-switch
+    # TNF Thursday hold: leave the instance free for schedule run-due / TNF_PRIME.
+    try:
+        from .tnf_thursday import tnf_hold_active
+
+        hold = tnf_hold_active()
+        out["tnf_hold"] = hold
+        if hold.get("active") and do_record:
+            do_record = False
+            out["steps"].append(
+                {
+                    "step": "tnf_hold",
+                    "skipped_record": True,
+                    "why": hold.get("why"),
+                }
+            )
+    except Exception as exc:  # noqa: BLE001
+        out["tnf_hold"] = {"active": False, "error": str(exc)}
+
+    try:
+        from .capture_pause import is_paused
+
+        pause = is_paused(root)
+        out["capture_pause"] = pause
+        if pause.get("active") and do_record:
+            do_record = False
+            out["steps"].append(
+                {
+                    "step": "capture_pause",
+                    "why": pause.get("why"),
+                    "detail": "TV record paused by owner flag",
+                }
+            )
+    except Exception as exc:  # noqa: BLE001
+        out["capture_pause"] = {"active": False, "error": str(exc)}
+
     if do_record:
         if not mem.get("allow_record", True):
             out["record"] = {"ok": False, "skipped": True, "reason": "ram_pressure", "memory": mem}
@@ -608,6 +1119,63 @@ def _write_loop_state(out: dict[str, Any], root: Path) -> None:
     path.write_text(json.dumps(out, indent=2), encoding="utf-8")
 
 
+def _spawn_verdict_worker(
+    root: Path,
+    *,
+    overnight: bool,
+    pause_active: bool,
+) -> dict[str, Any]:
+    """Detach continuous multichannel backfill so the 15m farm loop stays short."""
+    root = ensure_data_layout(root)
+    log_dir = root / "work" / "logs"
+    log_dir.mkdir(parents=True, exist_ok=True)
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    out_log = log_dir / f"verdict_worker_{stamp}.log"
+    err_log = log_dir / f"verdict_worker_{stamp}.err"
+    cmd = [
+        str(_python()),
+        "-m",
+        "tools.windows_lab.farm_verdict_backfill",
+        "--batch",
+        "1",
+        "--hop-s",
+        "5",
+        "--sleep-s",
+        "3",
+        "--trigger",
+        "overnight" if overnight else ("capture_pause" if pause_active else "loop"),
+    ]
+    if overnight:
+        cmd.extend(["--until-hour-et", str(OVERNIGHT_LABEL_END_HOUR)])
+    if pause_active and not overnight:
+        cmd.append("--require-pause")
+    try:
+        # DETACHED_PROCESS | CREATE_NEW_PROCESS_GROUP on Windows
+        creationflags = 0x00000008 | 0x00000200 if os.name == "nt" else 0
+        with out_log.open("w", encoding="utf-8") as out_fh, err_log.open("w", encoding="utf-8") as err_fh:
+            proc = subprocess.Popen(
+                cmd,
+                cwd=str(_repo_root()),
+                env={**os.environ, "OHUSH_DATA_ROOT": str(root)},
+                stdout=out_fh,
+                stderr=err_fh,
+                creationflags=creationflags,
+            )
+        return {
+            "ok": True,
+            "pid": proc.pid,
+            "log": str(out_log),
+            "err": str(err_log),
+            "cmd": cmd,
+            "detail": (
+                f"detached verdict worker pid={proc.pid} "
+                f"({'until '+str(OVERNIGHT_LABEL_END_HOUR)+' ET' if overnight else 'pause/loop'})"
+            ),
+        }
+    except Exception as exc:  # noqa: BLE001
+        return {"ok": False, "error": str(exc), "cmd": cmd}
+
+
 def install_loop_task(repo: Path | None = None, root: Path | None = None, *, minutes: int = 15) -> Path:
     """Write PowerShell that registers the farm loop in Task Scheduler."""
     repo = repo or _repo_root()
@@ -630,17 +1198,30 @@ def install_loop_task(repo: Path | None = None, root: Path | None = None, *, min
         newline="\r\n",
     )
     (root / "work" / "logs").mkdir(parents=True, exist_ok=True)
+    hidden = farm / "run_farm_hidden.vbs"
+    hidden.write_text(
+        "\r\n".join(
+            [
+                "' Hidden launcher — no console flash",
+                'Set sh = CreateObject("WScript.Shell")',
+                f'sh.Run "cmd /c ""{wrapper}""", 0, True',
+                "",
+            ]
+        ),
+        encoding="ascii",
+        newline="\r\n",
+    )
     ps1 = farm / "register_farm_loop.ps1"
     script = f"""# Register OHush farm autonomy loop (every {minutes} minutes)
 $ErrorActionPreference = "Stop"
 $taskName = "OHushFarmLoop"
-$wrapper = {json.dumps(str(wrapper))}
-$action = New-ScheduledTaskAction -Execute $wrapper
+$hidden = {json.dumps(str(hidden))}
+$action = New-ScheduledTaskAction -Execute "wscript.exe" -Argument "//B //Nologo `"$hidden`""
 # Finite repetition duration — MaxValue is rejected by Task Scheduler on this host.
 $trigger = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes {minutes}) -RepetitionDuration (New-TimeSpan -Days 3650)
-$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -ExecutionTimeLimit (New-TimeSpan -Hours 2)
+$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -ExecutionTimeLimit (New-TimeSpan -Hours 2) -Hidden
 Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Settings $settings -Force | Out-Null
-Write-Output "Registered $taskName -> $wrapper (every {minutes} min)"
+Write-Output "Registered $taskName (hidden via $hidden; every {minutes} min)"
 """
     ps1.write_text(script, encoding="utf-8")
     return ps1
@@ -663,6 +1244,9 @@ def main(argv: list[str] | None = None) -> int:
     run_p.add_argument("--foreground-record", action="store_true")
 
     sub.add_parser("health", help="Probe on-air health only")
+    alive_p = sub.add_parser("streamers-alive", help="Probe Streamers error screens (522); optional recover")
+    alive_p.add_argument("--recover", action="store_true", help="Force-stop + relaunch if down")
+    alive_p.add_argument("--instance", default=DEFAULT_INSTANCE)
     sub.add_parser("schedule", help="Show day/night capture vs label window")
     inst = sub.add_parser("install-task", help="Write + optionally register Task Scheduler job")
     inst.add_argument("--minutes", type=int, default=15)
@@ -680,6 +1264,17 @@ def main(argv: list[str] | None = None) -> int:
         iid = ready_instance_id(root) or DEFAULT_INSTANCE
         print(json.dumps(on_air_health(iid, root), indent=2))
         return 0
+    if args.cmd == "streamers-alive":
+        from .streamers_alive import ensure_streamers_alive, probe_streamers_down
+
+        iid = args.instance or ready_instance_id(root) or DEFAULT_INSTANCE
+        if args.recover:
+            out = ensure_streamers_alive(iid, root=root, recover=True)
+        else:
+            probe = probe_streamers_down(iid, root=root)
+            out = {"ok": bool(probe.get("ok")), "probe": probe, "recovered": False}
+        print(json.dumps(out, indent=2))
+        return 0 if out.get("ok") else 1
     if args.cmd == "schedule":
         sched = schedule_window()
         # Rough backlog ETA from unscored queue rows.

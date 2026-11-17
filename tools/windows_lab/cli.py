@@ -12,7 +12,8 @@ def main(argv: list[str] | None = None) -> int:
             "usage: python -m tools.windows_lab "
             "{inventory|ingest|analyze|health|capture|instances|channel|"
             "session|schedule|catalog|archive|ota|multi-instance|salvation|"
-            "farm} ..."
+            "farm|ops|streams|guide-catalog|desk|tnf|open|nav|olympics|todos|us-locals|notify|"
+            "process-loopback|windows} ..."
         )
         return 0
     cmd, rest = argv[0], argv[1:]
@@ -54,6 +55,18 @@ def main(argv: list[str] | None = None) -> int:
         from .multi_instance import main as m
     elif cmd == "salvation":
         from .salvation import main as m
+    elif cmd in ("ops", "farm-ops", "farm_ops"):
+        from .farm_ops import main as m
+
+        return m(rest)
+    elif cmd in ("streams", "stream-status", "stream_status", "uptime"):
+        from .stream_status import main as m
+
+        return m(rest)
+    elif cmd in ("guide-catalog", "guide_catalog", "channels-db", "guide-db"):
+        from .guide_catalog import main as m
+
+        return m(rest)
     elif cmd == "farm":
         # Three ops + worker helpers:
         #   record | label | human | status | orchestrate → farm_orchestrate
@@ -62,6 +75,14 @@ def main(argv: list[str] | None = None) -> int:
         #   cloud-sync → farm_cloud_sync (push help clips to ohush.co GCS)
         #   import → farm_import (authorized_sources → farm takes)
         #   plan | board | prepare | … → coverage_farm
+        #   ops → farm_ops (run log / board / preflight / preempt)
+        if rest and rest[0] in {"ops", "preflight"}:
+            from .farm_ops import main as m
+
+            # farm preflight → ops preflight; farm ops … → ops …
+            if rest[0] == "preflight":
+                return m(rest)
+            return m(rest[1:])
         if not rest:
             from .farm_orchestrate import main as m
 
@@ -83,12 +104,82 @@ def main(argv: list[str] | None = None) -> int:
             from .farm_loop import main as m
 
             return m(rest[1:])
+        if head in {"live-scorecard", "live_scorecard", "mute-scorecard"}:
+            from .farm_live_scorecard import main as m
+
+            return m(rest[1:])
+        if head in {"timeline", "timelines"}:
+            from .farm_timeline import main as m
+
+            return m(rest[1:])
+        if head in {"export-acoustic-gold", "export_acoustic_gold", "export-gold"}:
+            from .export_farm_acoustic_gold import main as m
+
+            return m(rest[1:])
+        if head in {"vision-timeline", "vision_timeline"}:
+            from .farm_vision_timeline import main as m
+
+            return m(rest[1:])
+        if head in {"embed-extract", "embed_extract", "farm-embed"}:
+            from .farm_embed_extract import main as m
+
+            return m(rest[1:])
+        if head in {"atomic-audit", "atomic_audit", "audit"}:
+            from .farm_atomic_audit import main as m
+
+            return m(rest[1:])
+        if head in {"episode-triage", "episode_triage"}:
+            from .farm_episode_triage import main as m
+
+            return m(rest[1:])
+        if head in {"episode-viewer", "episode_viewer", "triage-ui"}:
+            from .farm_episode_viewer import main as m
+
+            return m(rest[1:])
+        if head in {"streamers-alive", "alive"}:
+            from .streamers_alive import main as m
+
+            return m(rest[1:])
         if head in {"record", "label", "human", "status", "orchestrate"}:
             from .farm_orchestrate import main as m
 
             return m(rest)
         from .coverage_farm import main as m
 
+        return m(rest)
+    elif cmd == "tnf":
+        from .tnf_thursday import main as m
+    elif cmd == "open":
+        from .streamers_open import main as m
+    elif cmd in ("nav", "streamers-nav", "streamers_nav"):
+        from .streamers_nav import main as m
+    elif cmd in ("us-locals", "us_locals", "locals"):
+        from .us_locals import main as m
+    elif cmd in ("olympics", "channel-olympics", "channel_olympics"):
+        from .channel_olympics import main as m
+    elif cmd == "notify":
+        from .notify import main as m
+    elif cmd in ("todos", "todo", "open-model-todos", "hush-todos"):
+        from .open_model_todos import main as m
+    elif cmd in ("process-loopback", "process_loopback", "pid-loopback"):
+        from .process_loopback import main as m
+    elif cmd in ("capacity-probe-3", "capacity_probe_3", "probe-3"):
+        from .capacity_probe_3 import main as m
+    elif cmd in ("progressive-capacity", "progressive_capacity", "ramp-streams"):
+        from .progressive_capacity import main as m
+    elif cmd in ("recover", "streamers-recover", "streamers_recover"):
+        from .streamers_recover import main as m
+    elif cmd in ("heartbeat-fix", "heartbeat_fix", "hb-fix"):
+        from .heartbeat_fix import main as m
+    elif cmd in ("frame-watch", "frame_watch", "frames"):
+        from .frame_watch import main as m
+    elif cmd in ("desk", "desk-orchestrator", "orchestrator"):
+        from .desk_orchestrator import main as m
+    elif cmd in ("windows", "window", "layout", "window-layout"):
+        from .window_layout import main as m
+
+        if cmd == "layout" and (not rest or rest[0] not in ("list", "layout")):
+            rest = ["layout", *rest]
         return m(rest)
     else:
         print(f"unknown command: {cmd}", file=sys.stderr)

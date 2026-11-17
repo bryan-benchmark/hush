@@ -45,6 +45,67 @@ def find_device(name_substr: str) -> int:
     raise LookupError(f"no input device matching {name_substr!r}: {list_input_devices()}")
 
 
+_HOST_RANK = {
+    "Windows WASAPI": 0,
+    "Windows WDM-KS": 1,
+    "Windows DirectSound": 2,
+    "MME": 3,
+}
+
+
+def select_line_in(devices: list[dict]) -> dict:
+    """Pick the motherboard stereo line input.
+
+    Refuses microphone and Stereo Mix names. Prefers a Realtek device, then
+    a shared-mode endpoint (WASAPI) once Windows has seen a plug, otherwise
+    the WDM-KS pin that stays visible while the jack is empty.
+    """
+    ranked: list[tuple[int, int, str, dict]] = []
+    for device in devices:
+        name = str(device.get("name") or "")
+        lower = name.lower()
+        if "line in" not in lower and "line input" not in lower:
+            continue
+        if "microphone" in lower or "stereo mix" in lower:
+            continue
+        if int(device.get("channels") or 0) < 2:
+            continue
+        host = str(device.get("hostapi") or "")
+        ranked.append(
+            (
+                0 if "realtek" in lower else 1,
+                _HOST_RANK.get(host, 9),
+                name,
+                device,
+            )
+        )
+    if not ranked:
+        names = [d.get("name") for d in devices]
+        raise LookupError(f"no stereo line input among: {names}")
+    ranked.sort(key=lambda row: (row[0], row[1], row[2]))
+    return ranked[0][3]
+
+
+def describe_line_level(peak: float) -> dict:
+    """Say whether a line-in take is usable before a long recording."""
+    if peak <= 1e-5:
+        level = "silent"
+        hear = (
+            "The line input is open and silent. Plug the tablet headphone output "
+            "into the rear blue Line In, play Streamers, then run check again."
+        )
+    elif peak >= 0.98:
+        level = "clipping"
+        hear = "The line input is clipping. Lower the tablet volume, then run check again."
+    elif peak < 0.02:
+        level = "quiet"
+        hear = "The line input is very quiet. Raise the tablet volume, then run check again."
+    else:
+        level = "live"
+        hear = "The line input is receiving audio. A five-minute recording can start."
+    return {"level": level, "peak_abs": round(float(peak), 6), "hear": hear}
+
+
 def capture_pcm(
     *,
     device: int | str,
@@ -118,6 +179,7 @@ def capture_pcm(
     if channels > 1:
         x = x.reshape(-1, channels)
     peak = float(np.max(np.abs(x))) / 32768.0 if len(x) else 0.0
+    rms = float(np.sqrt(np.mean(np.square(x / 32768.0)))) if len(x) else 0.0
 
     manifest = {
         "outfile": str(outfile),
@@ -131,6 +193,7 @@ def capture_pcm(
         "capture_utc_start": utc_start,
         "capture_utc_end": datetime.now(timezone.utc).isoformat(),
         "peak_abs": round(peak, 6),
+        "rms": round(rms, 6),
         "nonzero": peak > 1e-5,
         "warnings": warnings,
         "source_label": source_label,
@@ -183,6 +246,17 @@ def main(argv: list[str] | None = None) -> int:
     f.add_argument("--outfile", type=Path, required=True)
     f.add_argument("--seconds", type=float, default=60.0)
 
+    tablet = sub.add_parser("tablet", help="Fire tablet headphone output into the motherboard Line In")
+    tablet_sub = tablet.add_subparsers(dest="tablet_cmd", required=True)
+    check = tablet_sub.add_parser("check", help="Record a few seconds and report the line level")
+    check.add_argument("--seconds", type=float, default=3.0)
+    record = tablet_sub.add_parser("record", help="Record the Line In to a local WAV")
+    record.add_argument("--seconds", type=float, default=300.0)
+    record.add_argument("--outfile", type=Path)
+    record.add_argument("--source-label", default="fire_tablet_streamers")
+    record.add_argument("--rights-status", default="authorized", choices=["authorized", "test_public"])
+    record.add_argument("--analyze", action="store_true", help="Run the local WAV through OHush QA after capture")
+
     args = p.parse_args(argv)
     if args.cmd == "list-devices":
         print(json.dumps(list_input_devices(), indent=2))
@@ -206,7 +280,57 @@ def main(argv: list[str] | None = None) -> int:
         )
         print(json.dumps({"ok": True, "manifest": man}, indent=2))
         return 0 if man.get("nonzero") else 3
+    if args.cmd == "tablet":
+        return _tablet_main(args)
     return 1
+
+
+def _tablet_main(args) -> int:
+    devices = list_input_devices()
+    try:
+        chosen = select_line_in(devices)
+    except LookupError as exc:
+        print(json.dumps({"ok": False, "error": str(exc)}, indent=2))
+        return 2
+
+    root = ensure_data_layout()
+    tablet_dir = root / "work" / "capture" / "tablet"
+    tablet_dir.mkdir(parents=True, exist_ok=True)
+    if args.tablet_cmd == "check":
+        stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+        outfile = tablet_dir / f"check_{stamp}.wav"
+        source_label = "fire_tablet_line_check"
+        rights_status = "test_public"
+        analyze = False
+    else:
+        outfile = args.outfile
+        if outfile is None:
+            stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+            outfile = tablet_dir / f"tablet_{stamp}.wav"
+        source_label = args.source_label
+        rights_status = args.rights_status
+        analyze = bool(args.analyze)
+
+    manifest = capture_pcm(
+        device=int(chosen["index"]),
+        seconds=float(args.seconds),
+        outfile=outfile,
+        source_label=source_label,
+        rights_status=rights_status,
+    )
+    manifest["capture_path"] = "fire_tablet_headphone_line_in"
+    manifest["input_class"] = "stereo_line_in"
+    level = describe_line_level(float(manifest["peak_abs"]))
+    side = Path(manifest["outfile"]).with_suffix(".capture_manifest.json")
+    side.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+
+    report: dict = {"ok": level["level"] == "live", "device": chosen, "level": level, "manifest": manifest}
+    if analyze and args.tablet_cmd == "record":
+        from .analyze import analyze_file
+
+        report["analysis"] = analyze_file(Path(manifest["outfile"]))
+    print(json.dumps(report, indent=2))
+    return 0 if level["level"] == "live" else 3
 
 
 if __name__ == "__main__":

@@ -1,0 +1,22 @@
+---
+description: Operate Streamers on BlueStacks. Read this before any login, channel change, or recording of ar.tvplayer.tv.
+alwaysApply: false
+---
+
+# Streamers operation
+
+Before touching the app, read `docs/ohush/data_lab/STREAMERS_CONTROLS.md` and follow its atoms. Login steps stay in `docs/ohush/data_lab/SALVATION_BLUESTACKS.md`.
+
+- Dump the UI and tap the center of the bounds you just read. A coordinate from an earlier dump is stale.
+- Open a channel with d-pad center (keyevent 23) after the guide row is selected. Back (keyevent 4) returns to the guide. A tap on the preview, and a tap on TV guide, History, or Clear, did not do those jobs.
+- **Sports events:** search show/team (`open search`) → live `NFL 01` card → keyevent 23. Not empty `AMZN##`.
+- **Linear nets (ESPN…):** section-first via `nav teach --route ESPN_US` (All channels → US SPORTS SECTION → ESPN). Never `(MAX SPORTS) ESPN` for national-ad corpus. Trajectories: `streamers_nav.jsonl` + `NAV_ATLAS.md`.
+- **US locals (any DMA):** `US ABC/CBS/NBC/FOX SECTION` has every US affiliate. Rotate big markets on purpose for dataset diversity — `python -m tools.windows_lab open local --network FOX` (optional `--market "New York"`). Tag takes with network/market/call letters. Do not leave the farm on one AK/WV filler.
+- **Stuck? Recover first:** `python -m tools.windows_lab open snap` then `open recover --goal guide|picture`. Do not thrash in chat — the recover loop dumps, classifies, fixes, and logs to `streamers_recover.jsonl`.
+- **Guide schedule + audit:** enqueue with `schedule from-shortcut` / `from-guide` (stamps search card on the job). Check health with `schedule audit` → `C:\OHushData\indexes\SCHEDULE_AUDIT.md`. Verdicts like `healthy_live` / `overdue` / `broken_live` are the source of truth that scheduled takes actually work.
+- Record a channel that is already playing with device `screenrecord` plus the WASAPI loopback of that instance's speaker. `gdigrab` includes whatever window covers BlueStacks.
+- **Display layout:** if BlueStacks windows are off-screen, tiny, or stacked, run `python -m tools.windows_lab windows layout --mode auto` (or `fill` / `split` / `grid`). If `stuck` is non-empty, re-run with `--relaunch-stuck`. Do not hand-drag. Atom Q0 in STREAMERS_CONTROLS.
+- Fleet = Nougat clones only (~10 ready, mostly stopped). `Tiramisu64` stays off. Raise hot concurrent past 2 only after `progressive-capacity --step N` under full AV.
+- Desk cron (`desk tick` / Task `OHushDeskOrchestrator`) is single-flight: never stack ticks, never spawn another desk. Preflight + budgets gate recover/vision/record.
+- `salvation record-add` stores a time. It does not tune. Do not apply an example channel recipe, and do not send keyevent 82 to open a channel.
+- The password stays in `C:\OHushData\farm\salvation_login.json`. Do not print it.

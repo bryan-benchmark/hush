@@ -152,6 +152,26 @@ def adb(instance: dict[str, Any], args: list[str], timeout: float = 30.0) -> tup
     return _run([adb_bin, "-s", serial, *args], timeout=timeout)
 
 
+def adb_bytes(instance: dict[str, Any], args: list[str], timeout: float = 60.0) -> tuple[int, bytes, str]:
+    """ADB call returning raw stdout bytes (for screencap / pull-less dumps)."""
+    reg = instance.get("_registry") or load_registry()
+    adb_bin = _which_adb(reg)
+    serial = str(instance.get("adb_serial") or f"127.0.0.1:{instance.get('adb_port', 5555)}")
+    try:
+        proc = subprocess.run(
+            [adb_bin, "-s", serial, *args],
+            capture_output=True,
+            timeout=timeout,
+            check=False,
+        )
+        err = (proc.stderr or b"").decode("utf-8", errors="replace").strip()
+        return int(proc.returncode), proc.stdout or b"", err
+    except FileNotFoundError as e:
+        return 127, b"", str(e)
+    except subprocess.TimeoutExpired:
+        return 124, b"", "timeout"
+
+
 def connect_adb(instance: dict[str, Any], timeout: float = 20.0) -> tuple[bool, str]:
     reg = instance.get("_registry") or load_registry()
     adb_bin = _which_adb(reg)
@@ -184,6 +204,125 @@ def launch_bluestacks(instance: dict[str, Any], *, launch_app: bool = True) -> d
         cmd.extend(["--cmd", "launchApp", "--package", package, "--source", "ohush_windows_lab"])
     proc = subprocess.Popen(cmd, cwd=str(player.parent))
     return {"pid": proc.pid, "cmd": cmd, "started_utc": _now()}
+
+
+def _bstkvmgr() -> Path:
+    """BlueStacks Hypervisor CLI (VBoxManage fork) — can stop/start VMs by engine name."""
+    player = Path(str(DEFAULT_BLUESTACKS_PLAYER))
+    cand = player.parent / "BstkVMMgr.exe"
+    if cand.is_file():
+        return cand
+    raise FileNotFoundError(f"BstkVMMgr missing next to player: {cand}")
+
+
+def list_running_engines() -> list[str]:
+    """Engine names currently running (e.g. Nougat32, Tiramisu64)."""
+    vm = _bstkvmgr()
+    code, out = _run([str(vm), "list", "runningvms"], timeout=30.0)
+    if code != 0:
+        return []
+    names: list[str] = []
+    for line in out.splitlines():
+        # "Nougat32" {uuid}
+        m = re.match(r'^"([^"]+)"', line.strip())
+        if m:
+            names.append(m.group(1))
+    return names
+
+
+def _kill_hd_player_by_title(window_title: str) -> list[int]:
+    """Kill orphan HD-Player windows left after VBox poweroff (by MainWindowTitle)."""
+    if not window_title:
+        return []
+    title = window_title.replace("'", "''")
+    _code, out = _run(
+        [
+            "powershell",
+            "-NoProfile",
+            "-Command",
+            f"Get-Process HD-Player -ErrorAction SilentlyContinue | "
+            f"Where-Object {{ $_.MainWindowTitle -eq '{title}' }} | "
+            f"ForEach-Object {{ $_.Id; Stop-Process -Id $_.Id -Force -ErrorAction SilentlyContinue }}",
+        ],
+        timeout=20.0,
+    )
+    killed: list[int] = []
+    for line in (out or "").splitlines():
+        line = line.strip()
+        if line.isdigit():
+            killed.append(int(line))
+    return killed
+
+
+def stop_bluestacks(
+    instance_id: str,
+    *,
+    root: Path | None = None,
+    hard: bool = False,
+    wait_sec: float = 45.0,
+) -> dict[str, Any]:
+    """Stop one BlueStacks instance (same as Multi-Instance Manager Stop).
+
+    Uses ``BstkVMMgr controlvm <engine> acpipowerbutton`` (or ``poweroff`` if hard),
+    then clears any orphan ``HD-Player`` window for that instance title.
+    """
+    inst = get_instance(instance_id, root)
+    engine = str(inst.get("engine") or instance_id)
+    title = str(inst.get("window_title") or "")
+    running = list_running_engines()
+    method = "already_stopped"
+    code, out = 0, ""
+    if engine in running:
+        vm = _bstkvmgr()
+        action = "poweroff" if hard else "acpipowerbutton"
+        method = action
+        code, out = _run([str(vm), "controlvm", engine, action], timeout=60.0)
+        deadline = time.time() + wait_sec
+        while time.time() < deadline:
+            if engine not in list_running_engines():
+                break
+            time.sleep(1.5)
+        if engine in list_running_engines() and not hard:
+            code, out = _run([str(vm), "controlvm", engine, "poweroff"], timeout=60.0)
+            method = "acpipowerbutton+poweroff"
+            time.sleep(2.0)
+    killed = _kill_hd_player_by_title(title) if title else []
+    still_vm = engine in list_running_engines()
+    return {
+        "ok": not still_vm,
+        "instance_id": instance_id,
+        "engine": engine,
+        "method": method,
+        "killed_hd_player_pids": killed,
+        "running": list_running_engines(),
+        "stopped_utc": _now(),
+        "vbox_rc": code,
+        "vbox_out": (out or "")[:300],
+        "error": "still_running_after_stop" if still_vm else None,
+    }
+
+
+def stop_disabled_instances(root: Path | None = None, *, hard: bool = False) -> dict[str, Any]:
+    """Stop every registry instance with enabled=false that is still running."""
+    root = ensure_data_layout(root)
+    running = set(list_running_engines())
+    stopped = []
+    skipped = []
+    for row in list_instances(root):
+        if row.get("enabled", True):
+            continue
+        engine = str(row.get("engine") or row.get("id"))
+        if engine not in running:
+            skipped.append({"id": row["id"], "reason": "not_running"})
+            continue
+        stopped.append(stop_bluestacks(str(row["id"]), root=root, hard=hard))
+    return {
+        "ok": all(s.get("ok") for s in stopped) if stopped else True,
+        "stopped": stopped,
+        "skipped": skipped,
+        "running_after": list_running_engines(),
+        "checked_utc": _now(),
+    }
 
 
 def window_titles() -> list[str]:
@@ -360,11 +499,21 @@ def main(argv: list[str] | None = None) -> int:
     l = sub.add_parser("launch")
     l.add_argument("--instance", required=True)
     l.add_argument("--no-app", action="store_true")
+    st = sub.add_parser("stop", help="Stop a BlueStacks instance (Multi-Instance Stop)")
+    st.add_argument("--instance", default=None, help="Engine/id e.g. Tiramisu64")
+    st.add_argument(
+        "--disabled",
+        action="store_true",
+        help="Stop every registry instance with enabled=false",
+    )
+    st.add_argument("--hard", action="store_true", help="poweroff instead of ACPI")
+    sub.add_parser("running", help="List running BlueStacks engine names")
     u = sub.add_parser("upsert")
     u.add_argument("--instance", required=True)
     u.add_argument("--adb-port", type=int)
     u.add_argument("--loopback-device")
     u.add_argument("--window-title")
+    u.add_argument("--audio-capture", choices=("process", "device", "auto"))
     u.add_argument("--package")
     u.add_argument("--enabled", choices=("true", "false"))
     c = sub.add_parser("crosstalk")
@@ -387,6 +536,19 @@ def main(argv: list[str] | None = None) -> int:
         info = launch_bluestacks(inst, launch_app=not args.no_app)
         print(json.dumps({"ok": True, "launch": info}, indent=2))
         return 0
+    if args.cmd == "running":
+        print(json.dumps({"running": list_running_engines()}, indent=2))
+        return 0
+    if args.cmd == "stop":
+        if args.disabled:
+            report = stop_disabled_instances(hard=args.hard)
+        elif args.instance:
+            report = stop_bluestacks(args.instance, hard=args.hard)
+        else:
+            print(json.dumps({"ok": False, "error": "pass --instance ID or --disabled"}, indent=2))
+            return 2
+        print(json.dumps(report, indent=2))
+        return 0 if report.get("ok") else 2
     if args.cmd == "upsert":
         patch: dict[str, Any] = {}
         if args.adb_port is not None:
@@ -396,6 +558,8 @@ def main(argv: list[str] | None = None) -> int:
             patch["loopback_device"] = args.loopback_device
         if args.window_title:
             patch["window_title"] = args.window_title
+        if args.audio_capture:
+            patch["audio_capture"] = args.audio_capture
         if args.package:
             patch["package"] = args.package
         if args.enabled is not None:

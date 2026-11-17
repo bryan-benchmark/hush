@@ -30,7 +30,11 @@ ALLOWED_RIGHTS = frozenset({"authorized", "test_public"})
 BLOCKED_RIGHTS = frozenset({"unknown", "unauthorized", "pending"})
 
 SOURCE_KINDS = frozenset({"streamers", "ota_antenna"})
-MEDIA_MODES = frozenset({"av", "audio"})
+# av = full audio + sparse stills (default labeling archive)
+# av_full = full audio + retained video_*.mp4
+# audio = archival WAV only
+MEDIA_MODES = frozenset({"av", "av_full", "audio"})
+DEFAULT_STILL_INTERVAL_SEC = 1.0
 
 DEFAULT_STREAMERS_PACKAGE = "ar.tvplayer.tv"
 DEFAULT_BLUESTACKS_PLAYER = Path(r"C:\Program Files\BlueStacks_nxt\HD-Player.exe")
@@ -42,6 +46,8 @@ INSTANCE_REGISTRY_NAME = "instances.json"
 SCHEDULE_NAME = "jobs.json"
 OTA_CONFIG_NAME = "ota.json"
 ACTIVE_LOCKS_NAME = "active_locks.json"
+SALVATION_LOGIN_NAME = "salvation_login.json"
+SALVATION_RECORDINGS_NAME = "salvation_recordings.json"
 
 
 def data_root() -> Path:
@@ -88,3 +94,11 @@ def ota_config_path(root: Path | None = None) -> Path:
 
 def active_locks_path(root: Path | None = None) -> Path:
     return farm_dir(root) / ACTIVE_LOCKS_NAME
+
+
+def salvation_login_path(root: Path | None = None) -> Path:
+    return farm_dir(root) / SALVATION_LOGIN_NAME
+
+
+def salvation_recordings_path(root: Path | None = None) -> Path:
+    return ensure_data_layout(root) / "schedules" / SALVATION_RECORDINGS_NAME
