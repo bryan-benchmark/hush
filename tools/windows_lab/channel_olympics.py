@@ -245,15 +245,25 @@ def _open_one(target: dict[str, Any], *, instance_id: str, root: Path) -> dict[s
                         selected = str(chosen)
                         break
             want = str(target.get("want_title") or "")
-            ok = bool(out.get("ok")) and (
-                not want or want.lower() in selected.lower() or selected.lower() in want.lower()
+            title_ok = bool(selected) and (
+                not want
+                or want.lower() in selected.lower()
+                or selected.lower() in want.lower()
             )
+            # Identity on the rail/row wins even when post-open dump is empty
+            # (fullscreen player → empty_hierarchy → nav raw_ok false).
+            ok = title_ok
+            err = None
+            if not ok:
+                err = out.get("error") or f"title_mismatch want={want!r} got={selected!r}"
+            elif not out.get("ok"):
+                err = None  # scored ok on identity; raw open may still be dump-soft
             row.update(
                 {
                     "ok": ok,
                     "open_via": "nav",
                     "selected_title": selected,
-                    "error": None if ok else (out.get("error") or f"title_mismatch want={want!r} got={selected!r}"),
+                    "error": err,
                     "raw_ok": bool(out.get("ok")),
                 }
             )
@@ -423,11 +433,16 @@ def run_olympics(
                 with (out_dir / "results.jsonl").open("a", encoding="utf-8") as fh:
                     fh.write(json.dumps(row, ensure_ascii=False) + "\n")
             if not row.get("ok"):
-                # Soft recover so the next open is not stuck on chrome.
+                # Light unstick only — full ensure_ready_for_open storms on
+                # fullscreen empty dumps and burns the wall-clock budget.
                 try:
-                    from .streamers_recover import ensure_ready_for_open
+                    from .instances import get_instance, adb, connect_adb
 
-                    ensure_ready_for_open(iid, root=root)
+                    inst = get_instance(iid, root)
+                    connect_adb(inst)
+                    for _ in range(2):
+                        adb(inst, ["shell", "input", "keyevent", "4"])
+                        time.sleep(0.35)
                 except Exception:
                     pass
 

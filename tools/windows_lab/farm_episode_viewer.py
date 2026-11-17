@@ -48,6 +48,69 @@ def _verdicts_path() -> Path:
     return farm_label_dir() / "audit" / "EPISODE_REVIEW_VERDICTS.json"
 
 
+def _capture_by_player(pause: dict[str, Any] | None = None) -> dict[str, Any]:
+    """Capture on/off per Streamers player (BlueStacks instance)."""
+    pause = dict(pause or {})
+    owner_off = bool(pause.get("active"))
+    players: list[dict[str, Any]] = []
+    try:
+        from .desk_orchestrator import enabled_streamers
+        from .instances import list_running_engines
+        from .locks import get_lock
+
+        running = set(list_running_engines() or [])
+        for row in enabled_streamers():
+            iid = str(row.get("id") or row.get("engine") or "")
+            if not iid:
+                continue
+            lock = get_lock("streamers", iid) or {}
+            recording = bool(lock) and not str(lock.get("session_id") or "").startswith("starting_")
+            engine_up = iid in running or str(row.get("engine") or "") in running
+            if owner_off:
+                state = "off"
+                why = "owner capture off"
+            elif recording:
+                state = "on"
+                why = str(lock.get("session_id") or "recording")
+            else:
+                state = "off"
+                why = "idle" if engine_up else "engine stopped"
+            players.append(
+                {
+                    "id": iid,
+                    "engine": row.get("engine") or iid,
+                    "enabled": bool(row.get("enabled", True)),
+                    "capture": state,
+                    "recording": recording,
+                    "engine_up": engine_up,
+                    "why": why,
+                    "session_id": lock.get("session_id"),
+                    "job_id": lock.get("job_id"),
+                }
+            )
+    except Exception as exc:  # noqa: BLE001
+        return {
+            "owner_capture": "off" if owner_off else "on",
+            "owner_off": owner_off,
+            "why": pause.get("why"),
+            "players": [],
+            "on_n": 0,
+            "off_n": 0,
+            "error": str(exc),
+        }
+    on_n = sum(1 for p in players if p.get("capture") == "on")
+    off_n = sum(1 for p in players if p.get("capture") != "on")
+    return {
+        "owner_capture": "off" if owner_off else "on",
+        "owner_off": owner_off,
+        "why": pause.get("why"),
+        "set_utc": pause.get("set_utc"),
+        "players": players,
+        "on_n": on_n,
+        "off_n": off_n,
+    }
+
+
 def _overnight_dashboard() -> dict[str, Any]:
     """Compact ops board for /dashboard (overnight verdict + backlog)."""
     label = farm_label_dir()
@@ -71,6 +134,7 @@ def _overnight_dashboard() -> dict[str, Any]:
         pause = is_paused()
     except Exception as exc:  # noqa: BLE001
         pause = {"active": False, "error": str(exc)}
+    capture = _capture_by_player(pause)
     lock: dict[str, Any] = {}
     try:
         from .farm_label_lock import status as label_lock_status
@@ -135,14 +199,90 @@ def _overnight_dashboard() -> dict[str, Any]:
         hierarchy = backlog_hierarchy(live_job=live, queue_limit=48)
     except Exception as exc:  # noqa: BLE001
         hierarchy = {"error": str(exc)}
+    label_timing: dict[str, Any] = {}
+    try:
+        from .farm_label_timing import load_summary
+
+        label_timing = load_summary()
+        # Approximate live elapsed from label-lock age when worker predates timing.
+        if live.get("active") and lock.get("held") and lock.get("age_s") is not None:
+            running = dict(label_timing.get("running") or {})
+            key = f"{live.get('session')}|{live.get('phase')}"
+            if key not in running and live.get("session") and live.get("phase"):
+                running[key] = {
+                    "session": live.get("session"),
+                    "step": live.get("phase"),
+                    "elapsed_s": round(float(lock.get("age_s") or 0), 1),
+                    "started_utc": None,
+                    "approx": True,
+                    "note": "from label_lock.age_s (timing begin missed mid-flight)",
+                }
+                label_timing["running"] = running
+        # Attach live elapsed onto live_job for the progress card.
+        for _k, rv in dict(label_timing.get("running") or {}).items():
+            if rv.get("session") == live.get("session") and rv.get("step") == live.get("phase"):
+                live["step_elapsed_s"] = rv.get("elapsed_s")
+                live["step_started_utc"] = rv.get("started_utc")
+                if rv.get("approx"):
+                    live["step_elapsed_approx"] = True
+                break
+        if live.get("step_elapsed_s") is None and live.get("active"):
+            try:
+                live["step_elapsed_s"] = round(float(lock.get("age_s") or 0), 1)
+                live["step_elapsed_approx"] = True
+            except (TypeError, ValueError):
+                pass
+        # Mirror live elapsed onto hierarchy queue row.
+        if live.get("active") and live.get("step_elapsed_s") is not None:
+            for row in hierarchy.get("queue") or []:
+                if row.get("session") == live.get("session"):
+                    tm = dict(row.get("timing") or {})
+                    tm["live"] = {
+                        "step": live.get("phase"),
+                        "elapsed_s": live.get("step_elapsed_s"),
+                        "started_utc": live.get("step_started_utc"),
+                        "approx": bool(live.get("step_elapsed_approx")),
+                    }
+                    row["timing"] = tm
+                    break
+    except Exception as exc:  # noqa: BLE001
+        label_timing = {"error": str(exc)}
+    etas: dict[str, Any] = {}
+    try:
+        from .farm_label_timing import estimate_label_etas
+
+        etas = estimate_label_etas(
+            live_job=live,
+            hierarchy=hierarchy,
+            timing=label_timing,
+            queue_annotate_limit=48,
+        )
+        # Surface key ETA on live_job for the top card.
+        cur = etas.get("current_session") or {}
+        if cur.get("remaining_s") is not None:
+            live["eta_remaining_s"] = cur.get("remaining_s")
+            live["eta_finish_et"] = cur.get("finish_et")
+            live["sec_per_hop"] = etas.get("sec_per_hop")
+            live["hops_per_min"] = etas.get("hops_per_min")
+    except Exception as exc:  # noqa: BLE001
+        etas = {"error": str(exc)}
     return {
         "ok": True,
         "updated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "overnight": board,
         "capture_pause": pause,
+        "capture": capture,
         "label_lock": lock,
         "live_job": live,
         "hierarchy": hierarchy,
+        "etas": etas,
+        "label_timing": {
+            "totals": label_timing.get("totals"),
+            "by_step": label_timing.get("by_step"),
+            "running": label_timing.get("running"),
+            "ledger": str(label / "audit" / "LABEL_TIMING.jsonl"),
+            "error": label_timing.get("error"),
+        },
         "schedule": {
             "mode": sched.get("mode"),
             "why": sched.get("why"),
@@ -551,13 +691,13 @@ HTML = r"""<!doctype html>
   header .right {
     display: flex; align-items: flex-start; gap: 10px; flex-shrink: 0;
   }
-  .btn-done {
+  .btn-next {
     border: 1px solid #0f766e; background: #0f766e; color: #fff;
-    border-radius: 6px; padding: 6px 12px; cursor: pointer;
-    font: inherit; font-weight: 700; font-size: 12px; white-space: nowrap;
+    border-radius: 8px; padding: 8px 14px; cursor: pointer;
+    font: inherit; font-weight: 700; font-size: 13px; white-space: nowrap;
   }
-  .btn-done:hover { background: #0d9488; border-color: #0d9488; }
-  .btn-done:disabled { opacity: 0.45; cursor: default; }
+  .btn-next:hover { background: #0d9488; border-color: #0d9488; }
+  .btn-next:disabled { opacity: 0.45; cursor: default; }
   .nav-link {
     border: 1px solid var(--line); background: #fff; color: var(--ink);
     border-radius: 6px; padding: 6px 10px; cursor: pointer;
@@ -575,7 +715,7 @@ HTML = r"""<!doctype html>
     display: inline-block; width: 8px; height: 8px; border-radius: 2px;
     margin-right: 3px; vertical-align: -1px;
   }
-  .layout { display: grid; grid-template-columns: 260px 1fr; min-height: calc(100vh - 52px); }
+  .layout { display: grid; grid-template-columns: 260px 1fr; min-height: calc(100vh - 52px); padding-bottom: 72px; }
   nav {
     border-right: 1px solid var(--line);
     background: rgba(247,250,252,.85);
@@ -645,11 +785,11 @@ HTML = r"""<!doctype html>
   }
   .card {
     display: grid;
-    grid-template-columns: 200px 220px 112px;
+    grid-template-columns: 200px minmax(180px, 1fr) 168px;
     gap: 0;
     align-items: stretch;
-    width: max-content;
-    max-width: 100%;
+    width: 100%;
+    max-width: 720px;
     flex: 0 0 auto;
     scroll-snap-align: start;
     border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
@@ -681,25 +821,86 @@ HTML = r"""<!doctype html>
     min-width: 0;
   }
   .card .you-col {
-    display: flex; align-items: stretch; justify-content: stretch;
-    padding: 8px;
+    display: flex; flex-direction: column; align-items: stretch; justify-content: center;
+    gap: 6px; padding: 8px;
     border-left: 1px solid var(--line);
     background: #eef3f6;
   }
+  .choice {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+    width: 100%; height: 100%; min-height: 88px;
+  }
+  .pick {
+    cursor: pointer; border: 2px solid #8aa0b0; border-radius: 8px;
+    background: #fff; color: var(--muted);
+    font: inherit; font-weight: 800; font-size: 14px; letter-spacing: .02em;
+    text-transform: uppercase; padding: 8px 4px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  }
+  .pick .sub {
+    display: block; font-size: 10px; font-weight: 700; letter-spacing: .04em;
+    text-transform: uppercase; opacity: .7; margin-top: 1px;
+  }
+  .pick .ico { width: 18px; height: 18px; margin-bottom: 2px; }
+  .pick.show.on {
+    background: #ccfbf1; color: var(--show); border-color: #0f766e;
+  }
+  .pick.ad.on {
+    background: #ffedd5; color: var(--ad); border-color: #c2410c;
+  }
+  .pick.prefill { border-style: dashed; }
+  .pick.on.prefill { border-style: dashed; }
+  .pick:hover { filter: brightness(0.98); }
+  .choice-hint {
+    font-size: 10px; font-weight: 700; color: var(--muted);
+    text-align: center; text-transform: uppercase; letter-spacing: .04em;
+  }
+  .choice-hint.yours { color: #0f766e; }
+  .action-bar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 8;
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: rgba(255,255,255,.96); border-top: 1px solid var(--line);
+    backdrop-filter: blur(10px);
+  }
+  .action-bar .hint { margin: 0; font-size: 12px; color: var(--muted); line-height: 1.3; max-width: 55vw; }
+  .action-bar .btn-next { min-width: 140px; padding: 12px 18px; font-size: 15px; }
   .signals {
-    display: grid;
-    grid-template-columns: 52px 1fr;
-    gap: 5px 8px;
-    align-items: center;
+    display: flex; flex-wrap: wrap; gap: 5px;
   }
-  .sig-lab {
-    font-size: 11px; font-weight: 700; color: var(--muted);
-    text-transform: uppercase; letter-spacing: .04em;
+  .sig {
+    display: inline-flex; align-items: center; gap: 5px;
+    border: 1px solid var(--line); border-radius: 7px;
+    padding: 4px 7px; background: #f8fafc; min-width: 0;
   }
+  .sig .lab {
+    font-size: 10px; font-weight: 700; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .03em;
+  }
+  .ico {
+    width: 14px; height: 14px; flex: 0 0 auto;
+    display: inline-block; vertical-align: -2px;
+  }
+  .ico.lg { width: 18px; height: 18px; }
   .mark {
-    display: inline-block; font-weight: 700; font-size: 13px;
-    padding: 3px 8px; border-radius: 5px; line-height: 1.2;
+    display: inline-flex; align-items: center; gap: 5px;
+    font-weight: 700; font-size: 12px;
+    padding: 2px 7px; border-radius: 5px; line-height: 1.2;
   }
+  .audit-key {
+    display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 8px;
+  }
+  .audit-key .ak {
+    display: inline-flex; align-items: center; gap: 5px;
+    border: 1px solid var(--line); background: #fff; border-radius: 999px;
+    padding: 4px 8px; font-size: 11px; font-weight: 700; color: var(--muted);
+  }
+  .audit-key .ak .hint { font-weight: 600; color: #8aa0b0; }
+  .empty-box {
+    color: var(--muted); padding: 28px 20px; text-align: center;
+    display: grid; gap: 12px; justify-items: center;
+  }
+  .empty-box .audit-key { justify-content: center; margin: 0; }
   .mark.ad { background: #ffedd5; color: var(--ad); }
   .mark.show { background: #ccfbf1; color: var(--show); }
   .mark.mute { background: #fee2e2; color: var(--mute); }
@@ -728,44 +929,41 @@ HTML = r"""<!doctype html>
     border-color: #1d4ed8;
     box-shadow: 0 0 0 2px #1d4ed8;
   }
-  .youbtn {
-    cursor: pointer;
-    width: 100%;
-    height: 100%;
-    min-height: 96px;
-    border: 2px solid #8aa0b0;
-    border-radius: 8px;
-    font: inherit;
-    font-weight: 800;
-    font-size: 18px;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-  }
-  .youbtn.ad { background: #ffedd5; color: var(--ad); border-color: #c2410c; }
-  .youbtn.show { background: #ccfbf1; color: var(--show); border-color: #0f766e; }
-  .youbtn.unk { background: #e5e7eb; color: #4b5563; }
-  .youbtn.prefill { border-style: dashed; }
-  .youbtn:hover { filter: brightness(0.97); border-style: solid; }
-  .youbtn .sub {
-    display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.04em;
-    text-transform: uppercase; opacity: 0.7; margin-top: 4px;
-  }
   .card.cut-start { outline: 2px solid #1d4ed8; }
   .nav-verdict {
     margin-top: 6px; font-size: 11px; font-weight: 700; color: #0f766e;
   }
   .nav-verdict.pending { color: #9a3412; }
   .empty { color: var(--muted); padding: 40px; }
+  .hdr-next { display: inline-flex; }
   @media (max-width: 960px) {
     header { flex-direction: column; gap: 6px; }
     header .right { width: 100%; justify-content: space-between; }
-    .legend { max-width: 100%; justify-content: flex-start; }
-    .layout { grid-template-columns: 1fr; }
-    nav { display: flex; gap: 8px; overflow-x: auto; }
-    nav button { min-width: 200px; }
-    .card { grid-template-columns: 160px 1fr 96px; width: 100%; }
-    .card img, .card .nostill { width: 160px; height: 96px; }
+    .legend { max-width: none; display: none; }
+    .hdr-next { display: none; }
+    .layout { grid-template-columns: 1fr; padding-bottom: 84px; }
+    nav {
+      display: flex; gap: 8px; overflow-x: auto; border-right: 0;
+      border-bottom: 1px solid var(--line); padding-bottom: 8px;
+    }
+    nav button { min-width: 180px; flex: 0 0 auto; }
+    main { padding: 10px 10px 24px; }
+    .strip-wrap { max-height: none; }
+    .card {
+      grid-template-columns: 1fr;
+      max-width: none;
+    }
+    .card .thumb { order: 1; }
+    .card img, .card .nostill { width: 100%; height: 180px; }
+    .card .body { order: 2; border-left: 0; border-top: 1px solid var(--line); }
+    .card .you-col {
+      order: 3; border-left: 0; border-top: 1px solid var(--line);
+      min-height: 0; padding: 10px;
+    }
+    .choice { min-height: 64px; }
+    .pick { font-size: 15px; min-height: 56px; }
+    .action-bar .hint { max-width: 42vw; font-size: 11px; }
+    .action-bar .btn-next { min-width: 0; flex: 1; }
   }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -775,7 +973,7 @@ HTML = r"""<!doctype html>
 <body>
 <header>
   <div class="titles">
-    <h1>Episode triage</h1>
+    <h1>Verdict</h1>
     <p class="sub" id="hdr">Loading…</p>
   </div>
   <div class="right">
@@ -784,15 +982,18 @@ HTML = r"""<!doctype html>
       <span><span class="swatch" style="background:#ccfbf1"></span><b>Show</b></span>
       <span><span class="swatch" style="background:#fee2e2"></span><b>Muted</b></span>
       <span><span class="swatch" style="background:#dbeafe"></span><b>Playing</b></span>
-      <span><span class="swatch" style="background:#fef08a"></span><b>Disagree</b></span>
     </div>
-    <a class="nav-link" id="linkDash" href="/dashboard">Overnight</a>
-    <button type="button" class="btn-done" id="btnDone" title="Confirm You labels and remove this stretch from the queue">Done</button>
+    <a class="nav-link" id="linkDash" href="/dashboard">Desk</a>
+    <button type="button" class="btn-next hdr-next" id="btnNextHdr" title="Save this stretch and go to the next one">Next →</button>
   </div>
 </header>
 <div class="layout">
   <nav id="nav"></nav>
-  <main id="main"><div class="empty">Pick a stretch on the left</div></main>
+  <main id="main"><div class="empty">Pick a stretch</div></main>
+</div>
+<div class="action-bar">
+  <p class="hint" id="actionHint">Pick Show or Ad on each frame · Next saves and continues</p>
+  <button type="button" class="btn-next" id="btnNext" title="Save this stretch and go to the next one">Next →</button>
 </div>
 <script>
 /** When served under ohush.co/verdict (or any /verdict mount), prefix API paths. */
@@ -801,6 +1002,22 @@ const BASE = (location.pathname === '/verdict' || location.pathname.startsWith('
 function apiUrl(path) {
   if (!path) return BASE || '/';
   return BASE + (path.startsWith('/') ? path : '/' + path);
+}
+/** Tiny inline SVGs — same audit language as /dashboard. */
+function ico(name, cls) {
+  const c = cls ? ('ico ' + cls) : 'ico';
+  const paths = {
+    pic: '<rect x="3" y="5" width="14" height="11" rx="2"/><circle cx="12" cy="10.5" r="2.5"/><path d="M7 5l1.5-2h3L13 5"/>',
+    txt: '<path d="M4 5h12v9H9l-3 3v-3H4z"/><path d="M7 8h6M7 11h4"/>',
+    snd: '<path d="M3 10h2l3-3v10l-3-3H3z"/><path d="M12 8a4 4 0 010 8M14.5 6a7 7 0 010 12"/>',
+    lock: '<rect x="5" y="9" width="10" height="8" rx="1.5"/><path d="M8 9V7a2 2 0 014 0v2"/>',
+    show: '<circle cx="10" cy="10" r="6"/><path d="M7 10l2 2 4-4"/>',
+    ad: '<path d="M5 5l10 10M15 5L5 15"/><rect x="3.5" y="3.5" width="13" height="13" rx="2"/>',
+    next: '<path d="M5 10h9M10 6l4 4-4 4"/>',
+    clock: '<circle cx="10" cy="10" r="7"/><path d="M10 6v4.5L13 12"/>',
+  };
+  const p = paths[name] || paths.pic;
+  return `<svg class="${c}" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
 }
 let DATA = null;
 let selected = null;
@@ -858,9 +1075,28 @@ function gold(v) {
   return {cls:'unk', text:'Gold: —'};
 }
 function humanLook(v, {prefill} = {}) {
-  if (v === 'mute') return {cls:'ad', text:'mute', prefill: !!prefill};
-  if (v === 'keep') return {cls:'show', text:'keep', prefill: !!prefill};
-  return {cls:'unk', text:'—', prefill: false};
+  if (v === 'mute') return {cls:'ad', text:'Ad', value:'mute', prefill: !!prefill};
+  if (v === 'keep') return {cls:'show', text:'Show', value:'keep', prefill: !!prefill};
+  return {cls:'unk', text:'—', value:null, prefill: false};
+}
+function choiceHtml(i, hd) {
+  const H = humanLook(hd.value, {prefill: hd.prefill});
+  const keepOn = H.value === 'keep' ? 'on' : '';
+  const muteOn = H.value === 'mute' ? 'on' : '';
+  const pref = H.prefill ? 'prefill' : '';
+  const hint = H.value
+    ? (H.prefill ? 'suggested' : 'yours')
+    : 'pick one';
+  const hintCls = (!H.prefill && H.value) ? 'yours' : '';
+  return `<div class="choice" data-choice-i="${i}">
+    <button type="button" class="pick show ${keepOn} ${keepOn?pref:''}" data-pick="keep" data-i="${i}" title="Keep / show">
+      ${ico('show')}<span>Show</span><span class="sub">keep</span>
+    </button>
+    <button type="button" class="pick ad ${muteOn} ${muteOn?pref:''}" data-pick="mute" data-i="${i}" title="Ad / mute · double-click = ad starts here">
+      ${ico('ad')}<span>Ad</span><span class="sub">mute</span>
+    </button>
+  </div>
+  <div class="choice-hint ${hintCls}">${hint}</div>`;
 }
 function goldAsHuman(gold) {
   const L = look(gold);
@@ -936,20 +1172,49 @@ function renderNav() {
   nav.querySelectorAll('button').forEach(btn => {
     btn.onclick = () => { selected = btn.dataset.id; selectedFrame = 0; renderNav(); renderMain(); };
   });
-  updateDoneButton();
+  updateNextButton();
 }
 
-function updateDoneButton() {
-  const btn = document.getElementById('btnDone');
-  if (!btn) return;
+function updateNextButton() {
   const cur = currentEp();
-  btn.disabled = !cur || isDone(cur.s.session, cur.e.t0, cur.e.t1, cur.e);
-  btn.textContent = btn.disabled ? 'Done' : 'Done';
+  const disabled = !cur || isDone(cur.s.session, cur.e.t0, cur.e.t1, cur.e);
+  ['btnNext', 'btnNextHdr'].forEach(id => {
+    const btn = document.getElementById(id);
+    if (!btn) return;
+    btn.disabled = disabled;
+    btn.innerHTML = `${ico('next')} Next`;
+  });
+  const hint = document.getElementById('actionHint');
+  if (hint) {
+    if (!cur) hint.textContent = 'Queue empty';
+    else hint.innerHTML = `${ico('pic')} ${ico('txt')} ${ico('snd')} ${ico('lock')} &nbsp; Show or Ad · dashed = suggested`;
+  }
 }
 
+function auditKeyHtml() {
+  return `<div class="audit-key" aria-label="Audit channels">
+    <span class="ak">${ico('pic')} Pictures <span class="hint">vision</span></span>
+    <span class="ak">${ico('txt')} Transcript <span class="hint">ASR</span></span>
+    <span class="ak">${ico('snd')} Sound <span class="hint">muter</span></span>
+    <span class="ak">${ico('lock')} Auto-lock <span class="hint">≥2 agree</span></span>
+  </div>`;
+}
+function sigChip(kind, label, L) {
+  return `<div class="sig" title="${label}">
+    ${ico(kind)}<span class="lab">${label}</span><span class="mark ${L.cls}">${L.text}</span>
+  </div>`;
+}
 function renderMain() {
   const main = document.getElementById('main');
-  if (!selected) { main.innerHTML = '<div class="empty">Pick a stretch on the left</div>'; return; }
+  if (!selected) {
+    main.innerHTML = `<div class="empty-box">
+      <div>Nothing in the queue — all stretches finished</div>
+      ${auditKeyHtml()}
+      <div style="font-size:12px;max-width:42ch;line-height:1.4">When a stretch lands, each frame shows these four audits side by side so you can scan agreement at a glance.</div>
+    </div>`;
+    updateNextButton();
+    return;
+  }
   const [si, ei] = selected.split(':').map(Number);
   const s = DATA.sessions[si];
   const e = s.episodes[ei];
@@ -966,7 +1231,6 @@ function renderMain() {
     const M = act(f.action);
     const G = gold(f.gold);
     const hd = humanDisplay(s.session, f);
-    const H = humanLook(hd.value, {prefill: hd.prefill});
     const pct = Math.max(0, Math.min(100, Math.round(100 * (f.p || 0))));
     const isCut = cutT != null && Math.abs(Number(f.t) - Number(cutT)) < 1e-6;
     return `<div class="card ${f.disagreement ? 'clash' : ''} ${i===selectedFrame?'selected':''} ${isCut?'cut-start':''}" data-i="${i}">
@@ -977,20 +1241,18 @@ function renderMain() {
       </div>
       <div class="body">
         <div class="signals">
-          <div class="sig-lab">Picture</div><div><span class="mark ${V.cls}">${V.text}</span></div>
-          <div class="sig-lab">Words</div><div><span class="mark ${A.cls}">${A.text}</span></div>
-          <div class="sig-lab">Muter</div><div><span class="mark ${M.cls}">${M.text}</span></div>
-          <div class="sig-lab">Gold</div><div><span class="mark ${G.cls}">${G.text.replace('Gold: ','')}</span></div>
+          ${sigChip('pic', 'Pictures', V)}
+          ${sigChip('txt', 'Transcript', A)}
+          ${sigChip('snd', 'Sound', M)}
+          ${sigChip('lock', 'Auto-lock', {cls: G.cls, text: G.text.replace('Gold: ','')})}
         </div>
         <div>
-          <div class="pbar" title="Muter ad confidence ${pct}%"><span style="width:${pct}%"></span></div>
-          <div class="pbar-lab">Muter ad score ${pct}%</div>
+          <div class="pbar" title="Sound / muter ad confidence ${pct}%"><span style="width:${pct}%"></span></div>
+          <div class="pbar-lab">${ico('snd')} Sound score ${pct}%</div>
         </div>
       </div>
       <div class="you-col">
-        <button type="button" class="youbtn ${H.cls} ${H.prefill?'prefill':''}" data-you="${i}" title="Click: flip keep ↔ mute. Double-click: ad starts here.">
-          ${H.text || '—'}<span class="sub">You</span>
-        </button>
+        ${choiceHtml(i, hd)}
       </div>
     </div>`;
   }).join('');
@@ -1007,19 +1269,21 @@ function renderMain() {
       <span>Frames <b>${frames.length}</b></span>
       <span>Patch <b>${e.action?.patch_id || 'none'}</b></span>
     </div>
+    ${auditKeyHtml()}
     <p class="hero-do"><b>Suggested:</b> ${doText}. ${e.action?.detail || ''}</p>
     <div class="listen">
       <audio id="epAudio" controls preload="auto" src="${audioUrl}"></audio>
-      <div class="now" id="audioNow">Take clock: ${Number(e.t0).toFixed(1)}s</div>
+      <div class="now" id="audioNow">${ico('clock')} Take clock: ${Number(e.t0).toFixed(1)}s</div>
     </div>
     <div class="strip-wrap">
       <div class="strip-head">
-        <p class="strip-label">${cutT != null ? 'Your cut @ ' + cutT + 's' : 'Click You to flip · double-click You = ad starts here'}</p>
+        <p class="strip-label">${cutT != null ? (ico('ad') + ' Your cut @ ' + cutT + 's') : (ico('show') + ' / ' + ico('ad') + ' Choose · dashed = suggested · double-tap Ad = cut')}</p>
         <button type="button" class="strip-clear" id="btnClearHuman" title="Clear your marks on this stretch">Clear</button>
       </div>
       <div class="strip" id="strip">${cards}</div>
     </div>
   `;
+  updateNextButton();
   const audio = document.getElementById('epAudio');
   const nowEl = document.getElementById('audioNow');
   let syncFromAudio = false;
@@ -1095,54 +1359,70 @@ function renderMain() {
   if (clearBtn) clearBtn.onclick = () => clearHumanStretch();
   main.querySelectorAll('.card').forEach(card => {
     card.onclick = (ev) => {
-      if (ev.target && ev.target.closest && ev.target.closest('[data-you]')) return;
+      if (ev.target && ev.target.closest && ev.target.closest('[data-pick]')) return;
       selectFrame(Number(card.dataset.i), {seek: true, autoplay: false, scroll: false});
     };
   });
-  let youClickTimer = null;
-  main.querySelectorAll('[data-you]').forEach(btn => {
+  let pickClickTimer = null;
+  main.querySelectorAll('[data-pick]').forEach(btn => {
     btn.onclick = (ev) => {
       ev.stopPropagation();
-      const i = Number(btn.dataset.you);
-      // No seek on You flip — avoids scroll jump from audio seeked sync
+      const i = Number(btn.dataset.i);
+      const val = btn.dataset.pick;
       selectFrame(i, {seek: false, autoplay: false, scroll: false});
-      if (youClickTimer) clearTimeout(youClickTimer);
-      youClickTimer = setTimeout(() => { youClickTimer = null; cycleHuman(i); }, 220);
+      if (pickClickTimer) clearTimeout(pickClickTimer);
+      pickClickTimer = setTimeout(() => {
+        pickClickTimer = null;
+        setHumanChoice(i, val);
+      }, 180);
     };
     btn.ondblclick = (ev) => {
       ev.stopPropagation();
       ev.preventDefault();
-      if (youClickTimer) { clearTimeout(youClickTimer); youClickTimer = null; }
-      const i = Number(btn.dataset.you);
+      if (pickClickTimer) { clearTimeout(pickClickTimer); pickClickTimer = null; }
+      const i = Number(btn.dataset.i);
+      const val = btn.dataset.pick;
       selectFrame(i, {seek: false, autoplay: false, scroll: false});
-      saveCutFromSelected();
+      // Ad double-click = cut starts here; Show just selects Show
+      setHumanChoice(i, val).then(() => {
+        if (val === 'mute') saveCutFromSelected();
+      });
     };
   });
   selectFrame(selectedFrame || 0, {seek: false, scroll: false});
 }
 
-function paintYouChips(session, frames) {
+function paintChoices(session, frames) {
   frames.forEach((f, i) => {
-    const btn = document.querySelector(`[data-you="${i}"]`);
-    if (!btn) return;
-    const hd = humanDisplay(session, f);
-    const H = humanLook(hd.value, {prefill: hd.prefill});
-    btn.className = `youbtn ${H.cls} ${H.prefill ? 'prefill' : ''}`;
-    btn.innerHTML = `${H.text || '—'}<span class="sub">You</span>`;
+    const col = document.querySelector(`.card[data-i="${i}"] .you-col`);
+    if (!col) return;
+    col.innerHTML = choiceHtml(i, humanDisplay(session, f));
+    col.querySelectorAll('[data-pick]').forEach(btn => {
+      btn.onclick = (ev) => {
+        ev.stopPropagation();
+        setHumanChoice(Number(btn.dataset.i), btn.dataset.pick);
+      };
+      btn.ondblclick = (ev) => {
+        ev.stopPropagation();
+        ev.preventDefault();
+        const i2 = Number(btn.dataset.i);
+        const val = btn.dataset.pick;
+        setHumanChoice(i2, val).then(() => {
+          if (val === 'mute') saveCutFromSelected();
+        });
+      };
+    });
   });
 }
 
-async function cycleHuman(i) {
+async function setHumanChoice(i, next) {
   const cur = currentEp();
   if (!cur) return;
   const f = cur.e.frames[i];
-  if (!f) return;
-  const hd = humanDisplay(cur.s.session, f);
-  // One click: flip keep ↔ mute (prefill or saved)
-  const next = hd.value === 'mute' ? 'keep' : 'mute';
+  if (!f || (next !== 'keep' && next !== 'mute')) return;
   setHumanLocal(cur.s.session, f.t, next);
   f.human = next;
-  paintYouChips(cur.s.session, cur.e.frames);
+  paintChoices(cur.s.session, cur.e.frames);
   try {
     await fetch(apiUrl('/api/human_frames'), {
       method: 'POST',
@@ -1185,7 +1465,7 @@ async function saveCutFromSelected() {
     cur.e.frames.forEach(fr => { fr.human = humanAt(cur.s.session, fr.t); });
     cur.e.human_cut = { cut_t: f.t };
     HUMAN_CUTS[cur.key] = { cut_t: f.t };
-    paintYouChips(cur.s.session, cur.e.frames);
+    paintChoices(cur.s.session, cur.e.frames);
     document.querySelectorAll('.card').forEach(c => {
       const idx = Number(c.dataset.i);
       const fr = cur.e.frames[idx];
@@ -1220,9 +1500,9 @@ async function clearHumanStretch() {
     cur.e.frames.forEach(fr => { fr.human = null; });
     cur.e.human_cut = null;
     delete HUMAN_CUTS[cur.key];
-    paintYouChips(cur.s.session, cur.e.frames);
+    paintChoices(cur.s.session, cur.e.frames);
     document.querySelectorAll('.card').forEach(c => c.classList.remove('cut-start'));
-    stripStatus('You = gold (dashed) · click flip · double-click = ad starts here');
+    stripStatus('Choose Show or Ad · dashed = suggested · double-tap Ad = cut starts here');
     renderNav();
   } catch (err) {
     stripStatus('Clear failed: ' + err.message);
@@ -1248,7 +1528,7 @@ function updateHdr() {
   const nDone = c.done_total != null ? c.done_total : Object.keys(HUMAN_DONE).length;
   const total = c.episode_total != null ? c.episode_total : 0;
   document.getElementById('hdr').textContent =
-    `${nLeft} in this chunk · ${pending} left overall · ${nDone}/${total} done · You autosaves`;
+    `${nLeft} here · ${pending} left · ${nDone}/${total} finished · choices autosave`;
 }
 
 async function loadChunk() {
@@ -1270,9 +1550,11 @@ async function loadChunk() {
 async function markStretchDone() {
   const cur = currentEp();
   if (!cur || isDone(cur.s.session, cur.e.t0, cur.e.t1, cur.e)) return;
-  const btn = document.getElementById('btnDone');
-  if (btn) { btn.disabled = true; btn.textContent = 'Saving…'; }
-  // Materialize You (incl. gold prefill) so You is the saved source of truth
+  ['btnNext', 'btnNextHdr'].forEach(id => {
+    const btn = document.getElementById(id);
+    if (btn) { btn.disabled = true; btn.textContent = 'Saving…'; }
+  });
+  // Materialize choices (incl. gold prefill) so your pick is the saved truth
   const marks = {};
   (cur.e.frames || []).forEach(f => {
     const hd = humanDisplay(cur.s.session, f);
@@ -1291,7 +1573,7 @@ async function markStretchDone() {
       }),
     });
     const body = await res.json();
-    if (!res.ok || !body.ok) throw new Error(body.error || 'done failed');
+    if (!res.ok || !body.ok) throw new Error(body.error || 'next failed');
     HUMAN[cur.s.session] = body.marks || HUMAN[cur.s.session] || {};
     if (body.done_map) HUMAN_DONE = body.done_map;
     else HUMAN_DONE[cur.key] = body.done || { utc: new Date().toISOString() };
@@ -1311,13 +1593,17 @@ async function markStretchDone() {
     renderNav();
     renderMain();
   } catch (err) {
-    if (btn) { btn.disabled = false; btn.textContent = 'Done'; }
-    alert('Done failed: ' + err.message);
+    updateNextButton();
+    alert('Next failed: ' + err.message);
   }
 }
 
 async function boot() {
-  document.getElementById('btnDone').onclick = () => markStretchDone();
+  const goNext = () => markStretchDone();
+  const n1 = document.getElementById('btnNext');
+  const n2 = document.getElementById('btnNextHdr');
+  if (n1) n1.onclick = goNext;
+  if (n2) n2.onclick = goNext;
   const dash = document.getElementById('linkDash');
   if (dash) dash.href = apiUrl('/dashboard');
   await loadChunk();
@@ -1334,106 +1620,156 @@ DASHBOARD_HTML = """<!doctype html>
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Overnight verdict</title>
+<title>Label desk</title>
 <style>
   :root {
-    --bg: #e7eef2;
+    --bg: #e8eef2;
     --ink: #14212b;
     --muted: #5a6b78;
-    --line: #c5d2dc;
+    --line: #c9d5de;
     --ok: #0f766e;
     --warn: #b45309;
-    --bad: #b91c1c;
     --run: #0369a1;
+    --card: #fff;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
     font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
-    background: linear-gradient(180deg, #d7e4ec 0%, var(--bg) 180px), var(--bg);
+    background: var(--bg);
     color: var(--ink);
   }
   header {
-    display: flex; justify-content: space-between; align-items: center;
-    gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--line);
-    background: rgba(231,238,242,.94); position: sticky; top: 0; z-index: 2;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 12px; padding: 12px 14px; border-bottom: 1px solid var(--line);
+    background: rgba(255,255,255,.92); position: sticky; top: 0; z-index: 2;
+    backdrop-filter: blur(8px);
   }
-  h1 { margin: 0; font-size: 16px; }
-  .sub { margin: 2px 0 0; color: var(--muted); font-size: 12px; }
+  h1 { margin: 0; font-size: 15px; letter-spacing: -.01em; }
+  .sub { margin: 3px 0 0; color: var(--muted); font-size: 12px; line-height: 1.35; }
   a.nav {
-    text-decoration: none; border: 1px solid var(--line); background: #fff;
-    color: var(--ink); border-radius: 6px; padding: 6px 10px; font-weight: 700; font-size: 12px;
+    flex: 0 0 auto; text-decoration: none; border: 1px solid var(--line); background: #fff;
+    color: var(--ink); border-radius: 8px; padding: 8px 10px; font-weight: 700; font-size: 12px;
   }
-  a.nav:hover { border-color: var(--ok); color: var(--ok); }
-  main { max-width: 980px; margin: 0 auto; padding: 16px; display: grid; gap: 12px; }
-  .cards { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; }
-  .card {
-    background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 12px;
+  main {
+    max-width: 920px; margin: 0 auto; padding: 12px 14px 28px;
+    display: grid; gap: 10px;
   }
-  .card .k { color: var(--muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
-  .card .v { margin-top: 4px; font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
-  .card .h { margin-top: 2px; color: var(--muted); font-size: 12px; }
-  .live {
-    background: #fff; border: 2px solid #0f766e; border-radius: 12px; padding: 14px 16px;
+  .hero {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 14px; display: grid; gap: 10px;
   }
-  .live.idle { border-color: var(--line); }
-  .live .title { font-size: 13px; font-weight: 700; margin: 0 0 6px; }
-  .live .big { font-size: 20px; font-weight: 700; margin: 0 0 8px; font-variant-numeric: tabular-nums; }
+  .hero.live { border-color: #5eead4; box-shadow: 0 0 0 1px rgba(15,118,110,.12); }
+  .hero-top { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+  .kicker { margin: 0; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+  .hero h2 { margin: 0; font-size: clamp(18px, 4.2vw, 24px); line-height: 1.2; font-variant-numeric: tabular-nums; }
+  .eta-big { font-size: clamp(22px, 5vw, 28px); font-weight: 700; font-variant-numeric: tabular-nums; color: var(--run); }
+  .meta { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.4; }
   .bar { height: 10px; background: #eef3f6; border-radius: 999px; overflow: hidden; }
-  .bar > span { display: block; height: 100%; background: #0f766e; border-radius: 999px; }
-  .bar.thin { height: 7px; }
-  .bar.warn > span { background: var(--warn); }
-  .bar.run > span { background: var(--run); }
-  .live .meta { margin-top: 8px; color: var(--muted); font-size: 12px; }
-  .panel { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 14px; }
-  .panel h2 { margin: 0 0 8px; font-size: 13px; }
-  .row { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; border-top: 1px solid #eef3f6; font-size: 13px; }
-  .row:first-of-type { border-top: 0; }
-  .muted { color: var(--muted); }
+  .bar > i { display: block; height: 100%; width: 0; background: var(--ok); border-radius: 999px; }
+  .glance {
+    display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px;
+  }
+  .stat {
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px;
+  }
+  .stat .k {
+    color: var(--muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
+    display: inline-flex; align-items: center; gap: 5px;
+  }
+  .stat .v { margin-top: 2px; font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .stat .h { margin-top: 2px; color: var(--muted); font-size: 12px; }
+  .ico {
+    width: 14px; height: 14px; flex: 0 0 auto; display: inline-block; vertical-align: -2px;
+  }
+  .ico.lg { width: 18px; height: 18px; }
+  .audit-legend {
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .audit-legend .ak {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 999px;
+    padding: 5px 9px; font-size: 11px; font-weight: 700; color: var(--muted);
+  }
+  .audit-legend .ak .hint { font-weight: 600; color: #8aa0b0; }
+  .audit-legend .ak.on { background: #ccfbf1; color: var(--ok); border-color: #99f6e4; }
+  .audit-legend .ak.go { background: #e0f2fe; color: var(--run); border-color: #7dd3fc; }
+  .hero-phase {
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .hero-phase .ico { width: 22px; height: 22px; color: var(--run); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 999px;
+    padding: 6px 10px; font-size: 12px; font-weight: 600;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+  .dot.on { background: var(--ok); }
+  .dot.off { background: var(--warn); }
+  .dot.run { background: var(--run); }
+  .dot.warn { background: var(--warn); }
+  .panel {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px;
+  }
+  .panel h3 { margin: 0 0 8px; font-size: 13px; }
+  .story { margin: 0 0 8px; font-size: 13px; line-height: 1.4; }
+  .split {
+    display: grid; grid-template-columns: 1fr; gap: 8px;
+  }
+  .queue { display: grid; gap: 0; }
+  .qrow {
+    display: grid; grid-template-columns: 1fr auto; gap: 8px 12px;
+    padding: 10px 0; border-top: 1px solid #eef3f6; align-items: start;
+  }
+  .qrow:first-child { border-top: 0; }
+  .qrow.run { background: linear-gradient(90deg, #f0f9ff, transparent); margin: 0 -6px; padding-left: 6px; padding-right: 6px; border-radius: 8px; }
+  .name { font-weight: 700; font-size: 13px; font-variant-numeric: tabular-nums; }
+  .marks { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+  .mark {
+    font-size: 10px; font-weight: 700; padding: 3px 7px; border-radius: 4px;
+    border: 1px solid var(--line); color: var(--muted); background: #fff;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .mark .ico { width: 12px; height: 12px; }
+  .mark.on { background: #ccfbf1; color: var(--ok); border-color: #99f6e4; }
+  .mark.go { background: #e0f2fe; color: var(--run); border-color: #7dd3fc; }
+  .mark.off { background: #fff7ed; color: var(--warn); border-color: #fed7aa; }
+  .right { text-align: right; }
   .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; }
   .pill.ok { background: #ccfbf1; color: var(--ok); }
   .pill.warn { background: #ffedd5; color: var(--warn); }
-  .pill.bad { background: #fee2e2; color: var(--bad); }
   .pill.run { background: #e0f2fe; color: var(--run); }
+  details.more {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px;
+  }
+  details.more > summary {
+    cursor: pointer; font-weight: 700; font-size: 13px; list-style: none;
+  }
+  details.more > summary::-webkit-details-marker { display: none; }
+  details.more[open] > summary { margin-bottom: 8px; }
+  .more-body { display: grid; gap: 10px; color: var(--muted); font-size: 12px; }
+  .kv { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; }
+  .kv span:nth-child(odd) { color: var(--muted); }
+  .kv span:nth-child(even) { font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; text-align: right; }
   pre {
     margin: 0; background: #f7fafc; border: 1px solid var(--line); border-radius: 8px;
-    padding: 10px; overflow: auto; font-size: 11px; line-height: 1.35; max-height: 180px;
+    padding: 10px; overflow: auto; font-size: 11px; line-height: 1.35; max-height: 160px;
   }
-  .checks { margin: 0; padding-left: 18px; color: var(--muted); font-size: 12px; }
-  .pipe { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; }
-  .pipe .card .v { font-size: 18px; }
-  .stages { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
-  .stage {
-    border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; background: #f7fafc;
-    min-width: 110px; flex: 1;
+  .foot { margin: 6px 0 0; font-size: 11px; color: var(--muted); }
+  @media (min-width: 720px) {
+    .glance { grid-template-columns: repeat(4, minmax(0,1fr)); }
+    .split { grid-template-columns: 1.2fr .8fr; }
+    .hero { grid-template-columns: 1.4fr .8fr; align-items: center; }
+    .hero-main { grid-column: 1; }
+    .hero-eta { grid-column: 2; text-align: right; }
+    .bar { grid-column: 1 / -1; }
+    .meta { grid-column: 1 / -1; }
   }
-  .stage .n { font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; }
-  .stage .l { font-size: 11px; color: var(--muted); font-weight: 700; text-transform: uppercase; }
-  .tree { display: grid; gap: 0; }
-  .branch {
-    border-top: 1px solid #eef3f6; padding: 8px 0 8px 12px;
-    border-left: 3px solid transparent; margin-left: 2px;
-  }
-  .branch.run { border-left-color: var(--run); background: #f0f9ff; }
-  .branch.done { border-left-color: #99f6e4; }
-  .branch.queued { border-left-color: #fdba74; }
-  .branch-top {
-    display: flex; justify-content: space-between; gap: 10px; align-items: baseline;
-    font-size: 13px; flex-wrap: wrap;
-  }
-  .sess { font-weight: 700; font-variant-numeric: tabular-nums; }
-  .chrow { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
-  .ch {
-    font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 4px;
-    border: 1px solid var(--line); color: var(--muted); background: #fff;
-  }
-  .ch.on { background: #ccfbf1; color: var(--ok); border-color: #99f6e4; }
-  .ch.go { background: #e0f2fe; color: var(--run); border-color: #7dd3fc; }
-  .ch.off { background: #fff7ed; color: var(--warn); border-color: #fed7aa; }
-  .hint { margin-top: 4px; font-size: 11px; color: var(--muted); }
-  .foot { margin-top: 8px; font-size: 11px; color: var(--muted); }
-  @media (max-width: 800px) {
-    .cards, .pipe { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  @media (max-width: 419px) {
+    .stat .v { font-size: 18px; }
+    .qrow { grid-template-columns: 1fr; }
+    .right { text-align: left; }
   }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -1442,56 +1778,91 @@ DASHBOARD_HTML = """<!doctype html>
 <body>
 <header>
   <div>
-    <h1>Overnight verdict</h1>
+    <h1>Label desk</h1>
     <p class="sub" id="sub">Loading…</p>
   </div>
-  <a class="nav" id="linkTriage" href="/">Back to triage</a>
+  <a class="nav" id="linkTriage" href="/">Triage</a>
 </header>
 <main>
-  <section class="live idle" id="live">
-    <p class="title">1 · Live job</p>
-    <p class="big" id="liveBig">Checking…</p>
-    <div class="bar"><span id="liveBar" style="width:0%"></span></div>
+  <section class="hero idle" id="hero">
+    <div class="hero-main">
+      <p class="kicker" id="liveKicker">Now</p>
+      <h2 id="liveBig">Checking…</h2>
+    </div>
+    <div class="hero-eta">
+      <p class="kicker">This tape left</p>
+      <div class="eta-big" id="liveEta">—</div>
+      <p class="meta" id="liveEtaSub"></p>
+    </div>
+    <div class="bar"><i id="liveBar"></i></div>
     <p class="meta" id="liveMeta"></p>
   </section>
+
+  <section class="glance" id="glance"></section>
+
+  <section class="audit-legend" id="auditLegend" aria-label="Audit channels"></section>
+
+  <section class="chips" id="statusChips"></section>
+
   <section class="panel">
-    <h2>2 · Four audits (sessions done / left)</h2>
-    <div class="pipe" id="pipe"></div>
+    <h3>Backlog</h3>
+    <p class="story" id="funnelPlain">Loading…</p>
+    <div class="bar"><i id="funnelBar"></i></div>
+    <p class="foot" id="funnelFoot"></p>
   </section>
+
   <section class="panel">
-    <h2>3 · Backlog stages</h2>
-    <div class="stages" id="stages"></div>
+    <h3>Up next</h3>
+    <div class="queue" id="queue"></div>
+    <p class="foot" id="queueFoot"></p>
   </section>
-  <section class="cards" id="cards"></section>
-  <section class="panel">
-    <h2>4 · Session queue (top-down)</h2>
-    <div class="tree" id="tree"></div>
-    <p class="foot" id="treeFoot"></p>
-  </section>
-  <section class="panel">
-    <h2>5 · Now</h2>
-    <div id="now"></div>
-  </section>
-  <section class="panel">
-    <h2>If overnight locked 0</h2>
-    <ol class="checks">
-      <li><code>live_audio_lock</code> — take still writing WAV past 02:00</li>
-      <li><code>label_pass_busy</code> — worker already running (OK if ticks continue)</li>
-      <li><code>ollama_down</code> — start Ollama / qwen2.5vl:7b</li>
-      <li><code>ram_pressure</code> — free RAM under label floor</li>
-      <li><code>hold_new_captures</code> in schedule_run_due.log — expected overnight</li>
-    </ol>
-  </section>
-  <section class="panel">
-    <h2>Last tick</h2>
-    <pre id="last">null</pre>
-  </section>
+
+  <details class="more">
+    <summary>More detail</summary>
+    <div class="more-body">
+      <div>
+        <strong style="color:var(--ink)">ETAs &amp; timing</strong>
+        <div class="kv" id="timeKv" style="margin-top:6px"></div>
+      </div>
+      <div>
+        <strong style="color:var(--ink)">If nothing locks overnight</strong>
+        <ol style="margin:6px 0 0; padding-left:18px">
+          <li><code>live_audio_lock</code> — still writing WAV past 02:00</li>
+          <li><code>label_pass_busy</code> — worker already running</li>
+          <li><code>ollama_down</code> — start Ollama / qwen2.5vl:7b</li>
+          <li><code>ram_pressure</code> — free RAM under label floor</li>
+        </ol>
+      </div>
+      <div>
+        <strong style="color:var(--ink)">Last tick</strong>
+        <pre id="last" style="margin-top:6px">null</pre>
+      </div>
+    </div>
+  </details>
 </main>
 <script>
 const BASE = (location.pathname === '/verdict/dashboard' || location.pathname.startsWith('/verdict/'))
   ? '/verdict' : '';
 function apiUrl(path) {
   return BASE + (path.startsWith('/') ? path : '/' + path);
+}
+function ico(name, cls) {
+  const c = cls ? ('ico ' + cls) : 'ico';
+  const paths = {
+    pic: '<rect x="3" y="5" width="14" height="11" rx="2"/><circle cx="12" cy="10.5" r="2.5"/><path d="M7 5l1.5-2h3L13 5"/>',
+    txt: '<path d="M4 5h12v9H9l-3 3v-3H4z"/><path d="M7 8h6M7 11h4"/>',
+    snd: '<path d="M3 10h2l3-3v10l-3-3H3z"/><path d="M12 8a4 4 0 010 8M14.5 6a7 7 0 010 12"/>',
+    lock: '<rect x="5" y="9" width="10" height="8" rx="1.5"/><path d="M8 9V7a2 2 0 014 0v2"/>',
+    show: '<circle cx="10" cy="10" r="6"/><path d="M7 10l2 2 4-4"/>',
+    ad: '<path d="M5 5l10 10M15 5L5 15"/><rect x="3.5" y="3.5" width="13" height="13" rx="2"/>',
+    clock: '<circle cx="10" cy="10" r="7"/><path d="M10 6v4.5L13 12"/>',
+    wait: '<circle cx="10" cy="10" r="7"/><path d="M7 10h6"/>',
+    run: '<path d="M7 5l9 5-9 5z"/>',
+    cap: '<circle cx="10" cy="10" r="4"/><circle cx="10" cy="10" r="7"/>',
+    stack: '<path d="M4 7h12v9H4z"/><path d="M7 4h12v9"/>',
+  };
+  const p = paths[name] || paths.pic;
+  return `<svg class="${c}" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
 }
 function pill(text, kind) {
   return `<span class="pill ${kind||'ok'}">${text}</span>`;
@@ -1503,108 +1874,157 @@ function fmt(n) {
 function shortSess(s) {
   return String(s || '').replace(/^20\\d{2}/, '');
 }
-function chPill(name, on, running) {
-  const cls = running ? 'ch go' : (on ? 'ch on' : 'ch off');
-  const mark = running ? '…' : (on ? '✓' : '·');
-  return `<span class="${cls}">${name} ${mark}</span>`;
+function fmtDur(sec) {
+  if (sec == null || sec === '') return '—';
+  const n = Number(sec);
+  if (!Number.isFinite(n)) return '—';
+  if (n < 60) return Math.round(n) + 's';
+  if (n < 3600) return (n/60).toFixed(n < 600 ? 1 : 0) + 'm';
+  return (n/3600).toFixed(1) + 'h';
+}
+function phaseName(p) {
+  return ({vision:'pictures', asr:'transcript', acoustic:'sound', combine:'merge', consensus:'auto-lock'})[p] || p || 'job';
+}
+function phaseIco(p) {
+  return ({vision:'pic', asr:'txt', acoustic:'snd', combine:'stack', consensus:'lock'})[p] || 'run';
+}
+function mark(kind, on, go) {
+  const cls = go ? 'mark go' : (on ? 'mark on' : 'mark off');
+  const label = ({pic:'Pictures', txt:'Transcript', snd:'Sound', lock:'Auto-lock'})[kind] || kind;
+  return `<span class="${cls}" title="${label}">${ico(kind)}${label}</span>`;
 }
 async function refresh() {
   const res = await fetch(apiUrl('/api/overnight'), { cache: 'no-store' });
   if (!res.ok) throw new Error('status ' + res.status);
   const d = await res.json();
   const o = d.overnight || {};
-  const cov = o.coverage || {};
   const pause = d.capture_pause || {};
+  const capture = d.capture || {};
   const lock = d.label_lock || {};
   const sched = d.schedule || {};
   const q = d.verdict_queue || {};
   const live = d.live_job || {};
   const h = d.hierarchy || {};
-  const stages = h.stages || {};
-  const pipe = h.pipeline || [];
+  const funnel = h.funnel || {};
+  const etas = d.etas || {};
+  const cur = etas.current_session || {};
+  const totEta = etas.total || {};
+  const pri = etas.priority || {};
+  const win = etas.window || {};
+  const lt = d.label_timing || {};
+  const tot = lt.totals || {};
+
   document.getElementById('sub').textContent =
-    `Updated ${d.updated_utc || '—'} · ${o.day_et || ''} ET · auto-refresh 5s`;
-  const liveEl = document.getElementById('live');
+    `${d.updated_utc || '—'} · ${o.day_et || ''} ET · refreshes every 5s`;
+
   const active = !!live.active;
-  liveEl.className = active ? 'live' : 'live idle';
+  const hero = document.getElementById('hero');
+  hero.className = active ? 'hero live' : 'hero';
+  const phase = phaseName(live.phase);
+  const livePhase = String(live.phase || '');
   if (active) {
-    const sess = shortSess(live.session);
-    document.getElementById('liveBig').textContent =
-      `${live.phase || 'job'} · ${sess} · ${fmt(live.hop_i)}/${fmt(live.hop_of)} (${fmt(live.pct)}%)`;
+    document.getElementById('liveKicker').textContent = 'Working now';
+    document.getElementById('liveBig').innerHTML =
+      `<span class="hero-phase">${ico(phaseIco(live.phase), 'lg')}<span>${phase} · ${shortSess(live.session)} · ${fmt(live.hop_i)}/${fmt(live.hop_of)}</span></span>`;
     document.getElementById('liveBar').style.width = Math.max(0, Math.min(100, Number(live.pct) || 0)) + '%';
-    document.getElementById('liveMeta').textContent =
-      `session ${fmt(live.session_i)}/${fmt(live.session_of)} · t=${fmt(live.t)}s · ${live.model || ''} · ${live.updated_utc || ''}`;
+    document.getElementById('liveEta').textContent = fmtDur(live.eta_remaining_s ?? cur.remaining_s);
+    document.getElementById('liveEtaSub').textContent = live.eta_finish_et || cur.finish_et
+      ? ('done ~' + (live.eta_finish_et || cur.finish_et))
+      : '';
+    const bits = [
+      live.pct != null ? (fmt(live.pct) + '%') : null,
+      live.step_elapsed_s != null ? ('elapsed ' + fmtDur(live.step_elapsed_s) + (live.step_elapsed_approx ? '≈' : '')) : null,
+      live.hops_per_min != null ? (fmt(live.hops_per_min) + '/min') : null,
+      live.model || null,
+    ].filter(Boolean);
+    document.getElementById('liveMeta').textContent = bits.join(' · ');
   } else {
-    document.getElementById('liveBig').textContent = live.note || 'Idle — waiting for next multichannel pass';
+    document.getElementById('liveKicker').textContent = 'Idle';
+    document.getElementById('liveBig').innerHTML =
+      `<span class="hero-phase">${ico('wait', 'lg')}<span>${live.note || 'Waiting for next tape'}</span></span>`;
     document.getElementById('liveBar').style.width = '0%';
+    document.getElementById('liveEta').textContent = fmtDur(pri.remaining_s);
+    document.getElementById('liveEtaSub').textContent = 'help-pile left';
     document.getElementById('liveMeta').textContent = live.updated_utc || '';
   }
-  document.getElementById('pipe').innerHTML = pipe.map(p => {
-    const left = p.left > 0;
-    return `<div class="card">
-      <div class="k">${p.label}</div>
-      <div class="v">${fmt(p.done)}<span class="muted" style="font-size:13px"> / ${fmt(p.of)}</span></div>
-      <div class="bar thin ${left ? 'warn' : ''}"><span style="width:${Math.max(0, Math.min(100, Number(p.pct)||0))}%"></span></div>
-      <div class="h">${left ? (fmt(p.left) + ' left') : 'complete'}</div>
-    </div>`;
-  }).join('') || '<div class="muted">No pipeline data</div>';
-  document.getElementById('stages').innerHTML = [
-    ['Running', stages.running, 'run'],
-    ['Need vision', stages.need_vision, 'warn'],
-    ['Need acoustic', stages.need_acoustic, 'warn'],
-    ['Need combine', stages.need_combine, 'warn'],
-    ['Need consensus', stages.need_consensus, 'warn'],
-    ['Done', stages.done, 'ok'],
-    ['Left', stages.left, stages.left ? 'warn' : 'ok'],
-  ].map(([l, n, k]) => `<div class="stage"><div class="l">${l}</div><div class="n">${fmt(n)}</div>${pill(k==='ok'?'ok':(k==='run'?'live':'todo'), k)}</div>`).join('');
-  document.getElementById('cards').innerHTML = `
-    <div class="card"><div class="k">Locked today</div><div class="v">${fmt(o.consensus_locked_today)}</div><div class="h">consensus auto-locks</div></div>
-    <div class="card"><div class="k">Help pile</div><div class="v">${fmt(o.help_asks_now)}</div><div class="h">legacy farm review</div></div>
-    <div class="card"><div class="k">Hops ready</div><div class="v">${fmt(cov.with_hops)}/${fmt(cov.prepared_sessions)}</div><div class="h">missing ${fmt(cov.missing_hops)}</div></div>
-    <div class="card"><div class="k">Disagree</div><div class="v">${fmt(q.pending_approx)}</div><div class="h">${fmt(q.done)} done · ${fmt(o.ticks_today)} ticks</div></div>
+
+  document.getElementById('glance').innerHTML = `
+    <div class="stat"><div class="k">${ico('lock')} Finished</div><div class="v">${fmt(funnel.finished)}<span style="font-size:13px;color:var(--muted);font-weight:600">/${fmt(funnel.prepared)}</span></div><div class="h">${fmt(funnel.pct_finished)}%</div></div>
+    <div class="stat"><div class="k">${ico('pic')} Waiting</div><div class="v">${fmt(funnel.waiting_for_pictures)}</div><div class="h">pictures first</div></div>
+    <div class="stat"><div class="k">${ico('show')} Help pile</div><div class="v">${fmtDur(pri.remaining_s)}</div><div class="h">${pri.finish_et ? ('~' + pri.finish_et) : (fmt(o.help_asks_now) + ' clips')}</div></div>
+    <div class="stat"><div class="k">${ico('clock')} All left</div><div class="v">${fmtDur(totEta.remaining_s)}</div><div class="h">${fmt(win.overnights_needed)} overnights</div></div>
   `;
-  const livePhase = String(live.phase || '');
-  const rows = (h.queue || []).map(row => {
+
+  const picGo = active && livePhase === 'vision';
+  const txtGo = active && livePhase === 'vision';
+  const sndGo = active && livePhase === 'acoustic';
+  const lockGo = active && (livePhase === 'consensus' || livePhase === 'combine');
+  document.getElementById('auditLegend').innerHTML = `
+    <span class="ak ${picGo?'go':''}">${ico('pic')} Pictures <span class="hint">vision</span></span>
+    <span class="ak ${txtGo?'go':''}">${ico('txt')} Transcript <span class="hint">ASR</span></span>
+    <span class="ak ${sndGo?'go':''}">${ico('snd')} Sound <span class="hint">muter</span></span>
+    <span class="ak ${lockGo?'go':''}">${ico('lock')} Auto-lock <span class="hint">≥2 agree</span></span>
+  `;
+
+  const ownerCap = String(capture.owner_capture || (pause.active ? 'off' : 'on'));
+  const chips = [];
+  chips.push(`<span class="chip">${ico('cap')}<span class="dot ${ownerCap==='on'?'on':'off'}"></span>Capture ${ownerCap}</span>`);
+  (capture.players || []).forEach(p => {
+    const on = String(p.capture||'') === 'on';
+    chips.push(`<span class="chip">${ico('cap')}<span class="dot ${on?'on':'off'}"></span>${p.id || p.engine} ${on?'on':'off'}</span>`);
+  });
+  chips.push(`<span class="chip">${ico(lock.held?'run':'wait')}<span class="dot ${lock.held?'run':'off'}"></span>Label ${lock.held?'running':'idle'}</span>`);
+  chips.push(`<span class="chip">${ico('clock')}<span class="dot"></span>${sched.mode || 'schedule'}</span>`);
+  if (q.pending_approx != null) chips.push(`<span class="chip">${ico('ad')}<span class="dot ${q.pending_approx?'warn':'on'}"></span>Disagree ${fmt(q.pending_approx)}</span>`);
+  document.getElementById('statusChips').innerHTML = chips.join('');
+
+  document.getElementById('funnelPlain').innerHTML =
+    `${ico('stack')} ${funnel.plain || '—'}`;
+  document.getElementById('funnelBar').style.width = Math.max(0, Math.min(100, Number(funnel.pct_finished)||0)) + '%';
+  const until16 = win.secs_to_16et != null ? (' · ' + fmtDur(win.secs_to_16et) + ' until 16:00') : '';
+  const fit16 = win.priority_before_16et ? ' · help pile fits by 16:00' : ' · help pile misses 16:00';
+  document.getElementById('funnelFoot').textContent =
+    (Number(funnel.working_now) ? `${fmt(funnel.working_now)} working now` : 'Nothing running')
+    + until16 + fit16;
+
+  const queueRows = (h.queue || [])
+    .filter(r => r.status !== 'done')
+    .slice(0, 12);
+  document.getElementById('queue').innerHTML = queueRows.map(row => {
     const ch = row.channels || {};
     const running = row.status === 'running';
-    const phase = running ? livePhase : '';
-    const cls = running ? 'branch run' : (row.status === 'done' ? 'branch done' : 'branch queued');
-    const next = row.next || '—';
-    const meta = [
-      row.help ? ('help ' + row.help) : null,
-      row.n_hops != null ? (row.n_hops + ' hops') : null,
-      row.n_disagree != null ? (row.n_disagree + ' disagree') : null,
-      row.locked_n ? ('locked ' + row.locked_n) : null,
-      'next ' + next,
-    ].filter(Boolean).join(' · ');
-    return `<div class="${cls}">
-      <div class="branch-top">
-        <span class="sess">${shortSess(row.session)}</span>
-        <span>${pill(row.status, running ? 'run' : (row.status === 'done' ? 'ok' : 'warn'))}</span>
+    const nextKind = ({vision:'pic', asr:'txt', acoustic:'snd', combine:'stack', consensus:'lock'})[row.next] || 'run';
+    const next = ({vision:'pictures', acoustic:'sound', combine:'merge', consensus:'auto-lock'})[row.next] || row.next || '—';
+    return `<div class="qrow ${running ? 'run' : ''}">
+      <div>
+        <div class="name">${shortSess(row.session)}</div>
+        <div class="marks">
+          ${mark('pic', !!ch.vision, running && livePhase==='vision')}
+          ${mark('txt', !!ch.asr, running && livePhase==='vision')}
+          ${mark('snd', !!ch.acoustic, running && livePhase==='acoustic')}
+          ${mark('lock', !!ch.gold, running && (livePhase==='consensus'||livePhase==='combine'))}
+        </div>
+        <div class="foot">${row.help ? ('help ' + row.help + ' · ') : ''}${ico(nextKind)} next ${next}</div>
       </div>
-      <div class="chrow">
-        ${chPill('vision', !!ch.vision, running && phase === 'vision')}
-        ${chPill('asr', !!ch.asr, running && phase === 'vision')}
-        ${chPill('acoustic', !!ch.acoustic, running && phase === 'acoustic')}
-        ${chPill('gold', !!ch.gold, running && (phase === 'consensus' || phase === 'combine'))}
+      <div class="right">
+        ${pill(running ? 'now' : 'queued', running ? 'run' : 'warn')}
+        <div class="foot">${row.eta_s != null ? (ico('clock') + ' ' + fmtDur(row.eta_s)) : ''}</div>
       </div>
-      <div class="hint">${meta}</div>
     </div>`;
-  }).join('');
-  document.getElementById('tree').innerHTML = rows || '<div class="muted">No sessions</div>';
-  document.getElementById('treeFoot').textContent =
-    `Showing ${fmt(h.queue_shown)} of ${fmt(h.queue_total)} prepared · ordered running → help pile → done`;
-  const modeKind = String(sched.mode||'').startsWith('overnight') ? 'ok' : (pause.active ? 'warn' : 'ok');
-  const lockKind = lock.held ? 'warn' : 'ok';
-  const pauseKind = pause.active ? 'warn' : 'ok';
-  document.getElementById('now').innerHTML = `
-    <div class="row"><span>Schedule</span><span>${pill(sched.mode || '—', modeKind)}</span></div>
-    <div class="row"><span class="muted">${sched.why || ''}</span><span></span></div>
-    <div class="row"><span>Capture pause</span><span>${pill(pause.active ? 'ON' : 'off', pauseKind)}</span></div>
-    <div class="row"><span class="muted">${pause.why || ''}</span><span></span></div>
-    <div class="row"><span>Label worker</span><span>${pill(lock.held ? 'running' : 'idle', lockKind)}</span></div>
-    <div class="row"><span class="muted">${lock.held ? ('pid ' + (lock.pid||'?') + ' · ' + (lock.age_s||0) + 's') : 'ready for next pass'}</span><span></span></div>
-  `;
+  }).join('') || '<p class="meta">Queue clear</p>';
+  document.getElementById('queueFoot').textContent =
+    `Top ${queueRows.length} waiting/working of ${fmt(h.queue_total)} · finished hidden`;
+
+  const byStep = lt.by_step || {};
+  document.getElementById('timeKv').innerHTML = [
+    [ico('clock') + ' This tape left', fmtDur(cur.remaining_s)],
+    [ico('show') + ' Help pile left', fmtDur(pri.remaining_s)],
+    [ico('stack') + ' All prepared left', fmtDur(totEta.remaining_s)],
+    [ico('run') + ' Pace', etas.hops_per_min != null ? (fmt(etas.hops_per_min) + '/min') : '—'],
+    [ico('clock') + ' Wall timed', fmtDur(tot.label_wall_s)],
+    [ico('pic') + ' Pictures mean', fmtDur((byStep.vision||{}).mean_s)],
+    [ico('lock') + ' Locked today', fmt(o.consensus_locked_today)],
+  ].map(([k,v]) => `<span>${k}</span><span>${v}</span>`).join('');
   document.getElementById('last').textContent = JSON.stringify(o.last_tick || null, null, 2);
 }
 document.getElementById('linkTriage').href = apiUrl('/');

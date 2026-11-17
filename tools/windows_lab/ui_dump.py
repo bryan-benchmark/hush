@@ -228,12 +228,18 @@ def heal_adb_for_dump(
     root: Path | None = None,
     allow_recover_streamers: bool = True,
 ) -> dict[str, Any]:
-    """Heal ladder: connect_adb → optional recover_streamers. Always logged."""
-    from .instances import connect_adb
+    """Heal ladder: connect_adb → BACK to rail → optional recover_streamers.
+
+    ``empty_hierarchy`` on a live fullscreen player is normal (nodes, no texts).
+    Force-stopping Streamers for that is the wrong medicine — it thrashes opens
+    and can surface BlueStacks power sheets. Prefer BACK to the parent guide.
+    """
+    from .instances import adb, connect_adb
 
     iid = _instance_id(instance)
     row = _inst_row(root, iid)
     streak = int(row.get("streak") or 0)
+    last_reason = str(row.get("last_reason") or row.get("reason") or "")
     steps: list[dict[str, Any]] = []
     heal = "none"
 
@@ -245,7 +251,39 @@ def heal_adb_for_dump(
         except Exception as exc:  # noqa: BLE001
             steps.append({"step": "connect_adb", "ok": False, "error": str(exc)})
 
-    if allow_recover_streamers and streak >= HEAL_RECOVER_STREAK:
+    # Hard force-stop only for real device/ADB death — not empty player trees.
+    hard_adb = last_reason in {
+        "device_offline",
+        "not_found",
+        "pull_failed",
+        "adb_not_ready",
+        "protocol_fault",
+    }
+    # Soft surface chrome before any app kill — covers empty player dumps.
+    emptyish = last_reason in {
+        "empty_hierarchy",
+        "soft_empty",
+        "dump_failed",
+        "unknown",
+    }
+    if emptyish or (streak >= HEAL_RECOVER_STREAK and not hard_adb):
+        try:
+            for _ in range(2):
+                adb(instance, ["shell", "input", "keyevent", "4"])
+                time.sleep(0.35)
+            # Also dismiss accidental power sheet (Power off / Restart) if present.
+            adb(instance, ["shell", "input", "keyevent", "4"])
+            time.sleep(0.25)
+            steps.append({"step": "back_to_rail", "ok": True, "keys": [4, 4, 4]})
+            heal = "back_to_rail"
+        except Exception as exc:  # noqa: BLE001
+            steps.append({"step": "back_to_rail", "ok": False, "error": str(exc)})
+
+    if (
+        allow_recover_streamers
+        and streak >= HEAL_RECOVER_STREAK
+        and hard_adb
+    ):
         try:
             from .streamers_alive import recover_streamers
 
@@ -271,7 +309,7 @@ def heal_adb_for_dump(
             instance=instance,
             detail=heal,
             ok=any(s.get("ok") for s in steps) if steps else False,
-            extra={"streak": streak, "steps": steps},
+            extra={"streak": streak, "steps": steps, "last_reason": last_reason},
             root=root,
         )
     return {"heal": heal, "streak": streak, "steps": steps}

@@ -257,14 +257,21 @@ def run_session(
     end = min(duration, float(t1) if t1 is not None else duration)
     start = max(0.0, float(t0))
 
+    from .farm_label_timing import begin_step, end_step
+
     transcript = _load_transcript(sd) if use_asr else {"segments": []}
-    # Ensure transcript exists when requested
+    # Ensure transcript exists when requested (timed as ASR step).
     if use_asr and not (sd / "farm_transcript.json").is_file():
         from .farm_draft import ensure_take_transcript
 
-        ensure_take_transcript(sd)
-        transcript = _load_transcript(sd)
-
+        begin_step(session, "asr", source="ensure_take_transcript")
+        try:
+            ensure_take_transcript(sd)
+            transcript = _load_transcript(sd)
+            end_step(session, "asr", ok=True, source="ensure_take_transcript")
+        except Exception as exc:  # noqa: BLE001
+            end_step(session, "asr", ok=False, error=str(exc), source="ensure_take_transcript")
+            raise
     cache: dict[str, dict] = {}
     cache_path = sd / "audit" / "vision_still_cache.json"
     if cache_path.is_file():
@@ -287,51 +294,67 @@ def run_session(
     t = start
     n_expect = max(1, int((end - start) / hop_s) + 1)
     i_hop = 0
-    while t < end - 1e-9:
-        vision = _vision_channel(sd, t, model=model, cache=cache) if use_vision else None
-        asr = _asr_channel(transcript, t) if use_asr else None
-        lock_bucket, lock_conf = _vote_bucket(vision or {}, asr)
-        hops_new.append(
-            hop_receipt(
-                session=session,
-                t=t,
-                vision=vision,
-                asr=asr,
-                acoustic=None,
-                gold=None,
-                extra={
-                    "lock_bucket": lock_bucket,
-                    "lock_confidence": lock_conf,
-                    "auto_lock": lock_bucket is not None and lock_conf == "high",
-                },
-            )
-        )
-        i_hop += 1
-        if i_hop == 1 or i_hop % 25 == 0 or t + hop_s >= end - 1e-9:
-            prog = {
-                "vision_progress": session,
-                "i": i_hop,
-                "of": n_expect,
-                "t": round(t, 1),
-                "model": model,
-            }
-            print(json.dumps(prog), flush=True)
-            try:
-                from .lab_status import write_status
-
-                write_status(
-                    progress={
-                        "phase": "vision",
-                        "session": session,
-                        "hop_i": i_hop,
-                        "hop_of": n_expect,
-                        "t": round(t, 1),
-                        "model": model,
-                    }
+    begin_step(session, "vision", hop_of=n_expect, model=model, hop_s=hop_s, t0=start, t1=end)
+    try:
+        while t < end - 1e-9:
+            vision = _vision_channel(sd, t, model=model, cache=cache) if use_vision else None
+            asr = _asr_channel(transcript, t) if use_asr else None
+            lock_bucket, lock_conf = _vote_bucket(vision or {}, asr)
+            hops_new.append(
+                hop_receipt(
+                    session=session,
+                    t=t,
+                    vision=vision,
+                    asr=asr,
+                    acoustic=None,
+                    gold=None,
+                    extra={
+                        "lock_bucket": lock_bucket,
+                        "lock_confidence": lock_conf,
+                        "auto_lock": lock_bucket is not None and lock_conf == "high",
+                    },
                 )
-            except Exception:
-                pass
-        t += hop_s
+            )
+            i_hop += 1
+            if i_hop == 1 or i_hop % 25 == 0 or t + hop_s >= end - 1e-9:
+                prog = {
+                    "vision_progress": session,
+                    "i": i_hop,
+                    "of": n_expect,
+                    "t": round(t, 1),
+                    "model": model,
+                }
+                print(json.dumps(prog), flush=True)
+                try:
+                    from .lab_status import write_status
+
+                    from .farm_label_timing import active_elapsed
+
+                    write_status(
+                        progress={
+                            "phase": "vision",
+                            "session": session,
+                            "hop_i": i_hop,
+                            "hop_of": n_expect,
+                            "t": round(t, 1),
+                            "model": model,
+                            "step_elapsed_s": active_elapsed(session, "vision"),
+                        }
+                    )
+                except Exception:
+                    pass
+            t += hop_s
+    except Exception as exc:  # noqa: BLE001
+        end_step(
+            session,
+            "vision",
+            ok=False,
+            error=str(exc),
+            hop_i=i_hop,
+            hop_of=n_expect,
+            model=model,
+        )
+        raise
 
     for h in hops_new:
         prior_by_t[round(float(h["t"]), 3)] = h
@@ -432,6 +455,15 @@ def run_session(
             encoding="utf-8",
         )
 
+    timing = end_step(
+        session,
+        "vision",
+        ok=True,
+        hop_i=i_hop,
+        hop_of=n_expect,
+        n_hops=len(hops),
+        model=model,
+    )
     return {
         "ok": True,
         "session": session,
@@ -445,6 +477,7 @@ def run_session(
         "vision_timeline": str(vision_tl),
         "audit": audit_meta,
         "export": export_receipt,
+        "timing": {"duration_s": timing.get("duration_s"), "started_utc": timing.get("started_utc")},
         "how_to_audit": [
             f"Open {audit_meta.get('md_path')}",
             f"grep DISAGREE {audit_meta.get('hops_path')}",

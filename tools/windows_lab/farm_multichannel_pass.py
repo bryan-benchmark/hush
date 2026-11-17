@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import time
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
@@ -23,6 +24,7 @@ from .export_farm_acoustic_gold import export as export_farm_gold
 from .farm_atomic_audit import combine_session, write_index
 from .farm_consensus import apply_consensus_locks, prepared_sessions
 from .farm_episode_triage import run as triage_run
+from .farm_label_timing import rebuild_snapshot, timed_step
 from .farm_vision_timeline import run_session as vision_run
 
 
@@ -142,6 +144,7 @@ def run(
     if limit is not None:
         sessions = sessions[: max(0, int(limit))]
 
+    pass_t0 = time.perf_counter()
     vision_results: list[dict[str, Any]] = []
     if not skip_vision:
         todo = [s for s in sessions if _needs_vision(s)]
@@ -174,6 +177,7 @@ def run(
             except Exception:
                 pass
             try:
+                # vision_run records asr + vision step times itself
                 vision_results.append(
                     vision_run(
                         session,
@@ -208,21 +212,27 @@ def run(
             except Exception:
                 pass
             try:
-                acoustic_results.append(extract_session(session, use_cache=True))
+                with timed_step(session, "acoustic", session_i=i, session_of=len(todo_a)) as _t:
+                    acoustic_results.append(extract_session(session, use_cache=True))
             except Exception as exc:  # noqa: BLE001
                 acoustic_results.append({"ok": False, "session": session, "error": str(exc)})
                 print(json.dumps({"acoustic_fail": session, "error": str(exc)}), flush=True)
 
     combine_results: list[dict[str, Any]] = []
     for session in sessions:
-        combine_results.append(combine_session(session))
+        try:
+            with timed_step(session, "combine") as _t:
+                combine_results.append(combine_session(session))
+        except Exception as exc:  # noqa: BLE001
+            combine_results.append({"ok": False, "session": session, "error": str(exc)})
     write_index(combine_results)
 
     consensus_results: list[dict[str, Any]] = []
     if apply_consensus:
         for session in sessions:
             try:
-                consensus_results.append(apply_consensus_locks(session))
+                with timed_step(session, "consensus") as _t:
+                    consensus_results.append(apply_consensus_locks(session))
             except Exception as exc:  # noqa: BLE001
                 consensus_results.append({"ok": False, "session": session, "error": str(exc)})
 
@@ -239,6 +249,7 @@ def run(
     n_eps = sum(len(r.get("episodes") or []) for r in triage.get("sessions") or [])
     locked_total = sum(int(r.get("locked_n") or 0) for r in consensus_results)
 
+    timing_snap = rebuild_snapshot()
     out = {
         "generated_utc": _now(),
         "mode": "all_prepared" if all_prepared else "farm_accepted",
@@ -252,6 +263,12 @@ def run(
         "hop_stats": hop_stats,
         "triage_episodes": n_eps,
         "disagree_hops_total": n_dis,
+        "pass_wall_s": round(time.perf_counter() - pass_t0, 1),
+        "timing": {
+            "totals": timing_snap.get("totals"),
+            "by_step": timing_snap.get("by_step"),
+            "ledger": str(farm_label_dir() / "audit" / "LABEL_TIMING.jsonl"),
+        },
         "triage_tag_summary": {r["session"]: r.get("tag_counts") for r in triage.get("sessions") or []},
         "next": [
             "Open https://ohush.co/verdict (or :3020) — Done queue is disagree episodes",

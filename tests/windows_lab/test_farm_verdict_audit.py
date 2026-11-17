@@ -49,7 +49,7 @@ def test_append_tick_writes_board(data_root: Path, monkeypatch: pytest.MonkeyPat
     assert "Consensus locked today" in md.read_text(encoding="utf-8")
 
 
-def test_backlog_hierarchy_four_audits(data_root: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+def test_backlog_hierarchy_funnel(data_root: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("OHUSH_DATA_ROOT", str(data_root))
     cap = data_root / "work" / "capture" / "streamers"
     for name in ("sess_done", "sess_gap", "sess_run"):
@@ -72,9 +72,13 @@ def test_backlog_hierarchy_four_audits(data_root: Path, monkeypatch: pytest.Monk
         queue_limit=10,
     )
     assert h["prepared_n"] == 3
-    by_id = {p["id"]: p for p in h["pipeline"]}
-    assert by_id["vision"]["done"] == 1
-    assert by_id["vision"]["left"] == 2
+    funnel = h["funnel"]
+    assert funnel["finished"] == 1
+    assert funnel["working_now"] == 1
+    assert funnel["waiting_for_pictures"] == 1
+    assert funnel["left"] == 2
+    assert "12 of" not in funnel["plain"]  # uses real counts
+    assert "1 of 3" in funnel["plain"] or "finished" in funnel["plain"].lower()
     assert h["stages"]["running"] == 1
     assert h["stages"]["need_vision"] == 1
     assert h["stages"]["done"] == 1

@@ -221,8 +221,40 @@ def backlog_hierarchy(
                 "locked_n": locked_n,
                 "n_hops": n_hops,
                 "n_disagree": disagree,
+                "timing": None,
             }
         )
+
+    try:
+        from .farm_label_timing import load_summary
+
+        timing = load_summary(root)
+        by_sess = timing.get("by_session") or {}
+        running = timing.get("running") or {}
+        for row in sessions_out:
+            s = row["session"]
+            steps = (by_sess.get(s) or {}).get("steps") or {}
+            total_s = (by_sess.get(s) or {}).get("total_s")
+            live_elapsed = None
+            for step_name in ("vision", "acoustic", "combine", "consensus", "asr"):
+                key = f"{s}|{step_name}"
+                if key in running:
+                    live_elapsed = {
+                        "step": step_name,
+                        "elapsed_s": (running[key] or {}).get("elapsed_s"),
+                        "started_utc": (running[key] or {}).get("started_utc"),
+                    }
+                    break
+            row["timing"] = {
+                "steps": {
+                    k: (steps.get(k) or {}).get("duration_s")
+                    for k in ("asr", "vision", "acoustic", "combine", "consensus")
+                },
+                "total_s": total_s,
+                "live": live_elapsed,
+            }
+    except Exception:
+        pass
 
     # Queue order: running first, then missing work by help pile, then done.
     def _sort_key(row: dict[str, Any]) -> tuple:
@@ -232,26 +264,6 @@ def backlog_hierarchy(
 
     sessions_out.sort(key=_sort_key)
     of_n = len(prepared)
-    pipeline = []
-    for ch, title in (
-        ("vision", "Vision"),
-        ("asr", "ASR"),
-        ("acoustic", "Acoustic"),
-        ("gold", "Gold / consensus"),
-    ):
-        done = int(pipe.get(ch) or 0)
-        left = max(0, of_n - done)
-        pct = round(100.0 * done / of_n, 1) if of_n else 0.0
-        pipeline.append(
-            {
-                "id": ch,
-                "label": title,
-                "done": done,
-                "of": of_n,
-                "left": left,
-                "pct": pct,
-            }
-        )
 
     need_vision = sum(1 for r in sessions_out if r["next"] == "vision" and r["status"] != "running")
     need_acoustic = sum(1 for r in sessions_out if r["next"] == "acoustic" and r["status"] != "running")
@@ -259,9 +271,72 @@ def backlog_hierarchy(
     need_consensus = sum(1 for r in sessions_out if r["next"] == "consensus" and r["status"] != "running")
     done_n = sum(1 for r in sessions_out if r["status"] == "done" or r["next"] == "done")
     running_n = sum(1 for r in sessions_out if r["status"] == "running")
+    left_n = max(0, of_n - done_n)
+    pct_done = round(100.0 * done_n / of_n, 1) if of_n else 0.0
+
+    # One story: work is gated on pictures first; transcript/sound/lock finish with the session.
+    waiting_after_pictures = need_acoustic + need_combine + need_consensus
+    funnel = {
+        "prepared": of_n,
+        "finished": done_n,
+        "working_now": running_n,
+        "waiting_for_pictures": need_vision,
+        "waiting_after_pictures": waiting_after_pictures,
+        "left": left_n,
+        "pct_finished": pct_done,
+        "plain": (
+            f"{done_n} of {of_n} tapes finished. "
+            + (
+                f"{running_n} working now (pictures first). "
+                if running_n
+                else ""
+            )
+            + (
+                f"{need_vision} waiting in line for pictures"
+                + (
+                    f"; {waiting_after_pictures} already past pictures (sound/merge/lock)."
+                    if waiting_after_pictures
+                    else "."
+                )
+                if need_vision or waiting_after_pictures
+                else ("All caught up." if not running_n else "")
+            )
+        ).strip(),
+        "why_same_counts": (
+            "Transcript, sound, and auto-lock are not separate queues. "
+            "A tape waits for pictures; when pictures finish, the rest of that tape "
+            "runs right after. So ‘12 done’ means 12 tapes fully through — not four jobs."
+        ),
+    }
+
+    # Keep pipeline for API compat, but as one finished bar + rare mid-pipeline splits.
+    pipeline = [
+        {
+            "id": "finished",
+            "label": "Finished tapes",
+            "hint": "pictures + transcript + sound → auto-lock done",
+            "done": done_n,
+            "of": of_n,
+            "left": left_n,
+            "pct": pct_done,
+        }
+    ]
+    if waiting_after_pictures:
+        pipeline.append(
+            {
+                "id": "mid",
+                "label": "Past pictures, not locked",
+                "hint": "sound / merge / auto-lock still open",
+                "done": waiting_after_pictures,
+                "of": of_n,
+                "left": 0,
+                "pct": round(100.0 * waiting_after_pictures / of_n, 1) if of_n else 0.0,
+            }
+        )
 
     return {
         "prepared_n": of_n,
+        "funnel": funnel,
         "pipeline": pipeline,
         "stages": {
             "running": running_n,
@@ -270,7 +345,7 @@ def backlog_hierarchy(
             "need_combine": need_combine,
             "need_consensus": need_consensus,
             "done": done_n,
-            "left": max(0, of_n - done_n),
+            "left": left_n,
         },
         "queue": sessions_out[: max(1, int(queue_limit))],
         "queue_total": of_n,

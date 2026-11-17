@@ -789,9 +789,13 @@ def _find_row(
     city: str,
     network: str,
 ) -> tuple[str, int, int, int, int] | None:
-    calls_u = calls.upper()
+    """Pick the section child row. Calls must match — city/network alone is not enough
+    (that was tapping WBNG/neighbors when hunting WCBS)."""
+    calls_u = calls.upper().strip()
     city_u = (city or "").upper()
     net_u = network.upper()
+    if not calls_u:
+        return None
     best: tuple[int, str, int, int, int, int] | None = None
     for node in ui.iter("node"):
         t = (node.attrib.get("text") or "").strip()
@@ -803,19 +807,20 @@ def _find_row(
             continue
         if parsed["network"] != net_u:
             continue
+        got_calls = str(parsed.get("calls") or "").upper()
+        # Exact call letters only — never city-only (WBNG vs WCBS).
+        tokens = re.findall(r"[A-Z0-9]{3,8}", t.upper())
+        if got_calls != calls_u and calls_u not in tokens:
+            continue
         m = re.fullmatch(r"\[(\d+),(\d+)\]\[(\d+),(\d+)\]", b)
         if not m:
             continue
         x1, y1, x2, y2 = map(int, m.groups())
         if y1 < 350 or x2 < 500:
             continue
-        score = 0
-        if parsed["calls"] == calls_u or calls_u in t.upper():
-            score += 100
+        score = 100
         if city_u and city_u in (parsed.get("city") or "").upper():
             score += 40
-        if score <= 0:
-            continue
         cand = (score, t, x1, y1, x2, y2)
         if best is None or cand[0] > best[0]:
             best = cand
@@ -1254,12 +1259,40 @@ def open_local(
     if not wait_for_adb(instance, seconds=60):
         return _status_fail("ADB not ready")
 
+    # Soft prep — never unconditional ensure_ready_for_open (that storms for
+    # minutes on fullscreen empty dumps and kills Channel Olympics budget).
     try:
-        from .streamers_recover import ensure_ready_for_open
+        from .streamers_recover import snapshot
 
-        ensure_ready_for_open(instance_id, root=root)
+        snap = snapshot(instance_id, root=root, take_frame=False)
+        kind = str(snap.get("kind") or "")
+        if kind in {
+            "bluestacks_home",
+            "welcome_login",
+            "credentials_login",
+            "service_list_login",
+            "playlist_name_login",
+            "overlay_permission",
+            "crash",
+            "black",
+            "unknown_app",
+        }:
+            from .streamers_recover import ensure_ready_for_open
+
+            ensure_ready_for_open(instance_id, root=root)
+        elif kind in {"dump_dead", "player_fullscreen", "player_chrome", "player_or_blank"} or kind.startswith(
+            "player_"
+        ):
+            for _ in range(2):
+                adb(instance, ["shell", "input", "keyevent", "4"])
+                time.sleep(0.35)
     except Exception:
-        pass
+        try:
+            for _ in range(2):
+                adb(instance, ["shell", "input", "keyevent", "4"])
+                time.sleep(0.35)
+        except Exception:
+            pass
 
     probe = root / "work" / "capture" / "bluestacks_probe"
     via = "us_section_grouper"
@@ -1291,9 +1324,50 @@ def open_local(
                 opened = True
         else:
             section_err = f"could not find {pick['calls']} in {pick['section']}"
+            # One more chance: BACK to rail and reopen section (player/empty dump
+            # often made the first hunt miss). Prefer this over calls_search.
+            try:
+                for _ in range(3):
+                    adb(instance, ["shell", "input", "keyevent", "4"])
+                    time.sleep(0.4)
+                ui_retry = _open_section(instance, pick["section"], probe)
+                row2, ui_retry = _scroll_section_for_child(
+                    instance, ui_retry, probe, pick=pick
+                )
+                if row2:
+                    title, x1, y1, x2, y2 = row2
+                    cx, cy = (x1 + x2) // 2, (y1 + y2) // 2
+                    adb(instance, ["shell", "input", "tap", str(cx), str(cy)])
+                    time.sleep(0.5)
+                    if open_player:
+                        adb(instance, ["shell", "input", "keyevent", "23"])
+                        time.sleep(2.0)
+                        player_texts = _texts(_dump_ui(instance, probe / "local_player_retry.xml"))
+                        opened = True
+                    section_err = None
+                    via = "us_section_grouper_retry"
+                    ui = ui_retry
+            except Exception as exc:  # noqa: BLE001
+                section_err = f"{section_err}; retry:{exc}"
 
     # Pack EPGs (Pluto / SN+ / FLSP) hide the grouper rail — open by call letters.
+    # Never search while still on an empty fullscreen dump (nodes=48, no texts).
     if not title:
+        rail_texts = _texts(ui) if ui is not None else []
+        if not rail_texts or not _on_guide_rail(rail_texts):
+            try:
+                for _ in range(3):
+                    adb(instance, ["shell", "input", "keyevent", "4"])
+                    time.sleep(0.4)
+                ui = _ensure_guide(instance, probe)
+                rail_texts = _texts(ui)
+            except Exception:
+                rail_texts = []
+        if not _on_guide_rail(rail_texts):
+            return _status_fail(
+                section_err or "section_miss_no_rail_for_search",
+                via_s="us_section_grouper",
+            ) | {"section_error": section_err, "lesson": "BACK to parent rail; refused calls_search on empty/player dump"}
         try:
             fb = _open_via_calls_search(instance, pick, probe, open_player=open_player)
         except Exception as exc:  # noqa: BLE001
@@ -1318,8 +1392,21 @@ def open_local(
         from .stream_status import identity_from_texts, verify_local_identity
 
         playing = identity_from_texts(player_texts)
+        want_calls = str(pick["calls"]).upper()
+        # If dump still lists guide neighbors, prefer a text that matches wanted calls.
+        for t in player_texts:
+            parsed = parse_local_title(t)
+            if parsed and str(parsed.get("calls") or "").upper() == want_calls:
+                playing = {
+                    **playing,
+                    "selected_title": parsed.get("title") or t,
+                    "network": parsed.get("network"),
+                    "calls": parsed.get("calls"),
+                    "city": parsed.get("city"),
+                }
+                break
         play_title = str(playing.get("selected_title") or title or "")
-        if playing.get("calls") and str(playing.get("calls")).upper() != str(pick["calls"]).upper():
+        if playing.get("calls") and str(playing.get("calls")).upper() != want_calls:
             return _status_fail(
                 f"landed_on_{playing.get('calls')}_wanted_{pick['calls']}",
                 via_s=via,
