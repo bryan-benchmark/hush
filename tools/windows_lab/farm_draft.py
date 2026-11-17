@@ -107,9 +107,9 @@ VISUAL_AD_HINT = re.compile(
 # Channel changes during capture leave these stills; keep the lexicon wide (phrasing varies).
 GUIDE_CAPTION_HINT = re.compile(
     r"("
-    r"tv guide(?:\s+interface)?|guide interface|"
+    r"tv guide(?:\s+interface)?|guide interface|streamers?\s+guide|"
     r"search bar|"
-    r"list of channels|channel options(?:\s+listed)?|channels?\s+section|"
+    r"list of channels|channel list|channel options(?:\s+listed)?|channels?\s+section|"
     r"channel listing|tv interface with a search|"
     r"under the ['\"]?channels['\"]? section|"
     r"channel menu|favorites.{0,40}(channels?|section)|"
@@ -121,8 +121,14 @@ GUIDE_CAPTION_HINT = re.compile(
     r"streaming interface|"
     r"service called ['\"]?streamers|"
     r"text boxes? displayed|"
-    r"(?:two|three|several) channels displayed|"
-    r"channels displayed,\s*both labeled"
+    # VL often inserts adjectives between the count and "channels displayed"
+    # e.g. "two ABC-affiliated channels displayed" (Streamers EPG chrome).
+    r"(?:two|three|several|multiple)\s+(?:\S+\s+){0,8}channels?\s+displayed|"
+    r"channels displayed,\s*both labeled|"
+    r"affiliated channels displayed|"
+    r"abc[- ]affiliated channels|"
+    r"channels?\s+(?:from|for)\s+(?:virginia|charleston|local)|"
+    r"\|\s*charleston"
     r")",
     re.I,
 )

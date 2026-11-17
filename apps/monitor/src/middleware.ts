@@ -13,9 +13,18 @@ export function middleware(request: NextRequest) {
       path.startsWith("/_next") ||
       path === "/favicon.ico" ||
       path === "/crowd" ||
+      path.startsWith("/crowd/") ||
       path.startsWith("/api/crowd")
     ) {
       return NextResponse.next();
+    }
+
+    // Home on ohush.co → verdict labeling (crowd stays at /crowd).
+    if (path === "/" || path === "") {
+      const home = request.nextUrl.clone();
+      home.pathname = "/verdict";
+      home.search = "";
+      return NextResponse.redirect(home);
     }
 
     // Solo /farm and /verdict on ohush.co — same password gate.

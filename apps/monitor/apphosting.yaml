@@ -22,11 +22,17 @@ env:
     secret: OHUSH_FARM_CODE
     availability:
       - RUNTIME
-  # Lab :3020 tunnel URL from scripts/verdict.ps1 — refresh when the quick tunnel URL changes.
+  # Optional override. Prod prefers apps/monitor/src/lib/verdictOrigin.published.ts
+  # (git-pushed tunnel URL). Secret stays available for named tunnels / emergencies.
   - variable: OHUSH_VERDICT_ORIGIN
     secret: OHUSH_VERDICT_ORIGIN
     availability:
       - RUNTIME
+  # Set to a tunnel URL to bypass published+secret without a full secret rotate.
+  # - variable: OHUSH_VERDICT_ORIGIN_OVERRIDE
+  #   value: "https://….trycloudflare.com"
+  #   availability:
+  #     - RUNTIME
   - variable: NEXT_PUBLIC_OHUSH_PUBLIC_SITE
     value: "1"
     availability:
