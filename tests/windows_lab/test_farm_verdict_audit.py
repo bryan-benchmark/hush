@@ -47,3 +47,36 @@ def test_append_tick_writes_board(data_root: Path, monkeypatch: pytest.MonkeyPat
     md = data_root / "indexes" / "farm_labels" / "OVERNIGHT_VERDICT.md"
     assert md.is_file()
     assert "Consensus locked today" in md.read_text(encoding="utf-8")
+
+
+def test_backlog_hierarchy_four_audits(data_root: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("OHUSH_DATA_ROOT", str(data_root))
+    cap = data_root / "work" / "capture" / "streamers"
+    for name in ("sess_done", "sess_gap", "sess_run"):
+        d = cap / name
+        d.mkdir(parents=True)
+        (d / "label_manifest.json").write_text("{}", encoding="utf-8")
+        (d / "audio.wav").write_bytes(b"RIFF")
+    audit = data_root / "indexes" / "farm_labels" / "audit"
+    done = audit / "sess_done"
+    done.mkdir(parents=True)
+    for f in ("hops_vision.jsonl", "hops_acoustic.jsonl", "hops.jsonl"):
+        (done / f).write_text("{}\n", encoding="utf-8")
+    (done / "CONSENSUS_LOCK.json").write_text(
+        json.dumps({"locked_n": 2, "hop_summary": {"n_hops": 10, "n_disagree_hops": 1}}),
+        encoding="utf-8",
+    )
+    h = backlog_hierarchy(
+        root=data_root,
+        live_job={"active": True, "session": "sess_run", "phase": "vision"},
+        queue_limit=10,
+    )
+    assert h["prepared_n"] == 3
+    by_id = {p["id"]: p for p in h["pipeline"]}
+    assert by_id["vision"]["done"] == 1
+    assert by_id["vision"]["left"] == 2
+    assert h["stages"]["running"] == 1
+    assert h["stages"]["need_vision"] == 1
+    assert h["stages"]["done"] == 1
+    assert h["queue"][0]["session"] == "sess_run"
+    assert h["queue"][0]["status"] == "running"
