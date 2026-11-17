@@ -19,7 +19,7 @@ from .config import ensure_data_layout
 from .instances import adb, connect_adb, get_instance, launch_bluestacks, wait_for_adb
 
 SHORTCUTS_NAME = "streamers_open_shortcuts.json"
-DEFAULT_INSTANCE = "Nougat32"
+DEFAULT_INSTANCE = "player 0"  # BlueStacks engine Nougat32
 
 # Prefer these channel-title prefixes when several search hits match.
 SPORTS_CHANNEL_PREF = (

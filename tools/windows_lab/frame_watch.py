@@ -621,7 +621,7 @@ def main(argv: list[str] | None = None) -> int:
     w.add_argument("--vision", action="store_true")
 
     r = sub.add_parser("watch", help="Live frame + recover if bad")
-    r.add_argument("--instance", default="Nougat32")
+    r.add_argument("--instance", default="player 0")
     r.add_argument("--session-dir", type=Path, default=None)
 
     args = p.parse_args(argv)

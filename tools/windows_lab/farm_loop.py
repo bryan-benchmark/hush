@@ -32,7 +32,7 @@ from .streamers_lag import CLEAN_CONCURRENT, scan_recent_lag
 
 ET = ZoneInfo("America/New_York")
 REVIEW_URL = "http://127.0.0.1:3010/farm"
-DEFAULT_INSTANCE = "Nougat32"
+DEFAULT_INSTANCE = "player 0"  # BlueStacks engine Nougat32
 DEFAULT_MINUTES = 20
 SHORT_MINUTES = 10
 PROBE_SECONDS = 2.0

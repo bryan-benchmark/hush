@@ -31,9 +31,13 @@ from .farm_label_audit import (
 
 OLLAMA_URL = "http://127.0.0.1:11434/api/generate"
 OLLAMA_CHAT_URL = "http://127.0.0.1:11434/api/chat"
-OLLAMA_KEEP_ALIVE = "5m"
+OLLAMA_PS_URL = "http://127.0.0.1:11434/api/ps"
+OLLAMA_KEEP_ALIVE = "30m"  # keep qwen hot across tapes in a backfill pass
 VISION_MODEL = "moondream"
 DEFAULT_TEXT_MODEL = "qwen2.5:14b"
+# Long edge for VL encode — full farm JPEGs are oversized for lexicon labeling.
+VISION_MAX_EDGE = 1024
+VISION_JPEG_QUALITY = 85
 ASR_PAD_SEC = 1.0  # keep tight — wide pad bleeds prior ads into program windows
 MIN_CLIP_ASR_SEC = 16.0
 SPORTS_VISUAL = re.compile(
@@ -99,6 +103,34 @@ VISUAL_AD_HINT = re.compile(
     r")\b",
     re.I,
 )
+# Streamers / EPG chrome — captions often say this clearly while class wrongly lands on "ad".
+# Channel changes during capture leave these stills; keep the lexicon wide (phrasing varies).
+GUIDE_CAPTION_HINT = re.compile(
+    r"("
+    r"tv guide(?:\s+interface)?|guide interface|"
+    r"search bar|"
+    r"list of channels|channel options(?:\s+listed)?|channels?\s+section|"
+    r"channel listing|tv interface with a search|"
+    r"under the ['\"]?channels['\"]? section|"
+    r"channel menu|favorites.{0,40}(channels?|section)|"
+    r"no information\.?|"
+    r"\(max sports\)|"
+    r"all channels|"
+    r"sidebar with categor|"
+    r"tv interface from a streaming|"
+    r"streaming interface|"
+    r"service called ['\"]?streamers|"
+    r"text boxes? displayed|"
+    r"(?:two|three|several) channels displayed|"
+    r"channels displayed,\s*both labeled"
+    r")",
+    re.I,
+)
+
+
+def vision_caption_is_guide(text: str | None) -> bool:
+    """True when the VL caption describes guide/UI chrome (not program, not an ad)."""
+    return bool(text and GUIDE_CAPTION_HINT.search(str(text)))
 
 
 def _trust_gate(root: Path | None = None) -> dict[str, Any]:
@@ -284,6 +316,9 @@ def apply_common_sense(draft: dict[str, Any], text: str, visual: str) -> dict[st
 
 def _visual_class(text: str) -> str:
     t = text or ""
+    # Guide chrome before ad lexicon — "Channels" / search UI must not train as mute.
+    if vision_caption_is_guide(t):
+        return "other"
     ad = bool(AD_HINT.search(t) or VISUAL_AD_HINT.search(t))
     prog = bool(SPORTS_VISUAL.search(t) or SHOW_HINT.search(t))
     if ad and prog:
@@ -359,10 +394,32 @@ def is_black_or_corrupt_still(image_path: Path | None) -> str | None:
         return None
 
 
+def _still_jpeg_b64(image_path: Path, *, max_edge: int = VISION_MAX_EDGE) -> tuple[str, dict[str, Any]]:
+    """Encode a downscaled JPEG for VL — same picture, less GPU/IO waste."""
+    from io import BytesIO
+
+    from PIL import Image
+
+    im = Image.open(image_path).convert("RGB")
+    w, h = im.size
+    meta = {"src_w": w, "src_h": h, "max_edge": int(max_edge)}
+    edge = max(w, h)
+    if edge > max_edge > 0:
+        scale = float(max_edge) / float(edge)
+        resample = getattr(getattr(Image, "Resampling", Image), "BILINEAR", Image.BILINEAR)
+        im = im.resize((max(1, int(w * scale)), max(1, int(h * scale))), resample)
+    meta["out_w"], meta["out_h"] = im.size
+    buf = BytesIO()
+    im.save(buf, format="JPEG", quality=VISION_JPEG_QUALITY, optimize=True)
+    return base64.b64encode(buf.getvalue()).decode("ascii"), meta
+
+
 def describe_still(image_path: Path, *, model: str = VISION_MODEL) -> dict[str, Any]:
-    """Short visual description via Ollama vision model (moondream).
+    """Short visual description via Ollama vision model.
 
     Use /api/generate — moondream's chat path often returns empty content on this box.
+    qwen2.5vl: one prompt (second prompt doubled worst-case hangs without accuracy gain).
+    Images are downscaled to VISION_MAX_EDGE before send.
     """
     if not image_path.is_file():
         return {"ok": False, "error": "missing_still"}
@@ -371,12 +428,19 @@ def describe_still(image_path: Path, *, model: str = VISION_MODEL) -> dict[str, 
         return {"ok": False, "error": "black_still", "still": str(image_path)}
     if dead == "green_corrupt":
         return {"ok": False, "error": "green_corrupt_still", "still": str(image_path)}
-    b64 = base64.b64encode(image_path.read_bytes()).decode("ascii")
+    try:
+        b64, scale_meta = _still_jpeg_b64(image_path)
+    except Exception as exc:  # noqa: BLE001
+        return {"ok": False, "error": f"still_encode:{exc}", "still": str(image_path)}
     # Keep wording plain — moondream returns empty on “labeling”/instruction-heavy prompts.
-    prompts = (
-        "Describe this TV frame. Name logos, products, scorebugs, anchors, or end-cards if visible.",
-        "What is on this TV screen? Mention any brand, logo, scorebug, or person.",
-    )
+    primary = "Describe this TV frame. Name logos, products, scorebugs, anchors, or end-cards if visible."
+    secondary = "What is on this TV screen? Mention any brand, logo, scorebug, or person."
+    model_l = str(model or "").lower()
+    # qwen is reliable enough that a 2nd full generate only burns wall clock.
+    if "qwen" in model_l:
+        prompts = (primary,)
+    else:
+        prompts = (primary, secondary)
 
     def _usable(text: str) -> bool:
         t = (text or "").strip()
@@ -404,9 +468,21 @@ def describe_still(image_path: Path, *, model: str = VISION_MODEL) -> dict[str, 
                 raw = json.loads(resp.read().decode())
             msg = str(raw.get("response") or "").strip()
             if _usable(msg):
-                return {"ok": True, "model": model, "visual": msg[:500], "still": str(image_path)}
+                return {
+                    "ok": True,
+                    "model": model,
+                    "visual": msg[:500],
+                    "still": str(image_path),
+                    "encode": scale_meta,
+                }
             last_err = "empty_or_unusable_vision"
-        return {"ok": False, "error": last_err, "still": str(image_path), "model": model}
+        return {
+            "ok": False,
+            "error": last_err,
+            "still": str(image_path),
+            "model": model,
+            "encode": scale_meta,
+        }
     except Exception as exc:  # noqa: BLE001
         return {"ok": False, "error": str(exc), "still": str(image_path)}
 
@@ -484,6 +560,36 @@ def unload_ollama_model(model: str) -> dict[str, Any]:
         }
     except Exception as exc:  # noqa: BLE001
         return {"ok": False, "error": str(exc), "model": model}
+
+
+def ollama_loaded_models() -> list[str]:
+    try:
+        with urlopen(OLLAMA_PS_URL, timeout=3) as resp:
+            raw = json.loads(resp.read().decode())
+        return [str(m.get("name") or m.get("model") or "") for m in (raw.get("models") or []) if m]
+    except Exception:  # noqa: BLE001
+        return []
+
+
+def prepare_vision_gpu(keep_model: str) -> dict[str, Any]:
+    """Free VRAM of other VL models so qwen can run alone (common-sense max for one stream)."""
+    keep = str(keep_model or "").strip()
+    keep_base = keep.split(":", 1)[0].lower()
+    unloaded: list[dict[str, Any]] = []
+    kept: list[str] = []
+    for name in ollama_loaded_models():
+        if not name:
+            continue
+        base = name.split(":", 1)[0].lower()
+        if base == keep_base or name == keep:
+            kept.append(name)
+            continue
+        # Only stop other vision / caption models — leave text LLMs alone.
+        if any(tok in base for tok in ("moondream", "llava", "minicpm", "vl", "vision", "bakllava")):
+            unloaded.append(unload_ollama_model(name))
+        else:
+            kept.append(name)
+    return {"ok": True, "keep": keep, "kept": kept, "unloaded": unloaded}
 
 
 def _resample_mono_to_16k(audio: Any, rate: int) -> tuple[Any, int]:

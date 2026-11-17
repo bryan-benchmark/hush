@@ -152,6 +152,42 @@ def write_status(*, progress: dict[str, Any] | None = None) -> Path:
     return path
 
 
+def write_job_progress(progress: dict[str, Any]) -> Path:
+    """Hot-path heartbeat: patch only ``job`` — do not rebuild the whole lab board.
+
+    Full ``write_status`` probes services + verdict queue (~seconds). Vision calls this
+    every still; that tax was larger than the GPU gap we were trying to close.
+    """
+    path = status_path()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    prev: dict[str, Any] = {}
+    if path.is_file():
+        try:
+            prev = json.loads(path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            prev = {}
+    job = dict(prev.get("job") or {})
+    job.update(progress or {})
+    job["updated_utc"] = _now()
+    prev["job"] = job
+    prev["updated_utc"] = _now()
+    path.write_text(json.dumps(prev, indent=2) + "\n", encoding="utf-8")
+    # Feed rolling /min meters (last ~60s wall) — only for the active audit.
+    try:
+        phase = str(job.get("phase") or "")
+        if job.get("hop_i") is not None and phase in {"vision", "acoustic"}:
+            from .farm_label_timing import record_label_rate_sample
+
+            record_label_rate_sample(
+                hop_i=job.get("hop_i"),
+                session=str(job.get("session") or "") or None,
+                kind="pictures" if phase == "vision" else "sound",
+            )
+    except Exception:
+        pass
+    return path
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description="Lab status blob for /status")
     p.add_argument("--progress-json", type=str, default=None, help="JSON object merged into job")

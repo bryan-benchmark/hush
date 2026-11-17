@@ -268,13 +268,11 @@ def heal_adb_for_dump(
     }
     if emptyish or (streak >= HEAL_RECOVER_STREAK and not hard_adb):
         try:
-            for _ in range(2):
-                adb(instance, ["shell", "input", "keyevent", "4"])
-                time.sleep(0.35)
-            # Also dismiss accidental power sheet (Power off / Restart) if present.
+            # One BACK surfaces player chrome / dismisses power sheet. Three BACKs
+            # were dumping us on BlueStacks home (POPULAR GAMES) mid-olympics.
             adb(instance, ["shell", "input", "keyevent", "4"])
-            time.sleep(0.25)
-            steps.append({"step": "back_to_rail", "ok": True, "keys": [4, 4, 4]})
+            time.sleep(0.4)
+            steps.append({"step": "back_to_rail", "ok": True, "keys": [4]})
             heal = "back_to_rail"
         except Exception as exc:  # noqa: BLE001
             steps.append({"step": "back_to_rail", "ok": False, "error": str(exc)})
@@ -432,6 +430,39 @@ def dump_ui_hard(
         )
         if heal:
             heal_adb_for_dump(instance, root=data_root)
+            # BACK-to-rail only helps if we dump again — otherwise callers just see raise.
+            time.sleep(0.45)
+            rc2, out2 = adb(
+                instance,
+                ["shell", "uiautomator", "dump", "/sdcard/ohush_ui.xml"],
+                timeout=12.0,
+            )
+            if rc2 == 0 and "null root" not in (out2 or "").lower():
+                adb(instance, ["pull", "/sdcard/ohush_ui.xml", str(dest)], timeout=12.0)
+                try:
+                    tree2 = ET.parse(dest).getroot()
+                    nodes2, n_texts2 = _count_texts(tree2)
+                    if n_texts2 > 0:
+                        ms = round((time.perf_counter() - t0) * 1000, 1)
+                        record_dump_success(instance, root=data_root, ms=ms)
+                        _emit(
+                            "ui_dump_ok",
+                            instance=instance,
+                            detail="ok_after_back_to_rail",
+                            ok=True,
+                            extra={
+                                "caller": caller,
+                                "mode": "hard",
+                                "dest": dest.name,
+                                "nodes": nodes2,
+                                "texts": n_texts2,
+                                "ms": ms,
+                            },
+                            root=data_root,
+                        )
+                        return tree2
+                except Exception:
+                    pass
         _emit(
             "ui_dump_fail",
             instance=instance,

@@ -73,7 +73,7 @@ def _sessions_needing_work(sessions: list[str]) -> list[str]:
     ready: list[str] = []
     for s in sessions:
         d = label / "audit" / s
-        has_v = (d / "hops_vision.jsonl").is_file()
+        has_v = not _needs_vision(s)
         has_a = (d / "hops_acoustic.jsonl").is_file()
         if has_v and has_a and (d / "hops.jsonl").is_file():
             ready.append(s)
@@ -84,9 +84,56 @@ def _sessions_needing_work(sessions: list[str]) -> list[str]:
     return missing + ready
 
 
-def _needs_vision(session: str) -> bool:
+def _vision_coverage(session: str, *, hop_s: float = 5.0) -> dict[str, Any]:
+    """How far vision got vs expected hops (checkpoint files can exist mid-tape)."""
     path = farm_label_dir() / "audit" / session / "hops_vision.jsonl"
-    return not path.is_file()
+    if not path.is_file():
+        return {"path": str(path), "exists": False, "done": 0, "expect": None, "complete": False}
+    done = 0
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        try:
+            row = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        vision = (row.get("channels") or {}).get("vision") or {}
+        if vision.get("ok") and vision.get("visual"):
+            done += 1
+            continue
+        err = str(vision.get("error") or "")
+        if err in {"black_still", "green_corrupt_still", "missing_still", "no_still"}:
+            done += 1
+    expect = None
+    try:
+        from .coverage_farm import streamers_capture_root
+        from .farm_draft import _wav_duration_sec
+
+        wav = streamers_capture_root() / session / "audio.wav"
+        if wav.is_file():
+            dur = float(_wav_duration_sec(wav) or 0.0)
+            if dur > 0 and hop_s > 0:
+                expect = max(1, int(dur / float(hop_s)) + 1)
+    except Exception:
+        expect = None
+    complete = bool(expect is not None and done >= int(expect * 0.98))
+    return {
+        "path": str(path),
+        "exists": True,
+        "done": done,
+        "expect": expect,
+        "complete": complete,
+    }
+
+
+def _needs_vision(session: str, *, hop_s: float = 5.0) -> bool:
+    cov = _vision_coverage(session, hop_s=hop_s)
+    if not cov.get("exists"):
+        return True
+    # Mid-run checkpoints create the file early — keep vision until coverage is ~full.
+    if cov.get("expect") is None:
+        return cov.get("done", 0) < 10
+    return not bool(cov.get("complete"))
 
 
 def _needs_acoustic(session: str) -> bool:
@@ -147,8 +194,14 @@ def run(
     pass_t0 = time.perf_counter()
     vision_results: list[dict[str, Any]] = []
     if not skip_vision:
-        todo = [s for s in sessions if _needs_vision(s)]
+        from .farm_draft import prepare_vision_gpu, unload_ollama_model
+
+        todo = [s for s in sessions if _needs_vision(s, hop_s=hop_s)]
+        # One VL resident for the whole vision leg — unload siblings (moondream) first.
+        gpu_prep = prepare_vision_gpu(model)
+        print(json.dumps({"vision_gpu_prep": gpu_prep}), flush=True)
         for i, session in enumerate(todo, 1):
+            cov = _vision_coverage(session, hop_s=hop_s)
             print(
                 json.dumps(
                     {
@@ -157,13 +210,26 @@ def run(
                         "of": len(todo),
                         "hop_s": hop_s,
                         "model": model,
+                        "keep_hot": True,
+                        "resume_done": cov.get("done"),
+                        "resume_expect": cov.get("expect"),
                     }
                 ),
                 flush=True,
             )
             try:
+                from .farm_label_lock import heartbeat as label_heartbeat
                 from .lab_status import write_status
 
+                label_heartbeat(
+                    phase="vision",
+                    session=session,
+                    session_i=i,
+                    session_of=len(todo),
+                    hop_s=hop_s,
+                    model=model,
+                    note="vision_tape_start",
+                )
                 write_status(
                     progress={
                         "phase": "vision",
@@ -172,12 +238,13 @@ def run(
                         "session_of": len(todo),
                         "hop_s": hop_s,
                         "model": model,
+                        "note": "vision_tape_start",
                     }
                 )
             except Exception:
                 pass
             try:
-                # vision_run records asr + vision step times itself
+                # Keep qwen hot across tapes; unload once after the vision leg.
                 vision_results.append(
                     vision_run(
                         session,
@@ -185,11 +252,14 @@ def run(
                         use_vision=True,
                         hop_s=float(hop_s),
                         model=model,
+                        unload_after=False,
                     )
                 )
             except Exception as exc:  # noqa: BLE001
                 vision_results.append({"ok": False, "session": session, "error": str(exc)})
                 print(json.dumps({"vision_fail": session, "error": str(exc)}), flush=True)
+        if todo:
+            print(json.dumps({"vision_unload": unload_ollama_model(model)}), flush=True)
 
     acoustic_results: list[dict[str, Any]] = []
     if not skip_acoustic:
@@ -199,14 +269,23 @@ def run(
         for i, session in enumerate(todo_a, 1):
             print(json.dumps({"acoustic_start": session, "i": i, "of": len(todo_a)}), flush=True)
             try:
+                from .farm_label_lock import heartbeat as label_heartbeat
                 from .lab_status import write_status
 
+                label_heartbeat(
+                    phase="acoustic",
+                    session=session,
+                    session_i=i,
+                    session_of=len(todo_a),
+                    note="sound_tape_start",
+                )
                 write_status(
                     progress={
                         "phase": "acoustic",
                         "session": session,
                         "session_i": i,
                         "session_of": len(todo_a),
+                        "note": "sound_tape_start",
                     }
                 )
             except Exception:

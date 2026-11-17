@@ -1,7 +1,10 @@
-"""Apply episode-viewer You marks (keep/mute) into farm key.jsonl gold.
+"""Apply episode-viewer You marks (keep/mute/drop) into farm key.jsonl gold.
 
 You is source of truth for labeled seconds: carves overlapping clips and
 upserts locked program/paid_ad ranges, then refreshes GOLD_CLEAN membership.
+
+``drop`` carves those seconds out of gold and does not upsert a train row
+(guide chrome, black frames, junk).
 
   python -m tools.windows_lab.farm_apply_you_marks
   python -m tools.windows_lab.farm_apply_you_marks --dry-run
@@ -39,11 +42,31 @@ def _load_human() -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def _merge_marks(marks: dict[str, str]) -> list[tuple[float, float, str]]:
-    """Collapse per-second keep/mute into half-open [t0,t1) ranges."""
+def _merge_marks(
+    marks: dict[str, str],
+    *,
+    include_drop: bool = False,
+    drop_hop_s: float = 5.0,
+) -> list[tuple[float, float, str]]:
+    """Collapse per-second marks into half-open [t0,t1) ranges.
+
+    keep/mute become gold. drop is only returned when include_drop=True
+    (carve-out / exclude from train — no gold upsert).
+
+    Guide stills are usually one mark per hop (every ~5s). Merge neighboring
+    ``drop`` marks across that hop gap so the carve covers the chrome, not a
+    single second.
+    """
+    allowed = set(YOU_TO_BUCKET)
+    if include_drop:
+        allowed = allowed | {"drop"}
+    try:
+        hop = max(1.0, float(drop_hop_s))
+    except (TypeError, ValueError):
+        hop = 5.0
     items: list[tuple[float, str]] = []
     for k, v in (marks or {}).items():
-        if v not in YOU_TO_BUCKET:
+        if v not in allowed:
             continue
         try:
             t = float(k)
@@ -57,12 +80,17 @@ def _merge_marks(marks: dict[str, str]) -> list[tuple[float, float, str]]:
     t0, lab = items[0]
     prev = t0
     for t, v in items[1:]:
-        if v == lab and abs(t - (prev + 1.0)) < 1e-6:
+        # keep/mute: contiguous seconds. drop: allow hop-spaced guide stills.
+        max_gap = hop if lab == "drop" and v == "drop" else 1.0
+        if v == lab and t <= prev + max_gap + 1e-6:
             prev = t
             continue
-        out.append((t0, prev + 1.0, lab))
+        # Point drop at T covers [T, T+hop) of tape when isolated.
+        end = prev + (hop if lab == "drop" else 1.0)
+        out.append((t0, end, lab))
         t0, lab, prev = t, v, t
-    out.append((t0, prev + 1.0, lab))
+    end = prev + (hop if lab == "drop" else 1.0)
+    out.append((t0, end, lab))
     return out
 
 
@@ -148,8 +176,10 @@ def apply(*, dry_run: bool = False) -> dict[str, Any]:
     for session in sorted(target):
         touched_sessions.append(session)
         marks = marks_by_session.get(session) or {}
-        ranges = _merge_marks(marks)
-        range_n += len(ranges)
+        # Drop carves gold out; keep/mute carve + upsert train rows.
+        all_ranges = _merge_marks(marks, include_drop=True)
+        gold_ranges = [(a, b, lab) for a, b, lab in all_ranges if lab in YOU_TO_BUCKET]
+        range_n += len(gold_ranges)
         segs: list[tuple[float, float, dict[str, Any]]] = []
         for r in rows:
             if str(r.get("session") or "") != session:
@@ -163,7 +193,7 @@ def apply(*, dry_run: bool = False) -> dict[str, Any]:
                 continue
             segs.append((a, b, r))
 
-        for t0, t1, lab in ranges:
+        for t0, t1, _lab in all_ranges:
             segs = _carve(segs, t0, t1)
             carved_n += 1
 
@@ -182,7 +212,7 @@ def apply(*, dry_run: bool = False) -> dict[str, Any]:
                 row["note"] = (str(row.get("note") or "") + f" · carved for You @ {utc}").strip(" ·")
             rebuilt.append(row)
 
-        for t0, t1, lab in ranges:
+        for t0, t1, lab in gold_ranges:
             if t1 - t0 < 0.05:
                 continue
             base = {"channel": session_channel.get(session, "")}

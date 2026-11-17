@@ -11,7 +11,7 @@ Disagree / uncertain → leave farm review rows alone; episode triage feeds /ver
 from __future__ import annotations
 
 import json
-from collections import defaultdict
+from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -23,6 +23,9 @@ from .farm_ontology import BROADCAST, NON_BROADCAST
 CONSENSUS_SOURCE = "multichannel_consensus"
 # Vision hops are often 5s; allow merge across that spine (+slack).
 HOP_MERGE_GAP_S = 6.0
+
+# Desk cache for channel-agreement rollup (hops scan is ~seconds).
+_AGREE_CACHE: dict[str, Any] = {"sig": None, "payload": None}
 
 
 def _now() -> str:
@@ -408,6 +411,163 @@ def apply_consensus_locks(
     path.mkdir(parents=True, exist_ok=True)
     (path / "CONSENSUS_LOCK.json").write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
     return receipt
+
+
+def _pct(num: int, den: int) -> float | None:
+    if den <= 0:
+        return None
+    return round(100.0 * float(num) / float(den), 1)
+
+
+def channel_agreement_stats(root: Path | None = None) -> dict[str, Any]:
+    """Rollup pic/txt/snd hard-vote coverage + pairwise / 2-of-3 agreement.
+
+    Cached on max hops.jsonl mtime so the desk can poll without re-scanning.
+    """
+    audit = farm_label_dir(root) / "audit"
+    if not audit.is_dir():
+        return {"ok": False, "error": "no audit dir", "hops_total": 0}
+
+    hops_files = sorted(
+        p for p in audit.glob("*/hops.jsonl") if p.is_file() and p.stat().st_size > 0
+    )
+    sig = tuple((str(p), int(p.stat().st_mtime_ns), int(p.stat().st_size)) for p in hops_files)
+    cached = _AGREE_CACHE.get("payload")
+    if _AGREE_CACHE.get("sig") == sig and isinstance(cached, dict):
+        return dict(cached)
+
+    present: Counter[str] = Counter()
+    pair_agree: Counter[tuple[str, str]] = Counter()
+    pair_disagree: Counter[tuple[str, str]] = Counter()
+    pair_n: Counter[tuple[str, str]] = Counter()
+    mute_rate: Counter[str] = Counter()  # channel -> mute count among hard
+    hard_n: Counter[str] = Counter()
+    vis_snd: Counter[tuple[str, str]] = Counter()
+    trio_n = 0
+    trio_unanimous = 0
+    odd_out: Counter[str] = Counter()
+    lock_coalition: Counter[str] = Counter()
+    auto_lock_n = 0
+    n_hops = 0
+    sessions = 0
+
+    for path in hops_files:
+        sessions += 1
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            try:
+                hop = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            n_hops += 1
+            votes = _hop_votes(hop)
+            hard = {k: v for k, v in votes.items() if v in {"mute", "play"}}
+            for k, v in hard.items():
+                present[k] += 1
+                hard_n[k] += 1
+                if v == "mute":
+                    mute_rate[k] += 1
+            for a, b in (("vision", "asr"), ("vision", "acoustic"), ("asr", "acoustic")):
+                if a in hard and b in hard:
+                    pair_n[(a, b)] += 1
+                    if hard[a] == hard[b]:
+                        pair_agree[(a, b)] += 1
+                    else:
+                        pair_disagree[(a, b)] += 1
+            if "vision" in hard and "acoustic" in hard:
+                vis_snd[(hard["vision"], hard["acoustic"])] += 1
+
+            cons = consensus_at_hop(hop)
+            if cons.get("label") in {"mute", "play"}:
+                auto_lock_n += 1
+                who = "+".join(sorted(k for k, v in hard.items() if v == cons["label"]))
+                lock_coalition[who] += 1
+
+            if len(hard) == 3:
+                trio_n += 1
+                labs = set(hard.values())
+                if len(labs) == 1:
+                    trio_unanimous += 1
+                else:
+                    maj, nmaj = Counter(hard.values()).most_common(1)[0]
+                    if nmaj == 2:
+                        odd = next(k for k, v in hard.items() if v != maj)
+                        odd_out[odd] += 1
+
+    odd_total = sum(odd_out.values())
+    lock_total = sum(lock_coalition.values()) or 1
+    payload: dict[str, Any] = {
+        "ok": True,
+        "utc": _now(),
+        "sessions": sessions,
+        "hops_total": n_hops,
+        "coverage": {
+            "acoustic": {
+                "n": present["acoustic"],
+                "pct": _pct(present["acoustic"], n_hops),
+                "mute_pct": _pct(mute_rate["acoustic"], hard_n["acoustic"]),
+            },
+            "vision": {
+                "n": present["vision"],
+                "pct": _pct(present["vision"], n_hops),
+                "mute_pct": _pct(mute_rate["vision"], hard_n["vision"]),
+            },
+            "asr": {
+                "n": present["asr"],
+                "pct": _pct(present["asr"], n_hops),
+                "mute_pct": _pct(mute_rate["asr"], hard_n["asr"]),
+            },
+        },
+        "pairwise": {
+            "sound_transcript": {
+                "n": pair_n[("asr", "acoustic")],
+                "agree_pct": _pct(pair_agree[("asr", "acoustic")], pair_n[("asr", "acoustic")]),
+            },
+            "pictures_transcript": {
+                "n": pair_n[("vision", "asr")],
+                "agree_pct": _pct(pair_agree[("vision", "asr")], pair_n[("vision", "asr")]),
+            },
+            "sound_pictures": {
+                "n": pair_n[("vision", "acoustic")],
+                "agree_pct": _pct(pair_agree[("vision", "acoustic")], pair_n[("vision", "acoustic")]),
+            },
+        },
+        "vision_vs_sound": {
+            "pic_mute_snd_play": vis_snd[("mute", "play")],
+            "pic_play_snd_play": vis_snd[("play", "play")],
+            "pic_mute_snd_mute": vis_snd[("mute", "mute")],
+            "pic_play_snd_mute": vis_snd[("play", "mute")],
+        },
+        "trio": {
+            "n": trio_n,
+            "unanimous": trio_unanimous,
+            "unanimous_pct": _pct(trio_unanimous, trio_n),
+            "odd_one_out": {
+                "vision": {"n": odd_out["vision"], "pct": _pct(odd_out["vision"], odd_total)},
+                "asr": {"n": odd_out["asr"], "pct": _pct(odd_out["asr"], odd_total)},
+                "acoustic": {"n": odd_out["acoustic"], "pct": _pct(odd_out["acoustic"], odd_total)},
+            },
+        },
+        "auto_lock": {
+            "n": auto_lock_n,
+            "coalitions": {
+                k: {"n": v, "pct": _pct(v, lock_total)}
+                for k, v in lock_coalition.most_common()
+            },
+        },
+        "plain": (
+            f"{sessions} sessions / {n_hops} hops · "
+            f"hard votes snd {_pct(present['acoustic'], n_hops)}% · "
+            f"pic {_pct(present['vision'], n_hops)}% · "
+            f"txt {_pct(present['asr'], n_hops)}% · "
+            f"snd↔txt {_pct(pair_agree[('asr', 'acoustic')], pair_n[('asr', 'acoustic')])}% · "
+            f"snd↔pic {_pct(pair_agree[('vision', 'acoustic')], pair_n[('vision', 'acoustic')])}%"
+        ),
+    }
+    _AGREE_CACHE["sig"] = sig
+    _AGREE_CACHE["payload"] = payload
+    return dict(payload)
 
 
 def apply_all_ready(

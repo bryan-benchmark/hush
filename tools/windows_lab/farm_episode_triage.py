@@ -79,6 +79,16 @@ def _episodes(disag_times: list[float]) -> list[tuple[float, float]]:
 
 def _tag_episode(seq: list[dict[str, Any]]) -> str:
     n = len(seq) or 1
+    # Channel changes during capture leave Streamers guide chrome in the stills.
+    # Picture captions already say so — never send those to human review.
+    try:
+        from .farm_draft import vision_caption_is_guide
+
+        guide_n = sum(1 for s in seq if vision_caption_is_guide(s.get("visual")))
+        if guide_n / n >= 0.8:
+            return "streamers_guide"
+    except Exception:  # noqa: BLE001
+        pass
     mute_v = sum(1 for s in seq if s.get("vb") == "non_broadcast" or s.get("v") == "ad")
     mute_a = sum(1 for s in seq if s.get("ab") == "non_broadcast")
     play_g = sum(1 for s in seq if s.get("g") in {"broadcast", "program"})
@@ -128,7 +138,8 @@ def triage_session(session: str) -> dict[str, Any]:
                     "fp": ac.get("force_play"),
                     "g": g.get("bucket"),
                     "still": v.get("still_name"),
-                    "visual": (v.get("visual") or "")[:120],
+                    # Keep enough caption for guide-chrome detection (search bar / Streamers UI).
+                    "visual": (v.get("visual") or "")[:320],
                     "asr": (asr.get("text") or "")[:80],
                 }
             )
@@ -174,6 +185,12 @@ def _count_tags(episodes: list[dict[str, Any]]) -> dict[str, int]:
 
 
 def _action_for_tag(tag: str, session: str, t0: float, t1: float, seq: list[dict[str, Any]]) -> dict[str, Any]:
+    if tag == "streamers_guide":
+        return {
+            "do": "drop_guide",
+            "detail": "Streamers guide/UI chrome (picture caption) — exclude from muter train; channel-change junk",
+            "patch_id": None,
+        }
     if tag == "boundary_late" and session.endswith("1339Z_pluto_cbs_sports_hq") and t0 <= 30 <= t1:
         return {
             "do": "fix_gold_boundary",
@@ -362,6 +379,20 @@ def run(*, apply: bool) -> dict[str, Any]:
     root.mkdir(parents=True, exist_ok=True)
     (root / "EPISODE_TRIAGE.json").write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     _write_md(out, root / "EPISODE_TRIAGE.md")
+    # Standing rule: Drop guide chrome out of the You-queue *and* carve it out of gold.
+    try:
+        from .farm_episode_viewer import auto_drop_guides_from_vision
+
+        out["auto_drop_guides"] = auto_drop_guides_from_vision(dry_run=False)
+    except Exception as exc:  # noqa: BLE001
+        out["auto_drop_guides"] = {"ok": False, "error": str(exc)}
+    try:
+        from .farm_apply_you_marks import apply as apply_you_marks
+
+        # Always carve current Drop marks into key.jsonl (no keep/mute upsert required).
+        out["apply_you_marks"] = apply_you_marks(dry_run=False)
+    except Exception as exc:  # noqa: BLE001
+        out["apply_you_marks"] = {"ok": False, "error": str(exc)}
     return out
 
 

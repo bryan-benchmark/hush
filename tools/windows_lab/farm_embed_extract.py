@@ -83,8 +83,63 @@ def extract_session(session: str, *, t_end: float | None = None, use_cache: bool
     cache_dir = farm_label_dir() / "live_scorecard_cache"
     cache_path = (cache_dir / f"{session}.npz") if use_cache else None
 
+    def _sound_progress(i: int, n: int, *, note: str = "sound_infer") -> None:
+        try:
+            from .farm_label_lock import heartbeat as label_heartbeat
+            from .farm_label_timing import active_elapsed, tape_through_plain, audit_plain_name
+            from .lab_status import write_job_progress
+
+            n = max(int(n), 1)
+            i = max(0, min(int(i), n))
+            # Acoustic hops are ~0.25s (HOP_S); desk progress uses content clock.
+            pos_s = float(i) * float(HOP_S)
+            total_s = float(n) * float(HOP_S)
+            pct = round(100.0 * i / n, 1)
+            elapsed = active_elapsed(session, "acoustic")
+            progress_plain = tape_through_plain(
+                pos_s=pos_s,
+                total_s=total_s,
+                audit=audit_plain_name("acoustic"),
+            )
+            label_heartbeat(
+                phase="acoustic",
+                session=session,
+                hop_i=i,
+                hop_of=n,
+                t=round(pos_s, 1),
+                hop_s=float(HOP_S),
+                note=note,
+                progress_plain=progress_plain,
+                step_elapsed_s=elapsed,
+                pct=pct,
+            )
+            write_job_progress(
+                {
+                    "phase": "acoustic",
+                    "session": session,
+                    "hop_i": i,
+                    "hop_of": n,
+                    "hop_s": float(HOP_S),
+                    "t": round(pos_s, 1),
+                    "note": note,
+                    "progress_plain": progress_plain,
+                    "step_elapsed_s": elapsed,
+                    "pct": pct,
+                }
+            )
+        except Exception:
+            pass
+
     # Force recompute embeddings into farm embed root; still reuse scorecard cache for probs when present
-    times, probs, decisions = _infer_session(wav, end, encoder, head, device, cache_path=cache_path)
+    times, probs, decisions = _infer_session(
+        wav,
+        end,
+        encoder,
+        head,
+        device,
+        cache_path=cache_path,
+        on_progress=_sound_progress,
+    )
 
     # Materialize embedding cache for training (same stamps as live infer).
     emb_path = EMBED_ROOT / f"{session}.npz"
@@ -98,10 +153,12 @@ def extract_session(session: str, *, t_end: float | None = None, use_cache: bool
             raise RuntimeError(f"expected 16k, got {rate}")
         times_e = np.asarray(times, dtype=np.float64)
         parts = []
-        for start in range(0, len(times_e), BATCH):
+        n_e = len(times_e)
+        for start in range(0, n_e, BATCH):
             chunk = times_e[start : start + BATCH]
             waves = pack_past_batch(audio, 0.0, chunk, WINDOW_S, CONTEXT_S, SR)
             parts.append(embed_numpy(encoder, device, waves))
+            _sound_progress(min(start + BATCH, n_e), max(n_e, 1), note="sound_embed")
         emb = np.concatenate(parts, axis=0).astype(np.float16)
         labels = np.full(len(times_e), -1, dtype=np.int8)
         for i, t in enumerate(times_e):

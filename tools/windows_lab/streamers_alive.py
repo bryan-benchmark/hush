@@ -93,7 +93,7 @@ def _dark_frame_ratio(png: bytes) -> float | None:
 
 
 def probe_streamers_down(
-    instance_id: str = "Nougat32",
+    instance_id: str = "player 0",
     *,
     root: Path | None = None,
     save_shot: bool = True,
@@ -215,7 +215,7 @@ def probe_streamers_down(
 
 
 def recover_streamers(
-    instance_id: str = "Nougat32",
+    instance_id: str = "player 0",
     *,
     root: Path | None = None,
     wait_s: float = 18.0,
@@ -282,7 +282,7 @@ def recover_streamers(
 
 
 def ensure_streamers_alive(
-    instance_id: str = "Nougat32",
+    instance_id: str = "player 0",
     *,
     root: Path | None = None,
     recover: bool = True,
@@ -320,7 +320,7 @@ def main(argv: list[str] | None = None) -> int:
     import argparse
 
     p = argparse.ArgumentParser(description="Probe / recover Streamers down screens")
-    p.add_argument("--instance", default="Nougat32")
+    p.add_argument("--instance", default="player 0")
     p.add_argument("--recover", action="store_true", help="Force-stop + relaunch if down")
     p.add_argument("--probe-only", action="store_true")
     args = p.parse_args(argv)

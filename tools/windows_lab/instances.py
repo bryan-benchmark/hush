@@ -25,8 +25,116 @@ def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
+def is_nougat_engine(instance_id: str) -> bool:
+    """True for the Streamers fleet BlueStacks engines (Nougat32 / Nougat32_N)."""
+    iid = str(instance_id or "")
+    return iid == "Nougat32" or iid.startswith("Nougat32_")
+
+
+def _nougat_sort_key(instance_id: str) -> tuple[int, int, str]:
+    iid = str(instance_id or "")
+    if iid == "Nougat32":
+        return (0, 0, iid)
+    m = re.match(r"^Nougat32_(\d+)$", iid)
+    if m:
+        return (0, int(m.group(1)), iid)
+    return (1, 9999, iid)
+
+
+def nougat_fleet_ids(root: Path | None = None, *, reg: dict[str, Any] | None = None) -> list[str]:
+    """Ordered BlueStacks engine ids for the Streamers player fleet (player 0, 1, 2…)."""
+    if reg is None:
+        reg = load_registry(root)
+    ids = [iid for iid in (reg.get("instances") or {}) if is_nougat_engine(iid)]
+    ids.sort(key=_nougat_sort_key)
+    return ids
+
+
+def player_index(instance_id: str, root: Path | None = None, *, reg: dict[str, Any] | None = None) -> int | None:
+    """0-based player number for a Nougat fleet engine; None if not in fleet."""
+    iid = str(instance_id or "")
+    if not is_nougat_engine(iid):
+        # May already be a player alias — resolve without recursing into get_instance.
+        resolved = _resolve_player_alias(iid, root=root, reg=reg)
+        if resolved and is_nougat_engine(resolved):
+            iid = resolved
+        else:
+            return None
+    fleet = nougat_fleet_ids(root, reg=reg)
+    try:
+        return fleet.index(iid)
+    except ValueError:
+        return None
+
+
+def player_label(instance_id: str, root: Path | None = None, *, reg: dict[str, Any] | None = None) -> str:
+    """Common-sense label: 'player 0'. Non-fleet engines keep their engine id."""
+    idx = player_index(instance_id, root, reg=reg)
+    if idx is None:
+        return str(instance_id or "")
+    return f"player {idx}"
+
+
+def _resolve_player_alias(
+    ref: str,
+    *,
+    root: Path | None = None,
+    reg: dict[str, Any] | None = None,
+) -> str | None:
+    """Map 'player 0' / 'player0' / 'p0' / '0' → engine id. None if not a player alias."""
+    raw = str(ref or "").strip()
+    if not raw:
+        return None
+    m = re.fullmatch(r"(?:player|p)\s*(\d+)", raw, flags=re.IGNORECASE)
+    if not m and re.fullmatch(r"\d+", raw):
+        # Bare digits only when small — avoids eating ADB ports etc. in other parsers.
+        # Accept 0–99 as player numbers.
+        m = re.fullmatch(r"(\d{1,2})", raw)
+    if not m:
+        return None
+    idx = int(m.group(1))
+    fleet = nougat_fleet_ids(root, reg=reg)
+    if 0 <= idx < len(fleet):
+        return fleet[idx]
+    return None
+
+
+def normalize_instance_id(ref: str, root: Path | None = None, *, reg: dict[str, Any] | None = None) -> str:
+    """Accept player labels or engine ids; return the BlueStacks engine id."""
+    raw = str(ref or "").strip()
+    if not raw:
+        return raw
+    if reg is None:
+        # Avoid load when caller already has engine id and no alias shape.
+        if is_nougat_engine(raw) or raw == "Tiramisu64":
+            return raw
+        reg = load_registry(root)
+        if raw in (reg.get("instances") or {}):
+            return raw
+    else:
+        if raw in (reg.get("instances") or {}):
+            return raw
+    alias = _resolve_player_alias(raw, root=root, reg=reg)
+    if alias:
+        return alias
+    return raw
+
+
+def _with_player_fields(instance_id: str, cfg: dict[str, Any], *, reg: dict[str, Any]) -> dict[str, Any]:
+    row = {"id": instance_id, **cfg}
+    idx = player_index(instance_id, reg=reg)
+    if idx is not None:
+        row["player"] = idx
+        row["player_label"] = f"player {idx}"
+    else:
+        row.setdefault("player_label", instance_id)
+    # Keep engine id explicit for logs / BlueStacks.
+    row.setdefault("engine", cfg.get("engine") or instance_id)
+    return row
+
+
 def default_registry() -> dict[str, Any]:
-    """Seed registry for the Node 01 Nougat32 instance."""
+    """Seed registry for player 0 (BlueStacks engine Nougat32)."""
     conf = _parse_bluestacks_conf(DEFAULT_BLUESTACKS_CONF)
     adb_port = int(conf.get("bst.instance.Nougat32.adb_port", "5555") or 5555)
     return {
@@ -38,6 +146,7 @@ def default_registry() -> dict[str, Any]:
             "Nougat32": {
                 "source_kind": "streamers",
                 "engine": "Nougat32",
+                "player": 0,
                 "adb_port": adb_port,
                 "adb_serial": f"127.0.0.1:{adb_port}",
                 "window_title": "BlueStacks App Player",
@@ -90,17 +199,27 @@ def list_instances(root: Path | None = None) -> list[dict[str, Any]]:
     reg = load_registry(root)
     rows = []
     for name, cfg in (reg.get("instances") or {}).items():
-        row = {"id": name, **cfg}
-        rows.append(row)
+        rows.append(_with_player_fields(name, dict(cfg or {}), reg=reg))
+    rows.sort(key=lambda r: (r.get("player") is None, r.get("player") if r.get("player") is not None else 999, str(r.get("id"))))
     return rows
 
 
 def get_instance(instance_id: str, root: Path | None = None) -> dict[str, Any]:
     reg = load_registry(root)
-    cfg = (reg.get("instances") or {}).get(instance_id)
+    resolved = normalize_instance_id(instance_id, root, reg=reg)
+    cfg = (reg.get("instances") or {}).get(resolved)
     if not cfg:
-        raise KeyError(f"unknown instance {instance_id!r}; known={list((reg.get('instances') or {}))}")
-    return {"id": instance_id, **cfg, "_registry": reg}
+        fleet = nougat_fleet_ids(root, reg=reg)
+        hint = {f"player {i}": eid for i, eid in enumerate(fleet)}
+        raise KeyError(
+            f"unknown instance {instance_id!r} (resolved {resolved!r}); "
+            f"known={list((reg.get('instances') or {}))} aliases={hint}"
+        )
+    row = _with_player_fields(resolved, dict(cfg), reg=reg)
+    row["_registry"] = reg
+    if str(instance_id).strip() != resolved:
+        row["requested_as"] = str(instance_id).strip()
+    return row
 
 
 def upsert_instance(instance_id: str, patch: dict[str, Any], root: Path | None = None) -> dict[str, Any]:

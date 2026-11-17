@@ -1,6 +1,6 @@
 # Streamers controls
 
-Atomic operations for `ar.tvplayer.tv` 5.1.0 on BlueStacks `Nougat32`. Login is [`SALVATION_BLUESTACKS.md`](SALVATION_BLUESTACKS.md). This file is what to do after the home screen is up, and how to record it.
+Atomic operations for `ar.tvplayer.tv` 5.1.0 on **player 0** (BlueStacks engine `Nougat32`; clones are player 1, player 2, …). Prefer `--instance "player 0"` in commands — engine ids still work. Login is [`SALVATION_BLUESTACKS.md`](SALVATION_BLUESTACKS.md). This file is what to do after the home screen is up, and how to record it.
 
 Every tap target comes from a fresh UI dump. A coordinate from an earlier dump is stale. The guide reflows, and the player chrome hides itself.
 
@@ -26,7 +26,7 @@ Farm sessions default to `--media av`: full archival WAV plus one still per seco
 
 ## Atoms
 
-Serial for `Nougat32` is `127.0.0.1:5555`. Screen is 1600x900. Window title is `BlueStacks App Player`. ADB is `%LOCALAPPDATA%\Android\Sdk\platform-tools\adb.exe`. The lab prefers `C:\Program Files\BlueStacks_nxt\HD-Adb.exe` when that file exists. Commands below say `adb` for the one that is connected.
+Serial for **player 0** (`Nougat32`) is `127.0.0.1:5555`. Screen is 1600x900. Window title is `BlueStacks App Player`. ADB is `%LOCALAPPDATA%\Android\Sdk\platform-tools\adb.exe`. The lab prefers `C:\Program Files\BlueStacks_nxt\HD-Adb.exe` when that file exists. Commands below say `adb` for the one that is connected.
 
 ### A. Connect
 
@@ -203,8 +203,8 @@ When windows are off-screen, tiny, or stacked, tile them over the primary work a
 ```powershell
 python -m tools.windows_lab windows list
 python -m tools.windows_lab windows layout --mode auto
-python -m tools.windows_lab windows layout --mode fill --instances Nougat32 --focus Nougat32
-python -m tools.windows_lab windows layout --mode split --instances Nougat32 Nougat32_1
+python -m tools.windows_lab windows layout --mode fill --instances "player 0" --focus "player 0"
+python -m tools.windows_lab windows layout --mode split --instances "player 0" "player 1"
 python -m tools.windows_lab windows layout --mode grid
 # If a Qt HD-Player ignores MoveWindow (report.stuck non-empty):
 python -m tools.windows_lab windows layout --mode auto --relaunch-stuck

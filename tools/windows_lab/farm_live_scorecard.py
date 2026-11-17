@@ -196,6 +196,7 @@ def _infer_session(
     device,
     *,
     cache_path: Path | None = None,
+    on_progress: Any | None = None,
 ) -> tuple[np.ndarray, np.ndarray, list[dict[str, Any]]]:
     """Run live-identical hop scoring on [0, t_end]. Returns times, probs, decision rows."""
     from experiments.audio_learn.encoder import embed_numpy
@@ -203,10 +204,19 @@ def _infer_session(
     from experiments.audio_learn.windows import pack_past_batch
     from ohush_live.research_muter import LiveController
 
+    def _prog(i: int, n: int, *, note: str = "sound_infer") -> None:
+        if on_progress is None:
+            return
+        try:
+            on_progress(i, n, note=note)
+        except Exception:
+            pass
+
     if cache_path and cache_path.is_file():
         blob = np.load(cache_path)
         times = np.asarray(blob["times"], dtype=np.float64)
         probs = np.asarray(blob["probs"], dtype=np.float32)
+        _prog(len(times), max(len(times), 1), note="sound_cache")
     else:
         duration = min(float(t_end), _wav_duration_sec(wav))
         if duration < WINDOW_S + HOP_S:
@@ -221,10 +231,13 @@ def _infer_session(
         max_t = len(audio) / float(SR)
         times = times[times <= max_t + 1e-9]
         embeds = []
-        for start in range(0, len(times), BATCH):
+        n_times = len(times)
+        _prog(0, max(n_times, 1), note="sound_infer")
+        for start in range(0, n_times, BATCH):
             chunk = times[start : start + BATCH]
             waves = pack_past_batch(audio, 0.0, chunk, WINDOW_S, CONTEXT_S, SR)
             embeds.append(embed_numpy(encoder, device, waves))
+            _prog(min(start + BATCH, n_times), max(n_times, 1), note="sound_infer")
         emb = np.concatenate(embeds, axis=0)
         probs = probabilities(head, emb, times, device, batch=256)
         if cache_path is not None:

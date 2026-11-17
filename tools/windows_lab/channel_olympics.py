@@ -33,7 +33,7 @@ from .us_locals import (
     parse_local_title,
 )
 
-DEFAULT_INSTANCES = ("Nougat32", "Nougat32_1")
+DEFAULT_INSTANCES = ("player 0", "player 1")  # BlueStacks Nougat32 / Nougat32_1
 LINEAR_TARGETS = (
     {"id": "ESPN_US", "kind": "sports_linear", "nav_route": "ESPN_US", "want_title": "US: ESPN"},
     {"id": "ESPN2_US", "kind": "sports_linear", "nav_route": "ESPN2_US", "want_title": "US: ESPN 2"},
@@ -527,13 +527,13 @@ def main(argv: list[str] | None = None) -> int:
     p_smoke = sub.add_parser("smoke", help="Short drill: 12 targets / 20 min")
     p_smoke.add_argument("--n", type=int, default=12)
     p_smoke.add_argument("--budget-min", type=float, default=20.0)
-    p_smoke.add_argument("--instances", default="Nougat32,Nougat32_1")
+    p_smoke.add_argument("--instances", default="player 0,player 1")
     p_smoke.add_argument("--no-recover", action="store_true")
 
     p_run = sub.add_parser("run", help="Full drill: N targets / budget minutes")
     p_run.add_argument("--n", type=int, default=100)
     p_run.add_argument("--budget-min", type=float, default=100.0)
-    p_run.add_argument("--instances", default="Nougat32,Nougat32_1")
+    p_run.add_argument("--instances", default="player 0,player 1")
     p_run.add_argument("--no-linear", action="store_true")
     p_run.add_argument("--no-recover", action="store_true")
     p_run.add_argument("--label", default=None)

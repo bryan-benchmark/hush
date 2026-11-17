@@ -440,16 +440,14 @@ def enabled_streamers(root: Path | None = None) -> list[dict[str, Any]]:
         if str(r.get("source_kind") or "streamers") != "streamers":
             continue
         rows.append(r)
-    # Prefer Nougat clones (same SKU). Tiramisu last — login/ADB flaky.
-    def _rank(row: dict[str, Any]) -> tuple[int, str]:
+    # Prefer player fleet (BlueStacks Nougat engines). Tiramisu last — login/ADB flaky.
+    def _rank(row: dict[str, Any]) -> tuple[int, int, str]:
         iid = str(row.get("id") or "")
-        if iid == "Nougat32":
-            return (0, iid)
-        if iid.startswith("Nougat32_"):
-            return (1, iid)
+        if row.get("player") is not None:
+            return (0, int(row["player"]), iid)
         if iid == "Tiramisu64":
-            return (90, iid)
-        return (50, iid)
+            return (90, 0, iid)
+        return (50, 0, iid)
 
     rows.sort(key=_rank)
     return rows

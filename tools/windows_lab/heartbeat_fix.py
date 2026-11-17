@@ -2594,7 +2594,7 @@ def fix_failing_from_audit_rows(
         job.setdefault("shortcut_id", row.get("shortcut_id"))
         job["job_id"] = jid
 
-        iid = str(job.get("instance_id") or row.get("instance_id") or "Nougat32")
+        iid = str(job.get("instance_id") or row.get("instance_id") or "player 0")
         budget -= 1
         verdict = str(row.get("verdict") or "stale_live")
         result = fix_heartbeat(iid, root=root, job=job, reason=verdict)
@@ -2770,11 +2770,11 @@ def main(argv: list[str] | None = None) -> int:
     sub = p.add_subparsers(dest="cmd", required=True)
 
     pr = sub.add_parser("probe", help="Probe picture/audio heartbeat")
-    pr.add_argument("--instance", default="Nougat32")
+    pr.add_argument("--instance", default="player 0")
     pr.add_argument("--session-id")
 
     fx = sub.add_parser("fix", help="Run the full heartbeat fix route")
-    fx.add_argument("--instance", default="Nougat32")
+    fx.add_argument("--instance", default="player 0")
     fx.add_argument("--job-id")
     fx.add_argument("--session-id")
     fx.add_argument("--channel")

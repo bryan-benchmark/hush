@@ -7,8 +7,8 @@ not need the window visible; layout is for humans and desktop aiming.
 ```powershell
 python -m tools.windows_lab windows list
 python -m tools.windows_lab windows layout --mode auto
-python -m tools.windows_lab windows layout --mode fill --instances Nougat32
-python -m tools.windows_lab windows layout --mode split --instances Nougat32 Nougat32_1
+python -m tools.windows_lab windows layout --mode fill --instances "player 0"
+python -m tools.windows_lab windows layout --mode split --instances "player 0" "player 1"
 python -m tools.windows_lab windows layout --mode grid
 ```
 """
@@ -236,6 +236,14 @@ def _resolve_players(instance_ids: list[str] | None) -> list[PlayerWindow]:
     by_id = {p.instance_id: p for p in players if p.instance_id}
     by_title = {p.title: p for p in players}
     for iid in instance_ids:
+        # Accept player 0 / player 1 aliases as well as engine ids.
+        try:
+            resolved = str(get_instance(iid).get("id") or iid)
+        except KeyError:
+            resolved = str(iid)
+        if resolved in by_id:
+            wanted.append(by_id[resolved])
+            continue
         if iid in by_id:
             wanted.append(by_id[iid])
             continue

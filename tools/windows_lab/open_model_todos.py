@@ -50,8 +50,8 @@ PRIORITY = {
 # What the open model / desk should try first (wired scripts — no improvisation).
 ACTIONS = {
     "audit_overdue": [
-        "schedule run-due (prefer free Nougat clone, not busy lock)",
-        "if primary busy: retarget job instance to Nougat32_1 / next free clone",
+        "schedule run-due (prefer free player, not busy lock)",
+        "if player 0 busy: retarget job to player 1 / next free player",
         "open via shortcut/guide on free instance; start session",
         "re-run schedule audit; resolve todo when verdict leaves overdue",
     ],
@@ -220,8 +220,8 @@ def _todo_instance_id(todo: dict[str, Any]) -> str:
     if iid:
         return iid
     key = str(todo.get("key") or "")
-    # Instance-keyed policy todos use the engine id as key.
-    if key.startswith("Nougat") or key.startswith("Tiramisu"):
+    # Instance-keyed policy todos use engine id or player label as key.
+    if key.startswith("Nougat") or key.startswith("Tiramisu") or key.startswith("player"):
         return key
     return ""
 
@@ -797,7 +797,7 @@ def attempt_fix(todo: dict[str, Any], *, root: Path | None = None) -> dict[str, 
                         "blocked": True,
                         "reason": issues,
                         "steps": steps,
-                        "lesson": "Overdue because instance busy — need free Nougat clone or wait for lock.",
+                        "lesson": "Overdue because instance busy — need a free player or wait for lock.",
                     }
         if not still_overdue:
             resolve(todo["id"], note="no longer overdue after run-due/audit", root=root)
@@ -874,7 +874,7 @@ def attempt_fix(todo: dict[str, Any], *, root: Path | None = None) -> dict[str, 
         iid = str(
             (todo.get("meta") or {}).get("instance_id")
             or todo.get("key")
-            or "Nougat32"
+            or "player 0"
         )
         from .heartbeat_fix import fix_instance_if_failing, probe_heartbeat
 

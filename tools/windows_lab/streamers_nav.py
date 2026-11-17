@@ -1528,16 +1528,28 @@ def atom_open_row(
         return max(scored, key=lambda x: x[0]) if scored else None
 
     texts0 = _texts(ui)
+    joined0 = " | ".join(texts0).upper()
+    if any(x in joined0 for x in ("POPULAR GAMES", "SEARCH FOR GAMES", "BLUESTACKS")):
+        return {
+            "ok": False,
+            "op": "open_row",
+            "match": match,
+            "error": "bluestacks_home",
+            "lesson": "On BlueStacks home — refuse grid hunt; relaunch Streamers / ensure_guide first.",
+        }
     wrong = _wrong_us_parent(texts0)
-    if require_sports_parent and wrong and not _section_open_confirmed(texts0, "US SPORTS"):
+    sports_ok = _section_open_confirmed(texts0, "US SPORTS") or any(
+        m.upper() in joined0 for m in _US_SPORTS_CHILD_MARKERS
+    )
+    if require_sports_parent and not sports_ok:
         return {
             "ok": False,
             "op": "open_row",
             "match": match,
             "error": "wrong_parent",
-            "wrong_parent": wrong,
+            "wrong_parent": wrong or "not_us_sports",
             "lesson": (
-                f"On {wrong}, not US SPORTS — refuse to hunt '{match}' here. "
+                f"Not on US SPORTS grid (saw {wrong or texts0[:8]}) — refuse to hunt '{match}'. "
                 "Open the US SPORTS parent first."
             ),
         }
@@ -1551,18 +1563,65 @@ def atom_open_row(
             adb(instance, ["shell", "input", "swipe", "900", "280", "900", "820", "450"])
             time.sleep(0.35)
             ui = _dump_ui_soft(instance, probe / f"{step:02d}_grid_top_{i}.xml")
+            texts_top = _texts(ui)
+            if any(x in " | ".join(texts_top).upper() for x in ("POPULAR GAMES", "SEARCH FOR GAMES")):
+                break
             best = _score_visible(ui)
             if best:
                 break
     if not best and not visible_only:
-        for attempt in range(24):
-            # Scroll channel grid upward (toward Z) looking for the child.
-            adb(instance, ["shell", "input", "swipe", "900", "820", "900", "320", "500"])
-            time.sleep(0.5)
-            ui = _dump_ui_soft(instance, probe / f"{step:02d}_grid_scroll_{attempt}.xml")
+        # Large swipes skip alphabetical neighbors (US: ESPN → jumps over US: ESPN 2
+        # straight to DEPORTES / ESPNU). Fine-scroll once ESPN* cluster is visible.
+        match_norm = re.sub(r"\s+", " ", match.lower().replace("espn2", "espn 2")).strip()
+        for attempt in range(36):
+            texts = _texts(ui)
+            joined_u = " | ".join(texts).upper()
+            if any(x in joined_u for x in ("POPULAR GAMES", "SEARCH FOR GAMES")):
+                break
+            # Dashed -------US SPORTS------- scrolls off mid-list; keep going while
+            # rail chip or US: children remain. Abort only on clear wrong parent/home.
+            still_sports = (
+                "US SPORTS" in texts
+                or any(t.startswith("US: ") for t in texts)
+                or _section_open_confirmed(texts, "US SPORTS")
+            )
+            if require_sports_parent and not still_sports:
+                break
+            if _wrong_us_parent(texts) and "US SPORTS" not in texts and not any(
+                t.startswith("US: ") for t in texts
+            ):
+                break
             best = _score_visible(ui)
             if best:
                 break
+            espn_rows = [
+                t
+                for t in texts
+                if re.search(r"US:\s*ESPN", t, re.I) or t.strip().upper() in {"ESPN", "ESPN 2", "ESPN2"}
+            ]
+            near_cluster = bool(espn_rows)
+            # Overshoot: later ESPN siblings visible, target not — nudge back toward A.
+            if near_cluster and match_norm:
+                joined = " | ".join(espn_rows).lower()
+                target_hit = match_norm in re.sub(r"\s+", " ", joined.replace("espn2", "espn 2"))
+                later = any(
+                    x in joined
+                    for x in ("deportes", "espnu", "espn u", "espnews", "the ocho", "espn 8")
+                )
+                if later and not target_hit:
+                    adb(instance, ["shell", "input", "swipe", "900", "380", "900", "680", "360"])
+                    time.sleep(0.45)
+                    ui = _dump_ui_soft(instance, probe / f"{step:02d}_grid_back_{attempt}.xml")
+                    continue
+            if near_cluster:
+                # Fine step — coarse swipe skips US: ESPN 2 between ESPN and Ocho.
+                adb(instance, ["shell", "input", "swipe", "900", "680", "900", "480", "320"])
+                time.sleep(0.4)
+            else:
+                # Medium step toward E… (full-page jumps over the ESPN cluster).
+                adb(instance, ["shell", "input", "swipe", "900", "780", "900", "380", "420"])
+                time.sleep(0.45)
+            ui = _dump_ui_soft(instance, probe / f"{step:02d}_grid_scroll_{attempt}.xml")
     if not best:
         return {
             "ok": False,

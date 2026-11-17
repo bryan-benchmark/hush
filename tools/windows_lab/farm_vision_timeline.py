@@ -15,6 +15,8 @@ Scale notes
 -----------
 - Failed moondream calls are NOT cached (retryable).
 - Candidate files replace per-session rows (no append duplicates).
+- Parallel vision keeps ``FARM_VISION_WORKERS`` calls in flight and refills on
+  each completion (no end-of-batch barrier / sawtooth idle).
 - Long takes (10–20 min) ≈ thousands of stills — start with --limit-sessions /
   --t0/--t1, or raise --hop, before full --from-export.
 - High-conf vision ranges are candidates only — do not train until reviewed.
@@ -24,8 +26,12 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import threading
+from concurrent.futures import FIRST_COMPLETED, Future, ThreadPoolExecutor, wait
+from contextlib import nullcontext
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterator
 
 from .coverage_farm import farm_label_dir, streamers_capture_root
 from .farm_audit_receipts import append_event, hop_receipt, write_hops
@@ -45,6 +51,56 @@ from .farm_draft import (
 from .farm_ontology import BROADCAST, NON_BROADCAST, desired_action
 
 _EPS = 1e-6
+
+
+def _vision_workers() -> int:
+    """Concurrent caption calls. Needs OLLAMA_NUM_PARALLEL >= workers on the server.
+
+    Live desk is the barometer (warmup snaps lie). Default 6; clamp 1..9.
+    """
+    raw = os.environ.get("FARM_VISION_WORKERS", "6")
+    try:
+        n = int(raw)
+    except ValueError:
+        n = 6
+    return max(1, min(n, 9))
+
+
+def _vision_hop_done(row: dict[str, Any] | None) -> bool:
+    """True when a prior hop already paid for VL (or a definitive dead still)."""
+    if not row:
+        return False
+    vision = (row.get("channels") or {}).get("vision") or {}
+    if vision.get("ok") and vision.get("visual"):
+        return True
+    err = str(vision.get("error") or "")
+    return err in {"black_still", "green_corrupt_still", "missing_still", "no_still"}
+
+
+def _append_vision_hops(path: Path, hops: list[dict[str, Any]]) -> None:
+    """Crash-safe checkpoint: append finished hops so a mid-run death keeps them."""
+    if not hops:
+        return
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8") as fh:
+        for hop in hops:
+            fh.write(json.dumps(hop, ensure_ascii=False) + "\n")
+        fh.flush()
+        try:
+            os.fsync(fh.fileno())
+        except OSError:
+            pass
+
+
+def _flush_still_cache(path: Path, cache: dict[str, dict], *, lock: threading.Lock | None = None) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    ctx = lock or nullcontext()
+    with ctx:
+        slim = {
+            k: {kk: vv for kk, vv in v.items() if kk in {"ok", "visual", "error", "model", "still"}}
+            for k, v in cache.items()
+        }
+        path.write_text(json.dumps(slim, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def _session_dir(session: str) -> Path:
@@ -94,16 +150,26 @@ def _vision_channel(
     model: str,
     cache: dict[str, dict],
     fallback_model: str = "qwen2.5vl:7b",
+    cache_lock: threading.Lock | None = None,
 ) -> dict[str, Any]:
     still = nearest_still(sd, t)
     if still is None:
         return {"ok": False, "error": "no_still", "t": t, "class": None, "acoustic_bucket": None}
     key = str(still)
-    cached = cache.get(key) or {}
-    # Reuse successes and definitive dead stills; retry empty/transient failures.
+    lock = cache_lock or nullcontext()
+    with lock:
+        cached = dict(cache.get(key) or {})
+    # Reuse successes, dead stills, and (within this tape) empty VL for the same file —
+    # adjacent hops often share one still; do not pay GPU twice.
     if cached.get("ok") and cached.get("visual"):
         meta = cached
-    elif str(cached.get("error") or "") in {"black_still", "green_corrupt_still", "missing_still"}:
+    elif str(cached.get("error") or "") in {
+        "black_still",
+        "green_corrupt_still",
+        "missing_still",
+        "empty_or_unusable_vision",
+        "empty_vision",
+    }:
         meta = cached
     else:
         meta = None
@@ -124,12 +190,21 @@ def _vision_channel(
             if fb.get("ok") and fb.get("visual"):
                 meta = fb
                 used_model = fallback_model
-        # Only cache successes — empty/500 responses must be retried on the next run.
-        # Also cache definitive dead stills so we do not re-hit the VL path every second.
-        if meta.get("ok") and meta.get("visual"):
-            cache[key] = {**meta, "model": used_model}
-        elif skip_fb:
-            cache[key] = {"ok": False, "error": err, "still": key, "model": used_model, "visual": ""}
+                err = ""
+            else:
+                err = str(fb.get("error") or err)
+        # Cache successes + definitive dead/empty so shared still paths are free.
+        with lock:
+            if meta.get("ok") and meta.get("visual"):
+                cache[key] = {**meta, "model": used_model}
+            elif skip_fb or err in {"empty_or_unusable_vision", "empty_vision"}:
+                cache[key] = {
+                    "ok": False,
+                    "error": err or "empty_vision",
+                    "still": key,
+                    "model": used_model,
+                    "visual": "",
+                }
     if not meta.get("ok"):
         return {
             "ok": False,
@@ -248,6 +323,7 @@ def run_session(
     use_vision: bool = True,
     model: str = VISION_MODEL,
     auto_export: bool = True,
+    unload_after: bool = True,
 ) -> dict[str, Any]:
     sd = _session_dir(session)
     wav = sd / "audio.wav"
@@ -291,60 +367,200 @@ def run_session(
             prior_by_t[round(float(row["t"]), 3)] = row
 
     hops_new: list[dict[str, Any]] = []
+    times: list[float] = []
     t = start
-    n_expect = max(1, int((end - start) / hop_s) + 1)
-    i_hop = 0
-    begin_step(session, "vision", hop_of=n_expect, model=model, hop_s=hop_s, t0=start, t1=end)
-    try:
-        while t < end - 1e-9:
-            vision = _vision_channel(sd, t, model=model, cache=cache) if use_vision else None
-            asr = _asr_channel(transcript, t) if use_asr else None
-            lock_bucket, lock_conf = _vote_bucket(vision or {}, asr)
-            hops_new.append(
-                hop_receipt(
-                    session=session,
-                    t=t,
-                    vision=vision,
-                    asr=asr,
-                    acoustic=None,
-                    gold=None,
-                    extra={
-                        "lock_bucket": lock_bucket,
-                        "lock_confidence": lock_conf,
-                        "auto_lock": lock_bucket is not None and lock_conf == "high",
-                    },
-                )
+    while t < end - 1e-9:
+        times.append(t)
+        t += hop_s
+    n_expect = max(1, len(times))
+    # Resume: skip hops already checkpointed from a previous (or crashed) run.
+    todo_times = [tt for tt in times if not _vision_hop_done(prior_by_t.get(round(tt, 3)))]
+    i_hop = n_expect - len(todo_times)
+    resumed_hops = int(i_hop)  # hops already on disk; rate must ignore these
+    workers = _vision_workers() if use_vision else 1
+    cache_lock = threading.Lock()
+    begin_step(
+        session,
+        "vision",
+        hop_of=n_expect,
+        model=model,
+        hop_s=hop_s,
+        t0=start,
+        t1=end,
+        workers=workers,
+        resumed_hops=resumed_hops,
+        todo_hops=len(todo_times),
+    )
+
+    def _pulse(*, note: str, hop_i: int, t_s: float) -> None:
+        """Labeler heartbeat + desk status every still (like channel hearts)."""
+        try:
+            from .farm_label_lock import heartbeat as label_heartbeat
+            from .farm_label_timing import active_elapsed, tape_through_plain, audit_plain_name
+            from .lab_status import write_job_progress
+
+            elapsed = active_elapsed(session, "vision")
+            progress_plain = tape_through_plain(
+                pos_s=float(t_s),
+                total_s=float(end - start) if end > start else float(n_expect) * float(hop_s),
+                audit=audit_plain_name("vision"),
             )
-            i_hop += 1
-            if i_hop == 1 or i_hop % 25 == 0 or t + hop_s >= end - 1e-9:
-                prog = {
-                    "vision_progress": session,
-                    "i": i_hop,
-                    "of": n_expect,
-                    "t": round(t, 1),
+            label_heartbeat(
+                phase="vision",
+                session=session,
+                hop_i=hop_i,
+                hop_of=n_expect,
+                t=round(t_s, 1),
+                hop_s=hop_s,
+                model=model,
+                note=note,
+                progress_plain=progress_plain,
+                step_elapsed_s=elapsed,
+                workers=workers,
+                resumed_hops=resumed_hops,
+            )
+            # Cheap job patch only — full write_status was ~3s × 2/hop.
+            write_job_progress(
+                {
+                    "phase": "vision",
+                    "note": note,
+                    "session": session,
+                    "hop_i": hop_i,
+                    "hop_of": n_expect,
+                    "hop_s": hop_s,
+                    "t": round(t_s, 1),
                     "model": model,
+                    "progress_plain": progress_plain,
+                    "step_elapsed_s": elapsed,
+                    "workers": workers,
+                    "resumed_hops": resumed_hops,
                 }
-                print(json.dumps(prog), flush=True)
-                try:
-                    from .lab_status import write_status
+            )
+        except Exception:
+            pass
 
-                    from .farm_label_timing import active_elapsed
+    try:
+        _pulse(note="vision_start", hop_i=i_hop, t_s=start if not todo_times else todo_times[0])
+        if i_hop:
+            print(
+                json.dumps(
+                    {
+                        "vision_resume": session,
+                        "already_done": i_hop,
+                        "todo": len(todo_times),
+                        "of": n_expect,
+                        "workers": workers,
+                    }
+                ),
+                flush=True,
+            )
+        # Keep ``workers`` Ollama calls in flight. Refill as each finishes so
+        # fast workers never wait on the slowest of a fixed batch (sawtooth).
+        todo_q: Iterator[float] = iter(todo_times)
+        pending_ckpt: list[dict[str, Any]] = []
+        done_since_flush = 0
 
-                    write_status(
-                        progress={
-                            "phase": "vision",
-                            "session": session,
-                            "hop_i": i_hop,
-                            "hop_of": n_expect,
-                            "t": round(t, 1),
+        def _commit_hop(tt: float, vision: dict[str, Any] | None) -> None:
+            nonlocal i_hop, done_since_flush
+            asr = _asr_channel(transcript, tt) if use_asr else None
+            lock_bucket, lock_conf = _vote_bucket(vision or {}, asr)
+            hop = hop_receipt(
+                session=session,
+                t=tt,
+                vision=vision,
+                asr=asr,
+                acoustic=None,
+                gold=None,
+                extra={
+                    "lock_bucket": lock_bucket,
+                    "lock_confidence": lock_conf,
+                    "auto_lock": lock_bucket is not None and lock_conf == "high",
+                },
+            )
+            pending_ckpt.append(hop)
+            hops_new.append(hop)
+            prior_by_t[round(float(tt), 3)] = hop
+            i_hop += 1
+            done_since_flush += 1
+            _pulse(note="vision_hop", hop_i=i_hop, t_s=tt)
+            if i_hop == 1 or i_hop % 25 == 0 or i_hop >= n_expect:
+                print(
+                    json.dumps(
+                        {
+                            "vision_progress": session,
+                            "i": i_hop,
+                            "of": n_expect,
+                            "t": round(tt, 1),
                             "model": model,
-                            "step_elapsed_s": active_elapsed(session, "vision"),
+                            "workers": workers,
+                            "inflight": True,
                         }
+                    ),
+                    flush=True,
+                )
+            # Checkpoint about every worker-width of completions (not a start barrier).
+            if len(pending_ckpt) >= max(1, workers):
+                _append_vision_hops(prior_path, pending_ckpt)
+                pending_ckpt.clear()
+            if done_since_flush >= max(1, workers * 5):
+                _flush_still_cache(cache_path, cache, lock=cache_lock)
+                done_since_flush = 0
+
+        def _submit_next(pool: ThreadPoolExecutor, inflight: dict[Future[Any], float]) -> bool:
+            try:
+                tt = next(todo_q)
+            except StopIteration:
+                return False
+            fut = pool.submit(
+                _vision_channel,
+                sd,
+                tt,
+                model=model,
+                cache=cache,
+                cache_lock=cache_lock,
+            )
+            inflight[fut] = tt
+            return True
+
+        if not use_vision:
+            for tt in todo_times:
+                _commit_hop(tt, None)
+        elif workers <= 1:
+            for tt in todo_times:
+                _pulse(note="vision_infer", hop_i=i_hop + 1, t_s=tt)
+                _commit_hop(
+                    tt,
+                    _vision_channel(sd, tt, model=model, cache=cache, cache_lock=cache_lock),
+                )
+        else:
+            inflight: dict[Future[Any], float] = {}
+            with ThreadPoolExecutor(max_workers=workers) as pool:
+                for _ in range(min(workers, len(todo_times))):
+                    if not _submit_next(pool, inflight):
+                        break
+                if inflight:
+                    _pulse(
+                        note="vision_infer",
+                        hop_i=i_hop + 1,
+                        t_s=next(iter(inflight.values())),
                     )
-                except Exception:
-                    pass
-            t += hop_s
+                while inflight:
+                    finished, _ = wait(tuple(inflight.keys()), return_when=FIRST_COMPLETED)
+                    for fut in finished:
+                        tt = inflight.pop(fut)
+                        vision = fut.result()
+                        _commit_hop(tt, vision)
+                        _submit_next(pool, inflight)
+
+        if pending_ckpt:
+            _append_vision_hops(prior_path, pending_ckpt)
+            pending_ckpt.clear()
+        _flush_still_cache(cache_path, cache, lock=cache_lock)
     except Exception as exc:  # noqa: BLE001
+        try:
+            _flush_still_cache(cache_path, cache, lock=cache_lock)
+        except Exception:
+            pass
         end_step(
             session,
             "vision",
@@ -353,18 +569,12 @@ def run_session(
             hop_i=i_hop,
             hop_of=n_expect,
             model=model,
+            workers=workers,
         )
         raise
 
-    for h in hops_new:
-        prior_by_t[round(float(h["t"]), 3)] = h
     hops = [prior_by_t[k] for k in sorted(prior_by_t.keys())]
-
-    # Persist vision cache
-    cache_path.parent.mkdir(parents=True, exist_ok=True)
-    # Only store serializable still→meta
-    slim = {k: {kk: vv for kk, vv in v.items() if kk in {"ok", "visual", "error", "model", "still"}} for k, v in cache.items()}
-    cache_path.write_text(json.dumps(slim, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    _flush_still_cache(cache_path, cache, lock=cache_lock)
 
     ranges = _merge_ranges(hops)
     # Write vision timeline sidecar (candidate gold)
@@ -414,7 +624,7 @@ def run_session(
         session_dir=sd,
     )
 
-    if use_vision:
+    if use_vision and unload_after:
         unload_ollama_model(model)
 
     export_receipt = None

@@ -285,16 +285,32 @@ def backlog_hierarchy(
         "left": left_n,
         "pct_finished": pct_done,
         "plain": (
-            f"{done_n} of {of_n} tapes finished. "
+            f"{done_n} of {of_n} recordings done. "
             + (
-                f"{running_n} working now (pictures first). "
+                (
+                    f"{running_n} labeling pictures right now. "
+                    if live_phase in {"", "vision"}
+                    else (
+                        f"{running_n} on the sound pass right now. "
+                        if live_phase == "acoustic"
+                        else (
+                            f"{running_n} merging right now. "
+                            if live_phase == "combine"
+                            else (
+                                f"{running_n} auto-locking right now. "
+                                if live_phase == "consensus"
+                                else f"{running_n} working now ({live_phase}). "
+                            )
+                        )
+                    )
+                )
                 if running_n
                 else ""
             )
             + (
-                f"{need_vision} waiting in line for pictures"
+                f"{need_vision} waiting for the picture pass"
                 + (
-                    f"; {waiting_after_pictures} already past pictures (sound/merge/lock)."
+                    f"; {waiting_after_pictures} already past pictures (sound / merge / lock)."
                     if waiting_after_pictures
                     else "."
                 )
@@ -303,9 +319,9 @@ def backlog_hierarchy(
             )
         ).strip(),
         "why_same_counts": (
-            "Transcript, sound, and auto-lock are not separate queues. "
-            "A tape waits for pictures; when pictures finish, the rest of that tape "
-            "runs right after. So ‘12 done’ means 12 tapes fully through — not four jobs."
+            "Transcript, sound, and auto-lock are not separate lines. "
+            "A recording waits for pictures; when pictures finish, the rest of that "
+            "recording runs right after. So ‘12 done’ means 12 recordings fully through."
         ),
     }
 

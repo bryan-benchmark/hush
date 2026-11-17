@@ -875,7 +875,8 @@ def _scroll_section_for_child(
         return row, ui
 
     # Scroll toward Z; nudge back if visible states overshoot the target letter.
-    for attempt in range(28):
+    # Large swipes skip mid-state cities (Buffalo → Rochester jumped over NEW YORK/WABC).
+    for attempt in range(40):
         letters = _visible_state_letters(ui)
         row = _find_row(ui, calls=calls, city=city, network=network)
         if row:
@@ -887,8 +888,14 @@ def _scroll_section_for_child(
             row = _find_row(ui, calls=calls, city=city, network=network)
             if row:
                 return row, ui
-        adb(instance, ["shell", "input", "swipe", "900", "820", "900", "320", "420"])
-        time.sleep(0.55)
+        on_target_state = bool(letters) and want_letter in letters
+        if on_target_state:
+            # Fine scroll inside the target state letter (NY|… rows).
+            adb(instance, ["shell", "input", "swipe", "900", "700", "900", "420", "380"])
+            time.sleep(0.45)
+        else:
+            adb(instance, ["shell", "input", "swipe", "900", "820", "900", "320", "420"])
+            time.sleep(0.55)
         ui = _dump_ui(instance, probe / f"local_alpha_{attempt}.xml")
     return _find_row(ui, calls=calls, city=city, network=network), ui
 
@@ -1323,7 +1330,20 @@ def open_local(
                 player_texts = _texts(ui2)
                 opened = True
         else:
-            section_err = f"could not find {pick['calls']} in {pick['section']}"
+            # Capture what NY/GA/… rows we did see — flagships missing from the
+            # Streamers section (e.g. WABC absent) must not look like a scroll bug.
+            seen_calls: list[str] = []
+            try:
+                for t in _texts(ui):
+                    p = parse_local_title(t)
+                    if p and p.get("calls"):
+                        seen_calls.append(str(p["calls"]))
+            except Exception:
+                pass
+            section_err = (
+                f"could not find {pick['calls']} in {pick['section']}"
+                + (f" seen={seen_calls[:24]}" if seen_calls else "")
+            )
             # One more chance: BACK to rail and reopen section (player/empty dump
             # often made the first hunt miss). Prefer this over calls_search.
             try:

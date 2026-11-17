@@ -99,20 +99,45 @@ def _save(data: dict[str, Any], root: Path | None = None) -> None:
     _with_file_lock(root, lambda: _save_unlocked(data, root))
 
 
-def resource_key(source_kind: str, resource_id: str) -> str:
-    return f"{source_kind}:{resource_id}"
+def normalize_resource_id(source_kind: str, resource_id: str, root: Path | None = None) -> str:
+    """Streamers locks key on BlueStacks engine id; accept player 0 / player 1 aliases."""
+    rid = str(resource_id or "")
+    if str(source_kind) != "streamers":
+        return rid
+    try:
+        from .instances import normalize_instance_id
+
+        return normalize_instance_id(rid, root)
+    except Exception:  # noqa: BLE001
+        return rid
+
+
+def resource_key(source_kind: str, resource_id: str, root: Path | None = None) -> str:
+    return f"{source_kind}:{normalize_resource_id(source_kind, resource_id, root)}"
 
 
 def _pid_alive(pid: Any) -> bool | None:
     if not pid:
         return None
     try:
+        import psutil
+
+        return bool(psutil.pid_exists(int(pid)))
+    except Exception:  # noqa: BLE001
+        pass
+    try:
         if os.name == "nt":
             import ctypes
+            from ctypes import wintypes
 
-            handle = ctypes.windll.kernel32.OpenProcess(0x1000, False, int(pid))
+            k32 = ctypes.windll.kernel32
+            k32.OpenProcess.restype = wintypes.HANDLE
+            k32.OpenProcess.argtypes = [wintypes.DWORD, wintypes.BOOL, wintypes.DWORD]
+            k32.CloseHandle.argtypes = [wintypes.HANDLE]
+            k32.SetLastError(0)
+            handle = k32.OpenProcess(0x1000, False, int(pid))
             if handle:
-                ctypes.windll.kernel32.CloseHandle(handle)
+                k32.CloseHandle(handle)
                 return True
             return False
         os.kill(int(pid), 0)
@@ -174,7 +199,7 @@ def _lock_holder_dead(row: dict[str, Any] | None, root: Path | None = None) -> b
 
 def get_lock(source_kind: str, resource_id: str, root: Path | None = None) -> dict[str, Any] | None:
     data = _load(root)
-    return (data.get("locks") or {}).get(resource_key(source_kind, resource_id))
+    return (data.get("locks") or {}).get(resource_key(source_kind, resource_id, root))
 
 
 def reclaim_dead_locks(root: Path | None = None) -> list[dict[str, Any]]:
@@ -211,7 +236,8 @@ def acquire(
     def _do() -> tuple[bool, dict[str, Any]]:
         data = _load_unlocked(root)
         locks = dict(data.get("locks") or {})
-        key = resource_key(source_kind, resource_id)
+        rid = normalize_resource_id(source_kind, resource_id, root)
+        key = resource_key(source_kind, rid, root)
         existing = locks.get(key)
         if existing:
             # Dead holder → reclaim and take.
@@ -228,7 +254,7 @@ def acquire(
                 return False, existing
         row = {
             "source_kind": source_kind,
-            "resource_id": resource_id,
+            "resource_id": rid,
             "session_id": session_id,
             "job_id": job_id,
             "holder_pid": int(holder_pid) if holder_pid else os.getpid(),
@@ -246,7 +272,7 @@ def release(source_kind: str, resource_id: str, root: Path | None = None) -> Non
     def _do() -> None:
         data = _load_unlocked(root)
         locks = dict(data.get("locks") or {})
-        locks.pop(resource_key(source_kind, resource_id), None)
+        locks.pop(resource_key(source_kind, resource_id, root), None)
         data["locks"] = locks
         _save_unlocked(data, root)
 

@@ -151,14 +151,18 @@ def write_hops(
     root = audit_dir(session, session_dir)
     # Kind-specific + combined
     path = root / (f"hops_{kind}.jsonl" if kind != "combined" else "hops.jsonl")
-    path.write_text(
-        "\n".join(json.dumps(h, ensure_ascii=False) for h in hops) + ("\n" if hops else ""),
-        encoding="utf-8",
-    )
+    payload = "\n".join(json.dumps(h, ensure_ascii=False) for h in hops) + ("\n" if hops else "")
+    # Atomic replace — a crash mid-write must not wipe a checkpointed hops file.
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp.write_text(payload, encoding="utf-8")
+    tmp.replace(path)
     if session_dir is not None:
         mirror = Path(session_dir) / "audit" / path.name
         mirror.parent.mkdir(parents=True, exist_ok=True)
-        mirror.write_text(path.read_text(encoding="utf-8"), encoding="utf-8")
+        mirror_tmp = mirror.with_suffix(mirror.suffix + ".tmp")
+        mirror_tmp.write_text(payload, encoding="utf-8")
+        mirror_tmp.replace(mirror)
 
     md_path = root / ("AUDIT.md" if kind == "combined" else f"AUDIT_{kind}.md")
     _write_md(md_path, session, hops, kind=kind)

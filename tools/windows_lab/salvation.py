@@ -367,9 +367,9 @@ def main(argv: list[str] | None = None) -> int:
     sub = p.add_subparsers(dest="cmd", required=True)
     for name in ("status", "login"):
         cmd = sub.add_parser(name)
-        cmd.add_argument("--instance", default="Nougat32")
+        cmd.add_argument("--instance", default="player 0")
     add = sub.add_parser("record-add")
-    add.add_argument("--instance", default="Nougat32")
+    add.add_argument("--instance", default="player 0")
     add.add_argument("--channel", required=True)
     add.add_argument("--at", required=True, help="ISO time, e.g. 2026-11-16T20:00:00-05:00")
     add.add_argument("--minutes", type=float, required=True)

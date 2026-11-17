@@ -16,7 +16,7 @@ Before touching the app, read `docs/ohush/data_lab/STREAMERS_CONTROLS.md` and fo
 - **Guide schedule + audit:** enqueue with `schedule from-shortcut` / `from-guide` (stamps search card on the job). Check health with `schedule audit` → `C:\OHushData\indexes\SCHEDULE_AUDIT.md`. Verdicts like `healthy_live` / `overdue` / `broken_live` are the source of truth that scheduled takes actually work.
 - Record a channel that is already playing with device `screenrecord` plus the WASAPI loopback of that instance's speaker. `gdigrab` includes whatever window covers BlueStacks.
 - **Display layout:** if BlueStacks windows are off-screen, tiny, or stacked, run `python -m tools.windows_lab windows layout --mode auto` (or `fill` / `split` / `grid`). If `stuck` is non-empty, re-run with `--relaunch-stuck`. Do not hand-drag. Atom Q0 in STREAMERS_CONTROLS.
-- Fleet = Nougat clones only (~10 ready, mostly stopped). `Tiramisu64` stays off. Raise hot concurrent past 2 only after `progressive-capacity --step N` under full AV.
+- Fleet = **player 0, player 1, player 2…** (BlueStacks engines `Nougat32`, `Nougat32_1`, … under the hood). Prefer `--instance "player 0"` in commands; engine ids still work. `Tiramisu64` stays off. Raise hot concurrent past 2 only after `progressive-capacity --step N` under full AV.
 - Desk cron (`desk tick` / Task `OHushDeskOrchestrator`) is single-flight: never stack ticks, never spawn another desk. Preflight + budgets gate recover/vision/record.
 - `salvation record-add` stores a time. It does not tune. Do not apply an example channel recipe, and do not send keyevent 82 to open a channel.
 - The password stays in `C:\OHushData\farm\salvation_login.json`. Do not print it.

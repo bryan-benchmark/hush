@@ -185,7 +185,7 @@ def add_job_from_shortcut(
     shortcut_id: str,
     start_at: str,
     minutes: float,
-    instance_id: str = "Nougat32",
+    instance_id: str = "player 0",
     weekly: bool = False,
     label: str | None = None,
     root: Path | None = None,
@@ -251,7 +251,7 @@ def add_job_from_guide_search(
     minutes: float,
     channel_id: str,
     title_contains: str | None = None,
-    instance_id: str = "Nougat32",
+    instance_id: str = "player 0",
     save_as: str | None = None,
     weekly: bool = False,
     label: str | None = None,
@@ -490,7 +490,7 @@ def _open_guide_before_record(job: dict[str, Any], root: Path | None = None) -> 
 
             out = run_route(
                 nav_route,
-                instance_id=str(job.get("instance_id") or "Nougat32"),
+                instance_id=str(job.get("instance_id") or "player 0"),
                 root=root,
                 open_player=True,
                 save_as=str(shortcut_id or job.get("channel_id") or nav_route),
@@ -520,7 +520,7 @@ def _open_guide_before_record(job: dict[str, Any], root: Path | None = None) -> 
                 out = open_local_for_shortcut(
                     sid,
                     row=row,
-                    instance_id=str(job.get("instance_id") or "Nougat32"),
+                    instance_id=str(job.get("instance_id") or "player 0"),
                     root=root,
                 )
                 if out is not None:
@@ -532,7 +532,7 @@ def _open_guide_before_record(job: dict[str, Any], root: Path | None = None) -> 
 
             out = open_shortcut(
                 str(shortcut_id),
-                instance_id=str(job.get("instance_id") or "Nougat32"),
+                instance_id=str(job.get("instance_id") or "player 0"),
                 root=root,
             )
             out.setdefault("open_via", out.get("open_via") or "search")
@@ -546,7 +546,7 @@ def _open_guide_before_record(job: dict[str, Any], root: Path | None = None) -> 
         # search_open itself redirects bare FOX/ABC/… to section_child.
         out = search_open(
             query=str(query),
-            instance_id=str(job.get("instance_id") or "Nougat32"),
+            instance_id=str(job.get("instance_id") or "player 0"),
             title_contains=guide.get("channel_title"),
             open_player=True,
             save_as=str(job.get("channel_id")),
@@ -594,7 +594,7 @@ def refresh_guide_for_upcoming(
     root: Path | None = None,
     *,
     horizon_hours: float = 72.0,
-    instance_id: str = "Nougat32",
+    instance_id: str = "player 0",
     execute_search: bool = True,
 ) -> dict[str, Any]:
     """Re-check Streamers guide cards for upcoming scheduled jobs.
@@ -817,11 +817,11 @@ def _free_streamers_instance(
     *,
     exclude: set[str] | None = None,
 ) -> str | None:
-    """Pick a free Nougat32 fleet instance. Prefer free clones when preferred is busy."""
-    from .instances import list_instances
+    """Pick a free player (Nougat fleet). Prefer free clones when preferred is busy."""
+    from .instances import list_instances, normalize_instance_id, player_index
 
     blocked = set(exclude or ())
-    preferred = str(preferred or "Nougat32")
+    preferred = normalize_instance_id(str(preferred or "player 0"), root)
     if preferred not in blocked and not get_lock("streamers", preferred, root=root):
         return preferred
 
@@ -832,7 +832,7 @@ def _free_streamers_instance(
         if str(row.get("source_kind") or "streamers") not in ("streamers", ""):
             continue
         iid = str(row.get("id") or "")
-        if not iid.startswith("Nougat32"):
+        if row.get("player") is None and not str(iid).startswith("Nougat32"):
             continue
         if iid in blocked or iid == preferred:
             continue
@@ -840,16 +840,9 @@ def _free_streamers_instance(
             continue
         candidates.append(iid)
 
-    def _sort_key(iid: str) -> tuple[int, int | str]:
-        if iid.startswith("Nougat32_"):
-            suffix = iid.split("_", 1)[1]
-            try:
-                return (0, int(suffix))
-            except ValueError:
-                return (1, suffix)
-        if iid == "Nougat32":
-            return (2, 0)
-        return (3, iid)
+    def _sort_key(iid: str) -> tuple[int, str]:
+        idx = player_index(iid, root)
+        return (idx if idx is not None else 999, iid)
 
     candidates.sort(key=_sort_key)
     return candidates[0] if candidates else None
@@ -1385,7 +1378,7 @@ def main(argv: list[str] | None = None) -> int:
     fs.add_argument("--id", required=True, help="Shortcut id (e.g. TNF_PRIME)")
     fs.add_argument("--at", required=True)
     fs.add_argument("--minutes", type=float, required=True)
-    fs.add_argument("--instance", default="Nougat32")
+    fs.add_argument("--instance", default="player 0")
     fs.add_argument("--weekly", action="store_true")
     fs.add_argument("--label")
 
@@ -1395,7 +1388,7 @@ def main(argv: list[str] | None = None) -> int:
     fg.add_argument("--at", required=True)
     fg.add_argument("--minutes", type=float, required=True)
     fg.add_argument("--title-contains")
-    fg.add_argument("--instance", default="Nougat32")
+    fg.add_argument("--instance", default="player 0")
     fg.add_argument("--save-as")
     fg.add_argument("--weekly", action="store_true")
     fg.add_argument("--label")
@@ -1418,7 +1411,7 @@ def main(argv: list[str] | None = None) -> int:
         help="Re-check Streamers guide cards for upcoming jobs (periodic)",
     )
     gr.add_argument("--horizon-hours", type=float, default=72.0)
-    gr.add_argument("--instance", default="Nougat32")
+    gr.add_argument("--instance", default="player 0")
     gr.add_argument("--dry-run", action="store_true")
 
     i = sub.add_parser("install-task")
@@ -1426,7 +1419,7 @@ def main(argv: list[str] | None = None) -> int:
 
     tnf = sub.add_parser("tnf-enqueue", help="Ensure weekly Thursday TNF_PRIME jobs")
     tnf.add_argument("--weeks", type=int, default=12)
-    tnf.add_argument("--instance", default="Nougat32")
+    tnf.add_argument("--instance", default="player 0")
     tnf.add_argument("--minutes", type=float, default=270.0)
 
     args = p.parse_args(argv)
