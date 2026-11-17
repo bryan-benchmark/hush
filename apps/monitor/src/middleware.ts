@@ -13,16 +13,29 @@ export function middleware(request: NextRequest) {
       path.startsWith("/_next") ||
       path === "/favicon.ico" ||
       path === "/crowd" ||
+      path.startsWith("/crowd/") ||
       path.startsWith("/api/crowd")
     ) {
       return NextResponse.next();
     }
 
-    // Solo /farm on ohush.co — password gate (OHUSH_FARM_CODE or OHUSH_PHONE_CODE).
+    // Home on ohush.co → verdict labeling (crowd stays at /crowd).
+    if (path === "/" || path === "") {
+      const home = request.nextUrl.clone();
+      home.pathname = "/verdict";
+      home.search = "";
+      return NextResponse.redirect(home);
+    }
+
+    // Solo /farm and /verdict on ohush.co — same password gate.
     const farmPath =
       path === "/farm" ||
       path.startsWith("/farm/") ||
-      path.startsWith("/api/farm");
+      path.startsWith("/api/farm") ||
+      path === "/verdict" ||
+      path.startsWith("/verdict/") ||
+      path === "/status" ||
+      path.startsWith("/api/lab-status");
     if (farmPath) {
       if (path === "/farm/enter" || path === "/api/farm/enter") {
         return NextResponse.next();
@@ -33,7 +46,13 @@ export function middleware(request: NextRequest) {
       const enter = request.nextUrl.clone();
       enter.pathname = "/farm/enter";
       enter.search = "";
-      enter.searchParams.set("next", path.startsWith("/api/farm") ? "/farm" : path);
+      const next =
+        path.startsWith("/api/farm") || path.startsWith("/api/lab-status")
+          ? "/status"
+          : path.startsWith("/verdict")
+            ? "/verdict"
+            : path;
+      enter.searchParams.set("next", next);
       return NextResponse.redirect(enter);
     }
 
@@ -61,9 +80,19 @@ export function middleware(request: NextRequest) {
     path.startsWith("/breaks") ||
     path.startsWith("/crowd") ||
     path.startsWith("/farm") ||
-    path.startsWith("/api/farm")
+    path.startsWith("/api/farm") ||
+    path.startsWith("/verdict") ||
+    path.startsWith("/status") ||
+    path.startsWith("/api/lab-status")
   ) {
-    enter.searchParams.set("next", path.startsWith("/api/farm") ? "/farm" : path);
+    enter.searchParams.set(
+      "next",
+      path.startsWith("/api/farm") || path.startsWith("/api/lab-status")
+        ? "/status"
+        : path.startsWith("/verdict")
+          ? "/verdict"
+          : path,
+    );
   }
   return NextResponse.redirect(enter);
 }
