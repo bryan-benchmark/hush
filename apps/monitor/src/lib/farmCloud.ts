@@ -25,6 +25,11 @@ type Judgment = {
   id: string;
   regions: Array<{ start_s: number; end_s: number; bucket: string; kind: string; note: string }>;
   saved_at: string;
+  /** Still and audio don't line up — usually extreme stream lag. */
+  av_mismatch?: boolean;
+  discarded?: boolean;
+  discard_reason?: string;
+  note?: string;
 };
 
 let auth: GoogleAuth | null = null;

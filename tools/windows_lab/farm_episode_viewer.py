@@ -22,6 +22,7 @@ import webbrowser
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from typing import Any
 from urllib.parse import parse_qs, unquote, urlparse
 
 from .coverage_farm import farm_label_dir, streamers_capture_root
@@ -45,6 +46,121 @@ def _triage_path() -> Path:
 
 def _verdicts_path() -> Path:
     return farm_label_dir() / "audit" / "EPISODE_REVIEW_VERDICTS.json"
+
+
+def _overnight_dashboard() -> dict[str, Any]:
+    """Compact ops board for /dashboard (overnight verdict + backlog)."""
+    label = farm_label_dir()
+    board_path = label / "overnight_verdict.json"
+    board: dict[str, Any] = {}
+    if board_path.is_file():
+        try:
+            board = json.loads(board_path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            board = {"error": "bad overnight_verdict.json"}
+    try:
+        from .farm_verdict_audit import write_overnight_board
+
+        board = write_overnight_board()
+    except Exception as exc:  # noqa: BLE001
+        board = {**board, "refresh_error": str(exc)}
+    pause: dict[str, Any] = {}
+    try:
+        from .capture_pause import is_paused
+
+        pause = is_paused()
+    except Exception as exc:  # noqa: BLE001
+        pause = {"active": False, "error": str(exc)}
+    lock: dict[str, Any] = {}
+    try:
+        from .farm_label_lock import status as label_lock_status
+
+        lock = label_lock_status()
+    except Exception as exc:  # noqa: BLE001
+        lock = {"held": False, "error": str(exc)}
+    triage = _load_triage()
+    pending = 0
+    done = 0
+    for s in triage.get("sessions") or []:
+        for e in s.get("episodes") or []:
+            # done tracked in human frames; approximate from triage fields if present
+            pending += 1
+    try:
+        human = _load_human_frames()
+        done = len(human.get("done") or {})
+        pending = max(0, pending - done)
+    except Exception:
+        pass
+    sched: dict[str, Any] = {}
+    try:
+        from .farm_loop import schedule_window
+
+        sched = schedule_window()
+    except Exception as exc:  # noqa: BLE001
+        sched = {"error": str(exc)}
+    job: dict[str, Any] = {}
+    lab_path = label / "audit" / "LAB_STATUS.json"
+    if lab_path.is_file():
+        try:
+            lab = json.loads(lab_path.read_text(encoding="utf-8"))
+            job = dict(lab.get("job") or {})
+        except json.JSONDecodeError:
+            job = {}
+    hop_i = job.get("hop_i")
+    hop_of = job.get("hop_of")
+    pct = None
+    try:
+        if hop_i is not None and hop_of:
+            pct = round(100.0 * float(hop_i) / float(hop_of), 1)
+    except (TypeError, ValueError, ZeroDivisionError):
+        pct = None
+    live = {
+        "phase": job.get("phase"),
+        "session": job.get("session"),
+        "session_i": job.get("session_i"),
+        "session_of": job.get("session_of"),
+        "hop_i": hop_i,
+        "hop_of": hop_of,
+        "pct": pct,
+        "t": job.get("t"),
+        "model": job.get("model"),
+        "note": job.get("note"),
+        "updated_utc": job.get("updated_utc"),
+        "active": bool(job.get("phase") and str(job.get("phase")) not in {"idle", ""}),
+    }
+    hierarchy: dict[str, Any] = {}
+    try:
+        from .farm_verdict_audit import backlog_hierarchy
+
+        hierarchy = backlog_hierarchy(live_job=live, queue_limit=48)
+    except Exception as exc:  # noqa: BLE001
+        hierarchy = {"error": str(exc)}
+    return {
+        "ok": True,
+        "updated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "overnight": board,
+        "capture_pause": pause,
+        "label_lock": lock,
+        "live_job": live,
+        "hierarchy": hierarchy,
+        "schedule": {
+            "mode": sched.get("mode"),
+            "why": sched.get("why"),
+            "do_label": sched.get("do_label"),
+            "do_record": sched.get("do_record"),
+        },
+        "verdict_queue": {
+            "pending_approx": pending,
+            "done": done,
+            "episodes": sum(len(s.get("episodes") or []) for s in (triage.get("sessions") or [])),
+        },
+        "links": {
+            "triage": "/",
+            "dashboard": "/dashboard",
+            "board_md": str(label / "OVERNIGHT_VERDICT.md"),
+            "tick_log": str(label / "audit" / "verdict_ticks.jsonl"),
+        },
+    }
 
 
 def _human_frames_path() -> Path:
@@ -442,6 +558,13 @@ HTML = r"""<!doctype html>
   }
   .btn-done:hover { background: #0d9488; border-color: #0d9488; }
   .btn-done:disabled { opacity: 0.45; cursor: default; }
+  .nav-link {
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+    border-radius: 6px; padding: 6px 10px; cursor: pointer;
+    font: inherit; font-weight: 700; font-size: 12px; white-space: nowrap;
+    text-decoration: none; display: inline-flex; align-items: center;
+  }
+  .nav-link:hover { border-color: #0f766e; color: #0f766e; }
   .legend {
     display: flex; flex-wrap: wrap; gap: 4px 10px;
     justify-content: flex-end; max-width: 42vw;
@@ -663,6 +786,7 @@ HTML = r"""<!doctype html>
       <span><span class="swatch" style="background:#dbeafe"></span><b>Playing</b></span>
       <span><span class="swatch" style="background:#fef08a"></span><b>Disagree</b></span>
     </div>
+    <a class="nav-link" id="linkDash" href="/dashboard">Overnight</a>
     <button type="button" class="btn-done" id="btnDone" title="Confirm You labels and remove this stretch from the queue">Done</button>
   </div>
 </header>
@@ -1194,9 +1318,300 @@ async function markStretchDone() {
 
 async function boot() {
   document.getElementById('btnDone').onclick = () => markStretchDone();
+  const dash = document.getElementById('linkDash');
+  if (dash) dash.href = apiUrl('/dashboard');
   await loadChunk();
 }
 boot();
+</script>
+</body>
+</html>
+"""
+
+
+DASHBOARD_HTML = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Overnight verdict</title>
+<style>
+  :root {
+    --bg: #e7eef2;
+    --ink: #14212b;
+    --muted: #5a6b78;
+    --line: #c5d2dc;
+    --ok: #0f766e;
+    --warn: #b45309;
+    --bad: #b91c1c;
+    --run: #0369a1;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+    background: linear-gradient(180deg, #d7e4ec 0%, var(--bg) 180px), var(--bg);
+    color: var(--ink);
+  }
+  header {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--line);
+    background: rgba(231,238,242,.94); position: sticky; top: 0; z-index: 2;
+  }
+  h1 { margin: 0; font-size: 16px; }
+  .sub { margin: 2px 0 0; color: var(--muted); font-size: 12px; }
+  a.nav {
+    text-decoration: none; border: 1px solid var(--line); background: #fff;
+    color: var(--ink); border-radius: 6px; padding: 6px 10px; font-weight: 700; font-size: 12px;
+  }
+  a.nav:hover { border-color: var(--ok); color: var(--ok); }
+  main { max-width: 980px; margin: 0 auto; padding: 16px; display: grid; gap: 12px; }
+  .cards { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; }
+  .card {
+    background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 12px;
+  }
+  .card .k { color: var(--muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+  .card .v { margin-top: 4px; font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .card .h { margin-top: 2px; color: var(--muted); font-size: 12px; }
+  .live {
+    background: #fff; border: 2px solid #0f766e; border-radius: 12px; padding: 14px 16px;
+  }
+  .live.idle { border-color: var(--line); }
+  .live .title { font-size: 13px; font-weight: 700; margin: 0 0 6px; }
+  .live .big { font-size: 20px; font-weight: 700; margin: 0 0 8px; font-variant-numeric: tabular-nums; }
+  .bar { height: 10px; background: #eef3f6; border-radius: 999px; overflow: hidden; }
+  .bar > span { display: block; height: 100%; background: #0f766e; border-radius: 999px; }
+  .bar.thin { height: 7px; }
+  .bar.warn > span { background: var(--warn); }
+  .bar.run > span { background: var(--run); }
+  .live .meta { margin-top: 8px; color: var(--muted); font-size: 12px; }
+  .panel { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 14px; }
+  .panel h2 { margin: 0 0 8px; font-size: 13px; }
+  .row { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; border-top: 1px solid #eef3f6; font-size: 13px; }
+  .row:first-of-type { border-top: 0; }
+  .muted { color: var(--muted); }
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+  .pill.ok { background: #ccfbf1; color: var(--ok); }
+  .pill.warn { background: #ffedd5; color: var(--warn); }
+  .pill.bad { background: #fee2e2; color: var(--bad); }
+  .pill.run { background: #e0f2fe; color: var(--run); }
+  pre {
+    margin: 0; background: #f7fafc; border: 1px solid var(--line); border-radius: 8px;
+    padding: 10px; overflow: auto; font-size: 11px; line-height: 1.35; max-height: 180px;
+  }
+  .checks { margin: 0; padding-left: 18px; color: var(--muted); font-size: 12px; }
+  .pipe { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; }
+  .pipe .card .v { font-size: 18px; }
+  .stages { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .stage {
+    border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; background: #f7fafc;
+    min-width: 110px; flex: 1;
+  }
+  .stage .n { font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .stage .l { font-size: 11px; color: var(--muted); font-weight: 700; text-transform: uppercase; }
+  .tree { display: grid; gap: 0; }
+  .branch {
+    border-top: 1px solid #eef3f6; padding: 8px 0 8px 12px;
+    border-left: 3px solid transparent; margin-left: 2px;
+  }
+  .branch.run { border-left-color: var(--run); background: #f0f9ff; }
+  .branch.done { border-left-color: #99f6e4; }
+  .branch.queued { border-left-color: #fdba74; }
+  .branch-top {
+    display: flex; justify-content: space-between; gap: 10px; align-items: baseline;
+    font-size: 13px; flex-wrap: wrap;
+  }
+  .sess { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .chrow { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+  .ch {
+    font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 4px;
+    border: 1px solid var(--line); color: var(--muted); background: #fff;
+  }
+  .ch.on { background: #ccfbf1; color: var(--ok); border-color: #99f6e4; }
+  .ch.go { background: #e0f2fe; color: var(--run); border-color: #7dd3fc; }
+  .ch.off { background: #fff7ed; color: var(--warn); border-color: #fed7aa; }
+  .hint { margin-top: 4px; font-size: 11px; color: var(--muted); }
+  .foot { margin-top: 8px; font-size: 11px; color: var(--muted); }
+  @media (max-width: 800px) {
+    .cards, .pipe { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Overnight verdict</h1>
+    <p class="sub" id="sub">Loading…</p>
+  </div>
+  <a class="nav" id="linkTriage" href="/">Back to triage</a>
+</header>
+<main>
+  <section class="live idle" id="live">
+    <p class="title">1 · Live job</p>
+    <p class="big" id="liveBig">Checking…</p>
+    <div class="bar"><span id="liveBar" style="width:0%"></span></div>
+    <p class="meta" id="liveMeta"></p>
+  </section>
+  <section class="panel">
+    <h2>2 · Four audits (sessions done / left)</h2>
+    <div class="pipe" id="pipe"></div>
+  </section>
+  <section class="panel">
+    <h2>3 · Backlog stages</h2>
+    <div class="stages" id="stages"></div>
+  </section>
+  <section class="cards" id="cards"></section>
+  <section class="panel">
+    <h2>4 · Session queue (top-down)</h2>
+    <div class="tree" id="tree"></div>
+    <p class="foot" id="treeFoot"></p>
+  </section>
+  <section class="panel">
+    <h2>5 · Now</h2>
+    <div id="now"></div>
+  </section>
+  <section class="panel">
+    <h2>If overnight locked 0</h2>
+    <ol class="checks">
+      <li><code>live_audio_lock</code> — take still writing WAV past 02:00</li>
+      <li><code>label_pass_busy</code> — worker already running (OK if ticks continue)</li>
+      <li><code>ollama_down</code> — start Ollama / qwen2.5vl:7b</li>
+      <li><code>ram_pressure</code> — free RAM under label floor</li>
+      <li><code>hold_new_captures</code> in schedule_run_due.log — expected overnight</li>
+    </ol>
+  </section>
+  <section class="panel">
+    <h2>Last tick</h2>
+    <pre id="last">null</pre>
+  </section>
+</main>
+<script>
+const BASE = (location.pathname === '/verdict/dashboard' || location.pathname.startsWith('/verdict/'))
+  ? '/verdict' : '';
+function apiUrl(path) {
+  return BASE + (path.startsWith('/') ? path : '/' + path);
+}
+function pill(text, kind) {
+  return `<span class="pill ${kind||'ok'}">${text}</span>`;
+}
+function fmt(n) {
+  if (n == null || n === '') return '—';
+  return String(n);
+}
+function shortSess(s) {
+  return String(s || '').replace(/^20\\d{2}/, '');
+}
+function chPill(name, on, running) {
+  const cls = running ? 'ch go' : (on ? 'ch on' : 'ch off');
+  const mark = running ? '…' : (on ? '✓' : '·');
+  return `<span class="${cls}">${name} ${mark}</span>`;
+}
+async function refresh() {
+  const res = await fetch(apiUrl('/api/overnight'), { cache: 'no-store' });
+  if (!res.ok) throw new Error('status ' + res.status);
+  const d = await res.json();
+  const o = d.overnight || {};
+  const cov = o.coverage || {};
+  const pause = d.capture_pause || {};
+  const lock = d.label_lock || {};
+  const sched = d.schedule || {};
+  const q = d.verdict_queue || {};
+  const live = d.live_job || {};
+  const h = d.hierarchy || {};
+  const stages = h.stages || {};
+  const pipe = h.pipeline || [];
+  document.getElementById('sub').textContent =
+    `Updated ${d.updated_utc || '—'} · ${o.day_et || ''} ET · auto-refresh 5s`;
+  const liveEl = document.getElementById('live');
+  const active = !!live.active;
+  liveEl.className = active ? 'live' : 'live idle';
+  if (active) {
+    const sess = shortSess(live.session);
+    document.getElementById('liveBig').textContent =
+      `${live.phase || 'job'} · ${sess} · ${fmt(live.hop_i)}/${fmt(live.hop_of)} (${fmt(live.pct)}%)`;
+    document.getElementById('liveBar').style.width = Math.max(0, Math.min(100, Number(live.pct) || 0)) + '%';
+    document.getElementById('liveMeta').textContent =
+      `session ${fmt(live.session_i)}/${fmt(live.session_of)} · t=${fmt(live.t)}s · ${live.model || ''} · ${live.updated_utc || ''}`;
+  } else {
+    document.getElementById('liveBig').textContent = live.note || 'Idle — waiting for next multichannel pass';
+    document.getElementById('liveBar').style.width = '0%';
+    document.getElementById('liveMeta').textContent = live.updated_utc || '';
+  }
+  document.getElementById('pipe').innerHTML = pipe.map(p => {
+    const left = p.left > 0;
+    return `<div class="card">
+      <div class="k">${p.label}</div>
+      <div class="v">${fmt(p.done)}<span class="muted" style="font-size:13px"> / ${fmt(p.of)}</span></div>
+      <div class="bar thin ${left ? 'warn' : ''}"><span style="width:${Math.max(0, Math.min(100, Number(p.pct)||0))}%"></span></div>
+      <div class="h">${left ? (fmt(p.left) + ' left') : 'complete'}</div>
+    </div>`;
+  }).join('') || '<div class="muted">No pipeline data</div>';
+  document.getElementById('stages').innerHTML = [
+    ['Running', stages.running, 'run'],
+    ['Need vision', stages.need_vision, 'warn'],
+    ['Need acoustic', stages.need_acoustic, 'warn'],
+    ['Need combine', stages.need_combine, 'warn'],
+    ['Need consensus', stages.need_consensus, 'warn'],
+    ['Done', stages.done, 'ok'],
+    ['Left', stages.left, stages.left ? 'warn' : 'ok'],
+  ].map(([l, n, k]) => `<div class="stage"><div class="l">${l}</div><div class="n">${fmt(n)}</div>${pill(k==='ok'?'ok':(k==='run'?'live':'todo'), k)}</div>`).join('');
+  document.getElementById('cards').innerHTML = `
+    <div class="card"><div class="k">Locked today</div><div class="v">${fmt(o.consensus_locked_today)}</div><div class="h">consensus auto-locks</div></div>
+    <div class="card"><div class="k">Help pile</div><div class="v">${fmt(o.help_asks_now)}</div><div class="h">legacy farm review</div></div>
+    <div class="card"><div class="k">Hops ready</div><div class="v">${fmt(cov.with_hops)}/${fmt(cov.prepared_sessions)}</div><div class="h">missing ${fmt(cov.missing_hops)}</div></div>
+    <div class="card"><div class="k">Disagree</div><div class="v">${fmt(q.pending_approx)}</div><div class="h">${fmt(q.done)} done · ${fmt(o.ticks_today)} ticks</div></div>
+  `;
+  const livePhase = String(live.phase || '');
+  const rows = (h.queue || []).map(row => {
+    const ch = row.channels || {};
+    const running = row.status === 'running';
+    const phase = running ? livePhase : '';
+    const cls = running ? 'branch run' : (row.status === 'done' ? 'branch done' : 'branch queued');
+    const next = row.next || '—';
+    const meta = [
+      row.help ? ('help ' + row.help) : null,
+      row.n_hops != null ? (row.n_hops + ' hops') : null,
+      row.n_disagree != null ? (row.n_disagree + ' disagree') : null,
+      row.locked_n ? ('locked ' + row.locked_n) : null,
+      'next ' + next,
+    ].filter(Boolean).join(' · ');
+    return `<div class="${cls}">
+      <div class="branch-top">
+        <span class="sess">${shortSess(row.session)}</span>
+        <span>${pill(row.status, running ? 'run' : (row.status === 'done' ? 'ok' : 'warn'))}</span>
+      </div>
+      <div class="chrow">
+        ${chPill('vision', !!ch.vision, running && phase === 'vision')}
+        ${chPill('asr', !!ch.asr, running && phase === 'vision')}
+        ${chPill('acoustic', !!ch.acoustic, running && phase === 'acoustic')}
+        ${chPill('gold', !!ch.gold, running && (phase === 'consensus' || phase === 'combine'))}
+      </div>
+      <div class="hint">${meta}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('tree').innerHTML = rows || '<div class="muted">No sessions</div>';
+  document.getElementById('treeFoot').textContent =
+    `Showing ${fmt(h.queue_shown)} of ${fmt(h.queue_total)} prepared · ordered running → help pile → done`;
+  const modeKind = String(sched.mode||'').startsWith('overnight') ? 'ok' : (pause.active ? 'warn' : 'ok');
+  const lockKind = lock.held ? 'warn' : 'ok';
+  const pauseKind = pause.active ? 'warn' : 'ok';
+  document.getElementById('now').innerHTML = `
+    <div class="row"><span>Schedule</span><span>${pill(sched.mode || '—', modeKind)}</span></div>
+    <div class="row"><span class="muted">${sched.why || ''}</span><span></span></div>
+    <div class="row"><span>Capture pause</span><span>${pill(pause.active ? 'ON' : 'off', pauseKind)}</span></div>
+    <div class="row"><span class="muted">${pause.why || ''}</span><span></span></div>
+    <div class="row"><span>Label worker</span><span>${pill(lock.held ? 'running' : 'idle', lockKind)}</span></div>
+    <div class="row"><span class="muted">${lock.held ? ('pid ' + (lock.pid||'?') + ' · ' + (lock.age_s||0) + 's') : 'ready for next pass'}</span><span></span></div>
+  `;
+  document.getElementById('last').textContent = JSON.stringify(o.last_tick || null, null, 2);
+}
+document.getElementById('linkTriage').href = apiUrl('/');
+refresh().catch(err => {
+  document.getElementById('sub').textContent = 'Failed: ' + err.message;
+});
+setInterval(() => { refresh().catch(() => {}); }, 5000);
 </script>
 </body>
 </html>
@@ -1222,6 +1637,16 @@ class Handler(BaseHTTPRequestHandler):
         path = parsed.path
         if path in {"/", "/index.html"}:
             self._send(200, HTML.encode("utf-8"), "text/html; charset=utf-8")
+            return
+        if path in {"/dashboard", "/dashboard.html", "/overnight"}:
+            self._send(200, DASHBOARD_HTML.encode("utf-8"), "text/html; charset=utf-8")
+            return
+        if path == "/api/overnight":
+            try:
+                blob = _overnight_dashboard()
+            except Exception as exc:  # noqa: BLE001
+                blob = {"ok": False, "error": str(exc)}
+            self._send(200, json.dumps(blob, default=str).encode("utf-8"), "application/json")
             return
         if path == "/api/triage":
             qs = parse_qs(parsed.query)

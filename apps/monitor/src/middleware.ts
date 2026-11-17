@@ -24,7 +24,9 @@ export function middleware(request: NextRequest) {
       path.startsWith("/farm/") ||
       path.startsWith("/api/farm") ||
       path === "/verdict" ||
-      path.startsWith("/verdict/");
+      path.startsWith("/verdict/") ||
+      path === "/status" ||
+      path.startsWith("/api/lab-status");
     if (farmPath) {
       if (path === "/farm/enter" || path === "/api/farm/enter") {
         return NextResponse.next();
@@ -36,7 +38,11 @@ export function middleware(request: NextRequest) {
       enter.pathname = "/farm/enter";
       enter.search = "";
       const next =
-        path.startsWith("/api/farm") ? "/farm" : path.startsWith("/verdict") ? "/verdict" : path;
+        path.startsWith("/api/farm") || path.startsWith("/api/lab-status")
+          ? "/status"
+          : path.startsWith("/verdict")
+            ? "/verdict"
+            : path;
       enter.searchParams.set("next", next);
       return NextResponse.redirect(enter);
     }
@@ -66,11 +72,17 @@ export function middleware(request: NextRequest) {
     path.startsWith("/crowd") ||
     path.startsWith("/farm") ||
     path.startsWith("/api/farm") ||
-    path.startsWith("/verdict")
+    path.startsWith("/verdict") ||
+    path.startsWith("/status") ||
+    path.startsWith("/api/lab-status")
   ) {
     enter.searchParams.set(
       "next",
-      path.startsWith("/api/farm") ? "/farm" : path.startsWith("/verdict") ? "/verdict" : path,
+      path.startsWith("/api/farm") || path.startsWith("/api/lab-status")
+        ? "/status"
+        : path.startsWith("/verdict")
+          ? "/verdict"
+          : path,
     );
   }
   return NextResponse.redirect(enter);

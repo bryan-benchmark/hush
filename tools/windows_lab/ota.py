@@ -254,9 +254,20 @@ def capture_ota_session(
     out_dir: Path,
     media: str = "av",
     chunk_minutes: float = 15.0,
+    still_interval_sec: float = 1.0,
 ) -> tuple[list[dict[str, Any]], list[str]]:
-    """Capture from DirectShow tuner devices into chunked video/audio files."""
+    """Capture OTA into archival audio plus stills (default) or retained video.
+
+    media=av       → sparse stills + WAV (temp video distilled then deleted when needed)
+    media=av_full  → retained video_*.mp4 + WAV
+    media=audio    → WAV only
+    """
+    from .config import DEFAULT_STILL_INTERVAL_SEC
     from .session_capture import CHUNK_MINUTES, _record_audio_loopback
+    from .visual_archive import distill_video_to_stills, record_stills_dshow
+
+    if still_interval_sec <= 0:
+        still_interval_sec = DEFAULT_STILL_INTERVAL_SEC
 
     tuner = resolve_tuner(tuner_id)
     warnings: list[str] = []
@@ -281,12 +292,73 @@ def capture_ota_session(
 
     if not ff:
         raise RuntimeError("ffmpeg required for OTA AV capture")
-    if not video_dev and media == "av":
+    if media in ("av", "av_full") and not video_dev:
         raise RuntimeError("OTA AV capture needs dshow_video configured on the tuner")
 
     chunk_seconds = (chunk_minutes or CHUNK_MINUTES) * 60.0
     n_chunks = max(1, int((seconds + chunk_seconds - 1) // chunk_seconds))
     import time
+
+    # Preferred labeling path: stills from tuner + loopback WAV in serial chunks.
+    if media == "av" and loopback and video_dev:
+        import queue
+        import threading
+
+        from .session_capture import _merge_audio_chunks
+
+        stop_event = threading.Event()
+        audio_q: queue.Queue = queue.Queue()
+
+        def audio_worker() -> None:
+            try:
+                rows = _record_audio_loopback(
+                    device_substr=loopback,
+                    seconds=seconds,
+                    out_dir=out_dir,
+                    chunk_minutes=chunk_minutes,
+                    stop_event=stop_event,
+                )
+                audio_q.put(("ok", rows))
+            except Exception as e:  # noqa: BLE001
+                audio_q.put(("err", str(e)))
+
+        th = threading.Thread(target=audio_worker, daemon=True)
+        th.start()
+        t0 = time.perf_counter()
+        visual: list[dict[str, Any]] = []
+        for i in range(n_chunks):
+            remaining = seconds - (time.perf_counter() - t0)
+            if remaining <= 0.5:
+                break
+            this_len = min(chunk_seconds, remaining)
+            result = record_stills_dshow(
+                video_device=video_dev,
+                seconds=this_len,
+                session_dir=out_dir,
+                interval_sec=still_interval_sec,
+                t0_sec=i * chunk_seconds,
+                chunk_index=i,
+            )
+            if not result.get("ok"):
+                warnings.append(f"ota_stills_{i}: {result.get('error')}")
+                visual.append({"index": i, "stills": 0})
+            else:
+                visual.append(
+                    {
+                        "index": i,
+                        "stills": int(result.get("still_count") or 0),
+                        "still_interval_sec": still_interval_sec,
+                    }
+                )
+        stop_event.set()
+        th.join(timeout=30)
+        status, payload = audio_q.get() if not audio_q.empty() else ("err", "audio thread silent")
+        if status != "ok":
+            warnings.append(f"audio: {payload}")
+            audio_chunks: list[dict[str, Any]] = []
+        else:
+            audio_chunks = payload  # type: ignore[assignment]
+        return _merge_audio_chunks(visual, audio_chunks), warnings
 
     t0 = time.perf_counter()
     for i in range(n_chunks):
@@ -299,15 +371,22 @@ def capture_ota_session(
         video_path = out_dir / video_name
         audio_path = out_dir / audio_name
         cmd = [ff, "-y", "-hide_banner", "-loglevel", "error"]
-        if media == "av" and video_dev:
-            cmd.extend(["-f", "dshow", "-i", f"video={video_dev}" + (f":audio={audio_dev}" if audio_dev else "")])
+        if media in ("av", "av_full") and video_dev:
+            cmd.extend(
+                [
+                    "-f",
+                    "dshow",
+                    "-i",
+                    f"video={video_dev}" + (f":audio={audio_dev}" if audio_dev else ""),
+                ]
+            )
         elif audio_dev:
             cmd.extend(["-f", "dshow", "-i", f"audio={audio_dev}"])
         else:
             raise RuntimeError("no OTA capture devices configured")
 
-        if media == "av":
-            # Write mp4; extract wav in a second pass if needed.
+        if media in ("av", "av_full"):
+            # Write mp4; extract wav; for media=av distill stills and drop the tape.
             cmd.extend(
                 [
                     "-t",
@@ -350,18 +429,37 @@ def capture_ota_session(
                 text=True,
                 timeout=120,
             )
-            if ext.returncode != 0 or not audio_path.is_file():
+            audio_ok = ext.returncode == 0 and audio_path.is_file()
+            if not audio_ok:
                 warnings.append(f"ota_audio_extract_{i}: {(ext.stderr or '')[-500:]}")
-                chunks.append({"index": i, "video": video_name, "audio": None})
-            else:
-                chunks.append(
-                    {
-                        "index": i,
-                        "video": video_name,
-                        "audio": audio_name,
-                        "duration_sec": this_len,
-                    }
+
+            stills = 0
+            keep_video = media == "av_full"
+            if media == "av":
+                distilled = distill_video_to_stills(
+                    video_path,
+                    session_dir=out_dir,
+                    t0_sec=i * chunk_seconds,
+                    interval_sec=still_interval_sec,
+                    chunk_index=i,
+                    delete_video=True,
                 )
+                if not distilled.get("ok"):
+                    warnings.append(f"ota_distill_{i}: {distilled.get('error')}")
+                    keep_video = True  # retain tape if distill failed
+                else:
+                    stills = int(distilled.get("still_count") or 0)
+
+            chunks.append(
+                {
+                    "index": i,
+                    "video": video_name if keep_video and video_path.is_file() else None,
+                    "audio": audio_name if audio_ok else None,
+                    "stills": stills if media == "av" else None,
+                    "still_interval_sec": still_interval_sec if media == "av" else None,
+                    "duration_sec": this_len,
+                }
+            )
         else:
             cmd.extend(
                 [

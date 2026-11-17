@@ -130,7 +130,15 @@ def build_cloud_items(*, root: Path | None = None, limit: int = 80) -> list[dict
         t1 = float(row.get("t1") or t0 + 12)
         if t1 <= t0:
             continue
-        help_ask = ask in {"needs_human", "review"} or str(row.get("source") or "") == "gold_candidate"
+        source = str(row.get("source") or "queue")
+        help_ask = ask in {"needs_human", "review"} or source == "gold_candidate"
+        # Don't sync undrafted transcript soup — those first clips suck for humans.
+        if (
+            source in {"transcript_boundary", "fallback_tile"}
+            and ask not in {"needs_human", "review"}
+            and not row.get("expect_bucket")
+        ):
+            continue
         items.append(
             {
                 "id": clip,
@@ -141,7 +149,7 @@ def build_cloud_items(*, root: Path | None = None, limit: int = 80) -> list[dict
                 "ask": ask or None,
                 "help": help_ask,
                 "priority": int(row.get("priority") or (10 if ask == "needs_human" else 20 if ask == "review" else 40)),
-                "source": str(row.get("source") or "queue"),
+                "source": source,
                 "expect_bucket": row.get("expect_bucket") or None,
                 "session_dir": str(session_dir),
                 "t0": t0,

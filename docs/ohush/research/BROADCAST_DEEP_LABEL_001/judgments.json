@@ -2,11 +2,11 @@
   "hush_20260924_220624_5026p8_5046p5": {
     "bucket": "broadcast",
     "kind": "highlights",
-    "phase": "",
+    "phase": "halftime",
     "setting": "package",
     "speaker": "clarissa, then fitzpatrick, then sherman, then clarissa - looks like - sounds like halftime highlights",
     "note": "ASR mentions Falcons at halftime / fourth quarter.",
-    "saved_at": "2026-11-09T14:57:33.285Z"
+    "saved_at": "2026-11-10T03:58:33.942Z"
   },
   "hush_20260924_220624_6267p8_6287p2": {
     "bucket": "broadcast",
@@ -15,7 +15,7 @@
     "setting": "studio_or_remote",
     "speaker": "james palmer injury update, sounds like halftime - not a main broadcaster, looks like offsite 'insider'",
     "note": "Elbow injury consult. ECAPA cold — needs speaker ID.",
-    "saved_at": "2026-11-09T14:57:35.603Z"
+    "saved_at": "2026-11-10T03:58:34.117Z"
   },
   "hush_20260924_220624_6315p2_6336p5": {
     "bucket": "broadcast",
@@ -24,7 +24,7 @@
     "setting": "sideline_or_remote",
     "speaker": "james palmer halftime - 'insider' - inside the lockerroom story =, likely during halftime broadcast",
     "note": "Will Anderson / team meeting. Top contiguous FP. Needs speaker + phase.",
-    "saved_at": "2026-11-09T14:57:36.908Z"
+    "saved_at": "2026-11-10T03:58:34.312Z"
   },
   "hush_20261008_205100_1749p8_1760p8": {
     "bucket": "broadcast",
@@ -33,7 +33,7 @@
     "setting": "package",
     "speaker": "al michaels - talking about jerry jones and family and venue",
     "note": "Jerry/Gene Jones feature. Needs narrator + phase.",
-    "saved_at": "2026-11-09T14:57:37.587Z"
+    "saved_at": "2026-11-10T03:58:34.477Z"
   },
   "hush_20260924_220624_6180p7_6207p8": {
     "bucket": "broadcast",
@@ -42,7 +42,7 @@
     "setting": "sideline_or_remote",
     "speaker": "clarissa and whit, giving postgame highlights - introducing james palmer",
     "note": "Insider James Palmer after break; ASR names Palmer.",
-    "saved_at": "2026-11-09T14:57:38.179Z"
+    "saved_at": "2026-11-10T03:58:34.638Z"
   },
   "hush_20260924_220624_7035p0_7095p2": {
     "bucket": "broadcast",
@@ -51,7 +51,7 @@
     "setting": "studio_desk",
     "speaker": "Andrew Whitworth, fitzpatrick / Clarissa Thompson (mixed), cuts to coach interview at end",
     "note": "Odell catch desk; mid-span Fits&Whit podcast promo (in-show).",
-    "saved_at": "2026-11-09T14:58:46.532Z"
+    "saved_at": "2026-11-10T03:58:34.815Z"
   },
   "hush_20260924_220624_7406p8_7436p2": {
     "bucket": "broadcast",
@@ -60,7 +60,7 @@
     "setting": "studio_desk",
     "speaker": "Andrew Whitworth & Clarissa & Fitz",
     "note": "Whitworth desk focus.",
-    "saved_at": "2026-11-09T14:59:05.799Z"
+    "saved_at": "2026-11-10T03:58:34.997Z"
   },
   "hush_20261008_205100_3974p0_3980p9": {
     "bucket": "broadcast",
@@ -69,7 +69,7 @@
     "setting": "unknown",
     "speaker": "outro broadcast music to go to commerical",
     "note": "Unlabeled champion FP. ASR: no speech.",
-    "saved_at": "2026-11-09T14:59:44.629Z"
+    "saved_at": "2026-11-10T03:58:35.189Z"
   },
   "hush_20260924_220624_3647p0_3652p5": {
     "bucket": "broadcast",
@@ -78,7 +78,7 @@
     "setting": "",
     "speaker": "al michaels commenting on weather during broadcast",
     "note": "",
-    "saved_at": "2026-11-09T15:00:15.507Z"
+    "saved_at": "2026-11-10T03:58:35.375Z"
   },
   "hush_20260924_220624_5518p7_5526p3": {
     "bucket": "broadcast",
@@ -87,7 +87,7 @@
     "setting": "package",
     "speaker": "al michaels giving pre-recorded intro to the game, part of broadcast",
     "note": "al michaels giving pre-recorded intro to the game, part of broadcast",
-    "saved_at": "2026-11-09T15:01:23.220Z"
+    "saved_at": "2026-11-10T03:58:35.557Z"
   },
   "hush_20260924_220624_6599p5_6605p7": {
     "bucket": "broadcast",
@@ -96,7 +96,7 @@
     "setting": "studio_desk",
     "speaker": "fitz postgame",
     "note": "",
-    "saved_at": "2026-11-09T15:01:40.054Z"
+    "saved_at": "2026-11-10T03:58:35.741Z"
   },
   "hush_20260924_220624_6614p0_6629p2": {
     "bucket": "broadcast",
@@ -105,7 +105,7 @@
     "setting": "studio_desk",
     "speaker": "clarissa and sherman post game",
     "note": "",
-    "saved_at": "2026-11-09T15:02:00.901Z"
+    "saved_at": "2026-11-10T03:58:35.928Z"
   },
   "hush_20260924_220624_6734p0_6739p8": {
     "bucket": "broadcast",
@@ -114,7 +114,7 @@
     "setting": "",
     "speaker": "tony gonzalez post game talking about a game",
     "note": "",
-    "saved_at": "2026-11-09T15:04:49.781Z"
+    "saved_at": "2026-11-10T03:58:36.156Z"
   },
   "hush_20260924_220624_6836p2_6844p5": {
     "bucket": "broadcast",
@@ -123,7 +123,7 @@
     "setting": "",
     "speaker": "whit and clarissa postgame",
     "note": "",
-    "saved_at": "2026-11-09T15:05:06.789Z"
+    "saved_at": "2026-11-10T03:58:36.349Z"
   },
   "hush_20260924_220624_7370p2_7379p8": {
     "bucket": "broadcast",
@@ -132,7 +132,7 @@
     "setting": "studio_desk",
     "speaker": "whit, clarissa - postgame",
     "note": "",
-    "saved_at": "2026-11-09T15:05:32.443Z"
+    "saved_at": "2026-11-10T03:58:36.528Z"
   },
   "hush_20260924_220624_7491p8_7515p4": {
     "bucket": "broadcast",
@@ -141,7 +141,7 @@
     "setting": "studio_desk",
     "speaker": "clarissa postgame",
     "note": "",
-    "saved_at": "2026-11-09T15:05:49.566Z"
+    "saved_at": "2026-11-10T03:58:36.735Z"
   },
   "hush_20261008_205100_376p9_386p2": {
     "bucket": "broadcast",
@@ -150,7 +150,7 @@
     "setting": "booth_only",
     "speaker": "starts with commercial, then al michaels introducing a player giving background",
     "note": "",
-    "saved_at": "2026-11-09T15:06:23.809Z"
+    "saved_at": "2026-11-10T03:58:36.942Z"
   },
   "hush_20261008_205100_3434p0_3443p0": {
     "bucket": "broadcast",
@@ -159,7 +159,7 @@
     "setting": "studio_desk",
     "speaker": "commercial back into half time broadcasts with clarissa",
     "note": "",
-    "saved_at": "2026-11-09T15:06:55.696Z"
+    "saved_at": "2026-11-10T03:58:37.122Z"
   },
   "hush_20260924_220624_63p2_66p8": {
     "bucket": "broadcast",
@@ -168,7 +168,7 @@
     "setting": "booth_only",
     "speaker": "al michaels giving commentary on past venues and history of the city",
     "note": "",
-    "saved_at": "2026-11-09T15:07:29.802Z"
+    "saved_at": "2026-11-10T03:58:37.312Z"
   },
   "hush_20260924_220624_910p2_913p4": {
     "bucket": "broadcast",
@@ -177,7 +177,7 @@
     "setting": "",
     "speaker": "broadcast outro music rock and roll all night, then starts commercial",
     "note": "",
-    "saved_at": "2026-11-09T15:08:17.489Z"
+    "saved_at": "2026-11-10T03:58:37.485Z"
   },
   "hush_20260924_220624_6723p8_6726p8": {
     "bucket": "broadcast",
@@ -186,7 +186,7 @@
     "setting": "studio_desk",
     "speaker": "tony gonzalez",
     "note": "",
-    "saved_at": "2026-11-09T15:09:07.819Z"
+    "saved_at": "2026-11-10T03:58:37.680Z"
   },
   "hush_20260924_220624_7398p8_7400p8": {
     "bucket": "broadcast",
@@ -195,7 +195,7 @@
     "setting": "studio_desk",
     "speaker": "whit clarissa talking about nothing",
     "note": "",
-    "saved_at": "2026-11-09T15:09:24.217Z"
+    "saved_at": "2026-11-10T03:58:37.861Z"
   },
   "hush_20261008_205100_3545p2_3548p8": {
     "bucket": "broadcast",
@@ -204,7 +204,7 @@
     "setting": "unknown",
     "speaker": "broadcast outro music into start of commercials",
     "note": "",
-    "saved_at": "2026-11-09T15:10:03.482Z"
+    "saved_at": "2026-11-10T03:58:38.053Z"
   },
   "hush_20261008_205100_4594p8_4597p5": {
     "bucket": "broadcast",
@@ -213,7 +213,7 @@
     "setting": "booth_only",
     "speaker": "al michaels talking in broadcast about a player walking with some crowd horns in background, herbstreit talking at the end",
     "note": "",
-    "saved_at": "2026-11-09T15:10:53.532Z"
+    "saved_at": "2026-11-10T03:58:38.239Z"
   },
   "hush_20261008_205100_10308p5_10312p2": {
     "bucket": "broadcast",
@@ -222,7 +222,7 @@
     "setting": "studio_desk",
     "speaker": "player brought into broadcast for interview during postgame talking about the game",
     "note": "",
-    "saved_at": "2026-11-09T15:11:25.960Z"
+    "saved_at": "2026-11-10T03:58:38.429Z"
   },
   "hush_20260924_220624_2969p8_3006p5": {
     "bucket": "non_broadcast",
@@ -231,7 +231,7 @@
     "setting": "spot",
     "speaker": "this sounds like a 30 second commercial as a result of a 30 second timeout or something - so they kept it in broadcast but played the ad for 30 seconds - you can hear outro broadcast noise then 30 sec",
     "note": "Chili's dry VO contrast anchor.",
-    "saved_at": "2026-11-09T15:12:47.955Z"
+    "saved_at": "2026-11-10T03:58:38.628Z"
   },
   "hush_20261008_205100_3384p3_3437p1": {
     "bucket": "non_broadcast",
@@ -240,6 +240,537 @@
     "setting": "spot",
     "speaker": "tirico doing AMEX ad 0-30 seconds, then quick 10 second ad for tv show, then 10 seconds for dog food, then back to game broadcast with clarissa",
     "note": "Amex Platinum dry VO contrast anchor.",
-    "saved_at": "2026-11-09T15:14:27.763Z"
+    "saved_at": "2026-11-10T03:58:38.824Z"
+  },
+  "hush_20261015_210805_4667p0_4697p0": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "outro to commercial for breast cancer rx",
+    "note": "Longest stack cover. Onset: Michaels ge0.25 (16 hops). Mid/tail: Clarissa/Whit often 'best' but all <0.25 — panel never hot. nn≈commercial. Band=onset.",
+    "saved_at": "2026-11-10T03:58:31.428Z"
+  },
+  "hush_20261015_210805_4717p1_4747p1": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "medical rx commercial",
+    "note": "Longest stack cover. Onset: Michaels ge0.25 (16 hops). Mid/tail: Clarissa/Whit often 'best' but all <0.25 — panel never hot. nn≈commercial. Band=mid.",
+    "saved_at": "2026-11-10T03:58:31.621Z"
+  },
+  "hush_20261015_210805_4767p2_4797p2": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "unknown",
+    "setting": "",
+    "speaker": "popeyes commercial, toothpaste commercial, 22 seconds broadcast starts back up with an intro",
+    "note": "Longest stack cover. Onset: Michaels ge0.25 (16 hops). Mid/tail: Clarissa/Whit often 'best' but all <0.25 — panel never hot. nn≈commercial. Band=tail.",
+    "saved_at": "2026-11-10T03:58:31.789Z"
+  },
+  "hush_20261015_210805_8088p2_8118p2": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "medical rx commercial",
+    "note": "Stack cover. Voice almost never ≥0.25; Whit dominates tail best-name but cold. nn≈commercial. Band=onset.",
+    "saved_at": "2026-11-10T03:58:31.997Z"
+  },
+  "hush_20261015_210805_8129p5_8159p5": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "medical rx commerical until 20sec, then tv show commercial",
+    "note": "Stack cover. Voice almost never ≥0.25; Whit dominates tail best-name but cold. nn≈commercial. Band=mid.",
+    "saved_at": "2026-11-10T03:58:32.198Z"
+  },
+  "hush_20261015_210805_8170p8_8200p8": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "medical rx commercial or phone commercial then intro to TNF broadcast",
+    "note": "Stack cover. Voice almost never ≥0.25; Whit dominates tail best-name but cold. nn≈commercial. Band=tail.",
+    "saved_at": "2026-11-10T03:58:32.397Z"
+  },
+  "hush_20261015_210805_7782p5_7812p5": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "unknown",
+    "speaker": "fanduel commerical into another commercial",
+    "note": "Stack cover. Onset often Herbstreit/Palmer ≥0.25 (out of KEEP panel / below margin). Mid Gonzalez cold. Tail Michaels. Band=onset.",
+    "saved_at": "2026-11-10T03:58:32.598Z"
+  },
+  "hush_20261015_210805_7814p2_7844p2": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "movie commercial into car commercial",
+    "note": "Stack cover. Onset often Herbstreit/Palmer ≥0.25 (out of KEEP panel / below margin). Mid Gonzalez cold. Tail Michaels. Band=mid.",
+    "saved_at": "2026-11-10T03:58:32.855Z"
+  },
+  "hush_20261015_210805_7846p0_7876p0": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "car commercial into newbalance josh allen commercial into pizza hut commercial",
+    "note": "Stack cover. Onset often Herbstreit/Palmer ≥0.25 (out of KEEP panel / below margin). Mid Gonzalez cold. Tail Michaels. Band=tail.",
+    "saved_at": "2026-11-10T03:58:33.053Z"
+  },
+  "hush_20261015_210805_3167p8_3197p8": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "food or grubhub commerical into movie commercial",
+    "note": "Stack cover. Palmer/Gonzalez/Clarissa names appear cold; panel_hot=0 entire span. Band=onset.",
+    "saved_at": "2026-11-10T03:58:33.237Z"
+  },
+  "hush_20261015_210805_3198p8_3228p8": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "movie commercial then at 28 seconds switch to capital one commerical",
+    "note": "Stack cover. Palmer/Gonzalez/Clarissa names appear cold; panel_hot=0 entire span. Band=mid.",
+    "saved_at": "2026-11-10T03:58:33.429Z"
+  },
+  "hush_20261015_210805_3229p8_3259p8": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "capital one commerical until 11 seconds then AWS commerical",
+    "note": "Stack cover. Palmer/Gonzalez/Clarissa names appear cold; panel_hot=0 entire span. Band=tail.",
+    "saved_at": "2026-11-10T03:58:33.604Z"
+  },
+  "hush_20261015_210805_1955p5_1985p5": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "outro music into commercial s- then hardys commercial, then energizer commercial",
+    "note": "Outside the four labeled ad pods. Stack still covers 86.2s (1955.5–2041.8). Band=onset. Ad vs desk/booth?",
+    "saved_at": "2026-11-10T03:58:28.325Z"
+  },
+  "hush_20261015_210805_1983p6_2013p6": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "end of energizer commercial, then state farm commercial,",
+    "note": "Outside the four labeled ad pods. Stack still covers 86.2s (1955.5–2041.8). Band=mid. Ad vs desk/booth?",
+    "saved_at": "2026-11-10T03:58:28.469Z"
+  },
+  "hush_20261015_210805_2011p8_2041p8": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "end of state farm commercial, then pro plan commercial, then vacuum commerical",
+    "note": "Outside the four labeled ad pods. Stack still covers 86.2s (1955.5–2041.8). Band=tail. Ad vs desk/booth?",
+    "saved_at": "2026-11-10T03:58:28.652Z"
+  },
+  "hush_20261015_210805_980p2_1010p2": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "education or army commercial, then another commerical",
+    "note": "Outside the four labeled ad pods. Stack still covers 78.0s (980.2–1058.2). Band=onset. Ad vs desk/booth?",
+    "saved_at": "2026-11-10T03:58:28.805Z"
+  },
+  "hush_20261015_210805_1004p2_1034p2": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "army/school commerical then charles barkley ro.co commerical, then idk commercial maybe rx",
+    "note": "Outside the four labeled ad pods. Stack still covers 78.0s (980.2–1058.2). Band=mid. Ad vs desk/booth?",
+    "saved_at": "2026-11-10T03:58:28.984Z"
+  },
+  "hush_20261015_210805_1028p2_1058p2": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "commerical that just has song, then toothpaste commercial",
+    "note": "Outside the four labeled ad pods. Stack still covers 78.0s (980.2–1058.2). Band=tail. Ad vs desk/booth?",
+    "saved_at": "2026-11-10T03:58:29.172Z"
+  },
+  "hush_20261015_210805_6256p5_6286p5": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "unknown",
+    "setting": "",
+    "speaker": "nba or nba2k commercial",
+    "note": "Outside the four labeled ad pods. Stack still covers 77.5s (6256.5–6334.0). Band=onset. Ad vs desk/booth?",
+    "saved_at": "2026-11-10T03:58:29.342Z"
+  },
+  "hush_20261015_210805_6280p2_6310p2": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "nba commercial into fashion commercial into applebees commercial",
+    "note": "Outside the four labeled ad pods. Stack still covers 77.5s (6256.5–6334.0). Band=mid. Ad vs desk/booth?",
+    "saved_at": "2026-11-10T03:58:29.524Z"
+  },
+  "hush_20261015_210805_6304p0_6334p0": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "applebees commercial into nfl tv commerical",
+    "note": "Outside the four labeled ad pods. Stack still covers 77.5s (6256.5–6334.0). Band=tail. Ad vs desk/booth?",
+    "saved_at": "2026-11-10T03:58:29.678Z"
+  },
+  "hush_20261015_210805_6729p8_6759p8": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "outro music into chatgpt commercial",
+    "note": "Outside the four labeled ad pods. Stack still covers 70.8s (6729.8–6800.5). Band=onset. Ad vs desk/booth?",
+    "saved_at": "2026-11-10T03:58:29.886Z"
+  },
+  "hush_20261015_210805_6750p1_6780p1": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "chatgpt commercial, reeses commercial, chilis commercial",
+    "note": "Outside the four labeled ad pods. Stack still covers 70.8s (6729.8–6800.5). Band=mid. Ad vs desk/booth?",
+    "saved_at": "2026-11-10T03:58:30.036Z"
+  },
+  "hush_20261015_210805_6770p5_6800p5": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "reeses commercial, then chilis, then jcpenny",
+    "note": "Outside the four labeled ad pods. Stack still covers 70.8s (6729.8–6800.5). Band=tail. Ad vs desk/booth?",
+    "saved_at": "2026-11-10T03:58:30.197Z"
+  },
+  "hush_20261015_210805_3534p5_3564p5": {
+    "bucket": "unsure",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "this may be part of broadcast, its a fanduel commercial that often preceeds them leaving the broadcast but it outros from main broadcasst",
+    "note": "Outside the four labeled ad pods. Stack still covers 65.8s (3534.5–3600.2). Band=onset. Ad vs desk/booth?",
+    "saved_at": "2026-11-10T03:58:30.349Z"
+  },
+  "hush_20261015_210805_3552p4_3582p4": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "fanduel then velveeta then unknown commerical",
+    "note": "Outside the four labeled ad pods. Stack still covers 65.8s (3534.5–3600.2). Band=mid. Ad vs desk/booth?",
+    "saved_at": "2026-11-10T03:58:30.524Z"
+  },
+  "hush_20261015_210805_3570p2_3600p2": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "velveeta commercial, united airlines commerical, liberty mutual commerical",
+    "note": "Outside the four labeled ad pods. Stack still covers 65.8s (3534.5–3600.2). Band=tail. Ad vs desk/booth?",
+    "saved_at": "2026-11-10T03:58:30.711Z"
+  },
+  "hush_20261015_210805_5419p2_5449p2": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "burger king commerical, coldwell banker commercial, amazon commerical",
+    "note": "Outside the four labeled ad pods. Stack still covers 64.2s (5419.2–5483.5). Band=onset. Ad vs desk/booth?",
+    "saved_at": "2026-11-10T03:58:30.886Z"
+  },
+  "hush_20261015_210805_5436p4_5466p4": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "amazon commerical, then nfl flag football commercial",
+    "note": "Outside the four labeled ad pods. Stack still covers 64.2s (5419.2–5483.5). Band=mid. Ad vs desk/booth?",
+    "saved_at": "2026-11-10T03:58:31.069Z"
+  },
+  "hush_20261015_210805_5453p5_5483p5": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "nfl flag football commercial into al michaels broadcast (28 second mark)",
+    "note": "Outside the four labeled ad pods. Stack still covers 64.2s (5419.2–5483.5). Band=tail. Ad vs desk/booth?",
+    "saved_at": "2026-11-10T03:58:31.265Z"
+  },
+  "hush_20261015_210805_1930p1_1955p1": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "draft kings commercial read by clarissa thompson, last 3 seconds are a differnt commerical",
+    "note": "cool covered, stack played (25.8s, 103 hops). Latch cleared — desk/return or burned ad? Core 1929.75–1955.5.",
+    "saved_at": "2026-11-10T03:58:07.952Z"
+  },
+  "hush_20261015_210805_600p5_620p2": {
+    "bucket": "broadcast",
+    "kind": "halftime_desk",
+    "phase": "halftime",
+    "setting": "studio_desk",
+    "speaker": "clarissa thompson - giving details on players and history and records and stats",
+    "note": "cool covered, stack played (9.8s, 39 hops). Latch cleared — desk/return or burned ad? Core 605.5–615.25.",
+    "saved_at": "2026-11-10T03:58:13.352Z"
+  },
+  "hush_20261015_210805_6619p0_6637p5": {
+    "bucket": "broadcast",
+    "kind": "postgame_desk",
+    "phase": "postgame",
+    "setting": "studio_desk",
+    "speaker": "3 seconds royal carribian commercial, then clarissa broadcast postgame talking about whats happening next",
+    "note": "cool covered, stack played (8.5s, 34 hops). Latch cleared — desk/return or burned ad? Core 6624.0–6632.5.",
+    "saved_at": "2026-11-10T03:58:14.990Z"
+  },
+  "hush_20261015_210805_307p2_325p5": {
+    "bucket": "broadcast",
+    "kind": "halftime_desk",
+    "phase": "halftime",
+    "setting": "studio_desk",
+    "speaker": "clarissa postgame welcome intro",
+    "note": "cool covered, stack played (8.2s, 33 hops). Latch cleared — desk/return or burned ad? Core 312.25–320.5.",
+    "saved_at": "2026-11-10T03:58:19.888Z"
+  },
+  "hush_20261015_210805_195p2_213p0": {
+    "bucket": "broadcast",
+    "kind": "pregame_desk",
+    "phase": "pregame",
+    "setting": "studio_desk",
+    "speaker": "clarissa intro",
+    "note": "cool covered, stack played (7.8s, 31 hops). Latch cleared — desk/return or burned ad? Core 200.25–208.0.",
+    "saved_at": "2026-11-10T03:58:24.461Z"
+  },
+  "hush_20261015_210805_9507p8_9523p8": {
+    "bucket": "broadcast",
+    "kind": "booth",
+    "phase": "",
+    "setting": "",
+    "speaker": "apple watch commercial for first 9 seconds, then al michaels giving intro to broadcast talking about next weeks TNF",
+    "note": "cool covered, stack played (6.0s, 24 hops). Latch cleared — desk/return or burned ad? Core 9512.75–9518.75.",
+    "saved_at": "2026-11-10T03:58:25.718Z"
+  },
+  "hush_20261015_210805_10977p2_10992p0": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "energizer commercial for 10 seconds, then medical rx commercial",
+    "note": "cool covered, stack played (4.8s, 19 hops). Latch cleared — desk/return or burned ad? Core 10982.25–10987.0.",
+    "saved_at": "2026-11-10T03:58:26.247Z"
+  },
+  "hush_20261015_210805_970p8_985p2": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "computer commercrial for 10 seconds, then another commerical unknown",
+    "note": "cool covered, stack played (4.5s, 18 hops). Latch cleared — desk/return or burned ad? Core 975.75–980.25.",
+    "saved_at": "2026-11-10T03:58:26.524Z"
+  },
+  "hush_20261015_210805_5222p5_5236p5": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "PNC bank commerical for 8 seconds, then coffee commerical or drink commercial",
+    "note": "cool covered, stack played (4.0s, 16 hops). Latch cleared — desk/return or burned ad? Core 5227.5–5231.5.",
+    "saved_at": "2026-11-10T03:58:26.702Z"
+  },
+  "hush_20261015_210805_2484p8_2498p2": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "chase saphire commerical",
+    "note": "cool covered, stack played (3.5s, 14 hops). Latch cleared — desk/return or burned ad? Core 2489.75–2493.25.",
+    "saved_at": "2026-11-10T03:58:26.861Z"
+  },
+  "hush_20261015_210805_1924p6_1949p6": {
+    "bucket": "non_broadcast",
+    "kind": "in_show_sponsorship",
+    "phase": "",
+    "setting": "",
+    "speaker": "al michaels outro into commercials for first 3 seconds, then clarissa thompson draft kings",
+    "note": "cool cover + KEEP panel hot (15.2s, 61 hops). Desk FP class the latch targets. Core 1929.5–1944.75.",
+    "saved_at": "2026-11-10T03:58:27.021Z"
+  },
+  "hush_20261015_210805_6618p8_6637p5": {
+    "bucket": "broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "royal carribian commercial 2 seconds, then back to broadcast - clarissa talking up concert after postgame",
+    "note": "cool cover + KEEP panel hot (8.8s, 35 hops). Desk FP class the latch targets. Core 6623.75–6632.5.",
+    "saved_at": "2026-11-10T03:58:27.326Z"
+  },
+  "hush_20261015_210805_307p0_325p5": {
+    "bucket": "broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "clarissa intro to the game, introducing the teams and broadcasters",
+    "note": "cool cover + KEEP panel hot (8.5s, 34 hops). Desk FP class the latch targets. Core 312.0–320.5.",
+    "saved_at": "2026-11-10T03:58:27.494Z"
+  },
+  "hush_20261015_210805_1940p8_1958p8": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "draft kings commericial with clarissa thompson for 17 seconds, then commerical unkonwn",
+    "note": "cool cover + KEEP panel hot (8.0s, 32 hops). Desk FP class the latch targets. Core 1945.75–1953.75.",
+    "saved_at": "2026-11-10T03:58:27.661Z"
+  },
+  "hush_20261015_210805_600p5_615p0": {
+    "bucket": "broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "clarissa talking about players and stats and history of nfl",
+    "note": "cool cover + KEEP panel hot (4.5s, 18 hops). Desk FP class the latch targets. Core 605.5–610.0.",
+    "saved_at": "2026-11-10T03:58:27.807Z"
+  },
+  "hush_20261015_210805_606p0_620p2": {
+    "bucket": "broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "clarissa talking about teams and stats and history",
+    "note": "cool cover + KEEP panel hot (4.2s, 17 hops). Desk FP class the latch targets. Core 611.0–615.25.",
+    "saved_at": "2026-11-10T03:58:27.968Z"
+  },
+  "hush_20261015_210805_10977p0_10990p2": {
+    "bucket": "non_broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "10 seconds energizer commerical, then rx med commercial",
+    "note": "cool cover + KEEP panel hot (3.2s, 13 hops). Desk FP class the latch targets. Core 10982.0–10985.25.",
+    "saved_at": "2026-11-10T03:58:28.148Z"
+  },
+  "hush_20261008_205100_1746p0_1764p8": {
+    "bucket": "broadcast",
+    "kind": "booth",
+    "phase": "",
+    "setting": "",
+    "speaker": "al michaels giving details on jerry jones and his wife and their hobbies",
+    "note": "Named desk still muted under KEEP stack (10.8s, 43 hops). Desk span 1749.8–1760.8. Core 1750.0–1760.75.",
+    "saved_at": "2026-11-10T03:50:47.216Z"
+  },
+  "hush_20260924_220624_7043p5_7058p2": {
+    "bucket": "broadcast",
+    "kind": "halftime_desk",
+    "phase": "",
+    "setting": "",
+    "speaker": "whitworth looking at a replay and giving commentary",
+    "note": "Named desk still muted under KEEP stack (6.8s, 27 hops). Desk span 7035.0–7095.2. Core 7047.5–7054.25.",
+    "saved_at": "2026-11-10T03:51:44.407Z"
+  },
+  "hush_20260924_220624_6595p5_6609p8": {
+    "bucket": "broadcast",
+    "kind": "postgame_desk",
+    "phase": "postgame",
+    "setting": "",
+    "speaker": "fitzpatrick breaking down a schedule of a team",
+    "note": "Named desk still muted under KEEP stack (6.2s, 25 hops). Desk span 6599.5–6605.7. Core 6599.5–6605.75.",
+    "saved_at": "2026-11-10T03:52:11.106Z"
+  },
+  "hush_20260924_220624_6730p0_6743p8": {
+    "bucket": "broadcast",
+    "kind": "halftime_desk",
+    "phase": "halftime",
+    "setting": "",
+    "speaker": "tony gonzalez halftime commentary",
+    "note": "Named desk still muted under KEEP stack (5.8s, 23 hops). Desk span 6734.0–6739.8. Core 6734.0–6739.75.",
+    "saved_at": "2026-11-10T03:52:47.089Z"
+  },
+  "hush_20260924_220624_3643p0_3656p5": {
+    "bucket": "broadcast",
+    "kind": "booth",
+    "phase": "",
+    "setting": "",
+    "speaker": "al michaels talking about the moon and the weather and filling time.",
+    "note": "Named desk still muted under KEEP stack (5.5s, 22 hops). Desk span 3647.0–3652.5. Core 3647.0–3652.5.",
+    "saved_at": "2026-11-10T03:53:13.695Z"
+  },
+  "hush_20260924_220624_7086p2_7099p2": {
+    "bucket": "broadcast",
+    "kind": "postgame_desk",
+    "phase": "postgame",
+    "setting": "",
+    "speaker": "clarissa postgame talking about postgame coach interviews, they cut to coach answering questions",
+    "note": "Named desk still muted under KEEP stack (5.0s, 20 hops). Desk span 7035.0–7095.2. Core 7090.25–7095.25.",
+    "saved_at": "2026-11-10T03:53:52.037Z"
+  },
+  "hush_20260924_220624_6610p0_6621p8": {
+    "bucket": "broadcast",
+    "kind": "postgame_desk",
+    "phase": "postgame",
+    "setting": "",
+    "speaker": "clarissa, fitz, sherm, whit all talking over eachoterh talking schedules",
+    "note": "Named desk still muted under KEEP stack (3.8s, 15 hops). Desk span 6614.0–6629.2. Core 6614.0–6617.75.",
+    "saved_at": "2026-11-10T03:54:27.862Z"
+  },
+  "hush_20261008_205100_3430p0_3441p5": {
+    "bucket": "broadcast",
+    "kind": "unknown",
+    "phase": "",
+    "setting": "",
+    "speaker": "first 7 seconds are dog food commercial, then clarissa intro TNF broadcast",
+    "note": "Named desk still muted under KEEP stack (3.5s, 14 hops). Desk span 3434.0–3443.0. Core 3434.0–3437.5.",
+    "saved_at": "2026-11-10T03:55:10.957Z"
+  },
+  "hush_20260924_220624_7509p0_7519p5": {
+    "bucket": "broadcast",
+    "kind": "postgame_desk",
+    "phase": "postgame",
+    "setting": "",
+    "speaker": "clarissa giving an outro talk into commerical break at 8 seconds, then verizon commerical",
+    "note": "Named desk still muted under KEEP stack (2.5s, 10 hops). Desk span 7491.8–7515.4. Core 7513.0–7515.5.",
+    "saved_at": "2026-11-10T03:55:48.326Z"
+  },
+  "hush_20260924_220624_7366p2_7376p2": {
+    "bucket": "broadcast",
+    "kind": "postgame_desk",
+    "phase": "postgame",
+    "setting": "",
+    "speaker": "TNF postgame clarissa sherman fitz whit all goofing around killing time",
+    "note": "Named desk still muted under KEEP stack (2.0s, 8 hops). Desk span 7370.2–7379.8. Core 7370.25–7372.25.",
+    "saved_at": "2026-11-10T03:56:27.141Z"
+  },
+  "hush_20260924_220624_7402p9_7412p9": {
+    "bucket": "broadcast",
+    "kind": "postgame_desk",
+    "phase": "postgame",
+    "setting": "",
+    "speaker": "TNF gang - clarissa, fitz, whit all goofing around",
+    "note": "Named desk still muted under KEEP stack (1.8s, 7 hops). Desk span 7406.8–7436.2. Core 7407.0–7408.75.",
+    "saved_at": "2026-11-10T03:56:53.984Z"
+  },
+  "hush_20260924_220624_6191p8_6201p8": {
+    "bucket": "broadcast",
+    "kind": "halftime_desk",
+    "phase": "halftime",
+    "setting": "",
+    "speaker": "clarissa talking about highlights of the game",
+    "note": "Named desk still muted under KEEP stack (1.5s, 6 hops). Desk span 6180.7–6207.8. Core 6196.0–6197.5.",
+    "saved_at": "2026-11-10T03:57:30.847Z"
   }
 }

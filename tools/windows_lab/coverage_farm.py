@@ -313,8 +313,21 @@ def live_windows_et(now: datetime | None = None) -> list[dict[str, Any]]:
                 "note": "Prefer ESPN / Prime / NFL feeds only if a real game is on air.",
             }
         )
-    # Sun
+    # Sun — Germany / London-style morning internationals, then US slate
     if weekday == 6:
+        windows.append(
+            {
+                "id": "nfl_sunday_germany_morning",
+                "label": "NFL international morning (Germany/London)",
+                "start_local": "09:00",
+                "end_local": "13:00",
+                "priority": "live_event",
+                "note": (
+                    "Munich/London kickoffs ~9:30 ET. Prefer live NFL 01 / FOX / NFL Network "
+                    "card with team names; confirm with schedule guide-refresh."
+                ),
+            }
+        )
         windows.append(
             {
                 "id": "nfl_sunday",
@@ -573,8 +586,21 @@ def build_capture_plan(root: Path | None = None, *, chunk_minutes: int = 20) -> 
             reason_parts.append("live_window_active")
         if pick.get("verified_play"):
             reason_parts.append("verified_play")
+        local_pick = None
         if pick.get("any_us_local"):
             reason_parts.append("any_us_local_ok")
+            # Concrete DMA for this assignment — not "whatever Alaska was last saved".
+            from .us_locals import NETWORKS, pick_local
+
+            net = next(
+                (n for n in NETWORKS if n in str(pick.get("channel_id") or "").upper()),
+                None,
+            )
+            if net:
+                local_pick = pick_local(net, root=root)
+                reason_parts.append(
+                    f"dma={local_pick['market']}/{local_pick['calls']}/{local_pick['why']}"
+                )
         assignments.append(
             {
                 "instance_id": inst["id"],
@@ -586,11 +612,29 @@ def build_capture_plan(root: Path | None = None, *, chunk_minutes: int = 20) -> 
                 "slot": pick["slot"],
                 "prominence": pick["prominence"],
                 "preferred_markets": list(PRIORITY_MARKETS[:5]) if pick.get("any_us_local") else [],
+                "local": local_pick,
+                "open_command": (
+                    f"python -m tools.windows_lab open local --network {local_pick['network']}"
+                    f" --market \"{local_pick['market']}\" --instance {inst['id']}"
+                    if local_pick
+                    else None
+                ),
                 "chunk_minutes": chunk_minutes,
                 "media": "av",
                 "open_hint": pick["open_hint"],
                 "why": ", ".join(reason_parts),
                 "do_not_apply_example_recipe": True,
+                "dataset_tags": (
+                    {
+                        "source_kind": "streamers_us_local",
+                        "network": local_pick["network"],
+                        "market": local_pick["market"],
+                        "call_letters": local_pick["calls"],
+                        "diversity": "multi_dma_linear",
+                    }
+                    if local_pick
+                    else None
+                ),
             }
         )
 

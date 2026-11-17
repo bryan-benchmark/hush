@@ -2937,16 +2937,67 @@ input {
   flex: 0 0 auto;
 }
 
-.farm-labeler-still {
+.farm-still-wrap {
+  position: relative;
   width: 50%;
   min-width: 50%;
   max-width: 50%;
+  flex: 0 0 50%;
+}
+
+.farm-labeler-still {
+  width: 100%;
   aspect-ratio: 16 / 9;
   height: auto;
   object-fit: cover;
   background: #0d0814;
   border-radius: 0.35rem;
-  flex: 0 0 50%;
+  display: block;
+}
+
+.farm-still-empty {
+  min-height: 4rem;
+}
+
+.farm-av-flag {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.35rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(12, 8, 18, 0.72);
+  color: inherit;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  touch-action: manipulation;
+  opacity: 0.85;
+}
+
+.farm-av-flag.on {
+  border-color: rgba(255, 180, 70, 0.85);
+  background: rgba(120, 60, 10, 0.88);
+  opacity: 1;
+  box-shadow: 0 0 0 2px rgba(255, 180, 70, 0.25);
+}
+
+.farm-av-flag-note {
+  color: #ffc56b;
+}
+
+.farm-dock-discard {
+  border: 1px solid rgba(255, 160, 80, 0.45) !important;
+  background: rgba(90, 40, 10, 0.55) !important;
+  color: #ffd7a8 !important;
+}
+
+.farm-dock-discard.on {
+  border-color: rgba(255, 180, 70, 0.9) !important;
+  background: rgba(140, 70, 15, 0.85) !important;
+  box-shadow: 0 0 0 2px rgba(255, 180, 70, 0.2);
 }
 
 .farm-labeler-meta-text {
@@ -3043,6 +3094,27 @@ input {
   min-width: 0;
 }
 
+.farm-wave-stage-wrap {
+  position: relative;
+}
+
+.farm-skip-flash {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(12, 8, 18, 0.82);
+  border: 1px solid rgba(125, 255, 179, 0.45);
+  color: #7dffb3;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+  letter-spacing: 0.02em;
+}
+
 .farm-wave-hint {
   margin: 0.2rem 0 0 !important;
   font-size: 0.72rem !important;
@@ -3108,8 +3180,41 @@ input {
 
 .farm-label-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.3rem;
+}
+
+.farm-label-secondary {
+  display: flex;
+  flex-direction: row;
+  gap: 0.3rem;
+  margin-top: 0.3rem;
+}
+
+.farm-label-secondary > .farm-label-btn {
+  flex: 1 1 50%;
+  width: 50%;
+  min-width: 0;
+}
+
+.farm-label-subgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr));
+  gap: 0.3rem;
+  margin-top: 0.35rem;
+  padding: 0.35rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 138, 212, 0.28);
+  background: rgba(255, 138, 212, 0.06);
+}
+
+.farm-label-btn.farm-sub-btn {
+  min-height: 2.7rem;
+  padding: 0.4rem 0.25rem;
+}
+
+.farm-label-btn.farm-sub-btn .farm-label-title {
+  font-size: 0.7rem;
 }
 
 .farm-label-btn {
@@ -3122,6 +3227,40 @@ input {
   cursor: pointer;
   min-height: 3.1rem;
   touch-action: manipulation;
+}
+
+.farm-label-btn.farm-label-row {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 2.75rem;
+  padding: 0.45rem 0.75rem;
+  text-align: left;
+}
+
+.farm-label-btn.farm-label-row .farm-label-icon {
+  display: inline;
+  font-size: 1rem;
+}
+
+.farm-label-btn.farm-label-row .farm-label-title {
+  display: inline;
+  margin-top: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.farm-label-btn.farm-label-av {
+  border-color: rgba(255, 170, 80, 0.35);
+  background: rgba(255, 140, 60, 0.1);
+}
+
+.farm-label-btn.farm-label-av.on,
+.farm-label-btn.farm-label-av:active {
+  border-color: rgba(255, 170, 80, 0.7);
+  background: rgba(255, 140, 60, 0.22);
 }
 
 .farm-label-btn.on {
@@ -3307,21 +3446,17 @@ input {
   }
 
   .farm-label-grid {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.35rem;
-  }
-
-  .farm-label-grid > .farm-label-btn:nth-child(-n + 3) {
-    grid-column: span 2;
-  }
-
-  .farm-label-grid > .farm-label-btn:nth-child(n + 4) {
-    grid-column: span 3;
   }
 
   .farm-label-btn {
     min-height: 3.4rem;
     padding: 0.55rem 0.25rem;
+  }
+
+  .farm-label-btn.farm-label-row {
+    min-height: 3rem;
   }
 
   .farm-label-icon {

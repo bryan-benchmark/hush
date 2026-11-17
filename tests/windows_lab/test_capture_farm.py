@@ -124,7 +124,10 @@ def test_locks_and_busy_session(data_root: Path):
     meta = json.loads(meta_path.read_text(encoding="utf-8"))
     assert meta["source_kind"] == "streamers"
     assert meta["media"] == "av"
+    assert meta["still_interval_sec"] == 1.0
     assert meta["credentials"] is None
+    assert meta["visual_archive"]["mode"] == "stills"
+    assert meta["visual_archive"]["planned"] is True
 
 
 def test_catalog_index(data_root: Path):

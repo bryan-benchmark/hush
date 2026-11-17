@@ -72,10 +72,13 @@ def backlog_report(root: Path | None = None) -> dict[str, Any]:
     reasons: list[str] = []
     if len(unprepared) >= CRITICAL_UNPREPARED_TAKES or help_asks >= CRITICAL_REVIEW_ASKS:
         level = "critical"
-        reasons.append("unlabeled backlog out of control — clear /farm and/or add GPU")
+        if len(unprepared) >= CRITICAL_UNPREPARED_TAKES:
+            reasons.append("takes unprepared — overnight draft falling behind (GPU/time)")
+        if help_asks >= CRITICAL_REVIEW_ASKS:
+            reasons.append("help pile huge — clear DAILY_LABEL morning batch at /farm")
     elif len(unprepared) >= WARN_UNPREPARED_TAKES or help_asks >= WARN_REVIEW_ASKS:
         level = "warn"
-        reasons.append("help queue growing — spend a /farm pass")
+        reasons.append("help queue growing — clear today's review_batch=active at /farm")
     elif help_asks > 0:
         reasons.append(f"{help_asks} clips need a human at /farm (model unsure or review)")
 
@@ -92,7 +95,8 @@ def backlog_report(root: Path | None = None) -> dict[str, Any]:
         "level": level,
         "reasons": reasons,
         "human_needed": level in {"warn", "critical"} or help_asks > 0,
-        "more_gpu_needed": level == "critical",
+        # GPU helps draft/prepare — not clearing the human review pile.
+        "more_gpu_needed": len(unprepared) >= CRITICAL_UNPREPARED_TAKES,
         "thresholds": {
             "warn_unprepared_takes": WARN_UNPREPARED_TAKES,
             "warn_review_asks": WARN_REVIEW_ASKS,
@@ -100,8 +104,9 @@ def backlog_report(root: Path | None = None) -> dict[str, Any]:
             "critical_review_asks": CRITICAL_REVIEW_ASKS,
         },
         "owner_action": (
-            "Keep capturing + farm tick. /farm is always live for help clips. "
-            "Clear the queue when human_needed; add GPU when more_gpu_needed."
+            "Overnight drafts; morning clear review_batch=active at /farm "
+            f"(~{CRITICAL_REVIEW_ASKS}+ help asks → spend the daily batch). "
+            "Add GPU only when takes_unprepared stays high."
         ),
         "review_url": "http://127.0.0.1:3010/farm",
     }
@@ -176,6 +181,20 @@ def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description="Farm worker: periodic Ollama labeling + backlog")
     sub = p.add_subparsers(dest="cmd", required=True)
     sub.add_parser("backlog", help="Report unlabeled / review backlog")
+    sub.add_parser("label-audit", help="Write LABEL_AUDIT.md contradiction/empty-evidence report")
+    sub.add_parser("digest", help="Write DAILY_LABEL.md + refresh morning /farm batch")
+    sub.add_parser("backfill-audit", help="Mirror key.jsonl into append-only label_draft.jsonl")
+    sub.add_parser("enrich", help="Patch session/t0/t1 onto key+audit from queue (no GPU)")
+    sub.add_parser(
+        "retriage",
+        help="90/10: stills_disagree+ASR → review; park silent needs_human; refresh morning batch",
+    )
+    sub.add_parser("sync-judgments", help="Lock key from take_judgments.json + refresh trust gate")
+    rd = sub.add_parser(
+        "redraft-weak",
+        help="Re-draft unscored + uncertain/low clips (full Whisper/vision audit)",
+    )
+    rd.add_argument("--limit", type=int, default=80)
     tk = sub.add_parser("tick", help="Prepare new takes + draft with Ollama + backlog")
     tk.add_argument("--model", default="qwen2.5:14b")
     tk.add_argument("--limit", type=int, default=30, help="Max new drafts this tick")
@@ -186,6 +205,63 @@ def main(argv: list[str] | None = None) -> int:
     root = data_root()
     if args.cmd == "backlog":
         print(json.dumps(backlog_report(root), indent=2))
+        return 0
+    if args.cmd == "label-audit":
+        from .label_audit_report import main as label_audit_main
+        return label_audit_main()
+    if args.cmd == "digest":
+        from .farm_draft import promote_help_queue
+        from .farm_label_audit import refresh_trust_gate, write_daily_digest
+
+        batch = promote_help_queue(root)
+        trust = refresh_trust_gate(root)
+        digest = write_daily_digest(root)
+        print(json.dumps({"digest": digest, "queue": batch, "trust_gate": trust}, indent=2, default=str))
+        return 0
+    if args.cmd == "backfill-audit":
+        from .farm_label_audit import backfill_draft_audit, write_daily_digest
+
+        out = backfill_draft_audit(root)
+        out["daily"] = write_daily_digest(root)
+        print(json.dumps(out, indent=2, default=str))
+        return 0
+    if args.cmd == "enrich":
+        from .farm_label_audit import enrich_keys_from_queue, write_daily_digest
+
+        out = enrich_keys_from_queue(root)
+        out["daily"] = write_daily_digest(root)
+        print(json.dumps(out, indent=2, default=str))
+        return 0
+    if args.cmd == "retriage":
+        from .farm_label_audit import retriage_needs_human, write_daily_digest
+
+        out = retriage_needs_human(root)
+        out["daily"] = write_daily_digest(root)
+        print(json.dumps(out, indent=2, default=str))
+        return 0
+    if args.cmd == "redraft-weak":
+        from .farm_draft import draft_queue
+        from .farm_label_audit import write_daily_digest
+
+        # only_unscored path also re-visits uncertain+low for a real audited tick.
+        out = draft_queue(
+            root=root,
+            limit=args.limit,
+            only_unscored=True,
+            use_whisper=True,
+            use_vision=True,
+        )
+        out["daily"] = write_daily_digest(root)
+        print(json.dumps(out, indent=2, default=str))
+        return 0
+    if args.cmd == "sync-judgments":
+        from .farm_draft import promote_help_queue
+        from .farm_label_audit import sync_judgments_to_locks, write_daily_digest
+
+        out = sync_judgments_to_locks(root)
+        out["queue"] = promote_help_queue(root)
+        out["daily"] = write_daily_digest(root)
+        print(json.dumps(out, indent=2, default=str))
         return 0
     if args.cmd == "tick":
         print(

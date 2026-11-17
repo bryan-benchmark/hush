@@ -139,27 +139,45 @@ def op2_label(
 
 
 def op3_human(root: Path | None = None) -> dict[str, Any]:
-    """Human-in-the-loop — /farm is always the help desk for model-unsure clips."""
+    """Human-in-the-loop — /verdict for disagrees; /farm is legacy clip queue."""
     backlog = backlog_report(root)
-    required = bool(backlog.get("human_needed"))
     help_n = int(backlog.get("draft_help_asks") or 0)
+    verdict_pending = 0
+    try:
+        from .coverage_farm import farm_label_dir
+
+        triage_path = farm_label_dir(root) / "audit" / "EPISODE_TRIAGE.json"
+        if triage_path.is_file():
+            blob = json.loads(triage_path.read_text(encoding="utf-8"))
+            verdict_pending = sum(len(s.get("episodes") or []) for s in (blob.get("sessions") or []))
+    except Exception:
+        verdict_pending = 0
+    required = bool(verdict_pending > 0) or bool(backlog.get("human_needed"))
+    reasons = []
+    if verdict_pending > 0:
+        reasons.append(f"{verdict_pending} disagree episodes at /verdict")
+    if backlog.get("reasons"):
+        reasons.extend(list(backlog.get("reasons") or []))
+    elif help_n > 0 and not reasons:
+        reasons.append(f"{help_n} legacy farm help clips (overnight consensus drains)")
+    if not reasons:
+        reasons = ["backlog ok — no verdict disagrees waiting"]
     return {
         "op": 3,
         "name": "human",
         "updated_utc": _now(),
-        "summary": "Label at /farm whenever the open-source draft needs help; warn when the pile is large.",
+        "summary": "Clear /verdict disagreements. Legacy /farm pile drains via multichannel consensus.",
         "required": required,
-        "reason": (
-            backlog.get("reasons")
-            or (["backlog ok — no help clips waiting"] if help_n == 0 else [f"{help_n} help clips at /farm"])
-        ),
-        "review_url": REVIEW_URL,
+        "reason": reasons,
+        "review_url": "http://127.0.0.1:3020/",
+        "farm_url": REVIEW_URL,
         "how": (
-            "Open review_url. Pick what each clip is, optional note, Add, Done. "
-            "Model-unsure clips stay at the front of the queue after each draft tick."
+            "Open /verdict (or :3020). Mark keep/mute on disagree stretches, Done. "
+            "Overnight auto-locks agreements; only conflicts need you."
         ),
         "backlog_level": backlog.get("level"),
         "help_asks": help_n,
+        "verdict_pending": verdict_pending,
     }
 
 

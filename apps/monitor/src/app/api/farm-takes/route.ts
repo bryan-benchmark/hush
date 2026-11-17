@@ -8,6 +8,7 @@ import {
   visibleFarmClip,
   writeFarmCloudJudgment,
 } from "@/lib/farmCloud";
+import { lockHumanClip, skipBadClip } from "@/lib/farmLabelLock";
 
 export const runtime = "nodejs";
 
@@ -43,6 +44,11 @@ type TakeJudgment = {
   id: string;
   regions: Region[];
   saved_at: string;
+  /** Still and audio don't line up — usually extreme stream lag. */
+  av_mismatch?: boolean;
+  discarded?: boolean;
+  discard_reason?: string;
+  note?: string;
 };
 
 function readJudgments(): Record<string, TakeJudgment> {
@@ -133,20 +139,23 @@ function loadKeyByClip() {
   return out;
 }
 
-function loadQueueClips(opts?: { unlabeledOnly?: boolean }) {
+function loadQueueClips(opts?: { unlabeledOnly?: boolean; morningOnly?: boolean }) {
   const unlabeledOnly = opts?.unlabeledOnly !== false;
+  const morningOnly = opts?.morningOnly !== false;
   const judged = unlabeledOnly
     ? new Set(
         Object.values(readJudgments())
-          .filter((row) => (row.regions || []).length > 0)
+          .filter((row) => (row.regions || []).length > 0 || row.discarded || row.av_mismatch)
           .map((row) => row.id),
       )
     : new Set<string>();
   const keys = loadKeyByClip();
   const file = queuePath();
-  if (!fs.existsSync(file)) return [];
+  if (!fs.existsSync(file)) return { items: [] as Array<Record<string, unknown>>, active: 0, parked: 0 };
   const lines = fs.readFileSync(file, "utf8").split(/\r?\n/).filter(Boolean);
   const items: Array<Record<string, unknown>> = [];
+  let active = 0;
+  let parked = 0;
   for (const line of lines) {
     try {
       const row = JSON.parse(line) as Record<string, unknown>;
@@ -160,8 +169,29 @@ function loadQueueClips(opts?: { unlabeledOnly?: boolean }) {
       // Skip auto-accepted drafts and already-locked gold — not help work.
       const key = keys[id] || {};
       const ask = String(row.ask || key.ask || "");
-      if (ask === "optional_confirm") continue;
+      if (ask === "optional_confirm" || ask === "skip") continue;
       if (ask === "locked" || key.gold || key.source === "gold" || key.source === "human") continue;
+      const source = String(row.source || "queue");
+      const reviewBatch = String(row.review_batch || "");
+      if (reviewBatch === "active") active += 1;
+      if (reviewBatch === "parked") parked += 1;
+      // Default /farm: only today's morning batch (+ gold candidates always visible).
+      if (
+        morningOnly &&
+        source !== "gold_candidate" &&
+        reviewBatch === "parked"
+      ) {
+        continue;
+      }
+      // transcript_boundary chops are weak soup — hide until the model marks them help.
+      if (
+        source === "transcript_boundary" &&
+        ask !== "needs_human" &&
+        ask !== "review" &&
+        !row.expect_bucket
+      ) {
+        continue;
+      }
       const aidPath = path.join(sessionDir, "label_aid.json");
       const aid = fs.existsSync(aidPath)
         ? (JSON.parse(fs.readFileSync(aidPath, "utf8")) as Record<string, unknown>)
@@ -193,24 +223,34 @@ function loadQueueClips(opts?: { unlabeledOnly?: boolean }) {
         why: why || null,
         ask: ask || null,
         draft_bucket: row.draft_bucket || key.bucket || null,
+        draft_confidence: row.draft_confidence || key.confidence || null,
         expect_bucket: expect || null,
-        source: String(row.source || "queue"),
+        source,
+        review_batch: reviewBatch || null,
         whole_clip: true,
         priority,
         help:
           ask === "needs_human" ||
           ask === "review" ||
-          String(row.source || "") === "gold_candidate",
+          source === "gold_candidate",
       });
     } catch {
       // skip bad line
     }
   }
-  // Help first (needs_human/review), then other priorities, then session time.
+  // Active batch first, then help, gold candidates, rest.
   items.sort((a, b) => {
-    const ha = a.help ? 0 : 1;
-    const hb = b.help ? 0 : 1;
-    if (ha !== hb) return ha - hb;
+    const rank = (row: Record<string, unknown>) => {
+      if (row.review_batch === "active") return 0;
+      if (row.help) return 1;
+      if (row.expect_bucket || row.source === "gold_candidate") return 2;
+      if (row.source === "still_diff" || row.source === "label_aid") return 3;
+      if (row.source === "transcript_boundary") return 9;
+      return 5;
+    };
+    const ra = rank(a);
+    const rb = rank(b);
+    if (ra !== rb) return ra - rb;
     const pa = Number(a.priority || 99);
     const pb = Number(b.priority || 99);
     if (pa !== pb) return pa - pb;
@@ -219,7 +259,7 @@ function loadQueueClips(opts?: { unlabeledOnly?: boolean }) {
     if (sa !== sb) return sa.localeCompare(sb);
     return Number(a.audio_start_s || 0) - Number(b.audio_start_s || 0);
   });
-  return items;
+  return { items, active, parked };
 }
 
 function loadTake(dir: string) {
@@ -256,19 +296,40 @@ function loadTake(dir: string) {
   };
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const all = req.nextUrl.searchParams.get("all") === "1";
   if (farmCloudMode()) {
     const judgments = await readFarmCloudJudgments();
     const saved = Object.values(judgments);
     const judged = new Set(saved.filter((row) => row.regions.length > 0).map((row) => row.id));
     const queue = await readFarmCloudQueue();
     const clips = queue
-      .filter((row) => !judged.has(row.id) && row.ask !== "optional_confirm")
+      .filter((row) => {
+        if (judged.has(row.id) || row.ask === "optional_confirm") return false;
+        const source = String(row.source || "");
+        const ask = String(row.ask || "");
+        if (
+          (source === "transcript_boundary" || source === "fallback_tile") &&
+          ask !== "needs_human" &&
+          ask !== "review" &&
+          !row.expect_bucket
+        ) {
+          return false;
+        }
+        return true;
+      })
       .map(visibleFarmClip)
       .sort((a, b) => {
-        const ha = a.help ? 0 : 1;
-        const hb = b.help ? 0 : 1;
-        if (ha !== hb) return ha - hb;
+        const rank = (row: { help?: boolean; expect_bucket?: string | null; source?: string }) => {
+          if (row.help) return 0;
+          if (row.expect_bucket || row.source === "gold_candidate") return 1;
+          if (row.source === "still_diff" || row.source === "label_aid" || row.source === "label_aid_boundary") return 2;
+          if (row.source === "transcript_boundary" || row.source === "fallback_tile") return 9;
+          return 5;
+        };
+        const ra = rank(a);
+        const rb = rank(b);
+        if (ra !== rb) return ra - rb;
         return (a.priority ?? 99) - (b.priority ?? 99);
       });
     const helpN = clips.filter((row) => row.help).length;
@@ -285,27 +346,43 @@ export async function GET() {
       saved,
       help_n: helpN,
       remaining: clips.length,
+      morning_batch: false,
     });
   }
 
   const judgments = readJudgments();
   const saved = Object.values(judgments);
-  const clips = loadQueueClips({ unlabeledOnly: true });
+  const loaded = loadQueueClips({ unlabeledOnly: true, morningOnly: !all });
+  // Full pile used to return 7k+ clips with every still → browser freeze / empty UI.
+  const ALL_CAP = 100;
+  let clips = loaded.items;
+  if (all && clips.length > ALL_CAP) {
+    clips = clips.slice(0, ALL_CAP).map((row) => {
+      const frames = Array.isArray(row.frames) ? (row.frames as unknown[]) : [];
+      return { ...row, frames: frames.slice(0, 5) };
+    });
+  }
   if (clips.length) {
     const helpN = clips.filter((row) => row.help).length;
+    const batchN = clips.filter((row) => row.review_batch === "active").length;
     return NextResponse.json({
       mode: "clips",
       cloud: false,
-      instructions:
-        helpN > 0
-          ? "Model needs help on these clips. Pick what it is, Add, Done."
-          : clips.length > 0
-            ? "Queue has clips to label. Pick what it is, Add, Done."
-            : "No unlabeled clips right now — farm tick will add more when the model is unsure.",
+      instructions: all
+        ? `Next ${clips.length} of pile (capped). Prefer morning batch for easy paid_ad confirms.`
+        : batchN > 0
+          ? `Morning batch: clear these ${batchN} first (paid_ad high → program → rest). ${loaded.parked} parked.`
+          : helpN > 0
+            ? "Model needs help on these clips. Pick what it is, Add, Done."
+            : "Queue has clips to label. Pick what it is, Add, Done.",
       items: clips,
       saved,
       help_n: helpN,
-      remaining: clips.length,
+      remaining: all ? loaded.items.length : clips.length,
+      morning_batch: !all,
+      morning_active: loaded.active,
+      morning_parked: loaded.parked,
+      capped: all ? ALL_CAP : null,
     });
   }
 
@@ -343,15 +420,54 @@ export async function POST(req: NextRequest) {
   const body = (await req.json()) as {
     id?: string;
     regions?: Region[];
+    av_mismatch?: boolean;
+    /** Throw out of dataset: av_lag | black_silent | other */
+    discard?: string;
+    note?: string;
   };
   const id = String(body.id || "").trim();
   if (!id) return NextResponse.json({ error: "id required" }, { status: 400 });
+
+  const discard = String(body.discard || "").trim();
+  if (discard) {
+    const reason = discard === "av_lag" || discard === "black_silent" || discard === "other" ? discard : "av_lag";
+    const judgment = {
+      id,
+      regions: [] as Region[],
+      saved_at: new Date().toISOString(),
+      discarded: true,
+      discard_reason: reason,
+      av_mismatch: reason === "av_lag",
+      note: String(body.note || "").slice(0, 800),
+    };
+    if (farmCloudMode()) {
+      await writeFarmCloudJudgment(judgment);
+      return NextResponse.json({ ok: true, id, discarded: true, reason, cloud: true });
+    }
+    const notes = readJudgments();
+    notes[id] = judgment;
+    writeJudgments(notes);
+    try {
+      const out = skipBadClip({ id, reason, note: String(body.note || "") });
+      return NextResponse.json({
+        ok: true,
+        id,
+        discarded: true,
+        reason,
+        trust_gate: out.trust,
+      });
+    } catch (err) {
+      return NextResponse.json({ ok: true, id, discarded: true, reason, lock_error: String(err) });
+    }
+  }
+
   const regions = Array.isArray(body.regions) ? body.regions : [];
   for (const row of regions) {
     if (!["paid_ad", "program", "show_promo", "program_mention", "uncertain"].includes(row.bucket)) {
       return NextResponse.json({ error: `bad bucket ${row.bucket}` }, { status: 400 });
     }
   }
+  const avBad = Boolean(body.av_mismatch);
   const judgment = {
     id,
     regions: regions.map((r) => ({
@@ -362,6 +478,7 @@ export async function POST(req: NextRequest) {
       note: String(r.note || "").slice(0, 800),
     })),
     saved_at: new Date().toISOString(),
+    ...(avBad ? { av_mismatch: true } : {}),
   };
 
   if (farmCloudMode()) {
@@ -372,5 +489,62 @@ export async function POST(req: NextRequest) {
   const notes = readJudgments();
   notes[id] = judgment;
   writeJudgments(notes);
-  return NextResponse.json({ ok: true, id, regions: notes[id].regions.length });
+
+  // A/V lag flag on Done → skip out of dataset (do not gold-lock).
+  if (avBad) {
+    try {
+      const out = skipBadClip({
+        id,
+        reason: "av_lag",
+        note: judgment.regions[0]?.note || "audio≠picture",
+      });
+      return NextResponse.json({
+        ok: true,
+        id,
+        discarded: true,
+        reason: "av_lag",
+        regions: judgment.regions.length,
+        trust_gate: out.trust,
+      });
+    } catch (err) {
+      return NextResponse.json({
+        ok: true,
+        id,
+        discarded: true,
+        regions: judgment.regions.length,
+        lock_error: String(err),
+      });
+    }
+  }
+
+  let lock: { trust?: Record<string, unknown> } | null = null;
+  if (judgment.regions.length > 0) {
+    const pick =
+      judgment.regions.find((r) => r.bucket !== "uncertain") || judgment.regions[0];
+    try {
+      lock = lockHumanClip({
+        id,
+        bucket: pick.bucket,
+        kind: pick.kind || "unknown",
+        note: pick.note || "",
+        regions: judgment.regions as unknown as Array<Record<string, unknown>>,
+      });
+    } catch (err) {
+      return NextResponse.json(
+        {
+          ok: true,
+          id,
+          regions: notes[id].regions.length,
+          lock_error: String(err),
+        },
+        { status: 200 },
+      );
+    }
+  }
+  return NextResponse.json({
+    ok: true,
+    id,
+    regions: notes[id].regions.length,
+    trust_gate: lock?.trust ?? null,
+  });
 }

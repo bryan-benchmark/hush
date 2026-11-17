@@ -4,10 +4,21 @@ import { join } from "node:path";
 
 export const LIVE_ORIGIN = "http://127.0.0.1:8770";
 
+function venvPython(root: string): string | null {
+  const candidates = [
+    join(root, ".venv", "Scripts", "python.exe"), // Windows
+    join(root, ".venv", "bin", "python"), // macOS / Linux
+  ];
+  for (const path of candidates) {
+    if (existsSync(path)) return path;
+  }
+  return null;
+}
+
 function repoRoot() {
   const guesses = [join(process.cwd(), "..", ".."), join(process.cwd(), ".."), process.cwd()];
   for (const guess of guesses) {
-    if (existsSync(join(guess, "ohush_live")) && existsSync(join(guess, ".venv", "bin", "python"))) {
+    if (existsSync(join(guess, "ohush_live")) && venvPython(guess)) {
       return guess;
     }
   }
@@ -15,7 +26,7 @@ function repoRoot() {
 }
 
 const REPO = repoRoot();
-const PYTHON = join(REPO, ".venv", "bin", "python");
+const PYTHON = venvPython(REPO) ?? join(REPO, ".venv", "bin", "python");
 const PID_FILE = join(REPO, "ohush_live", "sessions", ".desk.pid");
 
 declare global {

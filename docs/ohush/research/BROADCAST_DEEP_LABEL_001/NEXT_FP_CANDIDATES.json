@@ -1,0 +1,38 @@
+[
+  {
+    "start_s": 1955.5,
+    "end_s": 2041.75,
+    "length_s": 86.25,
+    "known_ol": 0.0
+  },
+  {
+    "start_s": 980.25,
+    "end_s": 1058.25,
+    "length_s": 78.0,
+    "known_ol": 0.0
+  },
+  {
+    "start_s": 6256.5,
+    "end_s": 6334.0,
+    "length_s": 77.5,
+    "known_ol": 0.0
+  },
+  {
+    "start_s": 6729.75,
+    "end_s": 6800.5,
+    "length_s": 70.75,
+    "known_ol": 0.0
+  },
+  {
+    "start_s": 3534.5,
+    "end_s": 3600.25,
+    "length_s": 65.75,
+    "known_ol": 0.0
+  },
+  {
+    "start_s": 5419.25,
+    "end_s": 5483.5,
+    "length_s": 64.25,
+    "known_ol": 0.0
+  }
+]

@@ -2,7 +2,8 @@
 
 Rules:
 - Never pretend aid captions are model evidence.
-- Empty ASR + no visual → needs_human (do not call the classifier as if it saw speech).
+- Empty ASR + black/corrupt still → ask=skip (dead air; not /farm work).
+- Empty ASR + no visual text but real picture → needs_human.
 - Auto-accept only paid_ad with high confidence AND lexicon support AND non-empty evidence.
 """
 
@@ -12,12 +13,21 @@ import base64
 import json
 import re
 import wave
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 from urllib.request import Request, urlopen
 
 from .config import data_root
 from .coverage_farm import farm_label_dir
+from .farm_label_audit import (
+    MORNING_REVIEW_BUDGET,
+    append_draft_events,
+    apply_morning_batch,
+    atomic_write_jsonl,
+    review_priority,
+    write_daily_digest,
+)
 
 OLLAMA_URL = "http://127.0.0.1:11434/api/generate"
 OLLAMA_CHAT_URL = "http://127.0.0.1:11434/api/chat"
@@ -29,7 +39,11 @@ MIN_CLIP_ASR_SEC = 16.0
 SPORTS_VISUAL = re.compile(
     r"\b("
     r"soccer|football|basketball|baseball|hockey|tennis|scorebug|scoreboard|"
-    r"players? on the (field|court)|live game|stadium|referee|goalkeeper"
+    r"players? on the (field|court)|live game|stadium|referee|goalkeeper|"
+    # Common spoken/on-screen sports without the sport name itself:
+    r"lakers|celtics|warriors|knicks|nba|nfl|nhl|mlb|nwsl|mls|"
+    r"assists?|rebounds?|touchdowns?|yardage|pitcher|home\s*run|"
+    r"sports\s+broadcast|on\s+the\s+court|on\s+the\s+field"
     r")\b",
     re.I,
 )
@@ -55,6 +69,7 @@ Rules:
 - uncertain = evidence is too weak (empty transcript AND vague visual, or conflict).
 - Prefer paid_ad when visual clearly shows a product end-card / logo ad even if speech is thin.
 - Prefer program when scorebug/desk/anchors/live play dominate.
+- If you describe a live game, scoreboard, anchors, or sports desk in "why", bucket MUST be program (not uncertain).
 - confidence=high only when evidence is clear; otherwise medium/low.
 """
 
@@ -71,7 +86,9 @@ SHOW_HINT = re.compile(
     r"\b("
     r"touchdown|first down|yard line|quarterback|halftime|sideline|"
     r"breaking news|good evening|welcome back|from the desk|"
-    r"final score|play[- ]by[- ]play|scorebug|kickoff"
+    r"final score|play[- ]by[- ]play|scorebug|kickoff|"
+    r"first half|second half|third quarter|fourth quarter|mid\s+third|"
+    r"step back|three[- ]pointer|free throw|full[- ]court"
     r")\b",
     re.I,
 )
@@ -119,22 +136,149 @@ def _auto_accept(
 
 
 def _rescue_program(draft: dict[str, Any], text: str, visual: str) -> dict[str, Any]:
-    """If the model hedges but stills clearly show live sports, prefer program.
+    """If the model hedges but sports cues are clear, prefer program.
 
     Never rewrite show_promo — that class needs packaging cues, not scorebugs.
     """
-    if draft.get("bucket") != "uncertain":
+    bucket = str(draft.get("bucket") or "")
+    if bucket == "show_promo":
         return draft
-    if not SPORTS_VISUAL.search(visual or ""):
+    if bucket not in {"uncertain", "program_mention"} and not (
+        bucket == "program" and str(draft.get("confidence") or "") == "low"
+    ):
+        # Also lift uncertain-only; leave solid paid_ad alone.
+        if bucket != "uncertain":
+            return draft
+    sports_vis = bool(SPORTS_VISUAL.search(visual or ""))
+    sports_speech = bool(SHOW_HINT.search(text or "") or SPORTS_VISUAL.search(text or ""))
+    if not (sports_vis or sports_speech):
         return draft
     # Don't override a clear paid-ad lexicon hit with no sports speech.
-    if AD_HINT.search(text or "") and not SHOW_HINT.search(text or "") and not SPORTS_VISUAL.search(text or ""):
+    if AD_HINT.search(text or "") and not sports_speech and not sports_vis:
         return draft
+    if AD_HINT.search(text or "") and not sports_speech and sports_vis:
+        # Mixed: keep uncertain rather than force program over a hard sell.
+        if AD_HINT.search(text or "") and not SHOW_HINT.search(text or ""):
+            return draft
     out = dict(draft)
     out["bucket"] = "program"
-    out["kind"] = "sports" if out.get("kind") in {"unknown", "dry_vo", "live_game"} else out.get("kind")
-    out["confidence"] = "medium" if out.get("confidence") == "low" else out.get("confidence") or "medium"
-    out["why"] = (out.get("why") or "")[:120] + " | rescued: sports visual"
+    out["kind"] = "sports" if out.get("kind") in {"unknown", "dry_vo", "live_game", "news"} else out.get("kind")
+    conf = str(out.get("confidence") or "low")
+    out["confidence"] = "medium" if conf == "low" else conf
+    tag = "sports visual" if sports_vis else "sports speech"
+    out["why"] = (out.get("why") or "")[:120] + f" | rescued: {tag}"
+    return out
+
+
+def _rescue_paid_ad(draft: dict[str, Any], text: str, visual: str) -> dict[str, Any]:
+    """Clear ad lexicon + no sports show cues → paid_ad (common-sense lift)."""
+    bucket = str(draft.get("bucket") or "")
+    if bucket in {"show_promo", "program_mention"}:
+        return draft
+    if bucket not in {"uncertain", "paid_ad"} and not (
+        bucket == "program" and str(draft.get("confidence") or "") == "low"
+    ):
+        return draft
+    ad_speech = bool(AD_HINT.search(text or ""))
+    ad_vis = bool(VISUAL_AD_HINT.search(visual or ""))
+    if not (ad_speech or ad_vis):
+        return draft
+    if SHOW_HINT.search(text or "") or SPORTS_VISUAL.search(visual or ""):
+        # Live game under a sponsor card — leave for human / program_mention.
+        return draft
+    out = dict(draft)
+    out["bucket"] = "paid_ad"
+    out["kind"] = "dry_vo" if out.get("kind") in {"unknown", "sports", "live_game"} else out.get("kind")
+    conf = str(out.get("confidence") or "low")
+    # Lexicon+visual agreement → medium; speech lexicon alone → medium; else keep.
+    out["confidence"] = "high" if ad_speech and ad_vis else ("medium" if conf == "low" else conf)
+    tag = "ad lexicon+visual" if ad_speech and ad_vis else ("ad lexicon" if ad_speech else "ad visual")
+    out["why"] = (out.get("why") or "")[:120] + f" | rescued: {tag}"
+    return out
+
+
+def detect_av_content_desync(
+    *,
+    head_text: str,
+    visual: str = "",
+    tail_text: str = "",
+    full_text: str = "",
+    still_classes: list[str] | None = None,
+    span_s: float,
+) -> dict[str, Any] | None:
+    """90/10 A/V content skew / mixed clip (not silence).
+
+    Classic Streamers failure: picture already on the ad, loopback audio still on the
+    previous segment for ~5–15s. Loud peak → audio_lag probe misses it.
+
+    Triggers (any one):
+      1) mid/end visual looks like ad AND early ASR still program
+      2) early ASR program AND late ASR ad (or reverse) on a ≥10s clip —
+         gold-poisoning mixed window even when start-still text is still “game”
+    """
+    if span_s < 8.0:
+        return None
+    head = (head_text or "").strip()
+    tail = (tail_text or "").strip()
+    full = (full_text or "").strip()
+    vis = (visual or "").strip()
+    if len(head) < 12 and len(full) < 20:
+        return None
+    if not tail and full and len(full) > len(head) + 20:
+        # Fall back: treat last 45% of characters as tail when caller only has one blob.
+        cut = max(len(head), int(len(full) * 0.55))
+        tail = full[cut:]
+    classes = {str(c) for c in (still_classes or []) if c}
+    vis_ad = bool(VISUAL_AD_HINT.search(vis) or AD_HINT.search(vis) or ("ad" in classes))
+    vis_prog = bool(
+        SPORTS_VISUAL.search(vis) or SHOW_HINT.search(vis) or ("program" in classes)
+    )
+    head_ad = bool(AD_HINT.search(head))
+    head_prog = bool(SHOW_HINT.search(head) or SPORTS_VISUAL.search(head)) and not head_ad
+    tail_ad = bool(AD_HINT.search(tail))
+    tail_prog = bool(SHOW_HINT.search(tail) or SPORTS_VISUAL.search(tail)) and not tail_ad
+
+    # Picture ahead: ad still + program speech at open of clip.
+    if vis_ad and head_prog and not vis_prog:
+        return {
+            "desync": True,
+            "kind": "picture_ad_audio_program",
+            "why": "skip_av_desync:picture_ad_early_program_asr",
+        }
+    # Less common: program still + clear ad speech at open.
+    if vis_prog and head_ad and not vis_ad:
+        return {
+            "desync": True,
+            "kind": "picture_program_audio_ad",
+            "why": "skip_av_desync:picture_program_early_ad_asr",
+        }
+    # Mixed ASR arc on a long clip — do not gold-lock as one bucket (Popeyes case).
+    if span_s >= 10.0 and head_prog and tail_ad:
+        return {
+            "desync": True,
+            "kind": "asr_program_then_ad",
+            "why": "skip_av_desync:early_program_late_ad_asr",
+        }
+    if span_s >= 10.0 and head_ad and tail_prog:
+        return {
+            "desync": True,
+            "kind": "asr_ad_then_program",
+            "why": "skip_av_desync:early_ad_late_program_asr",
+        }
+    return None
+
+
+def apply_common_sense(draft: dict[str, Any], text: str, visual: str) -> dict[str, Any]:
+    """Deterministic rescues after the model (or when stills disagree but ASR is clear).
+
+    Always fold the model's own ``why`` into the visual blob. VL often writes
+    ``bucket=uncertain`` while ``why`` says "basketball…scoreboard" — without
+    that, sports rescue never fires (ASR play-by-play may not hit SHOW_HINT).
+    """
+    why = str(draft.get("why") or "")
+    vis_blob = f"{visual or ''}\n{why}".strip()
+    out = _rescue_paid_ad(draft, text, vis_blob)
+    out = _rescue_program(out, text, vis_blob)
     return out
 
 
@@ -188,6 +332,33 @@ def _ask_ollama_text(model: str, text: str, visual: str) -> dict[str, Any]:
     return _parse_label_payload(raw.get("response") or "{}")
 
 
+def is_black_or_corrupt_still(image_path: Path | None) -> str | None:
+    """Cheap JPEG check: 'black' | 'green_corrupt' | None (usable picture).
+
+    90/10: black+silent windows are dead air — skip labeling, don't flood /farm.
+    """
+    if image_path is None or not image_path.is_file():
+        return "black"
+    try:
+        from PIL import Image
+        import numpy as np
+
+        im = Image.open(image_path).convert("RGB")
+        # Downscale for speed
+        im = im.resize((64, 36))
+        a = np.asarray(im, dtype=np.float32)
+        mean = float(a.mean())
+        std = float(a.std())
+        r, g, b = float(a[:, :, 0].mean()), float(a[:, :, 1].mean()), float(a[:, :, 2].mean())
+        if mean < 8 and std < 8:
+            return "black"
+        if g > r + 25 and g > b + 25 and mean > 40:
+            return "green_corrupt"
+        return None
+    except Exception:  # noqa: BLE001
+        return None
+
+
 def describe_still(image_path: Path, *, model: str = VISION_MODEL) -> dict[str, Any]:
     """Short visual description via Ollama vision model (moondream).
 
@@ -195,6 +366,11 @@ def describe_still(image_path: Path, *, model: str = VISION_MODEL) -> dict[str, 
     """
     if not image_path.is_file():
         return {"ok": False, "error": "missing_still"}
+    dead = is_black_or_corrupt_still(image_path)
+    if dead == "black":
+        return {"ok": False, "error": "black_still", "still": str(image_path)}
+    if dead == "green_corrupt":
+        return {"ok": False, "error": "green_corrupt_still", "still": str(image_path)}
     b64 = base64.b64encode(image_path.read_bytes()).decode("ascii")
     # Keep wording plain — moondream returns empty on “labeling”/instruction-heavy prompts.
     prompts = (
@@ -481,14 +657,33 @@ def draft_queue(
             if row.get("clip"):
                 existing[row["clip"]] = row
 
+    # Never re-draft clips the human already locked in take_judgments.json.
+    judged: set[str] = set()
+    judgments_path = label_dir / "take_judgments.json"
+    if judgments_path.is_file():
+        try:
+            judgments = json.loads(judgments_path.read_text(encoding="utf-8"))
+            for cid, j in judgments.items():
+                if (j.get("regions") or []):
+                    judged.add(str(cid))
+        except json.JSONDecodeError:
+            judged = set()
+
     if only_unscored:
-        unscored = [r for r in rows if not (existing.get(r["clip"]) or {}).get("model")]
+        unscored = [
+            r
+            for r in rows
+            if r["clip"] not in judged and not (existing.get(r["clip"]) or {}).get("model")
+        ]
         scored_weak = [
             r
             for r in rows
-            if (existing.get(r["clip"]) or {}).get("model")
+            if r["clip"] not in judged
+            and (existing.get(r["clip"]) or {}).get("model")
             and (existing.get(r["clip"]) or {}).get("bucket") == "uncertain"
             and (existing.get(r["clip"]) or {}).get("confidence") == "low"
+            and (existing.get(r["clip"]) or {}).get("ask") != "locked"
+            and (existing.get(r["clip"]) or {}).get("source") not in {"gold", "human"}
         ]
 
         def _rank(r: dict[str, Any]) -> tuple:
@@ -514,6 +709,8 @@ def draft_queue(
     transcript_cache: dict[str, dict[str, Any]] = {}
     auto_path = label_dir / "auto_labels.jsonl"
     auto_rows: list[dict[str, Any]] = []
+    audit_events: list[dict[str, Any]] = []
+    tick_id = datetime.now(timezone.utc).isoformat()
     drafted = 0
     asr_empty_n = 0
     vision_n = 0
@@ -569,8 +766,45 @@ def draft_queue(
         if asr_empty:
             asr_empty_n += 1
 
-        if asr_empty and visual_empty:
-            # Honest: no evidence — do not invent a classifier answer.
+        # 90/10: black / green-corrupt still + no speech → skip (not human work).
+        mid_still = still if isinstance(still, Path) else nearest_still(session_dir, 0.5 * (t0 + t1))
+        dead_frame = is_black_or_corrupt_still(mid_still) if asr_empty else None
+        # Early-ASR scrap for content desync (picture ad / audio still program).
+        head_text = ""
+        if tr and tr.get("ok") and (t1 - t0) >= 8.0:
+            head_end = t0 + min(10.0, (t1 - t0) * 0.45)
+            head_text = transcript_for_window(tr, t0, head_end, pad=0.0)
+        desync = detect_av_content_desync(
+            head_text=head_text or text,
+            visual=visual,
+            still_classes=list(visual_meta.get("still_classes") or []),
+            span_s=float(t1 - t0),
+        )
+        if asr_empty and dead_frame in {"black", "green_corrupt"}:
+            skipped_no_evidence += 1
+            draft = {
+                "bucket": "uncertain",
+                "kind": "unknown",
+                "confidence": "low",
+                "why": f"skip_{dead_frame}_silent",
+            }
+            model_used = None
+            ask = "skip"
+            text_source = f"{text_source}|{dead_frame}_silent"
+        elif desync:
+            # Loud but wrong speech for the picture — not gold, not morning-batch work.
+            skipped_no_evidence += 1
+            draft = {
+                "bucket": "uncertain",
+                "kind": "unknown",
+                "confidence": "low",
+                "why": desync["why"],
+            }
+            model_used = None
+            ask = "skip"
+            text_source = f"{text_source}|av_desync:{desync.get('kind')}"
+        elif asr_empty and visual_empty:
+            # No speech/vision text, but frame isn't obviously black — rare; park for human.
             skipped_no_evidence += 1
             draft = {
                 "bucket": "uncertain",
@@ -580,8 +814,8 @@ def draft_queue(
             }
             model_used = None
             ask = "needs_human"
-        elif visual_meta.get("stills_disagree"):
-            # Boundary inside the clip — do not force a single bucket.
+        elif visual_meta.get("stills_disagree") and asr_empty:
+            # Boundary + no speech — human later; don't invent.
             draft = {
                 "bucket": "uncertain",
                 "kind": "unknown",
@@ -592,9 +826,12 @@ def draft_queue(
             ask = "needs_human"
             text_source = f"{text_source}|stills_disagree"
         else:
+            # 90/10: boundary WITH speech (or agreeing stills) → draft normally.
+            # Mid-only visual is already selected when stills disagree.
+            boundary = bool(visual_meta.get("stills_disagree"))
             try:
                 draft = _ask_ollama_text(model, text, visual)
-                draft = _rescue_program(draft, text, visual)
+                draft = apply_common_sense(draft, text, visual)
                 model_used = model
             except Exception as exc:  # noqa: BLE001
                 draft = {
@@ -603,15 +840,24 @@ def draft_queue(
                     "confidence": "low",
                     "why": f"ollama_failed:{exc}",
                 }
+                draft = apply_common_sense(draft, text, visual)
                 model_used = model
                 text_source = f"{text_source}|ollama_failed"
+            if boundary:
+                text_source = f"{text_source}|stills_disagree_drafted"
+                draft["why"] = (str(draft.get("why") or "")[:100] + " | boundary_stills").strip(" |")
             # While building trust: even high-confidence non-auto stays in review.
             ask = "review"
-            if model_used and _auto_accept(draft, text, visual, stills_agree=stills_agree, root=root):
+            if model_used and _auto_accept(
+                draft, text, visual, stills_agree=stills_agree and not boundary, root=root
+            ):
                 ask = "optional_confirm"
 
         key = {
             "clip": clip,
+            "session": row.get("session"),
+            "t0": t0,
+            "t1": t1,
             "bucket": draft["bucket"],
             "kind": draft["kind"],
             "confidence": draft["confidence"],
@@ -630,6 +876,8 @@ def draft_queue(
             "still_classes": visual_meta.get("still_classes"),
             "model": model_used,
             "slot": row.get("slot"),
+            "drafted_utc": tick_id,
+            "tick_id": tick_id,
             "evidence": {
                 "has_asr": not asr_empty,
                 "has_visual": not visual_empty,
@@ -641,30 +889,67 @@ def draft_queue(
             auto_rows.append(
                 {
                     **key,
-                    "session": row["session"],
-                    "t0": t0,
-                    "t1": t1,
                     "auto": True,
                     "auto_rule": "paid_ad+high+lexicon_or_visual",
                 }
             )
 
+        audit_events.append(
+            {
+                "utc": tick_id,
+                "clip": clip,
+                "session": row.get("session"),
+                "t0": t0,
+                "t1": t1,
+                "ask": ask,
+                "bucket": draft["bucket"],
+                "kind": draft["kind"],
+                "confidence": draft["confidence"],
+                "why": draft.get("why"),
+                "model": model_used,
+                "vision_source": key.get("vision_source"),
+                "text_source": text_source,
+                "asr_empty": asr_empty,
+                "stills_agree": stills_agree,
+                "prior_ask": prior.get("ask"),
+                "prior_bucket": prior.get("bucket"),
+            }
+        )
         existing[clip] = key
         drafted += 1
 
-    with key_path.open("w", encoding="utf-8") as fh:
-        for clip, key in existing.items():
-            fh.write(json.dumps(key, ensure_ascii=False) + "\n")
-
-    with auto_path.open("w", encoding="utf-8") as fh:
-        for row in auto_rows:
-            fh.write(json.dumps(row, ensure_ascii=False) + "\n")
+    atomic_write_jsonl(key_path, list(existing.values()))
+    atomic_write_jsonl(auto_path, auto_rows)
+    audit_path = None
+    if audit_events:
+        audit_path = append_draft_events(audit_events, root=root, tick_id=tick_id)
 
     unloaded = {
         "text": unload_ollama_model(model),
         "vision": unload_ollama_model(vision_model) if use_vision else None,
     }
     help_queue = promote_help_queue(root)
+    digest = write_daily_digest(root)
+    try:
+        from .farm_ops import emit
+
+        emit(
+            "label_tick",
+            detail=f"drafted={drafted} auto={len(auto_rows)} help={help_queue.get('needs_human', 0)}+{help_queue.get('review', 0)}",
+            ok=True,
+            extra={
+                "drafted": drafted,
+                "auto_accepted": len(auto_rows),
+                "skipped_no_evidence": skipped_no_evidence,
+                "tick_id": tick_id,
+                "audit_path": str(audit_path) if audit_path else None,
+                "morning_batch": (help_queue or {}).get("morning_batch"),
+                "model": model,
+            },
+            root=root,
+        )
+    except Exception:  # noqa: BLE001
+        pass
     return {
         "drafted": drafted,
         "auto_accepted": len(auto_rows),
@@ -673,12 +958,15 @@ def draft_queue(
         "skipped_no_evidence": skipped_no_evidence,
         "key_path": str(key_path),
         "auto_path": str(auto_path),
+        "audit_path": str(audit_path) if audit_path else None,
+        "tick_id": tick_id,
         "model": model,
         "vision_model": vision_model if use_vision else None,
         "review_url": "http://127.0.0.1:3010/farm",
         "ollama_unloaded": unloaded,
         "only_unscored": only_unscored,
         "help_queue": help_queue,
+        "daily": digest,
     }
 
 
@@ -719,17 +1007,23 @@ def promote_help_queue(root: Path | None = None) -> dict[str, Any]:
             if "ask" not in row and ask:
                 row["ask"] = ask
             continue
-        if ask == "needs_human":
-            row["priority"] = 10
-            needs_n += 1
+        pri = review_priority(key)
+        if pri is not None:
+            row["priority"] = pri
             updated += 1
-        elif ask == "review":
-            row["priority"] = 20
-            review_n += 1
-            updated += 1
-        elif ask == "optional_confirm":
-            # Auto path — keep out of the active help front of the queue.
-            row["priority"] = max(int(row.get("priority") or 99), 90)
+            if ask == "needs_human":
+                needs_n += 1
+            elif ask == "review":
+                review_n += 1
+            elif ask == "skip":
+                row["review_batch"] = "skip"
+        elif str(row.get("source") or "") in {"transcript_boundary", "fallback_tile"} and ask not in {
+            "needs_human",
+            "review",
+            "skip",
+        }:
+            # Undrafted transcript chops are weak — park them until the model asks.
+            row["priority"] = max(int(row.get("priority") or 99), 80)
             updated += 1
         if ask:
             row["ask"] = ask
@@ -743,16 +1037,16 @@ def promote_help_queue(root: Path | None = None) -> dict[str, Any]:
         if key.get("confidence"):
             row["draft_confidence"] = key.get("confidence")
 
+    morning = apply_morning_batch(queue_rows, budget=MORNING_REVIEW_BUDGET)
     queue_rows.sort(
         key=lambda r: (
+            0 if r.get("review_batch") == "active" else 1,
             int(r.get("priority") or 99),
             str(r.get("session") or ""),
             float(r.get("t0") or 0),
         )
     )
-    with queue_path.open("w", encoding="utf-8") as fh:
-        for row in queue_rows:
-            fh.write(json.dumps(row, ensure_ascii=False) + "\n")
+    atomic_write_jsonl(queue_path, queue_rows)
 
     return {
         "ok": True,
@@ -761,6 +1055,7 @@ def promote_help_queue(root: Path | None = None) -> dict[str, Any]:
         "review": review_n,
         "updated": updated,
         "queue_n": len(queue_rows),
+        "morning_batch": morning,
         "review_url": "http://127.0.0.1:3010/farm",
     }
 

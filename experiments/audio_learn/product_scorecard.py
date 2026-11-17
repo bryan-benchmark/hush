@@ -44,15 +44,22 @@ def load_accepted() -> list[dict]:
 def non_broadcast_intervals(session: str, accepted: list[dict] | None = None) -> list[Interval]:
     accepted = accepted if accepted is not None else load_accepted()
     rows = [r for r in accepted if r["session"] == session and r["bucket"] == "non_broadcast"]
+    ranges = sorted((float(r["start_s"]), float(r["end_s"])) for r in rows)
+    merged: list[list[float]] = []
+    for a, b in ranges:
+        if not merged or a > merged[-1][1] + 1e-6:
+            merged.append([a, b])
+        else:
+            merged[-1][1] = max(merged[-1][1], b)
     return [
         Interval(
-            start=float(r["start_s"]),
-            end=float(r["end_s"]),
+            start=a,
+            end=b,
             event_class="commercial",
             desired_action="mute",
-            confidence=str(r.get("confidence") or "high"),
+            confidence="high",
         )
-        for r in rows
+        for a, b in merged
     ]
 
 

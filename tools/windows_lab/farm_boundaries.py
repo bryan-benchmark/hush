@@ -346,6 +346,14 @@ def rebuild_queue_and_gold(
             t0 = float(seg["t0"])
             t1 = float(seg["t1"])
             clip = _clip_id(session, t0, t1)
+            source = str(seg.get("source") or "boundary")
+            # Weak soup cuts stay in the file for drafting, but never crowd /farm.
+            if source in {"transcript_boundary", "fallback_tile"}:
+                pri = 80
+            elif not stub:
+                pri = 1
+            else:
+                pri = 5
             queue_rows.append(
                 {
                     "clip": clip,
@@ -358,11 +366,11 @@ def rebuild_queue_and_gold(
                     "duration": (t1 - t0) + 1.0,
                     "slot": slot,
                     "channel": guide.get("name"),
-                    "why": f"{seg.get('source')} · {seg.get('aid_kind') or seg.get('bucket')} · {guide.get('name')}",
-                    "priority": 1 if not stub else 5,
+                    "why": f"{source} · {seg.get('aid_kind') or seg.get('bucket')} · {guide.get('name')}",
+                    "priority": pri,
                     "caption": seg.get("note") or "",
                     "rank": len(queue_rows),
-                    "source": seg.get("source") or "boundary",
+                    "source": source,
                     "expect_bucket": seg.get("bucket") if not stub else None,
                 }
             )

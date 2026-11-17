@@ -95,7 +95,7 @@ def main() -> None:
     (OUT / "KEEP_REJECT.md").write_text(
         "\n".join(
             [
-                "# Research stack verify (cool + Clarissa m0.10 ∪ Whit m0.15 ∪ Palmer m0.15 ∪ Fitz m0.15)",
+                "# Research stack verify (cool + Clarissa ad-gated ∪ Whit m0.15 / Odell-local m0.10 ∪ Palmer/Fitz m0.15)",
                 "",
                 f"## vs cooldown_8s_only",
                 f"- **{decision}**",

@@ -27,27 +27,30 @@ type Take = {
   help?: boolean;
   expect_bucket?: string | null;
   source?: string;
+  review_batch?: string | null;
+  draft_bucket?: string | null;
+  draft_confidence?: string | null;
   whole_clip?: boolean;
   cloud?: boolean;
 };
-type Saved = { id: string; regions: Region[]; saved_at: string };
+type Saved = { id: string; regions: Region[]; saved_at: string; av_mismatch?: boolean };
 type Draft = { start_s: number; end_s: number };
 
-/** Plain-language labels — only these five choices matter for the human. */
-const LABELS = [
-  {
-    id: "paid_ad",
-    icon: "🛒",
-    title: "Commercial",
-    blurb: "Standalone ad for a product, store, insurance, app…",
-    kind: "dry_vo",
-  },
+/** Content buckets — The show first (far left); Not sure + A/V share a row below. */
+const CONTENT_LABELS = [
   {
     id: "program",
     icon: "📺",
     title: "The show",
     blurb: "Game, news desk, studio talk — the program itself",
     kind: "program_sports",
+  },
+  {
+    id: "paid_ad",
+    icon: "🛒",
+    title: "Commercial",
+    blurb: "Standalone ad for a product, store, insurance, app…",
+    kind: "dry_vo",
   },
   {
     id: "show_promo",
@@ -63,14 +66,26 @@ const LABELS = [
     blurb: "Show keeps going while they name a sponsor / PiP ad",
     kind: "in_show_sponsorship",
   },
-  {
-    id: "uncertain",
-    icon: "❓",
-    title: "Not sure",
-    blurb: "Mixed, unclear, or you want a second look later",
-    kind: "unknown",
-  },
 ] as const;
+
+const UNSURE_LABEL = {
+  id: "uncertain",
+  icon: "❓",
+  title: "Not sure",
+  blurb: "Mixed, unclear, or you want a second look later",
+  kind: "unknown",
+} as const;
+
+/** Grow this list — saved on the region as `kind` (bucket stays paid_ad). */
+const COMMERCIAL_SUBCARDS = [
+  { id: "ad_car", icon: "🚗", title: "Car" },
+  { id: "ad_car_insurance", icon: "🛡️", title: "Car insurance" },
+  { id: "ad_health_insurance", icon: "🏥", title: "Health insurance" },
+  { id: "ad_rx", icon: "💊", title: "Rx" },
+  { id: "ad_other", icon: "📦", title: "Other" },
+] as const;
+
+const LABELS = [...CONTENT_LABELS, UNSURE_LABEL] as const;
 
 const COLORS: Record<string, string> = {
   paid_ad: "#ff8ad4",
@@ -82,6 +97,10 @@ const COLORS: Record<string, string> = {
 
 function labelMeta(id: string) {
   return LABELS.find((row) => row.id === id) || LABELS[4];
+}
+
+function commercialSubMeta(kind: string) {
+  return COMMERCIAL_SUBCARDS.find((row) => row.id === kind) || null;
 }
 
 function drawWave(
@@ -156,16 +175,24 @@ export function FarmLabelApp() {
   const [draft, setDraft] = useState<Draft | null>(null);
   const [markIn, setMarkIn] = useState<number | null>(null);
   const [bucket, setBucket] = useState("paid_ad");
-  const [kind, setKind] = useState("dry_vo");
+  const [kind, setKind] = useState("ad_other");
   const [note, setNote] = useState("");
   const [saving, setSaving] = useState(false);
   const [playhead, setPlayhead] = useState(0);
   const [narrow, setNarrow] = useState(false);
+  /** Still vs audio out of sync — usually extreme stream lag. */
+  const [avMismatch, setAvMismatch] = useState(false);
 
   function pickLabel(id: string) {
     const meta = labelMeta(id);
     setBucket(meta.id);
-    setKind(meta.kind);
+    // Commercial opens sub-cards; default Other until they tap one.
+    setKind(meta.id === "paid_ad" ? "ad_other" : meta.kind);
+  }
+
+  function pickCommercialSub(subId: string) {
+    setBucket("paid_ad");
+    setKind(subId);
   }
 
   useEffect(() => {
@@ -180,14 +207,26 @@ export function FarmLabelApp() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const decodedRef = useRef<AudioBuffer | null>(null);
   const dragRef = useRef<{ start: number; pointerId: number; x: number; y: number; moved: boolean } | null>(null);
+  /** YouTube-style: double-tap left = back, right = forward. */
+  const doubleTapRef = useRef<{ at: number; side: "left" | "right" } | null>(null);
   const [heardDur, setHeardDur] = useState(0);
+  const [skipFlash, setSkipFlash] = useState<string | null>(null);
 
   const [helpN, setHelpN] = useState(0);
+  const [instructions, setInstructions] = useState("");
+  const [parkedN, setParkedN] = useState(0);
+  const [morningMode, setMorningMode] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [reloadToken, setReloadToken] = useState(0);
   /** Clips left via Done — Prev restores the last one (Done used to leave index stuck at 0). */
   const [history, setHistory] = useState<Take[]>([]);
 
   useEffect(() => {
-    fetch("/api/farm-takes")
+    const qs = morningMode ? "" : "?all=1";
+    const ac = new AbortController();
+    setLoading(true);
+    setError("");
+    fetch(`/api/farm-takes${qs}`, { signal: ac.signal })
       .then((res) => res.json())
       .then((data) => {
         const next = (data.items ?? []) as Take[];
@@ -196,12 +235,20 @@ export function FarmLabelApp() {
         setSaved(prior);
         setHistory([]);
         setHelpN(Number(data.help_n || next.filter((row) => row.help).length || 0));
+        setParkedN(Number(data.morning_parked || 0));
+        setInstructions(String(data.instructions || ""));
         const judged = new Set(prior.filter((row) => row.regions.length > 0).map((row) => row.id));
         const first = next.findIndex((row) => !judged.has(row.id));
         setIndex(first >= 0 ? first : 0);
+        setLoading(false);
       })
-      .catch(() => setError("Could not load farm takes."));
-  }, []);
+      .catch((err) => {
+        if (err?.name === "AbortError") return;
+        setLoading(false);
+        setError("Could not load farm takes.");
+      });
+    return () => ac.abort();
+  }, [morningMode, reloadToken]);
 
   const item = items[index];
   const savedCount = saved.filter((row) => row.regions.length > 0).length;
@@ -211,6 +258,7 @@ export function FarmLabelApp() {
     if (!item) return;
     const last = saved.find((row) => row.id === item.id);
     setRegions(last?.regions ?? []);
+    setAvMismatch(Boolean(last?.av_mismatch));
     setMarkIn(null);
     setPlayhead(0);
     setHeardDur(Number(item.duration_s) || 0);
@@ -282,6 +330,18 @@ export function FarmLabelApp() {
     setPlayhead(t);
   }
 
+  function clipDuration() {
+    if (!item) return 0;
+    return (heardDur > 0 ? heardDur : 0) || item.duration_s || decodedRef.current?.duration || 0;
+  }
+
+  function skipStep() {
+    const dur = clipDuration();
+    if (dur <= 0) return 5;
+    // Short farm clips: 5s (or ¼ of the clip), never more than half.
+    return Math.max(2, Math.min(5, Math.round(dur * 0.25 * 10) / 10));
+  }
+
   function timeAt(clientX: number) {
     const canvas = canvasRef.current;
     const duration =
@@ -298,8 +358,28 @@ export function FarmLabelApp() {
   function onPointerDown(event: React.PointerEvent<HTMLCanvasElement>) {
     if (!item) return;
     event.currentTarget.setPointerCapture(event.pointerId);
+    const rect = event.currentTarget.getBoundingClientRect();
+    const side: "left" | "right" = event.clientX < rect.left + rect.width / 2 ? "left" : "right";
+    const now = Date.now();
+    const prev = doubleTapRef.current;
+    if (prev && now - prev.at < 320 && prev.side === side) {
+      // Double-tap same half — skip like YouTube / Reels (relative to playhead).
+      doubleTapRef.current = null;
+      dragRef.current = null;
+      const step = skipStep();
+      const here = audioRef.current?.currentTime ?? playhead;
+      const next = side === "left" ? Math.max(0, here - step) : Math.min(clipDuration(), here + step);
+      seekTo(Math.round(next * 100) / 100);
+      setMarkIn(null);
+      const label = side === "left" ? `−${step}s` : `+${step}s`;
+      setSkipFlash(label);
+      window.setTimeout(() => setSkipFlash((cur) => (cur === label ? null : cur)), 450);
+      return;
+    }
+    doubleTapRef.current = { at: now, side };
+
     const at = timeAt(event.clientX);
-    // Click = seek only. Drag past a small threshold = grab. Avoids accidental 0→end grabs.
+    // Single tap = seek. Drag past a small threshold = grab.
     dragRef.current = {
       start: at,
       pointerId: event.pointerId,
@@ -318,6 +398,7 @@ export function FarmLabelApp() {
       // Phones: slightly lower threshold so a short drag still counts as a grab.
       if (Math.hypot(event.clientX - drag.x, event.clientY - drag.y) < (narrow ? 7 : 10)) return;
       drag.moved = true;
+      doubleTapRef.current = null; // drag is not a double-tap skip
     }
     const at = timeAt(event.clientX);
     setDraft({ start_s: Math.min(drag.start, at), end_s: Math.max(drag.start, at) });
@@ -399,7 +480,7 @@ export function FarmLabelApp() {
       const res = await fetch("/api/farm-takes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: item.id, regions: nextRegions }),
+        body: JSON.stringify({ id: item.id, regions: nextRegions, av_mismatch: avMismatch || undefined }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -407,7 +488,12 @@ export function FarmLabelApp() {
         setSaving(false);
         return;
       }
-      const nextSaved: Saved = { id: item.id, regions: nextRegions, saved_at: new Date().toISOString() };
+      const nextSaved: Saved = {
+        id: item.id,
+        regions: nextRegions,
+        saved_at: new Date().toISOString(),
+        ...(avMismatch ? { av_mismatch: true } : {}),
+      };
       setSaved((prev) => {
         const others = prev.filter((row) => row.id !== item.id);
         return [...others, nextSaved];
@@ -441,6 +527,45 @@ export function FarmLabelApp() {
     await saveRegions(regions);
   }
 
+  /** Audio ≠ picture (lag) — throw out of dataset, advance. */
+  async function discardBadAv() {
+    if (!item) return;
+    setSaving(true);
+    setError("");
+    try {
+      const res = await fetch("/api/farm-takes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: item.id,
+          discard: "av_lag",
+          note: note || "audio≠picture lag",
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setError(String(data.error || "Discard failed"));
+        setSaving(false);
+        return;
+      }
+      const leaving = item;
+      const wasHelp = Boolean(item.help);
+      setHistory((prev) => [...prev, leaving]);
+      setItems((prev) => {
+        const next = prev.filter((row) => row.id !== leaving.id);
+        setIndex(0);
+        return next;
+      });
+      if (wasHelp) setHelpN((n) => Math.max(0, n - 1));
+      setAvMismatch(false);
+      setRegions([]);
+      setSaving(false);
+    } catch {
+      setError("Discard failed.");
+      setSaving(false);
+    }
+  }
+
   const audioStart = item?.audio_start_s ?? 0;
   const audioSrc = !item
     ? ""
@@ -462,28 +587,53 @@ export function FarmLabelApp() {
       <header className="farm-labeler-top">
         <h1 className="identity-ask farm-labeler-title">
           Label · {items.length ? `${index + 1}/${items.length}` : "—"}
+          {item?.review_batch === "active" ? " · batch" : ""}
         </h1>
         <p className="tag farm-labeler-hint">
+          {morningMode ? "Morning batch · " : "Full pile · "}
           {helpN > 0 ? `${helpN} need help · ` : ""}
           {remaining} left · {savedCount} saved
+          {parkedN > 0 && morningMode ? ` · ${parkedN} parked` : ""}
           <span className="farm-labeler-hint-long">
             {clipMode ? " · pick what this is → Done" : " · drag → pick → Add"}
           </span>
+        </p>
+        {instructions ? <p className="tag farm-labeler-hint">{instructions}</p> : null}
+        <p className="farm-labeler-hint">
+          <button
+            type="button"
+            className="kind-chip farm-tap"
+            onClick={() => setMorningMode((v) => !v)}
+          >
+            {morningMode ? "Show more of pile" : "Morning batch only"}
+          </button>
+          <button
+            type="button"
+            className="kind-chip farm-tap"
+            style={{ marginLeft: 8 }}
+            onClick={() => setReloadToken((n) => n + 1)}
+          >
+            Refresh
+          </button>
         </p>
       </header>
 
       {item ? (
         <section className="identity-card farm-labeler-card">
           <div className="farm-labeler-meta">
-            {activeFrame ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                key={activeFrame.file}
-                src={frameSrc(activeFrame.file)}
-                alt=""
-                className="farm-labeler-still"
-              />
-            ) : null}
+            <div className="farm-still-wrap">
+              {activeFrame ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  key={activeFrame.file}
+                  src={frameSrc(activeFrame.file)}
+                  alt=""
+                  className="farm-labeler-still"
+                />
+              ) : (
+                <div className="farm-labeler-still farm-still-empty" aria-hidden />
+              )}
+            </div>
             <div className="identity-note farm-labeler-meta-text">
               <strong>{item.channel}</strong>
               <span>
@@ -491,6 +641,13 @@ export function FarmLabelApp() {
                   ? `${item.duration_s.toFixed(0)}s clip${item.caption ? ` · ${item.caption}` : ""}`
                   : `${playhead.toFixed(0)}s / ${item.duration_s.toFixed(0)}s`}
               </span>
+              {item.ask ? (
+                <span className="farm-labeler-why">
+                  {item.ask}
+                  {item.draft_bucket ? ` · draft ${item.draft_bucket}` : ""}
+                  {item.draft_confidence ? ` (${item.draft_confidence})` : ""}
+                </span>
+              ) : null}
               {item.help && item.why ? (
                 <span className="farm-labeler-why">Model: {item.why}</span>
               ) : item.ask === "needs_human" ? (
@@ -516,40 +673,47 @@ export function FarmLabelApp() {
 
           <div className="farm-labeler-wave">
             <div className="farm-wave-shell">
-              <WaveTransport
-                src={audioSrc}
-                audioRef={audioRef}
-                canvasRef={canvasRef}
-                waveHeight={narrow ? 96 : 84}
-                compact
-                simple
-                knownDuration={heardDur > 0 ? heardDur : item.duration_s}
-                // Always loop the whole clip — never the grab box (that made seek jump back).
-                loop={{ start_s: 0, end_s: item.duration_s }}
-                loopByDefault
-                volumeControl
-                onDecoded={(buffer) => {
-                  decodedRef.current = buffer;
-                  if (Number.isFinite(buffer.duration) && buffer.duration > 0) {
-                    setHeardDur(buffer.duration);
-                  }
-                  const canvas = canvasRef.current;
-                  if (canvas) drawWave(canvas, buffer, regions, draft);
-                }}
-                onPointerDown={onPointerDown}
-                onPointerMove={onPointerMove}
-                onPointerUp={onPointerUp}
-                onPointerCancel={onPointerUp}
-              />
+              <div className="farm-wave-stage-wrap">
+                <WaveTransport
+                  src={audioSrc}
+                  audioRef={audioRef}
+                  canvasRef={canvasRef}
+                  waveHeight={narrow ? 96 : 84}
+                  compact
+                  simple
+                  knownDuration={heardDur > 0 ? heardDur : item.duration_s}
+                  // Always loop the whole clip — never the grab box (that made seek jump back).
+                  loop={{ start_s: 0, end_s: item.duration_s }}
+                  loopByDefault
+                  volumeControl
+                  onDecoded={(buffer) => {
+                    decodedRef.current = buffer;
+                    if (Number.isFinite(buffer.duration) && buffer.duration > 0) {
+                      setHeardDur(buffer.duration);
+                    }
+                    const canvas = canvasRef.current;
+                    if (canvas) drawWave(canvas, buffer, regions, draft);
+                  }}
+                  onPointerDown={onPointerDown}
+                  onPointerMove={onPointerMove}
+                  onPointerUp={onPointerUp}
+                  onPointerCancel={onPointerUp}
+                />
+                {skipFlash ? (
+                  <div className="farm-skip-flash" aria-live="polite">
+                    {skipFlash}
+                  </div>
+                ) : null}
+              </div>
             </div>
             <p className="identity-note farm-wave-hint">
-              Tap = jump · drag = select a section
+              Tap = jump · double-tap L/R = skip · drag = select
             </p>
           </div>
 
           <div className="farm-labeler-labels">
             <div className="farm-label-grid">
-              {LABELS.map((row) => {
+              {CONTENT_LABELS.map((row) => {
                 const on = bucket === row.id;
                 return (
                   <button
@@ -570,9 +734,69 @@ export function FarmLabelApp() {
                 );
               })}
             </div>
+            {bucket === "paid_ad" ? (
+              <div className="farm-label-subgrid" role="group" aria-label="Commercial type">
+                {COMMERCIAL_SUBCARDS.map((row) => {
+                  const on = kind === row.id;
+                  return (
+                    <button
+                      key={row.id}
+                      type="button"
+                      className={on ? "farm-label-btn farm-sub-btn on" : "farm-label-btn farm-sub-btn"}
+                      onClick={() => pickCommercialSub(row.id)}
+                      aria-pressed={on}
+                      style={{
+                        borderColor: on ? COLORS.paid_ad : undefined,
+                        background: on ? `${COLORS.paid_ad}22` : undefined,
+                      }}
+                    >
+                      <span className="farm-label-icon">{row.icon}</span>
+                      <span className="farm-label-title">{row.title}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            ) : null}
+            <div className="farm-label-secondary">
+              <button
+                type="button"
+                title={UNSURE_LABEL.blurb}
+                className={
+                  bucket === UNSURE_LABEL.id ? "farm-label-btn farm-label-row on" : "farm-label-btn farm-label-row"
+                }
+                onClick={() => pickLabel(UNSURE_LABEL.id)}
+                aria-pressed={bucket === UNSURE_LABEL.id}
+                style={{
+                  borderColor: bucket === UNSURE_LABEL.id ? COLORS.uncertain : undefined,
+                  background: bucket === UNSURE_LABEL.id ? `${COLORS.uncertain}22` : undefined,
+                }}
+              >
+                <span className="farm-label-icon">{UNSURE_LABEL.icon}</span>
+                <span className="farm-label-title">{UNSURE_LABEL.title}</span>
+              </button>
+              <button
+                type="button"
+                title="Audio doesn't match the picture (lag) — remove from dataset"
+                className="farm-label-btn farm-label-row farm-label-av"
+                disabled={saving}
+                onClick={() => void discardBadAv()}
+              >
+                <span className="farm-label-icon">⚠️</span>
+                <span className="farm-label-title">
+                  {saving ? "…" : "A/V Issue (Discard)"}
+                </span>
+              </button>
+            </div>
             <p className="identity-note farm-labeler-blurb">
               {selected.icon} <strong>{selected.title}</strong>
-              <span className="farm-labeler-blurb-text"> — {selected.blurb}</span>
+              {bucket === "paid_ad" && commercialSubMeta(kind) ? (
+                <span className="farm-labeler-blurb-text">
+                  {" "}
+                  · {commercialSubMeta(kind)!.icon} {commercialSubMeta(kind)!.title}
+                </span>
+              ) : (
+                <span className="farm-labeler-blurb-text"> — {selected.blurb}</span>
+              )}
             </p>
           </div>
 
@@ -595,7 +819,10 @@ export function FarmLabelApp() {
               disabled={!grabReady}
               title="Add this selection with the label above"
             >
-              {selected.icon} Add {selected.title}
+              {selected.icon} Add{" "}
+              {bucket === "paid_ad" && commercialSubMeta(kind)
+                ? `Commercial · ${commercialSubMeta(kind)!.title}`
+                : selected.title}
             </button>
           </div>
 
@@ -603,6 +830,7 @@ export function FarmLabelApp() {
             {regions.length ? (
               regions.map((row, i) => {
                 const meta = labelMeta(row.bucket);
+                const sub = row.bucket === "paid_ad" ? commercialSubMeta(row.kind) : null;
                 return (
                   <button
                     key={`${row.start_s}-${row.end_s}-${i}`}
@@ -612,8 +840,11 @@ export function FarmLabelApp() {
                     onClick={() => setRegions((prev) => prev.filter((_, j) => j !== i))}
                   >
                     <span className="farm-region-main">
-                      <span className="farm-region-icon">{meta.icon}</span>
-                      <span className="farm-region-label">{meta.title}</span>
+                      <span className="farm-region-icon">{sub?.icon || meta.icon}</span>
+                      <span className="farm-region-label">
+                        {meta.title}
+                        {sub ? ` · ${sub.title}` : ""}
+                      </span>
                       <span className="farm-region-span">
                         {row.start_s.toFixed(0)}–{row.end_s.toFixed(0)}s
                       </span>
@@ -627,13 +858,20 @@ export function FarmLabelApp() {
               })
             ) : (
               <span className="identity-note farm-labeler-empty">
-                Pick a type, optional note, then Add — repeat if the clip has two things
+                Pick a type
+                {bucket === "paid_ad" ? " + commercial sub-card" : ""}
+                , optional note, then Add — repeat if the clip has two things
               </span>
             )}
           </div>
         </section>
+      ) : loading ? (
+        <p className="identity-note">Loading morning batch…</p>
       ) : (
-        <p>No farm takes with audio yet.</p>
+        <p className="identity-note">
+          No clips in this view.
+          {parkedN > 0 ? ` ${parkedN} parked — try Refresh or Show more of pile.` : " Queue may still be building."}
+        </p>
       )}
       {error ? <p className="device farm-labeler-error">{error}</p> : null}
 
