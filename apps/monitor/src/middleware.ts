@@ -27,13 +27,17 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(home);
     }
 
-    // Solo /farm and /verdict on ohush.co — same password gate.
+    // Solo /farm, /verdict, and lab /dashboard on ohush.co — same password gate.
     const farmPath =
       path === "/farm" ||
       path.startsWith("/farm/") ||
       path.startsWith("/api/farm") ||
       path === "/verdict" ||
       path.startsWith("/verdict/") ||
+      path === "/dashboard" ||
+      path.startsWith("/dashboard/") ||
+      path === "/overnight" ||
+      path === "/api/overnight" ||
       path === "/status" ||
       path.startsWith("/api/lab-status");
     if (farmPath) {
@@ -42,16 +46,34 @@ export function middleware(request: NextRequest) {
       }
       const code = farmCode();
       const cookie = request.cookies.get(FARM_COOKIE)?.value || "";
-      if (code && sameFarmCode(cookie, code)) return NextResponse.next();
+      if (code && sameFarmCode(cookie, code)) {
+        // Keep the URL as /dashboard; serve via the lab tunnel proxy under /verdict.
+        if (path === "/dashboard" || path === "/dashboard.html" || path === "/overnight") {
+          const rewrite = request.nextUrl.clone();
+          rewrite.pathname = "/verdict/dashboard";
+          return NextResponse.rewrite(rewrite);
+        }
+        if (path === "/api/overnight") {
+          const rewrite = request.nextUrl.clone();
+          rewrite.pathname = "/verdict/api/overnight";
+          return NextResponse.rewrite(rewrite);
+        }
+        return NextResponse.next();
+      }
       const enter = request.nextUrl.clone();
       enter.pathname = "/farm/enter";
       enter.search = "";
       const next =
         path.startsWith("/api/farm") || path.startsWith("/api/lab-status")
           ? "/status"
-          : path.startsWith("/verdict")
-            ? "/verdict"
-            : path;
+          : path === "/dashboard" ||
+              path.startsWith("/dashboard/") ||
+              path === "/overnight" ||
+              path === "/api/overnight"
+            ? "/dashboard"
+            : path.startsWith("/verdict")
+              ? "/verdict"
+              : path;
       enter.searchParams.set("next", next);
       return NextResponse.redirect(enter);
     }
@@ -82,6 +104,9 @@ export function middleware(request: NextRequest) {
     path.startsWith("/farm") ||
     path.startsWith("/api/farm") ||
     path.startsWith("/verdict") ||
+    path.startsWith("/dashboard") ||
+    path === "/overnight" ||
+    path === "/api/overnight" ||
     path.startsWith("/status") ||
     path.startsWith("/api/lab-status")
   ) {
@@ -89,9 +114,14 @@ export function middleware(request: NextRequest) {
       "next",
       path.startsWith("/api/farm") || path.startsWith("/api/lab-status")
         ? "/status"
-        : path.startsWith("/verdict")
-          ? "/verdict"
-          : path,
+        : path === "/dashboard" ||
+            path.startsWith("/dashboard/") ||
+            path === "/overnight" ||
+            path === "/api/overnight"
+          ? "/dashboard"
+          : path.startsWith("/verdict")
+            ? "/verdict"
+            : path,
     );
   }
   return NextResponse.redirect(enter);
