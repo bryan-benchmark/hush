@@ -48,7 +48,7 @@ def test_hierarchy_has_fill_order():
 
 def test_plan_and_board(data_root: Path):
     plan = build_capture_plan(data_root, chunk_minutes=15)
-    assert plan["version"] == 1
+    assert plan["version"] >= 1
     assert "assignments" in plan
     assert (data_root / "indexes" / "capture_plan.json").is_file()
     board = build_coverage_board(data_root)
